@@ -1,6 +1,0 @@
----
-title: 'update'
----
-
-{{< include includes/_update.md >}}
-

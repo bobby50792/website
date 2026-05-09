@@ -1,0 +1,28 @@
+---
+title: "快速开始"
+subtitle: "先把站点跑起来，再逐步补内容。"
+page-layout: article
+search: false
+---
+
+## 这页讲什么
+
+这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
+
+## 三个先看项
+
+1. 先看首页，确认站点现在只保留了 overview、guide 和 blog。
+2. 再看 `_quarto.yml`，确认导航、主题和资源配置是否符合预期。
+3. 最后看 blog 和 guide 的内容结构，决定后续要补哪些页面。
+
+## 建议的工作顺序
+
+- 先把每个页面的定位写清楚。
+- 再增加新的子页面和文章。
+- 最后统一检查导航、链接和渲染效果。
+
+## 相关页面
+
+- [Guide 首页](/docs/guide/index.qmd)
+- [内容组织](/docs/guide/content/index.qmd)
+- [发布维护](/docs/guide/publishing/index.qmd)

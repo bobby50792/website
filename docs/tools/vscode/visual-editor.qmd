@@ -1,7 +1,0 @@
----
-title: "Visual Editing in VS Code"
-aliases: 
-  - /docs/visual-editor/vscode/index.html
----
-
-{{< include ../_code-oss-visual-editor.md >}}

@@ -295,3 +295,28 @@ nav.page-navigation {
   color: #fff;
   background-color: #ff7518;
 }
+
+/* Reduce gap between logo and nav links without changing sizes */
+.navbar-brand {
+  margin-right: 6px !important;
+}
+
+.navbar-nav {
+  margin-left: 4px !important;
+}
+
+/* If Quarto outputs a .quarto-nav list, tighten that too */
+.quarto-nav {
+  margin-left: 6px !important;
+}
+
+/* Increase nav label size and ensure logo scales nicely */
+.navbar-nav .nav-link, .navbar .nav-link {
+  font-size: 18px !important;
+  line-height: 1.2 !important;
+}
+
+.navbar-brand img, .navbar-brand svg {
+  height: 40px !important;
+  width: auto !important;
+}

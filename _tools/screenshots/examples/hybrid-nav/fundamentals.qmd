@@ -1,5 +1,0 @@
----
-title: "Fundamentals"
----
-
-Core concepts and fundamentals of ProjectX.

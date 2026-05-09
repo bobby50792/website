@@ -1,6 +1,0 @@
----
-title: 'create'
----
-
-{{< include includes/_create.md >}}
-

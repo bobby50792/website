@@ -1,341 +1,52 @@
 ---
-pagetitle: "Quarto"
+pagetitle: "Bobby"
 page-layout: custom
 section-divs: false
 toc: false
 css: index.css
 editor: source
-description: | 
-  An open source technical publishing system for creating beautiful articles, websites, blogs, books, slides, and more. Supports Python, R, Julia, and JavaScript.
+description: |
+  An open source technical publishing system for websites, blogs, and documentation.
 hide-description: true
-image: quarto-dark-bg.jpeg
-resources: 
-  - images/hero_animation.mp4
-  - images/hero_animation_dark.mp4
+
 ---
 
-::: {.hero-banner}
+::: {style="max-width: 1080px; margin: 0 auto; padding: 0 1rem;"}
+# Welcome to Quarto^&ZeroWidthSpace;[®]{.trademark}^
 
+This site is now a compact, editorial-style workspace built around three clear paths: overview, guide, and blog. The homepage acts as the front door, the guide explains how the site fits together, and the blog holds updates, notes, and shorter reflections.
 
-::: {.content-block .py-4}
+## What you can do here
 
-::: {.hero-text}
-# Welcome to Quarto^&ZeroWidthSpace;[®]{.trademark}^ {.mt-1}
-
-### An open-source scientific and technical publishing system
-
-- Author using [Jupyter](https://jupyter.org) notebooks or with plain text markdown in your favorite editor.
-- Create dynamic content with [Python](/docs/computations/python.qmd), [R](/docs/computations/r.qmd), [Julia](/docs/computations/julia.qmd), and [Observable](/docs/computations/ojs.qmd).
-- Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.
-- Share knowledge and insights organization-wide by publishing to [Posit Connect](/docs/publishing/rstudio-connect.qmd), [Confluence](/docs/publishing/confluence.qmd), or other publishing systems. 
-- Write using [Pandoc](https://pandoc.org) markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.
-
-### Analyze. Share. Reproduce. You have a story to tell with data---tell it with Quarto.
-
-::: {.grid .gap-3 .pb-3 .pt-4}
-::: {.g-col-12 .g-col-sm-4}
-[Get Started](/docs/get-started/index.qmd){.btn-action-primary .btn-action .btn .btn-lg .w-100 role="button"}
-:::
-::: {.g-col-12 .g-col-sm-4 .mb-2}
-[Guide](/docs/guide/){#btn-guide .btn-action .btn-secondary .btn .btn-lg .w-100 role="button"}
-::: 
-::: 
-:::
-
-::: {.hero-animation}
-
-::: light-content
-
-```{=html}
-<video autoplay muted playsinline loop>
-<source src="images/hero_animation.mp4" type="video/mp4"/>
-</video>
-```
-
-:::
-
-::: dark-content
-
-```{=html}
-<video autoplay muted playsinline loop>
-<source src="images/hero_animation_dark.mp4" type="video/mp4"/>
-</video>
-```
-
-:::
-
-:::
-
-:::
-
-
-
-:::
-
-
-::: {.hello-quarto .alt-background}
-::: {.content-block .mt-2 .pt-4 .pb-2}
-
-::: {.hello-quarto-banner}
-::: {.grid .gap-1}
-::: {.g-col-lg-4 .g-col-12}
-# Hello, Quarto
-::: 
-::: {.g-col-lg-8 .g-col-12}
-<ul class="nav nav-pills d-flex flex-wrap" id="hello-quarto-tab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="python-tab" data-bs-toggle="tab" data-bs-target="#python" type="button" role="tab" aria-controls="python" aria-selected="true">Python</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="knitr-tab" data-bs-toggle="tab" data-bs-target="#knitr" type="button" role="tab" aria-controls="knitr" aria-selected="false">R</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="julia-tab" data-bs-toggle="tab" data-bs-target="#julia" type="button" role="tab" aria-controls="julia" aria-selected="false">Julia</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="observable-tab" data-bs-toggle="tab" data-bs-target="#observable" type="button" role="tab" aria-controls="observable" aria-selected="false">Observable</button>
-  </li>
-</ul>
-:::
-:::
-:::
-
-<div class="tab-content mt-2" id="hello-quarto-tabcontent">
-
-<div class="tab-pane fade  show active" id="python" role="tabpanel" aria-labelledby="python-tab">
-::: {.grid .gap-3}
-::: {.g-col-md-11 .g-col-12 .mb-0}
-Combine Jupyter notebooks with flexible options to produce production quality output in a wide variety of formats. Author using traditional notebook UIs or with a plain text markdown representation of notebooks.
-:::
-::: {.g-col-sm-6 .g-col-12}
-![](images/demo-jupyter-plain.png){fig-alt="Example Jupyter notebook entitled Palmer Penguins with code cells, text, and a scatterplot."}
-:::
-
-::: {.g-col-sm-6 .g-col-12}
-![](images/demo-jupyter-output.png){fig-alt="Output of example Jupyter notebook, Palmer Penguins, in HTML showing title, metadata, text, code, and scatterplot. At the top there is a dropdown option to show or hide the code."}
-:::
-:::
-
-</div>
-
-<div class="tab-pane fade" id="knitr" role="tabpanel" aria-labelledby="knitr-tab">
-::: {.grid}
-::: {.g-col-md-11 .g-col-12}
-Quarto is a multi-language, next generation version of R Markdown from Posit, with many new features and capabilities. Like R Markdown, Quarto uses [knitr](https://yihui.org/knitr/) to execute R code, and is therefore able to render most existing Rmd files without modification.
-
-:::
-::: {.g-col-md-6 .g-col-12}
-````markdown
----
-title: "ggplot2 demo"
-author: "Norah Jones"
-date: "5/22/2021"
-format: 
-  html:
-    fig-width: 8
-    fig-height: 4
-    code-fold: true
----
-
-## Air Quality
-
-@fig-airquality further explores the impact of temperature on ozone level.
-
-```{{r}}
-#| label: fig-airquality
-#| fig-cap: "Temperature and ozone level."
-#| warning: false
-
-library(ggplot2)
-ggplot(airquality, aes(Temp, Ozone)) + 
-  geom_point() + 
-  geom_smooth(method = "loess")
-```
-
-
-````
-:::
-::: {.g-col-md-6 .g-col-12}
-![](images/hello-knitr.png){.hello-output fig-alt="Example output with title (ggplot2 demo), author (Norah Jones), and date (5/22/2021). Below is a header reading Air Quality followed by body text (Figure 1 further explores the impact of temperature on ozone level.) with a toggleable code field, and figure with caption Figure 1 Temperature and ozone level."}
-:::
-:::
-
-</div>
-
-<div class="tab-pane fade" id="julia" role="tabpanel" aria-labelledby="julia-tab">
-::: {.grid}
-::: {.g-col-md-11 .g-col-12}
-Combine markdown and Julia code to create dynamic documents that are fully reproducible. Quarto executes Julia code either via the [`julia` engine](#using-the-julia-engine) using [QuartoNotebookRunner.jl](https://github.com/PumasAI/QuartoNotebookRunner.jl/) or via the [`jupyter` engine](#using-the-jupyter-engine) using the [IJulia](https://github.com/JuliaLang/IJulia.jl) Jupyter kernel, enabling you to author in plain text (as shown below) or render existing Jupyter notebooks.
-
-:::
-::: {.g-col-md-6 .g-col-12}
-````markdown
----
-title: "Plots Demo"
-author: "Norah Jones"
-date: "5/22/2021"
-format:
-  html:
-    code-fold: true
-engine: julia
----
-
-## Parametric Plots
-
-Plot function pair (x(u), y(u)). 
-See @fig-parametric for an example.
-
-```{{julia}}
-#| label: fig-parametric
-#| fig-cap: "Parametric Plots"
-
-using Plots
-
-plot(sin, 
-     x->sin(2x), 
-     0, 
-     2π, 
-     leg=false, 
-     fill=(0,:lavender))
-```
-
-
-````
-:::
-
-::: {.g-col-md-6 .g-col-12}
-![](images/hello-julia.png){.hello-output fig-alt="Example Plots Demo output with title, author, date published and main section on Parametric plots which contains text, a toggleable code field, and the output of the plot, with the caption Figure 1 Parametric Plots."}
-:::
-:::
-
-</div>
-
-<div class="tab-pane fade" id="observable" role="tabpanel" aria-labelledby="observable-tab">
-::: {.grid}
-::: {.g-col-md-11 .g-col-12}
-Quarto includes native support for Observable JS, a set of JavaScript enhancements created by Mike Bostock (the author of D3). Observable JS uses a reactive execution model, and is especially well suited for interactive data exploration and analysis.
-
-:::
-::: {.g-col-md-6 .g-col-12}
-````markdown
----
-title: "observable plot"
-author: "Norah Jones"
-format: 
-  html: 
-    code-fold: true
----
-
-## Seattle Precipitation by Day (2012 to 2016)
-
-```{{ojs}}
-data = FileAttachment("seattle-weather.csv")
-  .csv({typed: true})
-  
-Plot.plot({
-  width: 800, height: 500, padding: 0,
-  color: { scheme: "blues", type: "sqrt"},
-  y: { tickFormat: i => "JFMAMJJASOND"[i] },
-  marks: [
-    Plot.cell(data, Plot.group({fill: "mean"}, {
-      x: d => new Date(d.date).getDate(),
-      y: d => new Date(d.date).getMonth(),
-      fill: "precipitation", 
-      inset: 0.5
-    }))
-  ]
-})
-```
-````
-:::
-
-
-::: {.g-col-md-6 .g-col-12}
-![](images/hello-observable.png){style="" fig-alt="Example output with title, author, and date. Below, the main section reads Seattle Precipitation by Day (2012 to 2016) with a toggleable section to show code and a heatmap of the precipitation by day."}
-:::
-
-:::
-
-</div>
-
-</div>
-
-
+Explore the site in the order that makes the most sense for you. Start with the overview if you want the broad picture, open the guide if you need structure, or jump into the blog if you want a lighter, more personal stream of updates.
 
 ::: {.grid}
+::: {.g-col-12 .g-col-md-4}
+### Overview
 
+The polished front door to the site.
 
-:::
-:::
-:::
-
-
-::: {.content-block .py-4}
-::: {.features}
-
-::: {.feature}
-### Dynamic Documents
-Generate dynamic output using Python, R, Julia, and Observable. Create reproducible documents that can be regenerated when underlying assumptions or data change.
-
-::: {.learn-more}
-[Learn more »](/docs/computations/python.qmd)
-:::
+- [Open the overview](/index.qmd)
 :::
 
-::: {.feature}
-### Beautiful Publications
-Publish high-quality articles, reports, presentations, websites, and books in HTML, PDF, MS Word, ePub, and more. Use a single source document to target multiple formats.
+::: {.g-col-12 .g-col-md-4}
+### Guide
 
-::: {.learn-more}
-[Learn more »](/docs/output-formats/all-formats.qmd)
+The practical map for structure, organization, and publishing.
+
+- [Open the guide](/docs/guide/index.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### Blog
+
+The place for short updates, experiments, and personal notes.
+
+- [Open the blog](/docs/blog/index.qmd)
 :::
 :::
 
-::: {.feature}
-### Scientific Markdown
-Pandoc markdown has excellent support for LaTeX equations and citations. Quarto adds extensions for cross-references, figure panels, callouts, advanced page layout, and more.
+## Why this shape works
 
-::: {.learn-more}
-[Learn more »](/docs/authoring/markdown-basics.qmd)
-:::
-:::
-
-::: {.feature}
-### Authoring Tools
-Use your favorite tools including Positron, VS Code, RStudio, Jupyter Lab, or any text editor. Use the Quarto visual markdown editor for long-form documents.
-
-::: {.learn-more}
-[Learn more »](/docs/get-started/index.qmd)
-:::
-:::
-
-::: {.feature}
-### Interactivity
-Engage readers by adding interactive data exploration to your documents using Jupyter Widgets, htmlwidgets for R, Observable JS, and Shiny.
-
-::: {.learn-more}
-[Learn more »](/docs/interactive/)
-:::
-:::
-
-::: {.feature}
-### Websites and Books
-Publish collections of documents as a blog or full website. Create books and manuscripts in both print formats (PDF and MS Word) and online formats (HTML and ePub).
-
-::: {.learn-more}
-[Learn more »](/docs/websites/)
-:::
-:::
-
-:::
-:::
-
-
-::: {.get-started .alt-background}
-::: {.content-block .py-5 .grid}
-::: {.g-start-4 .g-col-6 .g-start-md-5 .g-col-md-3 .pt-1}
-[Get Started](/docs/get-started/index.qmd){.btn-action-primary  .btn-action .btn .btn-lg .w-100 role="button"}
-
-:::
-:::
+By keeping the site small and clearly divided, each page can stay focused. The result is easier navigation, less clutter, and a better place to grow content over time without losing the original structure.
 :::

@@ -1,6 +1,0 @@
----
-title: 'serve'
----
-
-{{< include includes/_serve.md >}}
-

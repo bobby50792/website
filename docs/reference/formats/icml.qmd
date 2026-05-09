@@ -1,6 +1,0 @@
----
-title: "InDesign Options"
----
-
-ICML is an XML representation of an Adobe InCopy/InDesign document.  
-ICML stands for InCopy Markup Language.

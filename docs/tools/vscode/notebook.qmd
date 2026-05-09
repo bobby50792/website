@@ -1,7 +1,0 @@
----
-title: VS Code Notebook Editor
-aliases: 
-  - /docs/tools/vscode-notebook.html
----
-
-{{< include ../_code-oss-notebook.md >}}

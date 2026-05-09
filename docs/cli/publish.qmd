@@ -1,6 +1,0 @@
----
-title: 'publish'
----
-
-{{< include includes/_publish.md >}}
-

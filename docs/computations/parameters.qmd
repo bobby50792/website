@@ -1,6 +1,0 @@
----
-title: "Parameters"
-document: "document"
----
-
-{{< include _parameters.md >}}

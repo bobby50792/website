@@ -1,6 +1,0 @@
----
-title: 'remove'
----
-
-{{< include includes/_remove.md >}}
-

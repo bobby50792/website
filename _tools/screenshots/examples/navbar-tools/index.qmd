@@ -1,5 +1,0 @@
----
-title: "Welcome to ProjectX"
----
-
-ProjectX is a data science toolkit for collaborative research.

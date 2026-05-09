@@ -1,6 +1,0 @@
----
-title: 'inspect'
----
-
-{{< include includes/_inspect.md >}}
-

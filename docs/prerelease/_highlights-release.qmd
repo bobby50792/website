@@ -1,3 +1,0 @@
-### Highlights {#download-section-highlights}
-
-{{< include /docs/prerelease/1.9/_highlights.qmd >}}

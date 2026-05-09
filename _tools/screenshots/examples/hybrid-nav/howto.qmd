@@ -1,5 +1,0 @@
----
-title: "How-To"
----
-
-How-to guides for common tasks in ProjectX.

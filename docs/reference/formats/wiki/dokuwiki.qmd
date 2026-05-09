@@ -1,6 +1,0 @@
----
-title: "DocuWiki Options"
-spec: https://www.dokuwiki.org/wiki:syntax
----
-
-DokuWiki is a simple to use and highly versatile open source wiki software that doesn't require a database. To learn more about DokuWiki see <https://www.dokuwiki.org>.

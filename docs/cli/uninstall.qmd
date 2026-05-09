@@ -1,6 +1,0 @@
----
-title: 'uninstall'
----
-
-{{< include includes/_uninstall.md >}}
-

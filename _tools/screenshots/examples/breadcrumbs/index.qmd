@@ -1,5 +1,0 @@
----
-title: "My Site"
----
-
-Welcome to the site.

@@ -1,5 +1,0 @@
----
-title: "Tutorials"
----
-
-A series of tutorials for ProjectX are provided here. We recommend you work through them in order.
