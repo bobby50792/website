@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html",
-    "href": "docs/blog/posts/2026-05-09-site-notes/index.html",
-    "title": "站点更新笔记",
-    "section": "",
-    "text": "这篇文章记录的是一次很小但很实用的整理：把站点收束到更明确的入口，并把 guide 和 blog 的职责拆开。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html#这次做了什么",
-    "href": "docs/blog/posts/2026-05-09-site-notes/index.html#这次做了什么",
-    "title": "站点更新笔记",
-    "section": "这次做了什么",
-    "text": "这次做了什么\n\n保留 overview、guide 和 blog 三个入口。\n给 guide 增加了更明确的子页面。\n给 blog 增加了两篇新的内容，用来承载更新和思考。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html#为什么这样拆",
-    "href": "docs/blog/posts/2026-05-09-site-notes/index.html#为什么这样拆",
-    "title": "站点更新笔记",
-    "section": "为什么这样拆",
-    "text": "为什么这样拆\n当首页只负责引导时，内容更容易维护；当 guide 只负责说明时，读者更容易快速找到答案；当 blog 只负责记录时，更新也会更自然。"
-  },
-  {
     "objectID": "docs/blog/posts/2026-05-09-writing-routine/index.html",
     "href": "docs/blog/posts/2026-05-09-writing-routine/index.html",
     "title": "写作节奏",
@@ -40,5 +19,26 @@
     "title": "写作节奏",
     "section": "这样做的好处",
     "text": "这样做的好处\n它能减少“空白页压力”，也能让每次更新都比上一次更容易开始。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html",
+    "href": "docs/blog/posts/2026-05-09-site-notes/index.html",
+    "title": "站点更新笔记",
+    "section": "",
+    "text": "这篇文章记录的是一次很小但很实用的整理：把站点收束到更明确的入口，并把 guide 和 blog 的职责拆开。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html#这次做了什么",
+    "href": "docs/blog/posts/2026-05-09-site-notes/index.html#这次做了什么",
+    "title": "站点更新笔记",
+    "section": "这次做了什么",
+    "text": "这次做了什么\n\n保留 overview、guide 和 blog 三个入口。\n给 guide 增加了更明确的子页面。\n给 blog 增加了两篇新的内容，用来承载更新和思考。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html#为什么这样拆",
+    "href": "docs/blog/posts/2026-05-09-site-notes/index.html#为什么这样拆",
+    "title": "站点更新笔记",
+    "section": "为什么这样拆",
+    "text": "为什么这样拆\n当首页只负责引导时，内容更容易维护；当 guide 只负责说明时，读者更容易快速找到答案；当 blog 只负责记录时，更新也会更自然。"
   }
 ]
