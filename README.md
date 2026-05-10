@@ -1,3 +1,1 @@
-# Bobby — Quarto Website
-
 This repository contains a small Quarto site for documentation and blog posts.
