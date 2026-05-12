@@ -22,8 +22,8 @@ website:
     left:
       - text: "Overview"
         href: index.qmd
-      - text: "Guide"
-        href: docs/guide/index.qmd
+      - text: "Notes"
+        href: docs/notes/index.qmd
       - text: "Blog"
         href: docs/blog/index.qmd
     right:
@@ -32,11 +32,11 @@ website:
         aria-label: GitHub repository
 
   sidebar:
-    - id: guide
+    - id: notes
       collapse-level: 1
       contents:
-        - section: "Guide"
-          href: docs/guide/index.qmd
+        - section: "Notes"
+          href: docs/notes/index.qmd
 format:
   html:
     respect-user-color-scheme: true
