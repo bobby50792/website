@@ -36,19 +36,46 @@ website:
       collapse-level: 1
       contents:
         - section: "Notes"
-          href: docs/notes/index.qmd
+          href: docs/notes/0.qmd
           contents:
-            - section: "Getting Started"
-              href: docs/notes/getting-started/index.qmd
-            - section: "Content Organization"
-              href: docs/notes/content/index.qmd
-            - section: "Publishing & Maintenance"
-              href: docs/notes/publishing/index.qmd
-    - id: blog
-      collapse-level: 1
-      contents:
-        - section: "Blog"
-          href: docs/blog/index.qmd
+            - section: "Calculus"
+              href: docs/notes/Calculus/0.qmd
+              contents: 
+                - text: "Real Numbers and Limits of Sequences"
+                  href: docs/notes/Calculus/1.qmd
+                - text: "Continuity of Functions"
+                  href: docs/notes/Calculus/2.qmd
+                - text: "Derivatives and Differentials of Functions"
+                  href: docs/notes/Calculus/3.qmd
+                - text: "Indefinite Integrals"
+                  href: docs/notes/Calculus/4.qmd
+                - text: "Definite Integrals"
+                  href: docs/notes/Calculus/5.qmd
+                - text: "Ordinary Differential Equations"
+                  href: docs/notes/Calculus/6.qmd
+                - text: "Limits and Continuity of Multivariate Functions"
+                  href: docs/notes/Calculus/7.qmd
+                - text: "Differential of Multivariable Functions"
+                  href: docs/notes/Calculus/8.qmd
+                - text: "Implicit Function and Inverse Mapping Theorem"
+                  href: docs/notes/Calculus/9.qmd
+                - text: "Integrals with Parameters and Improper Integrals"
+                  href: docs/notes/Calculus/10.qmd
+                - text: "Multiple Integrals"
+                  href: docs/notes/Calculus/11.qmd
+                - text: "Integration of Functions on Curves and Surfaces"
+                  href: docs/notes/Calculus/12.qmd
+            - section: "Math for CS and AI"
+              href: docs/notes/Math4CS&AI/0.qmd
+              contents: 
+                - text: "Discrete Probability"
+                  href: docs/notes/Math4CS&AI/1.qmd
+                - text: "Sampling and Concentration"
+                  href: docs/notes/Math4CS&AI/2.qmd
+                - text: "Generating Functions"
+                  href: docs/notes/Math4CS&AI/3.qmd
+                - text: "Continuous Probability"
+                  href: docs/notes/Math4CS&AI/4.qmd
 format:
   html:
     respect-user-color-scheme: true

@@ -20,9 +20,3 @@ search: false
 - 先把每个页面的定位写清楚。
 - 再增加新的子页面和文章。
 - 最后统一检查导航、链接和渲染效果。
-
-## 相关页面
-
-- [Guide 首页](/docs/guide/index.qmd)
-- [内容组织](/docs/guide/content/index.qmd)
-- [发布维护](/docs/guide/publishing/index.qmd)

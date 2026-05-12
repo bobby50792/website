@@ -1,0 +1,10 @@
+---
+title: "Chapter 1"
+subtitle: "先把站点跑起来，再逐步补内容。"
+page-layout: article
+search: false
+---
+
+## 这页讲什么
+
+这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
