@@ -20,15 +20,6 @@ This site is now a compact, editorial-style workspace built around three clear p
 
 Explore the site in the order that makes the most sense for you. Start with the overview if you want the broad picture, open the guide if you need structure, or jump into the blog if you want a lighter, more personal stream of updates.
 
-::: {.grid}
-
-### Overview
-
-The polished front door to the site.
-
-- [Open the overview](/index.qmd)
-:::
-
 
 ## Why this shape works
 
