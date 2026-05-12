@@ -1,6 +1,13 @@
 ---
 title: "Discrete Probability"
 subtitle: "hello world"
+page-layout: article
+search: true
+number-offset: [3]
+number-sections: true
+
+crossref:
+  chapters: true      
 ---
 
 # Introduction
