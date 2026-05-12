@@ -21,6 +21,30 @@
     "text": "这样做的好处\n它能减少“空白页压力”，也能让每次更新都比上一次更容易开始。"
   },
   {
+    "objectID": "docs/notes/Math4CS&AI/1.html",
+    "href": "docs/notes/Math4CS&AI/1.html",
+    "title": "Discrete Probability",
+    "section": "",
+    "text": "Introduction\n\n\n\n\n\n\nNote点击查看数学证明过程\n\n\n\n\n\n这里可以写任意内容：\n复杂的公式：\\(E = mc^2\\)\n甚至可以插入代码块\n保持缩进即可\n\n\n\n\nTheorem 1 (矩阵秩定理) For any \\(A\\)，we have \\[\\mathrm{rank}(A) = \\mathrm{rank}(A^T).\\]\n\n提示：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。\n根据 Theorem 1，我们可以推导出反向传播中的核心逻辑。\n\n提示：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。",
+    "crumbs": [
+      "Notes",
+      "Math for CS and AI",
+      "Discrete Probability"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/1.html",
+    "href": "docs/notes/Calculus/1.html",
+    "title": "Discrete Probability",
+    "section": "",
+    "text": "4 Introduction\n\n\n\n\n\n\nNote点击查看数学证明过程\n\n\n\n\n\n这里可以写任意内容：\n复杂的公式：\\(E = mc^2\\)\n甚至可以插入代码块\n保持缩进即可\n\n\n\n\nTheorem 4.1 (矩阵秩定理) For any \\(A\\)，we have \\[\\mathrm{rank}(A) = \\mathrm{rank}(A^T).\\]\n\n提示：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。\n根据 Theorem 4.1，我们可以推导出反向传播中的核心逻辑。\n\n提示：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Real Numbers and Limits of Sequences"
+    ]
+  },
+  {
     "objectID": "docs/blog/posts/2026-05-09-site-notes/index.html",
     "href": "docs/blog/posts/2026-05-09-site-notes/index.html",
     "title": "站点更新笔记",
