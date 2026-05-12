@@ -1,27 +1,8 @@
 ---
-title: "发布维护"
-subtitle: "让内容更新和站点发布保持同一节奏。"
+title: "Chapter 2"
+subtitle: "先把站点跑起来，再逐步补内容。"
 page-layout: article
-search: false
+search: true
 ---
 
-## 发布前检查
-
-每次新增页面后，先确认三件事：链接是否正确、标题是否清楚、页面是否还能正常渲染。
-
-## 维护清单
-
-- 新建页面后把它放进合适的导航层级。
-- 文章如果属于 blog，就放进 posts 目录并补 frontmatter。
-- 页面如果属于 guide，就保持简洁、说明明确。
-
-## 常见习惯
-
-- 小改动先本地渲染。
-- 页面多了之后，再统一整理目录。
-- 不要让首页承担过多说明，细节尽量下沉到子页面。
-
-## 相关页面
-
-- [快速开始](/docs/guide/getting-started/index.qmd)
-- [内容组织](/docs/guide/content/index.qmd)
+## 这页讲什么

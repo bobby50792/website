@@ -21,7 +21,7 @@ This site is now a compact, editorial-style workspace built around three clear p
 Explore the site in the order that makes the most sense for you. Start with the overview if you want the broad picture, open the guide if you need structure, or jump into the blog if you want a lighter, more personal stream of updates.
 
 ::: {.grid}
-::: {.g-col-12 .g-col-md-4}
+
 ### Overview
 
 The polished front door to the site.
@@ -29,22 +29,6 @@ The polished front door to the site.
 - [Open the overview](/index.qmd)
 :::
 
-::: {.g-col-12 .g-col-md-4}
-### Guide
-
-The practical map for structure, organization, and publishing.
-
-- [Open the guide](/docs/guide/index.qmd)
-:::
-
-::: {.g-col-12 .g-col-md-4}
-### Blog
-
-The place for short updates, experiments, and personal notes.
-
-- [Open the blog](/docs/blog/index.qmd)
-:::
-:::
 
 ## Why this shape works
 

@@ -1,27 +1,38 @@
 ---
-title: "发布维护"
-subtitle: "让内容更新和站点发布保持同一节奏。"
+title: "Discrete Probability"
+subtitle: "hello world"
 page-layout: article
-search: false
+search: true
+number-offset: [3]
+number-sections: true
+
+crossref:
+  chapters: true      
 ---
 
-## 发布前检查
+# Introduction
 
-每次新增页面后，先确认三件事：链接是否正确、标题是否清楚、页面是否还能正常渲染。
+::: {.callout-note collapse="true"}
+## 点击查看数学证明过程
 
-## 维护清单
+这里可以写任意内容：
 
-- 新建页面后把它放进合适的导航层级。
-- 文章如果属于 blog，就放进 posts 目录并补 frontmatter。
-- 页面如果属于 guide，就保持简洁、说明明确。
+复杂的公式：$E = mc^2$
 
-## 常见习惯
+甚至可以插入代码块
 
-- 小改动先本地渲染。
-- 页面多了之后，再统一整理目录。
-- 不要让首页承担过多说明，细节尽量下沉到子页面。
+保持缩进即可
+:::
 
-## 相关页面
+::: {#thm-matrix-rank}
+## 矩阵秩定理
 
-- [快速开始](/docs/guide/getting-started/index.qmd)
-- [内容组织](/docs/guide/content/index.qmd)
+For any $A$，we have $$\mathrm{rank}(A) = \mathrm{rank}(A^T).$$
+:::
+
+**提示**：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
+
+根据 @thm-matrix-rank，我们可以推导出反向传播中的核心逻辑。
+
+
+> **提示**：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。

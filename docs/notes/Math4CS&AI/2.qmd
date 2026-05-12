@@ -1,10 +1,10 @@
 ---
-title: "Chapter 1"
+title: "Chapter 2"
 subtitle: "先把站点跑起来，再逐步补内容。"
 page-layout: article
-search: false
+search: true
 ---
 
 ## 这页讲什么
 
-这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
+<!-- 正如在数学笔记中的[矩阵秩定理](1.qmd#thm-matrix-rank)所述，我们可以推导出反向传播中的... -->

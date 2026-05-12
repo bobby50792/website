@@ -101,7 +101,7 @@ filters:
 version: '1.9'
 prerelease-subdomain: ''
 
-freeze: true
+freeze: false
 
 profile:
   group:
