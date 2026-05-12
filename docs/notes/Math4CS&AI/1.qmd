@@ -4,7 +4,7 @@ subtitle: "hello world"
 page-layout: article
 search: true
 number-offset: [3]
-number-sections: true
+number-sections: false
 
 crossref:
   chapters: true      
