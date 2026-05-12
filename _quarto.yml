@@ -37,6 +37,18 @@ website:
       contents:
         - section: "Notes"
           href: docs/notes/index.qmd
+          contents:
+            - section: "Getting Started"
+              href: docs/notes/getting-started/index.qmd
+            - section: "Content Organization"
+              href: docs/notes/content/index.qmd
+            - section: "Publishing & Maintenance"
+              href: docs/notes/publishing/index.qmd
+    - id: blog
+      collapse-level: 1
+      contents:
+        - section: "Blog"
+          href: docs/blog/index.qmd
 format:
   html:
     respect-user-color-scheme: true

@@ -14,7 +14,7 @@ This first section is for orientation. It explains what this site contains, wher
 ### 1.1 页面入口
 
 - [Overview](/index.qmd) introduces the site.
-- [Guide 首页](/docs/guide/index.qmd) organizes the supporting pages.
+- [Notes 首页](/docs/notes/index.qmd) organizes the supporting pages.
 - [Blog 首页](/docs/blog/index.qmd) collects updates and shorter notes.
 
 ### 1.2 建议顺序
@@ -30,7 +30,7 @@ This section explains the internal logic of the site. Each page has a job, and t
 ### 2.1 页面职责
 
 - Overview: the front door and first impression.
-- Guide: the structural and editorial reference.
+- Notes: the structural and editorial reference.
 - Blog: the living record of updates and reflections.
 
 ### 2.2 内容原则
