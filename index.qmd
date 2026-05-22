@@ -5,23 +5,26 @@ section-divs: false
 toc: false
 css: index.css
 editor: source
-description: |
-  An open source technical publishing system for websites, blogs, and documentation.
-hide-description: true
 
 ---
 
-::: {style="max-width: 1080px; margin: 0 auto; padding: 0 1rem;"}
-# Welcome to Quarto^&ZeroWidthSpace;[®]{.trademark}^
+::: {.hero-banner style="justify-content:flex-start;"}
+::: {.content-block style="margin-left: 8rem; margin-right: auto;"}
+::: {.hero-text}
 
-This site is now a compact, editorial-style workspace built around three clear paths: overview, guide, and blog. The homepage acts as the front door, the guide explains how the site fits together, and the blog holds updates, notes, and shorter reflections.
+# <span style="white-space: nowrap;"> Welcome to bobby's website </span>
 
-## What you can do here
+<span style="white-space: nowrap;"> 这里记录了一些我认为比较有意义的内容...... </span>
 
-Explore the site in the order that makes the most sense for you. Start with the overview if you want the broad picture, open the guide if you need structure, or jump into the blog if you want a lighter, more personal stream of updates.
+:::
+:::
+:::
+
+::: {style="max-width: 1080px; margin: 2rem auto; padding: 0 1rem;"}
+
+## 为什么要建这个网站？
+
+给未来的同行者们提供一些参考资料。
 
 
-## Why this shape works
-
-By keeping the site small and clearly divided, each page can stay focused. The result is easier navigation, less clutter, and a better place to grow content over time without losing the original structure.
 :::

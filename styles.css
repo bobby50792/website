@@ -354,3 +354,14 @@ span.color-box {
   margin-right: 0.2em; /* Space between box and text */
   border: 1px solid #000; /* Border color */
 }
+
+.theorem-title::after,
+.lemma-title::after,
+.corollary-title::after,
+.definition-title::after,
+.proof-title::after {
+    content: ".";
+    font-weight: 600;
+    color: inherit;
+    margin-right: 4px;
+}

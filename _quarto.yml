@@ -20,8 +20,6 @@ website:
     title: false
     collapse-below: lg
     left:
-      - text: "Overview"
-        href: index.qmd
       - text: "Notes"
         href: docs/notes/index.qmd
       - text: "Blog"

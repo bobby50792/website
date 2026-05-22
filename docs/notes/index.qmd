@@ -1,56 +1,8 @@
 ---
-title: "Guide"
-subtitle: "A practical map for the trimmed site, its content structure, and its publishing flow."
+title: "Notes"
+subtitle: "A collection of notes to reference."
 page-layout: full
-anchor-sections: false
+anchor-sections: true
 search: false
-image: /images/hero_right.png
 ---
 
-## 1. 快速开始
-
-This first section is for orientation. It explains what this site contains, where the main entry points live, and how to move through the trimmed structure without guessing.
-
-### 1.1 页面入口
-
-- [Overview](/index.qmd) introduces the site.
-- [Notes 首页](/docs/notes/index.qmd) organizes the supporting pages.
-- [Blog 首页](/docs/blog/index.qmd) collects updates and shorter notes.
-
-### 1.2 建议顺序
-
-1. Open the overview to understand the main shape of the site.
-2. Read this guide to understand how the content is divided.
-3. Move into the blog when you want lighter, more frequent writing.
-
-## 2. 内容组织
-
-This section explains the internal logic of the site. Each page has a job, and that job should stay narrow enough that the site remains easy to maintain.
-
-### 2.1 页面职责
-
-- Overview: the front door and first impression.
-- Notes: the structural and editorial reference.
-- Blog: the living record of updates and reflections.
-
-### 2.2 内容原则
-
-1. Keep each page focused on one purpose.
-2. Prefer child pages when a topic starts growing.
-3. Use links to move between related pages instead of repeating the same material.
-
-## 3. 发布维护
-
-This section describes the working rhythm. It is meant to keep the site clean as new pages and posts are added over time.
-
-### 3.1 发布前检查
-
-- Verify links.
-- Confirm titles and subtitles.
-- Render the page before you move on.
-
-### 3.2 维护清单
-
-1. Add new guide topics as separate `.qmd` pages.
-2. Add new blog posts under `docs/blog/posts/`.
-3. Revisit the navigation only when the content structure changes.

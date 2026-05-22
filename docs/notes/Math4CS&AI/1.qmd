@@ -1,38 +1,307 @@
 ---
 title: "Discrete Probability"
-subtitle: "hello world"
 page-layout: article
 search: true
-number-offset: [3]
+number-offset: [1]
 number-sections: false
 
 crossref:
   chapters: true      
+
 ---
 
-# Introduction
+## Asymptotic Notations
+
+::: {.callout-tip collapse="false"}
+## Big-$\mathcal{O}$ notation
+
+Let $f,g : \mathbb{N} \to \mathbb{R}$ be functions defined on $\mathbb{N}$. We write $f(n) = \mathcal{O}(g(n))$ if there exist constants $C > 0$ and $N \in \mathbb{N}$ such that
+$$
+\begin{equation*}
+|f(n)| \le Cg(n), \quad \forall n \ge N.
+\end{equation*}
+$$
+
+$$
+\begin{equation*}
+\mathcal{O}(g) := \{f : \exists C > 0, \exists N \in \mathbb{N} \text{ s.t. } |f(n)| \le Cg(n), \text{ for all } n \ge N\}.
+\end{equation*}
+$$
+:::
 
 ::: {.callout-note collapse="true"}
-## 点击查看数学证明过程
+## Big-$\mathcal{O}$ notation properties
 
-这里可以写任意内容：
+Let $f, g : \mathbb{N} \to \mathbb{R}$ and $c \in \mathbb{R}$. If $f(n), g(n) \ge 0$ for all $n$, then 
+\begin{align*}
+f(n) &= \mathcal{O}(f(n)) \\
 
-复杂的公式：$E = mc^2$
+c \cdot f(n) &= \mathcal{O}(f(n)) \\
 
-甚至可以插入代码块
+\mathcal{O}(\mathcal{O}(f(n))) &= \mathcal{O}(f(n)) \\
 
-保持缩进即可
+\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &= \mathcal{O}(f(n) + g(n)) \\
+
+\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &= \mathcal{O}(\max\{f(n), g(n)\}) \\
+
+\mathcal{O}(f(n)) \cdot \mathcal{O}(g(n)) &= \mathcal{O}(f(n) \cdot g(n)) \\
+
+\mathcal{O}(f(n)g(n)) &= f(n) \cdot \mathcal{O}(g(n)). \\
+\end{align*}
 :::
 
-::: {#thm-matrix-rank}
-## 矩阵秩定理
-
-For any $A$，we have $$\mathrm{rank}(A) = \mathrm{rank}(A^T).$$
+::: {#thm-1}
+## Big-$\mathcal{O}$ notation defined using limsup
+Let $f, g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently large $n$. We write $f(n) = \mathcal{O}(g(n))$ if and only if
+$$
+\begin{equation*}
+\limsup_{n \to \infty} \frac{|f(n)|}{g(n)} < +\infty.
+\end{equation*}
+$$
 :::
 
-**提示**：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
+::: {.callout-tip collapse="false"}
+## $\Omega, \Theta, \sim, o, \omega$ notations
 
-根据 @thm-matrix-rank，我们可以推导出反向传播中的核心逻辑。
+Let $f,g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently large $n$.
+
+* We write $f(n) = \Omega(g(n))$ if $\liminf\limits_{n \to \infty} \frac{|f(n)|}{g(n)} > 0$.
+* We write $f(n) = \Theta(g(n))$ if $f(n) = \mathcal{O}(g(n))$ and $f(n) = \Omega(g(n))$.
+* We write $f(n) \sim g(n)$ if $\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 1$.
+* We write $f(n) = o(g(n))$ if $\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 0$.
+* We write $f(n) = \omega(g(n))$ if $\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = +\infty$.
+
+::: 
+
+::: {#thm-2}
+
+Let $f,g : \mathbb{N} \to \mathbb{R}$ with $g(n) > 0$ for all $n \ge 1$. If
+$$
+\begin{equation*}
+f(k) = \mathcal{O}(g(k)) \quad \text{as } k \to \infty,
+\end{equation*}
+$$
+then
+$$
+\begin{equation*}
+\sum_{k=1}^n f(k) = \mathcal{O}\left(\sum_{k=1}^n g(k)\right) \quad \text{as } n \to \infty.
+\end{equation*}
+$$
+
+:::
+
+\
+
+::: {#thm-3}
+
+Let $f,g : \mathbb{N}^2 \to \mathbb{R}$ with $g(m,n) > 0$ for all $m,n \ge 1$. If for some function $U(m) \ge 1$, we have
+$$
+\begin{equation*}
+f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m \to \infty,
+\end{equation*}
+$$
+Then,
+$$
+\begin{equation*}
+\sum_{k=1}^n f(m,k) = \mathcal{O}\left(\sum_{k=1}^n g(m,k)\right), \quad \text{for } 1 \le n \le U(m), \text{ as } m \to \infty.
+\end{equation*}
+$$
+:::
+
+::: {.callout-tip collapse="false"}
+## Big-$\mathcal{O}$ notation for multivariate functions
+
+Let $f,g : \mathbb{N}^d \to \mathbb{R}$ be functions defined on $\mathbb{N}^d$. We write
+$$
+\begin{equation*}
+f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
+\end{equation*}
+$$
+if there exist constants $C > 0$ and $N \in \mathbb{N}$ such that
+$$
+\begin{equation*}
+|f(n_1,\dots,n_d)| \le Cg(n_1,\dots,n_d), \quad \forall n_1,\dots,n_d \ge N.
+\end{equation*}
+$$
+:::
+
+## Probability Spaces and Event
 
 
-> **提示**：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
+::: {.callout-tip collapse="false"}
+## Discrete probability space
+
+A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
+
+* A non-empty finite set $\Omega$, called the *sample space*, whose elements represent all possible outcomes of an experiment.
+* A function $p : \Omega \to [0, 1]$, called the *probability mass function*, which assigns probabilities to outcomes and satisfies $\sum_{\omega \in \Omega} p(\omega) = 1$.
+:::
+
+
+::: {.callout-tip collapse="false"}
+## Event
+
+An event $A$ is a subset of $\Omega$ ($A \subseteq \Omega$), and its probability is defined as
+$$
+\begin{equation*}
+\Pr[A] := \sum_{\omega \in A} p(\omega).
+\end{equation*}
+$$
+:::
+
+## Uniform Probability Means Counting
+
+
+::: {.callout-note collapse="true"}
+
+## The Secretary Problem
+
+[Problem Description](https://en.wikipedia.org/wiki/Secretary_problem)
+
+### Threshold Strategy 
+
+For a fixed integer $k$ satisfying $1 \le k \le n - 1$, the $k$-strategy is an online decision strategy defined as follows:
+
+* Reject the first $k$ options and record the maximum value observed;
+* Starting from step $k + 1$, accept the first option whose value exceeds the recorded maximum.
+
+### Conclusion 
+
+For $n \ge 2$, the following two statements hold:
+
+1.  the optimal success probability satisfies
+
+$$
+\begin{align*}
+p_n = 1/e + \mathcal{O}\left(\frac{1}{n}\right);
+\end{align*}
+$$
+
+2.  the optimal threshold satisfies
+
+$$
+\begin{align*}
+k^* = n/e + \mathcal{O}(1).
+\end{align*}
+$$
+
+
+:::
+
+::: {.callout-note collapse="true"}
+## The Locker Puzzle
+
+[Problem Description](https://zh.wikipedia.org/wiki/百囚問題)
+
+### Pointer Chasing Strategy
+ 
+Before opening any locker, students discuss and agree on a bijection between student names and $[n]$,
+$$
+\begin{align*}
+\phi : \{\text{student names}\} \to [n],
+\end{align*}
+$$
+which assigns each student a unique ID in $[n]$.
+
+For each student $s$, let $x \leftarrow \phi(s)$. The search rule is:
+
+* open locker $x$;
+* if the revealed name tag is $s$, stop (success);
+* otherwise, let $x \leftarrow \phi(t)$, where $t$ is the revealed student name, and continue.
+
+If no success occurs, stop after $n/2$ opens (failure).
+
+### Conclusion
+For all even $n \ge 2$, the success probability of the pointer chasing strategy is 
+$$
+\begin{align*} \Pr[\text{success}] = 1 - \sum_{j=n/2+1}^n \frac{1}{j} = 1 - \ln 2 + \mathcal{O}\left(\frac{1}{n}\right) \approx 0.307. \end{align*}
+$$
+:::
+
+## Intersection and Union of Events
+
+::: {.callout-tip collapse="false"}
+## Intersection and union of event
+
+For events $A, B \subseteq \Omega$:
+
+- The intersection of two events $A$ and $B$, denoted by $A \cap B$, is the event that both $A$ and $B$ are happen.
+
+- The union of two events $A$ and $B$, denoted by $A \cup B$, is the event that at least one of $A, B$  happens.
+
+As events are subsets of the sample space $\Omega$, the operations $\cap$ and $\cup$ are the same as set operations.
+::: 
+
+::: {.callout-note collapse="true"}
+## Properties of probability measures
+
+1. For any events $A, B \subseteq \Omega$,
+$$
+\begin{align*}
+\Pr[A \cup B] = \Pr[A] + \Pr[B] - \Pr[A \cap B].
+\end{align*}
+$$
+
+
+2. For ans two events $A, B \subseteq \Omega$,
+$$
+\begin{align*}
+\Pr [A \cup B] \leq \Pr[A] + \Pr[B].
+\end{align*}
+$$
+
+
+3. For any sequence of events $A_1, \dots, A_m \subseteq \Omega$ with $m \geq 2$, 
+$$
+\begin{align*}
+\Pr\left[\bigcup_{i=1}^m A_i\right] \le \sum_{i=1}^m \Pr[A_i].
+\end{align*}
+$$
+::: 
+
+::: {.callout-note collapse="true"}
+
+## Hashing Collision
+
+### Linear Hash Function
+Here
+$$
+\begin{align*}
+h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
+\end{align*}
+$$
+
+The corresponding linear hash family is defined as follows:
+$$
+\begin{align*}
+\mathcal{H}_{p,m} := \{h_{a,b,p,m} : a \in \mathbb{Z}_p \setminus \{0\}, b \in \mathbb{Z}_p\}.
+\end{align*}
+$$
+That is, $\mathcal{H}_{p,m}$ is a family of linear hash functions with fixed prime $p$ and bucket number $m$. 
+
+### Conclusion
+
+1. For any two distinct integers $k, k' \in K$, if a hash function $h$ is sampled uniformly at random from $\mathcal{H}_{p,m}$, then
+$$
+\begin{align*}
+\Pr[h(k) = h(k')] \le \frac{1}{m}.
+\end{align*}
+$$
+
+2. For any universal hash family $\mathcal{H}$ and any $n$ distinct keys $k_1, \dots, k_n \in K$, the collision probability admits the upper bound
+$$
+\begin{align*}
+\Pr[C] \le \frac{1}{m} \binom{n}{2}.
+\end{align*}
+$$
+:::
+
+
+::: {.callout-note collapse="true"}
+
+## Ramsey Numbers
+
+[Problem Description](https://en.wikipedia.org/wiki/Ramsey%27s_theorem)
+
+
+:::
