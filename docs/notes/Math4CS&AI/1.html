@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-0807b46602c868d53e96bc5ea17ed061.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-de432f03e6d8807f368f16fc59afea51.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-0807b46602c868d53e96bc5ea17ed061.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-be99aad819e91f7c12dc333d9f3e17bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -300,10 +300,6 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
-<span class="menu-text">Overview</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
@@ -469,6 +465,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Physics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Physics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -481,7 +494,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#asymptotic-notations" id="toc-asymptotic-notations" class="nav-link active" data-scroll-target="#asymptotic-notations">Asymptotic Notations</a></li>
+  <li><a href="#probability-spaces-and-event" id="toc-probability-spaces-and-event" class="nav-link" data-scroll-target="#probability-spaces-and-event">Probability Spaces and Event</a></li>
+  <li><a href="#uniform-probability-means-counting" id="toc-uniform-probability-means-counting" class="nav-link" data-scroll-target="#uniform-probability-means-counting">Uniform Probability Means Counting</a></li>
+  <li><a href="#intersection-and-union-of-events" id="toc-intersection-and-union-of-events" class="nav-link" data-scroll-target="#intersection-and-union-of-events">Intersection and Union of Events</a></li>
   </ul>
 </nav>
     </div>
@@ -492,7 +508,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/1.html">Discrete Probability</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Discrete Probability</h1>
-<p class="subtitle lead">hello world</p>
 </div>
 
 
@@ -509,35 +524,383 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<section id="asymptotic-notations" class="level2">
+<h2 class="anchored" data-anchor-id="asymptotic-notations">Asymptotic Notations</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>点击查看数学证明过程
+<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>这里可以写任意内容：</p>
-<p>复杂的公式：<span class="math inline">\(E = mc^2\)</span></p>
-<p>甚至可以插入代码块</p>
-<p>保持缩进即可</p>
+<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
+\begin{equation*}
+|f(n)| \le Cg(n), \quad \forall n \ge N.
+\end{equation*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{equation*}
+\mathcal{O}(g) := \{f : \exists C &gt; 0, \exists N \in \mathbb{N} \text{ s.t. } |f(n)| \le Cg(n), \text{ for all } n \ge N\}.
+\end{equation*}
+\]</span></p>
 </div>
 </div>
 </div>
-<div id="thm-matrix-rank" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4.1 (矩阵秩定理)</strong></span> For any <span class="math inline">\(A\)</span>，we have <span class="math display">\[\mathrm{rank}(A) = \mathrm{rank}(A^T).\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p><strong>提示</strong>：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。</p>
-<p>根据 <a href="#thm-matrix-rank" class="quarto-xref">Theorem&nbsp;4.1</a>，我们可以推导出反向传播中的核心逻辑。</p>
-<blockquote class="blockquote">
-<p><strong>提示</strong>：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。</p>
-</blockquote>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation properties
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span> and <span class="math inline">\(c \in \mathbb{R}\)</span>. If <span class="math inline">\(f(n), g(n) \ge 0\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math display">\[\begin{align*}
+f(n) &amp;= \mathcal{O}(f(n)) \\
+
+c \cdot f(n) &amp;= \mathcal{O}(f(n)) \\
+
+\mathcal{O}(\mathcal{O}(f(n))) &amp;= \mathcal{O}(f(n)) \\
+
+\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) + g(n)) \\
+
+\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(\max\{f(n), g(n)\}) \\
+
+\mathcal{O}(f(n)) \cdot \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) \cdot g(n)) \\
+
+\mathcal{O}(f(n)g(n)) &amp;= f(n) \cdot \mathcal{O}(g(n)). \\
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1 (Big-<span class="math inline">\(\mathcal{O}\)</span> notation defined using limsup)</strong></span> Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if and only if <span class="math display">\[
+\begin{equation*}
+\limsup_{n \to \infty} \frac{|f(n)|}{g(n)} &lt; +\infty.
+\end{equation*}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><span class="math inline">\(\Omega, \Theta, \sim, o, \omega\)</span> notations
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>.</p>
+<ul>
+<li>We write <span class="math inline">\(f(n) = \Omega(g(n))\)</span> if <span class="math inline">\(\liminf\limits_{n \to \infty} \frac{|f(n)|}{g(n)} &gt; 0\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) = \Theta(g(n))\)</span> if <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> and <span class="math inline">\(f(n) = \Omega(g(n))\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) \sim g(n)\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 1\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) = o(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 0\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) = \omega(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = +\infty\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> with <span class="math inline">\(g(n) &gt; 0\)</span> for all <span class="math inline">\(n \ge 1\)</span>. If <span class="math display">\[
+\begin{equation*}
+f(k) = \mathcal{O}(g(k)) \quad \text{as } k \to \infty,
+\end{equation*}
+\]</span> then <span class="math display">\[
+\begin{equation*}
+\sum_{k=1}^n f(k) = \mathcal{O}\left(\sum_{k=1}^n g(k)\right) \quad \text{as } n \to \infty.
+\end{equation*}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.3</strong></span> Let <span class="math inline">\(f,g : \mathbb{N}^2 \to \mathbb{R}\)</span> with <span class="math inline">\(g(m,n) &gt; 0\)</span> for all <span class="math inline">\(m,n \ge 1\)</span>. If for some function <span class="math inline">\(U(m) \ge 1\)</span>, we have <span class="math display">\[
+\begin{equation*}
+f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m \to \infty,
+\end{equation*}
+\]</span> Then, <span class="math display">\[
+\begin{equation*}
+\sum_{k=1}^n f(m,k) = \mathcal{O}\left(\sum_{k=1}^n g(m,k)\right), \quad \text{for } 1 \le n \le U(m), \text{ as } m \to \infty.
+\end{equation*}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation for multivariate functions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f,g : \mathbb{N}^d \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}^d\)</span>. We write <span class="math display">\[
+\begin{equation*}
+f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
+\end{equation*}
+\]</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
+\begin{equation*}
+|f(n_1,\dots,n_d)| \le Cg(n_1,\dots,n_d), \quad \forall n_1,\dots,n_d \ge N.
+\end{equation*}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="probability-spaces-and-event" class="level2">
+<h2 class="anchored" data-anchor-id="probability-spaces-and-event">Probability Spaces and Event</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discrete probability space
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A discrete probability space is a pair <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> consisting of:</p>
+<ul>
+<li>A non-empty finite set <span class="math inline">\(\Omega\)</span>, called the <em>sample space</em>, whose elements represent all possible outcomes of an experiment.</li>
+<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the <em>probability mass function</em>, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>An event <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(\Omega\)</span> (<span class="math inline">\(A \subseteq \Omega\)</span>), and its probability is defined as <span class="math display">\[
+\begin{equation*}
+\Pr[A] := \sum_{\omega \in A} p(\omega).
+\end{equation*}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="uniform-probability-means-counting" class="level2">
+<h2 class="anchored" data-anchor-id="uniform-probability-means-counting">Uniform Probability Means Counting</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Secretary Problem
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://en.wikipedia.org/wiki/Secretary_problem">Problem Description</a></p>
+<section id="threshold-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="threshold-strategy">Threshold Strategy</h3>
+<p>For a fixed integer <span class="math inline">\(k\)</span> satisfying <span class="math inline">\(1 \le k \le n - 1\)</span>, the <span class="math inline">\(k\)</span>-strategy is an online decision strategy defined as follows:</p>
+<ul>
+<li>Reject the first <span class="math inline">\(k\)</span> options and record the maximum value observed;</li>
+<li>Starting from step <span class="math inline">\(k + 1\)</span>, accept the first option whose value exceeds the recorded maximum.</li>
+</ul>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>For <span class="math inline">\(n \ge 2\)</span>, the following two statements hold:</p>
+<ol type="1">
+<li>the optimal success probability satisfies</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+p_n = 1/e + \mathcal{O}\left(\frac{1}{n}\right);
+\end{align*}
+\]</span></p>
+<ol start="2" type="1">
+<li>the optimal threshold satisfies</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+k^* = n/e + \mathcal{O}(1).
+\end{align*}
+\]</span></p>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Locker Puzzle
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://zh.wikipedia.org/wiki/百囚問題">Problem Description</a></p>
+<section id="pointer-chasing-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="pointer-chasing-strategy">Pointer Chasing Strategy</h3>
+<p>Before opening any locker, students discuss and agree on a bijection between student names and <span class="math inline">\([n]\)</span>, <span class="math display">\[
+\begin{align*}
+\phi : \{\text{student names}\} \to [n],
+\end{align*}
+\]</span> which assigns each student a unique ID in <span class="math inline">\([n]\)</span>.</p>
+<p>For each student <span class="math inline">\(s\)</span>, let <span class="math inline">\(x \leftarrow \phi(s)\)</span>. The search rule is:</p>
+<ul>
+<li>open locker <span class="math inline">\(x\)</span>;</li>
+<li>if the revealed name tag is <span class="math inline">\(s\)</span>, stop (success);</li>
+<li>otherwise, let <span class="math inline">\(x \leftarrow \phi(t)\)</span>, where <span class="math inline">\(t\)</span> is the revealed student name, and continue.</li>
+</ul>
+<p>If no success occurs, stop after <span class="math inline">\(n/2\)</span> opens (failure).</p>
+</section>
+<section id="conclusion-1" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
+<p>For all even <span class="math inline">\(n \ge 2\)</span>, the success probability of the pointer chasing strategy is <span class="math display">\[
+\begin{align*} \Pr[\text{success}] = 1 - \sum_{j=n/2+1}^n \frac{1}{j} = 1 - \ln 2 + \mathcal{O}\left(\frac{1}{n}\right) \approx 0.307. \end{align*}
+\]</span></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="intersection-and-union-of-events" class="level2">
+<h2 class="anchored" data-anchor-id="intersection-and-union-of-events">Intersection and Union of Events</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Intersection and union of event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>For events <span class="math inline">\(A, B \subseteq \Omega\)</span>:</p>
+<ul>
+<li><p>The intersection of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cap B\)</span>, is the event that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are happen.</p></li>
+<li><p>The union of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cup B\)</span>, is the event that at least one of <span class="math inline">\(A, B\)</span> happens.</p></li>
+</ul>
+<p>As events are subsets of the sample space <span class="math inline">\(\Omega\)</span>, the operations <span class="math inline">\(\cap\)</span> and <span class="math inline">\(\cup\)</span> are the same as set operations.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties of probability measures
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>For any events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
+\begin{align*}
+\Pr[A \cup B] = \Pr[A] + \Pr[B] - \Pr[A \cap B].
+\end{align*}
+\]</span></p></li>
+<li><p>For ans two events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
+\begin{align*}
+\Pr [A \cup B] \leq \Pr[A] + \Pr[B].
+\end{align*}
+\]</span></p></li>
+<li><p>For any sequence of events <span class="math inline">\(A_1, \dots, A_m \subseteq \Omega\)</span> with <span class="math inline">\(m \geq 2\)</span>, <span class="math display">\[
+\begin{align*}
+\Pr\left[\bigcup_{i=1}^m A_i\right] \le \sum_{i=1}^m \Pr[A_i].
+\end{align*}
+\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hashing Collision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="linear-hash-function" class="level3">
+<h3 class="anchored" data-anchor-id="linear-hash-function">Linear Hash Function</h3>
+<p>Here <span class="math display">\[
+\begin{align*}
+h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
+\end{align*}
+\]</span></p>
+<p>The corresponding linear hash family is defined as follows: <span class="math display">\[
+\begin{align*}
+\mathcal{H}_{p,m} := \{h_{a,b,p,m} : a \in \mathbb{Z}_p \setminus \{0\}, b \in \mathbb{Z}_p\}.
+\end{align*}
+\]</span> That is, <span class="math inline">\(\mathcal{H}_{p,m}\)</span> is a family of linear hash functions with fixed prime <span class="math inline">\(p\)</span> and bucket number <span class="math inline">\(m\)</span>.</p>
+</section>
+<section id="conclusion-2" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-2">Conclusion</h3>
+<ol type="1">
+<li><p>For any two distinct integers <span class="math inline">\(k, k' \in K\)</span>, if a hash function <span class="math inline">\(h\)</span> is sampled uniformly at random from <span class="math inline">\(\mathcal{H}_{p,m}\)</span>, then <span class="math display">\[
+\begin{align*}
+\Pr[h(k) = h(k')] \le \frac{1}{m}.
+\end{align*}
+\]</span></p></li>
+<li><p>For any universal hash family <span class="math inline">\(\mathcal{H}\)</span> and any <span class="math inline">\(n\)</span> distinct keys <span class="math inline">\(k_1, \dots, k_n \in K\)</span>, the collision probability admits the upper bound <span class="math display">\[
+\begin{align*}
+\Pr[C] \le \frac{1}{m} \binom{n}{2}.
+\end{align*}
+\]</span></p></li>
+</ol>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ramsey Numbers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://en.wikipedia.org/wiki/Ramsey%27s_theorem">Problem Description</a></p>
+</div>
+</div>
+</div>
 
 
 </section>

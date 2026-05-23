@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Chapter 1 – Bobby</title>
+<title>Continuous Probability – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/Physics/index.html" rel="next">
 <link href="../../../docs/notes/Math4CS&amp;AI/3.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -45,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-0807b46602c868d53e96bc5ea17ed061.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-de432f03e6d8807f368f16fc59afea51.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-0807b46602c868d53e96bc5ea17ed061.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-be99aad819e91f7c12dc333d9f3e17bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,6 +77,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -270,10 +300,6 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
-<span class="menu-text">Overview</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
@@ -439,6 +465,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Physics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Physics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -451,7 +494,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#这页讲什么" id="toc-这页讲什么" class="nav-link active" data-scroll-target="#这页讲什么">这页讲什么</a></li>
+  <li><a href="#leaving-the-finite-world" id="toc-leaving-the-finite-world" class="nav-link active" data-scroll-target="#leaving-the-finite-world">Leaving the Finite World</a>
+  <ul class="collapse">
+  <li><a href="#discrete-probability-spaces-beyond-the-finite-case" id="toc-discrete-probability-spaces-beyond-the-finite-case" class="nav-link" data-scroll-target="#discrete-probability-spaces-beyond-the-finite-case">Discrete Probability Spaces Beyond the Finite Case</a></li>
+  <li><a href="#continuous-probability-space" id="toc-continuous-probability-space" class="nav-link" data-scroll-target="#continuous-probability-space">Continuous Probability Space</a></li>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability Distributions</a></li>
+  </ul></li>
+  <li><a href="#gaussian-distribution" id="toc-gaussian-distribution" class="nav-link" data-scroll-target="#gaussian-distribution">Gaussian Distribution</a>
+  <ul class="collapse">
+  <li><a href="#the-standard-gaussian-distributions" id="toc-the-standard-gaussian-distributions" class="nav-link" data-scroll-target="#the-standard-gaussian-distributions">The Standard Gaussian Distributions</a></li>
+  <li><a href="#general-gaussian-distributions" id="toc-general-gaussian-distributions" class="nav-link" data-scroll-target="#general-gaussian-distributions">General Gaussian Distributions</a></li>
+  <li><a href="#moment-generating-functions" id="toc-moment-generating-functions" class="nav-link" data-scroll-target="#moment-generating-functions">Moment Generating Functions</a></li>
+  <li><a href="#sum-of-independent-gaussians" id="toc-sum-of-independent-gaussians" class="nav-link" data-scroll-target="#sum-of-independent-gaussians">Sum of Independent Gaussians</a></li>
+  <li><a href="#gaussian-tail-bounds" id="toc-gaussian-tail-bounds" class="nav-link" data-scroll-target="#gaussian-tail-bounds">Gaussian Tail Bounds</a></li>
+  <li><a href="#gaussian-vectors" id="toc-gaussian-vectors" class="nav-link" data-scroll-target="#gaussian-vectors">Gaussian Vectors</a></li>
+  </ul></li>
+  <li><a href="#the-strange-geometry-of-high-dimensions" id="toc-the-strange-geometry-of-high-dimensions" class="nav-link" data-scroll-target="#the-strange-geometry-of-high-dimensions">The Strange Geometry of High Dimensions</a></li>
   </ul>
 </nav>
     </div>
@@ -461,8 +519,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/4.html">Continuous Probability</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Chapter 1</h1>
-<p class="subtitle lead">先把站点跑起来，再逐步补内容。</p>
+<h1 class="title">Continuous Probability</h1>
 </div>
 
 
@@ -479,9 +536,483 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="这页讲什么" class="level2">
-<h2 class="anchored" data-anchor-id="这页讲什么">这页讲什么</h2>
-<p>这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。</p>
+<section id="leaving-the-finite-world" class="level2">
+<h2 class="anchored" data-anchor-id="leaving-the-finite-world">Leaving the Finite World</h2>
+<section id="discrete-probability-spaces-beyond-the-finite-case" class="level3">
+<h3 class="anchored" data-anchor-id="discrete-probability-spaces-beyond-the-finite-case">Discrete Probability Spaces Beyond the Finite Case</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Countable and uncountable sets
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A set <span class="math inline">\(\Omega\)</span> is countable if it is finite, or if there exists a sequence <span class="math inline">\((a_n)_{n \ge 0}\)</span> such that</p>
+<p><span class="math display">\[
+\Omega = \{a_0, a_1, a_2, a_3, \dots\}.
+\]</span></p>
+<p>Equally, <span class="math inline">\(\Omega\)</span> is countable if and only if there exists a injection from <span class="math inline">\(\Omega\)</span> to <span class="math inline">\(\mathbb{N}\)</span>.</p>
+<p>A set that is not countable is uncountable.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties about countable and uncountable sets
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>(Tuples are countable). For every fixed integer <span class="math inline">\(k \ge 1\)</span>, the set of all <span class="math inline">\(k\)</span>-tuples of natural numbers,</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{N}^k := \{(x_1, x_2, \dots, x_k) : x_1, \dots, x_k \in \mathbb{N}\}
+\]</span></p>
+<p>is countable.</p>
+<ul>
+<li><p>Rational numbers are countable.</p></li>
+<li><p>Real numbers are uncountable.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discrete probability space
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A discrete probability space is a pair <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> consisting of:</p>
+<ul>
+<li>A non-empty countable set <span class="math inline">\(\Omega\)</span>, called the sample space, whose elements represent all possible outcomes of an experiment.</li>
+<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the probability mass function, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>An event <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(\Omega\)</span> (<span class="math inline">\(A \subseteq \Omega\)</span>), and its probability is defined as</p>
+<p><span class="math display">\[
+\Pr[A] := \sum_{\omega \in A} p(\omega).
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Expectation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable on a discrete probability space <span class="math inline">\((\Omega, p)\)</span>. The expectation of <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+\mathbb{E}[X] := \sum_{\omega \in \Omega} [X(\omega)]_+ p(\omega) - \sum_{\omega \in \Omega} [X(\omega)]_- p(\omega),
+\]</span></p>
+<p>provided the two sums are not both <span class="math inline">\(+\infty\)</span>. If both sums are finite, then <span class="math inline">\(\mathbb{E}[X]\)</span> is finite. If exactly one of them is <span class="math inline">\(+\infty\)</span>, then <span class="math inline">\(\mathbb{E}[X]\)</span> is <span class="math inline">\(+\infty\)</span> or <span class="math inline">\(-\infty\)</span>. If both are <span class="math inline">\(+\infty\)</span>, then the expectation is left undefined.</p>
+<ul>
+<li>This definition guarantees that limits exist and are consistent regardless of the order of summation. This need some knowledge about infinite series, which is not covered in this note.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="continuous-probability-space" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-probability-space">Continuous Probability Space</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability density function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A function <span class="math inline">\(f : \mathbb{R}^d \to [0, \infty)\)</span> is called a probability density function (PDF) on <span class="math inline">\(\mathbb{R}^d\)</span> if</p>
+<p><span class="math display">\[
+\int_{\mathbb{R}^d} f(\boldsymbol{x}) \, \mathrm{d}\boldsymbol{x} = 1.
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="probability-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="probability-distributions">Probability Distributions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discrete random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A random variable <span class="math inline">\(X\)</span> is discrete if it takes countably many values <span class="math inline">\(\{x_1, x_2, \dots\}\)</span>. We define the probability mass function (PMF) of <span class="math inline">\(X\)</span> as</p>
+<p><span class="math display">\[
+p_X(x) := \Pr[X = x].
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Continuous random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A random variable <span class="math inline">\(X\)</span> is continuous if there exists a function <span class="math inline">\(f_X : \mathbb{R} \to [0, +\infty)\)</span> such that</p>
+<p><span class="math display">\[
+\int_{\mathbb{R}} f_X(x) \,\mathrm{d}x = 1,
+\]</span></p>
+<p>and for every <span class="math inline">\(a &lt; b\)</span>,</p>
+<p><span class="math display">\[
+\Pr[a &lt; X &lt; b] = \int_{a}^{b} f_X(x) \,\mathrm{d}x.
+\]</span></p>
+<p>The function <span class="math inline">\(f_X\)</span> is called the probability density function (PDF) of <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability distribution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The probability distribution, or law, of <span class="math inline">\(X\)</span> is defined as a function <span class="math inline">\(P_X\)</span> that maps sets to probabilities:</p>
+<p><span class="math display">\[
+P_X(A) := \Pr[X \in A],
+\]</span></p>
+<p>In general, a probability distribution refers to any function <span class="math inline">\(\mathcal{D}\)</span> that maps sets to probabilities, and we write <span class="math inline">\(X \sim \mathcal{D}\)</span> if <span class="math inline">\(P_X = \mathcal{D}\)</span>. A probability distribution <span class="math inline">\(\mathcal{D}\)</span> is discrete if <span class="math inline">\(X \sim \mathcal{D}\)</span> for some discrete random variable <span class="math inline">\(X\)</span>, and continuous if <span class="math inline">\(X \sim \mathcal{D}\)</span> for some continuous random variable <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.1</strong></span> Let <span class="math inline">\(P_X\)</span> and <span class="math inline">\(P_Y\)</span> be the probability distributions of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Then the following conditions are equivalent to <span class="math inline">\(P_X = P_Y\)</span>:</p>
+<ol type="1">
+<li>For every <span class="math inline">\(a &lt; b\)</span>, <span class="math inline">\(P_X((a, b)) = P_Y((a, b))\)</span>.</li>
+<li>For every <span class="math inline">\(a &lt; b\)</span>, <span class="math inline">\(P_X([a, b]) = P_Y([a, b])\)</span>.</li>
+<li>For every <span class="math inline">\(a \in \mathbb{R}\)</span>, <span class="math inline">\(P_X((-\infty, a)) = P_Y((-\infty, a))\)</span>.</li>
+<li>For every <span class="math inline">\(a \in \mathbb{R}\)</span>, <span class="math inline">\(P_X((-\infty, a]) = P_Y((-\infty, a])\)</span>.</li>
+</ol>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.2</strong></span> Let <span class="math inline">\(P_X\)</span> and <span class="math inline">\(P_Y\)</span> be the probability distributions of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Suppose that the MGFs of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denoted as <span class="math inline">\(M_X\)</span> and <span class="math inline">\(M_Y\)</span>, are defined on some open interval <span class="math inline">\((-\epsilon, \epsilon)\)</span>. Then <span class="math inline">\(P_X = P_Y\)</span> if and only if <span class="math inline">\(M_X(t) = M_Y(t)\)</span> for all <span class="math inline">\(t \in (-\epsilon, \epsilon)\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="gaussian-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="gaussian-distribution">Gaussian Distribution</h2>
+<section id="the-standard-gaussian-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="the-standard-gaussian-distributions">The Standard Gaussian Distributions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Standard Gaussian distribution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The standard Gaussian distribution is the continuous probability distribution with PDF</p>
+<p><span class="math display">\[
+\varphi(x) := \frac{1}{\sqrt{2\pi}} e^{-x^2/2}.
+\]</span></p>
+<p>We denote the standard Gaussian distribution by <span class="math inline">\(\mathcal{N}(0, 1)\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="general-gaussian-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="general-gaussian-distributions">General Gaussian Distributions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>General Gaussian distribution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mu \in \mathbb{R}\)</span> and <span class="math inline">\(\sigma \ge 0\)</span>. The Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> is defined as the distribution of random variable</p>
+<p><span class="math display">\[
+X = \mu + \sigma Z,
+\]</span></p>
+<p>where <span class="math inline">\(Z \sim \mathcal{N}(0, 1)\)</span>. We denote this distribution by <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.3</strong></span> Let <span class="math inline">\(X\)</span> be a continuous random variable with PDF <span class="math inline">\(f_X(x)\)</span>. Let <span class="math inline">\(\alpha \in \mathbb{R} \setminus \{0\}\)</span> and <span class="math inline">\(\beta \in \mathbb{R}\)</span> be constants. Then:</p>
+<ul>
+<li>Scaling: <span class="math inline">\(\alpha X\)</span> has PDF <span class="math inline">\(\frac{1}{|\alpha|} f_X\left(\frac{x}{\alpha}\right)\)</span>.</li>
+<li>Shift: <span class="math inline">\(X + \beta\)</span> has PDF <span class="math inline">\(f_X(x - \beta)\)</span>.</li>
+<li>Scaling and Shift: <span class="math inline">\(\alpha X + \beta\)</span> has PDF <span class="math inline">\(\frac{1}{|\alpha|} f_X\left(\frac{x - \beta}{\alpha}\right)\)</span>.</li>
+</ul>
+<p>If <span class="math inline">\(X \sim \mathcal{N}(\mu, \sigma^2)\)</span> for some <span class="math inline">\(\mu \in \mathbb{R}\)</span> and <span class="math inline">\(\sigma &gt; 0\)</span>, then</p>
+<p><span class="math display">\[
+f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]</span></p>
+<p>is a PDF of <span class="math inline">\(X\)</span>.</p>
+</div>
+</section>
+<section id="moment-generating-functions" class="level3">
+<h3 class="anchored" data-anchor-id="moment-generating-functions">Moment Generating Functions</h3>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.4</strong></span> If <span class="math inline">\(X \sim \mathcal{N}(\mu, \sigma^2)\)</span> is a Gaussian random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then</p>
+<p><span class="math display">\[
+M_X(t) = e^{\mu t + \sigma^2 t^2 / 2}, \quad K_X(t) = \mu t + \frac{1}{2}\sigma^2 t^2.
+\]</span></p>
+</div>
+</section>
+<section id="sum-of-independent-gaussians" class="level3">
+<h3 class="anchored" data-anchor-id="sum-of-independent-gaussians">Sum of Independent Gaussians</h3>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.5</strong></span> Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be independent Gaussian random variables. Suppose</p>
+<p><span class="math display">\[
+X_1 \sim \mathcal{N}(\mu_1, \sigma_1^2), \quad X_2 \sim \mathcal{N}(\mu_2, \sigma_2^2).
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+X_1 + X_2 \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2).
+\]</span></p>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.6</strong></span> Let <span class="math inline">\(X_1, \dots, X_n\)</span> be independent Gaussian random variables with</p>
+<p><span class="math display">\[
+X_i \sim \mathcal{N}(\mu_i, \sigma_i^2), \quad \text{for all } i \in [n].
+\]</span></p>
+<p>For any constants <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\sum_{i=1}^n c_i X_i \sim \mathcal{N}\left(\sum_{i=1}^n c_i \mu_i, \sum_{i=1}^n c_i^2 \sigma_i^2\right).
+\]</span></p>
+</div>
+</section>
+<section id="gaussian-tail-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-tail-bounds">Gaussian Tail Bounds</h3>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.7</strong></span> Let <span class="math inline">\(X := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> i.i.d. Gaussian random variables <span class="math inline">\(X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)\)</span>. Then for every <span class="math inline">\(\epsilon \ge 0\)</span>, as <span class="math inline">\(n \to \infty\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[X \ge \mu + \epsilon] = \Pr[X \le \mu - \epsilon] &amp;= \bar{\Phi}\left(\frac{\epsilon}{\sigma}\sqrt{n}\right) \\
+&amp;\sim \frac{\sigma}{\epsilon\sqrt{2\pi n}}e^{-n\epsilon^2/(2\sigma^2)}.
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\bar{\Phi}\)</span> is conventionally defined as the tail probability of the standard Gaussian distribution: <span class="math display">\[
+\bar{\Phi}(x) := \int_x^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-u^2/2} \,\mathrm{d}u.
+\]</span></p>
+<p>However, based on some tricks with integration by parts, one can show that <span class="math display">\[
+\bar{\Phi}(x) \sim \frac{1}{\sqrt{2\pi}} \frac{e^{-x^2/2}}{x} \quad \text{as } x \to +\infty.
+\]</span></p>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.8</strong></span> Let <span class="math inline">\(X := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> i.i.d. Gaussian random variables <span class="math inline">\(X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)\)</span>. Then, for every <span class="math inline">\(\epsilon \ge 0\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X \ge \mu + \epsilon] \le e^{-n\epsilon^2/(2\sigma^2)}, \quad \Pr[X \le \mu - \epsilon] \le e^{-n\epsilon^2/(2\sigma^2)}.
+\]</span></p>
+</div>
+</section>
+<section id="gaussian-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-vectors">Gaussian Vectors</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Random vector
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A random vector in <span class="math inline">\(\mathbb{R}^d\)</span> is a vector</p>
+<p><span class="math display">\[
+\boldsymbol{x} = (X_1, \dots, X_d)
+\]</span></p>
+<p>whose coordinates <span class="math inline">\(X_1, \dots, X_d\)</span> are random variables. The probability distribution of a random vector <span class="math inline">\(\boldsymbol{x} \in \mathbb{R}^d\)</span>, or equivalently the joint distribution of <span class="math inline">\(X_1, \dots, X_d\)</span>, is a function that assigns probabilities to regions in <span class="math inline">\(\mathbb{R}^d\)</span>:</p>
+<p><span class="math display">\[
+P_{\boldsymbol{x}}(A) := \Pr[\boldsymbol{x} \in A].
+\]</span></p>
+<p>When referring to the distribution of a single coordinate <span class="math inline">\(X_i\)</span>, we use the term marginal distribution of <span class="math inline">\(X_i\)</span> to emphasize that we are considering the probability distribution of this coordinate alone.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mean vector
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The mean of a random vector <span class="math inline">\(\boldsymbol{x} = (X_1, \dots, X_d)\)</span> is the vector</p>
+<p><span class="math display">\[
+\mathbb{E}[\boldsymbol{x}] := \begin{bmatrix} \mathbb{E}[X_1] \\ \mathbb{E}[X_2] \\ \vdots \\ \mathbb{E}[X_d] \end{bmatrix}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Covariance matrix
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The covariance matrix of a random vector <span class="math inline">\(\boldsymbol{x} = (X_1, \dots, X_d)\)</span> is the matrix</p>
+<p><span class="math display">\[
+\text{Cov}(\boldsymbol{x}) := \mathbb{E}[(\boldsymbol{x} - \mathbb{E}[\boldsymbol{x}])(\boldsymbol{x} - \mathbb{E}[\boldsymbol{x}])^\top],
+\]</span></p>
+<p>where the expectation is taken entrywise. More explicitly,</p>
+<p><span class="math display">\[
+\text{Cov}(\boldsymbol{x}) := \begin{bmatrix} \text{Cov}(X_1, X_1) &amp; \text{Cov}(X_1, X_2) &amp; \cdots &amp; \text{Cov}(X_1, X_d) \\ \text{Cov}(X_2, X_1) &amp; \text{Cov}(X_2, X_2) &amp; \cdots &amp; \text{Cov}(X_2, X_d) \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \text{Cov}(X_d, X_1) &amp; \text{Cov}(X_d, X_2) &amp; \cdots &amp; \text{Cov}(X_d, X_d) \end{bmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(\text{Cov}(X, Y) := \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]\)</span> is defined as the covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Standard Gaussian vector
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A random vector <span class="math inline">\(\boldsymbol{x} = (X_1, \dots, X_d) \in \mathbb{R}^d\)</span> is called a standard Gaussian vector if <span class="math inline">\(X_1, \dots, X_d\)</span> are independent and</p>
+<p><span class="math display">\[
+X_i \sim \mathcal{N}(0, 1), \quad \text{for all } i \in [d].
+\]</span></p>
+<p>The distribution of this random vector is denoted by <span class="math inline">\(\mathcal{N}(\boldsymbol{0}, \boldsymbol{I})\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Gaussian vector
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A random vector <span class="math inline">\(\boldsymbol{x} \in \mathbb{R}^d\)</span> is called a Gaussian vector if there exists a vector <span class="math inline">\(\boldsymbol{\mu} \in \mathbb{R}^d\)</span>, a matrix <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{d \times r}\)</span>, and a <span class="math inline">\(r\)</span>-dimensional standard Gaussian vector <span class="math inline">\(\boldsymbol{z} \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})\)</span> such that</p>
+<p><span class="math display">\[
+\boldsymbol{x} = \boldsymbol{\mu} + \boldsymbol{A}\boldsymbol{z}.
+\]</span></p>
+<p>The distribution of this random vector is denoted by <span class="math inline">\(\mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span>, where <span class="math inline">\(\boldsymbol{\Sigma} = \boldsymbol{A}\boldsymbol{A}^\top\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.9</strong></span> Let <span class="math inline">\(P_{\boldsymbol{x}}\)</span> and <span class="math inline">\(P_{\boldsymbol{y}}\)</span> be the probability distributions of two random vectors <span class="math inline">\(\boldsymbol{x}\)</span> and <span class="math inline">\(\boldsymbol{y}\)</span>. Suppose that the MGFs of <span class="math inline">\(\boldsymbol{x}\)</span> and <span class="math inline">\(\boldsymbol{y}\)</span>, denoted as <span class="math inline">\(M_{\boldsymbol{x}}\)</span> and <span class="math inline">\(M_{\boldsymbol{y}}\)</span>, are defined on some open neighborhood of the origin. Then <span class="math inline">\(P_{\boldsymbol{x}} = P_{\boldsymbol{y}}\)</span> if and only if <span class="math inline">\(M_{\boldsymbol{x}}(\boldsymbol{t}) = M_{\boldsymbol{y}}(\boldsymbol{t})\)</span> for all <span class="math inline">\(\boldsymbol{t}\)</span> in this neighborhood.</p>
+</div>
+<div id="thm-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.10</strong></span> Let <span class="math inline">\(\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span>. Then the MGF and CGF of <span class="math inline">\(\boldsymbol{x}\)</span> are given by</p>
+<p><span class="math display">\[
+M_{\boldsymbol{x}}(\boldsymbol{t}) = e^{\boldsymbol{t}^\top \boldsymbol{\mu} + \boldsymbol{t}^\top \boldsymbol{\Sigma} \boldsymbol{t} / 2}, \quad K_{\boldsymbol{x}}(\boldsymbol{t}) = \boldsymbol{t}^\top \boldsymbol{\mu} + \frac{1}{2}\boldsymbol{t}^\top \boldsymbol{\Sigma} \boldsymbol{t}.
+\]</span></p>
+</div>
+<div id="thm-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.11</strong></span> Let <span class="math inline">\(\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span> with <span class="math inline">\(\det(\boldsymbol{\Sigma}) &gt; 0\)</span>. Then</p>
+<p><span class="math display">\[
+f_{\boldsymbol{x}}(\boldsymbol{x}) = \frac{1}{\sqrt{(2\pi)^d \det(\boldsymbol{\Sigma})}} e^{-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^\top \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})}.
+\]</span></p>
+<p>is a PDF of <span class="math inline">\(\boldsymbol{x}\)</span>.</p>
+</div>
+<div id="thm-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.12</strong></span> Let <span class="math inline">\(\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span>. Then for any fixed matrix <span class="math inline">\(\boldsymbol{S} \in \mathbb{R}^{r \times d}\)</span>,</p>
+<p><span class="math display">\[
+\boldsymbol{S}\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{S}\boldsymbol{\mu}, \boldsymbol{S}\boldsymbol{\Sigma}\boldsymbol{S}^\top).
+\]</span></p>
+</div>
+<div id="thm-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.13</strong></span> Let <span class="math inline">\(\boldsymbol{x}_1\)</span> and <span class="math inline">\(\boldsymbol{x}_2\)</span> be independent Gaussian vectors in <span class="math inline">\(\mathbb{R}^d\)</span>. Suppose</p>
+<p><span class="math display">\[
+\boldsymbol{x}_1 \sim \mathcal{N}(\boldsymbol{\mu}_1, \boldsymbol{\Sigma}_1), \quad \boldsymbol{x}_2 \sim \mathcal{N}(\boldsymbol{\mu}_2, \boldsymbol{\Sigma}_2).
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\boldsymbol{x}_1 + \boldsymbol{x}_2 \sim \mathcal{N}(\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2, \boldsymbol{\Sigma}_1 + \boldsymbol{\Sigma}_2).
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="the-strange-geometry-of-high-dimensions" class="level2">
+<h2 class="anchored" data-anchor-id="the-strange-geometry-of-high-dimensions">The Strange Geometry of High Dimensions</h2>
 
 
 </section>
@@ -926,6 +1457,9 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../../docs/notes/Physics/index.html" class="pagination-link" aria-label="General Physics">
+        <span class="nav-page-text">General Physics</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
