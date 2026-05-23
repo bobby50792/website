@@ -74,6 +74,11 @@ website:
                   href: docs/notes/Math4CS&AI/3.qmd
                 - text: "Continuous Probability"
                   href: docs/notes/Math4CS&AI/4.qmd
+            - section: "General Physics"
+              href: docs/notes/Physics/index.qmd
+              contents: 
+                - text: "Classical Mechanics"
+                  href: docs/notes/Physics/1.qmd
 format:
   html:
     respect-user-color-scheme: true

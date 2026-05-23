@@ -43,3 +43,367 @@ is countable.
 
 - Real numbers are uncountable.
 :::
+
+::: {.callout-tip collapse="false"}
+## Discrete probability space
+
+A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
+
+* A non-empty countable set $\Omega$, called the sample space, whose elements represent all possible outcomes of an experiment.
+* A function $p : \Omega \to [0, 1]$, called the probability mass function, which assigns probabilities to outcomes and satisfies $\sum_{\omega \in \Omega} p(\omega) = 1$.
+
+:::
+
+::: {.callout-tip collapse="false"}
+
+## Event
+An event $A$ is a subset of $\Omega$ ($A \subseteq \Omega$), and its probability is defined as
+
+$$
+\Pr[A] := \sum_{\omega \in A} p(\omega).
+$$
+
+:::
+
+::: {.callout-tip collapse="false"}
+## Expectation
+
+Let $X$ be a random variable on a discrete probability space $(\Omega, p)$. The expectation of $X$ is defined as
+
+$$
+\mathbb{E}[X] := \sum_{\omega \in \Omega} [X(\omega)]_+ p(\omega) - \sum_{\omega \in \Omega} [X(\omega)]_- p(\omega),
+$$
+
+provided the two sums are not both $+\infty$. If both sums are finite, then $\mathbb{E}[X]$ is finite. If exactly one of them is $+\infty$, then $\mathbb{E}[X]$ is $+\infty$ or $-\infty$. If both are $+\infty$, then the expectation is left undefined.
+
+- This definition guarantees that limits exist and are consistent regardless of the order of summation. This need some knowledge about infinite series, which is not covered in this note.
+:::
+
+### Continuous Probability Space
+
+::: {.callout-tip collapse="false"}
+## Probability density function
+
+A function $f : \mathbb{R}^d \to [0, \infty)$ is called a probability density function (PDF) on $\mathbb{R}^d$ if
+
+$$
+\int_{\mathbb{R}^d} f(\boldsymbol{x}) \, \mathrm{d}\boldsymbol{x} = 1.
+$$
+:::
+
+### Probability Distributions
+
+::: {.callout-tip collapse="false"}
+## Discrete random variables
+
+A random variable $X$ is discrete if it takes countably many values $\{x_1, x_2, \dots\}$. We define the probability mass function (PMF) of $X$ as
+
+$$
+p_X(x) := \Pr[X = x]. 
+$$
+
+:::
+
+::: {.callout-tip collapse="false"}
+## Continuous random variables
+
+A random variable $X$ is continuous if there exists a function $f_X : \mathbb{R} \to [0, +\infty)$ such that
+
+$$
+\int_{\mathbb{R}} f_X(x) \,\mathrm{d}x = 1, 
+$$
+
+and for every $a < b$,
+
+$$
+\Pr[a < X < b] = \int_{a}^{b} f_X(x) \,\mathrm{d}x. 
+$$
+
+The function $f_X$ is called the probability density function (PDF) of $X$.
+:::
+
+::: {.callout-tip collapse="false"}
+## Probability distribution
+
+The probability distribution, or law, of $X$ is defined as a function $P_X$ that maps sets to probabilities:
+
+$$
+P_X(A) := \Pr[X \in A], 
+$$
+
+In general, a probability distribution refers to any function $\mathcal{D}$ that maps sets to probabilities, and we write $X \sim \mathcal{D}$ if $P_X = \mathcal{D}$. A probability distribution $\mathcal{D}$ is discrete if $X \sim \mathcal{D}$ for some discrete random variable $X$, and continuous if $X \sim \mathcal{D}$ for some continuous random variable $X$.
+:::
+
+::: {#thm-1}
+
+Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$ and $Y$. Then the following conditions are equivalent to $P_X = P_Y$:
+
+1. For every $a < b$, $P_X((a, b)) = P_Y((a, b))$.
+2. For every $a < b$, $P_X([a, b]) = P_Y([a, b])$.
+3. For every $a \in \mathbb{R}$, $P_X((-\infty, a)) = P_Y((-\infty, a))$.
+4. For every $a \in \mathbb{R}$, $P_X((-\infty, a]) = P_Y((-\infty, a])$.
+:::
+
+::: {#thm-2}
+
+Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$ and $Y$. Suppose that the MGFs of $X$ and $Y$, denoted as $M_X$ and $M_Y$, are defined on some open interval $(-\epsilon, \epsilon)$. Then $P_X = P_Y$ if and only if $M_X(t) = M_Y(t)$ for all $t \in (-\epsilon, \epsilon)$.
+:::
+
+## Gaussian Distribution
+
+### The Standard Gaussian Distributions
+
+::: {.callout-tip collapse="false"}
+## Standard Gaussian distribution
+
+The standard Gaussian distribution is the continuous probability distribution with PDF
+
+$$
+\varphi(x) := \frac{1}{\sqrt{2\pi}} e^{-x^2/2}.
+$$
+
+We denote the standard Gaussian distribution by $\mathcal{N}(0, 1)$.
+:::
+
+### General Gaussian Distributions
+
+::: {.callout-tip collapse="false"}
+## General Gaussian distribution
+
+Let $\mu \in \mathbb{R}$ and $\sigma \ge 0$. The Gaussian distribution with mean $\mu$ and variance $\sigma^2$ is defined as the distribution of random variable
+
+$$
+X = \mu + \sigma Z,
+$$
+
+where $Z \sim \mathcal{N}(0, 1)$. We denote this distribution by $\mathcal{N}(\mu, \sigma^2)$.
+:::
+
+::: {#thm-3}
+
+Let $X$ be a continuous random variable with PDF $f_X(x)$. Let $\alpha \in \mathbb{R} \setminus \{0\}$ and $\beta \in \mathbb{R}$ be constants. Then:
+
+* Scaling: $\alpha X$ has PDF $\frac{1}{|\alpha|} f_X\left(\frac{x}{\alpha}\right)$.
+* Shift: $X + \beta$ has PDF $f_X(x - \beta)$.
+* Scaling and Shift: $\alpha X + \beta$ has PDF $\frac{1}{|\alpha|} f_X\left(\frac{x - \beta}{\alpha}\right)$.
+
+If $X \sim \mathcal{N}(\mu, \sigma^2)$ for some $\mu \in \mathbb{R}$ and $\sigma > 0$, then
+
+$$
+f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+is a PDF of $X$.
+
+:::
+
+### Moment Generating Functions
+
+::: {#thm-4}
+
+If $X \sim \mathcal{N}(\mu, \sigma^2)$ is a Gaussian random variable with mean $\mu$ and variance $\sigma^2$, then
+
+$$
+M_X(t) = e^{\mu t + \sigma^2 t^2 / 2}, \quad K_X(t) = \mu t + \frac{1}{2}\sigma^2 t^2.
+$$
+
+:::
+
+### Sum of Independent Gaussians
+
+::: {#thm-5}
+
+Let $X_1$ and $X_2$ be independent Gaussian random variables. Suppose
+
+$$
+X_1 \sim \mathcal{N}(\mu_1, \sigma_1^2), \quad X_2 \sim \mathcal{N}(\mu_2, \sigma_2^2).
+$$
+
+Then
+
+$$
+X_1 + X_2 \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2).
+$$
+
+:::
+
+::: {#thm-6}
+
+Let $X_1, \dots, X_n$ be independent Gaussian random variables with
+
+$$
+X_i \sim \mathcal{N}(\mu_i, \sigma_i^2), \quad \text{for all } i \in [n].
+$$
+
+For any constants $c_1, \dots, c_n \in \mathbb{R}$,
+
+$$
+\sum_{i=1}^n c_i X_i \sim \mathcal{N}\left(\sum_{i=1}^n c_i \mu_i, \sum_{i=1}^n c_i^2 \sigma_i^2\right).
+$$
+
+:::
+
+
+### Gaussian Tail Bounds
+
+::: {#thm-7}     
+
+Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. Gaussian random variables $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. Then for every $\epsilon \ge 0$, as $n \to \infty$,
+
+$$
+\begin{aligned}
+\Pr[X \ge \mu + \epsilon] = \Pr[X \le \mu - \epsilon] &= \bar{\Phi}\left(\frac{\epsilon}{\sigma}\sqrt{n}\right) \\
+&\sim \frac{\sigma}{\epsilon\sqrt{2\pi n}}e^{-n\epsilon^2/(2\sigma^2)}.
+\end{aligned}
+$$
+
+where $\bar{\Phi}$ is conventionally defined as the tail probability of the standard Gaussian distribution:
+$$
+\bar{\Phi}(x) := \int_x^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-u^2/2} \,\mathrm{d}u.
+$$
+
+However, based on some tricks with integration by parts,
+one can show that
+$$
+\bar{\Phi}(x) \sim \frac{1}{\sqrt{2\pi}} \frac{e^{-x^2/2}}{x} \quad \text{as } x \to +\infty.
+$$
+
+:::
+
+::: {#thm-8}
+
+Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. Gaussian random variables $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. Then, for every $\epsilon \ge 0$,
+
+$$
+\Pr[X \ge \mu + \epsilon] \le e^{-n\epsilon^2/(2\sigma^2)}, \quad \Pr[X \le \mu - \epsilon] \le e^{-n\epsilon^2/(2\sigma^2)}.
+$$
+
+:::
+
+### Gaussian Vectors
+
+::: {.callout-tip collapse="false"}
+## Random vector
+
+A random vector in $\mathbb{R}^d$ is a vector
+
+$$
+\boldsymbol{x} = (X_1, \dots, X_d)
+$$
+
+whose coordinates $X_1, \dots, X_d$ are random variables. The probability distribution of a random vector $\boldsymbol{x} \in \mathbb{R}^d$, or equivalently the joint distribution of $X_1, \dots, X_d$, is a function that assigns probabilities to regions in $\mathbb{R}^d$:
+
+$$
+P_{\boldsymbol{x}}(A) := \Pr[\boldsymbol{x} \in A].
+$$
+
+When referring to the distribution of a single coordinate $X_i$, we use the term marginal distribution of $X_i$ to emphasize that we are considering the probability distribution of this coordinate alone.
+:::
+
+::: {.callout-tip collapse="false"}
+## Mean vector
+
+The mean of a random vector $\boldsymbol{x} = (X_1, \dots, X_d)$ is the vector
+
+$$
+\mathbb{E}[\boldsymbol{x}] := \begin{bmatrix} \mathbb{E}[X_1] \\ \mathbb{E}[X_2] \\ \vdots \\ \mathbb{E}[X_d] \end{bmatrix}.
+$$
+
+:::
+
+::: {.callout-tip collapse="false"}
+## Covariance matrix
+
+The covariance matrix of a random vector $\boldsymbol{x} = (X_1, \dots, X_d)$ is the matrix
+
+$$
+\text{Cov}(\boldsymbol{x}) := \mathbb{E}[(\boldsymbol{x} - \mathbb{E}[\boldsymbol{x}])(\boldsymbol{x} - \mathbb{E}[\boldsymbol{x}])^\top],
+$$
+
+where the expectation is taken entrywise. More explicitly,
+
+$$
+\text{Cov}(\boldsymbol{x}) := \begin{bmatrix} \text{Cov}(X_1, X_1) & \text{Cov}(X_1, X_2) & \cdots & \text{Cov}(X_1, X_d) \\ \text{Cov}(X_2, X_1) & \text{Cov}(X_2, X_2) & \cdots & \text{Cov}(X_2, X_d) \\ \vdots & \vdots & \ddots & \vdots \\ \text{Cov}(X_d, X_1) & \text{Cov}(X_d, X_2) & \cdots & \text{Cov}(X_d, X_d) \end{bmatrix},
+$$
+
+where $\text{Cov}(X, Y) := \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]$ is defined as the covariance between $X$ and $Y$.
+:::
+
+::: {.callout-tip collapse="false"}
+## Standard Gaussian vector
+
+A random vector $\boldsymbol{x} = (X_1, \dots, X_d) \in \mathbb{R}^d$ is called a standard Gaussian vector if $X_1, \dots, X_d$ are independent and
+
+$$
+X_i \sim \mathcal{N}(0, 1), \quad \text{for all } i \in [d].
+$$
+
+The distribution of this random vector is denoted by $\mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$.
+:::
+
+::: {.callout-tip collapse="false"}
+## Gaussian vector
+
+A random vector $\boldsymbol{x} \in \mathbb{R}^d$ is called a Gaussian vector if there exists a vector $\boldsymbol{\mu} \in \mathbb{R}^d$, a matrix $\boldsymbol{A} \in \mathbb{R}^{d \times r}$, and a $r$-dimensional standard Gaussian vector $\boldsymbol{z} \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$ such that
+
+$$
+\boldsymbol{x} = \boldsymbol{\mu} + \boldsymbol{A}\boldsymbol{z}.
+$$
+
+The distribution of this random vector is denoted by $\mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$, where $\boldsymbol{\Sigma} = \boldsymbol{A}\boldsymbol{A}^\top$.
+:::
+
+::: {#thm-9}
+
+Let $P_{\boldsymbol{x}}$ and $P_{\boldsymbol{y}}$ be the probability distributions of two random vectors $\boldsymbol{x}$ and $\boldsymbol{y}$. Suppose that the MGFs of $\boldsymbol{x}$ and $\boldsymbol{y}$, denoted as $M_{\boldsymbol{x}}$ and $M_{\boldsymbol{y}}$, are defined on some open neighborhood of the origin. Then $P_{\boldsymbol{x}} = P_{\boldsymbol{y}}$ if and only if $M_{\boldsymbol{x}}(\boldsymbol{t}) = M_{\boldsymbol{y}}(\boldsymbol{t})$ for all $\boldsymbol{t}$ in this neighborhood.
+:::
+
+::: {#thm-10}
+
+Let $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$. Then the MGF and CGF of $\boldsymbol{x}$ are given by
+
+$$
+M_{\boldsymbol{x}}(\boldsymbol{t}) = e^{\boldsymbol{t}^\top \boldsymbol{\mu} + \boldsymbol{t}^\top \boldsymbol{\Sigma} \boldsymbol{t} / 2}, \quad K_{\boldsymbol{x}}(\boldsymbol{t}) = \boldsymbol{t}^\top \boldsymbol{\mu} + \frac{1}{2}\boldsymbol{t}^\top \boldsymbol{\Sigma} \boldsymbol{t}.
+$$
+
+:::
+
+::: {#thm-11}
+
+Let $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ with $\det(\boldsymbol{\Sigma}) > 0$. Then
+
+$$
+f_{\boldsymbol{x}}(\boldsymbol{x}) = \frac{1}{\sqrt{(2\pi)^d \det(\boldsymbol{\Sigma})}} e^{-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^\top \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})}.
+$$
+
+is a PDF of $\boldsymbol{x}$.
+:::
+
+::: {#thm-12}
+
+Let $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$. Then for any fixed matrix $\boldsymbol{S} \in \mathbb{R}^{r \times d}$,
+
+$$
+\boldsymbol{S}\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{S}\boldsymbol{\mu}, \boldsymbol{S}\boldsymbol{\Sigma}\boldsymbol{S}^\top).
+$$
+
+:::
+
+::: {#thm-13}
+
+Let $\boldsymbol{x}_1$ and $\boldsymbol{x}_2$ be independent Gaussian vectors in $\mathbb{R}^d$. Suppose
+
+$$
+\boldsymbol{x}_1 \sim \mathcal{N}(\boldsymbol{\mu}_1, \boldsymbol{\Sigma}_1), \quad \boldsymbol{x}_2 \sim \mathcal{N}(\boldsymbol{\mu}_2, \boldsymbol{\Sigma}_2).
+$$
+
+Then
+
+$$
+\boldsymbol{x}_1 + \boldsymbol{x}_2 \sim \mathcal{N}(\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2, \boldsymbol{\Sigma}_1 + \boldsymbol{\Sigma}_2).
+$$
+
+:::
+
+
+## The Strange Geometry of High Dimensions
