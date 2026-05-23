@@ -1,10 +1,9 @@
 ---
-title: "我的个人网站"
-subtitle: "记录学习、生活与灵感，也记录每一次整理站点的过程。"
+title: "Blog"
+subtitle: "Short columns, casual notes, and hobby projects."
 page-layout: full
 title-block-banner: true
-search: false
-image: quarto-blog-v2.png
+search: true
 listing:
   sort: "date desc"
   contents: "posts/*/index.qmd"
@@ -13,20 +12,7 @@ listing:
   categories: true
 ---
 
-## 关于我
+## What this is
 
-我喜欢把日常观察、学习心得和项目实践整理成文字，慢慢沉淀成自己的表达方式。这个页面会持续收纳那些不适合放在 guide 里的轻量记录。
+This is my blog for short columns, quick thoughts, and things I build in my free time.
 
-## 我在做什么
-
-我会持续更新技术笔记、写作练习和一些阶段性的思考，也会尝试把复杂问题用更清楚的方式记录下来。这里的内容不追求很长，但会尽量清楚、有节奏、方便回看。
-
-## 这里会写什么
-
-- 技术记录：开发经验、工具使用和问题解决方法
-- 生活分享：旅行、阅读、日常灵感和简单感受
-- 成长复盘：目标管理、阶段总结和自我反思
-
-## 最近更新
-
-Blog posts below will appear automatically in reverse chronological order.
