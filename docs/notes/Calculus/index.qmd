@@ -1,10 +1,7 @@
 ---
-title: "发布维护"
-subtitle: "让内容更新和站点发布保持同一节奏。"
+title: "Calculus"
 page-layout: article
-search: false
+search: true
 ---
 
-## 发布前检查
-
-每次新增页面后，先确认三件事：链接是否正确、标题是否清楚、页面是否还能正常渲染。
+本界面梳理了**微积分**相关知识, 希望对你能有所启发。

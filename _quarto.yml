@@ -39,30 +39,39 @@ website:
             - section: "Calculus"
               href: docs/notes/Calculus/index.qmd
               contents: 
-                - text: "Real Numbers and Limits of Sequences"
-                  href: docs/notes/Calculus/1.qmd
-                - text: "Continuity of Functions"
-                  href: docs/notes/Calculus/2.qmd
-                - text: "Derivatives and Differentials of Functions"
-                  href: docs/notes/Calculus/3.qmd
-                - text: "Indefinite Integrals"
-                  href: docs/notes/Calculus/4.qmd
-                - text: "Definite Integrals"
-                  href: docs/notes/Calculus/5.qmd
-                - text: "Ordinary Differential Equations"
-                  href: docs/notes/Calculus/6.qmd
-                - text: "Limits and Continuity of Multivariate Functions"
-                  href: docs/notes/Calculus/7.qmd
-                - text: "Differential of Multivariable Functions"
-                  href: docs/notes/Calculus/8.qmd
-                - text: "Implicit Function and Inverse Mapping Theorem"
-                  href: docs/notes/Calculus/9.qmd
-                - text: "Integrals with Parameters and Improper Integrals"
-                  href: docs/notes/Calculus/10.qmd
-                - text: "Multiple Integrals"
-                  href: docs/notes/Calculus/11.qmd
-                - text: "Integration of Functions on Curves and Surfaces"
-                  href: docs/notes/Calculus/12.qmd
+                - section: "Single Variable Calculus"
+                  href: docs/notes/Calculus/1/index.qmd
+                  contents:
+                    - text: "Real Numbers and Limits of Sequences"
+                      href: docs/notes/Calculus/1/1.qmd
+                    - text: "Continuity of Functions"
+                      href: docs/notes/Calculus/1/2.qmd
+                    - text: "Derivatives and Differentials of Functions"
+                      href: docs/notes/Calculus/1/3.qmd
+                    - text: "Indefinite Integrals"
+                      href: docs/notes/Calculus/1/4.qmd
+                    - text: "Definite Integral"
+                      href: docs/notes/Calculus/1/5.qmd
+                    - text: "Ordinary Differential Equations"
+                      href: docs/notes/Calculus/1/6.qmd  
+                - section: "Multivariable Calculus"
+                  href: docs/notes/Calculus/2/index.qmd
+                  contents:
+                    - text: "Limits and Continuity of Multivariate Functions"
+                      href: docs/notes/Calculus/2/1.qmd  
+                    - text: "Differential of Multivariable Functions"
+                      href: docs/notes/Calculus/2/2.qmd
+                    - text: "Implicit Function and Inverse Mapping Theorem"
+                      href: docs/notes/Calculus/2/3.qmd
+                    - text: "Integrals with Parameters and Improper Integrals"
+                      href: docs/notes/Calculus/2/4.qmd
+                    - text: "Multiple Integrals"
+                      href: docs/notes/Calculus/2/5.qmd
+                    - text: "Integration of Functions on Curves and Surfaces"
+                      href: docs/notes/Calculus/2/6.qmd
+                    - text: "Calculus of Vector Fields"
+                      href: docs/notes/Calculus/2/7.qmd
+
             - section: "Math for CS and AI"
               href: docs/notes/Math4CS&AI/index.qmd
               contents: 

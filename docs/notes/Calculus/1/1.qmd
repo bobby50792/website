@@ -1,0 +1,10 @@
+---
+title: "Real Numbers and Limits of Sequences"
+page-layout: article
+search: true
+number-offset: [1]
+number-sections: false
+
+crossref:
+  chapters: true      
+---

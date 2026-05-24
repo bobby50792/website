@@ -1,0 +1,10 @@
+---
+title: "Implicit Function and Inverse Mapping Theorem"
+page-layout: article
+search: true
+number-offset: [3]
+number-sections: false
+
+crossref:
+  chapters: true      
+---

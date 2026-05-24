@@ -1,0 +1,10 @@
+---
+title: "Definite Integral"
+page-layout: article
+search: true
+number-offset: [5]
+number-sections: false
+
+crossref:
+  chapters: true      
+---

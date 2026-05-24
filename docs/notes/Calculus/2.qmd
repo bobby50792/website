@@ -1,8 +1,0 @@
----
-title: "Chapter 2"
-subtitle: "先把站点跑起来，再逐步补内容。"
-page-layout: article
-search: true
----
-
-## 这页讲什么
