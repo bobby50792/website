@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Chapter 2 – Bobby</title>
+<title>Calculus of Vector Fields – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,29 +26,29 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../docs/notes/Math4CS&amp;AI/3.html" rel="next">
-<link href="../../../docs/notes/Math4CS&amp;AI/1.html" rel="prev">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-70be5ccd51f03de5ce195d75fadf0882.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-be99aad819e91f7c12dc333d9f3e17bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../docs/notes/Math4CS&amp;AI/index.html" rel="next">
+<link href="../../../../docs/notes/Calculus/2/6.html" rel="prev">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-70be5ccd51f03de5ce195d75fadf0882.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-be99aad819e91f7c12dc333d9f3e17bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-4bfa39e67ad7f837a080c32dd0858072.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,8 +77,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -259,9 +288,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -271,11 +300,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -297,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/2.html">Sampling and Concentration</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/index.html">Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/index.html">Multivariable Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/7.html">Calculus of Vector Fields</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -311,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -320,16 +349,16 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -338,37 +367,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/1/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/1/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/1/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/1/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/1/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/1/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/1/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/1/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/1/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/1/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/1/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/1/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -376,52 +405,52 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Calculus/2/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/7.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
@@ -431,34 +460,34 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../docs/notes/Math4CS&amp;AI/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling and Concentration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Math4CS&amp;AI/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generating Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Math4CS&amp;AI/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
@@ -466,7 +495,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -475,7 +504,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Physics/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Physics/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Classical Mechanics</span></a>
   </div>
 </li>
@@ -493,7 +522,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#这页讲什么" id="toc-这页讲什么" class="nav-link active" data-scroll-target="#这页讲什么">这页讲什么</a></li>
+  <li><a href="#line-integrals-of-vector-fields" id="toc-line-integrals-of-vector-fields" class="nav-link active" data-scroll-target="#line-integrals-of-vector-fields">Line Integrals of Vector Fields</a></li>
+  <li><a href="#total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields" id="toc-total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields" class="nav-link" data-scroll-target="#total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields">Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields</a></li>
+  <li><a href="#curl-and-divergence-of-plane-vector-fields-greens-formula" id="toc-curl-and-divergence-of-plane-vector-fields-greens-formula" class="nav-link" data-scroll-target="#curl-and-divergence-of-plane-vector-fields-greens-formula">Curl and Divergence of Plane Vector Fields, Green’s Formula</a></li>
+  <li><a href="#the-concept-of-surface-integrals-of-the-second-kind" id="toc-the-concept-of-surface-integrals-of-the-second-kind" class="nav-link" data-scroll-target="#the-concept-of-surface-integrals-of-the-second-kind">The Concept of Surface Integrals of the Second Kind</a></li>
   </ul>
 </nav>
     </div>
@@ -501,10 +533,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/2.html">Sampling and Concentration</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/index.html">Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/index.html">Multivariable Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/7.html">Calculus of Vector Fields</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Chapter 2</h1>
-<p class="subtitle lead">先把站点跑起来，再逐步补内容。</p>
+<h1 class="title">Calculus of Vector Fields</h1>
 </div>
 
 
@@ -521,9 +552,191 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="这页讲什么" class="level2">
-<h2 class="anchored" data-anchor-id="这页讲什么">这页讲什么</h2>
-<!-- 正如在数学笔记中的[矩阵秩定理](1.qmd#thm-matrix-rank)所述，我们可以推导出反向传播中的... -->
+<section id="line-integrals-of-vector-fields" class="level2">
+<h2 class="anchored" data-anchor-id="line-integrals-of-vector-fields">Line Integrals of Vector Fields</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Line Integral of Vector Fields
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The integral of a vector field <span class="math inline">\(\mathbf{F}: \mathbb{R}^m \to \mathbb{R}^m\)</span> along a piecewise <span class="math inline">\(\mathscr{C}^1\)</span> continuous path <span class="math inline">\(\mathbf{x}: [a, b] \to \mathbb{R}^m\)</span> is defined as</p>
+<p><span class="math display">\[
+\int_{\gamma} \mathbf{F} \cdot \mathrm{d}\mathbf{l} = \int_{a}^{b} \langle \mathbf{F}(\mathbf{x}(t)), \mathbf{x}'(t) \rangle dt.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Differential 1-form
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>In a Cartesian coordinate system, let <span class="math inline">\(\mathbf{F} = (F_1, \dots, F_m)^T\)</span> and <span class="math inline">\(\mathbf{x} = (x_1, \dots, x_m)^T\)</span>, then</p>
+<p><span class="math display">\[
+\int_a^b \langle \mathbf{F}(\mathbf{x}(t)), \mathbf{x}'(t) \rangle dt = \int_a^b F_1(\mathbf{x}(t))\mathrm{d}x_1(t) + \dots + F_m(\mathbf{x}(t))\mathrm{d}x_m(t).
+\]</span></p>
+<p>We call</p>
+<p><span class="math display">\[
+\omega = F_1(\mathbf{x})\mathrm{d}x_1 + \dots + F_m(\mathbf{x})\mathrm{d}x_m
+\]</span></p>
+<p>a differential 1-form.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields" class="level2">
+<h2 class="anchored" data-anchor-id="total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields">Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A differential 1-form <span class="math inline">\(\omega\)</span> is called an exact differential (or total differential) if there exists a <span class="math inline">\(\mathscr{C}^1\)</span> function <span class="math inline">\(f\)</span> such that <span class="math inline">\(\omega = \mathrm{d}f\)</span>. In this case, <span class="math inline">\(f\)</span> is called a primitive function of <span class="math inline">\(\omega\)</span>.</p>
+<p>A vector field <span class="math inline">\(\mathbf{F}\)</span> is called a potential field if there exists a <span class="math inline">\(\mathscr{C}^1\)</span> function <span class="math inline">\(f\)</span> such that <span class="math inline">\(\mathbf{F} = \nabla f\)</span>. In this case, <span class="math inline">\(f\)</span> is called a potential function of <span class="math inline">\(\mathbf{F}\)</span>.</p>
+<p>A vector field <span class="math inline">\(\mathbf{F}\)</span> is called a conservative field if, for any path <span class="math inline">\(\gamma\)</span>, the value of the integral <span class="math inline">\(\int_{\gamma} \langle \mathbf{F}, \mathbf{T} \rangle \mathrm{d}l\)</span> depends only on the starting and ending points of <span class="math inline">\(\gamma\)</span>, and is independent of <span class="math inline">\(\gamma\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.1</strong></span> For any <span class="math inline">\(\mathscr{C}^1\)</span> function <span class="math inline">\(f: U \to \mathbb{R}\)</span> and any <span class="math inline">\(\mathscr{C}^1\)</span> path <span class="math inline">\(\gamma \subset U\)</span>,</p>
+<p><span class="math display">\[
+\int_{\gamma} \mathrm{d}f = \int_{\gamma} \langle \nabla f, \mathbf{T} \rangle \mathrm{d}l = f(B) - f(A),
+\]</span></p>
+<p>where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are the starting and ending points of the path <span class="math inline">\(\gamma\)</span> respectively, and <span class="math inline">\(\mathbf{T}\)</span> is the unit tangent vector field of <span class="math inline">\(\gamma\)</span>. Therefore, gradient vector fields (i.e., potential fields) are conservative fields.</p>
+<p>If <span class="math inline">\(\gamma\)</span> is a closed curve, then <span class="math inline">\(\int_{\gamma} \mathrm{d}f = \int_{\gamma} \langle \nabla f, \mathbf{T} \rangle \mathrm{d}l = 0\)</span>.</p>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.2</strong></span> Every continuous conservative field in an open region (i.e., a path-connected open set) is a potential field.</p>
+</div>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.3</strong></span> If a <span class="math inline">\(\mathscr{C}^1\)</span> vector field <span class="math inline">\(\mathbf{F}: U \to \mathbf{R}^m\)</span> is a potential field, then <span class="math display">\[
+\frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i}, \quad 1 \le i &lt; j \le m.
+\]</span></p>
+<p>A vector field satisfying the latter condition is called an irrotational vector field. Therefore, all potential fields are irrotational vector fields.</p>
+</div>
+</section>
+<section id="curl-and-divergence-of-plane-vector-fields-greens-formula" class="level2">
+<h2 class="anchored" data-anchor-id="curl-and-divergence-of-plane-vector-fields-greens-formula">Curl and Divergence of Plane Vector Fields, Green’s Formula</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Curl and Divergence of Plane Vector Fields
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>For a plane <span class="math inline">\(\mathscr{C}^1\)</span> vector field <span class="math display">\[\mathbf{F}(x, y) = \begin{pmatrix} X(x, y) \\ Y(x, y) \end{pmatrix},\]</span></p>
+<p>denote <span class="math display">\[\operatorname{rot} \mathbf{F} = Y_x - X_y,\]</span></p>
+<p><span class="math display">\[\operatorname{div} \mathbf{F} = X_x + Y_y = \operatorname{tr} \frac{\partial(X, Y)}{\partial(x, y)},\]</span></p>
+<p>which are called the curl and divergence of <span class="math inline">\(\mathbf{F}\)</span>, respectively.</p>
+<p>A vector field with zero curl is called an irrotational vector field, and a vector field with zero divergence is called a source-free (or solenoidal) vector field.</p>
+</div>
+</div>
+</div>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.4</strong></span> Suppose the boundary of a bounded closed planar region <span class="math inline">\(\Omega\)</span> is a piecewise <span class="math inline">\(\mathscr{C}^1\)</span> curve, and let</p>
+<p><span class="math display">\[
+\mathbf{F}(x,y) = \begin{pmatrix} X(x,y) \\ Y(x,y) \end{pmatrix}
+\]</span></p>
+<p>be a <span class="math inline">\(\mathscr{C}^1\)</span> vector field on <span class="math inline">\(\Omega\)</span>. Then</p>
+<p><span class="math display">\[
+\int_{\partial\Omega} X(x,y)\mathrm{d}x + Y(x,y)\mathrm{d}y = \iint_{\Omega} (Y_x(x,y) - X_y(x,y))\mathrm{d}x\mathrm{d}y,
+\]</span></p>
+<p>Written in vector field form:</p>
+<p><span class="math display">\[
+\int_{\partial\Omega} \langle \mathbf{F}, \mathbf{T} \rangle \mathrm{d}l = \iint_{\Omega} \mathrm{rot} \mathbf{F} \, \mathrm{d}x\mathrm{d}y,
+\]</span></p>
+<p><span class="math display">\[
+\int_{\partial\Omega} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}l = \iint_{\Omega} \mathrm{div} \mathbf{F} \, \mathrm{d}x\mathrm{d}y,
+\]</span></p>
+<p>where <span class="math inline">\(\partial\Omega\)</span> is the boundary of the region <span class="math inline">\(\Omega\)</span>, and its orientation is determined by the left-hand rule with respect to the outward normal of the region, meaning that as you move forward along <span class="math inline">\(\partial\Omega\)</span>, the region is always located on your left side.</p>
+</div>
+</section>
+<section id="the-concept-of-surface-integrals-of-the-second-kind" class="level2">
+<h2 class="anchored" data-anchor-id="the-concept-of-surface-integrals-of-the-second-kind">The Concept of Surface Integrals of the Second Kind</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Surface Integrals of the Second Kind
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((\Sigma, \mathbf{n})\)</span> be an oriented surface. For a continuous vector field <span class="math inline">\(\mathbf{F}: \Sigma \to \mathbf{R}^3\)</span>, the integral <span class="math display">\[
+\int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle d\sigma
+\]</span></p>
+<p>is called the integral of the vector field <span class="math inline">\(\mathbf{F}\)</span> along the normal vector field <span class="math inline">\(\mathbf{n}\)</span> of the surface <span class="math inline">\(\Sigma\)</span>, also known as the flux of the vector field <span class="math inline">\(\mathbf{F}\)</span> across the oriented surface <span class="math inline">\(\Sigma\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.5</strong></span> For a <span class="math inline">\(\mathscr{C}^1\)</span> regular parametric surface <span class="math inline">\(\Sigma\)</span>:</p>
+<p><span class="math display">\[
+\begin{cases}
+x = x(u_1, u_2), \\
+y = y(u_1, u_2), &amp; (u_1, u_2) \in D \subseteq \mathbb{R}^2, \\
+z = z(u_1, u_2),
+\end{cases}
+\]</span></p>
+<p>satisfying that the direction of <span class="math inline">\(\frac{\partial \mathbf{x}}{\partial u_1} \times \frac{\partial \mathbf{x}}{\partial u_2}\)</span> is consistent with the normal vector field <span class="math inline">\(\mathbf{n}\)</span>. Then for any continuous vector field <span class="math inline">\(\mathbf{F}: \Sigma \to \mathbb{R}^3\)</span>,</p>
+<p><span class="math display">\[
+\int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{D} \det\left(\mathbf{F}, \frac{\partial \mathbf{x}}{\partial u_1}, \frac{\partial \mathbf{x}}{\partial u_2}\right) \mathrm{d}u_1 \mathrm{d}u_2,
+\]</span></p>
+<p>where <span class="math inline">\(\mathrm{d}\sigma\)</span> is the (undirected) surface area element of the surface <span class="math inline">\(\Sigma\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Surface Integrals of the Second Kind in Higher Dimensions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For an <span class="math inline">\(m\)</span>-dimensional <span class="math inline">\(\mathscr{C}^1\)</span> regular parametric surface <span class="math inline">\(\Sigma \subset \mathbb{R}^{m+1}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{x} = \mathbf{x}(u_1, u_2, \ldots, u_m), \quad (u_1, u_2, \ldots, u_m) \in D \subseteq \mathbb{R}^m,
+\]</span></p>
+<p>and a continuous vector field <span class="math inline">\(\mathbf{F}: \Sigma \to \mathbb{R}^{m+1}\)</span>,</p>
+<p><span class="math display">\[
+\int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{D} \det\left(\mathbf{F}, \frac{\partial \mathbf{x}}{\partial u_1}, \frac{\partial \mathbf{x}}{\partial u_2}, \ldots, \frac{\partial \mathbf{x}}{\partial u_m}\right) \mathrm{d}u_1 \mathrm{d}u_2 \cdots \mathrm{d}u_m,
+\]</span></p>
+<p>where <span class="math inline">\(\mathrm{d}\sigma\)</span> is the <span class="math inline">\(m\)</span>-dimensional (undirected) volume element of the surface <span class="math inline">\(\Sigma\)</span>.</p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -963,13 +1176,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="pagination-link" aria-label="Discrete Probability">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Discrete Probability</span>
+      <a href="../../../../docs/notes/Calculus/2/6.html" class="pagination-link" aria-label="Integration of Functions on Curves and Surfaces">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Integration of Functions on Curves and Surfaces</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../docs/notes/Math4CS&amp;AI/3.html" class="pagination-link" aria-label="Generating Functions">
-        <span class="nav-page-text">Generating Functions</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../docs/notes/Math4CS&amp;AI/index.html" class="pagination-link" aria-label="Math for CS and AI">
+        <span class="nav-page-text">Math for CS and AI</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

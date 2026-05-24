@@ -140,15 +140,103 @@
     ]
   },
   {
-    "objectID": "docs/notes/Calculus/1.html",
-    "href": "docs/notes/Calculus/1.html",
-    "title": "Discrete Probability",
+    "objectID": "docs/notes/Calculus/1/index.html",
+    "href": "docs/notes/Calculus/1/index.html",
+    "title": "Single Variable Calculus",
     "section": "",
-    "text": "4 Introduction\n\n\n\n\n\n\nNote点击查看数学证明过程\n\n\n\n\n\n这里可以写任意内容：\n复杂的公式：\\(E = mc^2\\)\n甚至可以插入代码块\n保持缩进即可\n\n\n\n\nTheorem 4.1 (矩阵秩定理) For any \\(A\\)，we have \\[\\mathrm{rank}(A) = \\mathrm{rank}(A^T).\\]\n\n提示：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。\n根据 Theorem 4.1，我们可以推导出反向传播中的核心逻辑。\n\n提示：这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。",
+    "text": "本界面梳理了一元微积分相关知识, 希望对你能有所启发。",
     "crumbs": [
       "Notes",
       "Calculus",
-      "Real Numbers and Limits of Sequences"
+      "Single Variable Calculus"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/index.html",
+    "href": "docs/notes/Calculus/index.html",
+    "title": "Calculus",
+    "section": "",
+    "text": "本界面梳理了微积分相关知识, 希望对你能有所启发。",
+    "crumbs": [
+      "Notes",
+      "Calculus"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/2/index.html",
+    "href": "docs/notes/Calculus/2/index.html",
+    "title": "Multivariable Calculus",
+    "section": "",
+    "text": "本界面梳理了多元微积分相关知识, 希望对你能有所启发。",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Multivariable Calculus"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/2/7.html",
+    "href": "docs/notes/Calculus/2/7.html",
+    "title": "Calculus of Vector Fields",
+    "section": "",
+    "text": "TipLine Integral of Vector Fields\n\n\n\n\n\nThe integral of a vector field \\(\\mathbf{F}: \\mathbb{R}^m \\to \\mathbb{R}^m\\) along a piecewise \\(\\mathscr{C}^1\\) continuous path \\(\\mathbf{x}: [a, b] \\to \\mathbb{R}^m\\) is defined as\n\\[\n\\int_{\\gamma} \\mathbf{F} \\cdot \\mathrm{d}\\mathbf{l} = \\int_{a}^{b} \\langle \\mathbf{F}(\\mathbf{x}(t)), \\mathbf{x}'(t) \\rangle dt.\n\\]\n\n\n\n\n\n\n\n\n\nTipDifferential 1-form\n\n\n\n\n\nIn a Cartesian coordinate system, let \\(\\mathbf{F} = (F_1, \\dots, F_m)^T\\) and \\(\\mathbf{x} = (x_1, \\dots, x_m)^T\\), then\n\\[\n\\int_a^b \\langle \\mathbf{F}(\\mathbf{x}(t)), \\mathbf{x}'(t) \\rangle dt = \\int_a^b F_1(\\mathbf{x}(t))\\mathrm{d}x_1(t) + \\dots + F_m(\\mathbf{x}(t))\\mathrm{d}x_m(t).\n\\]\nWe call\n\\[\n\\omega = F_1(\\mathbf{x})\\mathrm{d}x_1 + \\dots + F_m(\\mathbf{x})\\mathrm{d}x_m\n\\]\na differential 1-form.",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Multivariable Calculus",
+      "Calculus of Vector Fields"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/2/7.html#line-integrals-of-vector-fields",
+    "href": "docs/notes/Calculus/2/7.html#line-integrals-of-vector-fields",
+    "title": "Calculus of Vector Fields",
+    "section": "",
+    "text": "TipLine Integral of Vector Fields\n\n\n\n\n\nThe integral of a vector field \\(\\mathbf{F}: \\mathbb{R}^m \\to \\mathbb{R}^m\\) along a piecewise \\(\\mathscr{C}^1\\) continuous path \\(\\mathbf{x}: [a, b] \\to \\mathbb{R}^m\\) is defined as\n\\[\n\\int_{\\gamma} \\mathbf{F} \\cdot \\mathrm{d}\\mathbf{l} = \\int_{a}^{b} \\langle \\mathbf{F}(\\mathbf{x}(t)), \\mathbf{x}'(t) \\rangle dt.\n\\]\n\n\n\n\n\n\n\n\n\nTipDifferential 1-form\n\n\n\n\n\nIn a Cartesian coordinate system, let \\(\\mathbf{F} = (F_1, \\dots, F_m)^T\\) and \\(\\mathbf{x} = (x_1, \\dots, x_m)^T\\), then\n\\[\n\\int_a^b \\langle \\mathbf{F}(\\mathbf{x}(t)), \\mathbf{x}'(t) \\rangle dt = \\int_a^b F_1(\\mathbf{x}(t))\\mathrm{d}x_1(t) + \\dots + F_m(\\mathbf{x}(t))\\mathrm{d}x_m(t).\n\\]\nWe call\n\\[\n\\omega = F_1(\\mathbf{x})\\mathrm{d}x_1 + \\dots + F_m(\\mathbf{x})\\mathrm{d}x_m\n\\]\na differential 1-form.",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Multivariable Calculus",
+      "Calculus of Vector Fields"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/2/7.html#total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields",
+    "href": "docs/notes/Calculus/2/7.html#total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields",
+    "title": "Calculus of Vector Fields",
+    "section": "Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields",
+    "text": "Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields\n\n\n\n\n\n\nTipTotal Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields\n\n\n\n\n\nA differential 1-form \\(\\omega\\) is called an exact differential (or total differential) if there exists a \\(\\mathscr{C}^1\\) function \\(f\\) such that \\(\\omega = \\mathrm{d}f\\). In this case, \\(f\\) is called a primitive function of \\(\\omega\\).\nA vector field \\(\\mathbf{F}\\) is called a potential field if there exists a \\(\\mathscr{C}^1\\) function \\(f\\) such that \\(\\mathbf{F} = \\nabla f\\). In this case, \\(f\\) is called a potential function of \\(\\mathbf{F}\\).\nA vector field \\(\\mathbf{F}\\) is called a conservative field if, for any path \\(\\gamma\\), the value of the integral \\(\\int_{\\gamma} \\langle \\mathbf{F}, \\mathbf{T} \\rangle \\mathrm{d}l\\) depends only on the starting and ending points of \\(\\gamma\\), and is independent of \\(\\gamma\\).\n\n\n\n\nTheorem 7.1 For any \\(\\mathscr{C}^1\\) function \\(f: U \\to \\mathbb{R}\\) and any \\(\\mathscr{C}^1\\) path \\(\\gamma \\subset U\\),\n\\[\n\\int_{\\gamma} \\mathrm{d}f = \\int_{\\gamma} \\langle \\nabla f, \\mathbf{T} \\rangle \\mathrm{d}l = f(B) - f(A),\n\\]\nwhere \\(A\\) and \\(B\\) are the starting and ending points of the path \\(\\gamma\\) respectively, and \\(\\mathbf{T}\\) is the unit tangent vector field of \\(\\gamma\\). Therefore, gradient vector fields (i.e., potential fields) are conservative fields.\nIf \\(\\gamma\\) is a closed curve, then \\(\\int_{\\gamma} \\mathrm{d}f = \\int_{\\gamma} \\langle \\nabla f, \\mathbf{T} \\rangle \\mathrm{d}l = 0\\).\n\n\nTheorem 7.2 Every continuous conservative field in an open region (i.e., a path-connected open set) is a potential field.\n\n\nTheorem 7.3 If a \\(\\mathscr{C}^1\\) vector field \\(\\mathbf{F}: U \\to \\mathbf{R}^m\\) is a potential field, then \\[\n\\frac{\\partial F_i}{\\partial x_j} = \\frac{\\partial F_j}{\\partial x_i}, \\quad 1 \\le i &lt; j \\le m.\n\\]\nA vector field satisfying the latter condition is called an irrotational vector field. Therefore, all potential fields are irrotational vector fields.",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Multivariable Calculus",
+      "Calculus of Vector Fields"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/2/7.html#curl-and-divergence-of-plane-vector-fields-greens-formula",
+    "href": "docs/notes/Calculus/2/7.html#curl-and-divergence-of-plane-vector-fields-greens-formula",
+    "title": "Calculus of Vector Fields",
+    "section": "Curl and Divergence of Plane Vector Fields, Green’s Formula",
+    "text": "Curl and Divergence of Plane Vector Fields, Green’s Formula\n\n\n\n\n\n\nTipCurl and Divergence of Plane Vector Fields\n\n\n\n\n\nFor a plane \\(\\mathscr{C}^1\\) vector field \\[\\mathbf{F}(x, y) = \\begin{pmatrix} X(x, y) \\\\ Y(x, y) \\end{pmatrix},\\]\ndenote \\[\\operatorname{rot} \\mathbf{F} = Y_x - X_y,\\]\n\\[\\operatorname{div} \\mathbf{F} = X_x + Y_y = \\operatorname{tr} \\frac{\\partial(X, Y)}{\\partial(x, y)},\\]\nwhich are called the curl and divergence of \\(\\mathbf{F}\\), respectively.\nA vector field with zero curl is called an irrotational vector field, and a vector field with zero divergence is called a source-free (or solenoidal) vector field.\n\n\n\n\nTheorem 7.4 Suppose the boundary of a bounded closed planar region \\(\\Omega\\) is a piecewise \\(\\mathscr{C}^1\\) curve, and let\n\\[\n\\mathbf{F}(x,y) = \\begin{pmatrix} X(x,y) \\\\ Y(x,y) \\end{pmatrix}\n\\]\nbe a \\(\\mathscr{C}^1\\) vector field on \\(\\Omega\\). Then\n\\[\n\\int_{\\partial\\Omega} X(x,y)\\mathrm{d}x + Y(x,y)\\mathrm{d}y = \\iint_{\\Omega} (Y_x(x,y) - X_y(x,y))\\mathrm{d}x\\mathrm{d}y,\n\\]\nWritten in vector field form:\n\\[\n\\int_{\\partial\\Omega} \\langle \\mathbf{F}, \\mathbf{T} \\rangle \\mathrm{d}l = \\iint_{\\Omega} \\mathrm{rot} \\mathbf{F} \\, \\mathrm{d}x\\mathrm{d}y,\n\\]\n\\[\n\\int_{\\partial\\Omega} \\langle \\mathbf{F}, \\mathbf{n} \\rangle \\mathrm{d}l = \\iint_{\\Omega} \\mathrm{div} \\mathbf{F} \\, \\mathrm{d}x\\mathrm{d}y,\n\\]\nwhere \\(\\partial\\Omega\\) is the boundary of the region \\(\\Omega\\), and its orientation is determined by the left-hand rule with respect to the outward normal of the region, meaning that as you move forward along \\(\\partial\\Omega\\), the region is always located on your left side.",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Multivariable Calculus",
+      "Calculus of Vector Fields"
+    ]
+  },
+  {
+    "objectID": "docs/notes/Calculus/2/7.html#the-concept-of-surface-integrals-of-the-second-kind",
+    "href": "docs/notes/Calculus/2/7.html#the-concept-of-surface-integrals-of-the-second-kind",
+    "title": "Calculus of Vector Fields",
+    "section": "The Concept of Surface Integrals of the Second Kind",
+    "text": "The Concept of Surface Integrals of the Second Kind\n\n\n\n\n\n\nTipSurface Integrals of the Second Kind\n\n\n\n\n\nLet \\((\\Sigma, \\mathbf{n})\\) be an oriented surface. For a continuous vector field \\(\\mathbf{F}: \\Sigma \\to \\mathbf{R}^3\\), the integral \\[\n\\int_{\\Sigma} \\langle \\mathbf{F}, \\mathbf{n} \\rangle d\\sigma\n\\]\nis called the integral of the vector field \\(\\mathbf{F}\\) along the normal vector field \\(\\mathbf{n}\\) of the surface \\(\\Sigma\\), also known as the flux of the vector field \\(\\mathbf{F}\\) across the oriented surface \\(\\Sigma\\).\n\n\n\n\nTheorem 7.5 For a \\(\\mathscr{C}^1\\) regular parametric surface \\(\\Sigma\\):\n\\[\n\\begin{cases}\nx = x(u_1, u_2), \\\\\ny = y(u_1, u_2), & (u_1, u_2) \\in D \\subseteq \\mathbb{R}^2, \\\\\nz = z(u_1, u_2),\n\\end{cases}\n\\]\nsatisfying that the direction of \\(\\frac{\\partial \\mathbf{x}}{\\partial u_1} \\times \\frac{\\partial \\mathbf{x}}{\\partial u_2}\\) is consistent with the normal vector field \\(\\mathbf{n}\\). Then for any continuous vector field \\(\\mathbf{F}: \\Sigma \\to \\mathbb{R}^3\\),\n\\[\n\\int_{\\Sigma} \\langle \\mathbf{F}, \\mathbf{n} \\rangle \\mathrm{d}\\sigma = \\int_{D} \\det\\left(\\mathbf{F}, \\frac{\\partial \\mathbf{x}}{\\partial u_1}, \\frac{\\partial \\mathbf{x}}{\\partial u_2}\\right) \\mathrm{d}u_1 \\mathrm{d}u_2,\n\\]\nwhere \\(\\mathrm{d}\\sigma\\) is the (undirected) surface area element of the surface \\(\\Sigma\\).\n\n\n\n\n\n\n\nNoteSurface Integrals of the Second Kind in Higher Dimensions\n\n\n\n\n\nFor an \\(m\\)-dimensional \\(\\mathscr{C}^1\\) regular parametric surface \\(\\Sigma \\subset \\mathbb{R}^{m+1}\\):\n\\[\n\\mathbf{x} = \\mathbf{x}(u_1, u_2, \\ldots, u_m), \\quad (u_1, u_2, \\ldots, u_m) \\in D \\subseteq \\mathbb{R}^m,\n\\]\nand a continuous vector field \\(\\mathbf{F}: \\Sigma \\to \\mathbb{R}^{m+1}\\),\n\\[\n\\int_{\\Sigma} \\langle \\mathbf{F}, \\mathbf{n} \\rangle \\mathrm{d}\\sigma = \\int_{D} \\det\\left(\\mathbf{F}, \\frac{\\partial \\mathbf{x}}{\\partial u_1}, \\frac{\\partial \\mathbf{x}}{\\partial u_2}, \\ldots, \\frac{\\partial \\mathbf{x}}{\\partial u_m}\\right) \\mathrm{d}u_1 \\mathrm{d}u_2 \\cdots \\mathrm{d}u_m,\n\\]\nwhere \\(\\mathrm{d}\\sigma\\) is the \\(m\\)-dimensional (undirected) volume element of the surface \\(\\Sigma\\).",
+    "crumbs": [
+      "Notes",
+      "Calculus",
+      "Multivariable Calculus",
+      "Calculus of Vector Fields"
     ]
   },
   {
