@@ -407,3 +407,89 @@ $$
 
 
 ## The Strange Geometry of High Dimensions
+
+### High-dimensional Gaussians, Spheres, and Ball
+
+::: {.callout-tip collapse="false"}
+
+## Three fundamental distributions
+
+1. Gaussian distribution $\mathcal{G} = \mathcal{N}(\boldsymbol{0}, \boldsymbol{I}/d)$:
+   
+   The Gaussian distribution with mean $\boldsymbol{0} \in \mathbb{R}^d$ and covariance matrix $\boldsymbol{I}/d \in \mathbb{R}^{d \times d}$. The scaling factor $1/d$ here is intentional. For $\boldsymbol{x} = (X_1, \dots, X_d) \sim \mathcal{G}$, we have $\mathbb{E}[\|\boldsymbol{x}\|_2^2] = \sum_{i=1}^d \mathbb{E}[X_i^2] = d \cdot (1/d) = 1$. Therefore, this scaling keeps the expected squared norm equal to $1$, independent of $d$.
+
+2. Uniform sphere distribution $\mathcal{U}_{\mathbb{S}}$:
+   
+   The uniform distribution on the unit sphere $\mathbb{S}^{d-1} = \{\boldsymbol{x} \in \mathbb{R}^d : \|\boldsymbol{x}\|_2 = 1\}$. The norm of a point on the unit sphere is always $1$.
+
+3. Uniform ball distribution $\mathcal{U}_B$:
+   
+   The uniform distribution on the unit ball $B^d = \{\boldsymbol{x} \in \mathbb{R}^d : \|\boldsymbol{x}\|_2 \le 1\}$. The norm of a point in the unit ball is always upper bounded by $1$.
+
+:::
+
+::: {#thm-14}
+Let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
+$$
+\Pr[1 - \epsilon < \|\boldsymbol{x}\|_2 \le 1] \ge 1 - e^{-\epsilon d}. 
+$$
+:::
+
+::: {#thm-15}
+Let $\boldsymbol{x} \sim \mathcal{G}$. Then, for every $\epsilon \in (0, 1)$,
+$$
+\Pr[|\|\boldsymbol{x}\|_2^2 - 1| \ge \epsilon] \le 2e^{-d\epsilon^2/8}.
+$$
+
+In particular,
+$$
+\Pr[1 - \epsilon < \|\boldsymbol{x}\|_2 < 1 + \epsilon] \ge 1 - 2e^{-d\epsilon^2/8}. 
+$$
+
+:::
+
+::: {#thm-16}
+Let $d \ge 3$. Fix a unit vector $\boldsymbol{u} \in \mathbb{R}^d$, and let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
+
+$$
+\Pr[|\langle \boldsymbol{u}, \boldsymbol{x} \rangle| < \epsilon] \ge 1 - 6e^{-(d-1)\epsilon^2/2}.
+$$
+:::
+
+::: {.callout-note collapse="false"}
+
+## Corollary
+
+1. Let $d \ge 3$. Fix a unit vector $\boldsymbol{u} \in \mathbb{R}^d$, and let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
+$$
+\Pr\left[1 - \frac{1}{2}\epsilon^2 < \|\boldsymbol{x}\|_2 \le 1 \text{ and } |\langle \boldsymbol{u}, \boldsymbol{x} \rangle| < \epsilon\right] \ge 1 - 7e^{-(d-1)\epsilon^2/2}. 
+$$
+
+2. Fix a unit vector $\boldsymbol{u} \in \mathbb{R}^d$, and let $\boldsymbol{x} \sim \mathcal{G}$. Then, for every $\epsilon \in (0, 1)$,
+$$
+\Pr[1 - 2\epsilon < \|\boldsymbol{x}\|_2 < 1 + 2\epsilon \text{ and } |\langle \boldsymbol{u}, \boldsymbol{x} \rangle| < \epsilon] \ge 1 - 4e^{-d\epsilon^2/2}. 
+$$
+
+:::
+
+::: {#thm-17}
+Let $d \ge 3$. For any $\epsilon \in (0, 1)$ with $\epsilon = \Omega(\frac{1}{\sqrt{d}})$ and any confidence parameter $\delta \in (0, 1)$, there exists $N = \Theta(\sqrt{\delta}) e^{\Theta(d\epsilon^2)}$ such that for every $n \le N$, if we sample $n$ i.i.d. random vectors $\boldsymbol{x}_1, \dots, \boldsymbol{x}_n$ from $\mathcal{U}_{\mathbb{S}}$, then
+
+$$
+\Pr[|\langle \boldsymbol{x}_i, \boldsymbol{x}_j \rangle| < \epsilon \text{ for every } i \neq j] \ge 1 - \delta.
+$$
+
+Here $N = \Theta(\sqrt{\delta}) e^{\Theta(d\epsilon^2)}$ means that $N = c \sqrt{\delta} e^{f(d, \epsilon)}$ for some absolute constant $c > 0$ and some non-negative function $f(d, \epsilon) = \Theta(d\epsilon^2)$, where $\Theta(\cdot)$ and $\Omega(\cdot)$ are written for $d \ge 3$ and as $\epsilon \to 0$.
+:::
+
+::: {#thm-18}
+Let $\boldsymbol{x}_1, \dots, \boldsymbol{x}_n \in \mathbb{R}^d$ be $n$ points in $\mathbb{R}^d$, where $n \ge 2$. For every $\epsilon \in (0, 1)$ and any integer $k$ with
+$$
+k \ge \frac{16 \log n}{\epsilon^2}, 
+$$
+
+there exists a linear map $F : \mathbb{R}^d \to \mathbb{R}^k$ such that for all $1 \le i, j \le n$
+$$
+(1 - \epsilon)\|\boldsymbol{x}_i - \boldsymbol{x}_j\|_2^2 \le \|F(\boldsymbol{x}_i) - F(\boldsymbol{x}_j)\|_2^2 \le (1 + \epsilon)\|\boldsymbol{x}_i - \boldsymbol{x}_j\|_2^2. 
+$$
+:::
