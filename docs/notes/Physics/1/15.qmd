@@ -1,0 +1,13 @@
+---
+title: "Statistical Mechanics"
+page-layout: article
+search: true
+number-offset: [15]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Hello

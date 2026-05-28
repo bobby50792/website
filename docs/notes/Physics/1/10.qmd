@@ -1,0 +1,13 @@
+---
+title: "Lagrangian and Hamiltonian Mechanics"
+page-layout: article
+search: true
+number-offset: [10]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Hello

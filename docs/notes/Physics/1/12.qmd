@@ -1,0 +1,13 @@
+---
+title: "Temperature, Heat, and the First Law of Thermodynamics"
+page-layout: article
+search: true
+number-offset: [12]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## 
