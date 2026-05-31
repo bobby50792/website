@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-05-29">
+
+<title>提示词工程中的语用学 – Bobby</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-2a5c87f95b0fb482e5c5835a739e033e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../docs/notes/index.html"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../docs/blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bobby50792/website"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#先看一个真实效果同一段材料为什么一页像草稿一页像-ppt" id="toc-先看一个真实效果同一段材料为什么一页像草稿一页像-ppt" class="nav-link active" data-scroll-target="#先看一个真实效果同一段材料为什么一页像草稿一页像-ppt">先看一个真实效果：同一段材料，为什么一页像草稿，一页像 PPT？</a></li>
+  <li><a href="#先划清边界ai-能帮忙但不能替你想" id="toc-先划清边界ai-能帮忙但不能替你想" class="nav-link" data-scroll-target="#先划清边界ai-能帮忙但不能替你想">先划清边界：AI 能帮忙，但不能替你想</a></li>
+  <li><a href="#用-grice-四准则诊断提示词" id="toc-用-grice-四准则诊断提示词" class="nav-link" data-scroll-target="#用-grice-四准则诊断提示词">用 Grice 四准则诊断提示词</a></li>
+  <li><a href="#四个案例把翻车点改成提示词策略" id="toc-四个案例把翻车点改成提示词策略" class="nav-link" data-scroll-target="#四个案例把翻车点改成提示词策略">四个案例：把翻车点改成提示词策略</a>
+  <ul class="collapse">
+  <li><a href="#实践效果-1green-公式不是绿色公式" id="toc-实践效果-1green-公式不是绿色公式" class="nav-link" data-scroll-target="#实践效果-1green-公式不是绿色公式">实践效果 1：Green 公式不是“绿色公式”</a></li>
+  <li><a href="#实践效果-2细节不是堆字而是减少-ai-的盲猜" id="toc-实践效果-2细节不是堆字而是减少-ai-的盲猜" class="nav-link" data-scroll-target="#实践效果-2细节不是堆字而是减少-ai-的盲猜">实践效果 2：细节不是堆字，而是减少 AI 的盲猜</a></li>
+  </ul></li>
+  <li><a href="#一套可复用的-7-步人机协作流程" id="toc-一套可复用的-7-步人机协作流程" class="nav-link" data-scroll-target="#一套可复用的-7-步人机协作流程">一套可复用的 7 步人机协作流程</a></li>
+  <li><a href="#每一步可以这样让-ai-参与" id="toc-每一步可以这样让-ai-参与" class="nav-link" data-scroll-target="#每一步可以这样让-ai-参与">每一步可以这样让 AI 参与</a>
+  <ul class="collapse">
+  <li><a href="#第一步查资料" id="toc-第一步查资料" class="nav-link" data-scroll-target="#第一步查资料">第一步：查资料</a></li>
+  <li><a href="#第二步写大纲" id="toc-第二步写大纲" class="nav-link" data-scroll-target="#第二步写大纲">第二步：写大纲</a></li>
+  <li><a href="#第三步写细纲" id="toc-第三步写细纲" class="nav-link" data-scroll-target="#第三步写细纲">第三步：写细纲</a></li>
+  <li><a href="#第四步ai-润色成-prompt" id="toc-第四步ai-润色成-prompt" class="nav-link" data-scroll-target="#第四步ai-润色成-prompt">第四步：AI 润色成 prompt</a></li>
+  <li><a href="#第五步生成-ppt-初稿" id="toc-第五步生成-ppt-初稿" class="nav-link" data-scroll-target="#第五步生成-ppt-初稿">第五步：生成 PPT 初稿</a></li>
+  <li><a href="#第六步改排版和图片" id="toc-第六步改排版和图片" class="nav-link" data-scroll-target="#第六步改排版和图片">第六步：改排版和图片</a></li>
+  <li><a href="#第七步动画顺序和讲稿优化" id="toc-第七步动画顺序和讲稿优化" class="nav-link" data-scroll-target="#第七步动画顺序和讲稿优化">第七步：动画顺序和讲稿优化</a></li>
+  </ul></li>
+  <li><a href="#发布前检查表" id="toc-发布前检查表" class="nav-link" data-scroll-target="#发布前检查表">发布前检查表</a></li>
+  <li><a href="#结语语言不是包装而是控制接口" id="toc-结语语言不是包装而是控制接口" class="nav-link" data-scroll-target="#结语语言不是包装而是控制接口">结语：语言不是包装，而是控制接口</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">提示词工程中的语用学</h1>
+<p class="subtitle lead">如何用 AI 提高你做 PPT 的效率</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.tutorial-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 28px;
+  align-items: center;
+  margin: 14px 0 34px;
+  padding: 28px;
+  border: 1px solid #d8e5e3;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #eef8f5 100%);
+}
+
+.tutorial-hero h2 {
+  margin-top: 10px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: #0c6f63;
+  background: #dff4ef;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.hero-lead {
+  color: #415161;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.quick-map,
+.prompt-box,
+.checklist-box {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: #fbfcff;
+}
+
+.quick-map strong,
+.prompt-box strong,
+.checklist-box strong {
+  color: #17212f;
+}
+
+.step-grid,
+.principle-grid,
+.example-grid,
+.diagnosis-grid,
+.workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.step-card,
+.principle-card,
+.example-card,
+.diagnosis-card,
+.workflow-card {
+  padding: 18px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.diagnosis-card {
+  border-top: 4px solid #2d8f85;
+}
+
+.diagnosis-card:nth-child(2) {
+  border-top-color: #d99b2b;
+}
+
+.diagnosis-card:nth-child(3) {
+  border-top-color: #d8624a;
+}
+
+.diagnosis-card:nth-child(4) {
+  border-top-color: #5266b1;
+}
+
+.step-card h3,
+.principle-card h3,
+.example-card h3,
+.diagnosis-card h3,
+.workflow-card h3 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #17212f;
+  font-weight: 800;
+}
+
+.prompt-box pre {
+  margin-bottom: 0;
+  border-radius: 8px;
+}
+
+.figure-panel {
+  margin: 26px 0;
+}
+
+.figure-panel img {
+  width: 100%;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.figure-panel figcaption {
+  margin-top: 8px;
+  color: #647486;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.practice-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 26px 0;
+}
+
+.practice-shot {
+  overflow: hidden;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.practice-shot img {
+  display: block;
+  width: 100%;
+}
+
+.practice-shot figcaption {
+  padding: 12px 14px;
+  color: #415161;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  border-top: 1px solid #dbe2ea;
+  background: #fbfcff;
+}
+
+.table-note {
+  margin: 24px 0;
+}
+
+.table-note table {
+  width: 100%;
+  font-size: 0.94rem;
+}
+
+.table-note th {
+  white-space: nowrap;
+}
+
+.hero-contrast {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #ccdce7;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.98)),
+    radial-gradient(circle at 18% 18%, rgba(216, 98, 74, 0.16), transparent 32%),
+    radial-gradient(circle at 82% 72%, rgba(45, 143, 133, 0.18), transparent 34%);
+}
+
+.contrast-card {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #dbe2ea;
+  background: #ffffff;
+}
+
+.contrast-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+}
+
+.contrast-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.contrast-card li {
+  margin: 6px 0;
+  color: #415161;
+  line-height: 1.55;
+}
+
+.contrast-card.bad {
+  border-top: 4px solid #d8624a;
+  background: #fff8f5;
+}
+
+.contrast-card.good {
+  border-top: 4px solid #2d8f85;
+  background: #f4fbf8;
+}
+
+.contrast-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  color: #0c6f63;
+  font-weight: 900;
+}
+
+.diagram-note {
+  margin: 4px 0 0;
+  color: #647486;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.before-after,
+.do-dont {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.before,
+.after,
+.do,
+.dont {
+  padding: 18px;
+  border-radius: 8px;
+  border: 1px solid #dbe2ea;
+}
+
+.before,
+.dont {
+  background: #fff6f2;
+}
+
+.after,
+.do {
+  background: #f0f8f4;
+}
+
+.tagline {
+  margin: 8px 0 0;
+  color: #647486;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 800px) {
+  .tutorial-hero,
+  .hero-contrast,
+  .step-grid,
+  .principle-grid,
+  .example-grid,
+  .diagnosis-grid,
+  .workflow-strip,
+  .practice-compare,
+  .before-after,
+  .do-dont {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial-hero {
+    padding: 20px;
+  }
+}
+</style>
+<div class="tutorial-hero">
+<section id="ai-不应该替你思考而应该放大你的思考" class="level2">
+<h2 class="anchored" data-anchor-id="ai-不应该替你思考而应该放大你的思考">AI 不应该替你思考，而应该放大你的思考</h2>
+<p>先有人的判断，再有 AI 的效率。</p>
+</section>
+<div class="hero-contrast">
+<section id="把思考外包给-ai" class="level3 contrast-card bad">
+<h3 class="anchored" data-anchor-id="把思考外包给-ai">把思考外包给 AI</h3>
+<ul>
+<li>资料没核验</li>
+<li>观点像平均答案</li>
+<li>页面堆满文字</li>
+</ul>
+</section>
+<div class="contrast-arrow">
+<p>先有人的判断，再让 AI 加速</p>
+</div>
+<section id="带着框架和-ai-协作" class="level3 contrast-card good">
+<h3 class="anchored" data-anchor-id="带着框架和-ai-协作">带着框架和 AI 协作</h3>
+<ul>
+<li>人先定观点</li>
+<li>AI 优化表达</li>
+<li>工具生成 PPT 初稿</li>
+<li>人再做取舍</li>
+</ul>
+</section>
+</div>
+</div>
+<section id="先看一个真实效果同一段材料为什么一页像草稿一页像-ppt" class="level2">
+<h2 class="anchored" data-anchor-id="先看一个真实效果同一段材料为什么一页像草稿一页像-ppt">先看一个真实效果：同一段材料，为什么一页像草稿，一页像 PPT？</h2>
+<p>同一段“行业背景”材料，直接塞进页面是草稿；先拆结构，再让 AI 辅助排版，才像 PPT。</p>
+<div class="practice-compare">
+<figure class="practice-shot figure">
+<img src="ppt-before-dense.png" alt="文字堆叠且图片不相关的 PPT 页面" class="figure-img">
+<figcaption>
+<strong>直接堆材料：</strong>图片像装饰，文字像资料原文，听众很难在几秒内抓到重点。
+</figcaption>
+</figure>
+<figure class="practice-shot figure">
+<img src="ppt-after-cards.png" alt="拆分为四个信息模块后的 PPT 页面" class="figure-img">
+<figcaption>
+<strong>先拆结构再排版：</strong>把材料拆成网络覆盖率、数字化、电子商务、数字农业四个模块，页面才变得可讲、可看、可记。
+</figcaption>
+</figure>
+</div>
+<p>这就是本文的基本立场：人决定讲什么，AI 帮你讲得更清楚。</p>
+</section>
+<section id="先划清边界ai-能帮忙但不能替你想" class="level2">
+<h2 class="anchored" data-anchor-id="先划清边界ai-能帮忙但不能替你想">先划清边界：AI 能帮忙，但不能替你想</h2>
+<p>最危险的用法，是把“我还没想清楚”直接交给 AI。它当然可以生成一份看起来完整的 PPT，但这份 PPT 往往只是平均答案：论点松散、资料未经核验、例子听起来正确却不一定适合你的课堂展示。</p>
+<p>更好的用法，是先把人的思考写出来，再让 AI 做加工。</p>
+<div class="before-after">
+<section id="不推荐把思考外包" class="level3 before">
+<h3 class="anchored" data-anchor-id="不推荐把思考外包">不推荐：把思考外包</h3>
+<p>帮我做一个关于提示词工程的 PPT，要高级一点，内容丰富一点。</p>
+</section>
+<section id="推荐带着自己的框架协作" class="level3 after">
+<h3 class="anchored" data-anchor-id="推荐带着自己的框架协作">推荐：带着自己的框架协作</h3>
+<p>我已经查了资料，并初步确定展示主线：提示词工程可以理解为给 AI 补足语用语境。我的大纲是：引入案例、共同语境、Grice 四准则、PPT 工作流、总结。请不要替我重写主题，而是帮我检查逻辑跳跃、补充每页可用案例，并把它整理成 8 页 PPT 细纲。</p>
+</section>
+</div>
+<p>这两个请求的差别不只是长度。后者明确告诉 AI：主题由人决定，结构由人先搭，AI 的职责是检查、补充和优化。这样产出的 PPT 才不会像“生成内容”，而更像“把你的想法做成更好的表达”。</p>
+<p>所以提示词工程可以理解成：</p>
+<p><span class="math display">\[
+P(y \mid x)
+\]</span></p>
+<p>其中 <code>x</code> 是你给出的提示词、资料、观点、大纲和约束，<code>y</code> 是模型生成的结果。<code>x</code> 里如果没有人的判断，<code>y</code> 就只能靠概率平均；<code>x</code> 里有清楚的思考，AI 才能围绕你的方向继续加工。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>语用学关心的是“话在具体语境中是什么意思”。提示词工程关心的是“怎样把这个语境写清楚，让 AI 能按你的意思工作”。两者的交集，就是把人的思考、资料来源、概念边界和表达目标显性化。</p>
+</div>
+</div>
+</section>
+<section id="用-grice-四准则诊断提示词" class="level2">
+<h2 class="anchored" data-anchor-id="用-grice-四准则诊断提示词">用 Grice 四准则诊断提示词</h2>
+<p>Grice 的合作原则原本解释人类对话为什么能互相理解。换到 AI 协作里，它可以变成一张非常实用的提示词检查表。</p>
+<div class="principle-grid">
+<section id="质的准则真实吗" class="level3 principle-card">
+<h3 class="anchored" data-anchor-id="质的准则真实吗">质的准则：真实吗？</h3>
+<p>不要让 AI 为了迎合你而编造。好的提示词要允许它说“不确定”，并要求它先检查问题前提。</p>
+</section>
+<section id="关系准则相关吗" class="level3 principle-card">
+<h3 class="anchored" data-anchor-id="关系准则相关吗">关系准则：相关吗？</h3>
+<p>同一个词在不同语境里可能完全不同。提示词要告诉 AI 现在属于哪门课、哪个领域、哪种任务。</p>
+</section>
+<section id="量的准则够用吗" class="level3 principle-card">
+<h3 class="anchored" data-anchor-id="量的准则够用吗">量的准则：够用吗？</h3>
+<p>给太少，AI 会猜；给太多，AI 会抓不住重点。关键是给“足够完成任务”的信息。</p>
+</section>
+<section id="方式准则清楚吗" class="level3 principle-card">
+<h3 class="anchored" data-anchor-id="方式准则清楚吗">方式准则：清楚吗？</h3>
+<p>避免黑话、反讽、缩写和含糊代词。能拆成列表，就不要写成一大段情绪化要求。</p>
+</section>
+</div>
+<div class="table-note">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grice 准则</th>
+<th>Prompt 里要补什么</th>
+<th>做 PPT 时的具体问题</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>质的准则</td>
+<td>事实来源、前提检查、不确定性</td>
+<td>这个例子是真的吗？有没有让 AI 顺着错误前提编？</td>
+</tr>
+<tr class="even">
+<td>关系准则</td>
+<td>课程语境、领域限定、主题边界</td>
+<td>这一页和主题有关吗？关键词有没有被 AI 理解错？</td>
+</tr>
+<tr class="odd">
+<td>量的准则</td>
+<td>必要细节、输出长度、页面密度</td>
+<td>页面信息够不够？是不是把讲稿全塞进幻灯片？</td>
+</tr>
+<tr class="even">
+<td>方式准则</td>
+<td>清晰格式、少歧义、解释黑话</td>
+<td>prompt 是否可执行？缩写、反讽、圈内话有没有说明？</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="四个案例把翻车点改成提示词策略" class="level2">
+<h2 class="anchored" data-anchor-id="四个案例把翻车点改成提示词策略">四个案例：把翻车点改成提示词策略</h2>
+<p>下面不是单纯列模板，而是用语用学去诊断 AI 为什么会出错。每个案例都可以迁移到做 PPT 的过程中。</p>
+<div class="diagnosis-grid">
+<section id="质的准则先查前提" class="level3 diagnosis-card">
+<h3 class="anchored" data-anchor-id="质的准则先查前提">质的准则：先查前提</h3>
+<p><strong>AI 翻车表现：</strong> 你问“为什么隧道上通常会修建一座山”，AI 可能顺着问题解释，好像这个前提本身一定成立。</p>
+<p><strong>语用学解释：</strong> 人类听众可能会追问“你是不是把因果关系说反了”；AI 如果只追求顺畅回答，就可能忽略真实性。</p>
+<p><strong>Prompt 修正：</strong> “请先判断我的问题前提是否成立。如果前提不成立，请指出问题在哪里，再给出更合理的解释。”</p>
+</section>
+<section id="关系准则限定领域" class="level3 diagnosis-card">
+<h3 class="anchored" data-anchor-id="关系准则限定领域">关系准则：限定领域</h3>
+<p><strong>AI 翻车表现：</strong> 让 AI “生成一张关于 Green 公式的图片”，它可能画出绿色的数学公式，而不是 George Green 相关的数学概念。</p>
+<p><strong>语用学解释：</strong> <code>Green</code> 对人类课堂同学可能是明确的专业词，但对 AI 来说，它同时连接颜色、人名、环保、品牌和数学。</p>
+<p><strong>Prompt 修正：</strong> “这里的 Green 指数学家 George Green，不是绿色。请在数学分析/向量分析语境下处理这个概念。”</p>
+</section>
+<section id="量的准则细节服务目标" class="level3 diagnosis-card">
+<h3 class="anchored" data-anchor-id="量的准则细节服务目标">量的准则：细节服务目标</h3>
+<p><strong>AI 翻车表现：</strong> “画一张滑雪的图片”大概率得到普通人物和普通雪山；“帮我美化 PPT”也常得到通用模板。</p>
+<p><strong>语用学解释：</strong> 少量提示会让 AI 走向平均值。想要定制化，就要补足主体、动作、环境、构图、风格和使用场景。</p>
+<p><strong>Prompt 修正：</strong> “男性双板滑雪者、红色滑雪服、陡坡高速滑行、雪雾飞溅、湛蓝天空、高清超写实、动感构图。”做 PPT 也同理：把“高级”拆成配色、布局、图文比例和信息密度。</p>
+</section>
+<section id="方式准则翻译圈内话" class="level3 diagnosis-card">
+<h3 class="anchored" data-anchor-id="方式准则翻译圈内话">方式准则：翻译圈内话</h3>
+<p><strong>AI 翻车表现：</strong> “这门课不是 non-trivial 到爆了吧”“萝卜熟了”“老鼠尾巴”这类表达，如果不解释，AI 可能按字面理解。</p>
+<p><strong>语用学解释：</strong> 黑话依赖圈内共同经验。对同学来说是默契，对 AI 来说是没有说明来源的歧义。</p>
+<p><strong>Prompt 修正：</strong> “下面有一些课程/竞赛/医学圈内表达，请先按我给的定义理解，不要按字面解释。”然后列出缩写和含义。</p>
+</section>
+</div>
+<section id="实践效果-1green-公式不是绿色公式" class="level3">
+<h3 class="anchored" data-anchor-id="实践效果-1green-公式不是绿色公式">实践效果 1：Green 公式不是“绿色公式”</h3>
+<p>关系准则的问题，用图片最直观。只说“生成一张 green 公式的图片”，AI 可能抓住的是 <code>green = 绿色</code>，而不是课程语境里的 <code>Green = George Green</code>。</p>
+<div class="practice-compare">
+<figure class="practice-shot figure">
+<img src="green-wrong.png" alt="AI 把 Green 公式误解成绿色公式的图片" class="figure-img">
+<figcaption>
+<strong>缺少领域语境：</strong>AI 把关键词按字面理解，生成了“绿色的公式”。
+</figcaption>
+</figure>
+<figure class="practice-shot figure">
+<img src="green-correct.png" alt="正确呈现 Green 公式的图片" class="figure-img">
+<figcaption>
+<strong>补上数学语境：</strong>说明 Green 指数学家 George Green，输出才会靠近真正的课程内容。
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="实践效果-2细节不是堆字而是减少-ai-的盲猜" class="level3">
+<h3 class="anchored" data-anchor-id="实践效果-2细节不是堆字而是减少-ai-的盲猜">实践效果 2：细节不是堆字，而是减少 AI 的盲猜</h3>
+<p>“画一张滑雪的图片”和“男性双板滑雪者、红色滑雪服、陡坡高速滑行、雪雾飞溅、湛蓝天空、高清超写实、动感构图”得到的不是同一种结果。细节的作用，是让 AI 少猜一点，让画面更接近你脑子里的用途。</p>
+<figure class="figure-panel figure">
+<img src="ski-detailed.png" alt="使用细节提示词生成的滑雪图片" class="figure-img">
+<figcaption>
+当主体、动作、环境和构图都被写清楚时，图片就不再只是“一个人在滑雪”，而是可以直接作为 PPT 背景或案例图的视觉素材。
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="一套可复用的-7-步人机协作流程" class="level2">
+<h2 class="anchored" data-anchor-id="一套可复用的-7-步人机协作流程">一套可复用的 7 步人机协作流程</h2>
+<p>一次性让 AI 从 0 到 100 做完整 PPT，最大的问题不是“不稳定”，而是会让人跳过真正重要的思考。更好的流程是：前半段由人完成研究和立论，后半段让 AI 提高表达效率。</p>
+<div class="workflow-strip">
+<div class="workflow-card">
+<p><span class="step-number">1</span></p>
+<section id="查找资料" class="level3">
+<h3 class="anchored" data-anchor-id="查找资料">查找资料</h3>
+<p>先自己读材料、筛资料、记来源。AI 可以帮你整理摘要，但不能替你判断哪些材料值得信。</p>
+</section>
+</div>
+<div class="workflow-card">
+<p><span class="step-number">2</span></p>
+<section id="写大纲" class="level3">
+<h3 class="anchored" data-anchor-id="写大纲">写大纲</h3>
+<p>先用自己的话写出主题、核心观点和讲述顺序。这个阶段决定 PPT 有没有灵魂。</p>
+</section>
+</div>
+<div class="workflow-card">
+<p><span class="step-number">3</span></p>
+<section id="写细纲" class="level3">
+<h3 class="anchored" data-anchor-id="写细纲">写细纲</h3>
+<p>把大纲拆到每一页：这一页讲什么、用什么例子、听众要记住什么。</p>
+</section>
+</div>
+<div class="workflow-card">
+<p><span class="step-number">4</span></p>
+<section id="ai-润色成-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="ai-润色成-prompt">AI 润色成 prompt</h3>
+<p>把你的资料和细纲交给 AI，让它补足语境、输出格式和视觉要求。</p>
+</section>
+</div>
+<div class="workflow-card">
+<p><span class="step-number">5</span></p>
+<section id="生成-ppt-初稿" class="level3">
+<h3 class="anchored" data-anchor-id="生成-ppt-初稿">生成 PPT 初稿</h3>
+<p>用 Gamma、PPT 工具或其他 AI 工具生成初稿，但只把它当作可修改的草稿。</p>
+</section>
+</div>
+<div class="workflow-card">
+<p><span class="step-number">6</span></p>
+<section id="改排版和图片" class="level3">
+<h3 class="anchored" data-anchor-id="改排版和图片">改排版和图片</h3>
+<p>人继续检查页面逻辑、删掉多余文字、替换不准确或太“AI 味”的图片。</p>
+</section>
+</div>
+<div class="workflow-card">
+<p><span class="step-number">7</span></p>
+<section id="增加动画和演示节奏" class="level3">
+<h3 class="anchored" data-anchor-id="增加动画和演示节奏">增加动画和演示节奏</h3>
+<p>最后再做动画、转场和讲述节奏。动画服务理解，不负责掩盖内容问题。</p>
+</section>
+</div>
+</div>
+<div class="table-note">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>步骤</th>
+<th>人先完成什么</th>
+<th>AI 适合帮什么</th>
+<th>交付物</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. 查资料</td>
+<td>找资料、记来源、判断可信度</td>
+<td>摘要、分类、列出争议点</td>
+<td>资料笔记</td>
+</tr>
+<tr class="even">
+<td>2. 写大纲</td>
+<td>确定主题、观点、讲述顺序</td>
+<td>检查逻辑缺口</td>
+<td>人写的大纲</td>
+</tr>
+<tr class="odd">
+<td>3. 写细纲</td>
+<td>拆分每页内容和例子</td>
+<td>补充案例、压缩表达</td>
+<td>每页细纲</td>
+</tr>
+<tr class="even">
+<td>4. 润色 prompt</td>
+<td>写清受众、约束、风格</td>
+<td>把细纲改成可执行提示词</td>
+<td>生成 PPT 的 prompt</td>
+</tr>
+<tr class="odd">
+<td>5. 生成初稿</td>
+<td>选择工具和模板方向</td>
+<td>生成页面草稿</td>
+<td>PPT 初稿</td>
+</tr>
+<tr class="even">
+<td>6. 改排版图片</td>
+<td>判断准确性和审美</td>
+<td>给出排版/配图修改建议</td>
+<td>可展示版本</td>
+</tr>
+<tr class="odd">
+<td>7. 加动画</td>
+<td>决定演示节奏</td>
+<td>优化动画顺序和讲稿</td>
+<td>最终演示稿</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="每一步可以这样让-ai-参与" class="level2">
+<h2 class="anchored" data-anchor-id="每一步可以这样让-ai-参与">每一步可以这样让 AI 参与</h2>
+<p>下面把这次选题真的走一遍。每一步默认折叠，展开后能看到类似 <code>proposal.docx</code> / <code>prompt.docx</code> 那种阶段性草稿：先是人的想法，再是 AI 帮忙整理后的版本。</p>
+<section id="第一步查资料" class="level3">
+<h3 class="anchored" data-anchor-id="第一步查资料">第一步：查资料</h3>
+<p>先自己收集材料和案例。这里的重点不是让 AI 搜一遍，而是先判断哪些东西能支撑你的展示。</p>
+<div class="prompt-box">
+<pre class="text"><code>我正在准备一个课堂展示，主题是：[主题]。
+下面是我自己查到的资料和链接/笔记：
+[贴资料]
+
+请不要替我决定最终观点。请帮我做三件事：
+1. 按主题相关性整理资料
+2. 标出哪些内容需要进一步核验
+3. 提醒我哪些材料适合放进 PPT，哪些只适合作为背景理解</code></pre>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>实战成果：这一步做完会得到什么？
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>人的输入：</strong> 我先把能用的材料记成很粗的素材池：</p>
+<ul>
+<li>理论：Grice 合作原则，四个准则分别是 Quality / Relevance / Quantity / Manner。</li>
+<li>引入案例：文字排版前后对比，配图 prompt 前后对比。</li>
+<li>翻车案例：隧道上为什么修山；Green 公式被理解成绿色公式。</li>
+<li>视觉案例：滑雪图片，从“画一张滑雪图”到高细节 prompt。</li>
+<li>总结方向：语言演化，生物语言、人类语言、硅基语言。</li>
+</ul>
+<p><strong>AI/工具参与：</strong> AI 不替我决定主题，只帮我把素材分组，提醒哪些适合放进 PPT，哪些只适合作为背景。</p>
+<p><strong>阶段成果：</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>素材组</th>
+<th>可以放进 PPT 的内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>引入</td>
+<td>文字堆叠 vs 结构化排版；普通图片 vs 高细节图片</td>
+<td>让听众先看到差异</td>
+</tr>
+<tr class="even">
+<td>理论</td>
+<td>共同语境、先验概率、Grice 四准则</td>
+<td>解释为什么 prompt 有用</td>
+</tr>
+<tr class="odd">
+<td>案例</td>
+<td>隧道修山、Green 公式、滑雪图、PPT 美化</td>
+<td>把理论落到具体错误</td>
+</tr>
+<tr class="even">
+<td>工作流</td>
+<td>查资料、写大纲、写细纲、润色 prompt、生成、修改、动画</td>
+<td>教大家怎么做</td>
+</tr>
+</tbody>
+</table>
+<p>实际项目里，我还会把材料和素材文件对应起来：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>文件/素材</th>
+<th>内容</th>
+<th>放到哪一步</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>proposal.docx</code></td>
+<td>最早的逐页想法和案例安排</td>
+<td>写大纲</td>
+</tr>
+<tr class="even">
+<td><code>prompt.docx</code></td>
+<td>更完整的逐页讲述稿</td>
+<td>写细纲</td>
+</tr>
+<tr class="odd">
+<td><code>pre.pptx</code></td>
+<td>最终 PPT 版本</td>
+<td>生成和修改</td>
+</tr>
+<tr class="even">
+<td><code>1.png</code> / <code>2.png</code></td>
+<td>滑雪图片低维 prompt vs 高维 prompt</td>
+<td>量的准则</td>
+</tr>
+<tr class="odd">
+<td><code>3.png</code> / <code>4.png</code></td>
+<td>PPT 页面改版前后</td>
+<td>排版优化</td>
+</tr>
+<tr class="even">
+<td><code>5.png</code></td>
+<td>隧道修山问题的回答截图</td>
+<td>质的准则</td>
+</tr>
+<tr class="odd">
+<td><code>6.png</code> / <code>7.png</code></td>
+<td>Green 公式误解与修正</td>
+<td>关系准则</td>
+</tr>
+<tr class="even">
+<td><code>8.png</code> / <code>9.png</code></td>
+<td>建筑图普通 prompt vs 具体场景 prompt</td>
+<td>配图优化</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="第二步写大纲" class="level3">
+<h3 class="anchored" data-anchor-id="第二步写大纲">第二步：写大纲</h3>
+<p>大纲先由你写。AI 在这里更像评审：帮你发现逻辑跳跃、主题偏移和信息过载。</p>
+<div class="prompt-box">
+<pre class="text"><code>这是我自己写的 PPT 大纲：
+[贴大纲]
+
+请从课堂展示的角度评审它。
+重点检查：
+- 逻辑顺序是否自然
+- 是否有概念跳跃
+- 哪些页面信息太散
+- 哪些地方需要案例
+- 哪一页最可能让听众困惑
+
+请先指出问题，不要直接替我重写。最后给出 3 条修改建议。</code></pre>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>实战成果：这一步做完会得到什么？
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>人的输入：</strong> 我先写一个很像 <code>proposal.docx</code> 的粗大纲：</p>
+<pre class="text"><code>Slide 1: 主题
+提示词工程中的语用学——如何用 AI 提高你做 PPT 的效率
+
+Slide 2: 引入
+案例 1：文字和排版，一行行文字堆积 vs 结构清晰的要点简述。
+案例 2：图片/背景图，随口一句指令 vs 加入光影、构图、材质参数。
+总结：背后是提示词工程。
+
+Slide 3: 与 AI 对话 vs 与人类对话
+人类有共同语境，AI 没有具体生活经验。
+提示词工程就是手动为 AI 注入先验概率。
+
+Slide 4: Cooperative Principle
+Quality, Relevance, Quantity, Manner.
+
+Slide 5-8: 四个准则和案例
+质：隧道修山；关系：Green 公式；量：滑雪图和 PPT 美化；方式：圈内黑话。
+
+Slide 9: 实操展示
+用上面的准则生成、排版、修改 PPT。
+
+Slide 10-11: 总结
+语言演化的三个纪元；技术和语言的共生演化。
+
+Slide 12: Reference
+列出参考资料链接。
+
+Slide 13: Thanks
+结束页，放个人网站或致谢。</code></pre>
+<p><strong>AI/工具参与：</strong> AI 只做评审：指出 Slide 10-11 可能太宏观，应该压缩；Slide 9 最好不要只说“实操展示”，而要展开成具体步骤。</p>
+<p><strong>阶段成果：</strong> 得到一个顺序更清楚的大纲：先用效果对比抓住注意力，再讲语用学理论，最后进入 PPT 工作流。</p>
+</div>
+</div>
+</div>
+</section>
+<section id="第三步写细纲" class="level3">
+<h3 class="anchored" data-anchor-id="第三步写细纲">第三步：写细纲</h3>
+<p>把大纲拆到每一页。每页只回答一个问题：这一页要让听众记住什么？</p>
+<div class="prompt-box">
+<pre class="text"><code>下面是我修改后的 PPT 细纲：
+[贴每页细纲]
+
+请基于这个细纲，为每一页补充：
+- 页面标题：不超过 14 个字
+- 页面正文：不超过 3 个要点
+- 讲述提示：80-120 字
+- 视觉建议：图表、流程图、对比图或案例截图
+
+要求：
+- 不要新增我没有提到的核心论点
+- 如果你补充案例，请标明它只是建议，需要我核验
+- 页面上不要堆长段文字，把解释放到讲述提示里</code></pre>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>实战成果：这一步做完会得到什么？
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>人的输入：</strong> 我把大纲进一步写成 <code>prompt.docx</code> 那种逐页细纲：</p>
+<pre class="text"><code>Slide 2: 鲜明对比：魔法背后的秘密
+反面：丢给 AI 一段话，得到满屏密集文字。
+正面：结构清晰的要点简述、图文并茂的排版。
+核心问题：决定 AI 产出质量差距的是什么？
+
+Slide 3: 认知对齐：与 AI 对话 vs 与人类对话
+人类沟通依赖共同语境和常识。
+AI 没有肉身、情绪和课堂经历，只能从输入中猜。
+核心论点：提示词工程是在为 AI 注入先验概率。
+
+Slide 4: Recap: Cooperative Principle
+Maxim of Quality, Maxim of Relevance, Maxim of Quantity, Maxim of Manner.
+作用：把课堂里的语用学概念接到 AI prompt 上。
+
+Slide 5: 质的准则
+案例：问 AI “为什么隧道上通常会修建一座山？”
+问题：如果问题前提不清，AI 可能顺着错误前提解释。
+结论：把 AI 当工具，而不是权威；先检查问题是否成立。
+
+Slide 6: 关系准则
+案例：生成一张 Green 公式图片。
+问题：AI 可能理解成绿色公式。
+结论：不要把局部语境当成 AI 默认知道的常识。
+
+Slide 7: 量的准则
+低维 prompt：“画一张滑雪的图片。”
+高维 prompt：主体、动作、环境、光线、构图全部写清楚。
+PPT 排版同理：把“高级一点”拆成具体版式要求。
+
+Slide 8: 方式准则
+案例：non-trivial、老鼠尾巴、萝卜熟了这类圈内表达。
+问题：圈内人听得懂，AI 可能按字面理解。
+结论：prompt 里要解释缩写、黑话和隐含语气。
+
+Slide 9: 工作流展示
+展示怎样从资料、大纲、细纲，到 AI 润色 prompt，再生成和修改 PPT。
+
+Slide 10: 宏观视角
+生物语言、人类语言、硅基语言。
+共性：用有限符号组合出无限可能。
+
+Slide 11: 共生演化
+技术离不开语言的定义，语言也随着技术扩展边界。
+
+Slide 12-13: Reference / Thanks
+收束展示。</code></pre>
+<p><strong>AI/工具参与：</strong> AI 帮我检查每页是不是只有一个中心观点，并把“页面文字”和“讲稿解释”分开。</p>
+<p><strong>阶段成果：</strong> 每一页都有标题、案例、结论。后面做 PPT 时不再是把资料整段复制进去，而是按页组织表达。</p>
+</div>
+</div>
+</div>
+</section>
+<section id="第四步ai-润色成-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="第四步ai-润色成-prompt">第四步：AI 润色成 prompt</h3>
+<p>如果要用 Gamma 或类似工具，可以让 AI 把你的细纲改写成更适合生成 PPT 的 prompt。</p>
+<div class="prompt-box">
+<pre class="text"><code>请把我的 PPT 细纲整理成一个适合输入到 PPT 生成工具的 prompt。
+要求：
+- 保留我的主题、观点和页面顺序
+- 每页只保留一个中心观点
+- 明确页面标题、正文密度、视觉形式和风格
+- 风格为清晰、克制、适合课堂展示
+- 不要为了好看牺牲概念准确性</code></pre>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>实战成果：这一步做完会得到什么？
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>人的输入：</strong> 我把上面的细纲、受众、展示时长、视觉风格交给 AI。</p>
+<p><strong>AI/工具参与：</strong> AI 把“人看的细纲”改成“工具能执行的 prompt”，像这样：</p>
+<p><strong>阶段成果：</strong></p>
+<pre class="text"><code>请生成一份 8-10 页课堂展示 PPT，主题是“提示词工程中的语用学——如何用 AI 提高你做 PPT 的效率”。
+
+内容顺序：
+1. 用 PPT 排版前后对比和图片 prompt 前后对比引入。
+2. 解释 AI 缺少共同语境，因此提示词需要补足先验概率。
+3. 用 Grice 四准则作为诊断框架。
+4. 每个准则配一个案例：隧道修山、Green 公式、滑雪图片、圈内黑话。
+5. 展示一个人先写大纲、AI 再补充优化的 PPT 工作流。
+
+页面要求：
+- 每页只保留一个中心观点。
+- 页面文字少，讲稿解释多。
+- 可以使用流程图、对比图、卡片式布局。
+- 不要新增未经核验的事实。
+- 风格清晰、克制、适合课堂展示。</code></pre>
+<p>同时把图片和页面修改也写成单独 prompt，避免“高级一点”这种空话：</p>
+<pre class="text"><code>图片 prompt 示例：
+男性双板滑雪者，身着鲜艳红色连体滑雪套装，搭配白色安全头盔、橙色镜片滑雪护目镜、黑色防滑手套，背负双肩背包，手持滑雪杖在厚雪陡坡上高速滑行，雪雾飞溅，背景是晴朗湛蓝天空下的巍峨雪山，明亮自然日光，高清超写实，动感张力构图。
+
+页面改版 prompt 示例：
+将这张 PPT 页面重设计为现代化科技风信息图表，采用蓝绿色渐变配色与极简商务风格，以白色背景和卡片式布局呈现；将右侧大段文字拆分为“网络覆盖率、数字化、电子商务、数字农业”四个独立模块，保留全部中文内容并突出关键数据。</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="第五步生成-ppt-初稿" class="level3">
+<h3 class="anchored" data-anchor-id="第五步生成-ppt-初稿">第五步：生成 PPT 初稿</h3>
+<p>把结构化 prompt 放进 Gamma 或其他 PPT 工具，先得到一个可修改的初稿。不要期待它一步到位。</p>
+<div class="prompt-box">
+<pre class="text"><code>请根据上面的结构化 prompt 生成 PPT 初稿。
+重点：
+- 保留页面顺序
+- 每页只放一个中心观点
+- 不要自动添加未经核验的事实
+- 如果需要图片，用占位建议，不要编造来源</code></pre>
+</div>
+</section>
+<section id="第六步改排版和图片" class="level3">
+<h3 class="anchored" data-anchor-id="第六步改排版和图片">第六步：改排版和图片</h3>
+<p>生成 PPT 初稿后，AI 更适合做“设计助理”：指出哪里太挤、哪里图片不贴切、哪里可以改成图示。注意，这一步不是让 AI 改观点，而是让它帮你改善呈现。</p>
+<div class="prompt-box">
+<pre class="text"><code>下面是我生成后的 PPT 页面内容/截图说明：
+[贴每页内容或截图描述]
+
+请帮我给出排版和配图修改建议：
+1. 哪些页面文字太多，需要拆分或压缩？
+2. 哪些页面适合改成流程图、对比图、表格或时间线？
+3. 哪些配图太泛、太“AI 味”，应该替换成什么类型的图？
+4. 每页保留一个最重要的修改建议，不要重新改我的论点。</code></pre>
+</div>
+</section>
+<section id="第七步动画顺序和讲稿优化" class="level3">
+<h3 class="anchored" data-anchor-id="第七步动画顺序和讲稿优化">第七步：动画顺序和讲稿优化</h3>
+<p>最后再处理演示节奏。动画不是装饰，讲稿也不是逐字念 PPT；两者都应该服务听众对逻辑的理解。</p>
+<div class="prompt-box">
+<pre class="text"><code>下面是我的 PPT 页标题和每页核心内容：
+[贴页面列表]
+
+请帮我设计演示节奏：
+- 每页建议的出现顺序
+- 哪些要点适合逐条出现
+- 哪些页面不需要动画
+- 每页讲稿中需要补充解释、停顿或强调的位置
+- 哪些讲稿表达可以压缩得更自然
+- 哪些转场可能显得多余
+
+要求：动画要服务理解，不要为了炫技增加复杂效果。</code></pre>
+</div>
+</section>
+</section>
+<section id="发布前检查表" class="level2">
+<h2 class="anchored" data-anchor-id="发布前检查表">发布前检查表</h2>
+<div class="checklist-box">
+<ul>
+<li>资料是否由你自己读过，并且知道每个关键观点来自哪里？</li>
+<li>大纲是否先由你自己写出，而不是完全由 AI 生成？</li>
+<li>每一页是否只有一个主要观点？</li>
+<li>关键概念是否给了足够语境？</li>
+<li>AI 补充的事实、案例和图片是否已经人工核验？</li>
+<li>页面文字是否可以继续压缩？</li>
+<li>视觉建议是否服务内容，而不是只负责好看？</li>
+<li>配图是否具体、准确，避免只有“AI 味”的装饰图？</li>
+<li>讲稿是否解释了页面上没有写出来的逻辑？</li>
+<li>动画顺序和讲稿是否帮助听众理解，而不是单纯炫技或照读页面？</li>
+<li>是否把圈内话、缩写和容易误解的词解释清楚？</li>
+<li>最后一轮是否由你决定修改取舍，而不是全盘接受 AI 建议？</li>
+</ul>
+</div>
+</section>
+<section id="结语语言不是包装而是控制接口" class="level2">
+<h2 class="anchored" data-anchor-id="结语语言不是包装而是控制接口">结语：语言不是包装，而是控制接口</h2>
+<p>如果把视野拉远一点，语言一直都是人类理解世界、改变世界的接口。生物语言用 A、T、C、G 编码生命；人类语言用有限的词汇组合出思想和文明；今天的 AI 让自然语言又多了一种角色：它开始成为我们调动机器能力的指令系统。</p>
+<p>这也是为什么语用学在 AI 时代并没有过时。恰恰相反，当我们和一个没有肉身、没有课堂经历、没有共同生活经验的系统协作时，“语境”变得更重要了。</p>
+<p>但语境不是凭空出现的。它来自人的阅读、判断、取舍和表达意图。提示词工程的本质，不是背模板，也不是让 AI 替你完成思考，而是把你已经形成的思考设计成清楚的协作语境。你想得越清楚，AI 才越能成为一个可校准、可检查、可迭代的 PPT 合作者。</p>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ol type="1">
+<li><p><a href="https://acnll7zntynp.feishu.cn/wiki/QPiOw9B8NiZRslkcz8UcYzmtnlh/" class="uri">https://acnll7zntynp.feishu.cn/wiki/QPiOw9B8NiZRslkcz8UcYzmtnlh/</a></p></li>
+<li><p><a href="https://www.bilibili.com/video/BV1kvXzBjEZA/" class="uri">https://www.bilibili.com/video/BV1kvXzBjEZA/</a></p></li>
+<li><p><a href="https://www.bilibili.com/video/BV1ES4y1T7S6/" class="uri">https://www.bilibili.com/video/BV1ES4y1T7S6/</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=8z5-IlHYZCY/" class="uri">https://www.youtube.com/watch?v=8z5-IlHYZCY/</a></p></li>
+<li><p><a href="https://www.bilibili.com/video/BV1cp4FzQEsu/" class="uri">https://www.bilibili.com/video/BV1cp4FzQEsu/</a></p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript">
+
+// replace cmd keyboard shortcut w/ control on non-Mac platforms
+const kPlatformMac = typeof navigator !== 'undefined' ? /Mac/.test(navigator.platform) : false;
+if (!kPlatformMac) {
+   var kbds = document.querySelectorAll("kbd")
+   kbds.forEach(function(kbd) {
+      kbd.innerHTML = kbd.innerHTML.replace(/⌘/g, '⌃');
+   });
+}
+
+// tweak headings in pymd
+document.querySelectorAll(".pymd span.co").forEach(el => {
+   if (!el.innerText.startsWith("#|")) {
+      el.style.fontWeight = 1000;
+   }
+});
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bobby50792\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
