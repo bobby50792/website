@@ -1,7 +1,6 @@
 ---
 title: "站点更新笔记"
 subtitle: "记录这次站点整理时做了哪些决定。"
-description: "一个关于站点结构、内容拆分和维护节奏的简短记录。"
 date: 2026-05-09
 categories:
   - Site
