@@ -1,0 +1,217 @@
+---
+title: "Central Limit Theorem"
+page-layout: article
+search: true
+number-offset: [5]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Limiting Behavior of Sample Averages
+
+### Convergence in Distribution
+
+::: {.callout-tip collapse="true"}
+## Continuity set
+
+Let $\mathcal{D}$ be a probability distribution on $\mathbb{R}^d$. The *boundary* of a set $A \subseteq \mathbb{R}^d$, denoted by $\partial A$, is the set of points $\boldsymbol{x} \in \mathbb{R}^d$ such that every open set $U$ containing $\boldsymbol{x}$ intersects both $A$ and its complement $\bar{A}$, i.e., $U \cap A \neq \varnothing$ and $U \cap \bar{A} \neq \varnothing$. A set $A \subseteq \mathbb{R}^d$ is called a $\mathcal{D}$-continuity set if
+
+$$
+\mathcal{D}(\partial A) = 0.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Convergence in distribution
+
+Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}^d$. We say that $\mathcal{D}_n$ converges in distribution to a probability distribution $\mathcal{D}$ if
+
+$$
+\mathcal{D}_n(A) \to \mathcal{D}(A)
+$$
+
+for all $\mathcal{D}$-continuity sets $A$. We write this as
+
+$$
+\mathcal{D}_n \xrightarrow{d} \mathcal{D}.
+$$
+:::
+
+::: {#thm-1}
+
+Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}$ with CDFs $F_{\mathcal{D}_n}$ and $F_{\mathcal{D}}$. Then
+
+$$
+\mathcal{D}_n \xrightarrow{d} \mathcal{D}
+$$
+
+if and only if
+
+$$
+F_{\mathcal{D}_n}(x) \to F_{\mathcal{D}}(x)
+$$
+
+whenever $F_{\mathcal{D}}$ is continuous at $x$. Such $x$ is also called a continuity point of $F_{\mathcal{D}}$.
+:::
+
+::: {#thm-2}
+
+Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}^d$. Then
+
+$$
+\mathcal{D}_n \xrightarrow{d} \mathcal{D}
+$$
+
+if and only if
+
+$$
+\mathcal{D}_n(\phi) \to \mathcal{D}(\phi)
+$$
+
+for every bounded continuous function $\phi : \mathbb{R}^d \to \mathbb{R}$.
+:::
+
+::: {#thm-3}
+
+Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of discrete probability distributions on $\mathcal{X}$ and $\mathcal{D}$ be another discrete probability distribution on $\mathcal{X}$. Let $p_n$ and $p$ be the PMFs of $\mathcal{D}_n$ and $\mathcal{D}$, respectively. Then
+
+$$
+\mathcal{D}_n \xrightarrow{d} \mathcal{D}
+$$
+
+if and only if
+
+$$
+p_n(x) \to p(x)
+$$
+
+for all $x \in \mathcal{X}$.
+:::
+
+::: {#thm-4}
+
+Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of continuous probability distributions on $\mathbb{R}^d$ and $\mathcal{D}$ be another continuous probability distribution on $\mathbb{R}^d$. Let $f_n$ and $f$ be the PDFs of $\mathcal{D}_n$ and $\mathcal{D}$, respectively. Then if
+
+$$
+f_n(x) \to f(x)
+$$
+
+for all $x \in \mathbb{R}^d$, then
+
+$$
+\mathcal{D}_n \xrightarrow{d} \mathcal{D}.
+$$
+:::
+
+### The Law of Large Numbers
+
+::: {#thm-5}
+
+Let $(X_n)_{n \geq 1}$ be a sequence of random variables and let $X$ be a random variable. Suppose that the MGFs $M_{X_n}$ and $M_X$ are all defined on some common open interval $(-\epsilon, \epsilon)$. If
+
+$$
+M_{X_n}(t) \to M_X(t)
+$$
+
+for every $t \in (-\epsilon, \epsilon)$, then
+
+$$
+X_n \xrightarrow{d} X.
+$$
+:::
+
+::: {#thm-6}
+## Weak law of large numbers
+
+Let $X_1, X_2, \dots$ be i.i.d. random variables with
+
+$$
+\mathbb{E}[X_i] = \mu \quad \text{and} \quad \operatorname{Var}(X_i) = \sigma^2 < +\infty.
+$$
+
+Let $X^{(n)} := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average. Then, for every $\epsilon > 0$,
+
+$$
+\operatorname{Pr}\left[ |X^{(n)} - \mu| \geq \epsilon \right] \to 0.
+$$
+
+Equivalently, as $n \to \infty$,
+
+$$
+X^{(n)} \xrightarrow{d} \mu.
+$$
+:::
+
+### The Central Limit Theorem
+
+::: {#thm-7}
+
+Let $X_1, X_2, \dots$ be i.i.d. random variables with
+
+$$
+\mathbb{E}[X_i] = \mu \quad \text{and} \quad \operatorname{Var}(X_i) = \sigma^2 < +\infty.
+$$
+
+Let $X^{(n)} := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average. Then
+
+$$
+\sqrt{n}\left(X^{(n)} - \mu\right) \xrightarrow{d} \mathcal{N}(0, \sigma^2),
+$$
+:::
+
+::: {#thm-8}
+
+Let $\boldsymbol{x}_1, \boldsymbol{x}_2, \dots$ be i.i.d. random vectors in $\mathbb{R}^d$ with
+
+$$
+\mathbb{E}[\boldsymbol{x}_i] = \boldsymbol{\mu} \quad \text{and} \quad \operatorname{Cov}(\boldsymbol{x}_i) = \boldsymbol{\Sigma}.
+$$
+
+Let $\boldsymbol{x}^{(n)} := \frac{1}{n} \sum_{i=1}^n \boldsymbol{x}_i$ be the sample average. Then
+
+$$
+\sqrt{n}\left(\boldsymbol{x}^{(n)} - \boldsymbol{\mu}\right) \xrightarrow{d} \mathcal{N}(\mathbf{0}, \boldsymbol{\Sigma}).
+$$
+:::
+
+::: {#thm-9}
+
+Let $X_1, \dots, X_n$ be i.i.d. random variables with
+
+$$
+\mathbb{E}[X_i] = \mu \quad \text{and} \quad \operatorname{Var}(X_i) = \sigma^2 \in (0, +\infty).
+$$
+
+Let $X^{(n)} := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average. Then for every $\alpha > 0$, as $n \to \infty$,
+
+$$
+\operatorname{Pr}\left[ |X^{(n)} - \mu| < \alpha \cdot \frac{\sigma}{\sqrt{n}} \right] \to 1 - 2\bar{\Phi}(\alpha),
+$$
+
+where $\bar{\Phi}(x) := \int_x^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-u^2/2} \, \mathrm{d}u$ is the tail probability of the standard Gaussian distribution.
+:::
+
+## Appendix
+
+::: {#thm-10}
+## Wick's theorem
+
+Let $\boldsymbol{X} = (X_1, X_2, \dots, X_n)^\top \in \mathbb{R}^n$ be a zero-mean multivariate Gaussian random vector, i.e., $\boldsymbol{X} \sim \mathcal{N}(\mathbf{0}, \boldsymbol{\Sigma})$. 
+
+1. If $n$ is an odd integer, the higher-order joint raw moment is strictly zero due to symmetric cancellation:
+   
+   $$
+   \mathbb{E}[X_1 X_2 \dots X_n] = 0.
+   $$
+
+2. If $n$ is an even integer, the joint raw moment is exactly equal to the sum over all possible perfect matchings (pairings) of the variables of the products of their pairwise covariances:
+   
+   $$
+   \mathbb{E}[X_1 X_2 \dots X_n] = \sum_{p \in P_n} \prod_{\{i, j\} \in p} \mathbb{E}[X_i X_j],
+   $$
+   
+   where $P_n$ denotes the set of all possible partitions of $\{1, 2, \dots, n\}$ into pairs, and the total number of terms in the sum is given by the double factorial $(n-1)!!$.
+:::

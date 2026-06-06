@@ -1,10 +1,470 @@
 ---
-title: "Chapter 2"
-subtitle: "先把站点跑起来，再逐步补内容。"
+title: "Sampling and Concentration"
 page-layout: article
 search: true
+number-offset: [2]
+number-sections: false
+
+crossref:
+  chapters: true      
+
 ---
 
-## 这页讲什么
+## Markov's Inequality
 
-<!-- 正如在数学笔记中的[矩阵秩定理](1.qmd#thm-matrix-rank)所述，我们可以推导出反向传播中的... -->
+::: {#thm-1}
+
+## Markov's inequality
+If $X$ is a non-negative random variable, i.e., $\Pr[X \geq 0] = 1$, then for every $a > 0$,
+
+$$
+\Pr[X \geq a] \leq \frac{\mathbb{E}[X]}{a}.
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Corollary
+
+1. If $X$ is a non-negative random variable, then for every $\alpha > 0$,
+
+$$
+\Pr[X \geq \alpha \mathbb{E}[X]] \leq \frac{1}{\alpha}.
+$$
+
+2. Let $X$ be a random variable and $f : \mathbb{R} \to \mathbb{R}$ be a function. If $\Pr[f(X) \geq 0] = 1$, then for any $a > 0$,
+
+$$
+\Pr[f(X) \geq a] \leq \frac{\mathbb{E}[f(X)]}{a}.
+$$
+
+:::
+
+## Chebyshev's Inequality
+
+::: {.callout-tip collapse="true"}
+## Variance
+
+The variance of a random variable $X$ is defined as
+
+$$
+\operatorname{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2].
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Proposition
+
+For any random variable $X$,
+
+$$
+\operatorname{Var}(X) = \mathbb{E}[X^2] - \mathbb{E}[X]^2.
+$$
+:::
+
+::: {#thm-2}
+## Chebyshev's inequality
+
+For any random variable $X$ and any $\epsilon > 0$,
+
+$$
+\Pr[|X - \mathbb{E}[X]| \geq \epsilon] \leq \frac{\operatorname{Var}(X)}{\epsilon^2}.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Standard deviation
+
+The standard deviation of a random variable $X$ is defined as
+
+$$
+\sigma(X) = \sqrt{\operatorname{Var}(X)}.
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Corollary
+
+For any random variable $X$ and any $\alpha > 0$,
+
+$$
+\Pr[|X - \mathbb{E}[X]| \geq \alpha \cdot \sigma(X)] \leq \frac{1}{\alpha^2}.
+$$
+:::
+
+::: {#thm-3}
+
+For any random variable $X$ and any constant $c \in \mathbb{R}$,
+
+$$
+\operatorname{Var}(cX) = c^2 \operatorname{Var}(X).
+$$
+:::
+
+::: {#thm-4}
+
+If $X$ and $Y$ are independent random variables, then
+
+$$
+\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y).
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Covariance
+
+Let $X$ and $Y$ be two random variables. The variance of the sum of $X$ and $Y$ is given by
+
+$$
+\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2 \operatorname{Cov}(X, Y),
+$$
+
+where the covariance between $X$ and $Y$ is defined as
+
+$$
+\operatorname{Cov}(X, Y) := \mathbb{E}\left[ (X - \mathbb{E}[X])(Y - \mathbb{E}[Y]) \right] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y].
+$$
+:::
+
+::: {#thm-5}
+
+Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$, each with mean $\mu$ and variance $\sigma^2$. Then for every $\epsilon > 0$,
+
+$$
+\Pr[|X - \mu| \geq \epsilon] \leq \frac{\sigma^2}{n\epsilon^2}.
+$$
+:::
+
+## Chernoff Bounds
+
+::: {.callout-tip collapse="true"}
+## Moment generating function
+
+The moment generating function (MGF) of a random variable $X$ is defined as
+
+$$
+M_X(t) := \mathbb{E}[e^{tX}].
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Properties of the MGF
+
+Let $X$ be a random variable. Then its MGF $M(t)$ satisfies the following properties:
+
+1. $M(0) = 1$;
+2. $M(t) \geq e^{t \mathbb{E}[X]}$ for all $t \in \mathbb{R}$.
+:::
+
+::: {#thm-6}
+## Generic Chernoff bound (upper tail)
+
+Let $X$ be a random variable with mean $\mu$ and MGF $M(t)$. Then for any $a \geq \mu$,
+
+$$
+\Pr[X \geq a] \leq \inf_{t \in \mathbb{R}} \left\{ e^{-ta} M(t) \right\}.
+$$
+:::
+
+::: {#thm-7}
+## Generic Chernoff bound (lower tail)
+
+Let $X$ be a random variable with mean $\mu$ and MGF $M(t)$. Then for any $a \leq \mu$,
+
+$$
+\Pr[X \leq a] \leq \inf_{t \in \mathbb{R}} \left\{ e^{-ta} M(t) \right\}.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Rate function
+
+The rate function of a random variable $X$ is defined as
+
+$$
+I_X(a) := \sup_{t \in \mathbb{R}} \left\{ ta - \log M_X(t) \right\},
+$$
+
+with the convention that $I_X(a) = +\infty$ if the supremum is unbounded.
+:::
+
+::: {#thm-8}
+## Generic Chernoff bound in terms of the rate function
+
+Let $X$ be a random variable with mean $\mu$ and rate function $I(a)$. Then
+
+$$
+\begin{aligned}
+\forall a \geq \mu: \quad \Pr[X \geq a] &\leq e^{-I(a)}, \\
+\forall a \leq \mu: \quad \Pr[X \leq a] &\leq e^{-I(a)}.
+\end{aligned}
+$$
+:::
+
+\
+
+::: {#thm-9}
+## Properties of the rate function
+
+Let $X$ be a random variable with mean $\mu$ and rate function $I(a)$. Let $l$ and $u$ be the minimum and maximum values that $X$ can take, and assume $l < u$. Then
+
+1. $I(a) = +\infty$ if $a < l$ or $a > u$.
+2. $0 \leq I(a) < +\infty$ for all $a \in [l, u]$.
+3. $I(\mu) = 0$.
+4. $I(a)$ is convex on the interval $[l, u]$.
+5. $I'(\mu) = 0$.
+:::
+
+\
+
+::: {#thm-10}
+## Generic Chernoff bound for sample averages
+
+Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$, each with mean $\mu$ and rate function $I(a)$. Then
+
+$$
+\begin{aligned}
+\forall a \geq \mu: \quad \Pr[X \geq a] &\leq e^{-nI(a)}, \\
+\forall a \leq \mu: \quad \Pr[X \leq a] &\leq e^{-nI(a)}.
+\end{aligned}
+$$
+:::
+
+\
+
+::: {#thm-11}
+## Cramér's theorem
+
+Let $\mathcal{D}$ be a probability distribution with mean $\mu$ and rate function $I(a)$. Let $X^{(n)} := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$, drawn from $\mathcal{D}$. Then as $n \to \infty$,
+
+$$
+\begin{aligned}
+\text{for any fixed } a \geq \mu: \quad \Pr[X^{(n)} \geq a] &= e^{-n(I(a) + o(1))}, \\
+\text{for any fixed } a \leq \mu: \quad \Pr[X^{(n)} \leq a] &= e^{-n(I(a) + o(1))}.
+\end{aligned}
+$$
+:::
+
+## Hoeffding's Inequality for Bounded Variable
+
+::: {#thm-12}
+
+Let $X$ be a random variable taking values in $[l, u]$ for some $l \leq u$. Then for all $t \in \mathbb{R}$,
+
+$$
+\mathbb{E}[e^{t(X - \mathbb{E}[X])}] \leq e^{t^2(u - l)^2 / 8}.
+$$
+:::
+
+\
+
+::: {#thm-13}
+
+Let $X$ be a random variable taking values in $[l, u]$ for some $l \leq u$. Then for all $\epsilon \in \mathbb{R}$,
+
+$$
+I_X(\mathbb{E}[X] + \epsilon) \geq 2\epsilon^2 / (u - l)^2.
+$$
+:::
+
+\
+
+::: {#thm-14}
+## Hoeffding's inequality, i.i.d. case
+
+Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$ taking values in $[l, u]$ for some $l \leq u$. Then for all $\epsilon \geq 0$,
+
+$$
+\begin{aligned}
+\Pr[X \geq \mathbb{E}[X] + \epsilon] &\leq e^{-2n\epsilon^2 / (u - l)^2}, \\
+\Pr[X \leq \mathbb{E}[X] - \epsilon] &\leq e^{-2n\epsilon^2 / (u - l)^2}.
+\end{aligned}
+$$
+:::
+
+\
+
+::: {#thm-15}
+## Hoeffding's inequality
+
+Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ independent random variables $X_1, \dots, X_n$ taking values in intervals $[\ell_1, u_1], \dots, [\ell_n, u_n]$, respectively. Let $s^2$ be the mean squared interval length:
+
+$$
+s^2 := \frac{1}{n} \sum_{i=1}^n (u_i - \ell_i)^2.
+$$
+
+Then for all $\epsilon \geq 0$,
+
+$$
+\begin{aligned}
+\Pr[X \geq \mathbb{E}[X] + \epsilon] &\leq e^{-2n\epsilon^2 / s^2}, \\
+\Pr[X \leq \mathbb{E}[X] - \epsilon] &\leq e^{-2n\epsilon^2 / s^2}.
+\end{aligned}
+$$
+:::
+
+\
+
+::: {#thm-16}
+
+Let $X := \sum_{i=1}^n \Delta_i$ be the sum of $n$ independent random variables $\Delta_1, \dots, \Delta_n$ taking values in intervals $[\tilde{\ell}_1, \tilde{u}_1], \dots, [\tilde{\ell}_n, \tilde{u}_n]$, respectively. Let $L^2$ be the sum of the squared interval lengths:
+
+$$
+L^2 := \sum_{i=1}^n (\tilde{u}_i - \tilde{\ell}_i)^2.
+$$
+
+Then for all $\epsilon \geq 0$,
+
+$$
+\begin{aligned}
+\Pr[X \geq \mathbb{E}[X] + \epsilon] &\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[X \leq \mathbb{E}[X] - \epsilon] &\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Martingale
+
+Let $Z_0, Z_1, \dots, Z_n$ be random variables. We say that $(Z_i)_{i=0}^n$ is a martingale if for every $i \in [n]$,
+
+$$
+\mathbb{E}[Z_i \mid Z_0, \dots, Z_{i-1}] = Z_{i-1}.
+$$
+:::
+
+::: {#thm-17}
+
+Let $(Z_i)_{i=0}^n$ be a martingale. Assume that for each $i \in [n]$, the increment $\Delta_i := Z_i - Z_{i-1}$ always lies in an interval $[\tilde{\ell}_i, \tilde{u}_i]$ for some $\tilde{\ell}_i, \tilde{u}_i \in \mathbb{R}$. Let $L^2$ be the sum of the squared interval lengths:
+
+$$
+L^2 := \sum_{i=1}^n (\tilde{u}_i - \tilde{\ell}_i)^2.
+$$
+
+Then for every $t \in \mathbb{R}$,
+
+$$
+\mathbb{E}[e^{t(Z_n - Z_0)}] \leq e^{t^2 L^2 / 8}.
+$$
+:::
+
+\ 
+
+::: {#thm-18}
+## Azuma–Hoeffding inequality
+
+Let $(Z_i)_{i=0}^n$ be a martingale. Assume that for each $i \in [n]$, the increment $\Delta_i := Z_i - Z_{i-1}$ always lies in an interval $[\tilde{\ell}_i, \tilde{u}_i]$ for some $\tilde{\ell}_i, \tilde{u}_i \in \mathbb{R}$. Let $L^2$ be the sum of the squared interval lengths:
+
+$$
+L^2 := \sum_{i=1}^n (\tilde{u}_i - \tilde{\ell}_i)^2.
+$$
+
+Then for all $\epsilon \geq 0$,
+
+$$
+\begin{aligned}
+\Pr[Z_n \geq Z_0 + \epsilon] &\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[Z_n \leq Z_0 - \epsilon] &\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Martingale
+
+Let $(X_i)_{i=0}^n$ be a sequence of random variables, and let $(Z_i)_{i=0}^n$ be another sequence of random variables such that each $Z_i$ is a deterministic function of $X_0, \dots, X_i$. We say that $(Z_i)_{i=0}^n$ is a martingale with respect to the information revealed by $(X_i)_{i=0}^n$ if for every $i \in [n]$,
+
+$$
+\mathbb{E}[Z_i \mid X_{<i}] = Z_{i-1}.
+$$
+:::
+
+::: {#thm-19}
+## Azuma–Hoeffding inequality
+
+Let $(Z_i)_{i=0}^n$ be a martingale with respect to the information revealed by $(X_i)_{i=0}^n$. Assume that for each $i \in [n]$, the increment $\Delta_i := Z_i - Z_{i-1}$ always lies in an interval of length at most $c_i$ when conditioned on $X_{<i}$. That is, there exist functions $\tilde{\ell}_i, \tilde{u}_i : \mathbb{R}^i \to \mathbb{R}$ such that with probability 1,
+
+$$
+\tilde{\ell}_i(X_{<i}) \leq \Delta_i \leq \tilde{u}_i(X_{<i}), \quad \tilde{u}_i(X_{<i}) - \tilde{\ell}_i(X_{<i}) \leq c_i.
+$$
+
+Let $L^2 := \sum_{i=1}^n c_i^2$. Then for all $\epsilon \geq 0$,
+
+$$
+\begin{aligned}
+\Pr[Z_n \geq Z_0 + \epsilon] &\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[Z_n \leq Z_0 - \epsilon] &\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Doob martingale
+
+Let $X_1, \dots, X_n$ be independent random variables, and let $f : \mathbb{R}^n \to \mathbb{R}$ be a function. The Doob martingale associated with $f$ and $X_1, \dots, X_n$ is the sequence $(Z_i)_{i=0}^n$ defined by
+
+$$
+Z_i := \mathbb{E}[f(X_1, \dots, X_n) \mid X_1, \dots, X_i].
+$$
+:::
+
+::: {#thm-20}
+
+The Doob martingale $(Z_i)_{i=0}^n$ is a martingale with respect to the information revealed by $(X_i)_{i=1}^n$. That is, for all $i \in [n]$,
+
+$$
+\mathbb{E}[Z_i \mid X_{<i}] = Z_{i-1}.
+$$
+:::
+
+
+::: {#thm-21}
+## McDiarmid's inequality
+
+Let $X_1, \dots, X_n$ be independent random variables, and let $f : \mathbb{R}^n \to \mathbb{R}$ be a function. Assume that for each $i = 1, \dots, n$ there is a constant $c_i \geq 0$ such that whenever two inputs differ only in coordinate $i$,
+
+$$
+|f(x_1, \dots, x_i, \dots, x_n) - f(x_1, \dots, x_i', \dots, x_n)| \leq c_i.
+$$
+
+Let $L^2 := \sum_{i=1}^n c_i^2$. Then for all $\epsilon \geq 0$,
+
+$$
+\begin{aligned}
+\Pr[f(X_1, \dots, X_n) \geq \mathbb{E}[f(X_1, \dots, X_n)] + \epsilon] &\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[f(X_1, \dots, X_n) \leq \mathbb{E}[f(X_1, \dots, X_n)] - \epsilon] &\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+$$
+:::
+
+## Appendix 
+::: {#thm-22}
+## Paley–Zygmund inequality and anti-concentration
+
+Let $X$ be a random variable. 
+
+1. For all $a \geq 0$, the following bound holds via the Cauchy–Schwarz inequality:
+
+$$
+\mathbb{E}\left[X \mathbb{1}_{[X > a]}\right] \leq \mathbb{E}[X^2]^{1/2} \operatorname{Pr}[X > a]^{1/2}.
+$$
+
+2. Suppose $X$ is a non-negative random variable and $\mathbb{E}[X^2] \neq 0$. Then for all $\theta \in [0, 1]$,
+
+$$
+\operatorname{Pr}[X > \theta \mathbb{E}[X]] \geq (1 - \theta)^2 \frac{\mathbb{E}[X]^2}{\mathbb{E}[X^2]}.
+$$
+
+3. Suppose $\sigma(X) > 0$. Then for all $\alpha \in [0, 1]$, the deviation from the mean is bounded below by
+
+$$
+\operatorname{Pr}\left[|X - \mathbb{E}[X]| > \alpha \cdot \sigma(X)\right] \geq \frac{(1 - \alpha^2)^2}{\kappa(X)},
+$$
+
+where 
+
+$$
+\kappa(X) := \frac{\mathbb{E}\left[|X - \mathbb{E}[X]|^4\right]}{\sigma(X)^4}
+$$
+
+is called the kurtosis of $X$.
+:::

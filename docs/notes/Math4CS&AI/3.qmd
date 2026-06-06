@@ -1,10 +1,584 @@
 ---
-title: "Chapter 1"
-subtitle: "先把站点跑起来，再逐步补内容。"
+title: "Generating Functions"
 page-layout: article
-search: false
+search: true
+number-offset: [3]
+number-sections: false
+
+crossref:
+  chapters: true      
+
 ---
 
-## 这页讲什么
+## Complex Analysis
 
-这一页适合第一次接手这个网站的人，目标只有一个：快速找到入口，知道该改什么、该看什么、该保留什么。
+### Complex Functions and Power Series
+
+::: {.callout-note collapse="true"}
+## Complex functions
+
+Let $S \subseteq \mathbb{C}$ be a set of complex numbers. A complex function on $S$ is a function $f : S \to \mathbb{C}$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Power series
+
+A power series is an infinite sum of the form
+
+$$
+\sum_{n \geq 0} a_n z^n,
+$$
+
+where $a_n \in \mathbb{C}$ is the coefficient of the $n$-th term $z^n$. More generally, a power series with respect to a center $z_0 \in \mathbb{C}$ is an infinite sum of the form
+
+$$
+\sum_{n \geq 0} a_n (z - z_0)^n.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Limits of complex sequences
+
+We say that a sequence $(z_n)_{n \geq 0}$ of complex numbers converges to $A \in \mathbb{C}$ if for every $\epsilon > 0$ there exists $N$ such that
+
+$$
+|z_n - A| < \epsilon \quad \text{for all } n \geq N.
+$$
+:::
+
+::: {#thm-1}
+## Cauchy–Hadamard theorem
+
+Let $\sum_{n \geq 0} a_n z^n$. Define
+
+$$
+R := \frac{1}{\limsup_{n \to \infty} |a_n|^{1/n}} \in [0, +\infty) \cup \{+\infty\}.
+$$
+
+Then, for all $z \in \mathbb{C}$,
+
+1. if $|z| < R$, then the series converges absolutely;
+2. if $|z| > R$, then the series does not converge.
+
+This $R$ is called the radius of convergence of the power series.
+:::
+
+::: {#thm-2}
+## Euler's formula
+
+For every $x \in \mathbb{R}$,
+
+$$
+e^{ix} = \cos x + i \sin x.
+$$
+:::
+
+### Continuous Functions
+
+::: {.callout-tip collapse="true"}
+## Continuity
+
+Let $f : S \to \mathbb{C}$ be a complex function. We say that $f$ is continuous at $z_0 \in S$ if the limit of $f(z)$ as $z \in S$ approaches $z_0$ exists and is equal to $f(z_0)$. That is,
+
+$$
+\lim_{z \to z_0} f(z) = f(z_0).
+$$
+
+We say that $f$ is continuous on $S$ if it is continuous at every point of $S$.
+:::
+
+### Holomorphic Functions
+
+::: {.callout-tip collapse="true"}
+## Open and closed sets
+
+Let $S \subseteq \mathbb{C}$ be a set. We say that $S$ is open if for every $z_0 \in S$, there exists some $\delta > 0$ such that for all $z \in \mathbb{C}$ with $|z - z_0| < \delta$, we have
+
+$$
+z \in S.
+$$
+
+We say that $S$ is closed if its complement $\mathbb{C} \setminus S$ is open. An equivalent definition is that $S$ is closed if for every convergent sequence $(z_n)_{n \geq 0}$ in $S$, the limit $\lim_{n \to \infty} z_n$ is also in $S$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Differentiability
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is differentiable at $z_0 \in S$ if the limit
+
+$$
+f'(z_0) := \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}
+$$
+
+exists. Further, we say that $f$ is differentiable on $S$ if it is differentiable at every point of $S$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Infinite differentiability
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is infinitely differentiable at $z_0 \in S$ if all the higher order derivatives of $f$,
+
+$$
+f'(z_0), f''(z_0), f^{(3)}(z_0), f^{(4)}(z_0), \dots
+$$
+
+exist at $z_0$. Further, we say that $f$ is infinitely differentiable on $S$ if it is infinitely differentiable at every point of $S$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Analyticity
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is analytic at $z_0 \in S$ if there exists a sequence of complex numbers $(a_n)_{n \geq 0}$ such that for some $\delta > 0$, for all $z \in S$ with $|z - z_0| < \delta$,
+
+$$
+f(z) = \sum_{n \geq 0} a_n (z - z_0)^n.
+$$
+
+Further, we say that $f$ is analytic on $S$ if it is analytic at every point of $S$.
+:::
+
+::: {#thm-3}
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. Then the following properties are equivalent:
+
+(i) $f$ is differentiable on $S$;
+(ii) $f$ is infinitely differentiable on $S$;
+(iii) $f$ is analytic on $S$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Holomorphic function
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is holomorphic at $z_0 \in S$ if it is differentiable in an open set containing $z_0$. Further, we say that $f$ is holomorphic on $S$ if it is differentiable at every point of $S$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Curve
+
+A curve in $\mathbb{C}$ is a continuous function $\gamma : [a, b] \to \mathbb{C}$. Furthermore,
+
+* We say that $\gamma$ is smooth if it is continuously differentiable and its derivative $\gamma'$ is nowhere zero.
+* We say that $\gamma$ is simple if it is injective. That is, $\gamma$ does not cross itself.
+* We say that $\gamma$ is closed if $\gamma(a) = \gamma(b)$. That is, $\gamma$ returns to its starting point at the very end.
+* We say that $\gamma$ is a simple closed curve if it is closed and is injective on $[a, b)$. That is, $\gamma$ does not cross itself except at the endpoints.
+:::
+
+### Complex Integrals
+
+::: {.callout-tip collapse="true"}
+## Contour
+
+A contour is a sequence of smooth curves
+
+$$
+\gamma = \{\gamma_1, \gamma_2, \dots, \gamma_n\}
+$$
+
+such that the end point of $\gamma_i$ is the starting point of $\gamma_{i+1}$ for $i \in [n - 1]$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Line integral
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. If $\gamma : [a, b] \to S$ is a smooth curve in $S$, then the integral of $f$ along $\gamma$ is defined by
+
+$$
+\int_\gamma f(z) \, \mathrm{d}z := \int_a^b f(\gamma(t))\gamma'(t) \, \mathrm{d}t.
+$$
+
+If $\gamma = \gamma_1 + \dots + \gamma_n$ is a contour, then the contour integral of $f$ along $\gamma$ is defined as the sum of the integrals of $f$ along the smooth curves that make up the contour:
+
+$$
+\int_\gamma f(z) \, \mathrm{d}z := \sum_{i=1}^n \int_{\gamma_i} f(z) \, \mathrm{d}z.
+$$
+:::
+
+::: {#thm-4}
+## ML Inequality
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. If $\gamma : [a, b] \to S$ is a smooth curve in $S$ and $|f(\gamma(t))| \leq M$ for all $t \in [a, b]$, then
+
+$$
+\left| \int_\gamma f(z) \, \mathrm{d}z \right| \leq M \cdot L(\gamma).
+$$
+:::
+
+::: {#thm-5}
+## Cauchy–Goursat theorem
+
+Let $f : S \to \mathbb{C}$ be a holomorphic function defined on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed contour such that the region enclosed by $\gamma$ is contained in $S$. Then the contour integral of $f$ along $\gamma$ is zero. That is,
+
+$$
+\int_\gamma f(z) \, \mathrm{d}z = 0.
+$$
+:::
+
+### Integrals Around Singularities
+
+::: {.callout-tip collapse="true"}
+## Singularity
+
+Let $f : S \to \mathbb{C}$ be a complex function. We say that $z_0$ is a singular point, or a singularity of $f$ if $f$ is either not defined at $z_0$ or not holomorphic at $z_0$, but for every $\epsilon > 0$, there exists a complex number $z \in S$ such that $|z - z_0| < \epsilon$ and $f$ is holomorphic at $z$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Isolated singularity
+
+Let $f : S \to \mathbb{C}$ be a complex function. We say that $z_0$ is an isolated singularity of $f$ if $f$ is either not defined at $z_0$ or not holomorphic at $z_0$, but there exists an $\epsilon > 0$ such that $f$ is holomorphic on the punctured disk $\{z \in \mathbb{C} : 0 < |z - z_0| < \epsilon\}$.
+:::
+
+::: {#thm-6}
+## Cauchy's integral formula
+
+Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed counterclockwise contour such that the region enclosed by $\gamma$ is contained in $S$. Then for every $z$ enclosed by $\gamma$,
+
+$$
+f(z) = \frac{1}{2\pi i} \int_\gamma \frac{f(w)}{w - z} \, \mathrm{d}w.
+$$
+:::
+
+::: {#thm-7}
+## Cauchy's estimate
+
+Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $z_0 \in S$ and $r > 0$ be such that the closed disk $\overline{D}(z_0, r) \subseteq S$. If $|f(z)| \leq M$ for all $z \in \overline{D}(z_0, r)$, then for all $n \geq 0$,
+
+$$
+|f^{(n)}(z_0)| \leq \frac{n! M}{r^n}.
+$$
+:::
+
+::: {#thm-8}
+
+Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Fix $z_0 \in S$ and $r > 0$ such that the circle $C_r$ centered at $z_0$ and its interior $D_r$ are both contained in $S$. Then for every $z \in D_r$,
+
+$$
+f(z) = \sum_{n \geq 0} a_n(z-z_0)^n, \quad \text{where } a_n = \frac{1}{2\pi i} \int_{C_r} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d}w.
+$$
+:::
+
+::: {#thm-9}
+## Cauchy integral formula for derivatives
+
+Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed counterclockwise contour such that the region enclosed by $\gamma$ is contained in $S$. Then for every $z$ enclosed by $\gamma$ and every integer $n \geq 0$,
+
+$$
+f^{(n)}(z) = \frac{n!}{2\pi i} \int_\gamma \frac{f(w)}{(w - z)^{n+1}} \, \mathrm{d}w.
+$$
+:::
+
+::: {#thm-10}
+## Identity theorem
+
+Let $S \subseteq \mathbb{C}$ be a connected open set, and let $f,g : S \rightarrow \mathbb{C}$ be holomorphic. If there exists a non-empty open set $U \subseteq S$ such that $f(z) = g(z) for every $z \in U$, then $f(z) = g(z)$ for every $z \in S$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Removable and non-removable singularities
+
+Let $f : S \to \mathbb{C}$ be a complex function with an isolated singularity at $z_0$. We say that $z_0$ is a removable singularity of $f$ if there exists a complex number $w \in \mathbb{C}$ such that assigning the value $w$ to $f(z_0)$ makes $f$ holomorphic at $z_0$. We say that $z_0$ is a non-removable singularity of $f$ if it is not removable.
+:::
+
+::: {#thm-11}
+
+Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Fix $z_0 \in S$. If the following holds for some $R > 0$:
+
+1. $f$ is holomorphic on the open disk $D_R$ centered at $z_0$ with radius $R$;
+2. $f$ has a non-removable singularity at some point $s$ with $|s - z_0| = R$,
+
+Then the radius of convergence of the Taylor series of $f$ around $z_0$,
+
+$$
+\sum_{n \geq 0} \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n,
+$$
+
+is exactly $R$.
+:::
+
+
+### Expansion Around Isolated Singularities
+
+::: {#thm-12}
+## Laurent's theorem
+
+Let $f$ be holomorphic on a punctured disk $D_r(z_0) \setminus \{z_0\}$ for some $z_0 \in \mathbb{C}$ and some $r > 0$. Then there exists a unique sequence $(a_n)_{n \geq 0}$ and a unique sequence $(b_n)_{n \geq 1}$ such that
+
+$$
+f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n + \sum_{n=1}^\infty b_n (z - z_0)^{-n}
+$$
+
+for every $z \in D_r(z_0) \setminus \{z_0\}$.
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Classification of isolated singularities
+Let $z_0$ be an isolated singularity of $f$ with Laurent series expansion
+
+$$
+f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n.
+$$
+
+* If $a_j = 0$ for all $j < 0$, then $z_0$ is a removable singularity of $f$.
+* If $a_{-m} \neq 0$ for some positive integer $m$ and $a_j = 0$ for all $j < -m$, then we say that $z_0$ is a pole of order $m$ of $f$. A pole of order 1 is called a simple pole.
+* If $a_j \neq 0$ for infinitely many negative integers $j$, then we say that $z_0$ is an essential singularity of $f$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Residue
+
+Let $z_0$ be an isolated singularity of $f$ that admits a Laurent series expansion around $z_0$:
+
+$$
+f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n
+$$
+
+Then the coefficient $a_{-1}$ of $(z - z_0)^{-1}$ is called the residue of $f$ at $z_0$, which is denoted by $\operatorname{Res}(f, z_0)$.
+:::
+
+::: {#thm-13}
+## Cauchy's residue theorem
+
+Let $f$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed counterclockwise contour such that the region enclosed by $\gamma$ is contained in $S$ except for $m$ isolated singularities $z_1, \dots, z_m$. Then
+
+$$
+\frac{1}{2\pi i} \int_\gamma f(z) \, \mathrm{d}z = \sum_{j=1}^m \operatorname{Res}(f, z_j).
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## How to compute residues
+
+Let $z_0$ be an isolated singularity of $f$.
+
+1. If $\lim_{z \to z_0} (z - z_0)f(z)$ exists, then
+   
+   $$
+   \operatorname{Res}(f, z_0) = \lim_{z \to z_0} (z - z_0)f(z).
+   $$
+   
+   Moreover, $z_0$ is a simple pole if $\operatorname{Res}(f, z_0) \neq 0$, or a removable singularity if $\operatorname{Res}(f, z_0) = 0$.
+
+2. If $f(z) = \frac{g(z)}{h(z)}$ for some holomorphic functions $g$ and $h$ near $z_0$, with $h(z_0) = 0$ and $h'(z_0) \neq 0$, then
+   
+   $$
+   \operatorname{Res}(f, z_0) = \frac{g(z_0)}{h'(z_0)},
+   $$
+   
+   Moreover, $z_0$ is a simple pole if $\operatorname{Res}(f, z_0) \neq 0$, or a removable singularity if $\operatorname{Res}(f, z_0) = 0$.
+
+3. If $z_0$ is a pole of order at most $m$, then
+   
+   $$
+   \operatorname{Res}(f, z_0) = \frac{1}{(m - 1)!} \lim_{z \to z_0} \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}} \left[ (z - z_0)^m f(z) \right].
+   $$
+:::
+
+::: {#thm-14}
+
+If $f$ is holomorphic at $0$, then for every $n \geq 0$,
+
+$$
+\frac{f^{(n)}(0)}{n!} = \operatorname{Res}\left( \frac{f(z)}{z^{n+1}}, 0 \right).
+$$
+:::
+
+## Generating Functions of Random Variables
+
+### Probability Generating Functions
+
+::: {.callout-tip collapse="true"}
+## Probability generating function
+
+Let $X$ be a random variable taking values in non-negative integers. Its probability generating function (PGF) is defined as
+
+$$
+G_X(z) := \sum_{k \geq 0} \operatorname{Pr}[X = k] z^k.
+$$
+:::
+
+::: {#thm-15}
+## Expectation and variance from the PGF
+
+Let $X$ be a random variable taking values in non-negative integers. Then
+
+$$
+\begin{aligned}
+\mathbb{E}[X] &= G_X'(1), \\
+\mathbb{E}[X^2] &= G_X''(1) + G_X'(1), \\
+\operatorname{Var}(X) &= G_X''(1) + G_X'(1) - \left(G_X'(1)\right)^2.
+\end{aligned}
+$$
+:::
+
+::: {#thm-16}
+
+Let $X$ and $Y$ be independent random variables taking values in non-negative integers. Then
+
+$$
+G_{X+Y}(z) = G_X(z)G_Y(z).
+$$
+:::
+
+### Moment Generating Functions
+
+::: {.callout-tip collapse="true"}
+## Moment generating function
+
+The moment generating function (MGF) of a random variable $X$ is defined as
+
+$$
+M_X(t) := \mathbb{E}[e^{tX}].
+$$
+:::
+
+::: {#thm-17}
+
+Let $X_1, \dots, X_n$ be independent random variables, and let $X$ be a weighted sum of these random variables:
+
+$$
+X := \sum_{k=1}^n c_k X_k,
+$$
+
+where $c_1, \dots, c_n \in \mathbb{R}$ are constants. Then
+
+$$
+M_X(t) = \prod_{k=1}^n M_{X_k}(c_k t).
+$$
+:::
+
+### Recovering Distributions from MGFs
+
+::: {#thm-18}
+
+Let $c > 0$. For every $\delta \in \mathbb{R}$, we have
+
+$$
+\lim_{T \to +\infty} \frac{1}{2\pi i} \int_{c-iT}^{c+iT} \frac{e^{\delta z}}{z} \, \mathrm{d}z = 
+\begin{cases} 
+0 & \text{if } \delta < 0, \\ 
+1/2 & \text{if } \delta = 0, \\ 
+1 & \text{if } \delta > 0, 
+\end{cases}
+$$
+
+where $\int_{c-iT}^{c+iT}$ means integrating along the line segment from $c - iT$ to $c + iT$, i.e., $\gamma_{c,T}(t) = c + it$ for $t \in [-T, T]$.
+:::
+
+::: {#thm-19}
+## Inversion formula for the MGF
+
+Let $X$ be a random variable with MGF $M_X(t)$. For every $x_1 < x_2$, define
+
+$$
+p_X(x_1, x_2) := \frac{1}{2} \operatorname{Pr}[X = x_1] + \operatorname{Pr}[x_1 < X < x_2] + \frac{1}{2} \operatorname{Pr}[X = x_2].
+$$
+
+Then for every $c > 0$,
+
+$$
+p_X(x_1, x_2) = \frac{1}{2\pi i} \lim_{T \to +\infty} \int_{c-iT}^{c+iT} \frac{e^{-x_1 z} - e^{-x_2 z}}{z} M_X(z) \, \mathrm{d}z.
+$$
+:::
+
+### Cumulant Generating Functions
+
+::: {.callout-tip collapse="true"}
+## Cumulant generating function
+
+The cumulant generating function (CGF) of a random variable $X$ is defined as
+
+$$
+K_X(t) := \log M_X(t) = \sum_{m \geq 1} \kappa_m(X) \frac{t^m}{m!}, \quad \kappa_m(X) = K_X^{(m)}(0).
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Proposition
+
+Let $X$ be a random variable with MGF $M_X(t)$ and CGF $K_X(t)$. The relationship between its moments (derived from $M_X$) and cumulants (derived from $K_X$) evaluated at $t=0$ is given by the following table:
+
+| Statistic | From MGF ($M_X$) | From CGF ($K_X$) |
+| :--- | :---: | :---: |
+| Expectation<br>$\mathbb{E}[X]$ | $M_X'(0)$ | $K_X'(0)$ |
+| Second Moment<br>$\mathbb{E}[X^2]$ | $M_X''(0)$ | $K_X''(0) + K_X'(0)^2$ |
+| Variance<br>$\operatorname{Var}(X)$ | $M_X''(0) - M_X'(0)^2$ | $K_X''(0)$ |
+:::
+
+::: {#thm-20}
+
+Let $X_1, \dots, X_n$ be independent random variables, and let $X$ be a weighted sum of these random variables:
+
+$$
+X := \sum_{k=1}^n c_k X_k,
+$$
+
+where $c_1, \dots, c_n \in \mathbb{R}$ are constants. Then
+
+$$
+K_X(t) = \sum_{k=1}^n K_{X_k}(c_k t), \quad \kappa_m(X) = \sum_{k=1}^n \kappa_m(c_k X_k).
+$$
+:::
+
+### Exponential Tilting
+
+::: {.callout-tip collapse="true"}
+## Exponential tilting
+
+Let $X$ be a random variable with probability mass function $p_X(x)$. The $\lambda$-tilted distribution of $X$, denoted by $\mathcal{T}_{X,\lambda}$, is defined by the distribution corresponding to the probability mass function
+
+$$
+q(x) = \frac{p_X(x)e^{\lambda x}}{M_X(\lambda)}, \quad \forall x \in \mathbb{R}.
+$$
+:::
+
+::: {#thm-21}
+
+Let $X$ be a random variable and $Y \sim \mathcal{T}_{X,\lambda}$ be a random variable drawn from the $\lambda$-tilted distribution of $X$. Then
+
+$$
+\begin{aligned}
+M_Y(t) &= \frac{M_X(\lambda + t)}{M_X(\lambda)}, \\
+K_Y(t) &= K_X(\lambda + t) - K_X(\lambda), \\
+K_Y^{(m)}(0) &= K_X^{(m)}(\lambda), \quad \forall m \geq 1. 
+\end{aligned}
+$$
+:::
+
+## Appendix
+
+::: {#thm-22}
+Lagrange inversion formula via residues
+
+Let $S$ and $U$ be two open subsets of $\mathbb{C}$ containing $0$. Let $f : S \to U$ and $g : U \to S$ be holomorphic functions that are inverse to each other, meaning $f(g(z)) = z$ for all $z \in U$ and $g(f(w)) = w$ for all $w \in S$. Assume further that $f(0) = 0$. 
+
+Then there exists a radius $r > 0$ such that for all $z \in D_r(0)$, the inverse function $g(z)$ can be expanded as the power series
+
+$$
+g(z) = \sum_{n \geq 1} g_n z^n,
+$$
+
+where the coefficients $g_n$ are given by $g_n := \frac{1}{n} \operatorname{Res}(h_n, 0)$ and $h_n$ is the holomorphic function defined by
+
+$$
+h_n(w) = \left( \frac{1}{f(w)} \right)^n.
+$$
+:::
+
+::: {#thm-23}
+## Laurent series coefficient representation and uniqueness
+
+Let $f(z)$ be a holomorphic function defined in an open annulus centered at $z_0$. If $f(z)$ can be represented as a Laurent series of the form
+
+$$
+f(z) = \sum_{n=-\infty}^{\infty} a_n (z - z_0)^n
+$$
+
+for some sequence of complex coefficients $(a_n)_{n \in \mathbb{Z}}$, then for all $n \in \mathbb{Z}$, these coefficients are uniquely determined and given by the contour integral
+
+$$
+a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d}w,
+$$
+
+where $C_r(z_0)$ is any positively oriented circle of radius $r$ centered at $z_0$ lying entirely within the domain of holomorphy. Consequently, this integral representation guarantees the uniqueness of the coefficients in the Laurent series.
+:::
+

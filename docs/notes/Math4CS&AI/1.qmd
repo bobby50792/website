@@ -12,7 +12,7 @@ crossref:
 
 ## Asymptotic Notations
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Big-$\mathcal{O}$ notation
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$ be functions defined on $\mathbb{N}$. We write $f(n) = \mathcal{O}(g(n))$ if there exist constants $C > 0$ and $N \in \mathbb{N}$ such that
@@ -60,7 +60,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## $\Omega, \Theta, \sim, o, \omega$ notations
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently large $n$.
@@ -108,7 +108,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Big-$\mathcal{O}$ notation for multivariate functions
 
 Let $f,g : \mathbb{N}^d \to \mathbb{R}$ be functions defined on $\mathbb{N}^d$. We write
@@ -128,17 +128,17 @@ $$
 ## Probability Spaces and Event
 
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Discrete probability space
 
 A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
 
-* A non-empty finite set $\Omega$, called the *sample space*, whose elements represent all possible outcomes of an experiment.
-* A function $p : \Omega \to [0, 1]$, called the *probability mass function*, which assigns probabilities to outcomes and satisfies $\sum_{\omega \in \Omega} p(\omega) = 1$.
+* A non-empty finite set $\Omega$, called the sample space, whose elements represent all possible outcomes of an experiment.
+* A function $p : \Omega \to [0, 1]$, called the probability mass function, which assigns probabilities to outcomes and satisfies $\sum_{\omega \in \Omega} p(\omega) = 1$.
 :::
 
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Event
 
 An event $A$ is a subset of $\Omega$ ($A \subseteq \Omega$), and its probability is defined as
@@ -220,7 +220,7 @@ $$
 
 ## Intersection and Union of Events
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Intersection and union of event
 
 For events $A, B \subseteq \Omega$:
@@ -303,5 +303,243 @@ $$
 
 [Problem Description](https://en.wikipedia.org/wiki/Ramsey%27s_theorem)
 
+### Definition of Ramsey number
+1. For every integer $k \ge 2$, there exists an integer $N > 0$ such that every red/blue coloring of the edges of $K_N$ contains a monochromatic $K_k$. The Ramsey number $R(k)$ is the smallest integer $N$ such that every red/blue coloring of the edges of $K_N$ contains a monochromatic $K_k$.
 
+2. For any integers $r \ge 1$ and $k \ge m \ge 1$, there exists an integer $N$ such that for every coloring of the $m$-element subsets of an $N$-element set with $r$ colors, there exists a $k$-element subset whose $m$-element subsets are all assigned the same color.
+
+### Conclusion
+1. For all $k \ge 3$,
+$$
+\begin{align*}
+2 ^ {k / 2} < R(k) < \binom{2k - 2}{k - 1} < 4 ^ k.
+\end{align*}
+$$
+Thus $R(k) = 2^{\Theta(k)}$.
+
+2. For all $r, k, m \geq 2$, the multicolor Ramsey number $R_r^{(m)}(k)$ satisfies the following lower bound: 
+$$
+R_r^{(m)}(k) > r^{\frac{1}{m} \left( \binom{k}{m} - 1 \right)}.
+$$
+
+:::
+
+## Conditional Probability and Independence 
+
+::: {.callout-tip collapse="true"}
+## Conditional probability
+
+Let $A, B$ be events with $\Pr[B] > 0$. The conditional probability of $A$ given $B$ is defined as:
+
+$$
+\Pr[A \mid B] = \frac{\Pr[A \cap B]}{\Pr[B]}
+$$
+
+We leave $\Pr[A \mid B]$ undefined if $\Pr[B] = 0$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Independence
+
+Two events $A, B$ are said to be independent if
+
+$$
+\Pr[A \cap B] = \Pr[A] \Pr[B].
+$$
+
+If $\Pr[B] > 0$, this is equivalent to
+
+$$
+\Pr[A \mid B] = \Pr[A].
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Mutual independence
+
+Events $A_1, \dots, A_m$ are mutually independent if for every non-empty subset $I \subseteq [m]$,
+
+$$
+\Pr \left[ \bigcap_{i \in I} A_i \right] = \prod_{i \in I} \Pr[A_i].
+$$
+:::
+
+::: {#thm-4}
+
+Let $B_1, \dots, B_m$ be mutually exclusive events that satisfy $\bigcup_{i=1}^m B_i = \Omega$ and $\Pr[B_i] > 0$ for all $i \in [m]$. Then for any event $A$,
+
+$$
+\Pr[A] = \sum_{i=1}^m \Pr[A \mid B_i] \Pr[B_i].
+$$
+
+:::
+
+## Random Variables
+
+::: {.callout-tip collapse="true"}
+## Random variable
+
+Let $\mathcal{P} = (\Omega, p)$ be a discrete probability space. A random variable is a function
+
+$$
+X : \Omega \to \mathbb{R}.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Indicator function
+
+The indicator function of a condition $C$ is:
+
+$$
+\mathbb{1}_{[C]} = \begin{cases} 
+1 & \text{if the condition } C \text{ holds}, \\ 
+0 & \text{otherwise}. 
+\end{cases}
+$$
+
+For a set $A \subseteq U$, where $U$ is some universe, the indicator function of $A$ is:
+
+$$
+\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases} 
+1 & \text{if } x \in A, \\ 
+0 & \text{otherwise}. 
+\end{cases}
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Probability mass function
+
+For a random variable $X$, its probability mass function $p_X : \mathbb{R} \to [0, 1]$ is defined as
+
+$$
+p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Expectation
+
+Let $X$ be a random variable on a discrete probability space $(\Omega, p)$. The expectation, expected value or mean of $X$ is defined as
+
+$$
+\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega)p(\omega).
+$$
+:::
+
+::: {#thm-5}
+
+## Linearity of expectation
+For any random variables $X_1, \dots, X_n$ and constants $c_1, \dots, c_n \in \mathbb{R}$,
+
+$$
+\mathbb{E} \left[ \sum_{i=1}^n c_i X_i \right] = \sum_{i=1}^n c_i \mathbb{E}[X_i].
+$$
+:::
+
+::: {#thm-6}
+
+If $X$ is a random variable that takes values in non-negative integers, then
+
+$$
+\mathbb{E}[X] = \sum_{t \geq 0} \Pr[X > t].
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Conditional expectation given an event
+
+Let $X$ be a random variable and $B$ be an event with $\Pr[B] > 0$. The conditional expectation of $X$ given $B$ is defined as
+
+$$
+\mathbb{E}[X \mid B] = \frac{\mathbb{E}[\mathbb{1}_B \cdot X]}{\Pr[B]}.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Conditional expectation given a random variable
+
+Let $X$ and $Y$ be random variables. The conditional expectation of $X$ given $Y$ is defined as the following random variable:
+
+$$
+\mathbb{E}[X \mid Y] : \Omega \to \mathbb{R}, \quad \omega \mapsto \mathbb{E}[X \mid Y = Y(\omega)].
+$$
+:::
+
+::: {#thm-7}
+
+Let $X$ be a random variable and $B_1, \dots, B_m$ be mutually exclusive events that satisfy $\bigcup_{i=1}^m B_i = \Omega$ and $\Pr[B_i] > 0$ for all $i \in [m]$. Then
+
+$$
+\mathbb{E}[X] = \sum_{i=1}^m \mathbb{E}[X \mid B_i] \Pr[B_i].
+$$
+:::
+
+::: {#thm-8}
+
+Let $X$ and $Y$ be random variables. Then
+
+$$
+\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X \mid Y]].
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Independence of random variables
+
+We say that random variables $X$ and $Y$ are independent if for all sets $A, B \subseteq \mathbb{R}$,
+
+$$
+\Pr[X \in A, Y \in B] = \Pr[X \in A] \Pr[Y \in B].
+$$
+:::
+
+::: {#thm-9}
+
+If $X, Y$ are independent random variables, then
+
+$$
+\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y].
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Mutual independence of random variables
+
+We say that random variables $X_1, \dots, X_n$ are mutually independent if for all sets $A_1, \dots, A_n \subseteq \mathbb{R}$,
+
+$$
+\Pr[X_1 \in A_1, \dots, X_n \in A_n] = \prod_{i=1}^n \Pr[X_i \in A_i].
+$$
+:::
+
+::: {#thm-10}
+
+If $X_1, \dots, X_n$ are mutually independent random variables, then
+
+$$
+\mathbb{E} \left[ \prod_{i=1}^n X_i \right] = \prod_{i=1}^n \mathbb{E}[X_i].
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Independent and identically distributed random variables
+
+We say that random variables $X_1, \dots, X_n$ are independent and identically distributed, abbreviated i.i.d., if
+
+- $X_1, \dots, X_n$ are mutually independent, and
+- $X_1, \dots, X_n$ have the same probability distribution.
+:::
+
+## Appendix
+ 
+::: {#thm-11}
+## Nested conditional expectations
+
+Let $X$ and $Y$ be two random variables, and let $f : \mathbb{R} \to \mathbb{R}$ be a measurable function. Then the following simplified expressions hold for nested conditional expectations:
+
+1. $\mathbb{E}\left[ \mathbb{E}[X \mid f(Y)] \;\middle|\; Y \right] = \mathbb{E}[X \mid f(Y)]$
+
+2. $\mathbb{E}\left[ \mathbb{E}[X \mid Y] \;\middle|\; f(Y) \right] = \mathbb{E}[X \mid f(Y)]$
 :::

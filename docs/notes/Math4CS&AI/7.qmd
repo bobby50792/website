@@ -1,0 +1,11 @@
+---
+title: "Continuous Probability"
+page-layout: article
+search: true
+number-offset: [4]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---

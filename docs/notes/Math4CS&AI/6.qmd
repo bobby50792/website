@@ -1,0 +1,361 @@
+---
+title: "Optimization"
+page-layout: article
+search: true
+number-offset: [6]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Introduction to Gradient Descent
+
+### Gradient Descent
+
+::: {.callout-tip collapse="true"}
+## Gradient descent
+
+Given a differentiable loss function $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$, an initial parameter vector $\boldsymbol{\theta}_0 \in \mathbb{R}^d$, and a learning rate $\eta > 0$ (also called a step size), gradient descent (GD) iteratively updates the parameter vector according to the following rule:
+
+$$
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \nabla \mathcal{L}(\boldsymbol{\theta}_t).
+$$
+:::
+
+::: {.callout-note collapse="true"}
+
+## Gradient descent for linear regression
+The loss function can be written as
+
+$$
+\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{2n}\|\boldsymbol{X}\boldsymbol{\theta} - \boldsymbol{y}\|_2^2.
+$$
+
+We can further expand the square to obtain a quadratic objective:
+
+$$
+\begin{aligned}
+\mathcal{L}(\boldsymbol{\theta}) &= \frac{1}{2n}(\boldsymbol{X}\boldsymbol{\theta} - \boldsymbol{y})^\top (\boldsymbol{X}\boldsymbol{\theta} - \boldsymbol{y}) \\
+&= \frac{1}{2n}\left(\boldsymbol{\theta}^\top \boldsymbol{X}^\top \boldsymbol{X} \boldsymbol{\theta} - 2\boldsymbol{\theta}^\top \boldsymbol{X}^\top \boldsymbol{y} + \boldsymbol{y}^\top \boldsymbol{y}\right) \\
+&= \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{b}^\top \boldsymbol{\theta} + C_0,
+\end{aligned}
+$$
+
+where
+
+$$
+\boldsymbol{H} := \frac{1}{n}\boldsymbol{X}^\top \boldsymbol{X}, \quad \boldsymbol{b} := \frac{1}{n}\boldsymbol{X}^\top \boldsymbol{y}, \quad C_0 := \frac{1}{2n}\|\boldsymbol{y}\|_2^2.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Positive definite and semidefinite matrices
+
+A symmetric matrix $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ is positive definite, denoted by $\boldsymbol{A} \succ \mathbf{0}$, if for all $\boldsymbol{v} \in \mathbb{R}^d \setminus \{\mathbf{0}\}$,
+
+$$
+\boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v} > 0.
+$$
+
+A symmetric matrix $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ is positive semidefinite, denoted by $\boldsymbol{A} \succeq \mathbf{0}$, if for all $\boldsymbol{v} \in \mathbb{R}^d \setminus \{\mathbf{0}\}$,
+
+$$
+\boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v} \geq 0.
+$$
+
+If $\boldsymbol{A}$ and $\boldsymbol{B}$ are two symmetric matrices and $\boldsymbol{A} - \boldsymbol{B}$ is positive definite, then we write $\boldsymbol{A} \succ \boldsymbol{B}$. Similarly, we write $\boldsymbol{A} \succeq \boldsymbol{B}$ if $\boldsymbol{A} - \boldsymbol{B}$ is positive semidefinite.
+:::
+
+::: {.callout-note collapse="true"}
+## Properties of symmetric matrices
+
+Let $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ be a symmetric matrix, i.e., $\boldsymbol{A} = \boldsymbol{A}^\top$. Then it satisfies the following properties:
+
+1. All eigenvalues of $\boldsymbol{A}$ are real.
+2. $\boldsymbol{A}$ has an orthonormal eigenbasis. That is, there exists an orthonormal basis of $\mathbb{R}^d$, $\{\boldsymbol{v}_1, \boldsymbol{v}_2, \dots, \boldsymbol{v}_d\}$, such that $\boldsymbol{v}_i$ is an eigenvector of $\boldsymbol{A}$ with eigenvalue $\lambda_i$, i.e., $\boldsymbol{A}\boldsymbol{v}_i = \lambda_i \boldsymbol{v}_i$.
+3. $\boldsymbol{A}$ is orthogonally diagonalizable. That is, there exist an orthogonal matrix $\boldsymbol{Q} \in \mathbb{R}^{d \times d}$ ($\boldsymbol{Q}^\top \boldsymbol{Q} = \boldsymbol{Q}\boldsymbol{Q}^\top = \boldsymbol{I}$) and a diagonal matrix $\boldsymbol{\Lambda}$ such that $\boldsymbol{A} = \boldsymbol{Q}\boldsymbol{\Lambda}\boldsymbol{Q}^\top$.
+4. $\boldsymbol{A} = \sum_{i=1}^d \lambda_i \boldsymbol{v}_i \boldsymbol{v}_i^\top$, where $\{\boldsymbol{v}_1, \boldsymbol{v}_2, \dots, \boldsymbol{v}_d\}$ is an orthonormal eigenbasis of $\boldsymbol{A}$ and $\lambda_i$ is the eigenvalue associated with $\boldsymbol{v}_i$.
+5. $\boldsymbol{A} \succeq \mathbf{0}$ if and only if all its eigenvalues are non-negative.
+6. $\boldsymbol{A} \succ \mathbf{0}$ if and only if all its eigenvalues are positive.
+:::
+
+
+::: {.callout-note collapse="true"}
+## Exact Dynamics of Gradient Descent
+
+When $\boldsymbol{H}$ is positive definite, around the minimizer $\boldsymbol{\theta}^* = \boldsymbol{H}^{-1}\boldsymbol{b}$, we can write the quadratic objective as
+
+$$
+\begin{aligned}
+\mathcal{L}(\boldsymbol{\theta}) &= \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{H}^{-1}\boldsymbol{b} + C_0 \\
+&= \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta}^* + C_0 \\
+&= \frac{1}{2}(\boldsymbol{\theta} - \boldsymbol{\theta}^*)^\top \boldsymbol{H}(\boldsymbol{\theta} - \boldsymbol{\theta}^*) + \underbrace{C_0 - \frac{1}{2}{\boldsymbol{\theta}^*}^\top \boldsymbol{H}\boldsymbol{\theta}^*}_{=: \, \mathcal{L}_{\min}}.
+\end{aligned}
+$$
+
+Taking the derivative with respect to $\boldsymbol{\theta}$ gives
+
+$$
+\nabla \mathcal{L}(\boldsymbol{\theta}) = \boldsymbol{H}(\boldsymbol{\theta} - \boldsymbol{\theta}^*).
+$$
+
+So gradient descent with learning rate $\eta$ updates the parameter vector by
+
+$$
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \boldsymbol{H}(\boldsymbol{\theta}_t - \boldsymbol{\theta}^*).
+$$
+
+Subtracting the minimizer $\boldsymbol{\theta}^*$ on both sides gives
+
+$$
+\boldsymbol{\theta}_{t+1} - \boldsymbol{\theta}^* = (\boldsymbol{I} - \eta \boldsymbol{H})(\boldsymbol{\theta}_t - \boldsymbol{\theta}^*).
+$$
+
+Now we write $\boldsymbol{\theta}_t - \boldsymbol{\theta}^*$ in the eigenbasis of $\boldsymbol{H}$: let $\alpha_{t,1}, \dots, \alpha_{t,d}$ be the coefficients of $\boldsymbol{\theta}_t - \boldsymbol{\theta}^*$ in the eigenbasis, i.e.,
+
+$$
+\boldsymbol{\theta}_t - \boldsymbol{\theta}^* = \sum_{i=1}^d \alpha_{t,i} \boldsymbol{v}_i.
+$$
+
+Here $\alpha_{t,i}$ can explicitly be written as $\alpha_{t,i} = \langle\boldsymbol{\theta}_t - \boldsymbol{\theta}^*, \boldsymbol{v}_i\rangle$, which is due to the orthogonality of the eigenbasis.
+
+After multiplying both sides by $\boldsymbol{I} - \eta\boldsymbol{H}$, we get
+
+$$
+\boldsymbol{\theta}_{t+1} - \boldsymbol{\theta}^* = \sum_{i=1}^d \alpha_{t,i}(1 - \eta\lambda_i) \boldsymbol{v}_i.
+$$
+
+Thus we can see that each coordinate in the eigenbasis evolves independently:
+
+$$
+\alpha_{t+1,i} = \alpha_{t,i}(1 - \eta\lambda_i).
+$$
+
+Unrolling this recursion gives
+
+$$
+\alpha_{t,i} = \alpha_{0,i}(1 - \eta\lambda_i)^t.
+$$
+
+Therefore, the parameter vector and objective value at step $t$ are
+
+$$
+\begin{cases}
+\boldsymbol{\theta}_t - \boldsymbol{\theta}^* = \sum_{i=1}^d \alpha_{0,i}(1 - \eta\lambda_i)^t \boldsymbol{v}_i, \\
+\mathcal{L}(\boldsymbol{\theta}_t) = \frac{1}{2} \sum_{i=1}^d \lambda_i \alpha_{0,i}^2 (1 - \eta\lambda_i)^{2t} + \mathcal{L}_{\min}.
+\end{cases}
+$$
+:::
+
+::: {#thm-5}
+## Convergence behaviors on quadratic objectives
+
+Let $\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{b}^\top \boldsymbol{\theta} + C_0$ be a quadratic objective. Assume that $\boldsymbol{H}$ is symmetric and positive definite. Let $\lambda_1, \dots, \lambda_d$ be the eigenvalues of $\boldsymbol{H}$, and $\lambda_{\max}$ be the largest eigenvalue. Define $\rho(\eta)$ as
+
+$$
+\rho(\eta) := \max_{i \in [d]} |1 - \eta\lambda_i|.
+$$
+
+Then gradient descent with learning rate $\eta > 0$ exhibits the following behaviors as $t \to \infty$:
+
+1. If $\eta > \frac{2}{\lambda_{\max}}$ and $\alpha_{0,i} \neq 0$ for all $i \in [d]$, then
+   
+   $$
+   \mathcal{L}(\boldsymbol{\theta}_t) \to +\infty.
+   $$
+
+2. If $\eta < \frac{2}{\lambda_{\max}}$, then
+   
+   $$
+   \mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} \leq \left(\mathcal{L}(\boldsymbol{\theta}_0) - \mathcal{L}_{\min}\right) \rho(\eta)^{2t},
+   $$
+   
+   where $\rho(\eta) := \max_{i \in [d]} |1 - \eta\lambda_i|$.
+
+3. If $\eta < \frac{2}{\lambda_{\max}}$ and $\alpha_{0,i} \neq 0$ for all $i \in [d]$, then for some $c > 0$,
+   
+   $$
+   \mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} \geq c \cdot \rho(\eta)^{2t}.
+   $$
+
+    Therefore, 
+    $$
+    \mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} = \Theta\left(\rho(\eta)^{2t}\right).
+    $$
+:::
+
+::: {.callout-note collapse="true"}
+
+## Optimal learning rate for quadratic objectives
+
+Solving for $\eta$ gives
+
+$$
+\eta^* = \frac{2}{\lambda_{\min} + \lambda_{\max}}.
+$$
+
+Substituting $\eta^*$ into $\rho(\eta)$ gives
+
+$$
+\rho(\eta^*) = 1 - \frac{2}{\lambda_{\min} + \lambda_{\max}} \cdot \lambda_{\min} = 1 - \frac{2}{1 + \lambda_{\max}/\lambda_{\min}}.
+$$
+::: 
+
+::: {.callout-tip collapse="true"}
+## Condition number of a matrix
+
+Let $\boldsymbol{H} \in \mathbb{R}^{d \times d}$ be a symmetric positive definite matrix. Then the *condition number* of $\boldsymbol{H}$ is defined as
+
+$$
+\kappa(\boldsymbol{H}) := \frac{\lambda_{\max}(\boldsymbol{H})}{\lambda_{\min}(\boldsymbol{H})},
+$$
+
+where $\lambda_{\min}(\boldsymbol{H})$ and $\lambda_{\max}(\boldsymbol{H})$ are the smallest and largest eigenvalues of $\boldsymbol{H}$, respectively.
+:::
+
+### Optimization of Smooth Function
+
+::: {.callout-tip collapse="true"}
+## Smoothness
+
+A twice differentiable function $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ is $\beta$-smooth if for all $\boldsymbol{\theta} \in \mathbb{R}^d$,
+
+$$
+\|\nabla^2 \mathcal{L}(\boldsymbol{\theta})\|_2 \leq \beta.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Hessian matrix
+
+Let $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ be a function that is twice differentiable. Then the Hessian matrix of $\mathcal{L}(\boldsymbol{\theta})$ is defined as
+
+$$
+\nabla^2 \mathcal{L}(\boldsymbol{\theta}) := \begin{bmatrix}
+\frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_1^2} & \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_1 \partial \theta_2} & \dots & \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_1 \partial \theta_d} \\
+\frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_2^2} & \dots & \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_2 \partial \theta_d} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_d \partial \theta_1} & \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_d \partial \theta_2} & \dots & \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_d^2}
+\end{bmatrix}.
+$$
+
+That is, the Hessian matrix is a matrix whose $(i, j)$-th entry is the second partial derivative of $\mathcal{L}(\boldsymbol{\theta})$ with respect to the $i$-th and $j$-th variables. We denote the Hessian matrix of $\mathcal{L}(\boldsymbol{\theta})$ as $\nabla^2 \mathcal{L}(\boldsymbol{\theta})$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Operator norm
+
+The operator norm of a matrix $\boldsymbol{A} \in \mathbb{R}^{k \times d}$ is defined as
+
+$$
+\|\boldsymbol{A}\|_2 := \max_{\boldsymbol{x} \in \mathbb{R}^d \setminus \{\mathbf{0}\}} \frac{\|\boldsymbol{A}\boldsymbol{x}\|_2}{\|\boldsymbol{x}\|_2}.
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Properties of matrix operator norms
+
+The following statements on operator norms of matrices are true:
+
+1. For any matrix $\boldsymbol{A} \in \mathbb{R}^{k \times d}$,
+   
+   $$
+   \|\boldsymbol{A}\|_2 = \sqrt{\lambda_{\max}(\boldsymbol{A}^\top \boldsymbol{A})}.
+   $$
+
+2. If $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ is symmetric, then
+   
+   $$
+   \|\boldsymbol{A}\|_2 = \max\left\{|\lambda_{\max}(\boldsymbol{A})|, |\lambda_{\min}(\boldsymbol{A})|\right\}.
+   $$
+
+3. If $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ is symmetric positive semidefinite, then
+   
+   $$
+   \|\boldsymbol{A}\|_2 = \lambda_{\max}(\boldsymbol{A}).
+   $$
+
+Here $\lambda_{\max}(\cdot)$ and $\lambda_{\min}(\cdot)$ denote the largest and smallest eigenvalues of a matrix, respectively.
+:::
+
+### Strong Convex Optimization
+
+::: {#thm-6}
+
+Let $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ be a $\beta$-smooth function. Suppose we perform one step of gradient descent with learning rate $\eta$ from $\boldsymbol{\theta}_t$ to $\boldsymbol{\theta}_{t+1}$, i.e.,
+
+$$
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \nabla \mathcal{L}(\boldsymbol{\theta}_t).
+$$
+
+Then
+
+$$
+\mathcal{L}(\boldsymbol{\theta}_{t+1}) \leq \mathcal{L}(\boldsymbol{\theta}_t) - \eta \left(1 - \frac{\eta\beta}{2}\right) \|\nabla \mathcal{L}(\boldsymbol{\theta}_t)\|_2^2.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Convex and strongly convex functions
+
+A twice differentiable function $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ is convex if for all $\boldsymbol{\theta} \in \mathbb{R}^d$,
+
+$$
+\nabla^2 \mathcal{L}(\boldsymbol{\theta}) \succeq \mathbf{0}.
+$$
+
+It is $\alpha$-strongly convex if for all $\boldsymbol{\theta} \in \mathbb{R}^d$,
+
+$$
+\nabla^2 \mathcal{L}(\boldsymbol{\theta}) \succeq \alpha \boldsymbol{I}.
+$$
+:::
+
+::: {.callout-note collapse="true"}
+## Basic consequences of strong convexity
+
+Let $\mathcal{L} : \mathbb{R}^d \rightarrow \mathbb{R}$ be twice differentiable and $\alpha$-strongly convex. Then:
+
+1. For all $\boldsymbol{\theta}, \boldsymbol{u} \in \mathbb{R}^d$,
+   
+   $$
+   \mathcal{L}(\boldsymbol{u}) \geq \mathcal{L}(\boldsymbol{\theta}) + \langle\nabla\mathcal{L}(\boldsymbol{\theta}), \boldsymbol{u} - \boldsymbol{\theta}\rangle + \frac{\alpha}{2}\|\boldsymbol{u} - \boldsymbol{\theta}\|_2^2.
+   $$
+
+2. The function $\mathcal{L}$ has a unique minimizer $\boldsymbol{\theta}^*$.
+
+3. At the unique minimizer $\boldsymbol{\theta}^*$, it holds that for all $\boldsymbol{u} \in \mathbb{R}^d$,
+   
+   $$
+   \mathcal{L}(\boldsymbol{u}) \geq \mathcal{L}(\boldsymbol{\theta}^*) + \frac{\alpha}{2}\|\boldsymbol{u} - \boldsymbol{\theta}^*\|_2^2.
+   $$
+:::
+
+::: {.callout-tip collapse="true"}
+## Polyak–Łojasiewicz condition
+
+Let $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ be differentiable and have a minimizer $\boldsymbol{\theta}^*$. We say that $\mathcal{L}$ satisfies the Polyak–Łojasiewicz condition, or PL condition, with parameter $\mu > 0$ if
+
+$$
+\frac{1}{2}\|\nabla \mathcal{L}(\boldsymbol{\theta})\|_2^2 \geq \mu\left(\mathcal{L}(\boldsymbol{\theta}) - \mathcal{L}(\boldsymbol{\theta}^*)\right) \quad \text{for all } \boldsymbol{\theta} \in \mathbb{R}^d.
+$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Strong convexity implies PL
+
+If $\mathcal{L}(\boldsymbol{\theta})$ is twice differentiable and $\alpha$-strongly convex, then $\mathcal{L}(\boldsymbol{\theta})$ satisfies the PL condition with parameter $\alpha$.
+:::
+
+::: {#thm-7}
+
+Let $\mathcal{L}(\boldsymbol{\theta})$ be a twice differentiable, $\alpha$-strongly convex and $\beta$-smooth objective function. Let $\mathcal{L}_{\min}$ be the minimum value of $\mathcal{L}(\boldsymbol{\theta})$. For gradient descent with learning rate $\eta \in (0, 2/\beta)$, we have
+
+$$
+\mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} \leq \rho(\eta)^t \left(\mathcal{L}(\boldsymbol{\theta}_0) - \mathcal{L}_{\min}\right),
+$$
+
+where $\rho(\eta) := 1 - 2\alpha\eta + \alpha\beta\eta^2$.
+:::
