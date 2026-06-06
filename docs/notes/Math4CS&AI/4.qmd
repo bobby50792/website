@@ -479,7 +479,7 @@ $$
 3. Let $\mathbb{S}^{d-1} = \{\boldsymbol{x} \in \mathbb{R}^d : \|\boldsymbol{x}\|_2 = 1\}$ denote the unit sphere in $\mathbb{R}^d$. Let $\boldsymbol{x} \sim \mathcal{U}_S$ be a random vector uniformly distributed on $\mathbb{S}^{d-1}$. Fix any deterministic unit vector $\boldsymbol{u} \in \mathbb{R}^d$ ($\|\boldsymbol{u}\|_2 = 1$). Then, for every $\epsilon \in (0, 1)$, the random inner product satisfies the following concentration inequality:
 
 $$
-\operatorname{Pr}\left[ |\langle\boldsymbol{u}, \boldsymbol{x}\rangle| < \epsilon \right] \geq 1 - 2e^{-d\epsilon^2 / 2}.
+\operatorname{Pr}\left[ |\langle\boldsymbol{u}, \boldsymbol{x}\rangle| < \epsilon \right] \geq 1 - 7e^{-(d-1)\epsilon^2 / 8}.
 $$
 :::
 
