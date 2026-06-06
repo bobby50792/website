@@ -491,6 +491,24 @@ window.Quarto = {
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Math4CS&amp;AI/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Central Limit Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Math4CS&amp;AI/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Approximations</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -621,6 +639,9 @@ window.Quarto = {
   <li><a href="#probability-spaces-and-event" id="toc-probability-spaces-and-event" class="nav-link" data-scroll-target="#probability-spaces-and-event">Probability Spaces and Event</a></li>
   <li><a href="#uniform-probability-means-counting" id="toc-uniform-probability-means-counting" class="nav-link" data-scroll-target="#uniform-probability-means-counting">Uniform Probability Means Counting</a></li>
   <li><a href="#intersection-and-union-of-events" id="toc-intersection-and-union-of-events" class="nav-link" data-scroll-target="#intersection-and-union-of-events">Intersection and Union of Events</a></li>
+  <li><a href="#conditional-probability-and-independence" id="toc-conditional-probability-and-independence" class="nav-link" data-scroll-target="#conditional-probability-and-independence">Conditional Probability and Independence</a></li>
+  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
   </ul>
 </nav>
     </div>
@@ -650,7 +671,7 @@ window.Quarto = {
 <section id="asymptotic-notations" class="level2">
 <h2 class="anchored" data-anchor-id="asymptotic-notations">Asymptotic Notations</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -659,7 +680,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
 \begin{equation*}
@@ -712,7 +733,7 @@ c \cdot f(n) &amp;= \mathcal{O}(f(n)) \\
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -721,7 +742,7 @@ c \cdot f(n) &amp;= \mathcal{O}(f(n)) \\
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>.</p>
 <ul>
@@ -759,7 +780,7 @@ f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m 
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -768,7 +789,7 @@ f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m 
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(f,g : \mathbb{N}^d \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}^d\)</span>. We write <span class="math display">\[
 \begin{equation*}
@@ -786,7 +807,7 @@ f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
 <section id="probability-spaces-and-event" class="level2">
 <h2 class="anchored" data-anchor-id="probability-spaces-and-event">Probability Spaces and Event</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -795,18 +816,18 @@ f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A discrete probability space is a pair <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> consisting of:</p>
 <ul>
-<li>A non-empty finite set <span class="math inline">\(\Omega\)</span>, called the <em>sample space</em>, whose elements represent all possible outcomes of an experiment.</li>
-<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the <em>probability mass function</em>, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
+<li>A non-empty finite set <span class="math inline">\(\Omega\)</span>, called the sample space, whose elements represent all possible outcomes of an experiment.</li>
+<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the probability mass function, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -815,7 +836,7 @@ f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>An event <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(\Omega\)</span> (<span class="math inline">\(A \subseteq \Omega\)</span>), and its probability is defined as <span class="math display">\[
 \begin{equation*}
@@ -913,7 +934,7 @@ k^* = n/e + \mathcal{O}(1).
 <section id="intersection-and-union-of-events" class="level2">
 <h2 class="anchored" data-anchor-id="intersection-and-union-of-events">Intersection and Union of Events</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -922,7 +943,7 @@ k^* = n/e + \mathcal{O}(1).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For events <span class="math inline">\(A, B \subseteq \Omega\)</span>:</p>
 <ul>
@@ -1021,8 +1042,330 @@ h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><a href="https://en.wikipedia.org/wiki/Ramsey%27s_theorem">Problem Description</a></p>
+<section id="definition-of-ramsey-number" class="level3">
+<h3 class="anchored" data-anchor-id="definition-of-ramsey-number">Definition of Ramsey number</h3>
+<ol type="1">
+<li><p>For every integer <span class="math inline">\(k \ge 2\)</span>, there exists an integer <span class="math inline">\(N &gt; 0\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>. The Ramsey number <span class="math inline">\(R(k)\)</span> is the smallest integer <span class="math inline">\(N\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>.</p></li>
+<li><p>For any integers <span class="math inline">\(r \ge 1\)</span> and <span class="math inline">\(k \ge m \ge 1\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that for every coloring of the <span class="math inline">\(m\)</span>-element subsets of an <span class="math inline">\(N\)</span>-element set with <span class="math inline">\(r\)</span> colors, there exists a <span class="math inline">\(k\)</span>-element subset whose <span class="math inline">\(m\)</span>-element subsets are all assigned the same color.</p></li>
+</ol>
+</section>
+<section id="conclusion-3" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-3">Conclusion</h3>
+<ol type="1">
+<li><p>For all <span class="math inline">\(k \ge 3\)</span>, <span class="math display">\[
+\begin{align*}
+2 ^ {k / 2} &lt; R(k) &lt; \binom{2k - 2}{k - 1} &lt; 4 ^ k.
+\end{align*}
+\]</span> Thus <span class="math inline">\(R(k) = 2^{\Theta(k)}\)</span>.</p></li>
+<li><p>For all <span class="math inline">\(r, k, m \geq 2\)</span>, the multicolor Ramsey number <span class="math inline">\(R_r^{(m)}(k)\)</span> satisfies the following lower bound: <span class="math display">\[
+R_r^{(m)}(k) &gt; r^{\frac{1}{m} \left( \binom{k}{m} - 1 \right)}.
+\]</span></p></li>
+</ol>
+</section>
 </div>
 </div>
+</div>
+</section>
+<section id="conditional-probability-and-independence" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probability-and-independence">Conditional Probability and Independence</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conditional probability
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(A, B\)</span> be events with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional probability of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> is defined as:</p>
+<p><span class="math display">\[
+\Pr[A \mid B] = \frac{\Pr[A \cap B]}{\Pr[B]}
+\]</span></p>
+<p>We leave <span class="math inline">\(\Pr[A \mid B]\)</span> undefined if <span class="math inline">\(\Pr[B] = 0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Independence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Two events <span class="math inline">\(A, B\)</span> are said to be independent if</p>
+<p><span class="math display">\[
+\Pr[A \cap B] = \Pr[A] \Pr[B].
+\]</span></p>
+<p>If <span class="math inline">\(\Pr[B] &gt; 0\)</span>, this is equivalent to</p>
+<p><span class="math display">\[
+\Pr[A \mid B] = \Pr[A].
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mutual independence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Events <span class="math inline">\(A_1, \dots, A_m\)</span> are mutually independent if for every non-empty subset <span class="math inline">\(I \subseteq [m]\)</span>,</p>
+<p><span class="math display">\[
+\Pr \left[ \bigcap_{i \in I} A_i \right] = \prod_{i \in I} \Pr[A_i].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.4</strong></span> Let <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then for any event <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+\Pr[A] = \sum_{i=1}^m \Pr[A \mid B_i] \Pr[B_i].
+\]</span></p>
+</div>
+</section>
+<section id="random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="random-variables">Random Variables</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Random variable
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> be a discrete probability space. A random variable is a function</p>
+<p><span class="math display">\[
+X : \Omega \to \mathbb{R}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Indicator function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The indicator function of a condition <span class="math inline">\(C\)</span> is:</p>
+<p><span class="math display">\[
+\mathbb{1}_{[C]} = \begin{cases}
+1 &amp; \text{if the condition } C \text{ holds}, \\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>For a set <span class="math inline">\(A \subseteq U\)</span>, where <span class="math inline">\(U\)</span> is some universe, the indicator function of <span class="math inline">\(A\)</span> is:</p>
+<p><span class="math display">\[
+\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases}
+1 &amp; \text{if } x \in A, \\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability mass function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a random variable <span class="math inline">\(X\)</span>, its probability mass function <span class="math inline">\(p_X : \mathbb{R} \to [0, 1]\)</span> is defined as</p>
+<p><span class="math display">\[
+p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Expectation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable on a discrete probability space <span class="math inline">\((\Omega, p)\)</span>. The expectation, expected value or mean of <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega)p(\omega).
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.5 (Linearity of expectation)</strong></span> For any random variables <span class="math inline">\(X_1, \dots, X_n\)</span> and constants <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E} \left[ \sum_{i=1}^n c_i X_i \right] = \sum_{i=1}^n c_i \mathbb{E}[X_i].
+\]</span></p>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.6</strong></span> If <span class="math inline">\(X\)</span> is a random variable that takes values in non-negative integers, then</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{t \geq 0} \Pr[X &gt; t].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conditional expectation given an event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B\)</span> be an event with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(B\)</span> is defined as</p>
+<p><span class="math display">\[
+\mathbb{E}[X \mid B] = \frac{\mathbb{E}[\mathbb{1}_B \cdot X]}{\Pr[B]}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conditional expectation given a random variable
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as the following random variable:</p>
+<p><span class="math display">\[
+\mathbb{E}[X \mid Y] : \Omega \to \mathbb{R}, \quad \omega \mapsto \mathbb{E}[X \mid Y = Y(\omega)].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.7</strong></span> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{i=1}^m \mathbb{E}[X \mid B_i] \Pr[B_i].
+\]</span></p>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.8</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. Then</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X \mid Y]].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Independence of random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if for all sets <span class="math inline">\(A, B \subseteq \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X \in A, Y \in B] = \Pr[X \in A] \Pr[Y \in B].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.9</strong></span> If <span class="math inline">\(X, Y\)</span> are independent random variables, then</p>
+<p><span class="math display">\[
+\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mutual independence of random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent if for all sets <span class="math inline">\(A_1, \dots, A_n \subseteq \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X_1 \in A_1, \dots, X_n \in A_n] = \prod_{i=1}^n \Pr[X_i \in A_i].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.10</strong></span> If <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent random variables, then</p>
+<p><span class="math display">\[
+\mathbb{E} \left[ \prod_{i=1}^n X_i \right] = \prod_{i=1}^n \mathbb{E}[X_i].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Independent and identically distributed random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are independent and identically distributed, abbreviated i.i.d., if</p>
+<ul>
+<li><span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent, and</li>
+<li><span class="math inline">\(X_1, \dots, X_n\)</span> have the same probability distribution.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<div id="thm-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.11 (Nested conditional expectations)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two random variables, and let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a measurable function. Then the following simplified expressions hold for nested conditional expectations:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid f(Y)] \;\middle|\; Y \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid Y] \;\middle|\; f(Y) \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
+</ol>
 </div>
 
 

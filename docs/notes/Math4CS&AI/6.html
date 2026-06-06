@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>General Physics – Bobby</title>
+<title>Optimization – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../docs/notes/Physics/1/index.html" rel="next">
-<link href="../../../docs/notes/Math4CS&amp;AI/7.html" rel="prev">
+<link href="../../../docs/notes/Math4CS&amp;AI/7.html" rel="next">
+<link href="../../../docs/notes/Math4CS&amp;AI/5.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -77,6 +77,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -297,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Physics/index.html">General Physics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/6.html">Optimization</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -433,11 +462,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
@@ -470,7 +499,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
@@ -484,13 +513,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../docs/notes/Physics/1/index.html" class="sidebar-item-text sidebar-link">
@@ -601,16 +630,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-gradient-descent" id="toc-introduction-to-gradient-descent" class="nav-link active" data-scroll-target="#introduction-to-gradient-descent">Introduction to Gradient Descent</a>
+  <ul class="collapse">
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">Gradient Descent</a></li>
+  <li><a href="#optimization-of-smooth-function" id="toc-optimization-of-smooth-function" class="nav-link" data-scroll-target="#optimization-of-smooth-function">Optimization of Smooth Function</a></li>
+  <li><a href="#strong-convex-optimization" id="toc-strong-convex-optimization" class="nav-link" data-scroll-target="#strong-convex-optimization">Strong Convex Optimization</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Physics/index.html">General Physics</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/6.html">Optimization</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">General Physics</h1>
+<h1 class="title">Optimization</h1>
 </div>
 
 
@@ -627,9 +667,441 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>本界面梳理了<strong>普通物理</strong>相关知识, 希望对你能有所启发。</p>
+<section id="introduction-to-gradient-descent" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-gradient-descent">Introduction to Gradient Descent</h2>
+<section id="gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Gradient descent
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Given a differentiable loss function <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \to \mathbb{R}\)</span>, an initial parameter vector <span class="math inline">\(\boldsymbol{\theta}_0 \in \mathbb{R}^d\)</span>, and a learning rate <span class="math inline">\(\eta &gt; 0\)</span> (also called a step size), gradient descent (GD) iteratively updates the parameter vector according to the following rule:</p>
+<p><span class="math display">\[
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \nabla \mathcal{L}(\boldsymbol{\theta}_t).
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Gradient descent for linear regression
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The loss function can be written as</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{2n}\|\boldsymbol{X}\boldsymbol{\theta} - \boldsymbol{y}\|_2^2.
+\]</span></p>
+<p>We can further expand the square to obtain a quadratic objective:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L}(\boldsymbol{\theta}) &amp;= \frac{1}{2n}(\boldsymbol{X}\boldsymbol{\theta} - \boldsymbol{y})^\top (\boldsymbol{X}\boldsymbol{\theta} - \boldsymbol{y}) \\
+&amp;= \frac{1}{2n}\left(\boldsymbol{\theta}^\top \boldsymbol{X}^\top \boldsymbol{X} \boldsymbol{\theta} - 2\boldsymbol{\theta}^\top \boldsymbol{X}^\top \boldsymbol{y} + \boldsymbol{y}^\top \boldsymbol{y}\right) \\
+&amp;= \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{b}^\top \boldsymbol{\theta} + C_0,
+\end{aligned}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\boldsymbol{H} := \frac{1}{n}\boldsymbol{X}^\top \boldsymbol{X}, \quad \boldsymbol{b} := \frac{1}{n}\boldsymbol{X}^\top \boldsymbol{y}, \quad C_0 := \frac{1}{2n}\|\boldsymbol{y}\|_2^2.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Positive definite and semidefinite matrices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A symmetric matrix <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{d \times d}\)</span> is positive definite, denoted by <span class="math inline">\(\boldsymbol{A} \succ \mathbf{0}\)</span>, if for all <span class="math inline">\(\boldsymbol{v} \in \mathbb{R}^d \setminus \{\mathbf{0}\}\)</span>,</p>
+<p><span class="math display">\[
+\boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v} &gt; 0.
+\]</span></p>
+<p>A symmetric matrix <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{d \times d}\)</span> is positive semidefinite, denoted by <span class="math inline">\(\boldsymbol{A} \succeq \mathbf{0}\)</span>, if for all <span class="math inline">\(\boldsymbol{v} \in \mathbb{R}^d \setminus \{\mathbf{0}\}\)</span>,</p>
+<p><span class="math display">\[
+\boldsymbol{v}^\top \boldsymbol{A} \boldsymbol{v} \geq 0.
+\]</span></p>
+<p>If <span class="math inline">\(\boldsymbol{A}\)</span> and <span class="math inline">\(\boldsymbol{B}\)</span> are two symmetric matrices and <span class="math inline">\(\boldsymbol{A} - \boldsymbol{B}\)</span> is positive definite, then we write <span class="math inline">\(\boldsymbol{A} \succ \boldsymbol{B}\)</span>. Similarly, we write <span class="math inline">\(\boldsymbol{A} \succeq \boldsymbol{B}\)</span> if <span class="math inline">\(\boldsymbol{A} - \boldsymbol{B}\)</span> is positive semidefinite.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties of symmetric matrices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{d \times d}\)</span> be a symmetric matrix, i.e., <span class="math inline">\(\boldsymbol{A} = \boldsymbol{A}^\top\)</span>. Then it satisfies the following properties:</p>
+<ol type="1">
+<li>All eigenvalues of <span class="math inline">\(\boldsymbol{A}\)</span> are real.</li>
+<li><span class="math inline">\(\boldsymbol{A}\)</span> has an orthonormal eigenbasis. That is, there exists an orthonormal basis of <span class="math inline">\(\mathbb{R}^d\)</span>, <span class="math inline">\(\{\boldsymbol{v}_1, \boldsymbol{v}_2, \dots, \boldsymbol{v}_d\}\)</span>, such that <span class="math inline">\(\boldsymbol{v}_i\)</span> is an eigenvector of <span class="math inline">\(\boldsymbol{A}\)</span> with eigenvalue <span class="math inline">\(\lambda_i\)</span>, i.e., <span class="math inline">\(\boldsymbol{A}\boldsymbol{v}_i = \lambda_i \boldsymbol{v}_i\)</span>.</li>
+<li><span class="math inline">\(\boldsymbol{A}\)</span> is orthogonally diagonalizable. That is, there exist an orthogonal matrix <span class="math inline">\(\boldsymbol{Q} \in \mathbb{R}^{d \times d}\)</span> (<span class="math inline">\(\boldsymbol{Q}^\top \boldsymbol{Q} = \boldsymbol{Q}\boldsymbol{Q}^\top = \boldsymbol{I}\)</span>) and a diagonal matrix <span class="math inline">\(\boldsymbol{\Lambda}\)</span> such that <span class="math inline">\(\boldsymbol{A} = \boldsymbol{Q}\boldsymbol{\Lambda}\boldsymbol{Q}^\top\)</span>.</li>
+<li><span class="math inline">\(\boldsymbol{A} = \sum_{i=1}^d \lambda_i \boldsymbol{v}_i \boldsymbol{v}_i^\top\)</span>, where <span class="math inline">\(\{\boldsymbol{v}_1, \boldsymbol{v}_2, \dots, \boldsymbol{v}_d\}\)</span> is an orthonormal eigenbasis of <span class="math inline">\(\boldsymbol{A}\)</span> and <span class="math inline">\(\lambda_i\)</span> is the eigenvalue associated with <span class="math inline">\(\boldsymbol{v}_i\)</span>.</li>
+<li><span class="math inline">\(\boldsymbol{A} \succeq \mathbf{0}\)</span> if and only if all its eigenvalues are non-negative.</li>
+<li><span class="math inline">\(\boldsymbol{A} \succ \mathbf{0}\)</span> if and only if all its eigenvalues are positive.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Exact Dynamics of Gradient Descent
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When <span class="math inline">\(\boldsymbol{H}\)</span> is positive definite, around the minimizer <span class="math inline">\(\boldsymbol{\theta}^* = \boldsymbol{H}^{-1}\boldsymbol{b}\)</span>, we can write the quadratic objective as</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L}(\boldsymbol{\theta}) &amp;= \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{H}^{-1}\boldsymbol{b} + C_0 \\
+&amp;= \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta}^* + C_0 \\
+&amp;= \frac{1}{2}(\boldsymbol{\theta} - \boldsymbol{\theta}^*)^\top \boldsymbol{H}(\boldsymbol{\theta} - \boldsymbol{\theta}^*) + \underbrace{C_0 - \frac{1}{2}{\boldsymbol{\theta}^*}^\top \boldsymbol{H}\boldsymbol{\theta}^*}_{=: \, \mathcal{L}_{\min}}.
+\end{aligned}
+\]</span></p>
+<p>Taking the derivative with respect to <span class="math inline">\(\boldsymbol{\theta}\)</span> gives</p>
+<p><span class="math display">\[
+\nabla \mathcal{L}(\boldsymbol{\theta}) = \boldsymbol{H}(\boldsymbol{\theta} - \boldsymbol{\theta}^*).
+\]</span></p>
+<p>So gradient descent with learning rate <span class="math inline">\(\eta\)</span> updates the parameter vector by</p>
+<p><span class="math display">\[
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \boldsymbol{H}(\boldsymbol{\theta}_t - \boldsymbol{\theta}^*).
+\]</span></p>
+<p>Subtracting the minimizer <span class="math inline">\(\boldsymbol{\theta}^*\)</span> on both sides gives</p>
+<p><span class="math display">\[
+\boldsymbol{\theta}_{t+1} - \boldsymbol{\theta}^* = (\boldsymbol{I} - \eta \boldsymbol{H})(\boldsymbol{\theta}_t - \boldsymbol{\theta}^*).
+\]</span></p>
+<p>Now we write <span class="math inline">\(\boldsymbol{\theta}_t - \boldsymbol{\theta}^*\)</span> in the eigenbasis of <span class="math inline">\(\boldsymbol{H}\)</span>: let <span class="math inline">\(\alpha_{t,1}, \dots, \alpha_{t,d}\)</span> be the coefficients of <span class="math inline">\(\boldsymbol{\theta}_t - \boldsymbol{\theta}^*\)</span> in the eigenbasis, i.e.,</p>
+<p><span class="math display">\[
+\boldsymbol{\theta}_t - \boldsymbol{\theta}^* = \sum_{i=1}^d \alpha_{t,i} \boldsymbol{v}_i.
+\]</span></p>
+<p>Here <span class="math inline">\(\alpha_{t,i}\)</span> can explicitly be written as <span class="math inline">\(\alpha_{t,i} = \langle\boldsymbol{\theta}_t - \boldsymbol{\theta}^*, \boldsymbol{v}_i\rangle\)</span>, which is due to the orthogonality of the eigenbasis.</p>
+<p>After multiplying both sides by <span class="math inline">\(\boldsymbol{I} - \eta\boldsymbol{H}\)</span>, we get</p>
+<p><span class="math display">\[
+\boldsymbol{\theta}_{t+1} - \boldsymbol{\theta}^* = \sum_{i=1}^d \alpha_{t,i}(1 - \eta\lambda_i) \boldsymbol{v}_i.
+\]</span></p>
+<p>Thus we can see that each coordinate in the eigenbasis evolves independently:</p>
+<p><span class="math display">\[
+\alpha_{t+1,i} = \alpha_{t,i}(1 - \eta\lambda_i).
+\]</span></p>
+<p>Unrolling this recursion gives</p>
+<p><span class="math display">\[
+\alpha_{t,i} = \alpha_{0,i}(1 - \eta\lambda_i)^t.
+\]</span></p>
+<p>Therefore, the parameter vector and objective value at step <span class="math inline">\(t\)</span> are</p>
+<p><span class="math display">\[
+\begin{cases}
+\boldsymbol{\theta}_t - \boldsymbol{\theta}^* = \sum_{i=1}^d \alpha_{0,i}(1 - \eta\lambda_i)^t \boldsymbol{v}_i, \\
+\mathcal{L}(\boldsymbol{\theta}_t) = \frac{1}{2} \sum_{i=1}^d \lambda_i \alpha_{0,i}^2 (1 - \eta\lambda_i)^{2t} + \mathcal{L}_{\min}.
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.1 (Convergence behaviors on quadratic objectives)</strong></span> Let <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{b}^\top \boldsymbol{\theta} + C_0\)</span> be a quadratic objective. Assume that <span class="math inline">\(\boldsymbol{H}\)</span> is symmetric and positive definite. Let <span class="math inline">\(\lambda_1, \dots, \lambda_d\)</span> be the eigenvalues of <span class="math inline">\(\boldsymbol{H}\)</span>, and <span class="math inline">\(\lambda_{\max}\)</span> be the largest eigenvalue. Define <span class="math inline">\(\rho(\eta)\)</span> as</p>
+<p><span class="math display">\[
+\rho(\eta) := \max_{i \in [d]} |1 - \eta\lambda_i|.
+\]</span></p>
+<p>Then gradient descent with learning rate <span class="math inline">\(\eta &gt; 0\)</span> exhibits the following behaviors as <span class="math inline">\(t \to \infty\)</span>:</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(\eta &gt; \frac{2}{\lambda_{\max}}\)</span> and <span class="math inline">\(\alpha_{0,i} \neq 0\)</span> for all <span class="math inline">\(i \in [d]\)</span>, then</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}_t) \to +\infty.
+\]</span></p></li>
+<li><p>If <span class="math inline">\(\eta &lt; \frac{2}{\lambda_{\max}}\)</span>, then</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} \leq \left(\mathcal{L}(\boldsymbol{\theta}_0) - \mathcal{L}_{\min}\right) \rho(\eta)^{2t},
+\]</span></p>
+<p>where <span class="math inline">\(\rho(\eta) := \max_{i \in [d]} |1 - \eta\lambda_i|\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\eta &lt; \frac{2}{\lambda_{\max}}\)</span> and <span class="math inline">\(\alpha_{0,i} \neq 0\)</span> for all <span class="math inline">\(i \in [d]\)</span>, then for some <span class="math inline">\(c &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} \geq c \cdot \rho(\eta)^{2t}.
+\]</span></p>
+<p>Therefore, <span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} = \Theta\left(\rho(\eta)^{2t}\right).
+\]</span></p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Optimal learning rate for quadratic objectives
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Solving for <span class="math inline">\(\eta\)</span> gives</p>
+<p><span class="math display">\[
+\eta^* = \frac{2}{\lambda_{\min} + \lambda_{\max}}.
+\]</span></p>
+<p>Substituting <span class="math inline">\(\eta^*\)</span> into <span class="math inline">\(\rho(\eta)\)</span> gives</p>
+<p><span class="math display">\[
+\rho(\eta^*) = 1 - \frac{2}{\lambda_{\min} + \lambda_{\max}} \cdot \lambda_{\min} = 1 - \frac{2}{1 + \lambda_{\max}/\lambda_{\min}}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Condition number of a matrix
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\boldsymbol{H} \in \mathbb{R}^{d \times d}\)</span> be a symmetric positive definite matrix. Then the <em>condition number</em> of <span class="math inline">\(\boldsymbol{H}\)</span> is defined as</p>
+<p><span class="math display">\[
+\kappa(\boldsymbol{H}) := \frac{\lambda_{\max}(\boldsymbol{H})}{\lambda_{\min}(\boldsymbol{H})},
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_{\min}(\boldsymbol{H})\)</span> and <span class="math inline">\(\lambda_{\max}(\boldsymbol{H})\)</span> are the smallest and largest eigenvalues of <span class="math inline">\(\boldsymbol{H}\)</span>, respectively.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="optimization-of-smooth-function" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-of-smooth-function">Optimization of Smooth Function</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Smoothness
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A twice differentiable function <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \to \mathbb{R}\)</span> is <span class="math inline">\(\beta\)</span>-smooth if for all <span class="math inline">\(\boldsymbol{\theta} \in \mathbb{R}^d\)</span>,</p>
+<p><span class="math display">\[
+\|\nabla^2 \mathcal{L}(\boldsymbol{\theta})\|_2 \leq \beta.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hessian matrix
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \to \mathbb{R}\)</span> be a function that is twice differentiable. Then the Hessian matrix of <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span> is defined as</p>
+<p><span class="math display">\[
+\nabla^2 \mathcal{L}(\boldsymbol{\theta}) := \begin{bmatrix}
+\frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_1^2} &amp; \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_1 \partial \theta_2} &amp; \dots &amp; \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_1 \partial \theta_d} \\
+\frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_2 \partial \theta_1} &amp; \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_2^2} &amp; \dots &amp; \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_2 \partial \theta_d} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_d \partial \theta_1} &amp; \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_d \partial \theta_2} &amp; \dots &amp; \frac{\partial^2 \mathcal{L}(\boldsymbol{\theta})}{\partial \theta_d^2}
+\end{bmatrix}.
+\]</span></p>
+<p>That is, the Hessian matrix is a matrix whose <span class="math inline">\((i, j)\)</span>-th entry is the second partial derivative of <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span> with respect to the <span class="math inline">\(i\)</span>-th and <span class="math inline">\(j\)</span>-th variables. We denote the Hessian matrix of <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span> as <span class="math inline">\(\nabla^2 \mathcal{L}(\boldsymbol{\theta})\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Operator norm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The operator norm of a matrix <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{k \times d}\)</span> is defined as</p>
+<p><span class="math display">\[
+\|\boldsymbol{A}\|_2 := \max_{\boldsymbol{x} \in \mathbb{R}^d \setminus \{\mathbf{0}\}} \frac{\|\boldsymbol{A}\boldsymbol{x}\|_2}{\|\boldsymbol{x}\|_2}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties of matrix operator norms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The following statements on operator norms of matrices are true:</p>
+<ol type="1">
+<li><p>For any matrix <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{k \times d}\)</span>,</p>
+<p><span class="math display">\[
+\|\boldsymbol{A}\|_2 = \sqrt{\lambda_{\max}(\boldsymbol{A}^\top \boldsymbol{A})}.
+\]</span></p></li>
+<li><p>If <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{d \times d}\)</span> is symmetric, then</p>
+<p><span class="math display">\[
+\|\boldsymbol{A}\|_2 = \max\left\{|\lambda_{\max}(\boldsymbol{A})|, |\lambda_{\min}(\boldsymbol{A})|\right\}.
+\]</span></p></li>
+<li><p>If <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{d \times d}\)</span> is symmetric positive semidefinite, then</p>
+<p><span class="math display">\[
+\|\boldsymbol{A}\|_2 = \lambda_{\max}(\boldsymbol{A}).
+\]</span></p></li>
+</ol>
+<p>Here <span class="math inline">\(\lambda_{\max}(\cdot)\)</span> and <span class="math inline">\(\lambda_{\min}(\cdot)\)</span> denote the largest and smallest eigenvalues of a matrix, respectively.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="strong-convex-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="strong-convex-optimization">Strong Convex Optimization</h3>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.2</strong></span> Let <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \to \mathbb{R}\)</span> be a <span class="math inline">\(\beta\)</span>-smooth function. Suppose we perform one step of gradient descent with learning rate <span class="math inline">\(\eta\)</span> from <span class="math inline">\(\boldsymbol{\theta}_t\)</span> to <span class="math inline">\(\boldsymbol{\theta}_{t+1}\)</span>, i.e.,</p>
+<p><span class="math display">\[
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta \nabla \mathcal{L}(\boldsymbol{\theta}_t).
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}_{t+1}) \leq \mathcal{L}(\boldsymbol{\theta}_t) - \eta \left(1 - \frac{\eta\beta}{2}\right) \|\nabla \mathcal{L}(\boldsymbol{\theta}_t)\|_2^2.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Convex and strongly convex functions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A twice differentiable function <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \to \mathbb{R}\)</span> is convex if for all <span class="math inline">\(\boldsymbol{\theta} \in \mathbb{R}^d\)</span>,</p>
+<p><span class="math display">\[
+\nabla^2 \mathcal{L}(\boldsymbol{\theta}) \succeq \mathbf{0}.
+\]</span></p>
+<p>It is <span class="math inline">\(\alpha\)</span>-strongly convex if for all <span class="math inline">\(\boldsymbol{\theta} \in \mathbb{R}^d\)</span>,</p>
+<p><span class="math display">\[
+\nabla^2 \mathcal{L}(\boldsymbol{\theta}) \succeq \alpha \boldsymbol{I}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Basic consequences of strong convexity
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \rightarrow \mathbb{R}\)</span> be twice differentiable and <span class="math inline">\(\alpha\)</span>-strongly convex. Then:</p>
+<ol type="1">
+<li><p>For all <span class="math inline">\(\boldsymbol{\theta}, \boldsymbol{u} \in \mathbb{R}^d\)</span>,</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{u}) \geq \mathcal{L}(\boldsymbol{\theta}) + \langle\nabla\mathcal{L}(\boldsymbol{\theta}), \boldsymbol{u} - \boldsymbol{\theta}\rangle + \frac{\alpha}{2}\|\boldsymbol{u} - \boldsymbol{\theta}\|_2^2.
+\]</span></p></li>
+<li><p>The function <span class="math inline">\(\mathcal{L}\)</span> has a unique minimizer <span class="math inline">\(\boldsymbol{\theta}^*\)</span>.</p></li>
+<li><p>At the unique minimizer <span class="math inline">\(\boldsymbol{\theta}^*\)</span>, it holds that for all <span class="math inline">\(\boldsymbol{u} \in \mathbb{R}^d\)</span>,</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{u}) \geq \mathcal{L}(\boldsymbol{\theta}^*) + \frac{\alpha}{2}\|\boldsymbol{u} - \boldsymbol{\theta}^*\|_2^2.
+\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Polyak–Łojasiewicz condition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mathcal{L} : \mathbb{R}^d \to \mathbb{R}\)</span> be differentiable and have a minimizer <span class="math inline">\(\boldsymbol{\theta}^*\)</span>. We say that <span class="math inline">\(\mathcal{L}\)</span> satisfies the Polyak–Łojasiewicz condition, or PL condition, with parameter <span class="math inline">\(\mu &gt; 0\)</span> if</p>
+<p><span class="math display">\[
+\frac{1}{2}\|\nabla \mathcal{L}(\boldsymbol{\theta})\|_2^2 \geq \mu\left(\mathcal{L}(\boldsymbol{\theta}) - \mathcal{L}(\boldsymbol{\theta}^*)\right) \quad \text{for all } \boldsymbol{\theta} \in \mathbb{R}^d.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Strong convexity implies PL
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span> is twice differentiable and <span class="math inline">\(\alpha\)</span>-strongly convex, then <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span> satisfies the PL condition with parameter <span class="math inline">\(\alpha\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.3</strong></span> Let <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span> be a twice differentiable, <span class="math inline">\(\alpha\)</span>-strongly convex and <span class="math inline">\(\beta\)</span>-smooth objective function. Let <span class="math inline">\(\mathcal{L}_{\min}\)</span> be the minimum value of <span class="math inline">\(\mathcal{L}(\boldsymbol{\theta})\)</span>. For gradient descent with learning rate <span class="math inline">\(\eta \in (0, 2/\beta)\)</span>, we have</p>
+<p><span class="math display">\[
+\mathcal{L}(\boldsymbol{\theta}_t) - \mathcal{L}_{\min} \leq \rho(\eta)^t \left(\mathcal{L}(\boldsymbol{\theta}_0) - \mathcal{L}_{\min}\right),
+\]</span></p>
+<p>where <span class="math inline">\(\rho(\eta) := 1 - 2\alpha\eta + \alpha\beta\eta^2\)</span>.</p>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript">
@@ -1066,13 +1538,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../docs/notes/Math4CS&amp;AI/7.html" class="pagination-link" aria-label="Continuous Approximations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Continuous Approximations</span>
+      <a href="../../../docs/notes/Math4CS&amp;AI/5.html" class="pagination-link" aria-label="Central Limit Theorem">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Central Limit Theorem</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../docs/notes/Physics/1/index.html" class="pagination-link" aria-label="Mechanics and Thermal Physics">
-        <span class="nav-page-text">Mechanics and Thermal Physics</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/Math4CS&amp;AI/7.html" class="pagination-link" aria-label="Continuous Approximations">
+        <span class="nav-page-text">Continuous Approximations</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

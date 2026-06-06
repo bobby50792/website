@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Chapter 2 – Bobby</title>
+<title>Sampling and Concentration – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,6 +77,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -462,6 +491,24 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Math4CS&amp;AI/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Central Limit Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/Math4CS&amp;AI/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Approximations</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -588,7 +635,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#这页讲什么" id="toc-这页讲什么" class="nav-link active" data-scroll-target="#这页讲什么">这页讲什么</a></li>
+  <li><a href="#markovs-inequality" id="toc-markovs-inequality" class="nav-link active" data-scroll-target="#markovs-inequality">Markov’s Inequality</a></li>
+  <li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality" class="nav-link" data-scroll-target="#chebyshevs-inequality">Chebyshev’s Inequality</a></li>
+  <li><a href="#chernoff-bounds" id="toc-chernoff-bounds" class="nav-link" data-scroll-target="#chernoff-bounds">Chernoff Bounds</a></li>
+  <li><a href="#hoeffdings-inequality-for-bounded-variable" id="toc-hoeffdings-inequality-for-bounded-variable" class="nav-link" data-scroll-target="#hoeffdings-inequality-for-bounded-variable">Hoeffding’s Inequality for Bounded Variable</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
   </ul>
 </nav>
     </div>
@@ -598,8 +649,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/2.html">Sampling and Concentration</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Chapter 2</h1>
-<p class="subtitle lead">先把站点跑起来，再逐步补内容。</p>
+<h1 class="title">Sampling and Concentration</h1>
 </div>
 
 
@@ -616,9 +666,484 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="这页讲什么" class="level2">
-<h2 class="anchored" data-anchor-id="这页讲什么">这页讲什么</h2>
-<!-- 正如在数学笔记中的[矩阵秩定理](1.qmd#thm-matrix-rank)所述，我们可以推导出反向传播中的... -->
+<section id="markovs-inequality" class="level2">
+<h2 class="anchored" data-anchor-id="markovs-inequality">Markov’s Inequality</h2>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.1 (Markov’s inequality)</strong></span> If <span class="math inline">\(X\)</span> is a non-negative random variable, i.e., <span class="math inline">\(\Pr[X \geq 0] = 1\)</span>, then for every <span class="math inline">\(a &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X \geq a] \leq \frac{\mathbb{E}[X]}{a}.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Corollary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>If <span class="math inline">\(X\)</span> is a non-negative random variable, then for every <span class="math inline">\(\alpha &gt; 0\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+\Pr[X \geq \alpha \mathbb{E}[X]] \leq \frac{1}{\alpha}.
+\]</span></p>
+<ol start="2" type="1">
+<li>Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a function. If <span class="math inline">\(\Pr[f(X) \geq 0] = 1\)</span>, then for any <span class="math inline">\(a &gt; 0\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+\Pr[f(X) \geq a] \leq \frac{\mathbb{E}[f(X)]}{a}.
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="chebyshevs-inequality" class="level2">
+<h2 class="anchored" data-anchor-id="chebyshevs-inequality">Chebyshev’s Inequality</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Variance
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The variance of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+\operatorname{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2].
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proposition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For any random variable <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Var}(X) = \mathbb{E}[X^2] - \mathbb{E}[X]^2.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.2 (Chebyshev’s inequality)</strong></span> For any random variable <span class="math inline">\(X\)</span> and any <span class="math inline">\(\epsilon &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\Pr[|X - \mathbb{E}[X]| \geq \epsilon] \leq \frac{\operatorname{Var}(X)}{\epsilon^2}.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Standard deviation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The standard deviation of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+\sigma(X) = \sqrt{\operatorname{Var}(X)}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Corollary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For any random variable <span class="math inline">\(X\)</span> and any <span class="math inline">\(\alpha &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\Pr[|X - \mathbb{E}[X]| \geq \alpha \cdot \sigma(X)] \leq \frac{1}{\alpha^2}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.3</strong></span> For any random variable <span class="math inline">\(X\)</span> and any constant <span class="math inline">\(c \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Var}(cX) = c^2 \operatorname{Var}(X).
+\]</span></p>
+</div>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.4</strong></span> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent random variables, then</p>
+<p><span class="math display">\[
+\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y).
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Covariance
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two random variables. The variance of the sum of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by</p>
+<p><span class="math display">\[
+\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2 \operatorname{Cov}(X, Y),
+\]</span></p>
+<p>where the covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X, Y) := \mathbb{E}\left[ (X - \mathbb{E}[X])(Y - \mathbb{E}[Y]) \right] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.5</strong></span> Let <span class="math inline">\(X := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> i.i.d. random variables <span class="math inline">\(X_1, \dots, X_n\)</span>, each with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Then for every <span class="math inline">\(\epsilon &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\Pr[|X - \mu| \geq \epsilon] \leq \frac{\sigma^2}{n\epsilon^2}.
+\]</span></p>
+</div>
+</section>
+<section id="chernoff-bounds" class="level2">
+<h2 class="anchored" data-anchor-id="chernoff-bounds">Chernoff Bounds</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Moment generating function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The moment generating function (MGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+M_X(t) := \mathbb{E}[e^{tX}].
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties of the MGF
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable. Then its MGF <span class="math inline">\(M(t)\)</span> satisfies the following properties:</p>
+<ol type="1">
+<li><span class="math inline">\(M(0) = 1\)</span>;</li>
+<li><span class="math inline">\(M(t) \geq e^{t \mathbb{E}[X]}\)</span> for all <span class="math inline">\(t \in \mathbb{R}\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.6 (Generic Chernoff bound (upper tail))</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with mean <span class="math inline">\(\mu\)</span> and MGF <span class="math inline">\(M(t)\)</span>. Then for any <span class="math inline">\(a \geq \mu\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X \geq a] \leq \inf_{t \in \mathbb{R}} \left\{ e^{-ta} M(t) \right\}.
+\]</span></p>
+</div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.7 (Generic Chernoff bound (lower tail))</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with mean <span class="math inline">\(\mu\)</span> and MGF <span class="math inline">\(M(t)\)</span>. Then for any <span class="math inline">\(a \leq \mu\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X \leq a] \leq \inf_{t \in \mathbb{R}} \left\{ e^{-ta} M(t) \right\}.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Rate function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The rate function of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+I_X(a) := \sup_{t \in \mathbb{R}} \left\{ ta - \log M_X(t) \right\},
+\]</span></p>
+<p>with the convention that <span class="math inline">\(I_X(a) = +\infty\)</span> if the supremum is unbounded.</p>
+</div>
+</div>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.8 (Generic Chernoff bound in terms of the rate function)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with mean <span class="math inline">\(\mu\)</span> and rate function <span class="math inline">\(I(a)\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\forall a \geq \mu: \quad \Pr[X \geq a] &amp;\leq e^{-I(a)}, \\
+\forall a \leq \mu: \quad \Pr[X \leq a] &amp;\leq e^{-I(a)}.
+\end{aligned}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.9 (Properties of the rate function)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with mean <span class="math inline">\(\mu\)</span> and rate function <span class="math inline">\(I(a)\)</span>. Let <span class="math inline">\(l\)</span> and <span class="math inline">\(u\)</span> be the minimum and maximum values that <span class="math inline">\(X\)</span> can take, and assume <span class="math inline">\(l &lt; u\)</span>. Then</p>
+<ol type="1">
+<li><span class="math inline">\(I(a) = +\infty\)</span> if <span class="math inline">\(a &lt; l\)</span> or <span class="math inline">\(a &gt; u\)</span>.</li>
+<li><span class="math inline">\(0 \leq I(a) &lt; +\infty\)</span> for all <span class="math inline">\(a \in [l, u]\)</span>.</li>
+<li><span class="math inline">\(I(\mu) = 0\)</span>.</li>
+<li><span class="math inline">\(I(a)\)</span> is convex on the interval <span class="math inline">\([l, u]\)</span>.</li>
+<li><span class="math inline">\(I'(\mu) = 0\)</span>.</li>
+</ol>
+</div>
+<p><br>
+</p>
+<div id="thm-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.10 (Generic Chernoff bound for sample averages)</strong></span> Let <span class="math inline">\(X := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> i.i.d. random variables <span class="math inline">\(X_1, \dots, X_n\)</span>, each with mean <span class="math inline">\(\mu\)</span> and rate function <span class="math inline">\(I(a)\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\forall a \geq \mu: \quad \Pr[X \geq a] &amp;\leq e^{-nI(a)}, \\
+\forall a \leq \mu: \quad \Pr[X \leq a] &amp;\leq e^{-nI(a)}.
+\end{aligned}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.11 (Cramér’s theorem)</strong></span> Let <span class="math inline">\(\mathcal{D}\)</span> be a probability distribution with mean <span class="math inline">\(\mu\)</span> and rate function <span class="math inline">\(I(a)\)</span>. Let <span class="math inline">\(X^{(n)} := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> i.i.d. random variables <span class="math inline">\(X_1, \dots, X_n\)</span>, drawn from <span class="math inline">\(\mathcal{D}\)</span>. Then as <span class="math inline">\(n \to \infty\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{for any fixed } a \geq \mu: \quad \Pr[X^{(n)} \geq a] &amp;= e^{-n(I(a) + o(1))}, \\
+\text{for any fixed } a \leq \mu: \quad \Pr[X^{(n)} \leq a] &amp;= e^{-n(I(a) + o(1))}.
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section id="hoeffdings-inequality-for-bounded-variable" class="level2">
+<h2 class="anchored" data-anchor-id="hoeffdings-inequality-for-bounded-variable">Hoeffding’s Inequality for Bounded Variable</h2>
+<div id="thm-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.12</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in <span class="math inline">\([l, u]\)</span> for some <span class="math inline">\(l \leq u\)</span>. Then for all <span class="math inline">\(t \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[e^{t(X - \mathbb{E}[X])}] \leq e^{t^2(u - l)^2 / 8}.
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.13</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in <span class="math inline">\([l, u]\)</span> for some <span class="math inline">\(l \leq u\)</span>. Then for all <span class="math inline">\(\epsilon \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+I_X(\mathbb{E}[X] + \epsilon) \geq 2\epsilon^2 / (u - l)^2.
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.14 (Hoeffding’s inequality, i.i.d. case)</strong></span> Let <span class="math inline">\(X := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> i.i.d. random variables <span class="math inline">\(X_1, \dots, X_n\)</span> taking values in <span class="math inline">\([l, u]\)</span> for some <span class="math inline">\(l \leq u\)</span>. Then for all <span class="math inline">\(\epsilon \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[X \geq \mathbb{E}[X] + \epsilon] &amp;\leq e^{-2n\epsilon^2 / (u - l)^2}, \\
+\Pr[X \leq \mathbb{E}[X] - \epsilon] &amp;\leq e^{-2n\epsilon^2 / (u - l)^2}.
+\end{aligned}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.15 (Hoeffding’s inequality)</strong></span> Let <span class="math inline">\(X := \frac{1}{n} \sum_{i=1}^n X_i\)</span> be the sample average of <span class="math inline">\(n\)</span> independent random variables <span class="math inline">\(X_1, \dots, X_n\)</span> taking values in intervals <span class="math inline">\([\ell_1, u_1], \dots, [\ell_n, u_n]\)</span>, respectively. Let <span class="math inline">\(s^2\)</span> be the mean squared interval length:</p>
+<p><span class="math display">\[
+s^2 := \frac{1}{n} \sum_{i=1}^n (u_i - \ell_i)^2.
+\]</span></p>
+<p>Then for all <span class="math inline">\(\epsilon \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[X \geq \mathbb{E}[X] + \epsilon] &amp;\leq e^{-2n\epsilon^2 / s^2}, \\
+\Pr[X \leq \mathbb{E}[X] - \epsilon] &amp;\leq e^{-2n\epsilon^2 / s^2}.
+\end{aligned}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-16" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.16</strong></span> Let <span class="math inline">\(X := \sum_{i=1}^n \Delta_i\)</span> be the sum of <span class="math inline">\(n\)</span> independent random variables <span class="math inline">\(\Delta_1, \dots, \Delta_n\)</span> taking values in intervals <span class="math inline">\([\tilde{\ell}_1, \tilde{u}_1], \dots, [\tilde{\ell}_n, \tilde{u}_n]\)</span>, respectively. Let <span class="math inline">\(L^2\)</span> be the sum of the squared interval lengths:</p>
+<p><span class="math display">\[
+L^2 := \sum_{i=1}^n (\tilde{u}_i - \tilde{\ell}_i)^2.
+\]</span></p>
+<p>Then for all <span class="math inline">\(\epsilon \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[X \geq \mathbb{E}[X] + \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[X \leq \mathbb{E}[X] - \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Martingale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(Z_0, Z_1, \dots, Z_n\)</span> be random variables. We say that <span class="math inline">\((Z_i)_{i=0}^n\)</span> is a martingale if for every <span class="math inline">\(i \in [n]\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[Z_i \mid Z_0, \dots, Z_{i-1}] = Z_{i-1}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-17" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.17</strong></span> Let <span class="math inline">\((Z_i)_{i=0}^n\)</span> be a martingale. Assume that for each <span class="math inline">\(i \in [n]\)</span>, the increment <span class="math inline">\(\Delta_i := Z_i - Z_{i-1}\)</span> always lies in an interval <span class="math inline">\([\tilde{\ell}_i, \tilde{u}_i]\)</span> for some <span class="math inline">\(\tilde{\ell}_i, \tilde{u}_i \in \mathbb{R}\)</span>. Let <span class="math inline">\(L^2\)</span> be the sum of the squared interval lengths:</p>
+<p><span class="math display">\[
+L^2 := \sum_{i=1}^n (\tilde{u}_i - \tilde{\ell}_i)^2.
+\]</span></p>
+<p>Then for every <span class="math inline">\(t \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[e^{t(Z_n - Z_0)}] \leq e^{t^2 L^2 / 8}.
+\]</span></p>
+</div>
+<p>&nbsp;</p>
+<div id="thm-18" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.18 (Azuma–Hoeffding inequality)</strong></span> Let <span class="math inline">\((Z_i)_{i=0}^n\)</span> be a martingale. Assume that for each <span class="math inline">\(i \in [n]\)</span>, the increment <span class="math inline">\(\Delta_i := Z_i - Z_{i-1}\)</span> always lies in an interval <span class="math inline">\([\tilde{\ell}_i, \tilde{u}_i]\)</span> for some <span class="math inline">\(\tilde{\ell}_i, \tilde{u}_i \in \mathbb{R}\)</span>. Let <span class="math inline">\(L^2\)</span> be the sum of the squared interval lengths:</p>
+<p><span class="math display">\[
+L^2 := \sum_{i=1}^n (\tilde{u}_i - \tilde{\ell}_i)^2.
+\]</span></p>
+<p>Then for all <span class="math inline">\(\epsilon \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[Z_n \geq Z_0 + \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[Z_n \leq Z_0 - \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Martingale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((X_i)_{i=0}^n\)</span> be a sequence of random variables, and let <span class="math inline">\((Z_i)_{i=0}^n\)</span> be another sequence of random variables such that each <span class="math inline">\(Z_i\)</span> is a deterministic function of <span class="math inline">\(X_0, \dots, X_i\)</span>. We say that <span class="math inline">\((Z_i)_{i=0}^n\)</span> is a martingale with respect to the information revealed by <span class="math inline">\((X_i)_{i=0}^n\)</span> if for every <span class="math inline">\(i \in [n]\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[Z_i \mid X_{&lt;i}] = Z_{i-1}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-19" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.19 (Azuma–Hoeffding inequality)</strong></span> Let <span class="math inline">\((Z_i)_{i=0}^n\)</span> be a martingale with respect to the information revealed by <span class="math inline">\((X_i)_{i=0}^n\)</span>. Assume that for each <span class="math inline">\(i \in [n]\)</span>, the increment <span class="math inline">\(\Delta_i := Z_i - Z_{i-1}\)</span> always lies in an interval of length at most <span class="math inline">\(c_i\)</span> when conditioned on <span class="math inline">\(X_{&lt;i}\)</span>. That is, there exist functions <span class="math inline">\(\tilde{\ell}_i, \tilde{u}_i : \mathbb{R}^i \to \mathbb{R}\)</span> such that with probability 1,</p>
+<p><span class="math display">\[
+\tilde{\ell}_i(X_{&lt;i}) \leq \Delta_i \leq \tilde{u}_i(X_{&lt;i}), \quad \tilde{u}_i(X_{&lt;i}) - \tilde{\ell}_i(X_{&lt;i}) \leq c_i.
+\]</span></p>
+<p>Let <span class="math inline">\(L^2 := \sum_{i=1}^n c_i^2\)</span>. Then for all <span class="math inline">\(\epsilon \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[Z_n \geq Z_0 + \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[Z_n \leq Z_0 - \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Doob martingale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X_1, \dots, X_n\)</span> be independent random variables, and let <span class="math inline">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> be a function. The Doob martingale associated with <span class="math inline">\(f\)</span> and <span class="math inline">\(X_1, \dots, X_n\)</span> is the sequence <span class="math inline">\((Z_i)_{i=0}^n\)</span> defined by</p>
+<p><span class="math display">\[
+Z_i := \mathbb{E}[f(X_1, \dots, X_n) \mid X_1, \dots, X_i].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-20" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.20</strong></span> The Doob martingale <span class="math inline">\((Z_i)_{i=0}^n\)</span> is a martingale with respect to the information revealed by <span class="math inline">\((X_i)_{i=1}^n\)</span>. That is, for all <span class="math inline">\(i \in [n]\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[Z_i \mid X_{&lt;i}] = Z_{i-1}.
+\]</span></p>
+</div>
+<div id="thm-21" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.21 (McDiarmid’s inequality)</strong></span> Let <span class="math inline">\(X_1, \dots, X_n\)</span> be independent random variables, and let <span class="math inline">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> be a function. Assume that for each <span class="math inline">\(i = 1, \dots, n\)</span> there is a constant <span class="math inline">\(c_i \geq 0\)</span> such that whenever two inputs differ only in coordinate <span class="math inline">\(i\)</span>,</p>
+<p><span class="math display">\[
+|f(x_1, \dots, x_i, \dots, x_n) - f(x_1, \dots, x_i', \dots, x_n)| \leq c_i.
+\]</span></p>
+<p>Let <span class="math inline">\(L^2 := \sum_{i=1}^n c_i^2\)</span>. Then for all <span class="math inline">\(\epsilon \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr[f(X_1, \dots, X_n) \geq \mathbb{E}[f(X_1, \dots, X_n)] + \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}, \\
+\Pr[f(X_1, \dots, X_n) \leq \mathbb{E}[f(X_1, \dots, X_n)] - \epsilon] &amp;\leq e^{-2\epsilon^2 / L^2}.
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<div id="thm-22" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.22 (Paley–Zygmund inequality and anti-concentration)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable.</p>
+<ol type="1">
+<li>For all <span class="math inline">\(a \geq 0\)</span>, the following bound holds via the Cauchy–Schwarz inequality:</li>
+</ol>
+<p><span class="math display">\[
+\mathbb{E}\left[X \mathbb{1}_{[X &gt; a]}\right] \leq \mathbb{E}[X^2]^{1/2} \operatorname{Pr}[X &gt; a]^{1/2}.
+\]</span></p>
+<ol start="2" type="1">
+<li>Suppose <span class="math inline">\(X\)</span> is a non-negative random variable and <span class="math inline">\(\mathbb{E}[X^2] \neq 0\)</span>. Then for all <span class="math inline">\(\theta \in [0, 1]\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+\operatorname{Pr}[X &gt; \theta \mathbb{E}[X]] \geq (1 - \theta)^2 \frac{\mathbb{E}[X]^2}{\mathbb{E}[X^2]}.
+\]</span></p>
+<ol start="3" type="1">
+<li>Suppose <span class="math inline">\(\sigma(X) &gt; 0\)</span>. Then for all <span class="math inline">\(\alpha \in [0, 1]\)</span>, the deviation from the mean is bounded below by</li>
+</ol>
+<p><span class="math display">\[
+\operatorname{Pr}\left[|X - \mathbb{E}[X]| &gt; \alpha \cdot \sigma(X)\right] \geq \frac{(1 - \alpha^2)^2}{\kappa(X)},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\kappa(X) := \frac{\mathbb{E}\left[|X - \mathbb{E}[X]|^4\right]}{\sigma(X)^4}
+\]</span></p>
+<p>is called the kurtosis of <span class="math inline">\(X\)</span>.</p>
+</div>
 
 
 </section>
