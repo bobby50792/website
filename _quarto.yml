@@ -71,6 +71,12 @@ website:
                       href: docs/notes/Calculus/2/6.qmd
                     - text: "Calculus of Vector Fields"
                       href: docs/notes/Calculus/2/7.qmd
+                    - text: "Series"
+                      href: docs/notes/Calculus/2/8.qmd
+                    - text: "Series of Functions and Power Series"
+                      href: docs/notes/Calculus/2/9.qmd
+                    - text: "Fourier Series"
+                      href: docs/notes/Calculus/2/10.qmd
 
             - section: "Math for CS and AI"
               href: docs/notes/Math4CS&AI/index.qmd
@@ -125,6 +131,22 @@ website:
                     href: docs/notes/Physics/1/14.qmd
                   - text: "Statistical Mechanics"
                     href: docs/notes/Physics/1/15.qmd
+            - section: "Deep Learning"
+              href: docs/notes/DL/index.qmd
+              contents: 
+                - text: "Supervised Learning"
+                  href: docs/notes/DL/1.qmd
+                - text: "Energy-Based Model"
+                  href: docs/notes/DL/2.qmd
+                - text: "Generative Adversarial Network"
+                  href: docs/notes/DL/3.qmd
+                - text: "Normalizing Flow & Variational Autoencoder"
+                  href: docs/notes/DL/4.qmd
+                - text: "Diffusion Models & Flow Matching"
+                  href: docs/notes/DL/5.qmd
+                - text: "Sequence Modeling"
+                  href: docs/notes/DL/6.qmd
+
 format:
   html:
     respect-user-color-scheme: true

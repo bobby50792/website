@@ -1,0 +1,346 @@
+---
+title: "Supervised Learning"
+page-layout: article
+search: true
+number-offset: [1]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Classification
+
+### Logistic Regression
+::: {.callout-tip collapse="true"} 
+
+## Logistic Regression
+
+* $P(y = 1) = f(x; \theta) = \sigma(w^T x + b)$
+* Logistic function (sigmoid function): $\sigma(x) = \frac{1}{1 + e^{-x}}$
+* $err(f(x; \theta), y) = \begin{cases} -\log \sigma(w^T x + b) & y = 1 \\ -\log(1 - \sigma(w^T x + b)) & y = 0 \end{cases}$
+:::
+
+::: {.callout-tip collapse="true"}
+
+## The Gradient Descent Algorithm
+
+* Choose $X^0$
+* $X^{k+1} = X^k - \eta^k \nabla_X f(X^k)^T$
+* Convergence: $|f(X^{k+1}) - f(X^k)| < \epsilon$
+
+:::
+
+### Single-Layer Perceptron
+::: {.callout-tip collapse="true"}
+
+## Single-Layer Perceptron
+* Gradient Descent
+    * Initialize $w^0$; $w^{k+1} = w^k - \eta^k \nabla_w L(w)$ until convergence
+* Compute the Gradient
+    * $\nabla_w L(w) = \frac{1}{N} \sum_i \nabla_w \text{err}(f(x^i; w), y^i)$
+    * $y = 1$: $\nabla_w \text{err} = -\nabla_w \log \sigma(w^T x^i) = -\frac{1}{\text{err}} \nabla_w \sigma(w^T x^i)$
+    * $y = 0$: $\nabla_w \text{err} = -\nabla_w \log(1 - \sigma(w^T x + b)) = \frac{1}{\text{err}} \nabla_w \sigma(w^T x^i)$
+* Gradient of Sigmoid neuron
+    * $\sigma(z) = \frac{1}{1 + e^{-z}}$ where $z = w^T x$
+    * $\nabla_{w_i} \sigma(z) = \sigma'(z)x_i \quad \text{and} \quad \nabla_{x_i} \sigma(z) = \sigma'(z)w_i$
+    * $\sigma'(z) = \sigma(z)(1 - \sigma(z))$
+
+:::
+
+### Multi-Class Classification
+
+::: {.callout-tip collapse="true"}
+## Multi-Class Classification
+
+* A multi-class perceptron
+    * $C$ classes, $z = Wx$,
+    * $f(x; W) = \text{softmax}(z), \quad f_c(x; W) = \frac{e^{z_c}}{\sum_{j=1}^C e^{z_j}}$
+* Learning
+    * Given $X = \{(x^i, y^i)\}$, Loss function $L(W) = \frac{1}{N} \sum_i \text{err}(f(x^i; W), y^i)$
+* The error function
+    * The probability of a class $c$ given input $x^i$ is $P(y = c | x^i) = f_c(x^i; W)$
+    * Maximize the log probability of desired class $y^i$
+    * $\text{err}(f(x^i; W), y^i) = -\log f_{y^i}(x^i; W)$
+:::
+
+### Multi-Layer Perception 
+
+::: {.callout-tip collapse="true"}
+## Multi-Class Classification
+
+* A multi-class perceptron
+    * $C$ classes, $z = Wx$,
+    * $f(x; W) = \text{softmax}(z), \quad f_c(x; W) = \frac{e^{z_c}}{\sum_{j=1}^C e^{z_j}}$
+* Learning
+    * Given $X = \{(x^i, y^i)\}$, Loss function $L(W) = \frac{1}{N} \sum_i \text{err}(f(x^i; W), y^i)$
+* The error function
+    * The probability of a class $c$ given input $x^i$ is $P(y = c | x^i) = f_c(x^i; W)$
+    * Maximize the log probability of desired class $y^i$
+    * $\text{err}(f(x^i; W), y^i) = -\log f_{y^i}(x^i; W)$
+:::
+
+::: {.callout-note collapse="true"}
+## Backpropagation
+
+* Run forward pass to save all the values and then compute gradients in the reverse order
+* Output layer ($N$):
+    * Directly compute gradients $\frac{\partial L}{\partial y_i^{(N)}}$ and $\frac{\partial L}{\partial z_i^{(N)}} = \frac{\partial L}{\partial y_i^{(N)}} \cdot \frac{\partial y_i^{(N)}}{\partial z_i^{(N)}}$
+* For layer $k = N - 1$ downto 0
+    * $\frac{\partial L}{\partial w_{i,j}^{(k+1)}} = y_i^{(k)} \cdot \frac{\partial L}{\partial z_j^{(k+1)}}$
+    * $\frac{\partial L}{\partial y_i^k} = \sum_j w_{i,j}^{(k+1)} \frac{\partial L}{\partial z_j^{(k+1)}}$
+    * $\frac{\partial L}{\partial z_i^{(k)}} = \frac{\partial L}{\partial y_i^{(k)}} f_k'\left(z_i^{(k)}\right)$
+:::
+
+::: {.callout-note collapse="true"}
+
+## Regularization
+
+* Tricks to stabilize the learning process
+* L2 norm on all the weights.
+* $L(w) = \text{Loss}(w) + \frac{1}{2} \alpha |w|^2$
+* This is also called weight decay
+    * $\nabla_w L = \nabla \text{Loss}(w) + \alpha w$
+:::
+
+## Convolutional Neural Network
+
+::: {.callout-tip collapse="true"}
+## Convolutional Neural Network
+
+* **Input Stage**
+    * Raw Image Data: $Y^{(0)} = \text{Image}$ with dimensions $H \times W \times D_0$
+* **Feature Extraction Loop (Hidden Layers)**
+    * For layer $l = 1$ to $L$:
+        * **Convolution Layer (Distributed Scanning)**: 
+          $$z(l, j, x, y) = \sum_{i=1}^{D_{l-1}} \sum_{x'=1}^{K_l} \sum_{y'=1}^{K_l} w(l, i, j, x', y') \cdot Y(l-1, i, x+x'-1, y+y'-1)$$
+        * **Activation Function**: $Y(l, j, x, y) = \text{activation}(z(l, j, x, y))$
+        * **Max-Pooling Layer (Spatial Downsampling)**: Spatially reduces feature maps to capture invariant features.
+* **Classification Stage (Final MLP)**
+    * Flatten the final feature map into a 1D vector.
+    * Output Layer: $Y = \text{softmax}\left( Y(L, :, 1, 1) \dots Y(L, :, W_{\text{final}}, H_{\text{final}}) \right)$
+:::
+
+::: {.callout-note collapse="true"}
+## Distributed Scanning
+
+An elegant alternative to the traditional sliding window. Instead of cropping images into separate chunks for MLP processing, it applies a local convolutional kernel uniformly across the entire input tensor. This approach inherently shares weights across different spatial locations and dramatically accelerates grid-like computation.
+:::
+
+::: {.callout-note collapse="true"}
+## Output Map Dimension
+
+The spatial size of a feature map after a convolution operation. Without padding, the map shrinks according to the structural step-size of the scan, defined by the formula: 
+$$\text{Output Size} = \left\lfloor \frac{N - M}{S} \right\rfloor + 1$$
+where $N$ is input size, $M$ is filter size, and $S$ is stride.
+:::
+
+::: {.callout-note collapse="true"}
+## Padding
+
+
+
+The technique of symmetric zero-boundary expansion applied to the edges of input maps before scanning. It resolves the problem of spatial dimensionality shrinking over deep networks, preventing valuable edge information from fading away as the layer depth $L$ grows arbitrarily large.
+:::
+
+::: {.callout-note collapse="true"}
+## Max-Pooling Layer
+
+A downsampling operation that extracts the maximum value within localized spatial grids (e.g., $2 \times 2$). It reduces the data footprint to stabilize memory constraints while granting the network local translation invariance against distortions or positional shifts.
+:::
+
+### Convex Optimization
+
+::: {.callout-tip collapse="true"}
+## Lipschitz continuous
+
+* A function $g(x)$ is Lipschitz continuous: $|g(x) - g(y)| \le L|x - y|$
+
+* Assumption: a "smooth" convex function $f(x)$
+    * $f(x)$ is convex
+    * Gradient of $f(x)$ is Lipschitz continuous: $|\nabla f(x) - \nabla f(y)| \le L|x - y|$
+    * "Gradient can't change arbitrarily fast"
+        * $\nabla^2 f(x) \le LI$
+:::
+
+::: {.callout-note collapse="true"}
+## Descent Lemma
+
+* $f(y) \le f(x) + \nabla f(x)^T(y - x) + \frac{L}{2}|x - y|^2$
+
+* A convex quadratic upper bound on $f(x)$
+    * Minimize the upper bound of $y$
+    * $\eta = \frac{1}{L}$ (optimal)
+    * Remark: any $0 < \eta < \frac{2}{L}$, decreases $f(x)$
+:::
+
+::: {.callout-note collapse="true"}
+## Convergence Rate with constant learning rate $\eta = \frac{1}{L}$
+
+* Convergence Rate with constant learning rate $\eta = \frac{1}{L}$
+    * $X^{k+1} = X^k - \frac{1}{L}\nabla_X f(X^k)$
+    * $f(X^{k+1}) \le f(X^k) - \frac{1}{2L}|\nabla f(X^k)|^2$ (decent lemma)
+    * $|\nabla f(X^k)|^2 \le 2L\left(f(X^k) - f(X^{k+1})\right)$ (progress bound)
+    * $k \min_{i=0\dots k} \left\{ |\nabla f(X^i)|^2 \right\} \le 2L\left(f(X^0) - f(X^*)\right)$
+* For $X^k$ with $|\nabla f(X^k)|^2 \le \epsilon$
+    * $k = O\left(\frac{1}{\epsilon}\right)$, a sublinear convergence rate
+:::
+
+::: {.callout-note collapse="true"}
+## Strongly Convex Functions
+
+ * Strongly convexity (for some $\mu > 0$)
+    * $f(y) \ge f(x) + \nabla f(x)^T(y - x) + \frac{\mu}{2}|y - x|^2$
+    * A quadratic lower bound!
+* Better rate for $L$-smooth strongly convex function
+    * $LI \succeq \nabla^2 f(x) \succ 0$
+    * For $f(X^k) - f^* \le \epsilon$, we have $k = O\left(\log \frac{1}{\epsilon}\right)$
+:::
+
+::: {.callout-note collapse="true"}
+## Second-order optimization
+
+* Second-order optimization
+    * $X^{k+1} = X^k - \eta^k \nabla^2 f(X^k)^{-1}\nabla f(X^k)$
+* Convergence Rate (with $\eta^k = 1$ near optimum $X^*$)
+    * Under $\mu$-strong convexity and $C^3$ smoothness, the error $e_k = \|X^k - X^*\|$ satisfies:
+      $$\|X^{k+1} - X^*\| \le M \|X^k - X^*\|^2 \quad \text{where } M = \frac{\| \nabla^3 f(\xi) \|}{2\mu}$$
+    * For $f(X^k) - f^* \le \epsilon$, the iteration complexity is a blazing fast $k = O\left(\log \log \frac{1}{\epsilon}\right)$.
+:::
+
+::: {.callout-note collapse="true"}
+## Accelerated Methods
+
+* Gradient Descent with Momentum (Polyak's Heavy-ball Method)
+    * $X^{k+1} = X^k - \eta \nabla f(X^k) + \beta(X^k - X^{k-1})$
+
+* Nesterov's Accelerated Gradient Descent (NAG)
+    * $X^{k+1} = X^k - \eta \nabla f\left(X^k + \beta(X^k - X^{k-1})\right) + \beta(X^k - X^{k-1})$
+:::
+
+::: {.callout-tip collapse="true"}
+## Stochastic Gradient Descent
+
+* Stochastic Gradient Descent (SGD)
+    * Given training data $\mathcal{X} = \{(x^i, y^i)\}$
+    * Random sample a data point $(x^j, y^j) \in \mathcal{X}$
+    * Incremental update: $\theta^{k+1} \leftarrow \theta^k - \eta^k \nabla L_j(\theta^k)$
+:::
+
+::: {.callout-note collapse="true"}
+## Convergence of SGD
+
+* Convergence Condition
+    * A diminishing learning rate: $\sum_k \eta^k = \infty$ and $\sum_k (\eta^k)^2 < \infty$
+    * Typical usage: $\eta^k \propto \frac{1}{k}$
+    * Why wouldn't a constant learning rate work?
+* Convergence Rate (ML Course Recap.)
+    * Convex function: $\mathbb{E}[f(X^k)] - f^* = O\left(\frac{1}{\sqrt{k}}\right)$ (no improvement w. $L$-smooth)
+    * Strongly convex function: $\mathbb{E}[f(X^k)] - f^* = O\left(\frac{1}{k}\right)$
+:::
+
+::: {.callout-note collapse="true"}
+## Mini-batch Gradient Descent
+
+* Mini-batches!
+    * We choose a random subset of indices $I_j \subset \{1, \dots, N\}$ and $|I_j| = b$ (batch-size)
+    * $\mathcal{X} = \{(x^i, y^i) : i \in I_j\}$: a mini-batch of training data
+    * $L_{I_j}(\theta) = \frac{1}{b}\sum_{i \in I_j} L_i(\theta)$ estimate the gradient over a mini-batch
+    * $\theta^{k+1} = \theta^k - \eta^k \nabla L_{I_j}(\theta^k)$
+* Mini-batch gradient is still an unbiased estimate of the gradient
+    * Reduce the variance by $\frac{1}{b}$
+:::
+
+### Advanced Neural Network Training Regimes & Tricks
+
+::: {.callout-tip collapse="true"}
+## Regularization & Anti-Overfitting
+
+* Overfitting!
+    * Neural networks are universal functions
+    * Overfitted responses facilitated by large weights $\rightarrow$ Weight Decay (L2-norm)
+* Dropout
+    * **Training**: for each input, at each iteration, randomly "turn off" each neuron with a probability $1 - \alpha$
+        * In practice, we change a neuron to 0 by sampling a Bernoulli variable with prob. $1 - \alpha$
+        * Random "turn-off" prevent overfitting to particular neurons or weights
+        * **Gradient only propagated from non-zero neurons**
+* Early Stopping
+    * Continue training may lead to training data overfitting
+    * Track performance on a held-out validation set
+:::
+
+::: {.callout-tip collapse="true"}
+## Data Preparation & Augmentation
+
+* Data Preparation and Augmentation
+    * Subtract the mean activity over the training set from each pixel
+    * Crop $224 \times 224$ patches (and their horizontal reflections.)
+    * At test time, average the predictions on the 10 patches (ensemble)
+    * Change the intensity of RGB channels, add PCA components
+      $$[I_R, I_G, I_B] += \alpha[P_R, P_G, P_B][\lambda_R, \lambda_G, \lambda_B]^T, \quad \alpha \sim N(0, 0.1)$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Network Initialization & Stable Design
+
+* Initialization
+    * Zero initialization makes all neurons learn the same pattern $\rightarrow$ random init
+    * A too-large initialization leads to exploding gradients $\rightarrow$ small init
+* Design Principle
+    * Zero activation mean $\rightarrow$ value at 0 (softsign, tanh) or large gradient (sigmoid)
+    * Activation variance remains same across layers $\rightarrow$ prevent gradient vanishing/explosion
+* Gradient Clipping
+    * The loss can occasionally lead to a steep decent
+    * This can result in immediate instability
+    * If $\nabla\theta_i > 5$, then set $\nabla\theta_i$ to 5. (you can also scale the norm of $|\nabla\theta|$)
+:::
+
+::: {.callout-tip collapse="true"}
+## Normalization Techniques
+
+* The problem of covariance shift
+    * Assumption: mini-batches share a similar data distribution
+    * Reality: each minibatch may have a different distribution
+    * **Solution**: make each batch same mean and standard deviation for training
+* Batch Normalization
+    * BatchNorm Layer
+        * $u_i$ : scaled activations with zero-mean and unit std dev
+        * $\hat{z}_i = \gamma u_i + \beta$ : Then shift to a proper location, $\gamma, \beta$ are parameters
+* Layer Normalization
+    * LayerNorm layer
+        * Scales the mean and std-dev of a hidden layer
+        * $$h^t = f\left[ \frac{g}{\sigma^t} \odot (a^t - \mu^t) + b \right], \quad \mu^t = \frac{1}{H}\sum_{i=1}^H a_i^t, \quad \sigma^t = \sqrt{\frac{1}{H}\sum_{i=1}^H (a_i^t - \mu^t)^2}$$
+* Group cream
+    * GroupNorm
+        * Batch-independent, improve BatchNorm for small batch size
+:::
+
+### Residual Network
+
+::: {.callout-tip collapse="true"}
+## Residual Connection
+
+* Residual Connection
+    * $z = \sigma\left(f(x) + x\right)$
+* Justification from the paper
+    * A trivial solution with good precondition for arbitrarily deep network
+        * $W^{(k)} = I$
+    * Hypothesis: hard to learn identity but easy to learn zero
+    * Solution: fit the residual function $H(x) = f(x) - x$
+:::
+
+### Appendix
+
+
+::: {#thm-1}
+
+Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable, $\mu$-strongly-convex function. Then for any $x, y \in \mathbb{R}^d$:
+$$\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \mu\|x - y\|^2$$
+:::
+
+::: {#thm-2}
+
+Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable, $L$-smooth convex function. Then for any $x, y \in \mathbb{R}^d$:
+$$\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \frac{1}{L}\|\nabla f(x) - \nabla f(y)\|^2$$
+:::

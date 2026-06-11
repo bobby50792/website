@@ -1,0 +1,35 @@
+---
+title: " Series of Functions and Power Series"
+page-layout: article
+search: true
+number-offset: [9]
+number-sections: false
+
+crossref:
+  chapters: true      
+---
+
+## Uniform Convergence and Properties of Limit Functions
+
+::: {.callout-tip collapse="true"}
+
+## Uniform and Pointwise Convergence
+
+Let $I \subseteq \mathbb{R}^m$, for a function $f : I \to \mathbb{R}$, we denote:
+
+$$
+\|f\|_\infty = \sup_{\mathbf{x} \in I} |f(\mathbf{x})|.
+$$
+
+For a sequence of functions $f_n : I \to \mathbb{R}$, we say that $f_n$ uniformly converges to $f$ on $I$ (denoted as $f_n \overset{I}{\rightrightarrows} f$), if:
+
+$$
+\lim_{n \to +\infty} \|f_n - f\|_\infty = 0,
+$$
+
+That is: for any $\varepsilon > 0$, there exists an $N(\varepsilon)$ such that for any positive integer $n > N(\varepsilon)$ and for any $\mathbf{x} \in I$, $|f_n(\mathbf{x}) - f(\mathbf{x})| < \varepsilon$. Here, "uniform" means that $N(\varepsilon)$ is independent of $\mathbf{x} \in I$.
+
+If for any $\mathbf{x} \in I$, we have $\lim_{n \to +\infty} f_n(\mathbf{x}) = f(\mathbf{x})$, then $f_n$ is said to pointwise converge to $f$ on $I$, which means for any $\mathbf{x} \in I$ and any $\varepsilon > 0$, there exists an $N(\mathbf{x}, \varepsilon)$ such that for any positive integer $n > N(\mathbf{x}, \varepsilon)$, $|f_n(\mathbf{x}) - f(\mathbf{x})| < \varepsilon$.
+
+A sequence of functions $f_n$ is said to converge non-uniformly to $f$ on $I$ if $f_n$ converges pointwise to $f$ on $I$, but does not converge uniformly to $f$.
+:::

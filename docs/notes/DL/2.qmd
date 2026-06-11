@@ -1,0 +1,288 @@
+---
+title: "Energy-Based Model"
+page-layout: article
+search: true
+number-offset: [2]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Hopfield Network
+
+::: {.callout-tip collapse="true"}
+## Hopfield Network
+
+* Problem Formulation
+    * Desired patterns $P = \{y^p\}$
+    * Energy function $E(y) = -\frac{1}{2}y^TWy$ (we omit bias term for simplicity)
+* Objective for $W$
+    * Minimize $E$ for all $y^p$
+    * It should also maximize $E$ for all non-desired patterns!
+      $$W = \arg\min_W \sum_{y \in P} E(y) - \sum_{y' \notin P} E(y')$$
+    * Gradient Descent
+      $$W \leftarrow W + \eta \left( \sum_{y \in P} yy^T - \sum_{y' \notin P} y'y'^T \right)$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Hopfield Network: SGD Optimization
+
+* SGD update rule for $W$
+  $$W \leftarrow W - \eta\left(\mathbb{E}_{y \in P}[yy^T] - \mathbb{E}_{y'}[y'y'^T]\right)$$
+    * Compute outer-products of random desired pattern $y$
+    * Initialize $y'$ by a random desired pattern
+        * Run evolution for random $y'$ for a few timesteps (2~4)
+        * Calculate outer-product of $y'$
+    * Compute gradient and update $W$
+* In theory, $O(N)$ patterns can be stored in the network (with undesired valleys)
+    * How to store more patterns?
+:::
+
+## Boltzmann Machine
+
+### Stochastic Hopfield Network
+
+::: {.callout-tip collapse="true"}
+## Stochastic Hopfield Network
+
+* Let's model our Hopfield network as a thermodynamic system
+    * $T = k = 1$ for simplicity
+    * Energy
+      $$E(y) = -\sum_{i<j} w_{ij}y_iy_j - b_iy_i$$
+    * Boltzmann Probability
+      $$P(y) = \frac{1}{Z}\exp\left(-E(y)\right) = \frac{1}{Z}\exp\left(\sum_{i<j} w_{ij}y_iy_j + b_iy_i\right)$$
+* Stochastic Hopfield Network
+    * $P(y)$ models the stationary probability distribution of states $y$ given $E(y)$
+    * We generate patterns by sampling from $P(y)$
+:::
+
+::: {.callout-note collapse="true"}
+## Stochastic Hopfield Network: Gibbs Sampling Derivation
+
+* Let's consider the "flip" operation
+    * Deterministic $\rightarrow$ probabilistic
+    * Goal: change $y_i$ to 1 with probability $P(y_i = 1 \mid y_{j \neq i})$
+* Assume $y$ and $y'$ only differ at position $i$ and $y'_i = -1$
+    * $\log P(y) = -E(y) + C$
+    * $E(y) = -\sum_{i<j} w_{ij}y_iy_j - b_iy_i$
+    * $\log P(y) - \log P(y') = E(y') - E(y) = -\sum_{j} w_{ij}y_j - 2b_i$
+      $$\log\frac{P(y)}{P(y')} = \log\frac{P(y_i = 1 \mid y_{j \neq i})P(y_{j \neq i})}{P(y'_i = -1 \mid y'_{j \neq i})P(y'_{j \neq i})} = \log\frac{P(y_i = 1 \mid y_{j \neq i})}{1 - P(y_i = 1 \mid y_{j \neq i})} = -\sum_{j} w_{ij}y_j - 2b_i$$
+* A sigmoid conditional: $P(y_i = 1 \mid y_{j \neq i}) = \frac{1}{1+\exp\left(-\sum_{j} w_{ij}y_j - 2b_i\right)}$
+
+$$\text{This is also called Gibbs sampling}$$
+:::
+
+::: {.callout-note collapse="true"}
+## Stochastic Hopfield Network: The Whole Update Rule & Evolution
+
+* The whole update rule
+    * Field at $y_i$: $z_i = \sum_{j} w_{ij}y_j + 2b_i$
+    * $P(y_i = 1 \mid y_{j \neq i}) = \frac{1}{1 + \exp(-z_i)} = \sigma(z_i)$
+        * *Field quantifies the delta energy of flip*
+* Evolving the network
+    * Randomly initialize $y$
+    * Cycle over $y_i$, fixed other variables fixed and sample $y_i$ according to the conditional probability
+    * After "convergence", we can get samples of $y$ according to $P(y)$
+    * This sampling procedure is called *Gibbs sampling*
+:::
+
+### Boltzmann Machine Formulation
+::: {.callout-tip collapse="true"}
+## Boltzmann Machine Formulation
+
+* A generative Model (simplified)
+    * Energy function:
+      $$E(y) = -\frac{1}{2}y^TWy$$
+    * Boltzmann Probability (Gibbs Distribution):
+      $$P(y) = \frac{1}{Z}\exp\left(-\frac{E(y)}{T}\right)$$
+    * Parameter: $W$
+* It has a probability for producing any binary pattern $y$
+    * We assume $y_i = 0 \text{ or } 1 \text{ (or } \pm 1)$
+    * Effective local field at $y_i$:
+      $$z_i = \frac{1}{T} \sum_{j} w_{j,i}y_j$$
+    * Conditional activation probability (Sigmoid):
+      $$P(y_i = 1 \mid y_{j \neq i}) = \frac{1}{1 + e^{-z_i}}$$
+:::
+
+::: {.callout-note collapse="true"}
+## Boltzmann Machine: Training
+
+* Goal
+    * Remember a set of desired patterns $P = \{y^p\}$
+    * Now we have a probability distribution $P(y)$ with parameter $W$
+* Objective: maximum likelihood learning (assume $T = 1$)
+    * Probability of a particular pattern:
+      $$P(y) = \frac{\exp\left(\frac{1}{2}y^TWy\right)}{\sum_{y'} \exp\left(\frac{1}{2}y'^TWy'\right)}$$
+    * Maximize log-likelihood:
+      $$L(W) = \frac{1}{N_P} \sum_{y \in P} \frac{1}{2}y^TWy - \log \sum_{y'} \exp\left(\frac{1}{2}y'^TWy'\right)$$
+
+* Gradient Ascent $\nabla_{w_{ij}}L$
+    * $\nabla_{w_{ij}}L = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \sum_{y'} \frac{\exp\left(\frac{1}{2}y'^TWy'\right)}{Z} \cdot y'_i y'_j$
+    * $\nabla_{w_{ij}}L = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \mathbb{E}_{y'}[y'_i y'_j]$  (Monte-Carlo Approximation)
+    * Draw a set of samples $S$ for $y'$ according to the probability,
+    * $\nabla_{w_{ij}}L = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \frac{1}{|S|}\sum_{y' \in S} y'_i y'_j$
+
+:::
+
+::: {.callout-note collapse="true"}
+## Boltzmann Machine: Overall Training Algorithm
+
+* Overall Training
+    * Initialize $W$
+    * Maximize log-likelihood with $M$ Monte-Carlo samples
+      $$\nabla_{w_{ij}}L(W) = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \frac{1}{M}\sum_{y' \in S} y'_i y'_j$$
+    * $w_{ij} \leftarrow w_{ij} + \eta\nabla_{w_{ij}}L(W)$ (we are maximizing likelihood)
+:::
+
+### Boltzmann Machine with Hidden Neurons
+
+::: {.callout-tip collapse="true"}
+## Mathematical Formulation with Hidden Variables
+
+* Maximum log-likelihood learning
+  $$P(v) = \sum_{h} P(v, h) = \sum_{h} \frac{\exp(y^TWy)}{\sum_{y'} \exp(y'^TWy')}$$
+  $$L(W) = \frac{1}{|P|} \sum_{v \in P} \log \left( \sum_{h} \exp(y^TWy) \right) - \log \left( \sum_{y'} \exp(y'^TWy') \right)$$
+* Gradient $\nabla L(W)$?
+    * The first term is also in the form of log-sum
+    * Monte Carlo estimates for each $v \in P$!
+:::
+
+::: {.callout-note collapse="true"}
+## Gradient Derivation
+
+* Maximum log-likelihood learning
+  $$\nabla_{w_{ij}}L(W) = \frac{1}{|P|} \sum_{v \in P} E_{h}[y_iy_j] - E_{y'}[y'_i y'_j]$$
+:::
+
+::: {.callout-note collapse="true"}
+## Overall Training Algorithm 
+
+* Overall Training
+    * Initialize $W$
+    * For $v \in P$, fixed the visible neurons, run Gibbs sampling to get $K$ samples
+        * Collect all conditioned samples as $S_c$
+    * Randomly initialize all neurons, run Gibbs sampling to get $M$ samples
+        * Collect free samples as $S$
+    * Maximize log-likelihood with $N_pK + M$ Monte-Carlo samples
+      $$\nabla_{w_{ij}}L(W) = \frac{1}{N_PK} \sum_{y \in S_c} y_iy_j - \frac{1}{M} \sum_{y' \in S} y'_i y'_j$$
+    * $w_{ij} \leftarrow w_{ij} + \eta\nabla_{w_{ij}}L(W)$
+:::
+
+### Restricted Boltzmann Machine
+
+::: {.callout-tip collapse="true"}
+## Restricted Boltzmann Machine Layer Rules
+
+* Computation Rules: same as Boltzmann machine
+    * Hidden neurons $h_i$
+      $$z_i = \sum_{j} w_{ij}v_j, \quad P(h_i = 1 \mid v_j) = \frac{1}{1 + \exp(-z_i)}$$
+    * Visible neurons $v_j$
+      $$z_j = \sum_{i} w_{ij}h_i, \quad P(v_j = 1 \mid h_i) = \frac{1}{1 + \exp(-z_j)}$$
+* **Iterative Sampling!** (Alternating between Layers)
+:::
+
+::: {.callout-note collapse="true"}
+## Theoretical MLE Gradient & Alternating MCMC
+
+* Maximum Likelihood Estimate
+  $$\nabla_{w_{ij}}L(W) = \frac{1}{N_p K}\sum_{v \in P} {v_0}_i {h_0}_j - \frac{1}{M}\sum v_{\infty_i} h_{\infty_j}$$
+* Directly run Gibbs sampling from $v_0$ for 3 steps will be sufficient!
+  $$v_0 \to h_0 \to v_1 \to h_1 \to v_2 \to h_2 \to \dots \to v_\infty \to h_\infty$$
+:::
+
+::: {.callout-note collapse="true"}
+## Practical Contrastive Divergence Optimization
+
+* Maximum Likelihood Estimate (Empirical Approximation)
+  $$\nabla_{w_{ij}}L(W) = \frac{1}{N_P}\sum_{v \in P} {v_0}_i {h_0}_j - {v_1}_i {h_1}_j$$
+* **Only 1 Gibbs sampling step is needed!** (Note: The slide's text mentions "3 steps", but the equation explicitly displays CD-1 unrolling where $\infty \leftarrow 1$).
+:::
+
+### General Energy-Based Models
+
+::: {.callout-tip collapse="true"}
+## Energy-Based Model
+
+* Goal of generative model
+    * A probability distribution of "patterns" $P(x)$
+* Requirement
+    * $P(x) \ge 0$ (non-negative)
+    * $\int_{x} P(x)dx = 1$ (sum to 1)
+* Energy-Based Model
+    * Energy function: $E(x; \theta)$ parameterized by $\theta$
+    * $P(x) = \frac{1}{Z}\exp\left(-E(x; \theta)\right)$
+    * $Z = \int_{x} \exp\left(-E(x; \theta)\right) dx \quad \text{partition function}$
+:::
+
+## Sampling Methods
+
+### Sampling from Probability Distributions
+
+::: {.callout-tip collapse="true"}
+## Inverse Transform Sampling
+
+* Solution: uniform sampling, find the category with cumulative density
+    * *The mapping from CDF to value is called Inverse distribution function (quantile function)*
+:::
+
+::: {.callout-tip collapse="true"}
+## Importance Sampling
+
+* Idea: weighted samples
+    * sample from "easy" distribution $q(x)$ (e.g., uniform)
+    * Use $p(x)/q(x)$ as the weight for the sample
+* Importance Sampling
+    * $q(x)$ proposal distribution
+    * $\frac{p(x)}{q(x)}$ importance weight
+    * $$\mathbb{E}_{x \sim p}[f(x)] = \mathbb{E}_{x \sim q}\left[\frac{p(x)}{q(x)}f(x)\right]$$
+:::
+
+### Markov Chain Monte-Carlo
+
+::: {.callout-tip collapse="true"}
+## Markov Chain Basics & Stationary Distribution
+
+* Markov Chain
+    * A state space $S$, a transition probability $P(s_j \mid s_i) = T_{ij}$
+    * $T$ is the transition matrix
+    * We also use $T(s_i \rightarrow s_j)$ to denote $T_{ij}$
+* A Markov Chain has a stationary distribution with a proper $T$
+    * Current distribution over states $\pi_t$
+    * Single step transition $\pi_{t+1} = T\pi_t$
+    * Stationary distribution $\pi = T^\infty \pi_0$
+:::
+
+::: {.callout-note collapse="true"}
+## The Condition for Stationarity: Detailed Balance
+
+  * Detailed Balance (sufficient condition)
+      $$\pi(s)T(s \rightarrow s') = \pi(s')T(s' \rightarrow s)$$
+:::
+
+::: {.callout-tip collapse="true"}
+## Metropolis-Hastings Algorithm Formulation
+
+* Construct a valid Markov Chain $T(s' \rightarrow s)$ for distribution $p(s)$
+    * Detailed balance: $p(s)T(s \rightarrow s') = p(s')T(s' \rightarrow s)$
+    * Ergodicity
+* Metropolis Hastings Algorithm
+    * A proposal distribution $q(s' \mid s)$ to produce next state $s'$ based on $s$
+    * Draw $s' \sim q(s' \mid s)$
+    * $$\alpha = \min\left(1, \frac{p(s')q(s' \rightarrow s)}{p(s)q(s \rightarrow s')}\right) \quad \text{($q(s \rightarrow s')$ denotes $q(s' \mid s)$ for simplicity)}$$
+    * Transition to $s'$ (**accept**) with probability $\alpha$ (**acceptance ratio**);
+    * O.w., stays at $s$ (**reject**)
+:::
+
+::: {.callout-tip collapse="true"}
+## Gibbs Sampling Formulation
+
+* Gibbs sampling
+    * $s = (s_0, s_1, \dots, s_N)$, we construct a coordinate-wise $q(s_i \rightarrow s'_i)$
+    * $q(s_i \rightarrow s'_i) = p(s'_i \mid s_{j \neq i})$ (conditional distribution)
+* Dimensionality
+    * Sample a single coordinate per step.
+* Gibbs sampling always get accepted!
+    * Acceptance ratio is always 1, $\alpha(s_i \rightarrow s'_i) = 1$
+:::

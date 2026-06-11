@@ -1,0 +1,169 @@
+---
+title: "Series"
+page-layout: article
+search: true
+number-offset: [8]
+number-sections: false
+
+crossref:
+  chapters: true      
+---
+
+::: {.callout-tip collapse="true"}
+
+## Series
+
+Given a sequence $\{a_k\}_{k=1}^\infty$ in a linear space $V$, the expression $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ is called a series, and $a_n$ is called the $n$-th term of this series. For a positive integer $N$, $\sum_{k=1}^N a_k = a_1 + \cdots + a_N$ is called the $N$-th partial sum of the series, denoted as $S_N$.
+
+If there exists an $S \in V$ such that $\lim_{N \to +\infty} S_N = S$, then the series $\sum_{k=1}^\infty a_k$ is said to be convergent, and $S$ is called the sum of the series $\sum_{k=1}^\infty a_k$, denoted as $S = \sum_{k=1}^\infty a_k$.
+
+Here, the meaning of $\lim_{N \to +\infty} S_N = S$ is: for any $\varepsilon > 0$, there exists an $N(\varepsilon)$ such that for any positive integer $N > N(\varepsilon)$, we have $\|S_N - S\| < \varepsilon$. Where $\|\cdot\|$ is the norm in $V$.
+
+A series that does not converge is called a divergent series.
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Cauchy Convergence Criterion
+
+A series $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ is said to satisfy the Cauchy property if for any $\varepsilon > 0$, there exists an $N(\varepsilon)$ such that for any positive integers $m > n > N(\varepsilon)$,
+
+$$
+\left\| \sum_{k=n}^m a_k \right\| < \varepsilon.
+$$
+:::
+
+::: {#thm-1}
+
+## Cauchy Convergence Criterion
+If a linear space $V$ is complete under the norm $\|\cdot\|$ (i.e., every Cauchy sequence converges), then the series $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ converges if and only if it satisfies the Cauchy property.
+
+:::
+
+::: {.callout-note collapse="true"}
+
+## Corollary
+If the series $\sum_{k=1}^\infty a_k$ converges, then:
+
+$$
+\lim_{n \to +\infty} \|a_n\| = 0.
+$$
+
+:::
+
+## Absolute Convergence and Comparison Tests
+
+::: {.callout-tip collapse="true"}
+
+## Absolute Convergence
+
+A series $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ is said to converge absolutely if the series of norms:
+
+$$
+\sum_{k=1}^\infty \|a_k\|
+$$
+
+converges.
+:::
+
+::: {.callout-note collapse="true"}
+
+## Proposition
+1. An absolutely convergent series is convergent.
+
+2. Suppose $a_k = O(b_k)$ as $k \to +\infty$, that is, there exist $K_0$ and $M > 0$ such that $\|a_k\| \le M\|b_k\|$ for all $k \ge K_0$.
+
+- If $\sum_{k=1}^\infty \|b_k\|$ converges, then $\sum_{k=1}^\infty \|a_k\|$ converges.
+- If $\sum_{k=1}^\infty \|a_k\|$ diverges, then $\sum_{k=1}^\infty \|b_k\|$ diverges.
+
+:::
+
+::: {#thm-2}
+
+## Integral Test
+
+Let $f: (0, +\infty) \to \mathbb{R}$ be a non-negative, monotonically decreasing function. Then the improper integral:
+
+$$
+\int_1^{+\infty} f(x) \, \mathrm{d}x
+$$
+
+converges if and only if the series:
+
+$$
+\sum_{k=1}^\infty f(k)
+$$
+
+converges.
+:::
+
+::: {#thm-3}
+
+## D'Alembert's Ratio Test
+
+Let $\sum_{k=1}^\infty a_k$ be a series in a complete normed linear space, and suppose $a_k \neq 0$ for all sufficiently large $k$. Let:
+
+$$
+R = \limsup_{k \to +\infty} \frac{\|a_{k+1}\|}{\|a_k\|}, \quad \text{and} \quad r = \liminf_{k \to +\infty} \frac{\|a_{k+1}\|}{\|a_k\|}
+$$
+
+1. If $R < 1$, the series $\sum_{k=1}^\infty a_k$ converges absolutely.
+
+2. If $r > 1$, the series diverges. 
+
+3. If $r \le 1 \le R$, the test is inconclusive.
+
+:::
+
+::: {#thm-4}
+
+## Cauchy's Root Test
+
+Let $\sum_{k=1}^\infty a_k$ be a series in a complete normed linear space. Let:
+
+$$
+\rho = \limsup_{k \to +\infty} \sqrt[k]{\|a_k\|}
+$$
+
+1. If $\rho < 1$, the series $\sum_{k=1}^\infty a_k$ converges absolutely.
+2. If $\rho > 1$ (or $\rho = +\infty$), the series diverges.
+3. If $\rho = 1$, the test is inconclusive.
+
+:::
+
+::: {#thm-5}
+
+## Raabe's Test 
+
+Let $\sum_{k=1}^\infty a_k$ be a series in a complete normed linear space, and suppose $a_k \neq 0$ for all sufficiently large $k$. Let:
+
+$$
+\rho = \lim_{k \to +\infty} k \left( \frac{\|a_k\|}{\|a_{k+1}\|} - 1 \right)
+$$
+
+
+1. If $\rho > 1$, the series $\sum_{k=1}^\infty a_k$ converges absolutely.
+
+2. If $\rho < 1$, the series of norms $\sum_{k=1}^\infty \|a_k\|$ diverges (i.e., the series does not converge absolutely).
+
+3. If $\rho = 1$, the test is inconclusive.
+
+:::
+
+::: {#thm-6}
+
+## Gauss's Test
+
+Let $\sum_{k=1}^\infty a_k$ be a series in a complete normed linear space, and suppose $a_k \neq 0$ for all sufficiently large $k$. If the ratio of successive norms can be expressed as an asymptotic expansion of the form:
+
+$$
+\frac{\|a_k\|}{\|a_{k+1}\|} = 1 + \frac{\beta}{k} + O\left(\frac{1}{k^p}\right) \quad \text{as } k \to +\infty
+$$
+
+where $\beta$ is a real constant, and $p > 1$ is a strictly positive constant (the remainder term is bounded by $C/k^p$). Then:
+
+1. If $\beta > 1$, the series $\sum_{k=1}^\infty a_k$ converges absolutely.
+
+2. If $\beta \le 1$, the series of norms $\sum_{k=1}^\infty \|a_k\|$ diverges.
+
+:::

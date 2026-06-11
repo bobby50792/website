@@ -11,7 +11,7 @@ crossref:
 
 ## Line Integrals of Vector Fields
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 
 ## Line Integral of Vector Fields
 The integral of a vector field $\mathbf{F}: \mathbb{R}^m \to \mathbb{R}^m$ along a piecewise $\mathscr{C}^1$ continuous path $\mathbf{x}: [a, b] \to \mathbb{R}^m$ is defined as
@@ -22,7 +22,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Differential 1-form
 
 In a Cartesian coordinate system, let $\mathbf{F} = (F_1, \dots, F_m)^T$ and $\mathbf{x} = (x_1, \dots, x_m)^T$, then
@@ -42,7 +42,7 @@ a differential 1-form.
 
 ## Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 ## Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields
 A differential 1-form $\omega$ is called an exact differential (or total differential) if there exists a $\mathscr{C}^1$ function $f$ such that $\omega = \mathrm{d}f$. In this case, $f$ is called a primitive function of $\omega$.
 
@@ -78,7 +78,7 @@ A vector field satisfying the latter condition is called an irrotational vector 
 
 ## Curl and Divergence of Plane Vector Fields, Green's Formula
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 
 ## Curl and Divergence of Plane Vector Fields
 For a plane $\mathscr{C}^1$ vector field
@@ -122,7 +122,7 @@ where $\partial\Omega$ is the boundary of the region $\Omega$, and its orientati
 
 ## The Concept of Surface Integrals of the Second Kind
 
-::: {.callout-tip collapse="false"}
+::: {.callout-tip collapse="true"}
 
 ## Surface Integrals of the Second Kind
 Let $(\Sigma, \mathbf{n})$ be an oriented surface. For a continuous vector field $\mathbf{F}: \Sigma \to \mathbf{R}^3$, the integral
@@ -172,3 +172,156 @@ $$
 where $\mathrm{d}\sigma$ is the $m$-dimensional (undirected) volume element of the surface $\Sigma$.
 :::
 
+::: {.callout-tip collapse="true"}
+
+## Wedge Product of Linear Functions and Differential 2-Forms
+
+For two linear functions $L_1, L_2$ and two vectors $\mathbf{u}, \mathbf{v}$, we denote:
+
+$$
+(L_1 \wedge L_2)(\mathbf{u}, \mathbf{v}) = \det \begin{pmatrix} L_1(\mathbf{u}) & L_1(\mathbf{v}) \\ L_2(\mathbf{u}) & L_2(\mathbf{v}) \end{pmatrix}.
+$$
+
+We denote the expression:
+
+$$
+\omega = X(x, y, z)\mathrm{d}y \wedge \mathrm{d}z + Y(x, y, z)\mathrm{d}z \wedge \mathrm{d}x + Z(x, y, z)\mathrm{d}x \wedge \mathrm{d}y,
+$$
+
+which is called a differential 2-form (or second-order differential form).
+
+
+:::
+
+::: {#thm-6}
+
+Let $\Sigma$ be an oriented $\mathscr{C}^1$ regular parametric surface in $\mathbb{R}^3$, with parametric equation $\mathbf{x} = \mathbf{x}(u_1, u_2)$, where $(u_1, u_2) \in D \subseteq \mathbb{R}^2$. Assume that the direction of the normal vector induced by the parametrization, $\frac{\partial \mathbf{x}}{\partial u_1} \times \frac{\partial \mathbf{x}}{\partial u_2}$, is consistent with the given normal vector field $\mathbf{n}$ of the surface.
+
+For a given continuous vector field $\mathbf{F} = (X, Y, Z)$, we construct the equivalent differential 2-form:
+
+$$
+\omega = X(x, y, z)\mathrm{d}y \wedge \mathrm{d}z + Y(x, y, z)\mathrm{d}z \wedge \mathrm{d}x + Z(x, y, z)\mathrm{d}x \wedge \mathrm{d}y
+$$
+
+Then the surface integral of the second kind (flux integral) of the vector field $\mathbf{F}$ over the surface $\Sigma$ is equivalent to the integral of the differential 2-form $\omega$ over $\Sigma$. Utilizing the determinant definition of the wedge product, the calculation formula is expressed as:
+
+$$
+\int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{\Sigma} \omega = \int_{D} \det\left(\mathbf{F}, \frac{\partial \mathbf{x}}{\partial u_1}, \frac{\partial \mathbf{x}}{\partial u_2}\right) \mathrm{d}u_1 \mathrm{d}u_2
+$$
+
+In this formula, the differential form is pulled back to the domain $D$ via the parametrization, and the expansion of the determinant precisely corresponds to a linear combination of Jacobians:
+
+$$
+\int_{\Sigma} \omega = \int_{D} \left( X \frac{\partial(y,z)}{\partial(u_1,u_2)} + Y \frac{\partial(z,x)}{\partial(u_1,u_2)} + Z \frac{\partial(x,y)}{\partial(u_1,u_2)} \right) \mathrm{d}u_1 \mathrm{d}u_2
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Exterior Derivative
+
+For a differentiable function (0-form) $f$, the exterior derivative of $f$ is defined as the first-order differential $\mathrm{d}f$.
+
+For a 1-form $\omega = F_1\mathrm{d}x^1 + \dots + F_m\mathrm{d}x^m$, the exterior derivative of $\omega$ is defined as:
+
+$$
+\mathrm{d}\omega = \mathrm{d}F_1 \wedge \mathrm{d}x^1 + \dots + \mathrm{d}F_m \wedge \mathrm{d}x^m.
+$$
+
+:::
+
+## Curl and Divergence of Spatial Vector Fields, Gauss's Theorem and Stokes's Theorem
+
+::: {.callout-tip collapse="true"}
+
+## Curl and Divergence
+
+For a vector field $\mathbf{F} = (X, Y, Z)^T$ in $\mathbb{R}^3$ (under Cartesian coordinates), we denote:
+
+$$
+\operatorname{rot} \mathbf{F} = \operatorname{curl} \mathbf{F} = \nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ X & Y & Z \end{vmatrix} = \begin{pmatrix} Z_y - Y_z \\ X_z - Z_x \\ Y_x - X_y \end{pmatrix},
+$$
+
+$$
+\operatorname{div} \mathbf{F} = \nabla \cdot \mathbf{F} = \begin{pmatrix} \frac{\partial}{\partial x} \\ \frac{\partial}{\partial y} \\ \frac{\partial}{\partial z} \end{pmatrix} \cdot \begin{pmatrix} X \\ Y \\ Z \end{pmatrix} = X_x + Y_y + Z_z = \operatorname{tr} \frac{\partial(X, Y, Z)}{\partial(x, y, z)},
+$$
+
+These are called the curl and divergence of $\mathbf{F}$, respectively.
+
+A vector field with zero curl is called an irrotational vector field, and a vector field with zero divergence is called a solenoidal (or source-free) vector field.
+:::
+
+::: {#thm-7}
+## Gauss's Theorem
+
+Let $\Omega \subset \mathbb{R}^3$ be a bounded closed region, and the boundary $\partial \Omega$ of $\Omega$ be a piecewise $\mathscr{C}^1$ surface, oriented outwards from $\Omega$. Then:
+
+1. For any $\mathscr{C}^1$ vector field $\mathbf{F}: \Omega \to \mathbb{R}^3$,
+
+$$
+\int_{\partial \Omega} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{\Omega} \operatorname{div} \mathbf{F} \, \mathrm{d}\mu,
+$$
+
+which means the net outward flux of the vector field along the region's boundary is equal to the integral of the divergence inside the region. Here, $\mu$ is the three-dimensional volume.
+
+2. For any $\mathscr{C}^1$ differential 2-form $\omega = P(x,y,z)\mathrm{d}y \wedge \mathrm{d}z + Q(x,y,z)\mathrm{d}z \wedge \mathrm{d}x + R(x,y,z)\mathrm{d}x \wedge \mathrm{d}y$, the generalized Stokes' theorem $\int_{\partial \Omega} \omega = \int_{\Omega} \mathrm{d}\omega$ takes the explicit expanded form:
+
+$$
+\int_{\partial \Omega} P \, \mathrm{d}y \wedge \mathrm{d}z + Q \, \mathrm{d}z \wedge \mathrm{d}x + R \, \mathrm{d}x \wedge \mathrm{d}y = \int_{\Omega} \left( \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z} \right) \mathrm{d}x \wedge \mathrm{d}y \wedge \mathrm{d}z.
+$$
+
+:::
+
+::: {.callout-note collapse="true"}
+## Generalized Gauss's Theorem
+
+Let $\Omega \subset \mathbb{R}^{m+1}$ be a bounded closed region, and the boundary $\partial \Omega$ of $\Omega$ be a piecewise $\mathscr{C}^1$ $m$-dimensional surface, oriented outwards from $\Omega$. Then:
+
+1. For any $\mathscr{C}^1$ vector field $\mathbf{F}: \Omega \to \mathbb{R}^{m+1}$,
+
+$$
+\int_{\partial \Omega} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{\Omega} \operatorname{div} \mathbf{F} \, \mathrm{d}\mu,
+$$
+
+which means the net outward flux of the vector field along the region's boundary is equal to the integral of the divergence inside the region. Here, $\mu$ is the $(m+1)$-dimensional volume.
+
+2. For any $\mathscr{C}^1$ $m$-form
+
+$$
+\omega = \sum_{k=1}^{m+1} (-1)^{\#\sigma(k)} X_k \mathrm{d}x_1 \wedge \cdots \wedge \mathrm{d}x_{k-1} \wedge \mathrm{d}x_{k+1} \wedge \cdots \wedge \mathrm{d}x_{m+1},
+$$
+
+(where $\#\sigma(k)$ is the parity of the permutation of $k, 1, 2, \dots, k-1, k+1, \dots, m+1$ relative to $1, 2, \dots, m+1$), it holds that
+
+$$
+\int_{\partial \Omega} \omega = \int_{\Omega} \mathrm{d}\omega,
+$$
+
+where
+
+$$
+\mathrm{d}\omega = \operatorname{tr} \frac{\partial(X_1, X_2, \dots, X_{m+1})}{\partial(x_1, x_2, \dots, x_{m+1})} \mathrm{d}x_1 \wedge \mathrm{d}x_2 \wedge \cdots \wedge \mathrm{d}x_{m+1}.
+$$
+:::
+
+::: {#thm-8}
+## Stokes's Theorem
+
+Let $\Sigma \subset \mathbb{R}^3$ be a bounded, piecewise $\mathscr{C}^1$ oriented surface, and the boundary $\partial \Sigma$ of $\Sigma$ be a piecewise $\mathscr{C}^1$ oriented curve, such that when standing in the direction of the specified normal of the surface and walking along $\partial \Sigma$, the surface is always on the left-hand side. Then:
+
+1. For any $\mathscr{C}^1$ vector field $\mathbf{F}: \Sigma \to \mathbb{R}^3$,
+
+$$
+\int_{\partial \Sigma} \langle \mathbf{F}, \mathbf{T} \rangle \mathrm{d}l = \int_{\Sigma} \langle \operatorname{rot} \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma,
+$$
+
+which means the circulation of the vector field along the surface boundary is equal to the integral of the curl over the surface.
+
+2. For any $\mathscr{C}^1$ differential 1-form $\omega = P(x,y,z)\mathrm{d}x + Q(x,y,z)\mathrm{d}y + R(x,y,z)\mathrm{d}z$, the generalized Stokes' theorem $\int_{\partial \Sigma} \omega = \int_{\Sigma} \mathrm{d}\omega$ takes the explicit expanded form:
+
+$$
+\int_{\partial \Sigma} P \, \mathrm{d}x + Q \, \mathrm{d}y + R \, \mathrm{d}z = \int_{\Sigma} \left( \frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z} \right) \mathrm{d}y \wedge \mathrm{d}z + \left( \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x} \right) \mathrm{d}z \wedge \mathrm{d}x + \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \mathrm{d}x \wedge \mathrm{d}y.
+$$
+
+:::

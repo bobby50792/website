@@ -1,0 +1,437 @@
+---
+title: "Diffusion Models & Flow Matching"
+page-layout: article
+search: true
+number-offset: [5]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
+## Diffusion Models
+
+::: {.callout-tip collapse="true"}
+## DDPM: Forward and Reverse Processes
+
+### Forward Process: Add Noise
+
+* The forward process is fixed and gradually adds Gaussian noise to data:
+  $$
+  q(x_{1:T}\mid x_0)
+  :=
+  \prod_{t=1}^{T} q(x_t\mid x_{t-1})
+  $$
+
+  $$
+  q(x_t\mid x_{t-1})
+  :=
+  \mathcal N
+  \left(
+  x_t;
+  \sqrt{1-\beta_t}x_{t-1},
+  \beta_t I
+  \right)
+  $$
+
+* Equivalently, one step of the forward process can be written as:
+  $$
+  x_t
+  =
+  \sqrt{1-\beta_t}x_{t-1}
+  +
+  \sqrt{\beta_t}\epsilon,
+  \qquad
+  \epsilon\sim\mathcal N(0,I)
+  $$
+
+* Define:
+  $$
+  \alpha_t=1-\beta_t,
+  \qquad
+  \bar\alpha_t=\prod_{s=1}^{t}\alpha_s
+  $$
+
+* Then we can sample $x_t$ directly from $x_0$:
+  $$
+  x_t
+  =
+  \sqrt{\bar\alpha_t}x_0
+  +
+  \sqrt{1-\bar\alpha_t}\epsilon,
+  \qquad
+  \epsilon\sim\mathcal N(0,I)
+  $$
+
+* The goal of the forward process is to transform the data distribution into a standard Gaussian:
+  $$
+  x_T\approx\mathcal N(0,I)
+  $$
+
+  When $T$ is large:
+  $$
+  \sqrt{\bar\alpha_T}\rightarrow 0,
+  \qquad
+  1-\bar\alpha_T\rightarrow 1
+  $$
+
+---
+
+### Reverse Process: Denoise
+
+* The reverse process is learned and gradually removes noise:
+  $$
+  p_\theta(x_{0:T})
+  :=
+  p(x_T)
+  \prod_{t=1}^{T}
+  p_\theta(x_{t-1}\mid x_t)
+  $$
+
+* Each reverse step is modeled as a Gaussian:
+  $$
+  p_\theta(x_{t-1}\mid x_t)
+  :=
+  \mathcal N
+  \left(
+  x_{t-1};
+  \mu_\theta(x_t,t),
+  \Sigma_\theta(x_t,t)
+  \right)
+  $$
+
+* A denoising neural network predicts the reverse transition parameters:
+  $$
+  \mu_\theta(x_t,t),
+  \qquad
+  \Sigma_\theta(x_t,t)
+  $$
+
+* Generation starts from pure noise:
+  $$
+  x_T\sim\mathcal N(0,I)
+  $$
+
+  and repeatedly denoises:
+  $$
+  x_T \rightarrow x_{T-1}\rightarrow \cdots \rightarrow x_0
+  $$
+
+:::
+
+::: {.callout-note collapse="true"}
+## DDPM: Variational Inference (ELBO)
+
+* Variational inference identity:
+  $$
+  -\log p(x)
+  =
+  -\int q_x(z)\log p(x\mid z)dz
+  +
+  KL(q_x(z)\parallel p(z))
+  -
+  KL(q_x(z)\parallel p(z\mid x))
+  $$
+
+* Therefore, minimizing negative log-likelihood can be replaced by minimizing an upper bound:
+  $$
+  -\log p(x)
+  \le
+  -\int q_x(z)\log p(x\mid z)dz
+  +
+  KL(q_x(z)\parallel p(z))
+  $$
+
+* DDPM is similar to a hierarchical VAE.
+
+* The latent code is the entire noisy trajectory:
+  $$
+  z=\{x_1,x_2,\dots,x_T\}
+  $$
+
+* Forward process as encoder:
+  $$
+  q(x_{1:T}\mid x_0)
+  =
+  \prod_{t=1}^{T}q(x_t\mid x_{t-1})
+  $$
+
+* Reverse process as decoder:
+  $$
+  p_\theta(x_{0:T})
+  =
+  p(x_T)
+  \prod_{t=1}^{T}p_\theta(x_{t-1}\mid x_t)
+  $$
+
+* DDPM variational objective:
+  $$
+  \mathbb E_q
+  \left[
+  D_{KL}(q(x_T\mid x_0)\parallel p(x_T))
+  +
+  \sum_{t>1}
+  D_{KL}
+  \left(
+  q(x_{t-1}\mid x_t,x_0)
+  \parallel
+  p_\theta(x_{t-1}\mid x_t)
+  \right)
+  -
+  \log p_\theta(x_0\mid x_1)
+  \right]
+  $$
+
+* Term notation:
+  $$
+  L_T
+  =
+  D_{KL}(q(x_T\mid x_0)\parallel p(x_T))
+  $$
+  $$
+  L_{t-1}
+  =
+  D_{KL}
+  \left(
+  q(x_{t-1}\mid x_t,x_0)
+  \parallel
+  p_\theta(x_{t-1}\mid x_t)
+  \right)
+  $$
+  $$
+  L_0
+  =
+  -\log p_\theta(x_0\mid x_1)
+  $$
+
+* The true posterior of the forward process is Gaussian:
+  $$
+  q(x_{t-1}\mid x_t,x_0)
+  =
+  \mathcal N
+  \left(
+  x_{t-1};
+  \tilde\mu_t(x_t,x_0),
+  \tilde\beta_t I
+  \right)
+  $$
+
+  where
+  $$
+  \tilde\mu_t(x_t,x_0)
+  :=
+  \frac{\sqrt{\bar\alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0
+  +
+  \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t
+  $$
+
+  and
+  $$
+  \tilde\beta_t
+  :=
+  \frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t
+  $$
+
+* The forward process is decomposed into a similar form as the reverse process so that the KL divergence terms are easy to compute.
+
+:::
+
+::: {.callout-note collapse="true"}
+## DDPM: Training Loss and Sampling
+
+* Since
+  $$
+  q(x_{t-1}\mid x_t,x_0)
+  $$
+  and
+  $$
+  p_\theta(x_{t-1}\mid x_t)
+  $$
+  are both Gaussian, their KL divergence can be reduced to a mean-matching loss:
+  $$
+  L_{t-1}
+  =
+  D_{KL}
+  \left(
+  q(x_{t-1}\mid x_t,x_0)
+  \parallel
+  p_\theta(x_{t-1}\mid x_t)
+  \right)
+  $$
+  $$
+  =
+  \mathbb E_q
+  \left[
+  \frac{1}{2\sigma_t^2}
+  \left\|
+  \tilde\mu_t(x_t,x_0)
+  -
+  \mu_\theta(x_t,t)
+  \right\|^2
+  \right]
+  + C
+  $$
+
+* The true posterior mean can be written with the noise $\epsilon$:
+  $$
+  \tilde\mu_t(x_t,x_0)
+  =
+  \frac{1}{\sqrt{1-\beta_t}}
+  \left(
+  x_t
+  -
+  \frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon
+  \right)
+  $$
+
+* Reparametrize the model mean by predicting noise:
+  $$
+  \mu_\theta(x_t,t)
+  =
+  \frac{1}{\sqrt{1-\beta_t}}
+  \left(
+  x_t
+  -
+  \frac{\beta_t}{\sqrt{1-\bar\alpha_t}}
+  \epsilon_\theta(x_t,t)
+  \right)
+  $$
+
+* Therefore:
+  $$
+  L_{t-1}
+  =
+  \mathbb E_{x_0\sim q(x_0),\epsilon\sim\mathcal N(0,I)}
+  \left[
+  \frac{\beta_t^2}
+  {2\sigma_t^2(1-\beta_t)(1-\bar\alpha_t)}
+  \left\|
+  \epsilon
+  -
+  \epsilon_\theta
+  \left(
+  \sqrt{\bar\alpha_t}x_0
+  +
+  \sqrt{1-\bar\alpha_t}\epsilon,
+  t
+  \right)
+  \right\|^2
+  \right]
+  + C
+  $$
+
+* Let
+  $$
+  x_t=
+  \sqrt{\bar\alpha_t}x_0
+  +
+  \sqrt{1-\bar\alpha_t}\epsilon
+  $$
+
+  and define the weighting coefficient:
+  $$
+  \lambda_t
+  =
+  \frac{\beta_t^2}
+  {2\sigma_t^2(1-\beta_t)(1-\bar\alpha_t)}
+  $$
+
+* DDPM uses the simplified loss by setting $\lambda_t=1$:
+  $$
+  L_{\text{simple}}(\theta)
+  :=
+  \mathbb E_{t,x_0,\epsilon}
+  \left[
+  \left\|
+  \epsilon
+  -
+  \epsilon_\theta
+  \left(
+  \sqrt{\bar\alpha_t}x_0
+  +
+  \sqrt{1-\bar\alpha_t}\epsilon,
+  t
+  \right)
+  \right\|^2
+  \right]
+  $$
+
+---
+
+### Algorithm 1: Training
+
+1. Repeat until converged.
+2. Sample a clean data point:
+   $$
+   x_0\sim q(x_0)
+   $$
+3. Sample a timestep:
+   $$
+   t\sim \mathrm{Uniform}(\{1,\dots,T\})
+   $$
+4. Sample Gaussian noise:
+   $$
+   \epsilon\sim\mathcal N(0,I)
+   $$
+5. Construct noisy input:
+   $$
+   x_t=
+   \sqrt{\bar\alpha_t}x_0
+   +
+   \sqrt{1-\bar\alpha_t}\epsilon
+   $$
+6. Take a gradient descent step on:
+   $$
+   \nabla_\theta
+   \left\|
+   \epsilon
+   -
+   \epsilon_\theta(x_t,t)
+   \right\|^2
+   $$
+
+---
+
+### Algorithm 2: Sampling
+
+1. Start from pure Gaussian noise:
+   $$
+   x_T\sim\mathcal N(0,I)
+   $$
+
+2. For
+   $$
+   t=T,\dots,1
+   $$
+   repeat:
+
+   sample
+   $$
+   z\sim\mathcal N(0,I)
+   $$
+   if $t>1$, otherwise set $z=0$.
+
+   update:
+   $$
+   x_{t-1}
+   =
+   \frac{1}{\sqrt{\alpha_t}}
+   \left(
+   x_t
+   -
+   \frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}
+   \epsilon_\theta(x_t,t)
+   \right)
+   +
+   \sigma_t z
+   $$
+
+3. Return generated sample:
+   $$
+   x_0
+   $$
+
+:::
+
+## Score-based Diffusion Models

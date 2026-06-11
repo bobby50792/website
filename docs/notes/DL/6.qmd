@@ -1,0 +1,12 @@
+---
+title: "Sequence Modeling"
+page-layout: article
+search: true
+number-offset: [6]
+number-sections: false
+
+crossref:
+  chapters: true      
+
+---
+
