@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../docs/notes/Math4CS&amp;AI/index.html" rel="next">
+<link href="../../../../docs/notes/Calculus/2/8.html" rel="next">
 <link href="../../../../docs/notes/Calculus/2/6.html" rel="prev">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -454,6 +454,24 @@ window.Quarto = {
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/Calculus/2/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/Calculus/2/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series of Functions and Power Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier Series</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -623,6 +641,53 @@ window.Quarto = {
   </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy-Based Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/DL/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generative Adversarial Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/DL/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/DL/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/DL/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -639,6 +704,7 @@ window.Quarto = {
   <li><a href="#total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields" id="toc-total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields" class="nav-link" data-scroll-target="#total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields">Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields</a></li>
   <li><a href="#curl-and-divergence-of-plane-vector-fields-greens-formula" id="toc-curl-and-divergence-of-plane-vector-fields-greens-formula" class="nav-link" data-scroll-target="#curl-and-divergence-of-plane-vector-fields-greens-formula">Curl and Divergence of Plane Vector Fields, Green’s Formula</a></li>
   <li><a href="#the-concept-of-surface-integrals-of-the-second-kind" id="toc-the-concept-of-surface-integrals-of-the-second-kind" class="nav-link" data-scroll-target="#the-concept-of-surface-integrals-of-the-second-kind">The Concept of Surface Integrals of the Second Kind</a></li>
+  <li><a href="#curl-and-divergence-of-spatial-vector-fields-gausss-theorem-and-stokess-theorem" id="toc-curl-and-divergence-of-spatial-vector-fields-gausss-theorem-and-stokess-theorem" class="nav-link" data-scroll-target="#curl-and-divergence-of-spatial-vector-fields-gausss-theorem-and-stokess-theorem">Curl and Divergence of Spatial Vector Fields, Gauss’s Theorem and Stokes’s Theorem</a></li>
   </ul>
 </nav>
     </div>
@@ -668,7 +734,7 @@ window.Quarto = {
 <section id="line-integrals-of-vector-fields" class="level2">
 <h2 class="anchored" data-anchor-id="line-integrals-of-vector-fields">Line Integrals of Vector Fields</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -677,7 +743,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The integral of a vector field <span class="math inline">\(\mathbf{F}: \mathbb{R}^m \to \mathbb{R}^m\)</span> along a piecewise <span class="math inline">\(\mathscr{C}^1\)</span> continuous path <span class="math inline">\(\mathbf{x}: [a, b] \to \mathbb{R}^m\)</span> is defined as</p>
 <p><span class="math display">\[
@@ -687,7 +753,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -696,7 +762,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In a Cartesian coordinate system, let <span class="math inline">\(\mathbf{F} = (F_1, \dots, F_m)^T\)</span> and <span class="math inline">\(\mathbf{x} = (x_1, \dots, x_m)^T\)</span>, then</p>
 <p><span class="math display">\[
@@ -714,7 +780,7 @@ window.Quarto = {
 <section id="total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields" class="level2">
 <h2 class="anchored" data-anchor-id="total-differentials-potential-fields-conservative-fields-and-irrotational-vector-fields">Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -723,7 +789,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A differential 1-form <span class="math inline">\(\omega\)</span> is called an exact differential (or total differential) if there exists a <span class="math inline">\(\mathscr{C}^1\)</span> function <span class="math inline">\(f\)</span> such that <span class="math inline">\(\omega = \mathrm{d}f\)</span>. In this case, <span class="math inline">\(f\)</span> is called a primitive function of <span class="math inline">\(\omega\)</span>.</p>
 <p>A vector field <span class="math inline">\(\mathbf{F}\)</span> is called a potential field if there exists a <span class="math inline">\(\mathscr{C}^1\)</span> function <span class="math inline">\(f\)</span> such that <span class="math inline">\(\mathbf{F} = \nabla f\)</span>. In this case, <span class="math inline">\(f\)</span> is called a potential function of <span class="math inline">\(\mathbf{F}\)</span>.</p>
@@ -752,7 +818,7 @@ window.Quarto = {
 <section id="curl-and-divergence-of-plane-vector-fields-greens-formula" class="level2">
 <h2 class="anchored" data-anchor-id="curl-and-divergence-of-plane-vector-fields-greens-formula">Curl and Divergence of Plane Vector Fields, Green’s Formula</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -761,7 +827,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For a plane <span class="math inline">\(\mathscr{C}^1\)</span> vector field <span class="math display">\[\mathbf{F}(x, y) = \begin{pmatrix} X(x, y) \\ Y(x, y) \end{pmatrix},\]</span></p>
 <p>denote <span class="math display">\[\operatorname{rot} \mathbf{F} = Y_x - X_y,\]</span></p>
@@ -793,7 +859,7 @@ window.Quarto = {
 <section id="the-concept-of-surface-integrals-of-the-second-kind" class="level2">
 <h2 class="anchored" data-anchor-id="the-concept-of-surface-integrals-of-the-second-kind">The Concept of Surface Integrals of the Second Kind</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -802,7 +868,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\((\Sigma, \mathbf{n})\)</span> be an oriented surface. For a continuous vector field <span class="math inline">\(\mathbf{F}: \Sigma \to \mathbf{R}^3\)</span>, the integral <span class="math display">\[
 \int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle d\sigma
@@ -849,6 +915,161 @@ z = z(u_1, u_2),
 <p>where <span class="math inline">\(\mathrm{d}\sigma\)</span> is the <span class="math inline">\(m\)</span>-dimensional (undirected) volume element of the surface <span class="math inline">\(\Sigma\)</span>.</p>
 </div>
 </div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Wedge Product of Linear Functions and Differential 2-Forms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For two linear functions <span class="math inline">\(L_1, L_2\)</span> and two vectors <span class="math inline">\(\mathbf{u}, \mathbf{v}\)</span>, we denote:</p>
+<p><span class="math display">\[
+(L_1 \wedge L_2)(\mathbf{u}, \mathbf{v}) = \det \begin{pmatrix} L_1(\mathbf{u}) &amp; L_1(\mathbf{v}) \\ L_2(\mathbf{u}) &amp; L_2(\mathbf{v}) \end{pmatrix}.
+\]</span></p>
+<p>We denote the expression:</p>
+<p><span class="math display">\[
+\omega = X(x, y, z)\mathrm{d}y \wedge \mathrm{d}z + Y(x, y, z)\mathrm{d}z \wedge \mathrm{d}x + Z(x, y, z)\mathrm{d}x \wedge \mathrm{d}y,
+\]</span></p>
+<p>which is called a differential 2-form (or second-order differential form).</p>
+</div>
+</div>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.6</strong></span> Let <span class="math inline">\(\Sigma\)</span> be an oriented <span class="math inline">\(\mathscr{C}^1\)</span> regular parametric surface in <span class="math inline">\(\mathbb{R}^3\)</span>, with parametric equation <span class="math inline">\(\mathbf{x} = \mathbf{x}(u_1, u_2)\)</span>, where <span class="math inline">\((u_1, u_2) \in D \subseteq \mathbb{R}^2\)</span>. Assume that the direction of the normal vector induced by the parametrization, <span class="math inline">\(\frac{\partial \mathbf{x}}{\partial u_1} \times \frac{\partial \mathbf{x}}{\partial u_2}\)</span>, is consistent with the given normal vector field <span class="math inline">\(\mathbf{n}\)</span> of the surface.</p>
+<p>For a given continuous vector field <span class="math inline">\(\mathbf{F} = (X, Y, Z)\)</span>, we construct the equivalent differential 2-form:</p>
+<p><span class="math display">\[
+\omega = X(x, y, z)\mathrm{d}y \wedge \mathrm{d}z + Y(x, y, z)\mathrm{d}z \wedge \mathrm{d}x + Z(x, y, z)\mathrm{d}x \wedge \mathrm{d}y
+\]</span></p>
+<p>Then the surface integral of the second kind (flux integral) of the vector field <span class="math inline">\(\mathbf{F}\)</span> over the surface <span class="math inline">\(\Sigma\)</span> is equivalent to the integral of the differential 2-form <span class="math inline">\(\omega\)</span> over <span class="math inline">\(\Sigma\)</span>. Utilizing the determinant definition of the wedge product, the calculation formula is expressed as:</p>
+<p><span class="math display">\[
+\int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{\Sigma} \omega = \int_{D} \det\left(\mathbf{F}, \frac{\partial \mathbf{x}}{\partial u_1}, \frac{\partial \mathbf{x}}{\partial u_2}\right) \mathrm{d}u_1 \mathrm{d}u_2
+\]</span></p>
+<p>In this formula, the differential form is pulled back to the domain <span class="math inline">\(D\)</span> via the parametrization, and the expansion of the determinant precisely corresponds to a linear combination of Jacobians:</p>
+<p><span class="math display">\[
+\int_{\Sigma} \omega = \int_{D} \left( X \frac{\partial(y,z)}{\partial(u_1,u_2)} + Y \frac{\partial(z,x)}{\partial(u_1,u_2)} + Z \frac{\partial(x,y)}{\partial(u_1,u_2)} \right) \mathrm{d}u_1 \mathrm{d}u_2
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Exterior Derivative
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a differentiable function (0-form) <span class="math inline">\(f\)</span>, the exterior derivative of <span class="math inline">\(f\)</span> is defined as the first-order differential <span class="math inline">\(\mathrm{d}f\)</span>.</p>
+<p>For a 1-form <span class="math inline">\(\omega = F_1\mathrm{d}x^1 + \dots + F_m\mathrm{d}x^m\)</span>, the exterior derivative of <span class="math inline">\(\omega\)</span> is defined as:</p>
+<p><span class="math display">\[
+\mathrm{d}\omega = \mathrm{d}F_1 \wedge \mathrm{d}x^1 + \dots + \mathrm{d}F_m \wedge \mathrm{d}x^m.
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="curl-and-divergence-of-spatial-vector-fields-gausss-theorem-and-stokess-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="curl-and-divergence-of-spatial-vector-fields-gausss-theorem-and-stokess-theorem">Curl and Divergence of Spatial Vector Fields, Gauss’s Theorem and Stokes’s Theorem</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Curl and Divergence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a vector field <span class="math inline">\(\mathbf{F} = (X, Y, Z)^T\)</span> in <span class="math inline">\(\mathbb{R}^3\)</span> (under Cartesian coordinates), we denote:</p>
+<p><span class="math display">\[
+\operatorname{rot} \mathbf{F} = \operatorname{curl} \mathbf{F} = \nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ \frac{\partial}{\partial x} &amp; \frac{\partial}{\partial y} &amp; \frac{\partial}{\partial z} \\ X &amp; Y &amp; Z \end{vmatrix} = \begin{pmatrix} Z_y - Y_z \\ X_z - Z_x \\ Y_x - X_y \end{pmatrix},
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{div} \mathbf{F} = \nabla \cdot \mathbf{F} = \begin{pmatrix} \frac{\partial}{\partial x} \\ \frac{\partial}{\partial y} \\ \frac{\partial}{\partial z} \end{pmatrix} \cdot \begin{pmatrix} X \\ Y \\ Z \end{pmatrix} = X_x + Y_y + Z_z = \operatorname{tr} \frac{\partial(X, Y, Z)}{\partial(x, y, z)},
+\]</span></p>
+<p>These are called the curl and divergence of <span class="math inline">\(\mathbf{F}\)</span>, respectively.</p>
+<p>A vector field with zero curl is called an irrotational vector field, and a vector field with zero divergence is called a solenoidal (or source-free) vector field.</p>
+</div>
+</div>
+</div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.7 (Gauss’s Theorem)</strong></span> Let <span class="math inline">\(\Omega \subset \mathbb{R}^3\)</span> be a bounded closed region, and the boundary <span class="math inline">\(\partial \Omega\)</span> of <span class="math inline">\(\Omega\)</span> be a piecewise <span class="math inline">\(\mathscr{C}^1\)</span> surface, oriented outwards from <span class="math inline">\(\Omega\)</span>. Then:</p>
+<ol type="1">
+<li>For any <span class="math inline">\(\mathscr{C}^1\)</span> vector field <span class="math inline">\(\mathbf{F}: \Omega \to \mathbb{R}^3\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+\int_{\partial \Omega} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{\Omega} \operatorname{div} \mathbf{F} \, \mathrm{d}\mu,
+\]</span></p>
+<p>which means the net outward flux of the vector field along the region’s boundary is equal to the integral of the divergence inside the region. Here, <span class="math inline">\(\mu\)</span> is the three-dimensional volume.</p>
+<ol start="2" type="1">
+<li>For any <span class="math inline">\(\mathscr{C}^1\)</span> differential 2-form <span class="math inline">\(\omega = P(x,y,z)\mathrm{d}y \wedge \mathrm{d}z + Q(x,y,z)\mathrm{d}z \wedge \mathrm{d}x + R(x,y,z)\mathrm{d}x \wedge \mathrm{d}y\)</span>, the generalized Stokes’ theorem <span class="math inline">\(\int_{\partial \Omega} \omega = \int_{\Omega} \mathrm{d}\omega\)</span> takes the explicit expanded form:</li>
+</ol>
+<p><span class="math display">\[
+\int_{\partial \Omega} P \, \mathrm{d}y \wedge \mathrm{d}z + Q \, \mathrm{d}z \wedge \mathrm{d}x + R \, \mathrm{d}x \wedge \mathrm{d}y = \int_{\Omega} \left( \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z} \right) \mathrm{d}x \wedge \mathrm{d}y \wedge \mathrm{d}z.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Generalized Gauss’s Theorem
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\Omega \subset \mathbb{R}^{m+1}\)</span> be a bounded closed region, and the boundary <span class="math inline">\(\partial \Omega\)</span> of <span class="math inline">\(\Omega\)</span> be a piecewise <span class="math inline">\(\mathscr{C}^1\)</span> <span class="math inline">\(m\)</span>-dimensional surface, oriented outwards from <span class="math inline">\(\Omega\)</span>. Then:</p>
+<ol type="1">
+<li>For any <span class="math inline">\(\mathscr{C}^1\)</span> vector field <span class="math inline">\(\mathbf{F}: \Omega \to \mathbb{R}^{m+1}\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+\int_{\partial \Omega} \langle \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma = \int_{\Omega} \operatorname{div} \mathbf{F} \, \mathrm{d}\mu,
+\]</span></p>
+<p>which means the net outward flux of the vector field along the region’s boundary is equal to the integral of the divergence inside the region. Here, <span class="math inline">\(\mu\)</span> is the <span class="math inline">\((m+1)\)</span>-dimensional volume.</p>
+<ol start="2" type="1">
+<li>For any <span class="math inline">\(\mathscr{C}^1\)</span> <span class="math inline">\(m\)</span>-form</li>
+</ol>
+<p><span class="math display">\[
+\omega = \sum_{k=1}^{m+1} (-1)^{\#\sigma(k)} X_k \mathrm{d}x_1 \wedge \cdots \wedge \mathrm{d}x_{k-1} \wedge \mathrm{d}x_{k+1} \wedge \cdots \wedge \mathrm{d}x_{m+1},
+\]</span></p>
+<p>(where <span class="math inline">\(\#\sigma(k)\)</span> is the parity of the permutation of <span class="math inline">\(k, 1, 2, \dots, k-1, k+1, \dots, m+1\)</span> relative to <span class="math inline">\(1, 2, \dots, m+1\)</span>), it holds that</p>
+<p><span class="math display">\[
+\int_{\partial \Omega} \omega = \int_{\Omega} \mathrm{d}\omega,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\mathrm{d}\omega = \operatorname{tr} \frac{\partial(X_1, X_2, \dots, X_{m+1})}{\partial(x_1, x_2, \dots, x_{m+1})} \mathrm{d}x_1 \wedge \mathrm{d}x_2 \wedge \cdots \wedge \mathrm{d}x_{m+1}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7.8 (Stokes’s Theorem)</strong></span> Let <span class="math inline">\(\Sigma \subset \mathbb{R}^3\)</span> be a bounded, piecewise <span class="math inline">\(\mathscr{C}^1\)</span> oriented surface, and the boundary <span class="math inline">\(\partial \Sigma\)</span> of <span class="math inline">\(\Sigma\)</span> be a piecewise <span class="math inline">\(\mathscr{C}^1\)</span> oriented curve, such that when standing in the direction of the specified normal of the surface and walking along <span class="math inline">\(\partial \Sigma\)</span>, the surface is always on the left-hand side. Then:</p>
+<ol type="1">
+<li>For any <span class="math inline">\(\mathscr{C}^1\)</span> vector field <span class="math inline">\(\mathbf{F}: \Sigma \to \mathbb{R}^3\)</span>,</li>
+</ol>
+<p><span class="math display">\[
+\int_{\partial \Sigma} \langle \mathbf{F}, \mathbf{T} \rangle \mathrm{d}l = \int_{\Sigma} \langle \operatorname{rot} \mathbf{F}, \mathbf{n} \rangle \mathrm{d}\sigma,
+\]</span></p>
+<p>which means the circulation of the vector field along the surface boundary is equal to the integral of the curl over the surface.</p>
+<ol start="2" type="1">
+<li>For any <span class="math inline">\(\mathscr{C}^1\)</span> differential 1-form <span class="math inline">\(\omega = P(x,y,z)\mathrm{d}x + Q(x,y,z)\mathrm{d}y + R(x,y,z)\mathrm{d}z\)</span>, the generalized Stokes’ theorem <span class="math inline">\(\int_{\partial \Sigma} \omega = \int_{\Sigma} \mathrm{d}\omega\)</span> takes the explicit expanded form:</li>
+</ol>
+<p><span class="math display">\[
+\int_{\partial \Sigma} P \, \mathrm{d}x + Q \, \mathrm{d}y + R \, \mathrm{d}z = \int_{\Sigma} \left( \frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z} \right) \mathrm{d}y \wedge \mathrm{d}z + \left( \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x} \right) \mathrm{d}z \wedge \mathrm{d}x + \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \mathrm{d}x \wedge \mathrm{d}y.
+\]</span></p>
 </div>
 
 
@@ -1294,8 +1515,8 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../docs/notes/Math4CS&amp;AI/index.html" class="pagination-link" aria-label="Math for CS and AI">
-        <span class="nav-page-text">Math for CS and AI</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../docs/notes/Calculus/2/8.html" class="pagination-link" aria-label="Series">
+        <span class="nav-page-text">Series</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

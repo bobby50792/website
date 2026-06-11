@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Newton’s Laws – Bobby</title>
+<title>Generative Adversarial Network – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,29 +26,29 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../../docs/notes/Physics/1/3.html" rel="next">
-<link href="../../../../docs/notes/Physics/1/1.html" rel="prev">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-2a5c87f95b0fb482e5c5835a739e033e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/DL/4.html" rel="next">
+<link href="../../../docs/notes/DL/2.html" rel="prev">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-2a5c87f95b0fb482e5c5835a739e033e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,8 +77,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -259,9 +288,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -271,11 +300,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../../docs/notes/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -297,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/index.html">Mechanics and Thermal Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/2.html">Newton’s Laws</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/3.html">Generative Adversarial Network</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -311,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -320,7 +349,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -329,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -338,37 +367,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -376,7 +405,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -385,61 +414,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series of Functions and Power Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -449,7 +478,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -458,43 +487,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling and Concentration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generating Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Central Limit Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Approximations</span></a>
   </div>
 </li>
@@ -502,109 +531,109 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Physics/1/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Physics/1/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mechanics and Thermal Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinematics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../docs/notes/Physics/1/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Newton’s Laws</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy and Work</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Angular Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collision Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rigid Body</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Oscillation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Waves</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lagrangian and Hamiltonian Mechanics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Special Relativity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/12.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Temperature, Heat, and the First Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/13.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/13.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinetic Theory of Gases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/14.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/14.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Second Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/15.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/15.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Mechanics</span></a>
   </div>
 </li>
@@ -614,46 +643,46 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy-Based Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Generative Adversarial Network</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sequence Modeling</span></a>
   </div>
 </li>
@@ -671,7 +700,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello">Hello</a></li>
+  <li><a href="#generative-adversarial-network" id="toc-generative-adversarial-network" class="nav-link active" data-scroll-target="#generative-adversarial-network">Generative Adversarial Network</a>
+  <ul class="collapse">
+  <li><a href="#implicit-generative-model" id="toc-implicit-generative-model" class="nav-link" data-scroll-target="#implicit-generative-model">Implicit Generative Model</a></li>
+  <li><a href="#gan-the-minimax-game" id="toc-gan-the-minimax-game" class="nav-link" data-scroll-target="#gan-the-minimax-game">GAN: The Minimax Game</a></li>
+  <li><a href="#optimal-discriminator" id="toc-optimal-discriminator" class="nav-link" data-scroll-target="#optimal-discriminator">Optimal Discriminator</a></li>
+  <li><a href="#gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" id="toc-gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" class="nav-link" data-scroll-target="#gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior">GAN Mechanics: Forward vs.&nbsp;Reverse KL and JSD Behavior</a></li>
+  <li><a href="#evaluation-of-gans" id="toc-evaluation-of-gans" class="nav-link" data-scroll-target="#evaluation-of-gans">Evaluation of GANs</a></li>
+  </ul></li>
+  <li><a href="#gan-techniques" id="toc-gan-techniques" class="nav-link" data-scroll-target="#gan-techniques">GAN Techniques</a>
+  <ul class="collapse">
+  <li><a href="#deep-convolutional-gan" id="toc-deep-convolutional-gan" class="nav-link" data-scroll-target="#deep-convolutional-gan">Deep Convolutional GAN</a></li>
+  <li><a href="#improved-training-techniques-for-gan" id="toc-improved-training-techniques-for-gan" class="nav-link" data-scroll-target="#improved-training-techniques-for-gan">Improved Training Techniques for GAN</a></li>
+  <li><a href="#wasserstein-gan" id="toc-wasserstein-gan" class="nav-link" data-scroll-target="#wasserstein-gan">Wasserstein GAN</a></li>
+  <li><a href="#improved-training-of-wasserstein-gans" id="toc-improved-training-of-wasserstein-gans" class="nav-link" data-scroll-target="#improved-training-of-wasserstein-gans">Improved Training of Wasserstein GANs</a></li>
+  <li><a href="#biggan" id="toc-biggan" class="nav-link" data-scroll-target="#biggan">BigGAN</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -679,9 +723,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/index.html">Mechanics and Thermal Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/2.html">Newton’s Laws</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/3.html">Generative Adversarial Network</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Newton’s Laws</h1>
+<h1 class="title">Generative Adversarial Network</h1>
 </div>
 
 
@@ -698,10 +742,457 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hello" class="level2">
-<h2 class="anchored" data-anchor-id="hello">Hello</h2>
+<section id="generative-adversarial-network" class="level2">
+<h2 class="anchored" data-anchor-id="generative-adversarial-network">Generative Adversarial Network</h2>
+<section id="implicit-generative-model" class="level3">
+<h3 class="anchored" data-anchor-id="implicit-generative-model">Implicit Generative Model</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Implicit Generative Model Basics
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Goal: a sampler <span class="math inline">\(g(\cdot)\)</span> to generate images</li>
+<li>A simple generator <span class="math inline">\(g(z; \theta)\)</span>
+<ul>
+<li><span class="math inline">\(z \sim \mathcal{N}(0, I)\)</span></li>
+<li><span class="math inline">\(x = g(z; \theta)\)</span></li>
+</ul></li>
+<li>Likelihood-free learning
+<ul>
+<li>Goal: <span class="math inline">\(g(z; \theta) \approx p_{\text{data}}\)</span></li>
+<li>Idea: minimize <span class="math inline">\(D(g(z; \theta), p_{\text{data}})\)</span>
+<ul>
+<li><span class="math inline">\(D\)</span> is some distance metric</li>
+<li><span class="math inline">\(D\)</span> does not involve likelihood</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Adversarial Distance Metric &amp; Binary Classification
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Choose a distance measure <span class="math inline">\(D\)</span>
+<ul>
+<li>Goal: choose a <strong>differentiable</strong> <span class="math inline">\(D(x; \phi)\)</span> for <span class="math inline">\(g(z; \theta)\)</span></li>
+<li>Objective: <span class="math inline">\(L(\theta) = D(g(z; \theta); \phi)\)</span>
+<ul>
+<li>We can optimize <span class="math inline">\(\theta\)</span> by gradient descent</li>
+</ul></li>
+<li>How to get <span class="math inline">\(\phi\)</span>?
+<ul>
+<li>Goal: <span class="math inline">\(D(x; \phi)\)</span> measures how likely <span class="math inline">\(x\)</span> is from <span class="math inline">\(p_{\text{data}}\)</span></li>
+<li>A binary classification problem!
+<ul>
+<li><span class="math inline">\(D(x; \phi) = 1\)</span>: <span class="math inline">\(x \sim p_{\text{data}}\)</span></li>
+<li><span class="math inline">\(D(x; \phi) = 0\)</span>: <span class="math inline">\(x\)</span> not from <span class="math inline">\(p_{\text{data}}\)</span></li>
+</ul></li>
+<li>Let’s train a neural classifier!
+<ul>
+<li>How to choose the negative samples?
+<ul>
+<li>Random samples are too easy…</li>
+<li><strong>We have a generator! (negative samples)</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="gan-the-minimax-game" class="level3">
+<h3 class="anchored" data-anchor-id="gan-the-minimax-game">GAN: The Minimax Game</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Generative Adversarial Networks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Generator <span class="math inline">\(G(z; \theta)\)</span> (<span class="math inline">\(z \sim p(z) = \mathcal{N}(0, I)\)</span>)
+<ul>
+<li>generate realistic images</li>
+</ul></li>
+<li>Discriminator <span class="math inline">\(D(x; \phi)\)</span>
+<ul>
+<li>Classify the data is from <span class="math inline">\(p_{\text{data}}\)</span> or <span class="math inline">\(G\)</span></li>
+</ul></li>
+<li>Objective <span class="math display">\[L(\theta, \phi) = \min_{\theta} \max_{\phi} \mathbb{E}_{x \sim p_{\text{data}}}[\log D(x; \phi)] + \mathbb{E}_{\hat{x} \sim G}[\log(1 - D(\hat{x}; \phi))]\]</span></li>
+<li>Training procedure
+<ul>
+<li>Collect dataset <span class="math inline">\(\{(x, 1) \mid x \sim p_{\text{data}}\} \cup \{(\hat{x}, 0) \mid \hat{x} \sim g(z; \theta)\}\)</span></li>
+<li>Train discriminator <span class="math inline">\(D\)</span>: <span class="math inline">\(L(\phi) = \mathbb{E}_{x \sim p_{\text{data}}}[\log D(x; \phi)] + \mathbb{E}_{\hat{x} \sim G}[\log(1 - D(\hat{x}; \phi))]\)</span></li>
+<li>Train generator <span class="math inline">\(G\)</span>: <span class="math inline">\(L(\theta) = \mathbb{E}_{z \sim p(z)}[\log D(G(z; \theta))]\)</span></li>
+<li>Repeat</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="optimal-discriminator" class="level3">
+<h3 class="anchored" data-anchor-id="optimal-discriminator">Optimal Discriminator</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Finding the Optimal Discriminator <span class="math inline">\(D^*\)</span>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>GAN Objective <span class="math display">\[L(\theta, \phi) = \min_{\theta} \max_{\phi} \mathbb{E}_{x \sim p_{\text{data}}}[\log D(x; \phi)] + \mathbb{E}_{\hat{x} \sim G}[\log(1 - D(\hat{x}; \phi))]\]</span></li>
+<li>Let’s analyze the optimal solution <span class="math inline">\(D^*\)</span> and <span class="math inline">\(g^*\)</span> under <span class="math inline">\(L(\theta, \phi)\)</span></li>
+<li>Optimal <span class="math inline">\(D(x; \phi^*)\)</span> for <span class="math inline">\(x\)</span> <span class="math display">\[L(D) = p_{\text{data}}(x) \cdot \log D + p_G(x) \log(1 - D)\]</span>
+<ul>
+<li>Consider <span class="math inline">\(\frac{\partial L}{\partial D} = 0\)</span></li>
+<li>We have <span class="math inline">\(\frac{p_{\text{data}}(x)}{D^*} - \frac{p_G(x)}{1 - D^*} = 0\)</span></li>
+<li>So <span class="math inline">\((1 - D^*)p_{\text{data}}(x) = p_G(x)D^*\)</span></li>
+<li><span class="math display">\[D^* = \frac{p_{\text{data}}(x)}{p_{\text{data}}(x) + p_G(x)}\]</span></li>
+</ul></li>
+<li>Remark: when having a perfect generator, <span class="math inline">\(D^* = 0.5\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Global Minimum and JS Divergence Reduction
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>GAN Objective <span class="math display">\[L(\theta, \phi) = \min_{\theta} \max_{\phi} \mathbb{E}_{x \sim p_{\text{data}}}[\log D(x; \phi)] + \mathbb{E}_{\hat{x} \sim G}[\log(1 - D(\hat{x}; \phi))]\]</span></li>
+<li>Optimal discriminator <span class="math inline">\(D^*(x) = p_{\text{data}}(x) / (p_{\text{data}}(x) + p_G(x))\)</span></li>
+<li>Optimal generator <span class="math inline">\(g(z; \theta)\)</span> with <span class="math inline">\(\phi^*\)</span>
+<ul>
+<li><span class="math display">\[L(\theta, \phi^*) = \mathbb{E}_{x \sim p_{\text{data}}}\left[\log \frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_G(x)}\right] + \mathbb{E}_{\hat{x} \sim p_G}\left[\log \frac{p_G(x)}{p_{\text{data}}(x)+p_G(x)}\right]\]</span></li>
+<li><span class="math display">\[= \mathbb{E}_{x \sim p_{\text{data}}}\left[\log \frac{p_{\text{data}}(x)}{\frac{p_{\text{data}}(x)+p_G(x)}{2}}\right] + \mathbb{E}_{\hat{x} \sim p_G}\left[\log \frac{p_G(x)}{\frac{p_{\text{data}}(x)+p_G(x)}{2}}\right] - \log 4\]</span></li>
+<li><span class="math display">\[= KL\left(p_{\text{data}}(x) \;\Big\|\; \frac{1}{2}(p_{\text{data}} + p_G)\right) + KL\left(p_G \;\Big\|\; \frac{1}{2}(p_{\text{data}} + p_G)\right) - \log 4\]</span></li>
+</ul></li>
+<li><strong><span class="math inline">\(2 \times \text{Jensen-Shannon Divergence (JSD)} - \log 4\)</span></strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" class="level3">
+<h3 class="anchored" data-anchor-id="gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior">GAN Mechanics: Forward vs.&nbsp;Reverse KL and JSD Behavior</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Kullback–Leibler Divergence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(KL(p \mid\mid q) = \mathbb{E}_{x \sim p}[\log (p(x) / q(x))]\)</span></li>
+<li>Asymmetric measure
+<ul>
+<li><span class="math inline">\(KL(p \mid\mid q)\)</span> forward KL (inclusive)</li>
+<li><span class="math inline">\(KL(q \mid\mid p)\)</span> reverse KL (exclusive)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Jensen–Shannon Divergence (JSD)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(JSD(p \mid\mid q) = \frac{1}{2}\left(KL\left(p \mid\mid \frac{1}{2}(p + q)\right) + KL\left(q \mid\mid \frac{1}{2}(p + q)\right)\right)\)</span></li>
+<li>Properties
+<ul>
+<li>Symmetric: <span class="math inline">\(JSD(p \mid\mid q) = JSD(q \mid\mid p)\)</span></li>
+<li><span class="math inline">\(JSD(p \mid\mid q) \ge 0\)</span> and <span class="math inline">\(JSD(p \mid\mid q) = 0 \iff p = q\)</span></li>
+<li>Jensen-Shannon distance: <span class="math inline">\(\sqrt{JSD(p \mid\mid q)}\)</span> satisfies triangular inequality</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluation-of-gans" class="level3">
+<h3 class="anchored" data-anchor-id="evaluation-of-gans">Evaluation of GANs</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Evaluation of GAN
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Inception Score <span class="math display">\[IS = \exp\left(\mathbb{E}_{x \sim G}\left[KL(f(y \mid x) \mid\mid p_f(y))\right]\right)\]</span></li>
+<li>IS only measures the quality of generated samples
+<ul>
+<li>We also want <span class="math inline">\(G\)</span> to fully cover <span class="math inline">\(p_{\text{data}}\)</span></li>
+<li>Idea: statistics of <span class="math inline">\(G(z)\)</span> should be similar to <span class="math inline">\(p_{\text{data}}\)</span>
+<ul>
+<li>Statistics: measure the distribution of extracted features of <span class="math inline">\(p_{\text{data}}\)</span></li>
+</ul></li>
+</ul></li>
+<li>Fréchet Inception Distance
+<ul>
+<li>Compute <span class="math inline">\(\mu_p, \Sigma_p\)</span> and <span class="math inline">\(\mu_G, \Sigma_G\)</span> for <span class="math inline">\(p_{\text{data}}\)</span> and <span class="math inline">\(G(z)\)</span> using inception v3 pool3 layer (2048-d)</li>
+<li>Compute Wasserstein distance between two Gaussians (more on this later)</li>
+<li><span class="math display">\[FID = \|\mu_p - \mu_G\|^2 + \text{trace}\left(\Sigma_p + \Sigma_G - 2(\Sigma_p\Sigma_G)^{1/2}\right)\]</span></li>
+<li>Lower the better</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="gan-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="gan-techniques">GAN Techniques</h2>
+<section id="deep-convolutional-gan" class="level3">
+<h3 class="anchored" data-anchor-id="deep-convolutional-gan">Deep Convolutional GAN</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>GAN Techniques Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>GAN Techniques</li>
+<li>Deep Convolutional GAN (DCGAN, Radford et al, ICLR2016)
+<ul>
+<li>The first milestone paper to make GAN really work</li>
+<li>Trick Suggestions
+<ul>
+<li>Use fully convolutional network</li>
+<li>Batch normalization should be used</li>
+<li>Avoid ReLU activation in discriminator</li>
+<li>Small learning rate and momentum</li>
+</ul></li>
+<li>DCGAN can learn interesting features and patterns</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="improved-training-techniques-for-gan" class="level3">
+<h3 class="anchored" data-anchor-id="improved-training-techniques-for-gan">Improved Training Techniques for GAN</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Improved Training Techniques for GAN
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Improved Training Techniques for GAN (Salimans et al, NIPS 2016)
+<ul>
+<li>The paper primarily about GAN tricks
+<ul>
+<li>also IS, and semi-supervised learning, more to cover later</li>
+</ul></li>
+<li>Trick Suggestions
+<ul>
+<li>Feature matching</li>
+<li>Minibatch discrimination</li>
+<li>Historical averaging</li>
+<li>One-sided label smoothing</li>
+<li>Virtual batch normalization</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="wasserstein-gan" class="level3">
+<h3 class="anchored" data-anchor-id="wasserstein-gan">Wasserstein GAN</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Wasserstein GAN (WGAN)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Wasserstein GAN</li>
+<li>WGAN (Arjovsky et al, ICML 2017)
+<ul>
+<li>Objective
+<ul>
+<li><span class="math inline">\(L(\phi) = \mathbb{E}_{x \sim p_{\text{data}}}[f(x; \phi)] - \mathbb{E}_{x \sim p_G}[f(x; \phi)]\)</span></li>
+<li><span class="math inline">\(L(\theta) = \mathbb{E}_{x \sim G(z; \theta)}[f(x; \phi)]\)</span></li>
+<li>Subject to <span class="math inline">\(\|f(x; \phi)\|_L \le 1\)</span></li>
+</ul></li>
+<li>Tricks to enforce <span class="math inline">\(\|f(x; \phi)\|_L \le 1\)</span>
+<ul>
+<li>For each <span class="math inline">\(\phi_i\)</span>, <span class="math inline">\(\phi_i \leftarrow \text{clip}(\phi_i, -c, c)\)</span> (e.g., with <span class="math inline">\(c = 0.01\)</span>)</li>
+<li>No momentum! RMSProp suggested (<span class="math inline">\(\alpha = 5e-5\)</span>)</li>
+<li>Update critic for <span class="math inline">\(n_{\text{critic}}\)</span> batches before update <span class="math inline">\(G\)</span> (<span class="math inline">\(n_{\text{critic}} = 5\)</span>)</li>
+</ul></li>
+<li>Results</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="improved-training-of-wasserstein-gans" class="level3">
+<h3 class="anchored" data-anchor-id="improved-training-of-wasserstein-gans">Improved Training of Wasserstein GANs</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>WGAN-GP (Gulrajani et al., NIPS 2017) Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Wasserstein GAN</li>
+<li>Improved Training of Wasserstein GANs (Gulrajani et al, NIPS2017)
+<ul>
+<li>Wasserstein GAN objective <span class="math display">\[\min_{G} \max_{f:\|f\|_L \le 1} \mathbb{E}_{x \sim p_{\text{data}}}[f(x)] - \mathbb{E}_{\hat{x} \sim p_G}[f(\hat{x})]\]</span></li>
+<li>Corollary: <span class="math inline">\(f^*\)</span> have <span class="math inline">\(\|\nabla f\| = 1\)</span> almost everywhere under <span class="math inline">\(p_{\text{data}}\)</span> and <span class="math inline">\(p_G\)</span></li>
+<li>WGAN-GP (Gradient Penalty)
+<ul>
+<li><span class="math inline">\(\tilde{x} \leftarrow (1 - \epsilon)x + \epsilon \cdot \hat{x}\)</span> with <span class="math inline">\(\epsilon \sim \text{Unif}(0,1)\)</span></li>
+<li><span class="math inline">\(L(\phi) = \mathbb{E}_{x \sim p_{\text{data}}}[f(x; \phi)] - \mathbb{E}_{\hat{x} \sim p_G}[f(\hat{x}; \phi)] + \lambda \cdot \mathbb{E}_{\tilde{x}}\left[(\|\nabla_{\tilde{x}} f(\tilde{x}; \phi)\|_2 - 1)^2\right]\)</span></li>
+</ul></li>
+<li>Practical issue
+<ul>
+<li>No batch norm for <span class="math inline">\(f(x; \phi)\)</span> (since we compute <span class="math inline">\(\nabla_{\tilde{x}} f(\tilde{x})\)</span> for each <span class="math inline">\(\tilde{x}\)</span>)</li>
+<li>Layer norm or instance norm recommended as a drop-in replacement</li>
+</ul></li>
+<li>Remark:
+<ul>
+<li>Stable training with various architecture (even ResNet) and Adam</li>
+<li>But expensive due to gradient computation over gradient</li>
+<li>Also might be unstable due to the heuristic distribution <span class="math inline">\(\tilde{x}\)</span> when learning rate is high</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="biggan" class="level3">
+<h3 class="anchored" data-anchor-id="biggan">BigGAN</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>BigGAN (Brock et al., ICLR 2019) Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>GAN Techniques</li>
+<li>BigGAN (DeepMind, ICLR2019)
+<ul>
+<li>Large-Scale Training of GAN!
+<ul>
+<li><span class="math inline">\(\sim\)</span> 100M params</li>
+<li>TPU training (48h)</li>
+<li>Large batch size</li>
+</ul></li>
+<li>Trick Suggestions
+<ul>
+<li>Synced cross-replica class-conditioned batch-norm (linear projected from class id)</li>
+<li>Large batch size (as much as you can) and wider model!</li>
+<li>Sample <span class="math inline">\(z\)</span> from truncated Gaussian <span class="math inline">\(\mathcal{N}(0, 1, -c, c)\)</span></li>
+<li>Orthogonal initialization &amp; spectral normalization for weights</li>
+<li>Hinge loss <span class="math inline">\(l(z) = \max(0, 1 - t * z)\)</span>:
+<ul>
+<li>Ignore samples when <span class="math inline">\(D\)</span> make a correct output with high confidence (<span class="math inline">\(z\)</span> is too high)</li>
+<li>Adaptive hinge loss margin <span class="math inline">\(t\)</span> to include sufficient training data</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1139,13 +1630,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../docs/notes/Physics/1/1.html" class="pagination-link" aria-label="Kinematics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Kinematics</span>
+      <a href="../../../docs/notes/DL/2.html" class="pagination-link" aria-label="Energy-Based Model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Energy-Based Model</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../docs/notes/Physics/1/3.html" class="pagination-link" aria-label="Momentum">
-        <span class="nav-page-text">Momentum</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/DL/4.html" class="pagination-link" aria-label="Normalizing Flow &amp; Variational Autoencoder">
+        <span class="nav-page-text">Normalizing Flow &amp; Variational Autoencoder</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

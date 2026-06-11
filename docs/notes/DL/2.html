@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Discrete Probability – Bobby</title>
+<title>Energy-Based Model – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../docs/notes/Math4CS&amp;AI/2.html" rel="next">
-<link href="../../../docs/notes/Math4CS&amp;AI/index.html" rel="prev">
+<link href="../../../docs/notes/DL/3.html" rel="next">
+<link href="../../../docs/notes/DL/1.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -326,7 +326,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/1.html">Discrete Probability</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/2.html">Energy-Based Model</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -480,14 +480,14 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
@@ -645,11 +645,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
@@ -658,7 +658,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Energy-Based Model</span></a>
   </div>
 </li>
@@ -700,13 +700,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#asymptotic-notations" id="toc-asymptotic-notations" class="nav-link active" data-scroll-target="#asymptotic-notations">Asymptotic Notations</a></li>
-  <li><a href="#probability-spaces-and-event" id="toc-probability-spaces-and-event" class="nav-link" data-scroll-target="#probability-spaces-and-event">Probability Spaces and Event</a></li>
-  <li><a href="#uniform-probability-means-counting" id="toc-uniform-probability-means-counting" class="nav-link" data-scroll-target="#uniform-probability-means-counting">Uniform Probability Means Counting</a></li>
-  <li><a href="#intersection-and-union-of-events" id="toc-intersection-and-union-of-events" class="nav-link" data-scroll-target="#intersection-and-union-of-events">Intersection and Union of Events</a></li>
-  <li><a href="#conditional-probability-and-independence" id="toc-conditional-probability-and-independence" class="nav-link" data-scroll-target="#conditional-probability-and-independence">Conditional Probability and Independence</a></li>
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  <li><a href="#hopfield-network" id="toc-hopfield-network" class="nav-link active" data-scroll-target="#hopfield-network">Hopfield Network</a></li>
+  <li><a href="#boltzmann-machine" id="toc-boltzmann-machine" class="nav-link" data-scroll-target="#boltzmann-machine">Boltzmann Machine</a>
+  <ul class="collapse">
+  <li><a href="#stochastic-hopfield-network" id="toc-stochastic-hopfield-network" class="nav-link" data-scroll-target="#stochastic-hopfield-network">Stochastic Hopfield Network</a></li>
+  <li><a href="#boltzmann-machine-formulation" id="toc-boltzmann-machine-formulation" class="nav-link" data-scroll-target="#boltzmann-machine-formulation">Boltzmann Machine Formulation</a></li>
+  <li><a href="#boltzmann-machine-with-hidden-neurons" id="toc-boltzmann-machine-with-hidden-neurons" class="nav-link" data-scroll-target="#boltzmann-machine-with-hidden-neurons">Boltzmann Machine with Hidden Neurons</a></li>
+  <li><a href="#restricted-boltzmann-machine" id="toc-restricted-boltzmann-machine" class="nav-link" data-scroll-target="#restricted-boltzmann-machine">Restricted Boltzmann Machine</a></li>
+  <li><a href="#general-energy-based-models" id="toc-general-energy-based-models" class="nav-link" data-scroll-target="#general-energy-based-models">General Energy-Based Models</a></li>
+  </ul></li>
+  <li><a href="#sampling-methods" id="toc-sampling-methods" class="nav-link" data-scroll-target="#sampling-methods">Sampling Methods</a>
+  <ul class="collapse">
+  <li><a href="#sampling-from-probability-distributions" id="toc-sampling-from-probability-distributions" class="nav-link" data-scroll-target="#sampling-from-probability-distributions">Sampling from Probability Distributions</a></li>
+  <li><a href="#markov-chain-monte-carlo" id="toc-markov-chain-monte-carlo" class="nav-link" data-scroll-target="#markov-chain-monte-carlo">Markov Chain Monte-Carlo</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -714,9 +721,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/1.html">Discrete Probability</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/2.html">Energy-Based Model</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Discrete Probability</h1>
+<h1 class="title">Energy-Based Model</h1>
 </div>
 
 
@@ -733,228 +740,225 @@ window.Quarto = {
 </header>
 
 
-<section id="asymptotic-notations" class="level2">
-<h2 class="anchored" data-anchor-id="asymptotic-notations">Asymptotic Notations</h2>
+<section id="hopfield-network" class="level2">
+<h2 class="anchored" data-anchor-id="hopfield-network">Hopfield Network</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation
+<span class="screen-reader-only">Tip</span>Hopfield Network
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
-\begin{equation*}
-|f(n)| \le Cg(n), \quad \forall n \ge N.
-\end{equation*}
-\]</span></p>
-<p><span class="math display">\[
-\begin{equation*}
-\mathcal{O}(g) := \{f : \exists C &gt; 0, \exists N \in \mathbb{N} \text{ s.t. } |f(n)| \le Cg(n), \text{ for all } n \ge N\}.
-\end{equation*}
-\]</span></p>
+<ul>
+<li>Problem Formulation
+<ul>
+<li>Desired patterns <span class="math inline">\(P = \{y^p\}\)</span></li>
+<li>Energy function <span class="math inline">\(E(y) = -\frac{1}{2}y^TWy\)</span> (we omit bias term for simplicity)</li>
+</ul></li>
+<li>Objective for <span class="math inline">\(W\)</span>
+<ul>
+<li>Minimize <span class="math inline">\(E\)</span> for all <span class="math inline">\(y^p\)</span></li>
+<li>It should also maximize <span class="math inline">\(E\)</span> for all non-desired patterns! <span class="math display">\[W = \arg\min_W \sum_{y \in P} E(y) - \sum_{y' \notin P} E(y')\]</span></li>
+<li>Gradient Descent <span class="math display">\[W \leftarrow W + \eta \left( \sum_{y \in P} yy^T - \sum_{y' \notin P} y'y'^T \right)\]</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation properties
+<span class="screen-reader-only">Tip</span>Hopfield Network: SGD Optimization
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span> and <span class="math inline">\(c \in \mathbb{R}\)</span>. If <span class="math inline">\(f(n), g(n) \ge 0\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math display">\[\begin{align*}
-f(n) &amp;= \mathcal{O}(f(n)) \\
-
-c \cdot f(n) &amp;= \mathcal{O}(f(n)) \\
-
-\mathcal{O}(\mathcal{O}(f(n))) &amp;= \mathcal{O}(f(n)) \\
-
-\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) + g(n)) \\
-
-\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(\max\{f(n), g(n)\}) \\
-
-\mathcal{O}(f(n)) \cdot \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) \cdot g(n)) \\
-
-\mathcal{O}(f(n)g(n)) &amp;= f(n) \cdot \mathcal{O}(g(n)). \\
-\end{align*}\]</span></p>
+<ul>
+<li>SGD update rule for <span class="math inline">\(W\)</span> <span class="math display">\[W \leftarrow W - \eta\left(\mathbb{E}_{y \in P}[yy^T] - \mathbb{E}_{y'}[y'y'^T]\right)\]</span>
+<ul>
+<li>Compute outer-products of random desired pattern <span class="math inline">\(y\)</span></li>
+<li>Initialize <span class="math inline">\(y'\)</span> by a random desired pattern
+<ul>
+<li>Run evolution for random <span class="math inline">\(y'\)</span> for a few timesteps (2~4)</li>
+<li>Calculate outer-product of <span class="math inline">\(y'\)</span></li>
+</ul></li>
+<li>Compute gradient and update <span class="math inline">\(W\)</span></li>
+</ul></li>
+<li>In theory, <span class="math inline">\(O(N)\)</span> patterns can be stored in the network (with undesired valleys)
+<ul>
+<li>How to store more patterns?</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div id="thm-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.1 (Big-<span class="math inline">\(\mathcal{O}\)</span> notation defined using limsup)</strong></span> Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if and only if <span class="math display">\[
-\begin{equation*}
-\limsup_{n \to \infty} \frac{|f(n)|}{g(n)} &lt; +\infty.
-\end{equation*}
-\]</span></p>
-</div>
+</section>
+<section id="boltzmann-machine" class="level2">
+<h2 class="anchored" data-anchor-id="boltzmann-machine">Boltzmann Machine</h2>
+<section id="stochastic-hopfield-network" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-hopfield-network">Stochastic Hopfield Network</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><span class="math inline">\(\Omega, \Theta, \sim, o, \omega\)</span> notations
+<span class="screen-reader-only">Tip</span>Stochastic Hopfield Network
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>.</p>
 <ul>
-<li>We write <span class="math inline">\(f(n) = \Omega(g(n))\)</span> if <span class="math inline">\(\liminf\limits_{n \to \infty} \frac{|f(n)|}{g(n)} &gt; 0\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) = \Theta(g(n))\)</span> if <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> and <span class="math inline">\(f(n) = \Omega(g(n))\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) \sim g(n)\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 1\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) = o(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 0\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) = \omega(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = +\infty\)</span>.</li>
+<li>Let’s model our Hopfield network as a thermodynamic system
+<ul>
+<li><span class="math inline">\(T = k = 1\)</span> for simplicity</li>
+<li>Energy <span class="math display">\[E(y) = -\sum_{i&lt;j} w_{ij}y_iy_j - b_iy_i\]</span></li>
+<li>Boltzmann Probability <span class="math display">\[P(y) = \frac{1}{Z}\exp\left(-E(y)\right) = \frac{1}{Z}\exp\left(\sum_{i&lt;j} w_{ij}y_iy_j + b_iy_i\right)\]</span></li>
+</ul></li>
+<li>Stochastic Hopfield Network
+<ul>
+<li><span class="math inline">\(P(y)\)</span> models the stationary probability distribution of states <span class="math inline">\(y\)</span> given <span class="math inline">\(E(y)\)</span></li>
+<li>We generate patterns by sampling from <span class="math inline">\(P(y)\)</span></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
-<div id="thm-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> with <span class="math inline">\(g(n) &gt; 0\)</span> for all <span class="math inline">\(n \ge 1\)</span>. If <span class="math display">\[
-\begin{equation*}
-f(k) = \mathcal{O}(g(k)) \quad \text{as } k \to \infty,
-\end{equation*}
-\]</span> then <span class="math display">\[
-\begin{equation*}
-\sum_{k=1}^n f(k) = \mathcal{O}\left(\sum_{k=1}^n g(k)\right) \quad \text{as } n \to \infty.
-\end{equation*}
-\]</span></p>
-</div>
-<p><br>
-</p>
-<div id="thm-3" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.3</strong></span> Let <span class="math inline">\(f,g : \mathbb{N}^2 \to \mathbb{R}\)</span> with <span class="math inline">\(g(m,n) &gt; 0\)</span> for all <span class="math inline">\(m,n \ge 1\)</span>. If for some function <span class="math inline">\(U(m) \ge 1\)</span>, we have <span class="math display">\[
-\begin{equation*}
-f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m \to \infty,
-\end{equation*}
-\]</span> Then, <span class="math display">\[
-\begin{equation*}
-\sum_{k=1}^n f(m,k) = \mathcal{O}\left(\sum_{k=1}^n g(m,k)\right), \quad \text{for } 1 \le n \le U(m), \text{ as } m \to \infty.
-\end{equation*}
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation for multivariate functions
+<span class="screen-reader-only">Note</span>Stochastic Hopfield Network: Gibbs Sampling Derivation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f,g : \mathbb{N}^d \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}^d\)</span>. We write <span class="math display">\[
-\begin{equation*}
-f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
-\end{equation*}
-\]</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
-\begin{equation*}
-|f(n_1,\dots,n_d)| \le Cg(n_1,\dots,n_d), \quad \forall n_1,\dots,n_d \ge N.
-\end{equation*}
-\]</span></p>
+<ul>
+<li>Let’s consider the “flip” operation
+<ul>
+<li>Deterministic <span class="math inline">\(\rightarrow\)</span> probabilistic</li>
+<li>Goal: change <span class="math inline">\(y_i\)</span> to 1 with probability <span class="math inline">\(P(y_i = 1 \mid y_{j \neq i})\)</span></li>
+</ul></li>
+<li>Assume <span class="math inline">\(y\)</span> and <span class="math inline">\(y'\)</span> only differ at position <span class="math inline">\(i\)</span> and <span class="math inline">\(y'_i = -1\)</span>
+<ul>
+<li><span class="math inline">\(\log P(y) = -E(y) + C\)</span></li>
+<li><span class="math inline">\(E(y) = -\sum_{i&lt;j} w_{ij}y_iy_j - b_iy_i\)</span></li>
+<li><span class="math inline">\(\log P(y) - \log P(y') = E(y') - E(y) = -\sum_{j} w_{ij}y_j - 2b_i\)</span> <span class="math display">\[\log\frac{P(y)}{P(y')} = \log\frac{P(y_i = 1 \mid y_{j \neq i})P(y_{j \neq i})}{P(y'_i = -1 \mid y'_{j \neq i})P(y'_{j \neq i})} = \log\frac{P(y_i = 1 \mid y_{j \neq i})}{1 - P(y_i = 1 \mid y_{j \neq i})} = -\sum_{j} w_{ij}y_j - 2b_i\]</span></li>
+</ul></li>
+<li>A sigmoid conditional: <span class="math inline">\(P(y_i = 1 \mid y_{j \neq i}) = \frac{1}{1+\exp\left(-\sum_{j} w_{ij}y_j - 2b_i\right)}\)</span></li>
+</ul>
+<p><span class="math display">\[\text{This is also called Gibbs sampling}\]</span></p>
 </div>
 </div>
 </div>
-</section>
-<section id="probability-spaces-and-event" class="level2">
-<h2 class="anchored" data-anchor-id="probability-spaces-and-event">Probability Spaces and Event</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Discrete probability space
+<span class="screen-reader-only">Note</span>Stochastic Hopfield Network: The Whole Update Rule &amp; Evolution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A discrete probability space is a pair <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> consisting of:</p>
 <ul>
-<li>A non-empty finite set <span class="math inline">\(\Omega\)</span>, called the sample space, whose elements represent all possible outcomes of an experiment.</li>
-<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the probability mass function, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
+<li>The whole update rule
+<ul>
+<li>Field at <span class="math inline">\(y_i\)</span>: <span class="math inline">\(z_i = \sum_{j} w_{ij}y_j + 2b_i\)</span></li>
+<li><span class="math inline">\(P(y_i = 1 \mid y_{j \neq i}) = \frac{1}{1 + \exp(-z_i)} = \sigma(z_i)\)</span>
+<ul>
+<li><em>Field quantifies the delta energy of flip</em></li>
+</ul></li>
+</ul></li>
+<li>Evolving the network
+<ul>
+<li>Randomly initialize <span class="math inline">\(y\)</span></li>
+<li>Cycle over <span class="math inline">\(y_i\)</span>, fixed other variables fixed and sample <span class="math inline">\(y_i\)</span> according to the conditional probability</li>
+<li>After “convergence”, we can get samples of <span class="math inline">\(y\)</span> according to <span class="math inline">\(P(y)\)</span></li>
+<li>This sampling procedure is called <em>Gibbs sampling</em></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
+</section>
+<section id="boltzmann-machine-formulation" class="level3">
+<h3 class="anchored" data-anchor-id="boltzmann-machine-formulation">Boltzmann Machine Formulation</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Event
+<span class="screen-reader-only">Tip</span>Boltzmann Machine Formulation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>An event <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(\Omega\)</span> (<span class="math inline">\(A \subseteq \Omega\)</span>), and its probability is defined as <span class="math display">\[
-\begin{equation*}
-\Pr[A] := \sum_{\omega \in A} p(\omega).
-\end{equation*}
-\]</span></p>
+<ul>
+<li>A generative Model (simplified)
+<ul>
+<li>Energy function: <span class="math display">\[E(y) = -\frac{1}{2}y^TWy\]</span></li>
+<li>Boltzmann Probability (Gibbs Distribution): <span class="math display">\[P(y) = \frac{1}{Z}\exp\left(-\frac{E(y)}{T}\right)\]</span></li>
+<li>Parameter: <span class="math inline">\(W\)</span></li>
+</ul></li>
+<li>It has a probability for producing any binary pattern <span class="math inline">\(y\)</span>
+<ul>
+<li>We assume <span class="math inline">\(y_i = 0 \text{ or } 1 \text{ (or } \pm 1)\)</span></li>
+<li>Effective local field at <span class="math inline">\(y_i\)</span>: <span class="math display">\[z_i = \frac{1}{T} \sum_{j} w_{j,i}y_j\]</span></li>
+<li>Conditional activation probability (Sigmoid): <span class="math display">\[P(y_i = 1 \mid y_{j \neq i}) = \frac{1}{1 + e^{-z_i}}\]</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-</section>
-<section id="uniform-probability-means-counting" class="level2">
-<h2 class="anchored" data-anchor-id="uniform-probability-means-counting">Uniform Probability Means Counting</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The Secretary Problem
+<span class="screen-reader-only">Note</span>Boltzmann Machine: Training
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://en.wikipedia.org/wiki/Secretary_problem">Problem Description</a></p>
-<section id="threshold-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="threshold-strategy">Threshold Strategy</h3>
-<p>For a fixed integer <span class="math inline">\(k\)</span> satisfying <span class="math inline">\(1 \le k \le n - 1\)</span>, the <span class="math inline">\(k\)</span>-strategy is an online decision strategy defined as follows:</p>
 <ul>
-<li>Reject the first <span class="math inline">\(k\)</span> options and record the maximum value observed;</li>
-<li>Starting from step <span class="math inline">\(k + 1\)</span>, accept the first option whose value exceeds the recorded maximum.</li>
+<li>Goal
+<ul>
+<li>Remember a set of desired patterns <span class="math inline">\(P = \{y^p\}\)</span></li>
+<li>Now we have a probability distribution <span class="math inline">\(P(y)\)</span> with parameter <span class="math inline">\(W\)</span></li>
+</ul></li>
+<li>Objective: maximum likelihood learning (assume <span class="math inline">\(T = 1\)</span>)
+<ul>
+<li>Probability of a particular pattern: <span class="math display">\[P(y) = \frac{\exp\left(\frac{1}{2}y^TWy\right)}{\sum_{y'} \exp\left(\frac{1}{2}y'^TWy'\right)}\]</span></li>
+<li>Maximize log-likelihood: <span class="math display">\[L(W) = \frac{1}{N_P} \sum_{y \in P} \frac{1}{2}y^TWy - \log \sum_{y'} \exp\left(\frac{1}{2}y'^TWy'\right)\]</span></li>
+</ul></li>
+<li>Gradient Ascent <span class="math inline">\(\nabla_{w_{ij}}L\)</span>
+<ul>
+<li><span class="math inline">\(\nabla_{w_{ij}}L = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \sum_{y'} \frac{\exp\left(\frac{1}{2}y'^TWy'\right)}{Z} \cdot y'_i y'_j\)</span></li>
+<li><span class="math inline">\(\nabla_{w_{ij}}L = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \mathbb{E}_{y'}[y'_i y'_j]\)</span> (Monte-Carlo Approximation)</li>
+<li>Draw a set of samples <span class="math inline">\(S\)</span> for <span class="math inline">\(y'\)</span> according to the probability,</li>
+<li><span class="math inline">\(\nabla_{w_{ij}}L = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \frac{1}{|S|}\sum_{y' \in S} y'_i y'_j\)</span></li>
+</ul></li>
 </ul>
-</section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>For <span class="math inline">\(n \ge 2\)</span>, the following two statements hold:</p>
-<ol type="1">
-<li>the optimal success probability satisfies</li>
-</ol>
-<p><span class="math display">\[
-\begin{align*}
-p_n = 1/e + \mathcal{O}\left(\frac{1}{n}\right);
-\end{align*}
-\]</span></p>
-<ol start="2" type="1">
-<li>the optimal threshold satisfies</li>
-</ol>
-<p><span class="math display">\[
-\begin{align*}
-k^* = n/e + \mathcal{O}(1).
-\end{align*}
-\]</span></p>
-</section>
 </div>
 </div>
 </div>
@@ -964,58 +968,46 @@ k^* = n/e + \mathcal{O}(1).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The Locker Puzzle
+<span class="screen-reader-only">Note</span>Boltzmann Machine: Overall Training Algorithm
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://zh.wikipedia.org/wiki/百囚問題">Problem Description</a></p>
-<section id="pointer-chasing-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="pointer-chasing-strategy">Pointer Chasing Strategy</h3>
-<p>Before opening any locker, students discuss and agree on a bijection between student names and <span class="math inline">\([n]\)</span>, <span class="math display">\[
-\begin{align*}
-\phi : \{\text{student names}\} \to [n],
-\end{align*}
-\]</span> which assigns each student a unique ID in <span class="math inline">\([n]\)</span>.</p>
-<p>For each student <span class="math inline">\(s\)</span>, let <span class="math inline">\(x \leftarrow \phi(s)\)</span>. The search rule is:</p>
 <ul>
-<li>open locker <span class="math inline">\(x\)</span>;</li>
-<li>if the revealed name tag is <span class="math inline">\(s\)</span>, stop (success);</li>
-<li>otherwise, let <span class="math inline">\(x \leftarrow \phi(t)\)</span>, where <span class="math inline">\(t\)</span> is the revealed student name, and continue.</li>
+<li>Overall Training
+<ul>
+<li>Initialize <span class="math inline">\(W\)</span></li>
+<li>Maximize log-likelihood with <span class="math inline">\(M\)</span> Monte-Carlo samples <span class="math display">\[\nabla_{w_{ij}}L(W) = \frac{1}{N_P}\sum_{y \in P} y_iy_j - \frac{1}{M}\sum_{y' \in S} y'_i y'_j\]</span></li>
+<li><span class="math inline">\(w_{ij} \leftarrow w_{ij} + \eta\nabla_{w_{ij}}L(W)\)</span> (we are maximizing likelihood)</li>
+</ul></li>
 </ul>
-<p>If no success occurs, stop after <span class="math inline">\(n/2\)</span> opens (failure).</p>
-</section>
-<section id="conclusion-1" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
-<p>For all even <span class="math inline">\(n \ge 2\)</span>, the success probability of the pointer chasing strategy is <span class="math display">\[
-\begin{align*} \Pr[\text{success}] = 1 - \sum_{j=n/2+1}^n \frac{1}{j} = 1 - \ln 2 + \mathcal{O}\left(\frac{1}{n}\right) \approx 0.307. \end{align*}
-\]</span></p>
-</section>
 </div>
 </div>
 </div>
 </section>
-<section id="intersection-and-union-of-events" class="level2">
-<h2 class="anchored" data-anchor-id="intersection-and-union-of-events">Intersection and Union of Events</h2>
+<section id="boltzmann-machine-with-hidden-neurons" class="level3">
+<h3 class="anchored" data-anchor-id="boltzmann-machine-with-hidden-neurons">Boltzmann Machine with Hidden Neurons</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Intersection and union of event
+<span class="screen-reader-only">Tip</span>Mathematical Formulation with Hidden Variables
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>For events <span class="math inline">\(A, B \subseteq \Omega\)</span>:</p>
 <ul>
-<li><p>The intersection of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cap B\)</span>, is the event that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are happen.</p></li>
-<li><p>The union of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cup B\)</span>, is the event that at least one of <span class="math inline">\(A, B\)</span> happens.</p></li>
+<li>Maximum log-likelihood learning <span class="math display">\[P(v) = \sum_{h} P(v, h) = \sum_{h} \frac{\exp(y^TWy)}{\sum_{y'} \exp(y'^TWy')}\]</span> <span class="math display">\[L(W) = \frac{1}{|P|} \sum_{v \in P} \log \left( \sum_{h} \exp(y^TWy) \right) - \log \left( \sum_{y'} \exp(y'^TWy') \right)\]</span></li>
+<li>Gradient <span class="math inline">\(\nabla L(W)\)</span>?
+<ul>
+<li>The first term is also in the form of log-sum</li>
+<li>Monte Carlo estimates for each <span class="math inline">\(v \in P\)</span>!</li>
+</ul></li>
 </ul>
-<p>As events are subsets of the sample space <span class="math inline">\(\Omega\)</span>, the operations <span class="math inline">\(\cap\)</span> and <span class="math inline">\(\cup\)</span> are the same as set operations.</p>
 </div>
 </div>
 </div>
@@ -1025,29 +1017,15 @@ k^* = n/e + \mathcal{O}(1).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Properties of probability measures
+<span class="screen-reader-only">Note</span>Gradient Derivation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>For any events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
-\begin{align*}
-\Pr[A \cup B] = \Pr[A] + \Pr[B] - \Pr[A \cap B].
-\end{align*}
-\]</span></p></li>
-<li><p>For ans two events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
-\begin{align*}
-\Pr [A \cup B] \leq \Pr[A] + \Pr[B].
-\end{align*}
-\]</span></p></li>
-<li><p>For any sequence of events <span class="math inline">\(A_1, \dots, A_m \subseteq \Omega\)</span> with <span class="math inline">\(m \geq 2\)</span>, <span class="math display">\[
-\begin{align*}
-\Pr\left[\bigcup_{i=1}^m A_i\right] \le \sum_{i=1}^m \Pr[A_i].
-\end{align*}
-\]</span></p></li>
-</ol>
+<ul>
+<li>Maximum log-likelihood learning <span class="math display">\[\nabla_{w_{ij}}L(W) = \frac{1}{|P|} \sum_{v \in P} E_{h}[y_iy_j] - E_{y'}[y'_i y'_j]\]</span></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1057,169 +1035,154 @@ k^* = n/e + \mathcal{O}(1).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Hashing Collision
+<span class="screen-reader-only">Note</span>Overall Training Algorithm
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<section id="linear-hash-function" class="level3">
-<h3 class="anchored" data-anchor-id="linear-hash-function">Linear Hash Function</h3>
-<p>Here <span class="math display">\[
-\begin{align*}
-h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
-\end{align*}
-\]</span></p>
-<p>The corresponding linear hash family is defined as follows: <span class="math display">\[
-\begin{align*}
-\mathcal{H}_{p,m} := \{h_{a,b,p,m} : a \in \mathbb{Z}_p \setminus \{0\}, b \in \mathbb{Z}_p\}.
-\end{align*}
-\]</span> That is, <span class="math inline">\(\mathcal{H}_{p,m}\)</span> is a family of linear hash functions with fixed prime <span class="math inline">\(p\)</span> and bucket number <span class="math inline">\(m\)</span>.</p>
+<ul>
+<li>Overall Training
+<ul>
+<li>Initialize <span class="math inline">\(W\)</span></li>
+<li>For <span class="math inline">\(v \in P\)</span>, fixed the visible neurons, run Gibbs sampling to get <span class="math inline">\(K\)</span> samples
+<ul>
+<li>Collect all conditioned samples as <span class="math inline">\(S_c\)</span></li>
+</ul></li>
+<li>Randomly initialize all neurons, run Gibbs sampling to get <span class="math inline">\(M\)</span> samples
+<ul>
+<li>Collect free samples as <span class="math inline">\(S\)</span></li>
+</ul></li>
+<li>Maximize log-likelihood with <span class="math inline">\(N_pK + M\)</span> Monte-Carlo samples <span class="math display">\[\nabla_{w_{ij}}L(W) = \frac{1}{N_PK} \sum_{y \in S_c} y_iy_j - \frac{1}{M} \sum_{y' \in S} y'_i y'_j\]</span></li>
+<li><span class="math inline">\(w_{ij} \leftarrow w_{ij} + \eta\nabla_{w_{ij}}L(W)\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
 </section>
-<section id="conclusion-2" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-2">Conclusion</h3>
-<ol type="1">
-<li><p>For any two distinct integers <span class="math inline">\(k, k' \in K\)</span>, if a hash function <span class="math inline">\(h\)</span> is sampled uniformly at random from <span class="math inline">\(\mathcal{H}_{p,m}\)</span>, then <span class="math display">\[
-\begin{align*}
-\Pr[h(k) = h(k')] \le \frac{1}{m}.
-\end{align*}
-\]</span></p></li>
-<li><p>For any universal hash family <span class="math inline">\(\mathcal{H}\)</span> and any <span class="math inline">\(n\)</span> distinct keys <span class="math inline">\(k_1, \dots, k_n \in K\)</span>, the collision probability admits the upper bound <span class="math display">\[
-\begin{align*}
-\Pr[C] \le \frac{1}{m} \binom{n}{2}.
-\end{align*}
-\]</span></p></li>
-</ol>
-</section>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="restricted-boltzmann-machine" class="level3">
+<h3 class="anchored" data-anchor-id="restricted-boltzmann-machine">Restricted Boltzmann Machine</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ramsey Numbers
+<span class="screen-reader-only">Tip</span>Restricted Boltzmann Machine Layer Rules
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://en.wikipedia.org/wiki/Ramsey%27s_theorem">Problem Description</a></p>
-<section id="definition-of-ramsey-number" class="level3">
-<h3 class="anchored" data-anchor-id="definition-of-ramsey-number">Definition of Ramsey number</h3>
-<ol type="1">
-<li><p>For every integer <span class="math inline">\(k \ge 2\)</span>, there exists an integer <span class="math inline">\(N &gt; 0\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>. The Ramsey number <span class="math inline">\(R(k)\)</span> is the smallest integer <span class="math inline">\(N\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>.</p></li>
-<li><p>For any integers <span class="math inline">\(r \ge 1\)</span> and <span class="math inline">\(k \ge m \ge 1\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that for every coloring of the <span class="math inline">\(m\)</span>-element subsets of an <span class="math inline">\(N\)</span>-element set with <span class="math inline">\(r\)</span> colors, there exists a <span class="math inline">\(k\)</span>-element subset whose <span class="math inline">\(m\)</span>-element subsets are all assigned the same color.</p></li>
-</ol>
-</section>
-<section id="conclusion-3" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-3">Conclusion</h3>
-<ol type="1">
-<li><p>For all <span class="math inline">\(k \ge 3\)</span>, <span class="math display">\[
-\begin{align*}
-2 ^ {k / 2} &lt; R(k) &lt; \binom{2k - 2}{k - 1} &lt; 4 ^ k.
-\end{align*}
-\]</span> Thus <span class="math inline">\(R(k) = 2^{\Theta(k)}\)</span>.</p></li>
-<li><p>For all <span class="math inline">\(r, k, m \geq 2\)</span>, the multicolor Ramsey number <span class="math inline">\(R_r^{(m)}(k)\)</span> satisfies the following lower bound: <span class="math display">\[
-R_r^{(m)}(k) &gt; r^{\frac{1}{m} \left( \binom{k}{m} - 1 \right)}.
-\]</span></p></li>
-</ol>
-</section>
+<ul>
+<li>Computation Rules: same as Boltzmann machine
+<ul>
+<li>Hidden neurons <span class="math inline">\(h_i\)</span> <span class="math display">\[z_i = \sum_{j} w_{ij}v_j, \quad P(h_i = 1 \mid v_j) = \frac{1}{1 + \exp(-z_i)}\]</span></li>
+<li>Visible neurons <span class="math inline">\(v_j\)</span> <span class="math display">\[z_j = \sum_{i} w_{ij}h_i, \quad P(v_j = 1 \mid h_i) = \frac{1}{1 + \exp(-z_j)}\]</span></li>
+</ul></li>
+<li><strong>Iterative Sampling!</strong> (Alternating between Layers)</li>
+</ul>
 </div>
 </div>
 </div>
-</section>
-<section id="conditional-probability-and-independence" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-probability-and-independence">Conditional Probability and Independence</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Conditional probability
+<span class="screen-reader-only">Note</span>Theoretical MLE Gradient &amp; Alternating MCMC
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(A, B\)</span> be events with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional probability of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> is defined as:</p>
-<p><span class="math display">\[
-\Pr[A \mid B] = \frac{\Pr[A \cap B]}{\Pr[B]}
-\]</span></p>
-<p>We leave <span class="math inline">\(\Pr[A \mid B]\)</span> undefined if <span class="math inline">\(\Pr[B] = 0\)</span>.</p>
+<ul>
+<li>Maximum Likelihood Estimate <span class="math display">\[\nabla_{w_{ij}}L(W) = \frac{1}{N_p K}\sum_{v \in P} {v_0}_i {h_0}_j - \frac{1}{M}\sum v_{\infty_i} h_{\infty_j}\]</span></li>
+<li>Directly run Gibbs sampling from <span class="math inline">\(v_0\)</span> for 3 steps will be sufficient! <span class="math display">\[v_0 \to h_0 \to v_1 \to h_1 \to v_2 \to h_2 \to \dots \to v_\infty \to h_\infty\]</span></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Independence
+<span class="screen-reader-only">Note</span>Practical Contrastive Divergence Optimization
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Two events <span class="math inline">\(A, B\)</span> are said to be independent if</p>
-<p><span class="math display">\[
-\Pr[A \cap B] = \Pr[A] \Pr[B].
-\]</span></p>
-<p>If <span class="math inline">\(\Pr[B] &gt; 0\)</span>, this is equivalent to</p>
-<p><span class="math display">\[
-\Pr[A \mid B] = \Pr[A].
-\]</span></p>
+<ul>
+<li>Maximum Likelihood Estimate (Empirical Approximation) <span class="math display">\[\nabla_{w_{ij}}L(W) = \frac{1}{N_P}\sum_{v \in P} {v_0}_i {h_0}_j - {v_1}_i {h_1}_j\]</span></li>
+<li><strong>Only 1 Gibbs sampling step is needed!</strong> (Note: The slide’s text mentions “3 steps”, but the equation explicitly displays CD-1 unrolling where <span class="math inline">\(\infty \leftarrow 1\)</span>).</li>
+</ul>
 </div>
 </div>
 </div>
+</section>
+<section id="general-energy-based-models" class="level3">
+<h3 class="anchored" data-anchor-id="general-energy-based-models">General Energy-Based Models</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Mutual independence
+<span class="screen-reader-only">Tip</span>Energy-Based Model
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Events <span class="math inline">\(A_1, \dots, A_m\)</span> are mutually independent if for every non-empty subset <span class="math inline">\(I \subseteq [m]\)</span>,</p>
-<p><span class="math display">\[
-\Pr \left[ \bigcap_{i \in I} A_i \right] = \prod_{i \in I} \Pr[A_i].
-\]</span></p>
+<ul>
+<li>Goal of generative model
+<ul>
+<li>A probability distribution of “patterns” <span class="math inline">\(P(x)\)</span></li>
+</ul></li>
+<li>Requirement
+<ul>
+<li><span class="math inline">\(P(x) \ge 0\)</span> (non-negative)</li>
+<li><span class="math inline">\(\int_{x} P(x)dx = 1\)</span> (sum to 1)</li>
+</ul></li>
+<li>Energy-Based Model
+<ul>
+<li>Energy function: <span class="math inline">\(E(x; \theta)\)</span> parameterized by <span class="math inline">\(\theta\)</span></li>
+<li><span class="math inline">\(P(x) = \frac{1}{Z}\exp\left(-E(x; \theta)\right)\)</span></li>
+<li><span class="math inline">\(Z = \int_{x} \exp\left(-E(x; \theta)\right) dx \quad \text{partition function}\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
-</div>
-<div id="thm-4" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.4</strong></span> Let <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then for any event <span class="math inline">\(A\)</span>,</p>
-<p><span class="math display">\[
-\Pr[A] = \sum_{i=1}^m \Pr[A \mid B_i] \Pr[B_i].
-\]</span></p>
 </div>
 </section>
-<section id="random-variables" class="level2">
-<h2 class="anchored" data-anchor-id="random-variables">Random Variables</h2>
+</section>
+<section id="sampling-methods" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-methods">Sampling Methods</h2>
+<section id="sampling-from-probability-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-from-probability-distributions">Sampling from Probability Distributions</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Random variable
+<span class="screen-reader-only">Tip</span>Inverse Transform Sampling
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> be a discrete probability space. A random variable is a function</p>
-<p><span class="math display">\[
-X : \Omega \to \mathbb{R}.
-\]</span></p>
+<ul>
+<li>Solution: uniform sampling, find the category with cumulative density
+<ul>
+<li><em>The mapping from CDF to value is called Inverse distribution function (quantile function)</em></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1229,78 +1192,77 @@ X : \Omega \to \mathbb{R}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Indicator function
+<span class="screen-reader-only">Tip</span>Importance Sampling
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The indicator function of a condition <span class="math inline">\(C\)</span> is:</p>
-<p><span class="math display">\[
-\mathbb{1}_{[C]} = \begin{cases}
-1 &amp; \text{if the condition } C \text{ holds}, \\
-0 &amp; \text{otherwise}.
-\end{cases}
-\]</span></p>
-<p>For a set <span class="math inline">\(A \subseteq U\)</span>, where <span class="math inline">\(U\)</span> is some universe, the indicator function of <span class="math inline">\(A\)</span> is:</p>
-<p><span class="math display">\[
-\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases}
-1 &amp; \text{if } x \in A, \\
-0 &amp; \text{otherwise}.
-\end{cases}
-\]</span></p>
+<ul>
+<li>Idea: weighted samples
+<ul>
+<li>sample from “easy” distribution <span class="math inline">\(q(x)\)</span> (e.g., uniform)</li>
+<li>Use <span class="math inline">\(p(x)/q(x)\)</span> as the weight for the sample</li>
+</ul></li>
+<li>Importance Sampling
+<ul>
+<li><span class="math inline">\(q(x)\)</span> proposal distribution</li>
+<li><span class="math inline">\(\frac{p(x)}{q(x)}\)</span> importance weight</li>
+<li><span class="math display">\[\mathbb{E}_{x \sim p}[f(x)] = \mathbb{E}_{x \sim q}\left[\frac{p(x)}{q(x)}f(x)\right]\]</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
+</section>
+<section id="markov-chain-monte-carlo" class="level3">
+<h3 class="anchored" data-anchor-id="markov-chain-monte-carlo">Markov Chain Monte-Carlo</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Probability mass function
+<span class="screen-reader-only">Tip</span>Markov Chain Basics &amp; Stationary Distribution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>For a random variable <span class="math inline">\(X\)</span>, its probability mass function <span class="math inline">\(p_X : \mathbb{R} \to [0, 1]\)</span> is defined as</p>
-<p><span class="math display">\[
-p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
-\]</span></p>
+<ul>
+<li>Markov Chain
+<ul>
+<li>A state space <span class="math inline">\(S\)</span>, a transition probability <span class="math inline">\(P(s_j \mid s_i) = T_{ij}\)</span></li>
+<li><span class="math inline">\(T\)</span> is the transition matrix</li>
+<li>We also use <span class="math inline">\(T(s_i \rightarrow s_j)\)</span> to denote <span class="math inline">\(T_{ij}\)</span></li>
+</ul></li>
+<li>A Markov Chain has a stationary distribution with a proper <span class="math inline">\(T\)</span>
+<ul>
+<li>Current distribution over states <span class="math inline">\(\pi_t\)</span></li>
+<li>Single step transition <span class="math inline">\(\pi_{t+1} = T\pi_t\)</span></li>
+<li>Stationary distribution <span class="math inline">\(\pi = T^\infty \pi_0\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Expectation
+<span class="screen-reader-only">Note</span>The Condition for Stationarity: Detailed Balance
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X\)</span> be a random variable on a discrete probability space <span class="math inline">\((\Omega, p)\)</span>. The expectation, expected value or mean of <span class="math inline">\(X\)</span> is defined as</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega)p(\omega).
-\]</span></p>
+<ul>
+<li>Detailed Balance (sufficient condition) <span class="math display">\[\pi(s)T(s \rightarrow s') = \pi(s')T(s' \rightarrow s)\]</span></li>
+</ul>
 </div>
 </div>
-</div>
-<div id="thm-5" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.5 (Linearity of expectation)</strong></span> For any random variables <span class="math inline">\(X_1, \dots, X_n\)</span> and constants <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\mathbb{E} \left[ \sum_{i=1}^n c_i X_i \right] = \sum_{i=1}^n c_i \mathbb{E}[X_i].
-\]</span></p>
-</div>
-<div id="thm-6" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.6</strong></span> If <span class="math inline">\(X\)</span> is a random variable that takes values in non-negative integers, then</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \sum_{t \geq 0} \Pr[X &gt; t].
-\]</span></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
@@ -1308,16 +1270,27 @@ p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Conditional expectation given an event
+<span class="screen-reader-only">Tip</span>Metropolis-Hastings Algorithm Formulation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B\)</span> be an event with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(B\)</span> is defined as</p>
-<p><span class="math display">\[
-\mathbb{E}[X \mid B] = \frac{\mathbb{E}[\mathbb{1}_B \cdot X]}{\Pr[B]}.
-\]</span></p>
+<ul>
+<li>Construct a valid Markov Chain <span class="math inline">\(T(s' \rightarrow s)\)</span> for distribution <span class="math inline">\(p(s)\)</span>
+<ul>
+<li>Detailed balance: <span class="math inline">\(p(s)T(s \rightarrow s') = p(s')T(s' \rightarrow s)\)</span></li>
+<li>Ergodicity</li>
+</ul></li>
+<li>Metropolis Hastings Algorithm
+<ul>
+<li>A proposal distribution <span class="math inline">\(q(s' \mid s)\)</span> to produce next state <span class="math inline">\(s'\)</span> based on <span class="math inline">\(s\)</span></li>
+<li>Draw <span class="math inline">\(s' \sim q(s' \mid s)\)</span></li>
+<li><span class="math display">\[\alpha = \min\left(1, \frac{p(s')q(s' \rightarrow s)}{p(s)q(s \rightarrow s')}\right) \quad \text{($q(s \rightarrow s')$ denotes $q(s' \mid s)$ for simplicity)}\]</span></li>
+<li>Transition to <span class="math inline">\(s'\)</span> (<strong>accept</strong>) with probability <span class="math inline">\(\alpha\)</span> (<strong>acceptance ratio</strong>);</li>
+<li>O.w., stays at <span class="math inline">\(s\)</span> (<strong>reject</strong>)</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1327,113 +1300,33 @@ p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Conditional expectation given a random variable
+<span class="screen-reader-only">Tip</span>Gibbs Sampling Formulation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as the following random variable:</p>
-<p><span class="math display">\[
-\mathbb{E}[X \mid Y] : \Omega \to \mathbb{R}, \quad \omega \mapsto \mathbb{E}[X \mid Y = Y(\omega)].
-\]</span></p>
-</div>
-</div>
-</div>
-<div id="thm-7" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.7</strong></span> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \sum_{i=1}^m \mathbb{E}[X \mid B_i] \Pr[B_i].
-\]</span></p>
-</div>
-<div id="thm-8" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.8</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. Then</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X \mid Y]].
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Independence of random variables
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We say that random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if for all sets <span class="math inline">\(A, B \subseteq \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\Pr[X \in A, Y \in B] = \Pr[X \in A] \Pr[Y \in B].
-\]</span></p>
-</div>
-</div>
-</div>
-<div id="thm-9" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.9</strong></span> If <span class="math inline">\(X, Y\)</span> are independent random variables, then</p>
-<p><span class="math display">\[
-\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y].
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Mutual independence of random variables
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent if for all sets <span class="math inline">\(A_1, \dots, A_n \subseteq \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\Pr[X_1 \in A_1, \dots, X_n \in A_n] = \prod_{i=1}^n \Pr[X_i \in A_i].
-\]</span></p>
-</div>
-</div>
-</div>
-<div id="thm-10" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.10</strong></span> If <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent random variables, then</p>
-<p><span class="math display">\[
-\mathbb{E} \left[ \prod_{i=1}^n X_i \right] = \prod_{i=1}^n \mathbb{E}[X_i].
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Independent and identically distributed random variables
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are independent and identically distributed, abbreviated i.i.d., if</p>
 <ul>
-<li><span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent, and</li>
-<li><span class="math inline">\(X_1, \dots, X_n\)</span> have the same probability distribution.</li>
+<li>Gibbs sampling
+<ul>
+<li><span class="math inline">\(s = (s_0, s_1, \dots, s_N)\)</span>, we construct a coordinate-wise <span class="math inline">\(q(s_i \rightarrow s'_i)\)</span></li>
+<li><span class="math inline">\(q(s_i \rightarrow s'_i) = p(s'_i \mid s_{j \neq i})\)</span> (conditional distribution)</li>
+</ul></li>
+<li>Dimensionality
+<ul>
+<li>Sample a single coordinate per step.</li>
+</ul></li>
+<li>Gibbs sampling always get accepted!
+<ul>
+<li>Acceptance ratio is always 1, <span class="math inline">\(\alpha(s_i \rightarrow s'_i) = 1\)</span></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
+
+
 </section>
-<section id="appendix" class="level2">
-<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
-<div id="thm-11" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.11 (Nested conditional expectations)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two random variables, and let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a measurable function. Then the following simplified expressions hold for nested conditional expectations:</p>
-<ol type="1">
-<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid f(Y)] \;\middle|\; Y \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
-<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid Y] \;\middle|\; f(Y) \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
-</ol>
-</div>
-
-
 </section>
 
 </main> <!-- /main -->
@@ -1871,13 +1764,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="pagination-link" aria-label="Math for CS and AI">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Math for CS and AI</span>
+      <a href="../../../docs/notes/DL/1.html" class="pagination-link" aria-label="Supervised Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Supervised Learning</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../docs/notes/Math4CS&amp;AI/2.html" class="pagination-link" aria-label="Sampling and Concentration">
-        <span class="nav-page-text">Sampling and Concentration</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/DL/3.html" class="pagination-link" aria-label="Generative Adversarial Network">
+        <span class="nav-page-text">Generative Adversarial Network</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

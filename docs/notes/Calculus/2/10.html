@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Newton’s Laws – Bobby</title>
+<title>Fourier Series – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../docs/notes/Physics/1/3.html" rel="next">
-<link href="../../../../docs/notes/Physics/1/1.html" rel="prev">
+<link href="../../../../docs/notes/Math4CS&amp;AI/index.html" rel="next">
+<link href="../../../../docs/notes/Calculus/2/9.html" rel="prev">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
@@ -297,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/index.html">Mechanics and Thermal Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/2.html">Newton’s Laws</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/index.html">Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/index.html">Multivariable Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/10.html">Fourier Series</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -322,11 +322,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
@@ -378,11 +378,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
@@ -439,7 +439,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -504,20 +504,20 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/Physics/1/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mechanics and Thermal Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/Physics/1/1.html" class="sidebar-item-text sidebar-link">
@@ -526,7 +526,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../docs/notes/Physics/1/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Newton’s Laws</span></a>
   </div>
 </li>
@@ -666,22 +666,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello">Hello</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/index.html">Mechanics and Thermal Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/2.html">Newton’s Laws</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/index.html">Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/index.html">Multivariable Calculus</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Calculus/2/10.html">Fourier Series</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Newton’s Laws</h1>
+<h1 class="title">Fourier Series</h1>
 </div>
 
 
@@ -698,11 +692,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hello" class="level2">
-<h2 class="anchored" data-anchor-id="hello">Hello</h2>
 
 
-</section>
 
 </main> <!-- /main -->
 <script type="text/javascript">
@@ -1139,13 +1130,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../docs/notes/Physics/1/1.html" class="pagination-link" aria-label="Kinematics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Kinematics</span>
+      <a href="../../../../docs/notes/Calculus/2/9.html" class="pagination-link" aria-label="Series of Functions and Power Series">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Series of Functions and Power Series</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../docs/notes/Physics/1/3.html" class="pagination-link" aria-label="Momentum">
-        <span class="nav-page-text">Momentum</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../docs/notes/Math4CS&amp;AI/index.html" class="pagination-link" aria-label="Math for CS and AI">
+        <span class="nav-page-text">Math for CS and AI</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

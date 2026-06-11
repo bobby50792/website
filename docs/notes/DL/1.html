@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Discrete Probability – Bobby</title>
+<title>Supervised Learning – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../docs/notes/Math4CS&amp;AI/2.html" rel="next">
-<link href="../../../docs/notes/Math4CS&amp;AI/index.html" rel="prev">
+<link href="../../../docs/notes/DL/2.html" rel="next">
+<link href="../../../docs/notes/DL/index.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -326,7 +326,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/1.html">Discrete Probability</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/1.html">Supervised Learning</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -480,14 +480,14 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
@@ -645,14 +645,14 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Supervised Learning</span></a>
   </div>
 </li>
@@ -700,13 +700,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#asymptotic-notations" id="toc-asymptotic-notations" class="nav-link active" data-scroll-target="#asymptotic-notations">Asymptotic Notations</a></li>
-  <li><a href="#probability-spaces-and-event" id="toc-probability-spaces-and-event" class="nav-link" data-scroll-target="#probability-spaces-and-event">Probability Spaces and Event</a></li>
-  <li><a href="#uniform-probability-means-counting" id="toc-uniform-probability-means-counting" class="nav-link" data-scroll-target="#uniform-probability-means-counting">Uniform Probability Means Counting</a></li>
-  <li><a href="#intersection-and-union-of-events" id="toc-intersection-and-union-of-events" class="nav-link" data-scroll-target="#intersection-and-union-of-events">Intersection and Union of Events</a></li>
-  <li><a href="#conditional-probability-and-independence" id="toc-conditional-probability-and-independence" class="nav-link" data-scroll-target="#conditional-probability-and-independence">Conditional Probability and Independence</a></li>
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link active" data-scroll-target="#classification">Classification</a>
+  <ul class="collapse">
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#single-layer-perceptron" id="toc-single-layer-perceptron" class="nav-link" data-scroll-target="#single-layer-perceptron">Single-Layer Perceptron</a></li>
+  <li><a href="#multi-class-classification" id="toc-multi-class-classification" class="nav-link" data-scroll-target="#multi-class-classification">Multi-Class Classification</a></li>
+  <li><a href="#multi-layer-perception" id="toc-multi-layer-perception" class="nav-link" data-scroll-target="#multi-layer-perception">Multi-Layer Perception</a></li>
+  </ul></li>
+  <li><a href="#convolutional-neural-network" id="toc-convolutional-neural-network" class="nav-link" data-scroll-target="#convolutional-neural-network">Convolutional Neural Network</a>
+  <ul class="collapse">
+  <li><a href="#convex-optimization" id="toc-convex-optimization" class="nav-link" data-scroll-target="#convex-optimization">Convex Optimization</a></li>
+  <li><a href="#advanced-neural-network-training-regimes-tricks" id="toc-advanced-neural-network-training-regimes-tricks" class="nav-link" data-scroll-target="#advanced-neural-network-training-regimes-tricks">Advanced Neural Network Training Regimes &amp; Tricks</a></li>
+  <li><a href="#residual-network" id="toc-residual-network" class="nav-link" data-scroll-target="#residual-network">Residual Network</a></li>
   <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -714,9 +721,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/Math4CS&amp;AI/1.html">Discrete Probability</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/1.html">Supervised Learning</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Discrete Probability</h1>
+<h1 class="title">Supervised Learning</h1>
 </div>
 
 
@@ -733,289 +740,260 @@ window.Quarto = {
 </header>
 
 
-<section id="asymptotic-notations" class="level2">
-<h2 class="anchored" data-anchor-id="asymptotic-notations">Asymptotic Notations</h2>
+<section id="classification" class="level2">
+<h2 class="anchored" data-anchor-id="classification">Classification</h2>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation
+<span class="screen-reader-only">Tip</span>Logistic Regression
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
-\begin{equation*}
-|f(n)| \le Cg(n), \quad \forall n \ge N.
-\end{equation*}
-\]</span></p>
-<p><span class="math display">\[
-\begin{equation*}
-\mathcal{O}(g) := \{f : \exists C &gt; 0, \exists N \in \mathbb{N} \text{ s.t. } |f(n)| \le Cg(n), \text{ for all } n \ge N\}.
-\end{equation*}
-\]</span></p>
+<ul>
+<li><span class="math inline">\(P(y = 1) = f(x; \theta) = \sigma(w^T x + b)\)</span></li>
+<li>Logistic function (sigmoid function): <span class="math inline">\(\sigma(x) = \frac{1}{1 + e^{-x}}\)</span></li>
+<li><span class="math inline">\(err(f(x; \theta), y) = \begin{cases} -\log \sigma(w^T x + b) &amp; y = 1 \\ -\log(1 - \sigma(w^T x + b)) &amp; y = 0 \end{cases}\)</span></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation properties
+<span class="screen-reader-only">Tip</span>The Gradient Descent Algorithm
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span> and <span class="math inline">\(c \in \mathbb{R}\)</span>. If <span class="math inline">\(f(n), g(n) \ge 0\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math display">\[\begin{align*}
-f(n) &amp;= \mathcal{O}(f(n)) \\
-
-c \cdot f(n) &amp;= \mathcal{O}(f(n)) \\
-
-\mathcal{O}(\mathcal{O}(f(n))) &amp;= \mathcal{O}(f(n)) \\
-
-\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) + g(n)) \\
-
-\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(\max\{f(n), g(n)\}) \\
-
-\mathcal{O}(f(n)) \cdot \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) \cdot g(n)) \\
-
-\mathcal{O}(f(n)g(n)) &amp;= f(n) \cdot \mathcal{O}(g(n)). \\
-\end{align*}\]</span></p>
+<ul>
+<li>Choose <span class="math inline">\(X^0\)</span></li>
+<li><span class="math inline">\(X^{k+1} = X^k - \eta^k \nabla_X f(X^k)^T\)</span></li>
+<li>Convergence: <span class="math inline">\(|f(X^{k+1}) - f(X^k)| &lt; \epsilon\)</span></li>
+</ul>
 </div>
 </div>
 </div>
-<div id="thm-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.1 (Big-<span class="math inline">\(\mathcal{O}\)</span> notation defined using limsup)</strong></span> Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if and only if <span class="math display">\[
-\begin{equation*}
-\limsup_{n \to \infty} \frac{|f(n)|}{g(n)} &lt; +\infty.
-\end{equation*}
-\]</span></p>
-</div>
+</section>
+<section id="single-layer-perceptron" class="level3">
+<h3 class="anchored" data-anchor-id="single-layer-perceptron">Single-Layer Perceptron</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><span class="math inline">\(\Omega, \Theta, \sim, o, \omega\)</span> notations
+<span class="screen-reader-only">Tip</span>Single-Layer Perceptron
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>.</p>
 <ul>
-<li>We write <span class="math inline">\(f(n) = \Omega(g(n))\)</span> if <span class="math inline">\(\liminf\limits_{n \to \infty} \frac{|f(n)|}{g(n)} &gt; 0\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) = \Theta(g(n))\)</span> if <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> and <span class="math inline">\(f(n) = \Omega(g(n))\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) \sim g(n)\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 1\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) = o(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 0\)</span>.</li>
-<li>We write <span class="math inline">\(f(n) = \omega(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = +\infty\)</span>.</li>
+<li>Gradient Descent
+<ul>
+<li>Initialize <span class="math inline">\(w^0\)</span>; <span class="math inline">\(w^{k+1} = w^k - \eta^k \nabla_w L(w)\)</span> until convergence</li>
+</ul></li>
+<li>Compute the Gradient
+<ul>
+<li><span class="math inline">\(\nabla_w L(w) = \frac{1}{N} \sum_i \nabla_w \text{err}(f(x^i; w), y^i)\)</span></li>
+<li><span class="math inline">\(y = 1\)</span>: <span class="math inline">\(\nabla_w \text{err} = -\nabla_w \log \sigma(w^T x^i) = -\frac{1}{\text{err}} \nabla_w \sigma(w^T x^i)\)</span></li>
+<li><span class="math inline">\(y = 0\)</span>: <span class="math inline">\(\nabla_w \text{err} = -\nabla_w \log(1 - \sigma(w^T x + b)) = \frac{1}{\text{err}} \nabla_w \sigma(w^T x^i)\)</span></li>
+</ul></li>
+<li>Gradient of Sigmoid neuron
+<ul>
+<li><span class="math inline">\(\sigma(z) = \frac{1}{1 + e^{-z}}\)</span> where <span class="math inline">\(z = w^T x\)</span></li>
+<li><span class="math inline">\(\nabla_{w_i} \sigma(z) = \sigma'(z)x_i \quad \text{and} \quad \nabla_{x_i} \sigma(z) = \sigma'(z)w_i\)</span></li>
+<li><span class="math inline">\(\sigma'(z) = \sigma(z)(1 - \sigma(z))\)</span></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
-<div id="thm-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> with <span class="math inline">\(g(n) &gt; 0\)</span> for all <span class="math inline">\(n \ge 1\)</span>. If <span class="math display">\[
-\begin{equation*}
-f(k) = \mathcal{O}(g(k)) \quad \text{as } k \to \infty,
-\end{equation*}
-\]</span> then <span class="math display">\[
-\begin{equation*}
-\sum_{k=1}^n f(k) = \mathcal{O}\left(\sum_{k=1}^n g(k)\right) \quad \text{as } n \to \infty.
-\end{equation*}
-\]</span></p>
-</div>
-<p><br>
-</p>
-<div id="thm-3" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.3</strong></span> Let <span class="math inline">\(f,g : \mathbb{N}^2 \to \mathbb{R}\)</span> with <span class="math inline">\(g(m,n) &gt; 0\)</span> for all <span class="math inline">\(m,n \ge 1\)</span>. If for some function <span class="math inline">\(U(m) \ge 1\)</span>, we have <span class="math display">\[
-\begin{equation*}
-f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m \to \infty,
-\end{equation*}
-\]</span> Then, <span class="math display">\[
-\begin{equation*}
-\sum_{k=1}^n f(m,k) = \mathcal{O}\left(\sum_{k=1}^n g(m,k)\right), \quad \text{for } 1 \le n \le U(m), \text{ as } m \to \infty.
-\end{equation*}
-\]</span></p>
-</div>
+</section>
+<section id="multi-class-classification" class="level3">
+<h3 class="anchored" data-anchor-id="multi-class-classification">Multi-Class Classification</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation for multivariate functions
+<span class="screen-reader-only">Tip</span>Multi-Class Classification
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(f,g : \mathbb{N}^d \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}^d\)</span>. We write <span class="math display">\[
-\begin{equation*}
-f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
-\end{equation*}
-\]</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
-\begin{equation*}
-|f(n_1,\dots,n_d)| \le Cg(n_1,\dots,n_d), \quad \forall n_1,\dots,n_d \ge N.
-\end{equation*}
-\]</span></p>
+<ul>
+<li>A multi-class perceptron
+<ul>
+<li><span class="math inline">\(C\)</span> classes, <span class="math inline">\(z = Wx\)</span>,</li>
+<li><span class="math inline">\(f(x; W) = \text{softmax}(z), \quad f_c(x; W) = \frac{e^{z_c}}{\sum_{j=1}^C e^{z_j}}\)</span></li>
+</ul></li>
+<li>Learning
+<ul>
+<li>Given <span class="math inline">\(X = \{(x^i, y^i)\}\)</span>, Loss function <span class="math inline">\(L(W) = \frac{1}{N} \sum_i \text{err}(f(x^i; W), y^i)\)</span></li>
+</ul></li>
+<li>The error function
+<ul>
+<li>The probability of a class <span class="math inline">\(c\)</span> given input <span class="math inline">\(x^i\)</span> is <span class="math inline">\(P(y = c | x^i) = f_c(x^i; W)\)</span></li>
+<li>Maximize the log probability of desired class <span class="math inline">\(y^i\)</span></li>
+<li><span class="math inline">\(\text{err}(f(x^i; W), y^i) = -\log f_{y^i}(x^i; W)\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
 </section>
-<section id="probability-spaces-and-event" class="level2">
-<h2 class="anchored" data-anchor-id="probability-spaces-and-event">Probability Spaces and Event</h2>
+<section id="multi-layer-perception" class="level3">
+<h3 class="anchored" data-anchor-id="multi-layer-perception">Multi-Layer Perception</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Discrete probability space
+<span class="screen-reader-only">Tip</span>Multi-Class Classification
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A discrete probability space is a pair <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> consisting of:</p>
 <ul>
-<li>A non-empty finite set <span class="math inline">\(\Omega\)</span>, called the sample space, whose elements represent all possible outcomes of an experiment.</li>
-<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the probability mass function, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
+<li>A multi-class perceptron
+<ul>
+<li><span class="math inline">\(C\)</span> classes, <span class="math inline">\(z = Wx\)</span>,</li>
+<li><span class="math inline">\(f(x; W) = \text{softmax}(z), \quad f_c(x; W) = \frac{e^{z_c}}{\sum_{j=1}^C e^{z_j}}\)</span></li>
+</ul></li>
+<li>Learning
+<ul>
+<li>Given <span class="math inline">\(X = \{(x^i, y^i)\}\)</span>, Loss function <span class="math inline">\(L(W) = \frac{1}{N} \sum_i \text{err}(f(x^i; W), y^i)\)</span></li>
+</ul></li>
+<li>The error function
+<ul>
+<li>The probability of a class <span class="math inline">\(c\)</span> given input <span class="math inline">\(x^i\)</span> is <span class="math inline">\(P(y = c | x^i) = f_c(x^i; W)\)</span></li>
+<li>Maximize the log probability of desired class <span class="math inline">\(y^i\)</span></li>
+<li><span class="math inline">\(\text{err}(f(x^i; W), y^i) = -\log f_{y^i}(x^i; W)\)</span></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Event
+<span class="screen-reader-only">Note</span>Backpropagation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>An event <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(\Omega\)</span> (<span class="math inline">\(A \subseteq \Omega\)</span>), and its probability is defined as <span class="math display">\[
-\begin{equation*}
-\Pr[A] := \sum_{\omega \in A} p(\omega).
-\end{equation*}
-\]</span></p>
+<ul>
+<li>Run forward pass to save all the values and then compute gradients in the reverse order</li>
+<li>Output layer (<span class="math inline">\(N\)</span>):
+<ul>
+<li>Directly compute gradients <span class="math inline">\(\frac{\partial L}{\partial y_i^{(N)}}\)</span> and <span class="math inline">\(\frac{\partial L}{\partial z_i^{(N)}} = \frac{\partial L}{\partial y_i^{(N)}} \cdot \frac{\partial y_i^{(N)}}{\partial z_i^{(N)}}\)</span></li>
+</ul></li>
+<li>For layer <span class="math inline">\(k = N - 1\)</span> downto 0
+<ul>
+<li><span class="math inline">\(\frac{\partial L}{\partial w_{i,j}^{(k+1)}} = y_i^{(k)} \cdot \frac{\partial L}{\partial z_j^{(k+1)}}\)</span></li>
+<li><span class="math inline">\(\frac{\partial L}{\partial y_i^k} = \sum_j w_{i,j}^{(k+1)} \frac{\partial L}{\partial z_j^{(k+1)}}\)</span></li>
+<li><span class="math inline">\(\frac{\partial L}{\partial z_i^{(k)}} = \frac{\partial L}{\partial y_i^{(k)}} f_k'\left(z_i^{(k)}\right)\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-</section>
-<section id="uniform-probability-means-counting" class="level2">
-<h2 class="anchored" data-anchor-id="uniform-probability-means-counting">Uniform Probability Means Counting</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The Secretary Problem
+<span class="screen-reader-only">Note</span>Regularization
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://en.wikipedia.org/wiki/Secretary_problem">Problem Description</a></p>
-<section id="threshold-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="threshold-strategy">Threshold Strategy</h3>
-<p>For a fixed integer <span class="math inline">\(k\)</span> satisfying <span class="math inline">\(1 \le k \le n - 1\)</span>, the <span class="math inline">\(k\)</span>-strategy is an online decision strategy defined as follows:</p>
 <ul>
-<li>Reject the first <span class="math inline">\(k\)</span> options and record the maximum value observed;</li>
-<li>Starting from step <span class="math inline">\(k + 1\)</span>, accept the first option whose value exceeds the recorded maximum.</li>
+<li>Tricks to stabilize the learning process</li>
+<li>L2 norm on all the weights.</li>
+<li><span class="math inline">\(L(w) = \text{Loss}(w) + \frac{1}{2} \alpha |w|^2\)</span></li>
+<li>This is also called weight decay
+<ul>
+<li><span class="math inline">\(\nabla_w L = \nabla \text{Loss}(w) + \alpha w\)</span></li>
+</ul></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>For <span class="math inline">\(n \ge 2\)</span>, the following two statements hold:</p>
-<ol type="1">
-<li>the optimal success probability satisfies</li>
-</ol>
-<p><span class="math display">\[
-\begin{align*}
-p_n = 1/e + \mathcal{O}\left(\frac{1}{n}\right);
-\end{align*}
-\]</span></p>
-<ol start="2" type="1">
-<li>the optimal threshold satisfies</li>
-</ol>
-<p><span class="math display">\[
-\begin{align*}
-k^* = n/e + \mathcal{O}(1).
-\end{align*}
-\]</span></p>
 </section>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="convolutional-neural-network" class="level2">
+<h2 class="anchored" data-anchor-id="convolutional-neural-network">Convolutional Neural Network</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The Locker Puzzle
+<span class="screen-reader-only">Tip</span>Convolutional Neural Network
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://zh.wikipedia.org/wiki/百囚問題">Problem Description</a></p>
-<section id="pointer-chasing-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="pointer-chasing-strategy">Pointer Chasing Strategy</h3>
-<p>Before opening any locker, students discuss and agree on a bijection between student names and <span class="math inline">\([n]\)</span>, <span class="math display">\[
-\begin{align*}
-\phi : \{\text{student names}\} \to [n],
-\end{align*}
-\]</span> which assigns each student a unique ID in <span class="math inline">\([n]\)</span>.</p>
-<p>For each student <span class="math inline">\(s\)</span>, let <span class="math inline">\(x \leftarrow \phi(s)\)</span>. The search rule is:</p>
 <ul>
-<li>open locker <span class="math inline">\(x\)</span>;</li>
-<li>if the revealed name tag is <span class="math inline">\(s\)</span>, stop (success);</li>
-<li>otherwise, let <span class="math inline">\(x \leftarrow \phi(t)\)</span>, where <span class="math inline">\(t\)</span> is the revealed student name, and continue.</li>
+<li><strong>Input Stage</strong>
+<ul>
+<li>Raw Image Data: <span class="math inline">\(Y^{(0)} = \text{Image}\)</span> with dimensions <span class="math inline">\(H \times W \times D_0\)</span></li>
+</ul></li>
+<li><strong>Feature Extraction Loop (Hidden Layers)</strong>
+<ul>
+<li>For layer <span class="math inline">\(l = 1\)</span> to <span class="math inline">\(L\)</span>:
+<ul>
+<li><strong>Convolution Layer (Distributed Scanning)</strong>: <span class="math display">\[z(l, j, x, y) = \sum_{i=1}^{D_{l-1}} \sum_{x'=1}^{K_l} \sum_{y'=1}^{K_l} w(l, i, j, x', y') \cdot Y(l-1, i, x+x'-1, y+y'-1)\]</span></li>
+<li><strong>Activation Function</strong>: <span class="math inline">\(Y(l, j, x, y) = \text{activation}(z(l, j, x, y))\)</span></li>
+<li><strong>Max-Pooling Layer (Spatial Downsampling)</strong>: Spatially reduces feature maps to capture invariant features.</li>
+</ul></li>
+</ul></li>
+<li><strong>Classification Stage (Final MLP)</strong>
+<ul>
+<li>Flatten the final feature map into a 1D vector.</li>
+<li>Output Layer: <span class="math inline">\(Y = \text{softmax}\left( Y(L, :, 1, 1) \dots Y(L, :, W_{\text{final}}, H_{\text{final}}) \right)\)</span></li>
+</ul></li>
 </ul>
-<p>If no success occurs, stop after <span class="math inline">\(n/2\)</span> opens (failure).</p>
-</section>
-<section id="conclusion-1" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
-<p>For all even <span class="math inline">\(n \ge 2\)</span>, the success probability of the pointer chasing strategy is <span class="math display">\[
-\begin{align*} \Pr[\text{success}] = 1 - \sum_{j=n/2+1}^n \frac{1}{j} = 1 - \ln 2 + \mathcal{O}\left(\frac{1}{n}\right) \approx 0.307. \end{align*}
-\]</span></p>
-</section>
 </div>
 </div>
 </div>
-</section>
-<section id="intersection-and-union-of-events" class="level2">
-<h2 class="anchored" data-anchor-id="intersection-and-union-of-events">Intersection and Union of Events</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Intersection and union of event
+<span class="screen-reader-only">Note</span>Distributed Scanning
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>For events <span class="math inline">\(A, B \subseteq \Omega\)</span>:</p>
-<ul>
-<li><p>The intersection of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cap B\)</span>, is the event that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are happen.</p></li>
-<li><p>The union of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cup B\)</span>, is the event that at least one of <span class="math inline">\(A, B\)</span> happens.</p></li>
-</ul>
-<p>As events are subsets of the sample space <span class="math inline">\(\Omega\)</span>, the operations <span class="math inline">\(\cap\)</span> and <span class="math inline">\(\cup\)</span> are the same as set operations.</p>
+<p>An elegant alternative to the traditional sliding window. Instead of cropping images into separate chunks for MLP processing, it applies a local convolutional kernel uniformly across the entire input tensor. This approach inherently shares weights across different spatial locations and dramatically accelerates grid-like computation.</p>
 </div>
 </div>
 </div>
@@ -1025,29 +1003,13 @@ k^* = n/e + \mathcal{O}(1).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Properties of probability measures
+<span class="screen-reader-only">Note</span>Output Map Dimension
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>For any events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
-\begin{align*}
-\Pr[A \cup B] = \Pr[A] + \Pr[B] - \Pr[A \cap B].
-\end{align*}
-\]</span></p></li>
-<li><p>For ans two events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
-\begin{align*}
-\Pr [A \cup B] \leq \Pr[A] + \Pr[B].
-\end{align*}
-\]</span></p></li>
-<li><p>For any sequence of events <span class="math inline">\(A_1, \dots, A_m \subseteq \Omega\)</span> with <span class="math inline">\(m \geq 2\)</span>, <span class="math display">\[
-\begin{align*}
-\Pr\left[\bigcup_{i=1}^m A_i\right] \le \sum_{i=1}^m \Pr[A_i].
-\end{align*}
-\]</span></p></li>
-</ol>
+<p>The spatial size of a feature map after a convolution operation. Without padding, the map shrinks according to the structural step-size of the scan, defined by the formula: <span class="math display">\[\text{Output Size} = \left\lfloor \frac{N - M}{S} \right\rfloor + 1\]</span> where <span class="math inline">\(N\)</span> is input size, <span class="math inline">\(M\)</span> is filter size, and <span class="math inline">\(S\)</span> is stride.</p>
 </div>
 </div>
 </div>
@@ -1057,40 +1019,13 @@ k^* = n/e + \mathcal{O}(1).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Hashing Collision
+<span class="screen-reader-only">Note</span>Padding
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<section id="linear-hash-function" class="level3">
-<h3 class="anchored" data-anchor-id="linear-hash-function">Linear Hash Function</h3>
-<p>Here <span class="math display">\[
-\begin{align*}
-h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
-\end{align*}
-\]</span></p>
-<p>The corresponding linear hash family is defined as follows: <span class="math display">\[
-\begin{align*}
-\mathcal{H}_{p,m} := \{h_{a,b,p,m} : a \in \mathbb{Z}_p \setminus \{0\}, b \in \mathbb{Z}_p\}.
-\end{align*}
-\]</span> That is, <span class="math inline">\(\mathcal{H}_{p,m}\)</span> is a family of linear hash functions with fixed prime <span class="math inline">\(p\)</span> and bucket number <span class="math inline">\(m\)</span>.</p>
-</section>
-<section id="conclusion-2" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-2">Conclusion</h3>
-<ol type="1">
-<li><p>For any two distinct integers <span class="math inline">\(k, k' \in K\)</span>, if a hash function <span class="math inline">\(h\)</span> is sampled uniformly at random from <span class="math inline">\(\mathcal{H}_{p,m}\)</span>, then <span class="math display">\[
-\begin{align*}
-\Pr[h(k) = h(k')] \le \frac{1}{m}.
-\end{align*}
-\]</span></p></li>
-<li><p>For any universal hash family <span class="math inline">\(\mathcal{H}\)</span> and any <span class="math inline">\(n\)</span> distinct keys <span class="math inline">\(k_1, \dots, k_n \in K\)</span>, the collision probability admits the upper bound <span class="math display">\[
-\begin{align*}
-\Pr[C] \le \frac{1}{m} \binom{n}{2}.
-\end{align*}
-\]</span></p></li>
-</ol>
-</section>
+<p>The technique of symmetric zero-boundary expansion applied to the edges of input maps before scanning. It resolves the problem of spatial dimensionality shrinking over deep networks, preventing valuable edge information from fading away as the layer depth <span class="math inline">\(L\)</span> grows arbitrarily large.</p>
 </div>
 </div>
 </div>
@@ -1100,174 +1035,172 @@ h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ramsey Numbers
+<span class="screen-reader-only">Note</span>Max-Pooling Layer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://en.wikipedia.org/wiki/Ramsey%27s_theorem">Problem Description</a></p>
-<section id="definition-of-ramsey-number" class="level3">
-<h3 class="anchored" data-anchor-id="definition-of-ramsey-number">Definition of Ramsey number</h3>
-<ol type="1">
-<li><p>For every integer <span class="math inline">\(k \ge 2\)</span>, there exists an integer <span class="math inline">\(N &gt; 0\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>. The Ramsey number <span class="math inline">\(R(k)\)</span> is the smallest integer <span class="math inline">\(N\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>.</p></li>
-<li><p>For any integers <span class="math inline">\(r \ge 1\)</span> and <span class="math inline">\(k \ge m \ge 1\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that for every coloring of the <span class="math inline">\(m\)</span>-element subsets of an <span class="math inline">\(N\)</span>-element set with <span class="math inline">\(r\)</span> colors, there exists a <span class="math inline">\(k\)</span>-element subset whose <span class="math inline">\(m\)</span>-element subsets are all assigned the same color.</p></li>
-</ol>
-</section>
-<section id="conclusion-3" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-3">Conclusion</h3>
-<ol type="1">
-<li><p>For all <span class="math inline">\(k \ge 3\)</span>, <span class="math display">\[
-\begin{align*}
-2 ^ {k / 2} &lt; R(k) &lt; \binom{2k - 2}{k - 1} &lt; 4 ^ k.
-\end{align*}
-\]</span> Thus <span class="math inline">\(R(k) = 2^{\Theta(k)}\)</span>.</p></li>
-<li><p>For all <span class="math inline">\(r, k, m \geq 2\)</span>, the multicolor Ramsey number <span class="math inline">\(R_r^{(m)}(k)\)</span> satisfies the following lower bound: <span class="math display">\[
-R_r^{(m)}(k) &gt; r^{\frac{1}{m} \left( \binom{k}{m} - 1 \right)}.
-\]</span></p></li>
-</ol>
-</section>
+<p>A downsampling operation that extracts the maximum value within localized spatial grids (e.g., <span class="math inline">\(2 \times 2\)</span>). It reduces the data footprint to stabilize memory constraints while granting the network local translation invariance against distortions or positional shifts.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="conditional-probability-and-independence" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-probability-and-independence">Conditional Probability and Independence</h2>
+<section id="convex-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="convex-optimization">Convex Optimization</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Conditional probability
+<span class="screen-reader-only">Tip</span>Lipschitz continuous
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(A, B\)</span> be events with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional probability of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> is defined as:</p>
-<p><span class="math display">\[
-\Pr[A \mid B] = \frac{\Pr[A \cap B]}{\Pr[B]}
-\]</span></p>
-<p>We leave <span class="math inline">\(\Pr[A \mid B]\)</span> undefined if <span class="math inline">\(\Pr[B] = 0\)</span>.</p>
+<ul>
+<li><p>A function <span class="math inline">\(g(x)\)</span> is Lipschitz continuous: <span class="math inline">\(|g(x) - g(y)| \le L|x - y|\)</span></p></li>
+<li><p>Assumption: a “smooth” convex function <span class="math inline">\(f(x)\)</span></p>
+<ul>
+<li><span class="math inline">\(f(x)\)</span> is convex</li>
+<li>Gradient of <span class="math inline">\(f(x)\)</span> is Lipschitz continuous: <span class="math inline">\(|\nabla f(x) - \nabla f(y)| \le L|x - y|\)</span></li>
+<li>“Gradient can’t change arbitrarily fast”
+<ul>
+<li><span class="math inline">\(\nabla^2 f(x) \le LI\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Independence
+<span class="screen-reader-only">Note</span>Descent Lemma
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Two events <span class="math inline">\(A, B\)</span> are said to be independent if</p>
-<p><span class="math display">\[
-\Pr[A \cap B] = \Pr[A] \Pr[B].
-\]</span></p>
-<p>If <span class="math inline">\(\Pr[B] &gt; 0\)</span>, this is equivalent to</p>
-<p><span class="math display">\[
-\Pr[A \mid B] = \Pr[A].
-\]</span></p>
+<ul>
+<li><p><span class="math inline">\(f(y) \le f(x) + \nabla f(x)^T(y - x) + \frac{L}{2}|x - y|^2\)</span></p></li>
+<li><p>A convex quadratic upper bound on <span class="math inline">\(f(x)\)</span></p>
+<ul>
+<li>Minimize the upper bound of <span class="math inline">\(y\)</span></li>
+<li><span class="math inline">\(\eta = \frac{1}{L}\)</span> (optimal)</li>
+<li>Remark: any <span class="math inline">\(0 &lt; \eta &lt; \frac{2}{L}\)</span>, decreases <span class="math inline">\(f(x)\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Mutual independence
+<span class="screen-reader-only">Note</span>Convergence Rate with constant learning rate <span class="math inline">\(\eta = \frac{1}{L}\)</span>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Events <span class="math inline">\(A_1, \dots, A_m\)</span> are mutually independent if for every non-empty subset <span class="math inline">\(I \subseteq [m]\)</span>,</p>
-<p><span class="math display">\[
-\Pr \left[ \bigcap_{i \in I} A_i \right] = \prod_{i \in I} \Pr[A_i].
-\]</span></p>
+<ul>
+<li>Convergence Rate with constant learning rate <span class="math inline">\(\eta = \frac{1}{L}\)</span>
+<ul>
+<li><span class="math inline">\(X^{k+1} = X^k - \frac{1}{L}\nabla_X f(X^k)\)</span></li>
+<li><span class="math inline">\(f(X^{k+1}) \le f(X^k) - \frac{1}{2L}|\nabla f(X^k)|^2\)</span> (decent lemma)</li>
+<li><span class="math inline">\(|\nabla f(X^k)|^2 \le 2L\left(f(X^k) - f(X^{k+1})\right)\)</span> (progress bound)</li>
+<li><span class="math inline">\(k \min_{i=0\dots k} \left\{ |\nabla f(X^i)|^2 \right\} \le 2L\left(f(X^0) - f(X^*)\right)\)</span></li>
+</ul></li>
+<li>For <span class="math inline">\(X^k\)</span> with <span class="math inline">\(|\nabla f(X^k)|^2 \le \epsilon\)</span>
+<ul>
+<li><span class="math inline">\(k = O\left(\frac{1}{\epsilon}\right)\)</span>, a sublinear convergence rate</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div id="thm-4" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.4</strong></span> Let <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then for any event <span class="math inline">\(A\)</span>,</p>
-<p><span class="math display">\[
-\Pr[A] = \sum_{i=1}^m \Pr[A \mid B_i] \Pr[B_i].
-\]</span></p>
-</div>
-</section>
-<section id="random-variables" class="level2">
-<h2 class="anchored" data-anchor-id="random-variables">Random Variables</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Random variable
+<span class="screen-reader-only">Note</span>Strongly Convex Functions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> be a discrete probability space. A random variable is a function</p>
-<p><span class="math display">\[
-X : \Omega \to \mathbb{R}.
-\]</span></p>
+<ul>
+<li>Strongly convexity (for some <span class="math inline">\(\mu &gt; 0\)</span>)
+<ul>
+<li><span class="math inline">\(f(y) \ge f(x) + \nabla f(x)^T(y - x) + \frac{\mu}{2}|y - x|^2\)</span></li>
+<li>A quadratic lower bound!</li>
+</ul></li>
+<li>Better rate for <span class="math inline">\(L\)</span>-smooth strongly convex function
+<ul>
+<li><span class="math inline">\(LI \succeq \nabla^2 f(x) \succ 0\)</span></li>
+<li>For <span class="math inline">\(f(X^k) - f^* \le \epsilon\)</span>, we have <span class="math inline">\(k = O\left(\log \frac{1}{\epsilon}\right)\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Indicator function
+<span class="screen-reader-only">Note</span>Second-order optimization
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The indicator function of a condition <span class="math inline">\(C\)</span> is:</p>
-<p><span class="math display">\[
-\mathbb{1}_{[C]} = \begin{cases}
-1 &amp; \text{if the condition } C \text{ holds}, \\
-0 &amp; \text{otherwise}.
-\end{cases}
-\]</span></p>
-<p>For a set <span class="math inline">\(A \subseteq U\)</span>, where <span class="math inline">\(U\)</span> is some universe, the indicator function of <span class="math inline">\(A\)</span> is:</p>
-<p><span class="math display">\[
-\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases}
-1 &amp; \text{if } x \in A, \\
-0 &amp; \text{otherwise}.
-\end{cases}
-\]</span></p>
+<ul>
+<li>Second-order optimization
+<ul>
+<li><span class="math inline">\(X^{k+1} = X^k - \eta^k \nabla^2 f(X^k)^{-1}\nabla f(X^k)\)</span></li>
+</ul></li>
+<li>Convergence Rate (with <span class="math inline">\(\eta^k = 1\)</span> near optimum <span class="math inline">\(X^*\)</span>)
+<ul>
+<li>Under <span class="math inline">\(\mu\)</span>-strong convexity and <span class="math inline">\(C^3\)</span> smoothness, the error <span class="math inline">\(e_k = \|X^k - X^*\|\)</span> satisfies: <span class="math display">\[\|X^{k+1} - X^*\| \le M \|X^k - X^*\|^2 \quad \text{where } M = \frac{\| \nabla^3 f(\xi) \|}{2\mu}\]</span></li>
+<li>For <span class="math inline">\(f(X^k) - f^* \le \epsilon\)</span>, the iteration complexity is a blazing fast <span class="math inline">\(k = O\left(\log \log \frac{1}{\epsilon}\right)\)</span>.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Probability mass function
+<span class="screen-reader-only">Note</span>Accelerated Methods
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>For a random variable <span class="math inline">\(X\)</span>, its probability mass function <span class="math inline">\(p_X : \mathbb{R} \to [0, 1]\)</span> is defined as</p>
-<p><span class="math display">\[
-p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
-\]</span></p>
+<ul>
+<li>Gradient Descent with Momentum (Polyak’s Heavy-ball Method)
+<ul>
+<li><span class="math inline">\(X^{k+1} = X^k - \eta \nabla f(X^k) + \beta(X^k - X^{k-1})\)</span></li>
+</ul></li>
+<li>Nesterov’s Accelerated Gradient Descent (NAG)
+<ul>
+<li><span class="math inline">\(X^{k+1} = X^k - \eta \nabla f\left(X^k + \beta(X^k - X^{k-1})\right) + \beta(X^k - X^{k-1})\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1277,105 +1210,117 @@ p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Expectation
+<span class="screen-reader-only">Tip</span>Stochastic Gradient Descent
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X\)</span> be a random variable on a discrete probability space <span class="math inline">\((\Omega, p)\)</span>. The expectation, expected value or mean of <span class="math inline">\(X\)</span> is defined as</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega)p(\omega).
-\]</span></p>
+<ul>
+<li>Stochastic Gradient Descent (SGD)
+<ul>
+<li>Given training data <span class="math inline">\(\mathcal{X} = \{(x^i, y^i)\}\)</span></li>
+<li>Random sample a data point <span class="math inline">\((x^j, y^j) \in \mathcal{X}\)</span></li>
+<li>Incremental update: <span class="math inline">\(\theta^{k+1} \leftarrow \theta^k - \eta^k \nabla L_j(\theta^k)\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div id="thm-5" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.5 (Linearity of expectation)</strong></span> For any random variables <span class="math inline">\(X_1, \dots, X_n\)</span> and constants <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\mathbb{E} \left[ \sum_{i=1}^n c_i X_i \right] = \sum_{i=1}^n c_i \mathbb{E}[X_i].
-\]</span></p>
-</div>
-<div id="thm-6" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.6</strong></span> If <span class="math inline">\(X\)</span> is a random variable that takes values in non-negative integers, then</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \sum_{t \geq 0} \Pr[X &gt; t].
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Conditional expectation given an event
+<span class="screen-reader-only">Note</span>Convergence of SGD
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B\)</span> be an event with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(B\)</span> is defined as</p>
-<p><span class="math display">\[
-\mathbb{E}[X \mid B] = \frac{\mathbb{E}[\mathbb{1}_B \cdot X]}{\Pr[B]}.
-\]</span></p>
+<ul>
+<li>Convergence Condition
+<ul>
+<li>A diminishing learning rate: <span class="math inline">\(\sum_k \eta^k = \infty\)</span> and <span class="math inline">\(\sum_k (\eta^k)^2 &lt; \infty\)</span></li>
+<li>Typical usage: <span class="math inline">\(\eta^k \propto \frac{1}{k}\)</span></li>
+<li>Why wouldn’t a constant learning rate work?</li>
+</ul></li>
+<li>Convergence Rate (ML Course Recap.)
+<ul>
+<li>Convex function: <span class="math inline">\(\mathbb{E}[f(X^k)] - f^* = O\left(\frac{1}{\sqrt{k}}\right)\)</span> (no improvement w. <span class="math inline">\(L\)</span>-smooth)</li>
+<li>Strongly convex function: <span class="math inline">\(\mathbb{E}[f(X^k)] - f^* = O\left(\frac{1}{k}\right)\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Conditional expectation given a random variable
+<span class="screen-reader-only">Note</span>Mini-batch Gradient Descent
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as the following random variable:</p>
-<p><span class="math display">\[
-\mathbb{E}[X \mid Y] : \Omega \to \mathbb{R}, \quad \omega \mapsto \mathbb{E}[X \mid Y = Y(\omega)].
-\]</span></p>
+<ul>
+<li>Mini-batches!
+<ul>
+<li>We choose a random subset of indices <span class="math inline">\(I_j \subset \{1, \dots, N\}\)</span> and <span class="math inline">\(|I_j| = b\)</span> (batch-size)</li>
+<li><span class="math inline">\(\mathcal{X} = \{(x^i, y^i) : i \in I_j\}\)</span>: a mini-batch of training data</li>
+<li><span class="math inline">\(L_{I_j}(\theta) = \frac{1}{b}\sum_{i \in I_j} L_i(\theta)\)</span> estimate the gradient over a mini-batch</li>
+<li><span class="math inline">\(\theta^{k+1} = \theta^k - \eta^k \nabla L_{I_j}(\theta^k)\)</span></li>
+</ul></li>
+<li>Mini-batch gradient is still an unbiased estimate of the gradient
+<ul>
+<li>Reduce the variance by <span class="math inline">\(\frac{1}{b}\)</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div id="thm-7" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.7</strong></span> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \sum_{i=1}^m \mathbb{E}[X \mid B_i] \Pr[B_i].
-\]</span></p>
-</div>
-<div id="thm-8" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.8</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. Then</p>
-<p><span class="math display">\[
-\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X \mid Y]].
-\]</span></p>
-</div>
+</section>
+<section id="advanced-neural-network-training-regimes-tricks" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-neural-network-training-regimes-tricks">Advanced Neural Network Training Regimes &amp; Tricks</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Independence of random variables
+<span class="screen-reader-only">Tip</span>Regularization &amp; Anti-Overfitting
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We say that random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if for all sets <span class="math inline">\(A, B \subseteq \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\Pr[X \in A, Y \in B] = \Pr[X \in A] \Pr[Y \in B].
-\]</span></p>
+<ul>
+<li>Overfitting!
+<ul>
+<li>Neural networks are universal functions</li>
+<li>Overfitted responses facilitated by large weights <span class="math inline">\(\rightarrow\)</span> Weight Decay (L2-norm)</li>
+</ul></li>
+<li>Dropout
+<ul>
+<li><strong>Training</strong>: for each input, at each iteration, randomly “turn off” each neuron with a probability <span class="math inline">\(1 - \alpha\)</span>
+<ul>
+<li>In practice, we change a neuron to 0 by sampling a Bernoulli variable with prob. <span class="math inline">\(1 - \alpha\)</span></li>
+<li>Random “turn-off” prevent overfitting to particular neurons or weights</li>
+<li><strong>Gradient only propagated from non-zero neurons</strong></li>
+</ul></li>
+</ul></li>
+<li>Early Stopping
+<ul>
+<li>Continue training may lead to training data overfitting</li>
+<li>Track performance on a held-out validation set</li>
+</ul></li>
+</ul>
 </div>
 </div>
-</div>
-<div id="thm-9" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.9</strong></span> If <span class="math inline">\(X, Y\)</span> are independent random variables, then</p>
-<p><span class="math display">\[
-\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y].
-\]</span></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
@@ -1383,24 +1328,23 @@ p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Mutual independence of random variables
+<span class="screen-reader-only">Tip</span>Data Preparation &amp; Augmentation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent if for all sets <span class="math inline">\(A_1, \dots, A_n \subseteq \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\Pr[X_1 \in A_1, \dots, X_n \in A_n] = \prod_{i=1}^n \Pr[X_i \in A_i].
-\]</span></p>
+<ul>
+<li>Data Preparation and Augmentation
+<ul>
+<li>Subtract the mean activity over the training set from each pixel</li>
+<li>Crop <span class="math inline">\(224 \times 224\)</span> patches (and their horizontal reflections.)</li>
+<li>At test time, average the predictions on the 10 patches (ensemble)</li>
+<li>Change the intensity of RGB channels, add PCA components <span class="math display">\[[I_R, I_G, I_B] += \alpha[P_R, P_G, P_B][\lambda_R, \lambda_G, \lambda_B]^T, \quad \alpha \sim N(0, 0.1)\]</span></li>
+</ul></li>
+</ul>
 </div>
 </div>
-</div>
-<div id="thm-10" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.10</strong></span> If <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent random variables, then</p>
-<p><span class="math display">\[
-\mathbb{E} \left[ \prod_{i=1}^n X_i \right] = \prod_{i=1}^n \mathbb{E}[X_i].
-\]</span></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
@@ -1408,32 +1352,124 @@ p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Independent and identically distributed random variables
+<span class="screen-reader-only">Tip</span>Network Initialization &amp; Stable Design
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are independent and identically distributed, abbreviated i.i.d., if</p>
 <ul>
-<li><span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent, and</li>
-<li><span class="math inline">\(X_1, \dots, X_n\)</span> have the same probability distribution.</li>
+<li>Initialization
+<ul>
+<li>Zero initialization makes all neurons learn the same pattern <span class="math inline">\(\rightarrow\)</span> random init</li>
+<li>A too-large initialization leads to exploding gradients <span class="math inline">\(\rightarrow\)</span> small init</li>
+</ul></li>
+<li>Design Principle
+<ul>
+<li>Zero activation mean <span class="math inline">\(\rightarrow\)</span> value at 0 (softsign, tanh) or large gradient (sigmoid)</li>
+<li>Activation variance remains same across layers <span class="math inline">\(\rightarrow\)</span> prevent gradient vanishing/explosion</li>
+</ul></li>
+<li>Gradient Clipping
+<ul>
+<li>The loss can occasionally lead to a steep decent</li>
+<li>This can result in immediate instability</li>
+<li>If <span class="math inline">\(\nabla\theta_i &gt; 5\)</span>, then set <span class="math inline">\(\nabla\theta_i\)</span> to 5. (you can also scale the norm of <span class="math inline">\(|\nabla\theta|\)</span>)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Normalization Techniques
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>The problem of covariance shift
+<ul>
+<li>Assumption: mini-batches share a similar data distribution</li>
+<li>Reality: each minibatch may have a different distribution</li>
+<li><strong>Solution</strong>: make each batch same mean and standard deviation for training</li>
+</ul></li>
+<li>Batch Normalization
+<ul>
+<li>BatchNorm Layer
+<ul>
+<li><span class="math inline">\(u_i\)</span> : scaled activations with zero-mean and unit std dev</li>
+<li><span class="math inline">\(\hat{z}_i = \gamma u_i + \beta\)</span> : Then shift to a proper location, <span class="math inline">\(\gamma, \beta\)</span> are parameters</li>
+</ul></li>
+</ul></li>
+<li>Layer Normalization
+<ul>
+<li>LayerNorm layer
+<ul>
+<li>Scales the mean and std-dev of a hidden layer</li>
+<li><span class="math display">\[h^t = f\left[ \frac{g}{\sigma^t} \odot (a^t - \mu^t) + b \right], \quad \mu^t = \frac{1}{H}\sum_{i=1}^H a_i^t, \quad \sigma^t = \sqrt{\frac{1}{H}\sum_{i=1}^H (a_i^t - \mu^t)^2}\]</span></li>
+</ul></li>
+</ul></li>
+<li>Group cream
+<ul>
+<li>GroupNorm
+<ul>
+<li>Batch-independent, improve BatchNorm for small batch size</li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
 </section>
-<section id="appendix" class="level2">
-<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
-<div id="thm-11" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.11 (Nested conditional expectations)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two random variables, and let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a measurable function. Then the following simplified expressions hold for nested conditional expectations:</p>
-<ol type="1">
-<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid f(Y)] \;\middle|\; Y \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
-<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid Y] \;\middle|\; f(Y) \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
-</ol>
+<section id="residual-network" class="level3">
+<h3 class="anchored" data-anchor-id="residual-network">Residual Network</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Residual Connection
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Residual Connection
+<ul>
+<li><span class="math inline">\(z = \sigma\left(f(x) + x\right)\)</span></li>
+</ul></li>
+<li>Justification from the paper
+<ul>
+<li>A trivial solution with good precondition for arbitrarily deep network
+<ul>
+<li><span class="math inline">\(W^{(k)} = I\)</span></li>
+</ul></li>
+<li>Hypothesis: hard to learn identity but easy to learn zero</li>
+<li>Solution: fit the residual function <span class="math inline">\(H(x) = f(x) - x\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="appendix" class="level3">
+<h3 class="anchored" data-anchor-id="appendix">Appendix</h3>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline">\(f: \mathbb{R}^d \to \mathbb{R}\)</span> be a differentiable, <span class="math inline">\(\mu\)</span>-strongly-convex function. Then for any <span class="math inline">\(x, y \in \mathbb{R}^d\)</span>: <span class="math display">\[\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \mu\|x - y\|^2\]</span></p>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Let <span class="math inline">\(f: \mathbb{R}^d \to \mathbb{R}\)</span> be a differentiable, <span class="math inline">\(L\)</span>-smooth convex function. Then for any <span class="math inline">\(x, y \in \mathbb{R}^d\)</span>: <span class="math display">\[\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \frac{1}{L}\|\nabla f(x) - \nabla f(y)\|^2\]</span></p>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1871,13 +1907,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="pagination-link" aria-label="Math for CS and AI">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Math for CS and AI</span>
+      <a href="../../../docs/notes/DL/index.html" class="pagination-link" aria-label="Deep Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Deep Learning</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../docs/notes/Math4CS&amp;AI/2.html" class="pagination-link" aria-label="Sampling and Concentration">
-        <span class="nav-page-text">Sampling and Concentration</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/DL/2.html" class="pagination-link" aria-label="Energy-Based Model">
+        <span class="nav-page-text">Energy-Based Model</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

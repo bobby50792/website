@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Newton’s Laws – Bobby</title>
+<title>Normalizing Flow &amp; Variational Autoencoder – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,29 +26,29 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../../docs/notes/Physics/1/3.html" rel="next">
-<link href="../../../../docs/notes/Physics/1/1.html" rel="prev">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-2a5c87f95b0fb482e5c5835a739e033e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/DL/5.html" rel="next">
+<link href="../../../docs/notes/DL/3.html" rel="prev">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-2a5c87f95b0fb482e5c5835a739e033e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,8 +77,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -259,9 +288,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -271,11 +300,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../../docs/notes/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -297,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/index.html">Mechanics and Thermal Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/2.html">Newton’s Laws</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/4.html">Normalizing Flow &amp; Variational Autoencoder</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -311,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -320,7 +349,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Calculus/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -329,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Calculus/1/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -338,37 +367,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/1/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/1/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -376,7 +405,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Calculus/2/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -385,61 +414,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series of Functions and Power Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Calculus/2/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -449,7 +478,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Math4CS&amp;AI/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -458,43 +487,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling and Concentration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generating Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Central Limit Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Math4CS&amp;AI/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Math4CS&amp;AI/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Approximations</span></a>
   </div>
 </li>
@@ -502,109 +531,109 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/Physics/1/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/Physics/1/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mechanics and Thermal Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinematics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../docs/notes/Physics/1/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Newton’s Laws</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy and Work</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Angular Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collision Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rigid Body</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Oscillation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Waves</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lagrangian and Hamiltonian Mechanics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Special Relativity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/12.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Temperature, Heat, and the First Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/13.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/13.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinetic Theory of Gases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/14.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/14.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Second Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/Physics/1/15.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/Physics/1/15.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Mechanics</span></a>
   </div>
 </li>
@@ -614,46 +643,46 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/DL/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy-Based Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generative Adversarial Network</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/DL/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/DL/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sequence Modeling</span></a>
   </div>
 </li>
@@ -671,7 +700,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello">Hello</a></li>
+  <li><a href="#normalizing-flow" id="toc-normalizing-flow" class="nav-link active" data-scroll-target="#normalizing-flow">Normalizing Flow</a></li>
+  <li><a href="#variational-autoencoders" id="toc-variational-autoencoders" class="nav-link" data-scroll-target="#variational-autoencoders">Variational Autoencoders</a></li>
   </ul>
 </nav>
     </div>
@@ -679,9 +709,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/index.html">Mechanics and Thermal Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/Physics/1/2.html">Newton’s Laws</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/DL/4.html">Normalizing Flow &amp; Variational Autoencoder</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Newton’s Laws</h1>
+<h1 class="title">Normalizing Flow &amp; Variational Autoencoder</h1>
 </div>
 
 
@@ -698,8 +728,508 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hello" class="level2">
-<h2 class="anchored" data-anchor-id="hello">Hello</h2>
+<section id="normalizing-flow" class="level2">
+<h2 class="anchored" data-anchor-id="normalizing-flow">Normalizing Flow</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Normalizing Flows Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Generative Models
+<ul>
+<li>Generator: transform a simple distribution to the data distribution</li>
+<li>Generation: sample <span class="math inline">\(z_0 \sim \pi(z)\)</span>, <span class="math inline">\(x = G(z_0)\)</span></li>
+</ul></li>
+<li>Change Variables
+<ul>
+<li>For invertible neural networks, the change of variable formula: <span class="math display">\[p(x) = \pi(z) \left| \det(J_{G^{-1}}(x)) \right|, \quad z = G^{-1}(x)\]</span></li>
+<li><span class="math inline">\(J_{G^{-1}}\)</span>: Jacobian matrix of <span class="math inline">\(G^{-1}\)</span></li>
+<li>Intuition: <span class="math display">\[p(x')\Delta x = \pi(z')\Delta z \implies p(x') = \pi(z')\frac{\Delta z}{\Delta x} \implies p(x') = \pi(z')\left|\frac{dz}{dx}\right|\]</span></li>
+</ul></li>
+<li>Normalizing Flows
+<ul>
+<li>Loss function: <span class="math display">\[\log p(x) = \log \pi(G^{-1}(x)) + \log \left| \det(J_{G^{-1}}(x)) \right|\]</span></li>
+<li>Decompose <span class="math inline">\(G\)</span> into the decomposition of many sub-net: <span class="math display">\[z_K = f_{\theta^K} \circ f_{\theta^{K-1}} \circ \dots \circ f_{\theta^1}(z_0)\]</span></li>
+<li>Chain rule (given <span class="math inline">\(\left|\det(J_{G^{-1}})\right| = 1/\left|\det(J_G)\right|\)</span>): <span class="math display">\[\log p(z_K) = \log \pi(z_0) - \sum_{k=1}^K \log \left| \det\left(\frac{\partial f_{\theta^k}}{\partial z_k}\right) \right|\]</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Coupling Layers Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Coupling Layers
+<ul>
+<li><span class="math inline">\(f(x) = \begin{bmatrix} x^A \\ \hat{f}(x^B \mid \theta(x^A)) \end{bmatrix}\)</span></li>
+<li>Jacobian <span class="math display">\[J_f = \begin{bmatrix} I &amp; 0 \\ \partial\hat{f}(x^B \mid \theta(x^A)) / \partial x^A &amp; J_{\hat{f}} \end{bmatrix}\]</span></li>
+<li>Determinant <span class="math display">\[\det(J_f) = \det(J_{\hat{f}})\]</span></li>
+</ul></li>
+<li>Coupling Layers
+<ul>
+<li><span class="math inline">\(\theta(x^A)\)</span> can be arbitrary network</li>
+<li>Splitting is important for the expressivity of the invertible net.</li>
+<li>Coupling Transform
+<ul>
+<li>Linear [NICE, Dinh et al.&nbsp;2014] <span class="math display">\[\hat{f}(x \mid t) = x + t\]</span></li>
+<li>Affine [RealNVP, Dinh et al.&nbsp;2016] <span class="math display">\[\hat{f}(x \mid s, t) = s \odot x + t\]</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Glow (Kingma &amp; Dhariwal, NeurIPS 2018) Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Glow
+<ul>
+<li>Input <span class="math inline">\(h: c \times h \times w\)</span>, <span class="math inline">\(W: c \times c\)</span>, Output: <span class="math inline">\(c \times h \times w\)</span> <span class="math display">\[\log \left| \det \left( \frac{d \text{ conv2D}(h; W)}{d h} \right) \right| = h \cdot w \cdot \log |\det(W)|\]</span></li>
+<li>Compute <span class="math inline">\(|\det(W)|\)</span>: <span class="math inline">\(\mathcal{O}(c^3)\)</span> (Vs. complexity of conv <span class="math inline">\(\mathcal{O}(hwc^2)\)</span>)</li>
+<li>Reparametrize <span class="math inline">\(W\)</span> in LU decomposition <span class="math display">\[W = P L (U + \text{diag}(s))\]</span> <span class="math display">\[\log |\det(W)| = \text{sum}(\log |s|)\]</span></li>
+<li>Components of LU decomposition:
+<ul>
+<li><span class="math inline">\(P\)</span> (fixed): Permutation matrix</li>
+<li><span class="math inline">\(L\)</span>: A lower triangular matrix with diagonal elements equal to 1.</li>
+<li><span class="math inline">\(U\)</span>: An upper triangular matrix with diagonal elements equal to 0.</li>
+</ul></li>
+<li>complexity: <span class="math inline">\(\mathcal{O}(c)\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Continuous-time Normalizing Flows &amp; Neural ODE Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Continuous-time Normalizing Flows
+<ul>
+<li>Neural ODE <span class="math display">\[\frac{dz(t)}{dt} = f(z(t), t, \theta)\]</span> <span class="math display">\[\text{forward: } z(t_1) = z(t_0) + \int_{t_0}^{t_1} f(z(t), t, \theta) \quad (\text{discretization} = \text{ResNet})\]</span> <span class="math display">\[\text{reverse: } z(t_0) = z(t_1) + \int_{t_1}^{t_0} f(z(t), t, \theta)\]</span></li>
+<li>Flow map of an ODE is always invertible.</li>
+<li>Instantaneous Change of Variables <span class="math display">\[\frac{d\log p(z(t))}{dt} = -\text{Tr}\left(\frac{df}{dz(t)}\right) = -\text{div}(f)\]</span></li>
+</ul></li>
+<li>Continuous-time Normalizing Flows
+<ul>
+<li>Loss <span class="math display">\[L(z(t)) = -\log p(z(t)) = -\log p(z(0)) + \int_{0}^{t} \text{Tr}\left(\frac{df}{dz(t)}\right)\]</span> <span class="math display">\[\underbrace{\begin{bmatrix} z_0 \\ \log p(\mathbf{x}) - \log p_{z_0}(\mathbf{z}_0) \end{bmatrix}}_{\text{solutions}} = \int_{t_1}^{t_0} \underbrace{\begin{bmatrix} f(\mathbf{z}(t), t; \theta) \\ -\text{Tr}\left(\frac{\partial f}{\partial\mathbf{z}(t)}\right) \end{bmatrix}}_{\text{dynamics}} dt, \quad \underbrace{\begin{bmatrix} \mathbf{z}(t_1) \\ \log p(\mathbf{x}) - \log p(\mathbf{z}(t_1)) \end{bmatrix} = \begin{bmatrix} \mathbf{x} \\ 0 \end{bmatrix}}_{\text{initial values}}\]</span></li>
+<li>Dynamics of adjoint <span class="math inline">\(\mathbf{a}(t) = \partial L / \partial\mathbf{z}(t)\)</span> <span class="math display">\[\frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^T \frac{\partial f(\mathbf{z}(t), t, \theta)}{\partial\mathbf{z}}\]</span> <span class="math display">\[\frac{dL}{d\theta} = -\int_{t_1}^{t_0} \left(\frac{\partial L}{\partial\mathbf{z}(t)}\right)^T \frac{\partial f(\mathbf{z}(t), t; \theta)}{\partial\theta} dt\]</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="variational-autoencoders" class="level2">
+<h2 class="anchored" data-anchor-id="variational-autoencoders">Variational Autoencoders</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Gaussian Mixture Model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Gaussian Mixture Model
+<ul>
+<li><span class="math inline">\(z\)</span>: latent variable</li>
+<li>If <span class="math inline">\(z\)</span> can only take finite number of values, e.g. <span class="math display">\[p(z = i) = \pi_i, \quad i = 1, 2, \dots, N.\]</span></li>
+<li>and <span class="math inline">\(p(x \mid z)\)</span> is Gaussian, then <span class="math display">\[p(x) = \sum_{i=1}^N \pi_i \mathcal{N}(\mu_i, \Sigma_i)\]</span></li>
+<li>Gaussian Mixture Model (Generalized K-means with soft assignments)</li>
+</ul></li>
+<li>Recaps: K-means
+<ul>
+<li>K-means solves the following problem alternatively <span class="math display">\[\min_{\gamma_{ij} \in S, c_j} \frac{1}{2N} \sum_{ij} \gamma_{ij} \|x_i - c_j\|_2^2\]</span></li>
+<li>K-means Clustering Algorithm
+<ul>
+<li>Input: <span class="math inline">\(\mathcal{D} = \{x_i\}_{i=1}^N\)</span>, <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, K (number of clusters)</li>
+<li>Initialize: <span class="math inline">\(C = (c_1, c_2, \dots, c_K)\)</span>.</li>
+<li>Iterate Until Converge:
+<ul>
+<li>Update <span class="math inline">\(\gamma\)</span>: <span class="math display">\[\gamma_{ij} = \begin{cases} 1 &amp; \text{if } j = \text{argmin}_k \|x_i - c_k\|_2^2 \\ 0 &amp; \text{else} \end{cases}\]</span></li>
+<li>Update <span class="math inline">\(C\)</span>: <span class="math display">\[c_j = \left(\sum_i \gamma_{ij} x_i\right) \Big/ \sum_i \gamma_{ij}\]</span></li>
+</ul></li>
+<li>Output: Cluster centers C and cluster assignment <span class="math inline">\(\gamma\)</span>.</li>
+</ul></li>
+</ul></li>
+<li>Gaussian Mixture Model
+<ul>
+<li>GMM optimization</li>
+<li>update assignment <span class="math inline">\(\gamma_{ij} = p(z_i = j \mid x_i)\)</span> (posterior) <span class="math display">\[\gamma_{ij} := p(z_i = j \mid x_i) = \frac{p(z_i = j) p(x_i \mid z_i = j)}{p(x_i)} = \frac{p(z_i = j) p(x_i \mid z_i = j)}{\sum_j p(z_i = j) p(x_i \mid z_i = j)} = \frac{\pi_j^{(k)} \mathcal{N}(x_i \mid \mu_j^{(k)}, \Sigma_j^{(k)})}{\sum_j \pi_j^{(k)} \mathcal{N}(x_i \mid \mu_j^{(k)}, \Sigma_j^{(k)})}\]</span></li>
+<li>update center <span class="math inline">\((\mu, \Sigma)\)</span> and <span class="math inline">\(\pi_i = p(z = i)\)</span> (prior) <span class="math display">\[\pi_j = p(z = j) = \int p(z = j \mid x) p(x) dx \approx \frac{\sum_{i=1}^N p(z = j \mid x_i)}{N} = \frac{\sum_i \gamma_{ij}}{N}\]</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>EM Algorithm (Variational Inference) Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Expectation Maximization (EM) Algorithm (Variational Inference) <span class="math display">\[\sum_{i} \log \left( \sum_{j} \gamma_{ij} \pi_j \mathcal{N}(x_i \mid \mu_j, \Sigma_j) \big/ \gamma_{ij} \right) \ge \sum_{i} \left( \sum_{j} \gamma_{ij} \log \frac{\pi_j \mathcal{N}(x_i \mid \mu_j, \Sigma_j)}{\gamma_{ij}} \right) \quad \text{Jensen's Inequality}\]</span></li>
+<li>Expectation Step: <span class="math display">\[\gamma_{ij}^{(k+1)} = \arg\max_{\{\gamma_{ij} : \sum_j \gamma_{ij} = 1, \gamma_{ij} \in [0, 1]\}} \sum_{i} \sum_{j} \gamma_{ij} \log \pi_i^{(k)} \mathcal{N}\left(x_i \mid \mu_j^{(k)}, \Sigma_j^{(k)}\right) - \gamma_{ij} \log \gamma_{ij}\]</span></li>
+<li>Maximization Step: <span class="math display">\[\left(\pi_j^{(k+1)}, \mu_j^{(k+1)}, \Sigma_j^{(k+1)}\right) = \arg\max_{\theta} \sum_{i} \sum_{j} \gamma_{ij}^{(k+1)} \log \pi_j \mathcal{N}(x_i \mid \mu_j, \Sigma_j)\]</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Evidence Lower Bound (ELBO) Formulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Jensen’s Inequality <span class="math display">\[\log \int p(z)f(z)dz \ge \int p(z)\log f(z)dz\]</span></p></li>
+<li><p>Evidence Lower Bound (ELBO) <span class="math display">\[\log p(x) = \log \int p(z)p(x \mid z)dz = \log \int q_x(z) \frac{p(z)p(x \mid z)}{q_x(z)} dz\]</span> <span class="math display">\[\ge \int q_x(z) \log \frac{p(z)p(x \mid z)}{q_x(z)} dz\]</span> <span class="math display">\[= \int q_x(z) \log p(x \mid z)dz - KL(q_x(z) \parallel p(z))\]</span></p></li>
+<li><p>Gap between <span class="math inline">\(\log p(x)\)</span> and ELBO <span class="math display">\[\log p(x) - \left( \int q_x(z)\log p(x \mid z)dz - KL(q_x(z) \parallel p(z)) \right)\]</span> <span class="math display">\[= \log p(x) - \int q_x(z)\log p(x \mid z)dz + KL(q_x(z) \parallel p(z))\]</span> <span class="math display">\[= \int q_x(z)\log p(x)dz - \int q_x(z)\log p(x \mid z)dz + KL(q_x(z) \parallel p(z))\]</span> <span class="math display">\[= \int q_x(z) \left[ \log p(x) - \log p(x \mid z) - \log p(z) \right] dz + \int q_x(z)\log q_x(z)dz\]</span> <span class="math display">\[= -\int q_x(z) \log \frac{p(x \mid z)p(z)}{p(x)} dz + \int q_x(z)\log q_x(z)dz\]</span> <span class="math display">\[= -\int q_x(z) \log p(z \mid x)dz + \int q_x(z)\log q_x(z)dz = KL(q_x(z) \parallel p(z \mid x))\]</span></p></li>
+<li><p>When <span class="math inline">\(q_x(z) = p(z \mid x)\)</span>, the gap is closed.</p></li>
+<li><p>(In GMM, <span class="math inline">\(q_{x_i}(z = j) = \gamma_{ij} = p(z = j \mid x_i)\)</span>)</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Evidence Lower Bound
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>EM Algorithm: Alternately Maximize ELBO</p>
+<p><span class="math display">\[
+\max_{\phi,\psi}
+\int q_{\phi(x)}(z)\log p_\psi(x \mid z)dz
+-
+KL(q_{\phi(x)}(z) \parallel p(z))
+\]</span></p>
+<ul>
+<li>Expectation: <span class="math display">\[
+\max_\phi ELBO
+\Rightarrow
+q_{\phi(x)}(z) = p(z \mid x)
+\]</span></li>
+</ul>
+<p>However, we can’t obtain <span class="math inline">\(p(z \mid x)\)</span> in general; propose a parameterized distribution <span class="math inline">\(q_{\phi(x)}(z)\)</span> we know we can work with easily to approximate <span class="math inline">\(p(z \mid x)\)</span>.</p>
+<ul>
+<li>Maximization: <span class="math display">\[
+\max_\psi ELBO
+\]</span></li>
+</ul></li>
+<li><p>For Gaussian Mixture Models, the negative log-likelihood (NLL) function is non-convex, and directly minimizing it can lead to poor performance due to local optima. In contrast, the EM algorithm guarantees a monotonic decrease in the NLL at each iteration.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>VAEs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Parametrize <span class="math display">\[
+q_x(z)=\mathcal N(\mu_\theta(x), \sigma_\theta(x))
+\]</span> and <span class="math display">\[
+p_\psi(x \mid z)=\mathcal N(\psi(z), \beta I)
+\]</span></p></li>
+<li><p>ELBO: <span class="math display">\[
+ELBO
+=
+\int q_x(z)\log p(x \mid z)dz
+-
+KL(q_x(z)\parallel p(z))
+\]</span></p>
+<p><span class="math display">\[
+=
+-\frac{1}{2\beta}
+\mathbb E_{q_x(z)}
+\left\|
+\psi(z)-x
+\right\|_2^2
+-
+KL(q_x(z)\parallel p(z))
+\]</span></p>
+<p><span class="math display">\[
+=
+-\frac{1}{2\beta}
+\mathbb E_{\epsilon\sim\mathcal N(0,I)}
+\left\|
+\psi(z)-x
+\right\|_2^2
+-
+KL(q_x(z)\parallel p(z))
+\]</span></p>
+<p>where <span class="math display">\[
+z=\mu_\theta(x)+\sigma_\theta(x)\epsilon
+\]</span></p></li>
+<li><p>If <span class="math display">\[
+p(z)=\mathcal N(0,I),
+\]</span></p>
+<p>then <span class="math display">\[
+KL(q_x(z)\parallel p(z))
+=
+\frac{1}{2}\|\mu_\theta(x)\|_2^2
++
+\frac{1}{2}\sigma_\theta^2(x)
+-
+\log \sigma_\theta(x)
++
+c
+\]</span></p></li>
+<li><p>Gaussian KL formula:</p>
+<p>Let <span class="math display">\[
+p(x)=\mathcal N(\mu_1,\sigma_1)
+\]</span> and <span class="math display">\[
+q(x)=\mathcal N(\mu_2,\sigma_2).
+\]</span></p>
+<p><span class="math display">\[
+KL(p,q)
+=
+\log \frac{\sigma_2}{\sigma_1}
++
+\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}
+-
+\frac{1}{2}
+\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hierarchical PixelVAE
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Hierarchical latent space decomposition</strong></p>
+<ul>
+<li><p>Ordinary VAE uses one latent variable: <span class="math display">\[
+z \sim p(z), \qquad x \sim p(x \mid z)
+\]</span></p></li>
+<li><p>Hierarchical PixelVAE uses multiple latent variables: <span class="math display">\[
+z_L \rightarrow z_{L-1} \rightarrow \cdots \rightarrow z_1 \rightarrow x
+\]</span></p></li>
+<li><p>Generative model: <span class="math display">\[
+p(x,z_1,\dots,z_L)
+=
+p(z_L)
+\prod_{l=1}^{L-1}p(z_l\mid z_{l+1})
+p(x\mid z_1)
+\]</span></p></li>
+<li><p>Encoder / inference model: <span class="math display">\[
+x \rightarrow h_1 \rightarrow h_2 \rightarrow \cdots \rightarrow h_L
+\]</span></p>
+<p>The encoder produces approximate posteriors: <span class="math display">\[
+q(z_l\mid x)
+\]</span></p></li>
+<li><p>Reconstruction term: <span class="math display">\[
+-\mathbb E_{z_1\sim q(z_1\mid x)}
+\log p(x\mid z_1)
+\]</span></p></li>
+<li><p>KL terms at different latent levels: <span class="math display">\[
+D_{KL}(q(z_L\mid x)\parallel p(z_L))
+\]</span> <span class="math display">\[
+D_{KL}(q(z_{L-1}\mid x)\parallel p(z_{L-1}\mid z_L))
+\]</span> <span class="math display">\[
+\cdots
+\]</span> <span class="math display">\[
+D_{KL}(q(z_1\mid x)\parallel p(z_1\mid z_2))
+\]</span></p></li>
+<li><p>Training loss: <span class="math display">\[
+\mathcal L
+=
+-\mathbb E_q[\log p(x\mid z_1)]
++
+D_{KL}(q(z_L\mid x)\parallel p(z_L))
++
+\sum_{l=1}^{L-1}
+D_{KL}(q(z_l\mid x)\parallel p(z_l\mid z_{l+1}))
+\]</span></p></li>
+<li><p>ELBO form: <span class="math display">\[
+ELBO
+=
+\mathbb E_q[\log p(x\mid z_1)]
+-
+D_{KL}(q(z_L\mid x)\parallel p(z_L))
+-
+\sum_{l=1}^{L-1}
+D_{KL}(q(z_l\mid x)\parallel p(z_l\mid z_{l+1}))
+\]</span></p></li>
+<li><p>Intuition: high-level latent variables model global structure, while low-level latent variables model local details.</p></li>
+<li><p>PixelVAE combines hierarchical latent variables with an autoregressive PixelCNN-style decoder.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>NVAE
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Hierarchical Architecture</strong></p>
+<ul>
+<li><p>Hierarchical latent variables: <span class="math display">\[
+z=(z_1,z_2,\dots,z_L)
+\]</span></p></li>
+<li><p>Exact chain-rule decomposition: <span class="math display">\[
+q(z)=\prod_{l=1}^{L} q(z_l\mid z_{&lt;l})
+\]</span> <span class="math display">\[
+p(z\mid x)=\prod_{l=1}^{L} p(z_l\mid z_{&lt;l},x)
+\]</span></p>
+<p>This is an exact decomposition and does not introduce additional assumptions.</p></li>
+<li><p>Conditional prior at layer <span class="math inline">\(l\)</span>: <span class="math display">\[
+q(z_l\mid z_{&lt;l})
+=
+\mathcal N
+\left(
+z_l;
+\mu(z_{&lt;l}),
+\sigma^2(z_{&lt;l})
+\right)
+\]</span></p></li>
+<li><p>Approximate posterior at layer <span class="math inline">\(l\)</span>: <span class="math display">\[
+p(z_l\mid z_{&lt;l},x)
+=
+\mathcal N
+\left(
+z_l;
+\mu(z_{&lt;l})+\Delta\mu(z_{&lt;l},x),
+\sigma^2(z_{&lt;l})\otimes\Delta\sigma^2(z_{&lt;l},x)
+\right)
+\]</span></p></li>
+<li><p>The posterior is parameterized as a residual correction to the prior: <span class="math display">\[
+\mu_{\text{post}}
+=
+\mu_{\text{prior}}
++
+\Delta \mu
+\]</span> <span class="math display">\[
+\sigma^2_{\text{post}}
+=
+\sigma^2_{\text{prior}}
+\otimes
+\Delta\sigma^2
+\]</span></p></li>
+<li><p>Layer-wise KL decomposition: <span class="math display">\[
+KL(p(z\mid x)\parallel q(z))
+=
+KL(p(z_1\mid x)\parallel q(z_1))
++
+\sum_{l=2}^{L}
+\mathbb E_{p(z_{&lt;l}\mid x)}
+\left[
+KL(
+p(z_l\mid z_{&lt;l},x)
+\parallel
+q(z_l\mid z_{&lt;l})
+)
+\right]
+\]</span></p></li>
+<li><p>For diagonal Gaussian distributions, each layer has closed-form KL: <span class="math display">\[
+KL(
+p(z_l\mid z_{&lt;l},x)
+\parallel
+q(z_l\mid z_{&lt;l})
+)
+=
+\frac{1}{2}
+\sum_{i=1}^{|z_l|}
+\left(
+\frac{\Delta\mu_i^2}{\sigma_i^2}
++
+\Delta\sigma_i^2
+-
+\log \Delta\sigma_i^2
+-
+1
+\right)
+\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1139,13 +1669,13 @@ document.querySelectorAll(".pymd span.co").forEach(el => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../docs/notes/Physics/1/1.html" class="pagination-link" aria-label="Kinematics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Kinematics</span>
+      <a href="../../../docs/notes/DL/3.html" class="pagination-link" aria-label="Generative Adversarial Network">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Generative Adversarial Network</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../docs/notes/Physics/1/3.html" class="pagination-link" aria-label="Momentum">
-        <span class="nav-page-text">Momentum</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/DL/5.html" class="pagination-link" aria-label="Diffusion Models &amp; Flow Matching">
+        <span class="nav-page-text">Diffusion Models &amp; Flow Matching</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
