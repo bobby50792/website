@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,14 +44,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-2a5c87f95b0fb482e5c5835a739e033e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-ffde4453e2339c4a44a32a09cc980b12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,6 +80,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
@@ -671,7 +703,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello">Hello</a></li>
+  <li><a href="#statistical-view-of-entropy" id="toc-statistical-view-of-entropy" class="nav-link active" data-scroll-target="#statistical-view-of-entropy">Statistical View of Entropy</a>
+  <ul class="collapse">
+  <li><a href="#microscopic-and-macroscopic-states" id="toc-microscopic-and-macroscopic-states" class="nav-link" data-scroll-target="#microscopic-and-macroscopic-states">Microscopic and Macroscopic States</a></li>
+  <li><a href="#boltzmanns-entropy-formula" id="toc-boltzmanns-entropy-formula" class="nav-link" data-scroll-target="#boltzmanns-entropy-formula">Boltzmann’s Entropy Formula</a></li>
+  </ul></li>
+  <li><a href="#microscopic-ensembles-and-thermodynamic-laws" id="toc-microscopic-ensembles-and-thermodynamic-laws" class="nav-link" data-scroll-target="#microscopic-ensembles-and-thermodynamic-laws">Microscopic Ensembles and Thermodynamic Laws</a>
+  <ul class="collapse">
+  <li><a href="#temperature-and-the-zeroth-law" id="toc-temperature-and-the-zeroth-law" class="nav-link" data-scroll-target="#temperature-and-the-zeroth-law">Temperature and the Zeroth Law</a></li>
+  </ul></li>
+  <li><a href="#statistical-distributions-of-microscopic-particles" id="toc-statistical-distributions-of-microscopic-particles" class="nav-link" data-scroll-target="#statistical-distributions-of-microscopic-particles">Statistical Distributions of Microscopic Particles</a>
+  <ul class="collapse">
+  <li><a href="#kinds-of-particles" id="toc-kinds-of-particles" class="nav-link" data-scroll-target="#kinds-of-particles">Kinds of Particles</a></li>
+  <li><a href="#particle-distributions" id="toc-particle-distributions" class="nav-link" data-scroll-target="#particle-distributions">Particle Distributions</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -698,10 +743,315 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hello" class="level2">
-<h2 class="anchored" data-anchor-id="hello">Hello</h2>
+<section id="statistical-view-of-entropy" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-view-of-entropy">Statistical View of Entropy</h2>
+<section id="microscopic-and-macroscopic-states" class="level3">
+<h3 class="anchored" data-anchor-id="microscopic-and-macroscopic-states">Microscopic and Macroscopic States</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Microscopic State
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A microscopic state describes the exact arrangement of all particles (atoms or molecules) in a system, specifying details like positions, velocities, and spins for each individual particle.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Macroscopic State
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A macroscopic state is defined by bulk properties (state functions) of the system, such as temperature (T), pressure (P), volume (V), and entropy (S). These properties characterize the system as a whole, independent of individual particle details.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Equal-Probability Hypothesis
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An isolated system is in equilibrium iff all accessible microstates have equivalent probabilities. Which have the same energy (E), volume (V), and number of particles (N).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="boltzmanns-entropy-formula" class="level3">
+<h3 class="anchored" data-anchor-id="boltzmanns-entropy-formula">Boltzmann’s Entropy Formula</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Boltzmann’s Entropy Formula
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The entropy (S) of a system is related to the number of accessible microstates () by the formula: [ S = k_B ] where (k_B) is Boltzmann’s constant.</p>
+<p>Stirling’s approximation: (N! N N - N) for large (N).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Statistical Interpretation of the Entropy
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In classical statistical mechanics, we calculate the entropy of an isolated system (microcanonical ensemble) by analyzing its <strong>Phase Space</strong>. A system containing <span class="math inline">\(N\)</span> identical, distinguishable particles possesses <span class="math inline">\(3N\)</span> spatial coordinates and <span class="math inline">\(3N\)</span> velocity (momentum) coordinates.</p>
+<p>Here is the step-by-step rigorous derivation of separating these components to calculate the total entropy.</p>
+<p>The total number of accessible microstates <span class="math inline">\(\Omega\)</span> is defined by the volume of accessible phase space divided by the fundamental quantum volume unit <span class="math inline">\(h^{3N}\)</span>: <span class="math display">\[
+\Omega = \frac{1}{h^{3N}} \int \cdots \int d^{3N}\mathbf{r} \, d^{3N}\mathbf{p}
+\]</span></p>
+<p><span class="math display">\[
+\Omega = \frac{1}{h^{3N}} \left( \int_{V} d^{3N}\mathbf{r} \right) \times \left( \int_{E} d^{3N}\mathbf{p} \right)
+\]</span></p>
+<p>Each particle <span class="math inline">\(i\)</span> can occupy any position within the macroscopic volume <span class="math inline">\(V\)</span>. Integrating the three-dimensional coordinates <span class="math inline">\(\mathbf{r}_i = (x_i, y_i, z_i)\)</span> over the volume yields <span class="math inline">\(V\)</span>. For <span class="math inline">\(N\)</span> independent particles, the spatial integral evaluates to: <span class="math display">\[
+\int_{V} d^{3N}\mathbf{r} = V^N
+\]</span></p>
+<p>For an isolated ideal gas, the total internal energy <span class="math inline">\(E\)</span> is rigidly fixed. Since there is no potential energy, <span class="math inline">\(E\)</span> is entirely made of kinetic energy: <span class="math display">\[
+E = \sum_{i=1}^{3N} \frac{p_i^2}{2m} \implies \sum_{i=1}^{3N} p_i^2 = 2mE
+\]</span></p>
+<p>This constraint mathematically outlines the surface of a <span class="math inline">\(3N\)</span>-dimensional hyper-sphere with a radius of <span class="math inline">\(R = \sqrt{2mE}\)</span>. The momentum integral is proportional to the surface area of this hyper-sphere: <span class="math display">\[
+\int_{E} d^{3N}\mathbf{p} \propto (2mE)^{\frac{3N-1}{2} } \approx E^{\frac{3N}{2}}
+\]</span></p>
+<p>Combining both factored integrals yields the total microstates equation: <span class="math display">\[
+\Omega = C \cdot V^N \cdot E^{\frac{3N}{2}}
+\]</span></p>
+<p>We now map these microstates directly to macroscopic entropy using Boltzmann’s core postulate.</p>
+<p><span class="math display">\[
+S = k_B \ln \left( C \cdot V^N \cdot E^{\frac{3N}{2}} \right)
+\]</span></p>
+<p>By exploiting the algebraic rules of logarithms (<span class="math inline">\(\ln(ABC) = \ln A + \ln B + \ln C\)</span>), we can cleanly decouple the entropy into distinct coordinate and velocity expressions: <span class="math display">\[
+S = \underbrace{k_B \ln V^N}_{\text{Coordinate Contribution}} + \underbrace{k_B \ln E^{\frac{3N}{2}}}_{\text{Velocity (Energy) Contribution}} + k_B \ln C
+\]</span></p>
+<p>Bringing the exponents to the outside of the logarithms: <span class="math display">\[
+S = N k_B \ln V + \frac{3N}{2}k_B \ln E + \text{Constant} = n R \ln V + \frac{3}{2} n R \ln E + \text{Constant}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="microscopic-ensembles-and-thermodynamic-laws" class="level2">
+<h2 class="anchored" data-anchor-id="microscopic-ensembles-and-thermodynamic-laws">Microscopic Ensembles and Thermodynamic Laws</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Microcanonical Ensemble
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A microcanonical ensemble represents an isolated system with fixed energy (E), volume (V), and number of particles (N).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Principle of Maximum Entropy Postulate
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The system described by a microcanonical ensemble stays on the macroscopic state with maximum Boltzmann entropy.</p>
+</div>
+</div>
+</div>
+<section id="temperature-and-the-zeroth-law" class="level3">
+<h3 class="anchored" data-anchor-id="temperature-and-the-zeroth-law">Temperature and the Zeroth Law</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Temperature and the Zeroth Law from Statistical Mechanics
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Consider a situation where two subsystems, denoted as System 1 and System 2, are separated by a diathermal (heat-conducting) wall. The combined total system <span class="math inline">\(1 + 2\)</span> is completely isolated from the rest of the universe.</p>
+<p>Let the energy of System 1 be <span class="math inline">\(E_1\)</span>. Since the total energy is conserved, the energy of System 2 is constrained to be: <span class="math display">\[
+E_2 = E - E_1
+\]</span></p>
+<p>While <span class="math inline">\(E\)</span> is constant, <span class="math inline">\(E_1\)</span> can fluctuate and vary between different elements of the ensemble. Our goal is to determine the most probable value of <span class="math inline">\(E_1\)</span> when the systems reach thermal equilibrium.</p>
+<p>According to the Fundamental Postulate of Statistical Mechanics (the principle of equal a priori probabilities), the probability <span class="math inline">\(\Pr(E_1)\)</span> of finding System 1 with an internal energy <span class="math inline">\(E_1\)</span> is directly proportional to the number of microstates available to the combined system: <span class="math display">\[
+\Pr(E_1) = \frac{\Omega_1(E_1)\Omega_2(E - E_1)}{\Omega(E)}
+\]</span></p>
+<p>where <span class="math inline">\(\Omega(E)\)</span> represents the total number of microstates within the fixed total energy shell <span class="math inline">\([E, E + \Delta]\)</span>.</p>
+<p>To find the most probable macroscopic state, we maximize the likelihood by taking the natural logarithm of the probability (<span class="math inline">\(\ln \Pr(E_1)\)</span>) and setting its partial derivative with respect to <span class="math inline">\(E_1\)</span> equal to zero: <span class="math display">\[
+0 = \partial_{E_1} \ln \Pr(E_1) = \partial_{E_1} \left( \ln \Omega_1(E_1) + \ln \Omega_2(E - E_1) - \ln \Omega(E) \right)
+\]</span></p>
+<p>Since <span class="math inline">\(\ln \Omega(E)\)</span> is a constant with respect to <span class="math inline">\(E_1\)</span>, its derivative vanishes. We then apply the chain rule to explicitly track how changing <span class="math inline">\(E_1\)</span> impacts System 2 via <span class="math inline">\(E_2\)</span>: <span class="math display">\[
+0 = \partial_{E_1} \ln \Omega_1(E_1) + \frac{\partial E_2}{\partial E_1} \partial_{E_2} \ln \Omega_2(E_2)
+\]</span></p>
+<p>Since <span class="math inline">\(E_2 = E - E_1\)</span> and <span class="math inline">\(E\)</span> is a constant, the derivative of <span class="math inline">\(E_2\)</span> with respect to <span class="math inline">\(E_1\)</span> is strictly: <span class="math display">\[
+\frac{\partial E_2}{\partial E_1} = -1
+\]</span></p>
+<p>Substituting this back into the optimization equation yields the equilibrium condition: <span class="math display">\[
+\partial_{E_1} \ln \Omega_1(E_1) = \partial_{E_2} \ln \Omega_2(E_2)
+\]</span></p>
+<p>The condition above proves that when two systems are in thermal equilibrium (<span class="math inline">\(\Pr(E_1)\)</span> is extremized), a specific macro-property becomes perfectly equal between them. This property depends strictly on the parameters of each individual subsystem, which matches the definition of a temperature parameter.</p>
+<p>We can therefore establish the formal definition of temperature in statistical mechanics: <span class="math display">\[
+\frac{1}{k_B T} = (\partial_E \ln \Omega(E))_{dW=0}
+\]</span></p>
+<p>where <span class="math inline">\(k_B\)</span> is Boltzmann’s constant, and <span class="math inline">\(dW = 0\)</span> denotes that no mechanical work is done on the system. Using this definition, the equilibrium condition simplifies beautifully to: <span class="math display">\[
+\frac{1}{k_B T_1} = \frac{1}{k_B T_2} \implies T_1 = T_2
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Temperature with Statistical Mechanics
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>From classical thermodynamics, the inverse temperature <span class="math inline">\(\frac{1}{T}\)</span> is defined by the partial derivative of entropy <span class="math inline">\(S\)</span> with respect to internal energy <span class="math inline">\(U\)</span> at constant volume <span class="math inline">\(V\)</span> and particle number <span class="math inline">\(N\)</span>: <span class="math display">\[
+\frac{1}{T} = \left( \frac{\partial S}{\partial E} \right)_{V, N}
+\]</span></p>
+<p>By substituting Boltzmann’s entropy formula into this definition, we can express the temperature in terms of the number of accessible microstates <span class="math inline">\(\Omega\)</span>: <span class="math display">\[
+\frac{1}{T} = k_B \left( \frac{\partial \ln \Omega(E, V, N)}{\partial E} \right)_{V, N}
+\]</span></p>
+<p>As derived from the hyper-surface area of a <span class="math inline">\(3N\)</span>-dimensional sphere in momentum space, the total number of accessible microstates <span class="math inline">\(\Omega\)</span> is factored as: <span class="math display">\[
+\Omega(E, V, N) = C \cdot V^N \cdot E^{\frac{3N}{2}}
+\]</span></p>
+<p>where <span class="math inline">\(C\)</span> is a constant independent of <span class="math inline">\(E\)</span> and <span class="math inline">\(V\)</span>. Taking the natural logarithm of <span class="math inline">\(\Omega\)</span> to match Boltzmann’s formula yields: <span class="math display">\[
+\ln \Omega = \ln C + N \ln V + \frac{3N}{2} \ln E
+\]</span></p>
+<p>We apply the statistical mechanics definition of temperature by taking the partial derivative of this expanded expression with respect to <span class="math inline">\(E\)</span>: <span class="math display">\[
+\frac{1}{T} = k_B \cdot \frac{\partial}{\partial E} \left( \ln C + N \ln V + \frac{3N}{2} \ln E \right)
+\]</span></p>
+<p>Since <span class="math inline">\(\ln C\)</span> and <span class="math inline">\(N \ln V\)</span> are held constant during this partial differentiation, their derivatives vanish completely, leaving: <span class="math display">\[
+\frac{1}{T} = k_B \cdot \frac{3N}{2} \cdot \frac{1}{E}
+\]</span></p>
+<p>Rearranging the equation yields the canonical relationship between internal energy and macroscopic temperature: <span class="math display">\[
+E = \frac{3}{2} N k_B T
+\]</span></p>
+<p>Solving directly for <span class="math inline">\(T\)</span> reveals its final physical definition as the average thermal energy scaling factor: <span class="math display">\[
+T = \frac{2}{3k_B} \left( \frac{E}{N} \right)
+\]</span></p>
+<p><span class="math display">\[
+P = T \left( \frac{\partial S}{\partial V} \right)_{E, N} = \frac{2E}{3V}
+\]</span></p>
+<p><span class="math display">\[
+S = n R \ln V + \frac{3n}{2} R \ln E + C = n R \ln V + \frac{3n}{2} R \ln T + C
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="statistical-distributions-of-microscopic-particles" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-distributions-of-microscopic-particles">Statistical Distributions of Microscopic Particles</h2>
+<section id="kinds-of-particles" class="level3">
+<h3 class="anchored" data-anchor-id="kinds-of-particles">Kinds of Particles</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Types of Particles in Statistical Mechanics
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Distinguishable identical particles: <span class="math display">\[
+\Omega\{n_i\} = N! \prod_{i} \frac{g_i^{n_i}}{n_i!}
+\]</span></p></li>
+<li><p>Bosons: <span class="math display">\[
+\Omega\{n_i\} = \prod_{i} \frac{(n_i + g_i - 1)!}{n_i!(g_i - 1)!}
+\]</span></p></li>
+<li><p>Fermions: <span class="math display">\[
+\Omega_F\{n_i\} = \prod_{i} \frac{g_i!}{n_i!(g_i - n_i)!}
+\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="particle-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="particle-distributions">Particle Distributions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Particle Distributions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Maxwell-Boltzmann Distribution <span class="math display">\[
+n_i = g_i e^{-\alpha - \beta \epsilon_i}
+\]</span><br>
+</li>
+<li>Bose-Einstein Distribution <span class="math display">\[
+n_i = \frac{g_i}{e^{\alpha + \beta \epsilon_i
+} - 1}
+\]</span></li>
+<li>Fermi-Dirac Distribution <span class="math display">\[
+n_i = \frac{g_i}{e^{\alpha + \beta \epsilon_i } + 1}
+\]</span></li>
+</ul>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
