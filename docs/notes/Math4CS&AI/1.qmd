@@ -6,7 +6,7 @@ number-offset: [1]
 number-sections: false
 
 crossref:
-  chapters: true      
+  chapters: false      
 
 ---
 
@@ -35,17 +35,11 @@ $$
 Let $f, g : \mathbb{N} \to \mathbb{R}$ and $c \in \mathbb{R}$. If $f(n), g(n) \ge 0$ for all $n$, then 
 \begin{align*}
 f(n) &= \mathcal{O}(f(n)) \\
-
 c \cdot f(n) &= \mathcal{O}(f(n)) \\
-
 \mathcal{O}(\mathcal{O}(f(n))) &= \mathcal{O}(f(n)) \\
-
 \mathcal{O}(f(n)) + \mathcal{O}(g(n)) &= \mathcal{O}(f(n) + g(n)) \\
-
 \mathcal{O}(f(n)) + \mathcal{O}(g(n)) &= \mathcal{O}(\max\{f(n), g(n)\}) \\
-
 \mathcal{O}(f(n)) \cdot \mathcal{O}(g(n)) &= \mathcal{O}(f(n) \cdot g(n)) \\
-
 \mathcal{O}(f(n)g(n)) &= f(n) \cdot \mathcal{O}(g(n)). \\
 \end{align*}
 :::
