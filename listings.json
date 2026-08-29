@@ -9,10 +9,10 @@
   {
     "listing": "/index.html",
     "items": [
-      "/docs/notes/Calculus/index.html",
-      "/docs/notes/general-physics/index.html",
-      "/docs/notes/math-for-cs-and-ai/index.html",
       "/docs/notes/deep-learning/index.html",
+      "/docs/notes/math-for-cs-and-ai/index.html",
+      "/docs/notes/general-physics/index.html",
+      "/docs/notes/Calculus/index.html",
       "/docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html",
       "/docs/blog/posts/2026-05-09-site-update-notes/index.html"
     ]
