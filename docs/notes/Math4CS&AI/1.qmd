@@ -6,7 +6,7 @@ number-offset: [1]
 number-sections: false
 
 crossref:
-  chapters: false      
+  chapters: true      
 
 ---
 
