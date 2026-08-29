@@ -1,5 +1,6 @@
 ---
 title: "General Physics"
+output-file: index.html
 home-order: 2
 home-symbol: "φ"
 home-description: "Foundations of mechanics, thermodynamics, relativity, and statistical physics."

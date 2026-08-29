@@ -10,9 +10,9 @@ editor: source
 date-format: "YYYY.MM.DD"
 listing:
   - id: current-topics-list
-    contents: "docs/notes/*/index.qmd"
+    contents: "docs/notes/*/0.qmd"
     template: topic-listing.ejs
-    sort: "home-order asc"
+    sort: "home-order desc"
     sort-ui: false
     filter-ui: false
   - id: recent-writing-list
@@ -36,7 +36,7 @@ listing:
 Notes, projects, and things I am learning along the way.
 
 <div class="hero-actions">
-  <a class="home-button home-button-primary" href="docs/notes/index.qmd">Browse notes <span aria-hidden="true">→</span></a>
+  <a class="home-button home-button-primary" href="docs/notes/0.qmd">Browse notes <span aria-hidden="true">→</span></a>
   <a class="home-button home-button-secondary" href="docs/blog/index.qmd">Read the blog</a>
 </div>
 
@@ -64,11 +64,11 @@ Explore the site through two paths: structured notes for ideas worth keeping and
 
 <span class="card-number">01</span>
 
-### [Notes](docs/notes/index.qmd)
+### [Notes](docs/notes/0.qmd)
 
 Long-form notes organized by subject, built to connect ideas and remain useful over time. New topics appear as my interests evolve.
 
-[Explore the knowledge base <span aria-hidden="true">→</span>](docs/notes/index.qmd){.card-link}
+[Explore the knowledge base <span aria-hidden="true">→</span>](docs/notes/0.qmd){.card-link}
 
 :::
 

@@ -1,5 +1,6 @@
 ---
 title: "Deep Learning"
+output-file: index.html
 home-order: 4
 home-symbol: "∇"
 home-description: "From supervised learning to generative models, diffusion, and sequence modeling."

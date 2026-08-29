@@ -18,7 +18,7 @@ website:
     collapse-below: lg
     left:
       - text: "Notes"
-        href: docs/notes/index.qmd
+        href: docs/notes/0.qmd
       - text: "Blog"
         href: docs/blog/index.qmd
     right:
@@ -31,13 +31,13 @@ website:
       collapse-level: 1
       contents:
         - section: "Notes"
-          href: docs/notes/index.qmd
+          href: docs/notes/0.qmd
           contents:
             - section: "Calculus"
-              href: docs/notes/calculus/index.qmd
+              href: docs/notes/calculus/0.qmd
               contents: 
                 - section: "Single Variable Calculus"
-                  href: docs/notes/calculus/single-variable/index.qmd
+                  href: docs/notes/calculus/single-variable/0.qmd
                   contents:
                     - text: "Real Numbers and Limits of Sequences"
                       href: docs/notes/calculus/single-variable/1.qmd
@@ -52,7 +52,7 @@ website:
                     - text: "Ordinary Differential Equations"
                       href: docs/notes/calculus/single-variable/6.qmd
                 - section: "Multivariable Calculus"
-                  href: docs/notes/calculus/multivariable/index.qmd
+                  href: docs/notes/calculus/multivariable/0.qmd
                   contents:
                     - text: "Limits and Continuity of Multivariate Functions"
                       href: docs/notes/calculus/multivariable/1.qmd
@@ -76,7 +76,7 @@ website:
                       href: docs/notes/calculus/multivariable/10.qmd
 
             - section: "Math for CS and AI"
-              href: docs/notes/math-for-cs-and-ai/index.qmd
+              href: docs/notes/math-for-cs-and-ai/0.qmd
               contents: 
                 - text: "Discrete Probability"
                   href: docs/notes/math-for-cs-and-ai/1.qmd
@@ -93,10 +93,10 @@ website:
                 - text: "Continuous Approximations"
                   href: docs/notes/math-for-cs-and-ai/7.qmd
             - section: "General Physics"
-              href: docs/notes/general-physics/index.qmd
+              href: docs/notes/general-physics/0.qmd
               contents: 
                 - section: "Mechanics and Thermal Physics"
-                  href: docs/notes/general-physics/mechanics-and-thermal-physics/index.qmd
+                  href: docs/notes/general-physics/mechanics-and-thermal-physics/0.qmd
                   contents: 
                   - text: "Kinematics"
                     href: docs/notes/general-physics/mechanics-and-thermal-physics/1.qmd
@@ -129,7 +129,7 @@ website:
                   - text: "Statistical Mechanics"
                     href: docs/notes/general-physics/mechanics-and-thermal-physics/15.qmd
             - section: "Deep Learning"
-              href: docs/notes/deep-learning/index.qmd
+              href: docs/notes/deep-learning/0.qmd
               contents: 
                 - text: "Supervised Learning"
                   href: docs/notes/deep-learning/1.qmd

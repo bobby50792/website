@@ -1,5 +1,6 @@
 ---
 title: "Notes"
+output-file: index.html
 subtitle: "A collection of notes to reference."
 page-layout: full
 anchor-sections: true

@@ -1,7 +1,0 @@
----
-title: "Single Variable Calculus"
-page-layout: article
-search: true
----
-
-本界面梳理了**一元微积分**相关知识, 希望对你能有所启发。

@@ -1,7 +1,0 @@
----
-title: "Mechanics and Thermal Physics"
-page-layout: article
-search: true
----
-
-本界面梳理了**力学与热学**相关知识, 希望对你能有所启发。

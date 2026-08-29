@@ -1,4 +1,10 @@
 /*-- scss:defaults --*/
+$font-family-sans-serif: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 600;
+$font-family-monospace: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+$web-font-path: false;
+
 $link-color: #39729E;
 $text-muted: #6a737b;
 

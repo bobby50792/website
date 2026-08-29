@@ -1,5 +1,6 @@
 ---
 title: "Calculus"
+output-file: index.html
 home-order: 1
 home-symbol: "∫"
 home-description: "From single-variable calculus to vector fields and Fourier series."

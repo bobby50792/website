@@ -1,9 +1,11 @@
 ---
 title: "Blog"
-subtitle: "Short columns, casual notes, and hobby projects."
+subtitle: "Essays, working notes, experiments, and projects."
 page-layout: full
 title-block-banner: true
+toc: false
 search: true
+css: blog.css
 listing:
   sort: "date desc"
   contents: "posts/*/index.qmd"
@@ -12,7 +14,12 @@ listing:
   categories: true
 ---
 
-## What this is
+::: {.blog-section-header}
 
-This is my blog for short columns, quick thoughts, and things I build in my free time.
+<p class="blog-kicker">LATEST</p>
 
+## Recent writing
+
+Ideas in progress, useful discoveries, and occasional notes from things I build.
+
+:::
