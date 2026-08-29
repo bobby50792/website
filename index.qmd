@@ -1,6 +1,6 @@
 ---
 pagetitle: "Bobby"
-description: "Bobby's personal knowledge base for mathematics, physics, deep learning, and writing."
+description: "Bobby's evolving knowledge base for notes, ideas, projects, and writing."
 page-layout: custom
 section-divs: false
 anchor-sections: false
@@ -18,7 +18,7 @@ editor: source
 
 # Turn what I learn into knowledge worth returning to.
 
-Notes on mathematics, physics, and deep learning, along with reflections on learning, writing, and making things.
+A growing collection of notes, ideas, experiments, and projects—shaped by whatever I am learning, building, or exploring.
 
 <div class="hero-actions">
   <a class="home-button home-button-primary" href="docs/notes/index.qmd">Browse notes <span aria-hidden="true">→</span></a>
@@ -58,7 +58,7 @@ learn <span class="code-arrow">→</span> connect <span class="code-arrow">→</
 
 ## Start here
 
-Explore the site through two paths: structured learning notes and more informal essays, experiments, and project updates.
+Explore the site through two paths: structured notes for ideas worth keeping and a blog for everything still taking shape.
 
 :::
 
@@ -69,7 +69,7 @@ Explore the site through two paths: structured learning notes and more informal 
 
 ### [Notes](docs/notes/index.qmd)
 
-Long-form notes organized by subject, covering mathematics, physics, and deep learning. The collection continues to grow as I learn.
+Long-form notes organized by subject, built to connect ideas and remain useful over time. New topics appear as my interests evolve.
 
 [Explore the knowledge base <span aria-hidden="true">→</span>](docs/notes/index.qmd){.card-link}
 
@@ -81,7 +81,7 @@ Long-form notes organized by subject, covering mathematics, physics, and deep le
 
 ### [Blog](docs/blog/index.qmd)
 
-Essays about writing, tools, AI, and personal projects, including notes on how this website evolves over time.
+Essays, observations, experiments, and project logs about whatever I am currently exploring or creating.
 
 [View all posts <span aria-hidden="true">→</span>](docs/blog/index.qmd){.card-link}
 
@@ -93,7 +93,7 @@ Essays about writing, tools, AI, and personal projects, including notes on how t
 
 <p class="section-kicker">TOPICS</p>
 
-## Topics in progress
+## Current topics
 
 :::
 
@@ -147,7 +147,7 @@ From supervised learning to generative models, diffusion, and sequence modeling.
 
 ## Recent writing
 
-Beyond technical notes, I write about communicating ideas, using tools thoughtfully, and turning concepts into finished work.
+The blog follows ideas beyond formal notes—from early questions and useful tools to projects, creative work, and lessons learned along the way.
 
 [Browse the blog <span aria-hidden="true">→</span>](docs/blog/index.qmd){.text-link}
 
