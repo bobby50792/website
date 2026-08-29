@@ -1,0 +1,10 @@
+---
+title: "General Physics"
+home-order: 2
+home-symbol: "φ"
+home-description: "Foundations of mechanics, thermodynamics, relativity, and statistical physics."
+page-layout: article
+search: true
+---
+
+本界面梳理了**普通物理**相关知识, 希望对你能有所启发。

@@ -1,0 +1,10 @@
+---
+title: "Deep Learning"
+home-order: 4
+home-symbol: "∇"
+home-description: "From supervised learning to generative models, diffusion, and sequence modeling."
+page-layout: article
+search: true
+---
+
+本界面梳理了**深度学习**相关知识, 希望对你能有所启发。

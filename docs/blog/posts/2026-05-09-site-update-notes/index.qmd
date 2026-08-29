@@ -1,6 +1,8 @@
 ---
 title: "站点更新笔记"
 subtitle: "记录这次站点整理时做了哪些决定。"
+home-title: "Site Update Notes"
+home-description: "A record of the decisions and trade-offs behind the site's evolving structure."
 date: 2026-05-09
 categories:
   - Site

@@ -1,0 +1,14 @@
+```{=html}
+<div class="topic-grid list">
+<% for (const item of items) { %>
+  <% const title = item["home-title"] || item.title; %>
+  <% const description = item["home-description"] || item.description; %>
+  <% const symbol = item["home-symbol"] || "·"; %>
+  <article class="topic-card" <%= metadataAttrs(item) %>>
+    <span class="topic-mark" aria-hidden="true"><%- symbol %></span>
+    <h3><a class="listing-title" href="<%- item.path %>"><%- title %></a></h3>
+    <% if (description) { %><p class="listing-description"><%- description %></p><% } %>
+  </article>
+<% } %>
+</div>
+```

@@ -34,115 +34,115 @@ website:
           href: docs/notes/index.qmd
           contents:
             - section: "Calculus"
-              href: docs/notes/Calculus/index.qmd
+              href: docs/notes/calculus/index.qmd
               contents: 
                 - section: "Single Variable Calculus"
-                  href: docs/notes/Calculus/1/index.qmd
+                  href: docs/notes/calculus/single-variable/index.qmd
                   contents:
                     - text: "Real Numbers and Limits of Sequences"
-                      href: docs/notes/Calculus/1/1.qmd
+                      href: docs/notes/calculus/single-variable/1.qmd
                     - text: "Continuity of Functions"
-                      href: docs/notes/Calculus/1/2.qmd
+                      href: docs/notes/calculus/single-variable/2.qmd
                     - text: "Derivatives and Differentials of Functions"
-                      href: docs/notes/Calculus/1/3.qmd
+                      href: docs/notes/calculus/single-variable/3.qmd
                     - text: "Indefinite Integrals"
-                      href: docs/notes/Calculus/1/4.qmd
+                      href: docs/notes/calculus/single-variable/4.qmd
                     - text: "Definite Integral"
-                      href: docs/notes/Calculus/1/5.qmd
+                      href: docs/notes/calculus/single-variable/5.qmd
                     - text: "Ordinary Differential Equations"
-                      href: docs/notes/Calculus/1/6.qmd  
+                      href: docs/notes/calculus/single-variable/6.qmd
                 - section: "Multivariable Calculus"
-                  href: docs/notes/Calculus/2/index.qmd
+                  href: docs/notes/calculus/multivariable/index.qmd
                   contents:
                     - text: "Limits and Continuity of Multivariate Functions"
-                      href: docs/notes/Calculus/2/1.qmd  
+                      href: docs/notes/calculus/multivariable/1.qmd
                     - text: "Differential of Multivariable Functions"
-                      href: docs/notes/Calculus/2/2.qmd
+                      href: docs/notes/calculus/multivariable/2.qmd
                     - text: "Implicit Function and Inverse Mapping Theorem"
-                      href: docs/notes/Calculus/2/3.qmd
+                      href: docs/notes/calculus/multivariable/3.qmd
                     - text: "Integrals with Parameters and Improper Integrals"
-                      href: docs/notes/Calculus/2/4.qmd
+                      href: docs/notes/calculus/multivariable/4.qmd
                     - text: "Multiple Integrals"
-                      href: docs/notes/Calculus/2/5.qmd
+                      href: docs/notes/calculus/multivariable/5.qmd
                     - text: "Integration of Functions on Curves and Surfaces"
-                      href: docs/notes/Calculus/2/6.qmd
+                      href: docs/notes/calculus/multivariable/6.qmd
                     - text: "Calculus of Vector Fields"
-                      href: docs/notes/Calculus/2/7.qmd
+                      href: docs/notes/calculus/multivariable/7.qmd
                     - text: "Series"
-                      href: docs/notes/Calculus/2/8.qmd
+                      href: docs/notes/calculus/multivariable/8.qmd
                     - text: "Series of Functions and Power Series"
-                      href: docs/notes/Calculus/2/9.qmd
+                      href: docs/notes/calculus/multivariable/9.qmd
                     - text: "Fourier Series"
-                      href: docs/notes/Calculus/2/10.qmd
+                      href: docs/notes/calculus/multivariable/10.qmd
 
             - section: "Math for CS and AI"
-              href: docs/notes/Math4CS&AI/index.qmd
+              href: docs/notes/math-for-cs-and-ai/index.qmd
               contents: 
                 - text: "Discrete Probability"
-                  href: docs/notes/Math4CS&AI/1.qmd
+                  href: docs/notes/math-for-cs-and-ai/1.qmd
                 - text: "Sampling and Concentration"
-                  href: docs/notes/Math4CS&AI/2.qmd
+                  href: docs/notes/math-for-cs-and-ai/2.qmd
                 - text: "Generating Functions"
-                  href: docs/notes/Math4CS&AI/3.qmd
+                  href: docs/notes/math-for-cs-and-ai/3.qmd
                 - text: "Continuous Probability"
-                  href: docs/notes/Math4CS&AI/4.qmd
+                  href: docs/notes/math-for-cs-and-ai/4.qmd
                 - text: "Central Limit Theorem"
-                  href: docs/notes/Math4CS&AI/5.qmd
+                  href: docs/notes/math-for-cs-and-ai/5.qmd
                 - text: "Optimization"
-                  href: docs/notes/Math4CS&AI/6.qmd
+                  href: docs/notes/math-for-cs-and-ai/6.qmd
                 - text: "Continuous Approximations"
-                  href: docs/notes/Math4CS&AI/7.qmd
+                  href: docs/notes/math-for-cs-and-ai/7.qmd
             - section: "General Physics"
-              href: docs/notes/Physics/index.qmd
+              href: docs/notes/general-physics/index.qmd
               contents: 
                 - section: "Mechanics and Thermal Physics"
-                  href: docs/notes/Physics/1/index.qmd
+                  href: docs/notes/general-physics/mechanics-and-thermal-physics/index.qmd
                   contents: 
                   - text: "Kinematics"
-                    href: docs/notes/Physics/1/1.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/1.qmd
                   - text: "Newton's Laws"
-                    href: docs/notes/Physics/1/2.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/2.qmd
                   - text: "Momentum"
-                    href: docs/notes/Physics/1/3.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/3.qmd
                   - text: "Energy and Work"
-                    href: docs/notes/Physics/1/4.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/4.qmd
                   - text: "Angular Momentum"
-                    href: docs/notes/Physics/1/5.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/5.qmd
                   - text: "Collision Theory"
-                    href: docs/notes/Physics/1/6.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/6.qmd
                   - text: "Rigid Body" 
-                    href: docs/notes/Physics/1/7.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/7.qmd
                   - text: "Oscillation"
-                    href: docs/notes/Physics/1/8.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/8.qmd
                   - text: "Waves"
-                    href: docs/notes/Physics/1/9.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/9.qmd
                   - text: "Lagrangian and Hamiltonian Mechanics"
-                    href: docs/notes/Physics/1/10.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/10.qmd
                   - text: "Special Relativity"
-                    href: docs/notes/Physics/1/11.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/11.qmd
                   - text: "Temperature, Heat, and the First Law of Thermodynamics"
-                    href: docs/notes/Physics/1/12.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/12.qmd
                   - text: "Kinetic Theory of Gases"
-                    href: docs/notes/Physics/1/13.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/13.qmd
                   - text: "Second Law of Thermodynamics"
-                    href: docs/notes/Physics/1/14.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/14.qmd
                   - text: "Statistical Mechanics"
-                    href: docs/notes/Physics/1/15.qmd
+                    href: docs/notes/general-physics/mechanics-and-thermal-physics/15.qmd
             - section: "Deep Learning"
-              href: docs/notes/DL/index.qmd
+              href: docs/notes/deep-learning/index.qmd
               contents: 
                 - text: "Supervised Learning"
-                  href: docs/notes/DL/1.qmd
+                  href: docs/notes/deep-learning/1.qmd
                 - text: "Energy-Based Model"
-                  href: docs/notes/DL/2.qmd
+                  href: docs/notes/deep-learning/2.qmd
                 - text: "Generative Adversarial Network"
-                  href: docs/notes/DL/3.qmd
+                  href: docs/notes/deep-learning/3.qmd
                 - text: "Normalizing Flow & Variational Autoencoder"
-                  href: docs/notes/DL/4.qmd
+                  href: docs/notes/deep-learning/4.qmd
                 - text: "Diffusion Models & Flow Matching"
-                  href: docs/notes/DL/5.qmd
+                  href: docs/notes/deep-learning/5.qmd
                 - text: "Sequence Modeling"
-                  href: docs/notes/DL/6.qmd
+                  href: docs/notes/deep-learning/6.qmd
 
 format:
   html:

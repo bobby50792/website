@@ -1,5 +1,8 @@
 ---
 title: "Calculus"
+home-order: 1
+home-symbol: "∫"
+home-description: "From single-variable calculus to vector fields and Fourier series."
 page-layout: article
 search: true
 ---

@@ -1,6 +1,8 @@
 ---
 title: "提示词工程中的语用学"
 subtitle: "如何用 AI 提高你做 PPT 的效率"
+home-title: "Pragmatics in Prompt Engineering"
+home-description: "How to express real requirements clearly and use AI to build better presentations more efficiently."
 date: 2026-05-29
 categories:
   - AI
