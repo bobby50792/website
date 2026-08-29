@@ -1,0 +1,23 @@
+# Jupyter runtime
+jupyter
+
+# Numerical computing and data analysis
+numpy
+pandas
+scipy
+sympy
+statsmodels
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Machine learning
+scikit-learn
+
+# Files and web data
+beautifulsoup4
+openpyxl
+pillow
+requests

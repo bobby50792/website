@@ -21,16 +21,6 @@ $$
 
 
 ```{python}
-#| output: false
-%pip install pandas matplotlib
-```
-
-```{python}
-import pandas as pd
-import matplotlib.pyplot as plt
-```
-
-```{python}
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -50,4 +40,3 @@ plt.title("Training Accuracy")
 plt.grid()
 plt.show()
 ```
-
