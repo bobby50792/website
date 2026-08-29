@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Discrete Probability – Bobby</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/math-for-cs-and-ai/2.html" rel="next">
+<link href="../../../docs/notes/math-for-cs-and-ai/index.html" rel="prev">
+<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../docs/blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bobby50792/website"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/1.html">Discrete Probability</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/calculus/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculus</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/calculus/single-variable/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Single Variable Calculus</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuity of Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Derivatives and Differentials of Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indefinite Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Definite Integral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordinary Differential Equations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/calculus/multivariable/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multivariable Calculus</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Differential of Multivariable Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculus of Vector Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series of Functions and Power Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math for CS and AI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Discrete Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling and Concentration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generating Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Central Limit Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Approximations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Physics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mechanics and Thermal Physics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kinematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Newton’s Laws</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Momentum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy and Work</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Angular Momentum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collision Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rigid Body</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Oscillation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Waves</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lagrangian and Hamiltonian Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Relativity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temperature, Heat, and the First Law of Thermodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kinetic Theory of Gases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Second Law of Thermodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy-Based Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generative Adversarial Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#asymptotic-notations" id="toc-asymptotic-notations" class="nav-link active" data-scroll-target="#asymptotic-notations">Asymptotic Notations</a></li>
+  <li><a href="#probability-spaces-and-event" id="toc-probability-spaces-and-event" class="nav-link" data-scroll-target="#probability-spaces-and-event">Probability Spaces and Event</a></li>
+  <li><a href="#uniform-probability-means-counting" id="toc-uniform-probability-means-counting" class="nav-link" data-scroll-target="#uniform-probability-means-counting">Uniform Probability Means Counting</a></li>
+  <li><a href="#intersection-and-union-of-events" id="toc-intersection-and-union-of-events" class="nav-link" data-scroll-target="#intersection-and-union-of-events">Intersection and Union of Events</a></li>
+  <li><a href="#conditional-probability-and-independence" id="toc-conditional-probability-and-independence" class="nav-link" data-scroll-target="#conditional-probability-and-independence">Conditional Probability and Independence</a></li>
+  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/1.html">Discrete Probability</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Discrete Probability</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="asymptotic-notations" class="level2">
+<h2 class="anchored" data-anchor-id="asymptotic-notations">Asymptotic Notations</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
+\begin{equation*}
+|f(n)| \le Cg(n), \quad \forall n \ge N.
+\end{equation*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{equation*}
+\mathcal{O}(g) := \{f : \exists C &gt; 0, \exists N \in \mathbb{N} \text{ s.t. } |f(n)| \le Cg(n), \text{ for all } n \ge N\}.
+\end{equation*}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation properties
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span> and <span class="math inline">\(c \in \mathbb{R}\)</span>. If <span class="math inline">\(f(n), g(n) \ge 0\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math display">\[\begin{align*}
+f(n) &amp;= \mathcal{O}(f(n)) \\
+c \cdot f(n) &amp;= \mathcal{O}(f(n)) \\
+\mathcal{O}(\mathcal{O}(f(n))) &amp;= \mathcal{O}(f(n)) \\
+\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) + g(n)) \\
+\mathcal{O}(f(n)) + \mathcal{O}(g(n)) &amp;= \mathcal{O}(\max\{f(n), g(n)\}) \\
+\mathcal{O}(f(n)) \cdot \mathcal{O}(g(n)) &amp;= \mathcal{O}(f(n) \cdot g(n)) \\
+\mathcal{O}(f(n)g(n)) &amp;= f(n) \cdot \mathcal{O}(g(n)). \\
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1 (Big-<span class="math inline">\(\mathcal{O}\)</span> notation defined using limsup)</strong></span> Let <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>. We write <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> if and only if <span class="math display">\[
+\begin{equation*}
+\limsup_{n \to \infty} \frac{|f(n)|}{g(n)} &lt; +\infty.
+\end{equation*}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><span class="math inline">\(\Omega, \Theta, \sim, o, \omega\)</span> notations
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span>, where <span class="math inline">\(g(n) &gt; 0\)</span> for all sufficiently large <span class="math inline">\(n\)</span>.</p>
+<ul>
+<li>We write <span class="math inline">\(f(n) = \Omega(g(n))\)</span> if <span class="math inline">\(\liminf\limits_{n \to \infty} \frac{|f(n)|}{g(n)} &gt; 0\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) = \Theta(g(n))\)</span> if <span class="math inline">\(f(n) = \mathcal{O}(g(n))\)</span> and <span class="math inline">\(f(n) = \Omega(g(n))\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) \sim g(n)\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 1\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) = o(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 0\)</span>.</li>
+<li>We write <span class="math inline">\(f(n) = \omega(g(n))\)</span> if <span class="math inline">\(\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = +\infty\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Let <span class="math inline">\(f,g : \mathbb{N} \to \mathbb{R}\)</span> with <span class="math inline">\(g(n) &gt; 0\)</span> for all <span class="math inline">\(n \ge 1\)</span>. If <span class="math display">\[
+\begin{equation*}
+f(k) = \mathcal{O}(g(k)) \quad \text{as } k \to \infty,
+\end{equation*}
+\]</span> then <span class="math display">\[
+\begin{equation*}
+\sum_{k=1}^n f(k) = \mathcal{O}\left(\sum_{k=1}^n g(k)\right) \quad \text{as } n \to \infty.
+\end{equation*}
+\]</span></p>
+</div>
+<p><br>
+</p>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.3</strong></span> Let <span class="math inline">\(f,g : \mathbb{N}^2 \to \mathbb{R}\)</span> with <span class="math inline">\(g(m,n) &gt; 0\)</span> for all <span class="math inline">\(m,n \ge 1\)</span>. If for some function <span class="math inline">\(U(m) \ge 1\)</span>, we have <span class="math display">\[
+\begin{equation*}
+f(m,k) = \mathcal{O}(g(m,k)), \quad \text{for } 1 \le k \le U(m), \text{ as } m \to \infty,
+\end{equation*}
+\]</span> Then, <span class="math display">\[
+\begin{equation*}
+\sum_{k=1}^n f(m,k) = \mathcal{O}\left(\sum_{k=1}^n g(m,k)\right), \quad \text{for } 1 \le n \le U(m), \text{ as } m \to \infty.
+\end{equation*}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Big-<span class="math inline">\(\mathcal{O}\)</span> notation for multivariate functions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f,g : \mathbb{N}^d \to \mathbb{R}\)</span> be functions defined on <span class="math inline">\(\mathbb{N}^d\)</span>. We write <span class="math display">\[
+\begin{equation*}
+f(n_1,\dots,n_d) = \mathcal{O}(g(n_1,\dots,n_d))
+\end{equation*}
+\]</span> if there exist constants <span class="math inline">\(C &gt; 0\)</span> and <span class="math inline">\(N \in \mathbb{N}\)</span> such that <span class="math display">\[
+\begin{equation*}
+|f(n_1,\dots,n_d)| \le Cg(n_1,\dots,n_d), \quad \forall n_1,\dots,n_d \ge N.
+\end{equation*}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="probability-spaces-and-event" class="level2">
+<h2 class="anchored" data-anchor-id="probability-spaces-and-event">Probability Spaces and Event</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discrete probability space
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A discrete probability space is a pair <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> consisting of:</p>
+<ul>
+<li>A non-empty finite set <span class="math inline">\(\Omega\)</span>, called the sample space, whose elements represent all possible outcomes of an experiment.</li>
+<li>A function <span class="math inline">\(p : \Omega \to [0, 1]\)</span>, called the probability mass function, which assigns probabilities to outcomes and satisfies <span class="math inline">\(\sum_{\omega \in \Omega} p(\omega) = 1\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An event <span class="math inline">\(A\)</span> is a subset of <span class="math inline">\(\Omega\)</span> (<span class="math inline">\(A \subseteq \Omega\)</span>), and its probability is defined as <span class="math display">\[
+\begin{equation*}
+\Pr[A] := \sum_{\omega \in A} p(\omega).
+\end{equation*}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="uniform-probability-means-counting" class="level2">
+<h2 class="anchored" data-anchor-id="uniform-probability-means-counting">Uniform Probability Means Counting</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Secretary Problem
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://en.wikipedia.org/wiki/Secretary_problem">Problem Description</a></p>
+<section id="threshold-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="threshold-strategy">Threshold Strategy</h3>
+<p>For a fixed integer <span class="math inline">\(k\)</span> satisfying <span class="math inline">\(1 \le k \le n - 1\)</span>, the <span class="math inline">\(k\)</span>-strategy is an online decision strategy defined as follows:</p>
+<ul>
+<li>Reject the first <span class="math inline">\(k\)</span> options and record the maximum value observed;</li>
+<li>Starting from step <span class="math inline">\(k + 1\)</span>, accept the first option whose value exceeds the recorded maximum.</li>
+</ul>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>For <span class="math inline">\(n \ge 2\)</span>, the following two statements hold:</p>
+<ol type="1">
+<li>the optimal success probability satisfies</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+p_n = 1/e + \mathcal{O}\left(\frac{1}{n}\right);
+\end{align*}
+\]</span></p>
+<ol start="2" type="1">
+<li>the optimal threshold satisfies</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+k^* = n/e + \mathcal{O}(1).
+\end{align*}
+\]</span></p>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Locker Puzzle
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://zh.wikipedia.org/wiki/百囚問題">Problem Description</a></p>
+<section id="pointer-chasing-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="pointer-chasing-strategy">Pointer Chasing Strategy</h3>
+<p>Before opening any locker, students discuss and agree on a bijection between student names and <span class="math inline">\([n]\)</span>, <span class="math display">\[
+\begin{align*}
+\phi : \{\text{student names}\} \to [n],
+\end{align*}
+\]</span> which assigns each student a unique ID in <span class="math inline">\([n]\)</span>.</p>
+<p>For each student <span class="math inline">\(s\)</span>, let <span class="math inline">\(x \leftarrow \phi(s)\)</span>. The search rule is:</p>
+<ul>
+<li>open locker <span class="math inline">\(x\)</span>;</li>
+<li>if the revealed name tag is <span class="math inline">\(s\)</span>, stop (success);</li>
+<li>otherwise, let <span class="math inline">\(x \leftarrow \phi(t)\)</span>, where <span class="math inline">\(t\)</span> is the revealed student name, and continue.</li>
+</ul>
+<p>If no success occurs, stop after <span class="math inline">\(n/2\)</span> opens (failure).</p>
+</section>
+<section id="conclusion-1" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
+<p>For all even <span class="math inline">\(n \ge 2\)</span>, the success probability of the pointer chasing strategy is <span class="math display">\[
+\begin{align*} \Pr[\text{success}] = 1 - \sum_{j=n/2+1}^n \frac{1}{j} = 1 - \ln 2 + \mathcal{O}\left(\frac{1}{n}\right) \approx 0.307. \end{align*}
+\]</span></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="intersection-and-union-of-events" class="level2">
+<h2 class="anchored" data-anchor-id="intersection-and-union-of-events">Intersection and Union of Events</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Intersection and union of event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For events <span class="math inline">\(A, B \subseteq \Omega\)</span>:</p>
+<ul>
+<li><p>The intersection of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cap B\)</span>, is the event that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are happen.</p></li>
+<li><p>The union of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cup B\)</span>, is the event that at least one of <span class="math inline">\(A, B\)</span> happens.</p></li>
+</ul>
+<p>As events are subsets of the sample space <span class="math inline">\(\Omega\)</span>, the operations <span class="math inline">\(\cap\)</span> and <span class="math inline">\(\cup\)</span> are the same as set operations.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties of probability measures
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>For any events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
+\begin{align*}
+\Pr[A \cup B] = \Pr[A] + \Pr[B] - \Pr[A \cap B].
+\end{align*}
+\]</span></p></li>
+<li><p>For ans two events <span class="math inline">\(A, B \subseteq \Omega\)</span>, <span class="math display">\[
+\begin{align*}
+\Pr [A \cup B] \leq \Pr[A] + \Pr[B].
+\end{align*}
+\]</span></p></li>
+<li><p>For any sequence of events <span class="math inline">\(A_1, \dots, A_m \subseteq \Omega\)</span> with <span class="math inline">\(m \geq 2\)</span>, <span class="math display">\[
+\begin{align*}
+\Pr\left[\bigcup_{i=1}^m A_i\right] \le \sum_{i=1}^m \Pr[A_i].
+\end{align*}
+\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hashing Collision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="linear-hash-function" class="level3">
+<h3 class="anchored" data-anchor-id="linear-hash-function">Linear Hash Function</h3>
+<p>Here <span class="math display">\[
+\begin{align*}
+h_{a,b,p,m} : K \to \mathbb{Z}_m, \quad x \mapsto ((ax + b) \bmod p) \bmod m,
+\end{align*}
+\]</span></p>
+<p>The corresponding linear hash family is defined as follows: <span class="math display">\[
+\begin{align*}
+\mathcal{H}_{p,m} := \{h_{a,b,p,m} : a \in \mathbb{Z}_p \setminus \{0\}, b \in \mathbb{Z}_p\}.
+\end{align*}
+\]</span> That is, <span class="math inline">\(\mathcal{H}_{p,m}\)</span> is a family of linear hash functions with fixed prime <span class="math inline">\(p\)</span> and bucket number <span class="math inline">\(m\)</span>.</p>
+</section>
+<section id="conclusion-2" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-2">Conclusion</h3>
+<ol type="1">
+<li><p>For any two distinct integers <span class="math inline">\(k, k' \in K\)</span>, if a hash function <span class="math inline">\(h\)</span> is sampled uniformly at random from <span class="math inline">\(\mathcal{H}_{p,m}\)</span>, then <span class="math display">\[
+\begin{align*}
+\Pr[h(k) = h(k')] \le \frac{1}{m}.
+\end{align*}
+\]</span></p></li>
+<li><p>For any universal hash family <span class="math inline">\(\mathcal{H}\)</span> and any <span class="math inline">\(n\)</span> distinct keys <span class="math inline">\(k_1, \dots, k_n \in K\)</span>, the collision probability admits the upper bound <span class="math display">\[
+\begin{align*}
+\Pr[C] \le \frac{1}{m} \binom{n}{2}.
+\end{align*}
+\]</span></p></li>
+</ol>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ramsey Numbers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://en.wikipedia.org/wiki/Ramsey%27s_theorem">Problem Description</a></p>
+<section id="definition-of-ramsey-number" class="level3">
+<h3 class="anchored" data-anchor-id="definition-of-ramsey-number">Definition of Ramsey number</h3>
+<ol type="1">
+<li><p>For every integer <span class="math inline">\(k \ge 2\)</span>, there exists an integer <span class="math inline">\(N &gt; 0\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>. The Ramsey number <span class="math inline">\(R(k)\)</span> is the smallest integer <span class="math inline">\(N\)</span> such that every red/blue coloring of the edges of <span class="math inline">\(K_N\)</span> contains a monochromatic <span class="math inline">\(K_k\)</span>.</p></li>
+<li><p>For any integers <span class="math inline">\(r \ge 1\)</span> and <span class="math inline">\(k \ge m \ge 1\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that for every coloring of the <span class="math inline">\(m\)</span>-element subsets of an <span class="math inline">\(N\)</span>-element set with <span class="math inline">\(r\)</span> colors, there exists a <span class="math inline">\(k\)</span>-element subset whose <span class="math inline">\(m\)</span>-element subsets are all assigned the same color.</p></li>
+</ol>
+</section>
+<section id="conclusion-3" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-3">Conclusion</h3>
+<ol type="1">
+<li><p>For all <span class="math inline">\(k \ge 3\)</span>, <span class="math display">\[
+\begin{align*}
+2 ^ {k / 2} &lt; R(k) &lt; \binom{2k - 2}{k - 1} &lt; 4 ^ k.
+\end{align*}
+\]</span> Thus <span class="math inline">\(R(k) = 2^{\Theta(k)}\)</span>.</p></li>
+<li><p>For all <span class="math inline">\(r, k, m \geq 2\)</span>, the multicolor Ramsey number <span class="math inline">\(R_r^{(m)}(k)\)</span> satisfies the following lower bound: <span class="math display">\[
+R_r^{(m)}(k) &gt; r^{\frac{1}{m} \left( \binom{k}{m} - 1 \right)}.
+\]</span></p></li>
+</ol>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="conditional-probability-and-independence" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probability-and-independence">Conditional Probability and Independence</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conditional probability
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(A, B\)</span> be events with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional probability of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> is defined as:</p>
+<p><span class="math display">\[
+\Pr[A \mid B] = \frac{\Pr[A \cap B]}{\Pr[B]}
+\]</span></p>
+<p>We leave <span class="math inline">\(\Pr[A \mid B]\)</span> undefined if <span class="math inline">\(\Pr[B] = 0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Independence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Two events <span class="math inline">\(A, B\)</span> are said to be independent if</p>
+<p><span class="math display">\[
+\Pr[A \cap B] = \Pr[A] \Pr[B].
+\]</span></p>
+<p>If <span class="math inline">\(\Pr[B] &gt; 0\)</span>, this is equivalent to</p>
+<p><span class="math display">\[
+\Pr[A \mid B] = \Pr[A].
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mutual independence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Events <span class="math inline">\(A_1, \dots, A_m\)</span> are mutually independent if for every non-empty subset <span class="math inline">\(I \subseteq [m]\)</span>,</p>
+<p><span class="math display">\[
+\Pr \left[ \bigcap_{i \in I} A_i \right] = \prod_{i \in I} \Pr[A_i].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.4</strong></span> Let <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then for any event <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+\Pr[A] = \sum_{i=1}^m \Pr[A \mid B_i] \Pr[B_i].
+\]</span></p>
+</div>
+</section>
+<section id="random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="random-variables">Random Variables</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Random variable
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mathcal{P} = (\Omega, p)\)</span> be a discrete probability space. A random variable is a function</p>
+<p><span class="math display">\[
+X : \Omega \to \mathbb{R}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Indicator function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The indicator function of a condition <span class="math inline">\(C\)</span> is:</p>
+<p><span class="math display">\[
+\mathbb{1}_{[C]} = \begin{cases}
+1 &amp; \text{if the condition } C \text{ holds}, \\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>For a set <span class="math inline">\(A \subseteq U\)</span>, where <span class="math inline">\(U\)</span> is some universe, the indicator function of <span class="math inline">\(A\)</span> is:</p>
+<p><span class="math display">\[
+\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases}
+1 &amp; \text{if } x \in A, \\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability mass function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a random variable <span class="math inline">\(X\)</span>, its probability mass function <span class="math inline">\(p_X : \mathbb{R} \to [0, 1]\)</span> is defined as</p>
+<p><span class="math display">\[
+p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Expectation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable on a discrete probability space <span class="math inline">\((\Omega, p)\)</span>. The expectation, expected value or mean of <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{\omega \in \Omega} X(\omega)p(\omega).
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.5 (Linearity of expectation)</strong></span> For any random variables <span class="math inline">\(X_1, \dots, X_n\)</span> and constants <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E} \left[ \sum_{i=1}^n c_i X_i \right] = \sum_{i=1}^n c_i \mathbb{E}[X_i].
+\]</span></p>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.6</strong></span> If <span class="math inline">\(X\)</span> is a random variable that takes values in non-negative integers, then</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{t \geq 0} \Pr[X &gt; t].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conditional expectation given an event
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B\)</span> be an event with <span class="math inline">\(\Pr[B] &gt; 0\)</span>. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(B\)</span> is defined as</p>
+<p><span class="math display">\[
+\mathbb{E}[X \mid B] = \frac{\mathbb{E}[\mathbb{1}_B \cdot X]}{\Pr[B]}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conditional expectation given a random variable
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. The conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as the following random variable:</p>
+<p><span class="math display">\[
+\mathbb{E}[X \mid Y] : \Omega \to \mathbb{R}, \quad \omega \mapsto \mathbb{E}[X \mid Y = Y(\omega)].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.7</strong></span> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(B_1, \dots, B_m\)</span> be mutually exclusive events that satisfy <span class="math inline">\(\bigcup_{i=1}^m B_i = \Omega\)</span> and <span class="math inline">\(\Pr[B_i] &gt; 0\)</span> for all <span class="math inline">\(i \in [m]\)</span>. Then</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{i=1}^m \mathbb{E}[X \mid B_i] \Pr[B_i].
+\]</span></p>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.8</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables. Then</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X \mid Y]].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Independence of random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if for all sets <span class="math inline">\(A, B \subseteq \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X \in A, Y \in B] = \Pr[X \in A] \Pr[Y \in B].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.9</strong></span> If <span class="math inline">\(X, Y\)</span> are independent random variables, then</p>
+<p><span class="math display">\[
+\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mutual independence of random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent if for all sets <span class="math inline">\(A_1, \dots, A_n \subseteq \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\Pr[X_1 \in A_1, \dots, X_n \in A_n] = \prod_{i=1}^n \Pr[X_i \in A_i].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.10</strong></span> If <span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent random variables, then</p>
+<p><span class="math display">\[
+\mathbb{E} \left[ \prod_{i=1}^n X_i \right] = \prod_{i=1}^n \mathbb{E}[X_i].
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Independent and identically distributed random variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that random variables <span class="math inline">\(X_1, \dots, X_n\)</span> are independent and identically distributed, abbreviated i.i.d., if</p>
+<ul>
+<li><span class="math inline">\(X_1, \dots, X_n\)</span> are mutually independent, and</li>
+<li><span class="math inline">\(X_1, \dots, X_n\)</span> have the same probability distribution.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<div id="thm-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.11 (Nested conditional expectations)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two random variables, and let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span> be a measurable function. Then the following simplified expressions hold for nested conditional expectations:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid f(Y)] \;\middle|\; Y \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{E}\left[ \mathbb{E}[X \mid Y] \;\middle|\; f(Y) \right] = \mathbb{E}[X \mid f(Y)]\)</span></p></li>
+</ol>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bobby50792\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../docs/notes/math-for-cs-and-ai/index.html" class="pagination-link" aria-label="Math for CS and AI">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Math for CS and AI</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../docs/notes/math-for-cs-and-ai/2.html" class="pagination-link" aria-label="Sampling and Concentration">
+        <span class="nav-page-text">Sampling and Concentration</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

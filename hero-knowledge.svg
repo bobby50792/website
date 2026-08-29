@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-labelledby="hero-title hero-description">
+  <title id="hero-title">Connected ideas</title>
+  <desc id="hero-description">An abstract notebook connected to small idea nodes.</desc>
+
+  <defs>
+    <linearGradient id="halo" x1="105" y1="74" x2="493" y2="418" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eef7fb"/>
+      <stop offset="1" stop-color="#dceef7"/>
+    </linearGradient>
+    <linearGradient id="card" x1="225" y1="96" x2="412" y2="376" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f6fafc"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#245779" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <circle cx="302" cy="240" r="196" fill="url(#halo)"/>
+  <circle cx="302" cy="240" r="166" fill="none" stroke="#a8cddd" stroke-width="2" stroke-dasharray="5 12"/>
+
+  <path d="M171 135C218 113 244 111 275 127M430 137c35-15 57-19 89-12M441 337c37 10 56 20 78 42M176 351c32 5 59-1 84-18" fill="none" stroke="#7eafc8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 8"/>
+
+  <g filter="url(#shadow)">
+    <rect x="177" y="135" width="224" height="260" rx="25" fill="#c5e1ef" transform="rotate(-7 289 265)"/>
+    <rect x="209" y="90" width="228" height="292" rx="27" fill="url(#card)" stroke="#bfd7e3" stroke-width="2"/>
+  </g>
+
+  <rect x="239" y="124" width="58" height="9" rx="4.5" fill="#39729e"/>
+  <rect x="306" y="124" width="72" height="9" rx="4.5" fill="#d8e9f1"/>
+  <rect x="239" y="149" width="142" height="7" rx="3.5" fill="#e1edf3"/>
+
+  <path d="M275 238 321 196l53 54M321 196l-1 100M275 238l45 58 54-46" fill="none" stroke="#79aec8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="321" cy="196" r="17" fill="#39729e"/>
+  <circle cx="275" cy="238" r="13" fill="#8bc4e8"/>
+  <circle cx="374" cy="250" r="13" fill="#68a7c8"/>
+  <circle cx="320" cy="296" r="18" fill="#245779"/>
+  <circle cx="321" cy="196" r="6" fill="#fff"/>
+  <circle cx="320" cy="296" r="6" fill="#fff"/>
+
+  <rect x="239" y="329" width="112" height="8" rx="4" fill="#d8e9f1"/>
+  <rect x="239" y="347" width="158" height="8" rx="4" fill="#e7f0f5"/>
+
+  <g fill="#fff" stroke="#8eb9ce" stroke-width="2.5">
+    <circle cx="135" cy="126" r="34"/>
+    <circle cx="500" cy="113" r="31"/>
+    <circle cx="515" cy="378" r="36"/>
+    <circle cx="136" cy="363" r="30"/>
+  </g>
+
+  <path d="M124 126h22M135 115v22" stroke="#39729e" stroke-width="5" stroke-linecap="round"/>
+  <path d="m491 103-10 10 10 10M509 103l10 10-10 10" fill="none" stroke="#39729e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m499 379 11 11 22-25" fill="none" stroke="#39729e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M126 354h20M126 364h14M126 374h17" stroke="#39729e" stroke-width="4" stroke-linecap="round"/>
+
+  <circle cx="96" cy="255" r="7" fill="#8bc4e8"/>
+  <circle cx="504" cy="245" r="9" fill="#39729e"/>
+  <circle cx="438" cy="67" r="6" fill="#68a7c8"/>
+</svg>

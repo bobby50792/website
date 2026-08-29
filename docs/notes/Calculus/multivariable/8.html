@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Calculus – Bobby</title>
+<title>Series – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,28 +29,28 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,8 +79,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -261,9 +290,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -273,11 +302,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/notes/index.html"> 
+    <a class="nav-link" href="../../../../docs/notes/index.html"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -299,8 +328,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#absolute-convergence-and-comparison-tests" id="toc-absolute-convergence-and-comparison-tests" class="nav-link active" data-scroll-target="#absolute-convergence-and-comparison-tests">Absolute Convergence and Comparison Tests</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -308,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Calculus</h1>
+<h1 class="title">Series</h1>
 </div>
 
 
@@ -325,9 +360,169 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>本界面梳理了<strong>微积分</strong>相关知识, 希望对你能有所启发。</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Series
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Given a sequence <span class="math inline">\(\{a_k\}_{k=1}^\infty\)</span> in a linear space <span class="math inline">\(V\)</span>, the expression <span class="math inline">\(\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots\)</span> is called a series, and <span class="math inline">\(a_n\)</span> is called the <span class="math inline">\(n\)</span>-th term of this series. For a positive integer <span class="math inline">\(N\)</span>, <span class="math inline">\(\sum_{k=1}^N a_k = a_1 + \cdots + a_N\)</span> is called the <span class="math inline">\(N\)</span>-th partial sum of the series, denoted as <span class="math inline">\(S_N\)</span>.</p>
+<p>If there exists an <span class="math inline">\(S \in V\)</span> such that <span class="math inline">\(\lim_{N \to +\infty} S_N = S\)</span>, then the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> is said to be convergent, and <span class="math inline">\(S\)</span> is called the sum of the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span>, denoted as <span class="math inline">\(S = \sum_{k=1}^\infty a_k\)</span>.</p>
+<p>Here, the meaning of <span class="math inline">\(\lim_{N \to +\infty} S_N = S\)</span> is: for any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there exists an <span class="math inline">\(N(\varepsilon)\)</span> such that for any positive integer <span class="math inline">\(N &gt; N(\varepsilon)\)</span>, we have <span class="math inline">\(\|S_N - S\| &lt; \varepsilon\)</span>. Where <span class="math inline">\(\|\cdot\|\)</span> is the norm in <span class="math inline">\(V\)</span>.</p>
+<p>A series that does not converge is called a divergent series.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Cauchy Convergence Criterion
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A series <span class="math inline">\(\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots\)</span> is said to satisfy the Cauchy property if for any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there exists an <span class="math inline">\(N(\varepsilon)\)</span> such that for any positive integers <span class="math inline">\(m &gt; n &gt; N(\varepsilon)\)</span>,</p>
+<p><span class="math display">\[
+\left\| \sum_{k=n}^m a_k \right\| &lt; \varepsilon.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.1 (Cauchy Convergence Criterion)</strong></span> If a linear space <span class="math inline">\(V\)</span> is complete under the norm <span class="math inline">\(\|\cdot\|\)</span> (i.e., every Cauchy sequence converges), then the series <span class="math inline">\(\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots\)</span> converges if and only if it satisfies the Cauchy property.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Corollary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> converges, then:</p>
+<p><span class="math display">\[
+\lim_{n \to +\infty} \|a_n\| = 0.
+\]</span></p>
+</div>
+</div>
+</div>
+<section id="absolute-convergence-and-comparison-tests" class="level2">
+<h2 class="anchored" data-anchor-id="absolute-convergence-and-comparison-tests">Absolute Convergence and Comparison Tests</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Absolute Convergence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A series <span class="math inline">\(\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots\)</span> is said to converge absolutely if the series of norms:</p>
+<p><span class="math display">\[
+\sum_{k=1}^\infty \|a_k\|
+\]</span></p>
+<p>converges.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proposition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>An absolutely convergent series is convergent.</p></li>
+<li><p>Suppose <span class="math inline">\(a_k = O(b_k)\)</span> as <span class="math inline">\(k \to +\infty\)</span>, that is, there exist <span class="math inline">\(K_0\)</span> and <span class="math inline">\(M &gt; 0\)</span> such that <span class="math inline">\(\|a_k\| \le M\|b_k\|\)</span> for all <span class="math inline">\(k \ge K_0\)</span>.</p></li>
+</ol>
+<ul>
+<li>If <span class="math inline">\(\sum_{k=1}^\infty \|b_k\|\)</span> converges, then <span class="math inline">\(\sum_{k=1}^\infty \|a_k\|\)</span> converges.</li>
+<li>If <span class="math inline">\(\sum_{k=1}^\infty \|a_k\|\)</span> diverges, then <span class="math inline">\(\sum_{k=1}^\infty \|b_k\|\)</span> diverges.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.2 (Integral Test)</strong></span> Let <span class="math inline">\(f: (0, +\infty) \to \mathbb{R}\)</span> be a non-negative, monotonically decreasing function. Then the improper integral:</p>
+<p><span class="math display">\[
+\int_1^{+\infty} f(x) \, \mathrm{d}x
+\]</span></p>
+<p>converges if and only if the series:</p>
+<p><span class="math display">\[
+\sum_{k=1}^\infty f(k)
+\]</span></p>
+<p>converges.</p>
+</div>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.3 (D’Alembert’s Ratio Test)</strong></span> Let <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> be a series in a complete normed linear space, and suppose <span class="math inline">\(a_k \neq 0\)</span> for all sufficiently large <span class="math inline">\(k\)</span>. Let:</p>
+<p><span class="math display">\[
+R = \limsup_{k \to +\infty} \frac{\|a_{k+1}\|}{\|a_k\|}, \quad \text{and} \quad r = \liminf_{k \to +\infty} \frac{\|a_{k+1}\|}{\|a_k\|}
+\]</span></p>
+<ol type="1">
+<li><p>If <span class="math inline">\(R &lt; 1\)</span>, the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> converges absolutely.</p></li>
+<li><p>If <span class="math inline">\(r &gt; 1\)</span>, the series diverges.</p></li>
+<li><p>If <span class="math inline">\(r \le 1 \le R\)</span>, the test is inconclusive.</p></li>
+</ol>
+</div>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.4 (Cauchy’s Root Test)</strong></span> Let <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> be a series in a complete normed linear space. Let:</p>
+<p><span class="math display">\[
+\rho = \limsup_{k \to +\infty} \sqrt[k]{\|a_k\|}
+\]</span></p>
+<ol type="1">
+<li>If <span class="math inline">\(\rho &lt; 1\)</span>, the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> converges absolutely.</li>
+<li>If <span class="math inline">\(\rho &gt; 1\)</span> (or <span class="math inline">\(\rho = +\infty\)</span>), the series diverges.</li>
+<li>If <span class="math inline">\(\rho = 1\)</span>, the test is inconclusive.</li>
+</ol>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.5 (Raabe’s Test)</strong></span> Let <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> be a series in a complete normed linear space, and suppose <span class="math inline">\(a_k \neq 0\)</span> for all sufficiently large <span class="math inline">\(k\)</span>. Let:</p>
+<p><span class="math display">\[
+\rho = \lim_{k \to +\infty} k \left( \frac{\|a_k\|}{\|a_{k+1}\|} - 1 \right)
+\]</span></p>
+<ol type="1">
+<li><p>If <span class="math inline">\(\rho &gt; 1\)</span>, the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> converges absolutely.</p></li>
+<li><p>If <span class="math inline">\(\rho &lt; 1\)</span>, the series of norms <span class="math inline">\(\sum_{k=1}^\infty \|a_k\|\)</span> diverges (i.e., the series does not converge absolutely).</p></li>
+<li><p>If <span class="math inline">\(\rho = 1\)</span>, the test is inconclusive.</p></li>
+</ol>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.6 (Gauss’s Test)</strong></span> Let <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> be a series in a complete normed linear space, and suppose <span class="math inline">\(a_k \neq 0\)</span> for all sufficiently large <span class="math inline">\(k\)</span>. If the ratio of successive norms can be expressed as an asymptotic expansion of the form:</p>
+<p><span class="math display">\[
+\frac{\|a_k\|}{\|a_{k+1}\|} = 1 + \frac{\beta}{k} + O\left(\frac{1}{k^p}\right) \quad \text{as } k \to +\infty
+\]</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is a real constant, and <span class="math inline">\(p &gt; 1\)</span> is a strictly positive constant (the remainder term is bounded by <span class="math inline">\(C/k^p\)</span>). Then:</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(\beta &gt; 1\)</span>, the series <span class="math inline">\(\sum_{k=1}^\infty a_k\)</span> converges absolutely.</p></li>
+<li><p>If <span class="math inline">\(\beta \le 1\)</span>, the series of norms <span class="math inline">\(\sum_{k=1}^\infty \|a_k\|\)</span> diverges.</p></li>
+</ol>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Generating Functions – Bobby</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/math-for-cs-and-ai/4.html" rel="next">
+<link href="../../../docs/notes/math-for-cs-and-ai/2.html" rel="prev">
+<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../docs/blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bobby50792/website"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/3.html">Generating Functions</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/calculus/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculus</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/calculus/single-variable/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Single Variable Calculus</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuity of Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Derivatives and Differentials of Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indefinite Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Definite Integral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordinary Differential Equations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/calculus/multivariable/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multivariable Calculus</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Differential of Multivariable Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculus of Vector Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series of Functions and Power Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math for CS and AI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Discrete Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling and Concentration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Generating Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Central Limit Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Approximations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Physics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mechanics and Thermal Physics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kinematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Newton’s Laws</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Momentum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy and Work</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Angular Momentum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collision Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rigid Body</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Oscillation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Waves</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lagrangian and Hamiltonian Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Relativity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temperature, Heat, and the First Law of Thermodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kinetic Theory of Gases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Second Law of Thermodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy-Based Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generative Adversarial Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#complex-analysis" id="toc-complex-analysis" class="nav-link active" data-scroll-target="#complex-analysis">Complex Analysis</a>
+  <ul class="collapse">
+  <li><a href="#complex-functions-and-power-series" id="toc-complex-functions-and-power-series" class="nav-link" data-scroll-target="#complex-functions-and-power-series">Complex Functions and Power Series</a></li>
+  <li><a href="#continuous-functions" id="toc-continuous-functions" class="nav-link" data-scroll-target="#continuous-functions">Continuous Functions</a></li>
+  <li><a href="#holomorphic-functions" id="toc-holomorphic-functions" class="nav-link" data-scroll-target="#holomorphic-functions">Holomorphic Functions</a></li>
+  <li><a href="#complex-integrals" id="toc-complex-integrals" class="nav-link" data-scroll-target="#complex-integrals">Complex Integrals</a></li>
+  <li><a href="#integrals-around-singularities" id="toc-integrals-around-singularities" class="nav-link" data-scroll-target="#integrals-around-singularities">Integrals Around Singularities</a></li>
+  <li><a href="#expansion-around-isolated-singularities" id="toc-expansion-around-isolated-singularities" class="nav-link" data-scroll-target="#expansion-around-isolated-singularities">Expansion Around Isolated Singularities</a></li>
+  </ul></li>
+  <li><a href="#generating-functions-of-random-variables" id="toc-generating-functions-of-random-variables" class="nav-link" data-scroll-target="#generating-functions-of-random-variables">Generating Functions of Random Variables</a>
+  <ul class="collapse">
+  <li><a href="#probability-generating-functions" id="toc-probability-generating-functions" class="nav-link" data-scroll-target="#probability-generating-functions">Probability Generating Functions</a></li>
+  <li><a href="#moment-generating-functions" id="toc-moment-generating-functions" class="nav-link" data-scroll-target="#moment-generating-functions">Moment Generating Functions</a></li>
+  <li><a href="#recovering-distributions-from-mgfs" id="toc-recovering-distributions-from-mgfs" class="nav-link" data-scroll-target="#recovering-distributions-from-mgfs">Recovering Distributions from MGFs</a></li>
+  <li><a href="#cumulant-generating-functions" id="toc-cumulant-generating-functions" class="nav-link" data-scroll-target="#cumulant-generating-functions">Cumulant Generating Functions</a></li>
+  <li><a href="#exponential-tilting" id="toc-exponential-tilting" class="nav-link" data-scroll-target="#exponential-tilting">Exponential Tilting</a></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/math-for-cs-and-ai/3.html">Generating Functions</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Generating Functions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="complex-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="complex-analysis">Complex Analysis</h2>
+<section id="complex-functions-and-power-series" class="level3">
+<h3 class="anchored" data-anchor-id="complex-functions-and-power-series">Complex Functions and Power Series</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Complex functions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a set of complex numbers. A complex function on <span class="math inline">\(S\)</span> is a function <span class="math inline">\(f : S \to \mathbb{C}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Power series
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A power series is an infinite sum of the form</p>
+<p><span class="math display">\[
+\sum_{n \geq 0} a_n z^n,
+\]</span></p>
+<p>where <span class="math inline">\(a_n \in \mathbb{C}\)</span> is the coefficient of the <span class="math inline">\(n\)</span>-th term <span class="math inline">\(z^n\)</span>. More generally, a power series with respect to a center <span class="math inline">\(z_0 \in \mathbb{C}\)</span> is an infinite sum of the form</p>
+<p><span class="math display">\[
+\sum_{n \geq 0} a_n (z - z_0)^n.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Limits of complex sequences
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say that a sequence <span class="math inline">\((z_n)_{n \geq 0}\)</span> of complex numbers converges to <span class="math inline">\(A \in \mathbb{C}\)</span> if for every <span class="math inline">\(\epsilon &gt; 0\)</span> there exists <span class="math inline">\(N\)</span> such that</p>
+<p><span class="math display">\[
+|z_n - A| &lt; \epsilon \quad \text{for all } n \geq N.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.1 (Cauchy–Hadamard theorem)</strong></span> Let <span class="math inline">\(\sum_{n \geq 0} a_n z^n\)</span>. Define</p>
+<p><span class="math display">\[
+R := \frac{1}{\limsup_{n \to \infty} |a_n|^{1/n}} \in [0, +\infty) \cup \{+\infty\}.
+\]</span></p>
+<p>Then, for all <span class="math inline">\(z \in \mathbb{C}\)</span>,</p>
+<ol type="1">
+<li>if <span class="math inline">\(|z| &lt; R\)</span>, then the series converges absolutely;</li>
+<li>if <span class="math inline">\(|z| &gt; R\)</span>, then the series does not converge.</li>
+</ol>
+<p>This <span class="math inline">\(R\)</span> is called the radius of convergence of the power series.</p>
+</div>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.2 (Euler’s formula)</strong></span> For every <span class="math inline">\(x \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+e^{ix} = \cos x + i \sin x.
+\]</span></p>
+</div>
+</section>
+<section id="continuous-functions" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-functions">Continuous Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Continuity
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function. We say that <span class="math inline">\(f\)</span> is continuous at <span class="math inline">\(z_0 \in S\)</span> if the limit of <span class="math inline">\(f(z)\)</span> as <span class="math inline">\(z \in S\)</span> approaches <span class="math inline">\(z_0\)</span> exists and is equal to <span class="math inline">\(f(z_0)\)</span>. That is,</p>
+<p><span class="math display">\[
+\lim_{z \to z_0} f(z) = f(z_0).
+\]</span></p>
+<p>We say that <span class="math inline">\(f\)</span> is continuous on <span class="math inline">\(S\)</span> if it is continuous at every point of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="holomorphic-functions" class="level3">
+<h3 class="anchored" data-anchor-id="holomorphic-functions">Holomorphic Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Open and closed sets
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a set. We say that <span class="math inline">\(S\)</span> is open if for every <span class="math inline">\(z_0 \in S\)</span>, there exists some <span class="math inline">\(\delta &gt; 0\)</span> such that for all <span class="math inline">\(z \in \mathbb{C}\)</span> with <span class="math inline">\(|z - z_0| &lt; \delta\)</span>, we have</p>
+<p><span class="math display">\[
+z \in S.
+\]</span></p>
+<p>We say that <span class="math inline">\(S\)</span> is closed if its complement <span class="math inline">\(\mathbb{C} \setminus S\)</span> is open. An equivalent definition is that <span class="math inline">\(S\)</span> is closed if for every convergent sequence <span class="math inline">\((z_n)_{n \geq 0}\)</span> in <span class="math inline">\(S\)</span>, the limit <span class="math inline">\(\lim_{n \to \infty} z_n\)</span> is also in <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Differentiability
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is differentiable at <span class="math inline">\(z_0 \in S\)</span> if the limit</p>
+<p><span class="math display">\[
+f'(z_0) := \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}
+\]</span></p>
+<p>exists. Further, we say that <span class="math inline">\(f\)</span> is differentiable on <span class="math inline">\(S\)</span> if it is differentiable at every point of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Infinite differentiability
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is infinitely differentiable at <span class="math inline">\(z_0 \in S\)</span> if all the higher order derivatives of <span class="math inline">\(f\)</span>,</p>
+<p><span class="math display">\[
+f'(z_0), f''(z_0), f^{(3)}(z_0), f^{(4)}(z_0), \dots
+\]</span></p>
+<p>exist at <span class="math inline">\(z_0\)</span>. Further, we say that <span class="math inline">\(f\)</span> is infinitely differentiable on <span class="math inline">\(S\)</span> if it is infinitely differentiable at every point of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Analyticity
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is analytic at <span class="math inline">\(z_0 \in S\)</span> if there exists a sequence of complex numbers <span class="math inline">\((a_n)_{n \geq 0}\)</span> such that for some <span class="math inline">\(\delta &gt; 0\)</span>, for all <span class="math inline">\(z \in S\)</span> with <span class="math inline">\(|z - z_0| &lt; \delta\)</span>,</p>
+<p><span class="math display">\[
+f(z) = \sum_{n \geq 0} a_n (z - z_0)^n.
+\]</span></p>
+<p>Further, we say that <span class="math inline">\(f\)</span> is analytic on <span class="math inline">\(S\)</span> if it is analytic at every point of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.3</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Then the following properties are equivalent:</p>
+<ol type="i">
+<li><span class="math inline">\(f\)</span> is differentiable on <span class="math inline">\(S\)</span>;</li>
+<li><span class="math inline">\(f\)</span> is infinitely differentiable on <span class="math inline">\(S\)</span>;</li>
+<li><span class="math inline">\(f\)</span> is analytic on <span class="math inline">\(S\)</span>.</li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Holomorphic function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(z_0 \in S\)</span> if it is differentiable in an open set containing <span class="math inline">\(z_0\)</span>. Further, we say that <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(S\)</span> if it is differentiable at every point of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Curve
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A curve in <span class="math inline">\(\mathbb{C}\)</span> is a continuous function <span class="math inline">\(\gamma : [a, b] \to \mathbb{C}\)</span>. Furthermore,</p>
+<ul>
+<li>We say that <span class="math inline">\(\gamma\)</span> is smooth if it is continuously differentiable and its derivative <span class="math inline">\(\gamma'\)</span> is nowhere zero.</li>
+<li>We say that <span class="math inline">\(\gamma\)</span> is simple if it is injective. That is, <span class="math inline">\(\gamma\)</span> does not cross itself.</li>
+<li>We say that <span class="math inline">\(\gamma\)</span> is closed if <span class="math inline">\(\gamma(a) = \gamma(b)\)</span>. That is, <span class="math inline">\(\gamma\)</span> returns to its starting point at the very end.</li>
+<li>We say that <span class="math inline">\(\gamma\)</span> is a simple closed curve if it is closed and is injective on <span class="math inline">\([a, b)\)</span>. That is, <span class="math inline">\(\gamma\)</span> does not cross itself except at the endpoints.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="complex-integrals" class="level3">
+<h3 class="anchored" data-anchor-id="complex-integrals">Complex Integrals</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Contour
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A contour is a sequence of smooth curves</p>
+<p><span class="math display">\[
+\gamma = \{\gamma_1, \gamma_2, \dots, \gamma_n\}
+\]</span></p>
+<p>such that the end point of <span class="math inline">\(\gamma_i\)</span> is the starting point of <span class="math inline">\(\gamma_{i+1}\)</span> for <span class="math inline">\(i \in [n - 1]\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Line integral
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. If <span class="math inline">\(\gamma : [a, b] \to S\)</span> is a smooth curve in <span class="math inline">\(S\)</span>, then the integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is defined by</p>
+<p><span class="math display">\[
+\int_\gamma f(z) \, \mathrm{d}z := \int_a^b f(\gamma(t))\gamma'(t) \, \mathrm{d}t.
+\]</span></p>
+<p>If <span class="math inline">\(\gamma = \gamma_1 + \dots + \gamma_n\)</span> is a contour, then the contour integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is defined as the sum of the integrals of <span class="math inline">\(f\)</span> along the smooth curves that make up the contour:</p>
+<p><span class="math display">\[
+\int_\gamma f(z) \, \mathrm{d}z := \sum_{i=1}^n \int_{\gamma_i} f(z) \, \mathrm{d}z.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.4 (ML Inequality)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. If <span class="math inline">\(\gamma : [a, b] \to S\)</span> is a smooth curve in <span class="math inline">\(S\)</span> and <span class="math inline">\(|f(\gamma(t))| \leq M\)</span> for all <span class="math inline">\(t \in [a, b]\)</span>, then</p>
+<p><span class="math display">\[
+\left| \int_\gamma f(z) \, \mathrm{d}z \right| \leq M \cdot L(\gamma).
+\]</span></p>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.5 (Cauchy–Goursat theorem)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then the contour integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is zero. That is,</p>
+<p><span class="math display">\[
+\int_\gamma f(z) \, \mathrm{d}z = 0.
+\]</span></p>
+</div>
+</section>
+<section id="integrals-around-singularities" class="level3">
+<h3 class="anchored" data-anchor-id="integrals-around-singularities">Integrals Around Singularities</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Singularity
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function. We say that <span class="math inline">\(z_0\)</span> is a singular point, or a singularity of <span class="math inline">\(f\)</span> if <span class="math inline">\(f\)</span> is either not defined at <span class="math inline">\(z_0\)</span> or not holomorphic at <span class="math inline">\(z_0\)</span>, but for every <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a complex number <span class="math inline">\(z \in S\)</span> such that <span class="math inline">\(|z - z_0| &lt; \epsilon\)</span> and <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(z\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Isolated singularity
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function. We say that <span class="math inline">\(z_0\)</span> is an isolated singularity of <span class="math inline">\(f\)</span> if <span class="math inline">\(f\)</span> is either not defined at <span class="math inline">\(z_0\)</span> or not holomorphic at <span class="math inline">\(z_0\)</span>, but there exists an <span class="math inline">\(\epsilon &gt; 0\)</span> such that <span class="math inline">\(f\)</span> is holomorphic on the punctured disk <span class="math inline">\(\{z \in \mathbb{C} : 0 &lt; |z - z_0| &lt; \epsilon\}\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.6 (Cauchy’s integral formula)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z\)</span> enclosed by <span class="math inline">\(\gamma\)</span>,</p>
+<p><span class="math display">\[
+f(z) = \frac{1}{2\pi i} \int_\gamma \frac{f(w)}{w - z} \, \mathrm{d}w.
+\]</span></p>
+</div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.7 (Cauchy’s estimate)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(z_0 \in S\)</span> and <span class="math inline">\(r &gt; 0\)</span> be such that the closed disk <span class="math inline">\(\overline{D}(z_0, r) \subseteq S\)</span>. If <span class="math inline">\(|f(z)| \leq M\)</span> for all <span class="math inline">\(z \in \overline{D}(z_0, r)\)</span>, then for all <span class="math inline">\(n \geq 0\)</span>,</p>
+<p><span class="math display">\[
+|f^{(n)}(z_0)| \leq \frac{n! M}{r^n}.
+\]</span></p>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.8</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Fix <span class="math inline">\(z_0 \in S\)</span> and <span class="math inline">\(r &gt; 0\)</span> such that the circle <span class="math inline">\(C_r\)</span> centered at <span class="math inline">\(z_0\)</span> and its interior <span class="math inline">\(D_r\)</span> are both contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z \in D_r\)</span>,</p>
+<p><span class="math display">\[
+f(z) = \sum_{n \geq 0} a_n(z-z_0)^n, \quad \text{where } a_n = \frac{1}{2\pi i} \int_{C_r} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d}w.
+\]</span></p>
+</div>
+<div id="thm-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.9 (Cauchy integral formula for derivatives)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z\)</span> enclosed by <span class="math inline">\(\gamma\)</span> and every integer <span class="math inline">\(n \geq 0\)</span>,</p>
+<p><span class="math display">\[
+f^{(n)}(z) = \frac{n!}{2\pi i} \int_\gamma \frac{f(w)}{(w - z)^{n+1}} \, \mathrm{d}w.
+\]</span></p>
+</div>
+<div id="thm-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.10 (Identity theorem)</strong></span> Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a connected open set, and let <span class="math inline">\(f,g : S \rightarrow \mathbb{C}\)</span> be holomorphic. If there exists a non-empty open set <span class="math inline">\(U \subseteq S\)</span> such that $f(z) = g(z) for every <span class="math inline">\(z \in U\)</span>, then <span class="math inline">\(f(z) = g(z)\)</span> for every <span class="math inline">\(z \in S\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Removable and non-removable singularities
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function with an isolated singularity at <span class="math inline">\(z_0\)</span>. We say that <span class="math inline">\(z_0\)</span> is a removable singularity of <span class="math inline">\(f\)</span> if there exists a complex number <span class="math inline">\(w \in \mathbb{C}\)</span> such that assigning the value <span class="math inline">\(w\)</span> to <span class="math inline">\(f(z_0)\)</span> makes <span class="math inline">\(f\)</span> holomorphic at <span class="math inline">\(z_0\)</span>. We say that <span class="math inline">\(z_0\)</span> is a non-removable singularity of <span class="math inline">\(f\)</span> if it is not removable.</p>
+</div>
+</div>
+</div>
+<div id="thm-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.11</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Fix <span class="math inline">\(z_0 \in S\)</span>. If the following holds for some <span class="math inline">\(R &gt; 0\)</span>:</p>
+<ol type="1">
+<li><span class="math inline">\(f\)</span> is holomorphic on the open disk <span class="math inline">\(D_R\)</span> centered at <span class="math inline">\(z_0\)</span> with radius <span class="math inline">\(R\)</span>;</li>
+<li><span class="math inline">\(f\)</span> has a non-removable singularity at some point <span class="math inline">\(s\)</span> with <span class="math inline">\(|s - z_0| = R\)</span>,</li>
+</ol>
+<p>Then the radius of convergence of the Taylor series of <span class="math inline">\(f\)</span> around <span class="math inline">\(z_0\)</span>,</p>
+<p><span class="math display">\[
+\sum_{n \geq 0} \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n,
+\]</span></p>
+<p>is exactly <span class="math inline">\(R\)</span>.</p>
+</div>
+</section>
+<section id="expansion-around-isolated-singularities" class="level3">
+<h3 class="anchored" data-anchor-id="expansion-around-isolated-singularities">Expansion Around Isolated Singularities</h3>
+<div id="thm-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.12 (Laurent’s theorem)</strong></span> Let <span class="math inline">\(f\)</span> be holomorphic on a punctured disk <span class="math inline">\(D_r(z_0) \setminus \{z_0\}\)</span> for some <span class="math inline">\(z_0 \in \mathbb{C}\)</span> and some <span class="math inline">\(r &gt; 0\)</span>. Then there exists a unique sequence <span class="math inline">\((a_n)_{n \geq 0}\)</span> and a unique sequence <span class="math inline">\((b_n)_{n \geq 1}\)</span> such that</p>
+<p><span class="math display">\[
+f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n + \sum_{n=1}^\infty b_n (z - z_0)^{-n}
+\]</span></p>
+<p>for every <span class="math inline">\(z \in D_r(z_0) \setminus \{z_0\}\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Classification of isolated singularities
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span> with Laurent series expansion</p>
+<p><span class="math display">\[
+f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n.
+\]</span></p>
+<ul>
+<li>If <span class="math inline">\(a_j = 0\)</span> for all <span class="math inline">\(j &lt; 0\)</span>, then <span class="math inline">\(z_0\)</span> is a removable singularity of <span class="math inline">\(f\)</span>.</li>
+<li>If <span class="math inline">\(a_{-m} \neq 0\)</span> for some positive integer <span class="math inline">\(m\)</span> and <span class="math inline">\(a_j = 0\)</span> for all <span class="math inline">\(j &lt; -m\)</span>, then we say that <span class="math inline">\(z_0\)</span> is a pole of order <span class="math inline">\(m\)</span> of <span class="math inline">\(f\)</span>. A pole of order 1 is called a simple pole.</li>
+<li>If <span class="math inline">\(a_j \neq 0\)</span> for infinitely many negative integers <span class="math inline">\(j\)</span>, then we say that <span class="math inline">\(z_0\)</span> is an essential singularity of <span class="math inline">\(f\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Residue
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span> that admits a Laurent series expansion around <span class="math inline">\(z_0\)</span>:</p>
+<p><span class="math display">\[
+f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n
+\]</span></p>
+<p>Then the coefficient <span class="math inline">\(a_{-1}\)</span> of <span class="math inline">\((z - z_0)^{-1}\)</span> is called the residue of <span class="math inline">\(f\)</span> at <span class="math inline">\(z_0\)</span>, which is denoted by <span class="math inline">\(\operatorname{Res}(f, z_0)\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.13 (Cauchy’s residue theorem)</strong></span> Let <span class="math inline">\(f\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span> except for <span class="math inline">\(m\)</span> isolated singularities <span class="math inline">\(z_1, \dots, z_m\)</span>. Then</p>
+<p><span class="math display">\[
+\frac{1}{2\pi i} \int_\gamma f(z) \, \mathrm{d}z = \sum_{j=1}^m \operatorname{Res}(f, z_j).
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How to compute residues
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span>.</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(\lim_{z \to z_0} (z - z_0)f(z)\)</span> exists, then</p>
+<p><span class="math display">\[
+\operatorname{Res}(f, z_0) = \lim_{z \to z_0} (z - z_0)f(z).
+\]</span></p>
+<p>Moreover, <span class="math inline">\(z_0\)</span> is a simple pole if <span class="math inline">\(\operatorname{Res}(f, z_0) \neq 0\)</span>, or a removable singularity if <span class="math inline">\(\operatorname{Res}(f, z_0) = 0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(f(z) = \frac{g(z)}{h(z)}\)</span> for some holomorphic functions <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> near <span class="math inline">\(z_0\)</span>, with <span class="math inline">\(h(z_0) = 0\)</span> and <span class="math inline">\(h'(z_0) \neq 0\)</span>, then</p>
+<p><span class="math display">\[
+\operatorname{Res}(f, z_0) = \frac{g(z_0)}{h'(z_0)},
+\]</span></p>
+<p>Moreover, <span class="math inline">\(z_0\)</span> is a simple pole if <span class="math inline">\(\operatorname{Res}(f, z_0) \neq 0\)</span>, or a removable singularity if <span class="math inline">\(\operatorname{Res}(f, z_0) = 0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(z_0\)</span> is a pole of order at most <span class="math inline">\(m\)</span>, then</p>
+<p><span class="math display">\[
+\operatorname{Res}(f, z_0) = \frac{1}{(m - 1)!} \lim_{z \to z_0} \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}} \left[ (z - z_0)^m f(z) \right].
+\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="thm-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.14</strong></span> If <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(0\)</span>, then for every <span class="math inline">\(n \geq 0\)</span>,</p>
+<p><span class="math display">\[
+\frac{f^{(n)}(0)}{n!} = \operatorname{Res}\left( \frac{f(z)}{z^{n+1}}, 0 \right).
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="generating-functions-of-random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="generating-functions-of-random-variables">Generating Functions of Random Variables</h2>
+<section id="probability-generating-functions" class="level3">
+<h3 class="anchored" data-anchor-id="probability-generating-functions">Probability Generating Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability generating function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable taking values in non-negative integers. Its probability generating function (PGF) is defined as</p>
+<p><span class="math display">\[
+G_X(z) := \sum_{k \geq 0} \operatorname{Pr}[X = k] z^k.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.15 (Expectation and variance from the PGF)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in non-negative integers. Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}[X] &amp;= G_X'(1), \\
+\mathbb{E}[X^2] &amp;= G_X''(1) + G_X'(1), \\
+\operatorname{Var}(X) &amp;= G_X''(1) + G_X'(1) - \left(G_X'(1)\right)^2.
+\end{aligned}
+\]</span></p>
+</div>
+<div id="thm-16" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.16</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be independent random variables taking values in non-negative integers. Then</p>
+<p><span class="math display">\[
+G_{X+Y}(z) = G_X(z)G_Y(z).
+\]</span></p>
+</div>
+</section>
+<section id="moment-generating-functions" class="level3">
+<h3 class="anchored" data-anchor-id="moment-generating-functions">Moment Generating Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Moment generating function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The moment generating function (MGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+M_X(t) := \mathbb{E}[e^{tX}].
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-17" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.17</strong></span> Let <span class="math inline">\(X_1, \dots, X_n\)</span> be independent random variables, and let <span class="math inline">\(X\)</span> be a weighted sum of these random variables:</p>
+<p><span class="math display">\[
+X := \sum_{k=1}^n c_k X_k,
+\]</span></p>
+<p>where <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span> are constants. Then</p>
+<p><span class="math display">\[
+M_X(t) = \prod_{k=1}^n M_{X_k}(c_k t).
+\]</span></p>
+</div>
+</section>
+<section id="recovering-distributions-from-mgfs" class="level3">
+<h3 class="anchored" data-anchor-id="recovering-distributions-from-mgfs">Recovering Distributions from MGFs</h3>
+<div id="thm-18" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.18</strong></span> Let <span class="math inline">\(c &gt; 0\)</span>. For every <span class="math inline">\(\delta \in \mathbb{R}\)</span>, we have</p>
+<p><span class="math display">\[
+\lim_{T \to +\infty} \frac{1}{2\pi i} \int_{c-iT}^{c+iT} \frac{e^{\delta z}}{z} \, \mathrm{d}z =
+\begin{cases}
+0 &amp; \text{if } \delta &lt; 0, \\
+1/2 &amp; \text{if } \delta = 0, \\
+1 &amp; \text{if } \delta &gt; 0,
+\end{cases}
+\]</span></p>
+<p>where <span class="math inline">\(\int_{c-iT}^{c+iT}\)</span> means integrating along the line segment from <span class="math inline">\(c - iT\)</span> to <span class="math inline">\(c + iT\)</span>, i.e., <span class="math inline">\(\gamma_{c,T}(t) = c + it\)</span> for <span class="math inline">\(t \in [-T, T]\)</span>.</p>
+</div>
+<div id="thm-19" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.19 (Inversion formula for the MGF)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with MGF <span class="math inline">\(M_X(t)\)</span>. For every <span class="math inline">\(x_1 &lt; x_2\)</span>, define</p>
+<p><span class="math display">\[
+p_X(x_1, x_2) := \frac{1}{2} \operatorname{Pr}[X = x_1] + \operatorname{Pr}[x_1 &lt; X &lt; x_2] + \frac{1}{2} \operatorname{Pr}[X = x_2].
+\]</span></p>
+<p>Then for every <span class="math inline">\(c &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+p_X(x_1, x_2) = \frac{1}{2\pi i} \lim_{T \to +\infty} \int_{c-iT}^{c+iT} \frac{e^{-x_1 z} - e^{-x_2 z}}{z} M_X(z) \, \mathrm{d}z.
+\]</span></p>
+</div>
+</section>
+<section id="cumulant-generating-functions" class="level3">
+<h3 class="anchored" data-anchor-id="cumulant-generating-functions">Cumulant Generating Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Cumulant generating function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The cumulant generating function (CGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="math display">\[
+K_X(t) := \log M_X(t) = \sum_{m \geq 1} \kappa_m(X) \frac{t^m}{m!}, \quad \kappa_m(X) = K_X^{(m)}(0).
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proposition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable with MGF <span class="math inline">\(M_X(t)\)</span> and CGF <span class="math inline">\(K_X(t)\)</span>. The relationship between its moments (derived from <span class="math inline">\(M_X\)</span>) and cumulants (derived from <span class="math inline">\(K_X\)</span>) evaluated at <span class="math inline">\(t=0\)</span> is given by the following table:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 35%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Statistic</th>
+<th style="text-align: center;">From MGF (<span class="math inline">\(M_X\)</span>)</th>
+<th style="text-align: center;">From CGF (<span class="math inline">\(K_X\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Expectation<br><span class="math inline">\(\mathbb{E}[X]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_X'(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(K_X'(0)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Second Moment<br><span class="math inline">\(\mathbb{E}[X^2]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_X''(0)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(K_X''(0) + K_X'(0)^2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Variance<br><span class="math inline">\(\operatorname{Var}(X)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_X''(0) - M_X'(0)^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(K_X''(0)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="thm-20" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.20</strong></span> Let <span class="math inline">\(X_1, \dots, X_n\)</span> be independent random variables, and let <span class="math inline">\(X\)</span> be a weighted sum of these random variables:</p>
+<p><span class="math display">\[
+X := \sum_{k=1}^n c_k X_k,
+\]</span></p>
+<p>where <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span> are constants. Then</p>
+<p><span class="math display">\[
+K_X(t) = \sum_{k=1}^n K_{X_k}(c_k t), \quad \kappa_m(X) = \sum_{k=1}^n \kappa_m(c_k X_k).
+\]</span></p>
+</div>
+</section>
+<section id="exponential-tilting" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-tilting">Exponential Tilting</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Exponential tilting
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a random variable with probability mass function <span class="math inline">\(p_X(x)\)</span>. The <span class="math inline">\(\lambda\)</span>-tilted distribution of <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(\mathcal{T}_{X,\lambda}\)</span>, is defined by the distribution corresponding to the probability mass function</p>
+<p><span class="math display">\[
+q(x) = \frac{p_X(x)e^{\lambda x}}{M_X(\lambda)}, \quad \forall x \in \mathbb{R}.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-21" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.21</strong></span> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(Y \sim \mathcal{T}_{X,\lambda}\)</span> be a random variable drawn from the <span class="math inline">\(\lambda\)</span>-tilted distribution of <span class="math inline">\(X\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+M_Y(t) &amp;= \frac{M_X(\lambda + t)}{M_X(\lambda)}, \\
+K_Y(t) &amp;= K_X(\lambda + t) - K_X(\lambda), \\
+K_Y^{(m)}(0) &amp;= K_X^{(m)}(\lambda), \quad \forall m \geq 1.
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<div id="thm-22" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.22</strong></span> Lagrange inversion formula via residues</p>
+<p>Let <span class="math inline">\(S\)</span> and <span class="math inline">\(U\)</span> be two open subsets of <span class="math inline">\(\mathbb{C}\)</span> containing <span class="math inline">\(0\)</span>. Let <span class="math inline">\(f : S \to U\)</span> and <span class="math inline">\(g : U \to S\)</span> be holomorphic functions that are inverse to each other, meaning <span class="math inline">\(f(g(z)) = z\)</span> for all <span class="math inline">\(z \in U\)</span> and <span class="math inline">\(g(f(w)) = w\)</span> for all <span class="math inline">\(w \in S\)</span>. Assume further that <span class="math inline">\(f(0) = 0\)</span>.</p>
+<p>Then there exists a radius <span class="math inline">\(r &gt; 0\)</span> such that for all <span class="math inline">\(z \in D_r(0)\)</span>, the inverse function <span class="math inline">\(g(z)\)</span> can be expanded as the power series</p>
+<p><span class="math display">\[
+g(z) = \sum_{n \geq 1} g_n z^n,
+\]</span></p>
+<p>where the coefficients <span class="math inline">\(g_n\)</span> are given by <span class="math inline">\(g_n := \frac{1}{n} \operatorname{Res}(h_n, 0)\)</span> and <span class="math inline">\(h_n\)</span> is the holomorphic function defined by</p>
+<p><span class="math display">\[
+h_n(w) = \left( \frac{1}{f(w)} \right)^n.
+\]</span></p>
+</div>
+<div id="thm-23" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.23 (Laurent series coefficient representation and uniqueness)</strong></span> Let <span class="math inline">\(f(z)\)</span> be a holomorphic function defined in an open annulus centered at <span class="math inline">\(z_0\)</span>. If <span class="math inline">\(f(z)\)</span> can be represented as a Laurent series of the form</p>
+<p><span class="math display">\[
+f(z) = \sum_{n=-\infty}^{\infty} a_n (z - z_0)^n
+\]</span></p>
+<p>for some sequence of complex coefficients <span class="math inline">\((a_n)_{n \in \mathbb{Z}}\)</span>, then for all <span class="math inline">\(n \in \mathbb{Z}\)</span>, these coefficients are uniquely determined and given by the contour integral</p>
+<p><span class="math display">\[
+a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d}w,
+\]</span></p>
+<p>where <span class="math inline">\(C_r(z_0)\)</span> is any positively oriented circle of radius <span class="math inline">\(r\)</span> centered at <span class="math inline">\(z_0\)</span> lying entirely within the domain of holomorphy. Consequently, this integral representation guarantees the uniqueness of the coefficients in the Laurent series.</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bobby50792\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../docs/notes/math-for-cs-and-ai/2.html" class="pagination-link" aria-label="Sampling and Concentration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sampling and Concentration</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../docs/notes/math-for-cs-and-ai/4.html" class="pagination-link" aria-label="Continuous Probability">
+        <span class="nav-page-text">Continuous Probability</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

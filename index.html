@@ -38,6 +38,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -78,7 +80,93 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-current-topics-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-highlight-style','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-title','listing-home-order','listing-home-symbol','listing-home-description','listing-page-layout','listing-search','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-highlight-style","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-title","listing-home-order","listing-home-symbol","listing-home-description","listing-page-layout","listing-search","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-current-topics-list'] = new List('listing-current-topics-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-recent-writing-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-highlight-style','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-title','listing-subtitle','listing-home-title','listing-home-description','listing-date','listing-categories','listing-image','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-highlight-style","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-title","listing-subtitle","listing-home-title","listing-home-description","listing-date","listing-categories","listing-image","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-recent-writing-list'] = new List('listing-recent-writing-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="index.css">
@@ -313,30 +401,14 @@ ul.task-list li input[type="checkbox"] {
 <p class="hero-eyebrow">
 BOBBY’S KNOWLEDGE BASE
 </p>
-<h1 id="turn-what-i-learn-into-knowledge-worth-returning-to.">Turn what I learn into knowledge worth returning to.</h1>
-<p>A growing collection of notes, ideas, experiments, and projects—shaped by whatever I am learning, building, or exploring.</p>
+<h1 id="a-place-for-ideas-to-grow.">A place for ideas to grow.</h1>
+<p>Notes, projects, and things I am learning along the way.</p>
 <div class="hero-actions">
 <p><a class="home-button home-button-primary" href="./docs/notes/index.html">Browse notes <span aria-hidden="true">→</span></a> <a class="home-button home-button-secondary" href="./docs/blog/index.html">Read the blog</a></p>
 </div>
-<p class="hero-note">
-Built with Quarto · Notes grow as I learn
-</p>
 </div>
-<div class="hero-preview" aria-label="Quarto document source preview">
-<div class="preview-toolbar" aria-hidden="true">
-<p><span></span><span></span><span></span> <strong>index.qmd</strong></p>
-</div>
-<pre aria-hidden="true"><code><span class="code-muted">---</span>
-<span class="code-key">title</span>: <span class="code-value">"Keep learning"</span>
-<span class="code-key">format</span>: <span class="code-value">html</span>
-<span class="code-muted">---</span>
-
-<span class="code-heading"># Notes become knowledge</span>
-
-learn <span class="code-arrow">→</span> connect <span class="code-arrow">→</span> create</code></pre>
-<div class="preview-output">
-<p><span class="preview-label">OUTPUT</span> <strong>Ideas worth revisiting.</strong> <span>Writing clearly is how ideas become your own.</span></p>
-</div>
+<div class="hero-visual">
+<p><img class="hero-illustration" src="hero-knowledge.svg" alt="Abstract illustration of connected notes and ideas."></p>
 </div>
 </div>
 </div>
@@ -369,27 +441,47 @@ TOPICS
 </p>
 <h2 id="current-topics">Current topics</h2>
 </div>
-<div class="topic-grid">
-<div class="topic-card">
-<p><span class="topic-mark" aria-hidden="true">∫</span></p>
-<h3 id="calculus"><a href="./docs/notes/Calculus/index.html">Calculus</a></h3>
-<p>From single-variable calculus to vector fields and Fourier series.</p>
+<div id="listing-current-topics-list" class="quarto-listing quarto-listing-container-custom">
+<div class="topic-grid list">
+
+  
+  
+  
+  <article class="topic-card" data-index="0" data-listing-file-modified-sort="1788007764139" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <span class="topic-mark" aria-hidden="true">∫</span>
+    <h3><a class="listing-title" href="./docs/notes/Calculus/index.html">Calculus</a></h3>
+    <p class="listing-description">From single-variable calculus to vector fields and Fourier series.</p>
+  </article>
+
+  
+  
+  
+  <article class="topic-card" data-index="1" data-listing-file-modified-sort="1788007764141" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <span class="topic-mark" aria-hidden="true">φ</span>
+    <h3><a class="listing-title" href="./docs/notes/general-physics/index.html">General Physics</a></h3>
+    <p class="listing-description">Foundations of mechanics, thermodynamics, relativity, and statistical physics.</p>
+  </article>
+
+  
+  
+  
+  <article class="topic-card" data-index="2" data-listing-file-modified-sort="1788007764142" data-listing-reading-time-sort="1" data-listing-word-count-sort="4">
+    <span class="topic-mark" aria-hidden="true">P</span>
+    <h3><a class="listing-title" href="./docs/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></h3>
+    <p class="listing-description">Probability, generating functions, sampling, optimization, and continuous approximations.</p>
+  </article>
+
+  
+  
+  
+  <article class="topic-card" data-index="3" data-listing-file-modified-sort="1788007764141" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <span class="topic-mark" aria-hidden="true">∇</span>
+    <h3><a class="listing-title" href="./docs/notes/deep-learning/index.html">Deep Learning</a></h3>
+    <p class="listing-description">From supervised learning to generative models, diffusion, and sequence modeling.</p>
+  </article>
+
 </div>
-<div class="topic-card">
-<p><span class="topic-mark" aria-hidden="true">φ</span></p>
-<h3 id="general-physics"><a href="./docs/notes/Physics/index.html">General Physics</a></h3>
-<p>Foundations of mechanics, thermodynamics, relativity, and statistical physics.</p>
-</div>
-<div class="topic-card">
-<p><span class="topic-mark" aria-hidden="true">P</span></p>
-<h3 id="math-for-cs-ai"><a href="./docs/notes/Math4CS&amp;AI/index.html">Math for CS &amp; AI</a></h3>
-<p>Probability, generating functions, sampling, optimization, and continuous approximations.</p>
-</div>
-<div class="topic-card">
-<p><span class="topic-mark" aria-hidden="true">∇</span></p>
-<h3 id="deep-learning"><a href="./docs/notes/DL/index.html">Deep Learning</a></h3>
-<p>From supervised learning to generative models, diffusion, and sequence modeling.</p>
-</div>
+<div class="listing-no-matching d-none">No matching items</div>
 </div>
 </div>
 <div class="recent-section">
@@ -401,21 +493,32 @@ RECENT WRITING
 <p>The blog follows ideas beyond formal notes—from early questions and useful tools to projects, creative work, and lessons learned along the way.</p>
 <p><a href="./docs/blog/index.html" class="text-link">Browse the blog <span aria-hidden="true">→</span></a></p>
 </div>
-<div class="recent-list">
-<div class="recent-item">
-<p><span class="recent-date">2026.05.29</span></p>
-<h3 id="pragmatics-in-prompt-engineering"><a href="./docs/blog/posts/2026-05-29/index.html">Pragmatics in Prompt Engineering</a></h3>
-<p>How to express real requirements clearly and use AI to build better presentations more efficiently.</p>
+<div id="listing-recent-writing-list" class="quarto-listing quarto-listing-container-custom">
+<div class="recent-list list">
+
+  
+  
+  <article class="recent-item" data-index="0" data-categories="QUk=" data-listing-date-sort="1780012800000" data-listing-file-modified-sort="1788007764131" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1446">
+    <span class="recent-date listing-date">2026.05.29</span>
+    <h3><a class="listing-title" href="./docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html">Pragmatics in Prompt Engineering</a></h3>
+    <p class="listing-description">How to express real requirements clearly and use AI to build better presentations more efficiently.</p>
+  </article>
+
+  
+  
+  <article class="recent-item" data-index="1" data-categories="U2l0ZSUyQ05vdGVz" data-listing-date-sort="1778284800000" data-listing-file-modified-sort="1788007764129" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="21">
+    <span class="recent-date listing-date">2026.05.09</span>
+    <h3><a class="listing-title" href="./docs/blog/posts/2026-05-09-site-update-notes/index.html">Site Update Notes</a></h3>
+    <p class="listing-description">A record of the decisions and trade-offs behind the site's evolving structure.</p>
+  </article>
+
 </div>
-<div class="recent-item">
-<p><span class="recent-date">2026.05.09</span></p>
-<h3 id="site-update-notes"><a href="./docs/blog/posts/2026-05-09-writing-routine/index.html">Site Update Notes</a></h3>
-<p>A record of the decisions and trade-offs behind the site’s evolving structure.</p>
+<div class="listing-no-matching d-none">No matching items</div>
 </div>
 </div>
 </div>
 </div>
-</div>
+
 
 
 

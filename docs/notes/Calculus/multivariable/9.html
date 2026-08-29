@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Calculus – Bobby</title>
+<title>Series of Functions and Power Series – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,28 +29,28 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,8 +79,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -261,9 +290,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -273,11 +302,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/notes/index.html"> 
+    <a class="nav-link" href="../../../../docs/notes/index.html"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -299,8 +328,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#uniform-convergence-and-properties-of-limit-functions" id="toc-uniform-convergence-and-properties-of-limit-functions" class="nav-link active" data-scroll-target="#uniform-convergence-and-properties-of-limit-functions">Uniform Convergence and Properties of Limit Functions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -308,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Calculus</h1>
+<h1 class="title">Series of Functions and Power Series</h1>
 </div>
 
 
@@ -325,9 +360,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>本界面梳理了<strong>微积分</strong>相关知识, 希望对你能有所启发。</p>
+<section id="uniform-convergence-and-properties-of-limit-functions" class="level2">
+<h2 class="anchored" data-anchor-id="uniform-convergence-and-properties-of-limit-functions">Uniform Convergence and Properties of Limit Functions</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Uniform and Pointwise Convergence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(I \subseteq \mathbb{R}^m\)</span>, for a function <span class="math inline">\(f : I \to \mathbb{R}\)</span>, we denote:</p>
+<p><span class="math display">\[
+\|f\|_\infty = \sup_{\mathbf{x} \in I} |f(\mathbf{x})|.
+\]</span></p>
+<p>For a sequence of functions <span class="math inline">\(f_n : I \to \mathbb{R}\)</span>, we say that <span class="math inline">\(f_n\)</span> uniformly converges to <span class="math inline">\(f\)</span> on <span class="math inline">\(I\)</span> (denoted as <span class="math inline">\(f_n \overset{I}{\rightrightarrows} f\)</span>), if:</p>
+<p><span class="math display">\[
+\lim_{n \to +\infty} \|f_n - f\|_\infty = 0,
+\]</span></p>
+<p>That is: for any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there exists an <span class="math inline">\(N(\varepsilon)\)</span> such that for any positive integer <span class="math inline">\(n &gt; N(\varepsilon)\)</span> and for any <span class="math inline">\(\mathbf{x} \in I\)</span>, <span class="math inline">\(|f_n(\mathbf{x}) - f(\mathbf{x})| &lt; \varepsilon\)</span>. Here, “uniform” means that <span class="math inline">\(N(\varepsilon)\)</span> is independent of <span class="math inline">\(\mathbf{x} \in I\)</span>.</p>
+<p>If for any <span class="math inline">\(\mathbf{x} \in I\)</span>, we have <span class="math inline">\(\lim_{n \to +\infty} f_n(\mathbf{x}) = f(\mathbf{x})\)</span>, then <span class="math inline">\(f_n\)</span> is said to pointwise converge to <span class="math inline">\(f\)</span> on <span class="math inline">\(I\)</span>, which means for any <span class="math inline">\(\mathbf{x} \in I\)</span> and any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there exists an <span class="math inline">\(N(\mathbf{x}, \varepsilon)\)</span> such that for any positive integer <span class="math inline">\(n &gt; N(\mathbf{x}, \varepsilon)\)</span>, <span class="math inline">\(|f_n(\mathbf{x}) - f(\mathbf{x})| &lt; \varepsilon\)</span>.</p>
+<p>A sequence of functions <span class="math inline">\(f_n\)</span> is said to converge non-uniformly to <span class="math inline">\(f\)</span> on <span class="math inline">\(I\)</span> if <span class="math inline">\(f_n\)</span> converges pointwise to <span class="math inline">\(f\)</span> on <span class="math inline">\(I\)</span>, but does not converge uniformly to <span class="math inline">\(f\)</span>.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

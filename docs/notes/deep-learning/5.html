@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notes – Bobby</title>
+<title>Diffusion Models &amp; Flow Matching – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,67 +26,33 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../docs/notes/calculus/index.qmd" rel="next">
-<link href="../../favicon.svg" rel="icon" type="image/svg+xml">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/deep-learning/6.html" rel="next">
+<link href="../../../docs/notes/deep-learning/4.html" rel="prev">
+<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-eaeb381c6b7494c50009502241a4985c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-a753e26ec89be1554aa1dfb1f1bbdec7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-523254947070de9b6767d4d2333aa615.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,9 +80,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -148,7 +111,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -329,9 +292,9 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -341,11 +304,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../docs/notes/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -367,21 +330,21 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/notes/index.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/deep-learning/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/deep-learning/5.html">Diffusion Models &amp; Flow Matching</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -390,7 +353,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/calculus/index.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/calculus/index.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -399,7 +362,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/calculus/single-variable/index.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/calculus/single-variable/index.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -408,37 +371,37 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -446,7 +409,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/calculus/multivariable/index.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/calculus/multivariable/index.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -455,61 +418,61 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series of Functions and Power Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -519,7 +482,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -528,43 +491,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling and Concentration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generating Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Central Limit Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Approximations</span></a>
   </div>
 </li>
@@ -572,7 +535,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -581,7 +544,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mechanics and Thermal Physics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -590,91 +553,91 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinematics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Newton’s Laws</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy and Work</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Angular Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collision Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rigid Body</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Oscillation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Waves</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lagrangian and Hamiltonian Mechanics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Special Relativity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Temperature, Heat, and the First Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinetic Theory of Gases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Second Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Mechanics</span></a>
   </div>
 </li>
@@ -684,46 +647,46 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy-Based Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generative Adversarial Network</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sequence Modeling</span></a>
   </div>
 </li>
@@ -736,22 +699,28 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#diffusion-models" id="toc-diffusion-models" class="nav-link active" data-scroll-target="#diffusion-models">Diffusion Models</a></li>
+  <li><a href="#score-based-diffusion-models" id="toc-score-based-diffusion-models" class="nav-link" data-scroll-target="#score-based-diffusion-models">Score-based Diffusion Models</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/deep-learning/index.html">Deep Learning</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/deep-learning/5.html">Diffusion Models &amp; Flow Matching</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Notes</h1>
-<p class="subtitle lead">A collection of notes to reference.</p>
+<h1 class="title">Diffusion Models &amp; Flow Matching</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta">
 
     
   
@@ -763,91 +732,395 @@ window.Quarto = {
 </header>
 
 
-<div id="7a3b56a5" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.executable)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello from VS Code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3
-Hello from VS Code</code></pre>
+<section id="diffusion-models" class="level2">
+<h2 class="anchored" data-anchor-id="diffusion-models">Diffusion Models</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>DDPM: Forward and Reverse Processes
 </div>
-<p>This is a simple mathematical equation:</p>
-<p><span class="math display">\[
-y = x^2 + 2x + 1
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="forward-process-add-noise" class="level3">
+<h3 class="anchored" data-anchor-id="forward-process-add-noise">Forward Process: Add Noise</h3>
+<ul>
+<li><p>The forward process is fixed and gradually adds Gaussian noise to data: <span class="math display">\[
+q(x_{1:T}\mid x_0)
+:=
+\prod_{t=1}^{T} q(x_t\mid x_{t-1})
 \]</span></p>
-<div id="7cae946c" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"epoch"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"accuracy"</span>: [<span class="fl">0.55</span>, <span class="fl">0.68</span>, <span class="fl">0.76</span>, <span class="fl">0.82</span>, <span class="fl">0.87</span>]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
+<p><span class="math display">\[
+q(x_t\mid x_{t-1})
+:=
+\mathcal N
+\left(
+x_t;
+\sqrt{1-\beta_t}x_{t-1},
+\beta_t I
+\right)
+\]</span></p></li>
+<li><p>Equivalently, one step of the forward process can be written as: <span class="math display">\[
+x_t
+=
+\sqrt{1-\beta_t}x_{t-1}
++
+\sqrt{\beta_t}\epsilon,
+\qquad
+\epsilon\sim\mathcal N(0,I)
+\]</span></p></li>
+<li><p>Define: <span class="math display">\[
+\alpha_t=1-\beta_t,
+\qquad
+\bar\alpha_t=\prod_{s=1}^{t}\alpha_s
+\]</span></p></li>
+<li><p>Then we can sample <span class="math inline">\(x_t\)</span> directly from <span class="math inline">\(x_0\)</span>: <span class="math display">\[
+x_t
+=
+\sqrt{\bar\alpha_t}x_0
++
+\sqrt{1-\bar\alpha_t}\epsilon,
+\qquad
+\epsilon\sim\mathcal N(0,I)
+\]</span></p></li>
+<li><p>The goal of the forward process is to transform the data distribution into a standard Gaussian: <span class="math display">\[
+x_T\approx\mathcal N(0,I)
+\]</span></p>
+<p>When <span class="math inline">\(T\)</span> is large: <span class="math display">\[
+\sqrt{\bar\alpha_T}\rightarrow 0,
+\qquad
+1-\bar\alpha_T\rightarrow 1
+\]</span></p></li>
+</ul>
+<hr>
+</section>
+<section id="reverse-process-denoise" class="level3">
+<h3 class="anchored" data-anchor-id="reverse-process-denoise">Reverse Process: Denoise</h3>
+<ul>
+<li><p>The reverse process is learned and gradually removes noise: <span class="math display">\[
+p_\theta(x_{0:T})
+:=
+p(x_T)
+\prod_{t=1}^{T}
+p_\theta(x_{t-1}\mid x_t)
+\]</span></p></li>
+<li><p>Each reverse step is modeled as a Gaussian: <span class="math display">\[
+p_\theta(x_{t-1}\mid x_t)
+:=
+\mathcal N
+\left(
+x_{t-1};
+\mu_\theta(x_t,t),
+\Sigma_\theta(x_t,t)
+\right)
+\]</span></p></li>
+<li><p>A denoising neural network predicts the reverse transition parameters: <span class="math display">\[
+\mu_\theta(x_t,t),
+\qquad
+\Sigma_\theta(x_t,t)
+\]</span></p></li>
+<li><p>Generation starts from pure noise: <span class="math display">\[
+x_T\sim\mathcal N(0,I)
+\]</span></p>
+<p>and repeatedly denoises: <span class="math display">\[
+x_T \rightarrow x_{T-1}\rightarrow \cdots \rightarrow x_0
+\]</span></p></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>DDPM: Variational Inference (ELBO)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Variational inference identity: <span class="math display">\[
+-\log p(x)
+=
+-\int q_x(z)\log p(x\mid z)dz
++
+KL(q_x(z)\parallel p(z))
+-
+KL(q_x(z)\parallel p(z\mid x))
+\]</span></p></li>
+<li><p>Therefore, minimizing negative log-likelihood can be replaced by minimizing an upper bound: <span class="math display">\[
+-\log p(x)
+\le
+-\int q_x(z)\log p(x\mid z)dz
++
+KL(q_x(z)\parallel p(z))
+\]</span></p></li>
+<li><p>DDPM is similar to a hierarchical VAE.</p></li>
+<li><p>The latent code is the entire noisy trajectory: <span class="math display">\[
+z=\{x_1,x_2,\dots,x_T\}
+\]</span></p></li>
+<li><p>Forward process as encoder: <span class="math display">\[
+q(x_{1:T}\mid x_0)
+=
+\prod_{t=1}^{T}q(x_t\mid x_{t-1})
+\]</span></p></li>
+<li><p>Reverse process as decoder: <span class="math display">\[
+p_\theta(x_{0:T})
+=
+p(x_T)
+\prod_{t=1}^{T}p_\theta(x_{t-1}\mid x_t)
+\]</span></p></li>
+<li><p>DDPM variational objective: <span class="math display">\[
+\mathbb E_q
+\left[
+D_{KL}(q(x_T\mid x_0)\parallel p(x_T))
++
+\sum_{t&gt;1}
+D_{KL}
+\left(
+q(x_{t-1}\mid x_t,x_0)
+\parallel
+p_\theta(x_{t-1}\mid x_t)
+\right)
+-
+\log p_\theta(x_0\mid x_1)
+\right]
+\]</span></p></li>
+<li><p>Term notation: <span class="math display">\[
+L_T
+=
+D_{KL}(q(x_T\mid x_0)\parallel p(x_T))
+\]</span> <span class="math display">\[
+L_{t-1}
+=
+D_{KL}
+\left(
+q(x_{t-1}\mid x_t,x_0)
+\parallel
+p_\theta(x_{t-1}\mid x_t)
+\right)
+\]</span> <span class="math display">\[
+L_0
+=
+-\log p_\theta(x_0\mid x_1)
+\]</span></p></li>
+<li><p>The true posterior of the forward process is Gaussian: <span class="math display">\[
+q(x_{t-1}\mid x_t,x_0)
+=
+\mathcal N
+\left(
+x_{t-1};
+\tilde\mu_t(x_t,x_0),
+\tilde\beta_t I
+\right)
+\]</span></p>
+<p>where <span class="math display">\[
+\tilde\mu_t(x_t,x_0)
+:=
+\frac{\sqrt{\bar\alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0
++
+\frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t
+\]</span></p>
+<p>and <span class="math display">\[
+\tilde\beta_t
+:=
+\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t
+\]</span></p></li>
+<li><p>The forward process is decomposed into a similar form as the reverse process so that the KL divergence terms are easy to compute.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>DDPM: Training Loss and Sampling
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Since <span class="math display">\[
+q(x_{t-1}\mid x_t,x_0)
+\]</span> and <span class="math display">\[
+p_\theta(x_{t-1}\mid x_t)
+\]</span> are both Gaussian, their KL divergence can be reduced to a mean-matching loss: <span class="math display">\[
+L_{t-1}
+=
+D_{KL}
+\left(
+q(x_{t-1}\mid x_t,x_0)
+\parallel
+p_\theta(x_{t-1}\mid x_t)
+\right)
+\]</span> <span class="math display">\[
+=
+\mathbb E_q
+\left[
+\frac{1}{2\sigma_t^2}
+\left\|
+\tilde\mu_t(x_t,x_0)
+-
+\mu_\theta(x_t,t)
+\right\|^2
+\right]
++ C
+\]</span></p></li>
+<li><p>The true posterior mean can be written with the noise <span class="math inline">\(\epsilon\)</span>: <span class="math display">\[
+\tilde\mu_t(x_t,x_0)
+=
+\frac{1}{\sqrt{1-\beta_t}}
+\left(
+x_t
+-
+\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon
+\right)
+\]</span></p></li>
+<li><p>Reparametrize the model mean by predicting noise: <span class="math display">\[
+\mu_\theta(x_t,t)
+=
+\frac{1}{\sqrt{1-\beta_t}}
+\left(
+x_t
+-
+\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}
+\epsilon_\theta(x_t,t)
+\right)
+\]</span></p></li>
+<li><p>Therefore: <span class="math display">\[
+L_{t-1}
+=
+\mathbb E_{x_0\sim q(x_0),\epsilon\sim\mathcal N(0,I)}
+\left[
+\frac{\beta_t^2}
+{2\sigma_t^2(1-\beta_t)(1-\bar\alpha_t)}
+\left\|
+\epsilon
+-
+\epsilon_\theta
+\left(
+\sqrt{\bar\alpha_t}x_0
++
+\sqrt{1-\bar\alpha_t}\epsilon,
+t
+\right)
+\right\|^2
+\right]
++ C
+\]</span></p></li>
+<li><p>Let <span class="math display">\[
+x_t=
+\sqrt{\bar\alpha_t}x_0
++
+\sqrt{1-\bar\alpha_t}\epsilon
+\]</span></p>
+<p>and define the weighting coefficient: <span class="math display">\[
+\lambda_t
+=
+\frac{\beta_t^2}
+{2\sigma_t^2(1-\beta_t)(1-\bar\alpha_t)}
+\]</span></p></li>
+<li><p>DDPM uses the simplified loss by setting <span class="math inline">\(\lambda_t=1\)</span>: <span class="math display">\[
+L_{\text{simple}}(\theta)
+:=
+\mathbb E_{t,x_0,\epsilon}
+\left[
+\left\|
+\epsilon
+-
+\epsilon_\theta
+\left(
+\sqrt{\bar\alpha_t}x_0
++
+\sqrt{1-\bar\alpha_t}\epsilon,
+t
+\right)
+\right\|^2
+\right]
+\]</span></p></li>
+</ul>
+<hr>
+<section id="algorithm-1-training" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-1-training">Algorithm 1: Training</h3>
+<ol type="1">
+<li>Repeat until converged.</li>
+<li>Sample a clean data point: <span class="math display">\[
+x_0\sim q(x_0)
+\]</span></li>
+<li>Sample a timestep: <span class="math display">\[
+t\sim \mathrm{Uniform}(\{1,\dots,T\})
+\]</span></li>
+<li>Sample Gaussian noise: <span class="math display">\[
+\epsilon\sim\mathcal N(0,I)
+\]</span></li>
+<li>Construct noisy input: <span class="math display">\[
+x_t=
+\sqrt{\bar\alpha_t}x_0
++
+\sqrt{1-\bar\alpha_t}\epsilon
+\]</span></li>
+<li>Take a gradient descent step on: <span class="math display">\[
+\nabla_\theta
+\left\|
+\epsilon
+-
+\epsilon_\theta(x_t,t)
+\right\|^2
+\]</span></li>
+</ol>
+<hr>
+</section>
+<section id="algorithm-2-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-2-sampling">Algorithm 2: Sampling</h3>
+<ol type="1">
+<li><p>Start from pure Gaussian noise: <span class="math display">\[
+x_T\sim\mathcal N(0,I)
+\]</span></p></li>
+<li><p>For <span class="math display">\[
+t=T,\dots,1
+\]</span> repeat:</p>
+<p>sample <span class="math display">\[
+z\sim\mathcal N(0,I)
+\]</span> if <span class="math inline">\(t&gt;1\)</span>, otherwise set <span class="math inline">\(z=0\)</span>.</p>
+<p>update: <span class="math display">\[
+x_{t-1}
+=
+\frac{1}{\sqrt{\alpha_t}}
+\left(
+x_t
+-
+\frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}
+\epsilon_\theta(x_t,t)
+\right)
++
+\sigma_t z
+\]</span></p></li>
+<li><p>Return generated sample: <span class="math display">\[
+x_0
+\]</span></p></li>
+</ol>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="score-based-diffusion-models" class="level2">
+<h2 class="anchored" data-anchor-id="score-based-diffusion-models">Score-based Diffusion Models</h2>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">epoch</th>
-<th data-quarto-table-cell-role="th">accuracy</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>0.55</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>2</td>
-<td>0.68</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>3</td>
-<td>0.76</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>4</td>
-<td>0.82</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>5</td>
-<td>0.87</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div id="d42cb7a4" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">"epoch"</span>], data[<span class="st">"accuracy"</span>], marker<span class="op">=</span><span class="st">"o"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Accuracy"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Training Accuracy"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-4-output-1.png" width="598" height="451" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1263,12 +1536,15 @@ y = x^2 + 2x + 1
     }
   });
   </script>
-<nav class="page-navigation column-page-right">
+<nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../../docs/notes/deep-learning/4.html" class="pagination-link" aria-label="Normalizing Flow &amp; Variational Autoencoder">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Normalizing Flow &amp; Variational Autoencoder</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../docs/notes/calculus/index.qmd" class="pagination-link" aria-label="Calculus">
-        <span class="nav-page-text">Calculus</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/deep-learning/6.html" class="pagination-link" aria-label="Sequence Modeling">
+        <span class="nav-page-text">Sequence Modeling</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
