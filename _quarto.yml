@@ -1,10 +1,6 @@
 project:
   type: website
   output-dir: _site
-  resources:
-    - "/_redirects"
-    - "/netlify.toml"
-    - "/.well-known/atproto-did"
 
 highlight-style: a11y
 
@@ -157,23 +153,9 @@ format:
     code-copy: true
     code-overflow: wrap
     css: styles.css
-    include-after-body: js.html
     grid:
       sidebar-width: 250px
       body-width: 900px
       margin-width: 300px
 
-filters:
-  - filters/tools-tabset.lua
-  - filters/color-box.lua
-  - at: post-quarto
-    path: filters/include-dark.lua
-
-version: '1.9'
-prerelease-subdomain: ''
-
 freeze: false
-
-profile:
-  group:
-    - [prerelease, rc]

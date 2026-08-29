@@ -50,3 +50,5 @@ pnpm-debug.log*
 # Operating systems
 .DS_Store
 Thumbs.db
+
+**/*.quarto_ipynb
