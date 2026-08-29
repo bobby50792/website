@@ -7,6 +7,7 @@ highlight-style: a11y
 website:
   title: "Bobby"
   site-url: https://bobby50792.com
+  favicon: favicon.svg
   repo-url: https://github.com/bobby50792/website
   page-navigation: true
   navbar:

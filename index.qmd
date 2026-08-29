@@ -1,30 +1,179 @@
 ---
 pagetitle: "Bobby"
+description: "Bobby's personal knowledge base for mathematics, physics, deep learning, and writing."
 page-layout: custom
 section-divs: false
+anchor-sections: false
 toc: false
 css: index.css
 editor: source
-
 ---
 
-::: {.hero-banner style="justify-content:flex-start;"}
-::: {.content-block style="margin-left: 8rem; margin-right: auto;"}
-::: {.hero-text}
+::: {.home-page}
+::: {.home-hero}
+::: {.home-shell .hero-grid}
+::: {.hero-copy}
 
-# <span style="white-space: nowrap;"> Welcome to bobby's website </span>
+<p class="hero-eyebrow">BOBBY'S KNOWLEDGE BASE</p>
 
-<span style="white-space: nowrap;"> 这里记录了一些我认为比较有意义的内容...... </span>
+# Turn what I learn into knowledge worth returning to.
+
+Notes on mathematics, physics, and deep learning, along with reflections on learning, writing, and making things.
+
+<div class="hero-actions">
+  <a class="home-button home-button-primary" href="docs/notes/index.qmd">Browse notes <span aria-hidden="true">→</span></a>
+  <a class="home-button home-button-secondary" href="docs/blog/index.qmd">Read the blog</a>
+</div>
+
+<p class="hero-note">Built with Quarto · Notes grow as I learn</p>
+
+:::
+
+::: {.hero-preview aria-label="Quarto document source preview"}
+<div class="preview-toolbar" aria-hidden="true">
+  <span></span><span></span><span></span>
+  <strong>index.qmd</strong>
+</div>
+<pre aria-hidden="true"><code><span class="code-muted">---</span>
+<span class="code-key">title</span>: <span class="code-value">"Keep learning"</span>
+<span class="code-key">format</span>: <span class="code-value">html</span>
+<span class="code-muted">---</span>
+
+<span class="code-heading"># Notes become knowledge</span>
+
+learn <span class="code-arrow">→</span> connect <span class="code-arrow">→</span> create</code></pre>
+<div class="preview-output">
+  <span class="preview-label">OUTPUT</span>
+  <strong>Ideas worth revisiting.</strong>
+  <span>Writing clearly is how ideas become your own.</span>
+</div>
+:::
+:::
+:::
+
+::: {.home-shell .home-main}
+::: {.section-heading}
+
+<p class="section-kicker">EXPLORE</p>
+
+## Start here
+
+Explore the site through two paths: structured learning notes and more informal essays, experiments, and project updates.
+
+:::
+
+::: {.primary-card-grid}
+::: {.home-card .home-card-featured}
+
+<span class="card-number">01</span>
+
+### [Notes](docs/notes/index.qmd)
+
+Long-form notes organized by subject, covering mathematics, physics, and deep learning. The collection continues to grow as I learn.
+
+[Explore the knowledge base <span aria-hidden="true">→</span>](docs/notes/index.qmd){.card-link}
+
+:::
+
+::: {.home-card}
+
+<span class="card-number">02</span>
+
+### [Blog](docs/blog/index.qmd)
+
+Essays about writing, tools, AI, and personal projects, including notes on how this website evolves over time.
+
+[View all posts <span aria-hidden="true">→</span>](docs/blog/index.qmd){.card-link}
+
+:::
+:::
+
+::: {.topic-section}
+::: {.section-heading .section-heading-compact}
+
+<p class="section-kicker">TOPICS</p>
+
+## Topics in progress
+
+:::
+
+::: {.topic-grid}
+::: {.topic-card}
+
+<span class="topic-mark" aria-hidden="true">∫</span>
+
+### [Calculus](docs/notes/Calculus/index.qmd)
+
+From single-variable calculus to vector fields and Fourier series.
+
+:::
+
+::: {.topic-card}
+
+<span class="topic-mark" aria-hidden="true">φ</span>
+
+### [General Physics](docs/notes/Physics/index.qmd)
+
+Foundations of mechanics, thermodynamics, relativity, and statistical physics.
+
+:::
+
+::: {.topic-card}
+
+<span class="topic-mark" aria-hidden="true">P</span>
+
+### [Math for CS & AI](docs/notes/Math4CS&AI/index.qmd)
+
+Probability, generating functions, sampling, optimization, and continuous approximations.
+
+:::
+
+::: {.topic-card}
+
+<span class="topic-mark" aria-hidden="true">∇</span>
+
+### [Deep Learning](docs/notes/DL/index.qmd)
+
+From supervised learning to generative models, diffusion, and sequence modeling.
 
 :::
 :::
 :::
 
-::: {style="max-width: 1080px; margin: 2rem auto; padding: 0 1rem;"}
+::: {.recent-section}
+::: {.recent-copy}
 
-## 为什么要建这个网站？
+<p class="section-kicker">RECENT WRITING</p>
 
-给未来的同行者们提供一些参考资料。
+## Recent writing
 
+Beyond technical notes, I write about communicating ideas, using tools thoughtfully, and turning concepts into finished work.
 
+[Browse the blog <span aria-hidden="true">→</span>](docs/blog/index.qmd){.text-link}
+
+:::
+
+::: {.recent-list}
+::: {.recent-item}
+
+<span class="recent-date">2026.05.29</span>
+
+### [Pragmatics in Prompt Engineering](docs/blog/posts/2026-05-29/index.qmd)
+
+How to express real requirements clearly and use AI to build better presentations more efficiently.
+
+:::
+
+::: {.recent-item}
+
+<span class="recent-date">2026.05.09</span>
+
+### [Site Update Notes](docs/blog/posts/2026-05-09-writing-routine/index.qmd)
+
+A record of the decisions and trade-offs behind the site's evolving structure.
+
+:::
+:::
+:::
+:::
 :::
