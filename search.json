@@ -356,99 +356,78 @@
     "text": "Ideas in progress, useful discoveries, and occasional notes from things I build."
   },
   {
-    "objectID": "docs/blog/posts/2026-05-09-site-update-notes/index.html",
-    "href": "docs/blog/posts/2026-05-09-site-update-notes/index.html",
-    "title": "站点更新笔记",
-    "section": "",
-    "text": "这篇文章记录的是一次很小但很实用的整理：把站点收束到更明确的入口，并把 guide 和 blog 的职责拆开。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-05-09-site-update-notes/index.html#这次做了什么",
-    "href": "docs/blog/posts/2026-05-09-site-update-notes/index.html#这次做了什么",
-    "title": "站点更新笔记",
-    "section": "这次做了什么",
-    "text": "这次做了什么\n\n保留 overview、guide 和 blog 三个入口。\n给 guide 增加了更明确的子页面。\n给 blog 增加了两篇新的内容，用来承载更新和思考。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-05-09-site-update-notes/index.html#为什么这样拆",
-    "href": "docs/blog/posts/2026-05-09-site-update-notes/index.html#为什么这样拆",
-    "title": "站点更新笔记",
-    "section": "为什么这样拆",
-    "text": "为什么这样拆\n当首页只负责引导时，内容更容易维护；当 guide 只负责说明时，读者更容易快速找到答案；当 blog 只负责记录时，更新也会更自然。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html",
+    "objectID": "docs/blog/posts/2026-05-29/index.html",
+    "href": "docs/blog/posts/2026-05-29/index.html",
     "title": "提示词工程中的语用学",
     "section": "",
     "text": "先有人的判断，再有 AI 的效率。\n\n\n\n\n\n资料没核验\n观点像平均答案\n页面堆满文字\n\n\n\n先有人的判断，再让 AI 加速\n\n\n\n\n人先定观点\nAI 优化表达\n工具生成 PPT 初稿\n人再做取舍"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#ai-不应该替你思考而应该放大你的思考",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#ai-不应该替你思考而应该放大你的思考",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#ai-不应该替你思考而应该放大你的思考",
+    "href": "docs/blog/posts/2026-05-29/index.html#ai-不应该替你思考而应该放大你的思考",
     "title": "提示词工程中的语用学",
     "section": "",
     "text": "先有人的判断，再有 AI 的效率。"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#先看一个真实效果同一段材料为什么一页像草稿一页像-ppt",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#先看一个真实效果同一段材料为什么一页像草稿一页像-ppt",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#先看一个真实效果同一段材料为什么一页像草稿一页像-ppt",
+    "href": "docs/blog/posts/2026-05-29/index.html#先看一个真实效果同一段材料为什么一页像草稿一页像-ppt",
     "title": "提示词工程中的语用学",
     "section": "先看一个真实效果：同一段材料，为什么一页像草稿，一页像 PPT？",
     "text": "先看一个真实效果：同一段材料，为什么一页像草稿，一页像 PPT？\n同一段“行业背景”材料，直接塞进页面是草稿；先拆结构，再让 AI 辅助排版，才像 PPT。\n\n\n\n\n直接堆材料：图片像装饰，文字像资料原文，听众很难在几秒内抓到重点。\n\n\n\n\n\n先拆结构再排版：把材料拆成网络覆盖率、数字化、电子商务、数字农业四个模块，页面才变得可讲、可看、可记。\n\n\n\n这就是本文的基本立场：人决定讲什么，AI 帮你讲得更清楚。"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#先划清边界ai-能帮忙但不能替你想",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#先划清边界ai-能帮忙但不能替你想",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#先划清边界ai-能帮忙但不能替你想",
+    "href": "docs/blog/posts/2026-05-29/index.html#先划清边界ai-能帮忙但不能替你想",
     "title": "提示词工程中的语用学",
     "section": "先划清边界：AI 能帮忙，但不能替你想",
     "text": "先划清边界：AI 能帮忙，但不能替你想\n最危险的用法，是把“我还没想清楚”直接交给 AI。它当然可以生成一份看起来完整的 PPT，但这份 PPT 往往只是平均答案：论点松散、资料未经核验、例子听起来正确却不一定适合你的课堂展示。\n更好的用法，是先把人的思考写出来，再让 AI 做加工。\n\n\n不推荐：把思考外包\n帮我做一个关于提示词工程的 PPT，要高级一点，内容丰富一点。\n\n\n推荐：带着自己的框架协作\n我已经查了资料，并初步确定展示主线：提示词工程可以理解为给 AI 补足语用语境。我的大纲是：引入案例、共同语境、Grice 四准则、PPT 工作流、总结。请不要替我重写主题，而是帮我检查逻辑跳跃、补充每页可用案例，并把它整理成 8 页 PPT 细纲。\n\n\n这两个请求的差别不只是长度。后者明确告诉 AI：主题由人决定，结构由人先搭，AI 的职责是检查、补充和优化。这样产出的 PPT 才不会像“生成内容”，而更像“把你的想法做成更好的表达”。\n所以提示词工程可以理解成：\n\\[\nP(y \\mid x)\n\\]\n其中 x 是你给出的提示词、资料、观点、大纲和约束，y 是模型生成的结果。x 里如果没有人的判断，y 就只能靠概率平均；x 里有清楚的思考，AI 才能围绕你的方向继续加工。\n\n\n\n\n\n\nNote\n\n\n\n语用学关心的是“话在具体语境中是什么意思”。提示词工程关心的是“怎样把这个语境写清楚，让 AI 能按你的意思工作”。两者的交集，就是把人的思考、资料来源、概念边界和表达目标显性化。"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#用-grice-四准则诊断提示词",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#用-grice-四准则诊断提示词",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#用-grice-四准则诊断提示词",
+    "href": "docs/blog/posts/2026-05-29/index.html#用-grice-四准则诊断提示词",
     "title": "提示词工程中的语用学",
     "section": "用 Grice 四准则诊断提示词",
     "text": "用 Grice 四准则诊断提示词\nGrice 的合作原则原本解释人类对话为什么能互相理解。换到 AI 协作里，它可以变成一张非常实用的提示词检查表。\n\n\n质的准则：真实吗？\n不要让 AI 为了迎合你而编造。好的提示词要允许它说“不确定”，并要求它先检查问题前提。\n\n\n关系准则：相关吗？\n同一个词在不同语境里可能完全不同。提示词要告诉 AI 现在属于哪门课、哪个领域、哪种任务。\n\n\n量的准则：够用吗？\n给太少，AI 会猜；给太多，AI 会抓不住重点。关键是给“足够完成任务”的信息。\n\n\n方式准则：清楚吗？\n避免黑话、反讽、缩写和含糊代词。能拆成列表，就不要写成一大段情绪化要求。\n\n\n\n\n\n\n\n\n\n\n\nGrice 准则\nPrompt 里要补什么\n做 PPT 时的具体问题\n\n\n\n\n质的准则\n事实来源、前提检查、不确定性\n这个例子是真的吗？有没有让 AI 顺着错误前提编？\n\n\n关系准则\n课程语境、领域限定、主题边界\n这一页和主题有关吗？关键词有没有被 AI 理解错？\n\n\n量的准则\n必要细节、输出长度、页面密度\n页面信息够不够？是不是把讲稿全塞进幻灯片？\n\n\n方式准则\n清晰格式、少歧义、解释黑话\nprompt 是否可执行？缩写、反讽、圈内话有没有说明？"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#四个案例把翻车点改成提示词策略",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#四个案例把翻车点改成提示词策略",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#四个案例把翻车点改成提示词策略",
+    "href": "docs/blog/posts/2026-05-29/index.html#四个案例把翻车点改成提示词策略",
     "title": "提示词工程中的语用学",
     "section": "四个案例：把翻车点改成提示词策略",
     "text": "四个案例：把翻车点改成提示词策略\n下面不是单纯列模板，而是用语用学去诊断 AI 为什么会出错。每个案例都可以迁移到做 PPT 的过程中。\n\n\n质的准则：先查前提\nAI 翻车表现： 你问“为什么隧道上通常会修建一座山”，AI 可能顺着问题解释，好像这个前提本身一定成立。\n语用学解释： 人类听众可能会追问“你是不是把因果关系说反了”；AI 如果只追求顺畅回答，就可能忽略真实性。\nPrompt 修正： “请先判断我的问题前提是否成立。如果前提不成立，请指出问题在哪里，再给出更合理的解释。”\n\n\n关系准则：限定领域\nAI 翻车表现： 让 AI “生成一张关于 Green 公式的图片”，它可能画出绿色的数学公式，而不是 George Green 相关的数学概念。\n语用学解释： Green 对人类课堂同学可能是明确的专业词，但对 AI 来说，它同时连接颜色、人名、环保、品牌和数学。\nPrompt 修正： “这里的 Green 指数学家 George Green，不是绿色。请在数学分析/向量分析语境下处理这个概念。”\n\n\n量的准则：细节服务目标\nAI 翻车表现： “画一张滑雪的图片”大概率得到普通人物和普通雪山；“帮我美化 PPT”也常得到通用模板。\n语用学解释： 少量提示会让 AI 走向平均值。想要定制化，就要补足主体、动作、环境、构图、风格和使用场景。\nPrompt 修正： “男性双板滑雪者、红色滑雪服、陡坡高速滑行、雪雾飞溅、湛蓝天空、高清超写实、动感构图。”做 PPT 也同理：把“高级”拆成配色、布局、图文比例和信息密度。\n\n\n方式准则：翻译圈内话\nAI 翻车表现： “这门课不是 non-trivial 到爆了吧”“萝卜熟了”“老鼠尾巴”这类表达，如果不解释，AI 可能按字面理解。\n语用学解释： 黑话依赖圈内共同经验。对同学来说是默契，对 AI 来说是没有说明来源的歧义。\nPrompt 修正： “下面有一些课程/竞赛/医学圈内表达，请先按我给的定义理解，不要按字面解释。”然后列出缩写和含义。\n\n\n\n实践效果 1：Green 公式不是“绿色公式”\n关系准则的问题，用图片最直观。只说“生成一张 green 公式的图片”，AI 可能抓住的是 green = 绿色，而不是课程语境里的 Green = George Green。\n\n\n\n\n缺少领域语境：AI 把关键词按字面理解，生成了“绿色的公式”。\n\n\n\n\n\n补上数学语境：说明 Green 指数学家 George Green，输出才会靠近真正的课程内容。\n\n\n\n\n\n实践效果 2：细节不是堆字，而是减少 AI 的盲猜\n“画一张滑雪的图片”和“男性双板滑雪者、红色滑雪服、陡坡高速滑行、雪雾飞溅、湛蓝天空、高清超写实、动感构图”得到的不是同一种结果。细节的作用，是让 AI 少猜一点，让画面更接近你脑子里的用途。\n\n\n\n当主体、动作、环境和构图都被写清楚时，图片就不再只是“一个人在滑雪”，而是可以直接作为 PPT 背景或案例图的视觉素材。"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#一套可复用的-7-步人机协作流程",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#一套可复用的-7-步人机协作流程",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#一套可复用的-7-步人机协作流程",
+    "href": "docs/blog/posts/2026-05-29/index.html#一套可复用的-7-步人机协作流程",
     "title": "提示词工程中的语用学",
     "section": "一套可复用的 7 步人机协作流程",
     "text": "一套可复用的 7 步人机协作流程\n一次性让 AI 从 0 到 100 做完整 PPT，最大的问题不是“不稳定”，而是会让人跳过真正重要的思考。更好的流程是：前半段由人完成研究和立论，后半段让 AI 提高表达效率。\n\n\n1\n\n查找资料\n先自己读材料、筛资料、记来源。AI 可以帮你整理摘要，但不能替你判断哪些材料值得信。\n\n\n\n2\n\n写大纲\n先用自己的话写出主题、核心观点和讲述顺序。这个阶段决定 PPT 有没有灵魂。\n\n\n\n3\n\n写细纲\n把大纲拆到每一页：这一页讲什么、用什么例子、听众要记住什么。\n\n\n\n4\n\nAI 润色成 prompt\n把你的资料和细纲交给 AI，让它补足语境、输出格式和视觉要求。\n\n\n\n5\n\n生成 PPT 初稿\n用 Gamma、PPT 工具或其他 AI 工具生成初稿，但只把它当作可修改的草稿。\n\n\n\n6\n\n改排版和图片\n人继续检查页面逻辑、删掉多余文字、替换不准确或太“AI 味”的图片。\n\n\n\n7\n\n增加动画和演示节奏\n最后再做动画、转场和讲述节奏。动画服务理解，不负责掩盖内容问题。\n\n\n\n\n\n\n\n\n\n\n\n\n\n步骤\n人先完成什么\nAI 适合帮什么\n交付物\n\n\n\n\n1. 查资料\n找资料、记来源、判断可信度\n摘要、分类、列出争议点\n资料笔记\n\n\n2. 写大纲\n确定主题、观点、讲述顺序\n检查逻辑缺口\n人写的大纲\n\n\n3. 写细纲\n拆分每页内容和例子\n补充案例、压缩表达\n每页细纲\n\n\n4. 润色 prompt\n写清受众、约束、风格\n把细纲改成可执行提示词\n生成 PPT 的 prompt\n\n\n5. 生成初稿\n选择工具和模板方向\n生成页面草稿\nPPT 初稿\n\n\n6. 改排版图片\n判断准确性和审美\n给出排版/配图修改建议\n可展示版本\n\n\n7. 加动画\n决定演示节奏\n优化动画顺序和讲稿\n最终演示稿"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#每一步可以这样让-ai-参与",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#每一步可以这样让-ai-参与",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#每一步可以这样让-ai-参与",
+    "href": "docs/blog/posts/2026-05-29/index.html#每一步可以这样让-ai-参与",
     "title": "提示词工程中的语用学",
     "section": "每一步可以这样让 AI 参与",
     "text": "每一步可以这样让 AI 参与\n下面把这次选题真的走一遍。每一步默认折叠，展开后能看到类似 proposal.docx / prompt.docx 那种阶段性草稿：先是人的想法，再是 AI 帮忙整理后的版本。\n\n第一步：查资料\n先自己收集材料和案例。这里的重点不是让 AI 搜一遍，而是先判断哪些东西能支撑你的展示。\n\n我正在准备一个课堂展示，主题是：[主题]。\n下面是我自己查到的资料和链接/笔记：\n[贴资料]\n\n请不要替我决定最终观点。请帮我做三件事：\n1. 按主题相关性整理资料\n2. 标出哪些内容需要进一步核验\n3. 提醒我哪些材料适合放进 PPT，哪些只适合作为背景理解\n\n\n\n\n\n\n\nNote实战成果：这一步做完会得到什么？\n\n\n\n\n\n人的输入： 我先把能用的材料记成很粗的素材池：\n\n理论：Grice 合作原则，四个准则分别是 Quality / Relevance / Quantity / Manner。\n引入案例：文字排版前后对比，配图 prompt 前后对比。\n翻车案例：隧道上为什么修山；Green 公式被理解成绿色公式。\n视觉案例：滑雪图片，从“画一张滑雪图”到高细节 prompt。\n总结方向：语言演化，生物语言、人类语言、硅基语言。\n\nAI/工具参与： AI 不替我决定主题，只帮我把素材分组，提醒哪些适合放进 PPT，哪些只适合作为背景。\n阶段成果：\n\n\n\n\n\n\n\n\n素材组\n可以放进 PPT 的内容\n用途\n\n\n\n\n引入\n文字堆叠 vs 结构化排版；普通图片 vs 高细节图片\n让听众先看到差异\n\n\n理论\n共同语境、先验概率、Grice 四准则\n解释为什么 prompt 有用\n\n\n案例\n隧道修山、Green 公式、滑雪图、PPT 美化\n把理论落到具体错误\n\n\n工作流\n查资料、写大纲、写细纲、润色 prompt、生成、修改、动画\n教大家怎么做\n\n\n\n实际项目里，我还会把材料和素材文件对应起来：\n\n\n\n文件/素材\n内容\n放到哪一步\n\n\n\n\nproposal.docx\n最早的逐页想法和案例安排\n写大纲\n\n\nprompt.docx\n更完整的逐页讲述稿\n写细纲\n\n\npre.pptx\n最终 PPT 版本\n生成和修改\n\n\n1.png / 2.png\n滑雪图片低维 prompt vs 高维 prompt\n量的准则\n\n\n3.png / 4.png\nPPT 页面改版前后\n排版优化\n\n\n5.png\n隧道修山问题的回答截图\n质的准则\n\n\n6.png / 7.png\nGreen 公式误解与修正\n关系准则\n\n\n8.png / 9.png\n建筑图普通 prompt vs 具体场景 prompt\n配图优化\n\n\n\n\n\n\n\n\n第二步：写大纲\n大纲先由你写。AI 在这里更像评审：帮你发现逻辑跳跃、主题偏移和信息过载。\n\n这是我自己写的 PPT 大纲：\n[贴大纲]\n\n请从课堂展示的角度评审它。\n重点检查：\n- 逻辑顺序是否自然\n- 是否有概念跳跃\n- 哪些页面信息太散\n- 哪些地方需要案例\n- 哪一页最可能让听众困惑\n\n请先指出问题，不要直接替我重写。最后给出 3 条修改建议。\n\n\n\n\n\n\n\nNote实战成果：这一步做完会得到什么？\n\n\n\n\n\n人的输入： 我先写一个很像 proposal.docx 的粗大纲：\nSlide 1: 主题\n提示词工程中的语用学——如何用 AI 提高你做 PPT 的效率\n\nSlide 2: 引入\n案例 1：文字和排版，一行行文字堆积 vs 结构清晰的要点简述。\n案例 2：图片/背景图，随口一句指令 vs 加入光影、构图、材质参数。\n总结：背后是提示词工程。\n\nSlide 3: 与 AI 对话 vs 与人类对话\n人类有共同语境，AI 没有具体生活经验。\n提示词工程就是手动为 AI 注入先验概率。\n\nSlide 4: Cooperative Principle\nQuality, Relevance, Quantity, Manner.\n\nSlide 5-8: 四个准则和案例\n质：隧道修山；关系：Green 公式；量：滑雪图和 PPT 美化；方式：圈内黑话。\n\nSlide 9: 实操展示\n用上面的准则生成、排版、修改 PPT。\n\nSlide 10-11: 总结\n语言演化的三个纪元；技术和语言的共生演化。\n\nSlide 12: Reference\n列出参考资料链接。\n\nSlide 13: Thanks\n结束页，放个人网站或致谢。\nAI/工具参与： AI 只做评审：指出 Slide 10-11 可能太宏观，应该压缩；Slide 9 最好不要只说“实操展示”，而要展开成具体步骤。\n阶段成果： 得到一个顺序更清楚的大纲：先用效果对比抓住注意力，再讲语用学理论，最后进入 PPT 工作流。\n\n\n\n\n\n第三步：写细纲\n把大纲拆到每一页。每页只回答一个问题：这一页要让听众记住什么？\n\n下面是我修改后的 PPT 细纲：\n[贴每页细纲]\n\n请基于这个细纲，为每一页补充：\n- 页面标题：不超过 14 个字\n- 页面正文：不超过 3 个要点\n- 讲述提示：80-120 字\n- 视觉建议：图表、流程图、对比图或案例截图\n\n要求：\n- 不要新增我没有提到的核心论点\n- 如果你补充案例，请标明它只是建议，需要我核验\n- 页面上不要堆长段文字，把解释放到讲述提示里\n\n\n\n\n\n\n\nNote实战成果：这一步做完会得到什么？\n\n\n\n\n\n人的输入： 我把大纲进一步写成 prompt.docx 那种逐页细纲：\nSlide 2: 鲜明对比：魔法背后的秘密\n反面：丢给 AI 一段话，得到满屏密集文字。\n正面：结构清晰的要点简述、图文并茂的排版。\n核心问题：决定 AI 产出质量差距的是什么？\n\nSlide 3: 认知对齐：与 AI 对话 vs 与人类对话\n人类沟通依赖共同语境和常识。\nAI 没有肉身、情绪和课堂经历，只能从输入中猜。\n核心论点：提示词工程是在为 AI 注入先验概率。\n\nSlide 4: Recap: Cooperative Principle\nMaxim of Quality, Maxim of Relevance, Maxim of Quantity, Maxim of Manner.\n作用：把课堂里的语用学概念接到 AI prompt 上。\n\nSlide 5: 质的准则\n案例：问 AI “为什么隧道上通常会修建一座山？”\n问题：如果问题前提不清，AI 可能顺着错误前提解释。\n结论：把 AI 当工具，而不是权威；先检查问题是否成立。\n\nSlide 6: 关系准则\n案例：生成一张 Green 公式图片。\n问题：AI 可能理解成绿色公式。\n结论：不要把局部语境当成 AI 默认知道的常识。\n\nSlide 7: 量的准则\n低维 prompt：“画一张滑雪的图片。”\n高维 prompt：主体、动作、环境、光线、构图全部写清楚。\nPPT 排版同理：把“高级一点”拆成具体版式要求。\n\nSlide 8: 方式准则\n案例：non-trivial、老鼠尾巴、萝卜熟了这类圈内表达。\n问题：圈内人听得懂，AI 可能按字面理解。\n结论：prompt 里要解释缩写、黑话和隐含语气。\n\nSlide 9: 工作流展示\n展示怎样从资料、大纲、细纲，到 AI 润色 prompt，再生成和修改 PPT。\n\nSlide 10: 宏观视角\n生物语言、人类语言、硅基语言。\n共性：用有限符号组合出无限可能。\n\nSlide 11: 共生演化\n技术离不开语言的定义，语言也随着技术扩展边界。\n\nSlide 12-13: Reference / Thanks\n收束展示。\nAI/工具参与： AI 帮我检查每页是不是只有一个中心观点，并把“页面文字”和“讲稿解释”分开。\n阶段成果： 每一页都有标题、案例、结论。后面做 PPT 时不再是把资料整段复制进去，而是按页组织表达。\n\n\n\n\n\n第四步：AI 润色成 prompt\n如果要用 Gamma 或类似工具，可以让 AI 把你的细纲改写成更适合生成 PPT 的 prompt。\n\n请把我的 PPT 细纲整理成一个适合输入到 PPT 生成工具的 prompt。\n要求：\n- 保留我的主题、观点和页面顺序\n- 每页只保留一个中心观点\n- 明确页面标题、正文密度、视觉形式和风格\n- 风格为清晰、克制、适合课堂展示\n- 不要为了好看牺牲概念准确性\n\n\n\n\n\n\n\nNote实战成果：这一步做完会得到什么？\n\n\n\n\n\n人的输入： 我把上面的细纲、受众、展示时长、视觉风格交给 AI。\nAI/工具参与： AI 把“人看的细纲”改成“工具能执行的 prompt”，像这样：\n阶段成果：\n请生成一份 8-10 页课堂展示 PPT，主题是“提示词工程中的语用学——如何用 AI 提高你做 PPT 的效率”。\n\n内容顺序：\n1. 用 PPT 排版前后对比和图片 prompt 前后对比引入。\n2. 解释 AI 缺少共同语境，因此提示词需要补足先验概率。\n3. 用 Grice 四准则作为诊断框架。\n4. 每个准则配一个案例：隧道修山、Green 公式、滑雪图片、圈内黑话。\n5. 展示一个人先写大纲、AI 再补充优化的 PPT 工作流。\n\n页面要求：\n- 每页只保留一个中心观点。\n- 页面文字少，讲稿解释多。\n- 可以使用流程图、对比图、卡片式布局。\n- 不要新增未经核验的事实。\n- 风格清晰、克制、适合课堂展示。\n同时把图片和页面修改也写成单独 prompt，避免“高级一点”这种空话：\n图片 prompt 示例：\n男性双板滑雪者，身着鲜艳红色连体滑雪套装，搭配白色安全头盔、橙色镜片滑雪护目镜、黑色防滑手套，背负双肩背包，手持滑雪杖在厚雪陡坡上高速滑行，雪雾飞溅，背景是晴朗湛蓝天空下的巍峨雪山，明亮自然日光，高清超写实，动感张力构图。\n\n页面改版 prompt 示例：\n将这张 PPT 页面重设计为现代化科技风信息图表，采用蓝绿色渐变配色与极简商务风格，以白色背景和卡片式布局呈现；将右侧大段文字拆分为“网络覆盖率、数字化、电子商务、数字农业”四个独立模块，保留全部中文内容并突出关键数据。\n\n\n\n\n\n第五步：生成 PPT 初稿\n把结构化 prompt 放进 Gamma 或其他 PPT 工具，先得到一个可修改的初稿。不要期待它一步到位。\n\n请根据上面的结构化 prompt 生成 PPT 初稿。\n重点：\n- 保留页面顺序\n- 每页只放一个中心观点\n- 不要自动添加未经核验的事实\n- 如果需要图片，用占位建议，不要编造来源\n\n\n\n第六步：改排版和图片\n生成 PPT 初稿后，AI 更适合做“设计助理”：指出哪里太挤、哪里图片不贴切、哪里可以改成图示。注意，这一步不是让 AI 改观点，而是让它帮你改善呈现。\n\n下面是我生成后的 PPT 页面内容/截图说明：\n[贴每页内容或截图描述]\n\n请帮我给出排版和配图修改建议：\n1. 哪些页面文字太多，需要拆分或压缩？\n2. 哪些页面适合改成流程图、对比图、表格或时间线？\n3. 哪些配图太泛、太“AI 味”，应该替换成什么类型的图？\n4. 每页保留一个最重要的修改建议，不要重新改我的论点。\n\n\n\n第七步：动画顺序和讲稿优化\n最后再处理演示节奏。动画不是装饰，讲稿也不是逐字念 PPT；两者都应该服务听众对逻辑的理解。\n\n下面是我的 PPT 页标题和每页核心内容：\n[贴页面列表]\n\n请帮我设计演示节奏：\n- 每页建议的出现顺序\n- 哪些要点适合逐条出现\n- 哪些页面不需要动画\n- 每页讲稿中需要补充解释、停顿或强调的位置\n- 哪些讲稿表达可以压缩得更自然\n- 哪些转场可能显得多余\n\n要求：动画要服务理解，不要为了炫技增加复杂效果。"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#发布前检查表",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#发布前检查表",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#发布前检查表",
+    "href": "docs/blog/posts/2026-05-29/index.html#发布前检查表",
     "title": "提示词工程中的语用学",
     "section": "发布前检查表",
     "text": "发布前检查表\n\n\n资料是否由你自己读过，并且知道每个关键观点来自哪里？\n大纲是否先由你自己写出，而不是完全由 AI 生成？\n每一页是否只有一个主要观点？\n关键概念是否给了足够语境？\nAI 补充的事实、案例和图片是否已经人工核验？\n页面文字是否可以继续压缩？\n视觉建议是否服务内容，而不是只负责好看？\n配图是否具体、准确，避免只有“AI 味”的装饰图？\n讲稿是否解释了页面上没有写出来的逻辑？\n动画顺序和讲稿是否帮助听众理解，而不是单纯炫技或照读页面？\n是否把圈内话、缩写和容易误解的词解释清楚？\n最后一轮是否由你决定修改取舍，而不是全盘接受 AI 建议？"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#结语语言不是包装而是控制接口",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#结语语言不是包装而是控制接口",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#结语语言不是包装而是控制接口",
+    "href": "docs/blog/posts/2026-05-29/index.html#结语语言不是包装而是控制接口",
     "title": "提示词工程中的语用学",
     "section": "结语：语言不是包装，而是控制接口",
     "text": "结语：语言不是包装，而是控制接口\n如果把视野拉远一点，语言一直都是人类理解世界、改变世界的接口。生物语言用 A、T、C、G 编码生命；人类语言用有限的词汇组合出思想和文明；今天的 AI 让自然语言又多了一种角色：它开始成为我们调动机器能力的指令系统。\n这也是为什么语用学在 AI 时代并没有过时。恰恰相反，当我们和一个没有肉身、没有课堂经历、没有共同生活经验的系统协作时，“语境”变得更重要了。\n但语境不是凭空出现的。它来自人的阅读、判断、取舍和表达意图。提示词工程的本质，不是背模板，也不是让 AI 替你完成思考，而是把你已经形成的思考设计成清楚的协作语境。你想得越清楚，AI 才越能成为一个可校准、可检查、可迭代的 PPT 合作者。"
   },
   {
-    "objectID": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#reference",
-    "href": "docs/blog/posts/2026-05-29-prompt-engineering-pragmatics/index.html#reference",
+    "objectID": "docs/blog/posts/2026-05-29/index.html#reference",
+    "href": "docs/blog/posts/2026-05-29/index.html#reference",
     "title": "提示词工程中的语用学",
     "section": "Reference",
     "text": "Reference\n\nhttps://acnll7zntynp.feishu.cn/wiki/QPiOw9B8NiZRslkcz8UcYzmtnlh/\nhttps://www.bilibili.com/video/BV1kvXzBjEZA/\nhttps://www.bilibili.com/video/BV1ES4y1T7S6/\nhttps://www.youtube.com/watch?v=8z5-IlHYZCY/\nhttps://www.bilibili.com/video/BV1cp4FzQEsu/"
