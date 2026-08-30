@@ -49,42 +49,6 @@ Notes, projects, and things I am learning along the way.
 :::
 
 ::: {.home-shell .home-main}
-::: {.section-heading}
-
-<p class="section-kicker">EXPLORE</p>
-
-## Start here
-
-Explore the site through two paths: structured notes for ideas worth keeping and a blog for everything still taking shape.
-
-:::
-
-::: {.primary-card-grid}
-::: {.home-card .home-card-featured}
-
-<span class="card-number">01</span>
-
-### [Notes](docs/notes/0.qmd)
-
-Long-form notes organized by subject, built to connect ideas and remain useful over time. New topics appear as my interests evolve.
-
-[Explore the knowledge base <span aria-hidden="true">→</span>](docs/notes/0.qmd){.card-link}
-
-:::
-
-::: {.home-card}
-
-<span class="card-number">02</span>
-
-### [Blog](docs/blog/index.qmd)
-
-Essays, observations, experiments, and project logs about whatever I am currently exploring or creating.
-
-[View all posts <span aria-hidden="true">→</span>](docs/blog/index.qmd){.card-link}
-
-:::
-:::
-
 ::: {.topic-section}
 ::: {.section-heading .section-heading-compact}
 
