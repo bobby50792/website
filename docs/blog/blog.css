@@ -2,11 +2,11 @@
 
 #title-block-header {
   margin: 0;
-  padding: clamp(3rem, 4.5vw, 4.25rem) 0 clamp(2.5rem, 4vw, 3.5rem);
+  padding: clamp(2.75rem, 4vw, 3.75rem) 0;
   border-bottom: 1px solid var(--bs-border-color);
   background:
-    radial-gradient(circle at 76% 8%, color-mix(in srgb, var(--bs-primary) 10%, transparent), transparent 25%),
-    linear-gradient(180deg, color-mix(in srgb, var(--bs-body-bg) 94%, var(--bs-primary)), var(--bs-body-bg));
+    radial-gradient(circle at 76% 0%, color-mix(in srgb, var(--bs-primary) 9%, transparent), transparent 28%),
+    linear-gradient(110deg, color-mix(in srgb, var(--bs-body-bg) 97%, var(--bs-primary)), var(--bs-body-bg));
 }
 
 #title-block-header .quarto-title,
@@ -19,33 +19,54 @@
   background: transparent;
 }
 
+#title-block-header .quarto-title {
+  display: grid;
+  grid-template-columns: minmax(210px, 280px) minmax(0, 620px);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+
 #title-block-header h1.title {
+  display: inline-block;
   max-width: 12ch;
-  margin: 0 0 0.5rem;
-  font-family: "Newsreader", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
-  font-size: clamp(3.75rem, 6vw, 5.5rem);
-  font-weight: 600;
+  margin: 0;
+  color: var(--bs-primary);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--bs-body-color) 72%, var(--bs-primary)) 8%,
+    var(--bs-primary) 92%
+  );
+  background-clip: text;
+  font-family: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", sans-serif;
+  font-size: clamp(3.75rem, 5vw, 4.85rem);
+  font-style: normal;
+  font-weight: 700;
   letter-spacing: -0.055em;
-  line-height: 0.94;
+  line-height: 0.9;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 #title-block-header .subtitle {
-  max-width: 620px;
+  max-width: 38rem;
   margin: 0;
+  padding: 0;
+  border: 0;
   color: var(--bs-secondary-color);
   font-family: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", sans-serif;
-  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
   line-height: 1.55;
 }
 
 main.content {
-  padding-top: clamp(2.75rem, 4vw, 3.75rem);
+  padding-top: clamp(2.25rem, 3vw, 3rem);
   padding-bottom: clamp(5rem, 9vw, 8rem);
 }
 
 .blog-section-header {
   max-width: 720px;
-  margin-bottom: clamp(1.75rem, 3vw, 2.35rem);
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
 }
 
 .blog-kicker {
@@ -60,7 +81,7 @@ main.content {
   margin: 0 0 0.6rem;
   border: 0;
   font-family: "Newsreader", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
-  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-size: clamp(1.95rem, 2.6vw, 2.45rem);
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.05;
@@ -74,7 +95,7 @@ main.content {
 }
 
 #quarto-margin-sidebar {
-  padding-left: 1.25rem;
+  padding: 0.35rem 0 0 1.25rem;
   border-left: 1px solid var(--bs-border-color);
 }
 
@@ -84,12 +105,13 @@ main.content {
 
 #listing-listing .quarto-post {
   display: grid;
-  grid-template-columns: 108px minmax(0, 1fr) 210px;
+  grid-template-columns: 108px minmax(0, 34rem) clamp(240px, 26vw, 280px);
   grid-template-areas: "metadata body thumbnail";
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  justify-content: space-between;
+  column-gap: clamp(2rem, 4vw, 4rem);
   align-items: start;
   margin: 0;
-  padding: clamp(2rem, 4vw, 3rem) 0;
+  padding: clamp(1.5rem, 2.5vw, 1.85rem) 0;
   border-bottom: 1px solid var(--bs-border-color);
 }
 
@@ -97,28 +119,37 @@ main.content {
   grid-area: metadata;
   width: auto;
   margin: 0;
+  padding: 0;
+  justify-self: start;
+}
+
+#listing-listing .quarto-post .metadata > a {
+  display: block;
 }
 
 #listing-listing .quarto-post .listing-date {
   color: var(--bs-secondary-color);
   font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 #listing-listing .quarto-post .body {
   grid-area: body;
+  width: 100%;
+  padding: 0;
+  justify-self: start;
 }
 
 #listing-listing .quarto-post .listing-title {
-  margin: -0.2rem 0 0.45rem;
+  margin: 0 0 0.35rem;
   font-family: "Newsreader", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
-  font-size: clamp(1.65rem, 2.5vw, 2.15rem);
+  font-size: clamp(1.6rem, 2.2vw, 1.95rem);
   font-weight: 600;
   letter-spacing: -0.025em;
-  line-height: 1.18;
+  line-height: 1.14;
 }
 
 #listing-listing .quarto-post .listing-title a {
@@ -132,9 +163,9 @@ main.content {
 }
 
 #listing-listing .listing-subtitle {
-  margin-bottom: 0.8rem;
-  color: var(--bs-secondary-color);
-  font-size: 0.98rem;
+  margin-bottom: 0;
+  color: color-mix(in srgb, var(--bs-body-color) 74%, var(--bs-body-bg));
+  font-size: 0.96rem;
   line-height: 1.55;
 }
 
@@ -146,7 +177,7 @@ main.content {
 
 #listing-listing .listing-description {
   max-width: 58ch;
-  margin-top: 1rem;
+  margin: 0.7rem 0 0;
   color: var(--bs-secondary-color);
   font-size: 0.93rem;
   line-height: 1.7;
@@ -156,7 +187,8 @@ main.content {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-top: 0.75rem;
+  margin-top: 0.55rem;
+  padding-bottom: 0;
 }
 
 #listing-listing .listing-category,
@@ -176,8 +208,10 @@ main.content {
   width: 100%;
   margin: 0;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--bs-border-color) 72%, transparent);
+  border-radius: 0.9rem;
   background: color-mix(in srgb, var(--bs-body-color) 5%, var(--bs-body-bg));
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--bs-body-color) 8%, transparent);
 }
 
 #listing-listing .quarto-post .thumbnail-image {
@@ -194,10 +228,9 @@ main.content {
 .quarto-listing-category-title {
   margin: 0 0 0.75rem;
   font-family: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", sans-serif;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .quarto-listing-category.category-default {
@@ -217,24 +250,35 @@ main.content {
 
 @media (max-width: 900px) {
   #listing-listing .quarto-post {
-    grid-template-columns: 88px minmax(0, 1fr) 170px;
+    grid-template-columns: 88px minmax(0, 1fr) 190px;
+    grid-template-areas: "metadata body thumbnail";
+    column-gap: 2rem;
   }
 }
 
 @media (max-width: 700px) {
   #title-block-header {
-    padding-block: 2.75rem 2.4rem;
+    padding-block: 3rem 2.75rem;
+  }
+
+  #title-block-header .quarto-title {
+    display: block;
+  }
+
+  #title-block-header .subtitle {
+    max-width: 30rem;
+    margin-top: 1rem;
   }
 
   #listing-listing .quarto-post {
     grid-template-columns: 1fr 130px;
     grid-template-areas:
-      "body thumbnail"
-      "metadata thumbnail";
+      "metadata thumbnail"
+      "body thumbnail";
   }
 
   #listing-listing .quarto-post .metadata {
-    align-self: end;
+    align-self: start;
   }
 }
 

@@ -215,13 +215,6 @@ main.content {
   line-height: 1.75;
 }
 
-.primary-card-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 1.25rem;
-}
-
-.home-card,
 .topic-card {
   position: relative;
   border: 1px solid var(--home-border);
@@ -229,69 +222,38 @@ main.content {
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 
-.home-card {
-  min-height: 285px;
-  padding: clamp(1.6rem, 3vw, 2.5rem);
-  border-radius: 1rem;
-}
-
-.home-card > p:first-child,
 .topic-card > p:first-child,
 .recent-item > p:first-child {
   margin: 0;
 }
 
-.home-card-featured {
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--home-blue-soft) 70%, var(--home-surface)), var(--home-surface) 65%);
-}
-
-.home-card:hover,
 .topic-card:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--home-blue) 55%, var(--home-border));
   box-shadow: 0 18px 45px rgba(38, 81, 107, 0.1);
 }
 
-.card-number {
-  display: block;
-  margin-bottom: 3.25rem;
-  color: var(--home-blue);
-  font-family: var(--bs-font-monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-}
-
-.home-card h3,
 .topic-card h3,
 .recent-item h3 {
   margin: 0 0 0.8rem;
 }
 
-.home-card h3 {
-  font-size: 1.72rem;
-}
-
-.home-card h3 a,
 .topic-card h3 a,
 .recent-item h3 a {
   color: var(--home-ink);
   text-decoration: none;
 }
 
-.home-card h3 a:hover,
 .topic-card h3 a:hover,
 .recent-item h3 a:hover {
   color: var(--home-blue-deep);
 }
 
-.home-card > p:not(:last-child),
 .topic-card > p {
   color: var(--home-muted);
   line-height: 1.7;
 }
 
-.card-link,
 .text-link {
   display: inline-flex;
   min-height: 44px;
@@ -304,19 +266,10 @@ main.content {
   touch-action: manipulation;
 }
 
-.card-link {
-  margin-top: 1rem;
-}
-
-.card-link:hover,
 .text-link:hover {
   color: var(--home-blue);
   text-decoration: underline;
   text-underline-offset: 0.25em;
-}
-
-.topic-section {
-  padding-top: clamp(5rem, 9vw, 8rem);
 }
 
 .section-heading-compact {
@@ -473,17 +426,8 @@ nav.page-navigation {
     width: min(88%, 340px);
   }
 
-  .primary-card-grid,
   .recent-section {
     grid-template-columns: 1fr;
-  }
-
-  .home-card {
-    min-height: 0;
-  }
-
-  .card-number {
-    margin-bottom: 2rem;
   }
 
   .recent-section {
@@ -518,7 +462,6 @@ nav.page-navigation {
     transition-duration: 0.01ms !important;
   }
 
-  .home-card:hover,
   .topic-card:hover,
   .home-button:hover {
     transform: none;
