@@ -395,22 +395,18 @@ window.Quarto = {
 
 <style>
 .tutorial-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-  gap: 28px;
-  align-items: center;
   margin: 14px 0 34px;
-  padding: 28px;
-  border: 1px solid #d8e5e3;
+  padding: 24px;
+  border: 1px solid var(--bs-border-color);
   border-radius: 8px;
-  background: linear-gradient(135deg, #ffffff 0%, #eef8f5 100%);
+  background: var(--bs-tertiary-bg, var(--bs-body-bg));
 }
 
-.tutorial-hero h2 {
-  margin-top: 10px;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1.12;
-  letter-spacing: 0;
+.tutorial-hero > p {
+  margin: 0 0 20px;
+  color: var(--bs-body-color);
+  font-size: 1.08rem;
+  font-weight: 600;
 }
 
 .eyebrow {
@@ -573,21 +569,16 @@ window.Quarto = {
 
 .hero-contrast {
   display: grid;
-  gap: 14px;
-  padding: 18px;
-  border: 1px solid #ccdce7;
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.98)),
-    radial-gradient(circle at 18% 18%, rgba(216, 98, 74, 0.16), transparent 32%),
-    radial-gradient(circle at 82% 72%, rgba(45, 143, 133, 0.18), transparent 34%);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .contrast-card {
-  padding: 16px;
+  min-width: 0;
+  padding: 20px;
   border-radius: 8px;
-  border: 1px solid #dbe2ea;
-  background: #ffffff;
+  border: 1px solid var(--bs-border-color);
+  background: var(--bs-body-bg);
 }
 
 .contrast-card h3 {
@@ -602,27 +593,16 @@ window.Quarto = {
 
 .contrast-card li {
   margin: 6px 0;
-  color: #415161;
+  color: var(--bs-body-color);
   line-height: 1.55;
 }
 
 .contrast-card.bad {
   border-top: 4px solid #d8624a;
-  background: #fff8f5;
 }
 
 .contrast-card.good {
   border-top: 4px solid #2d8f85;
-  background: #f4fbf8;
-}
-
-.contrast-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
-  color: #0c6f63;
-  font-weight: 900;
 }
 
 .diagram-note {
@@ -689,9 +669,7 @@ window.Quarto = {
 <section id="ai-不应该替你思考而应该放大你的思考" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="ai-不应该替你思考而应该放大你的思考"><span class="header-section-number">1</span> AI 不应该替你思考，而应该放大你的思考</h2>
 <div class="tutorial-hero">
-<div>
 <p>先有人的判断，再有 AI 的效率。</p>
-</div>
 <div class="hero-contrast">
 <section id="把思考外包给-ai" class="level3 contrast-card bad" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="把思考外包给-ai"><span class="header-section-number">1.1</span> 把思考外包给 AI</h3>
@@ -701,9 +679,6 @@ window.Quarto = {
 <li>页面堆满文字</li>
 </ul>
 </section>
-<div class="contrast-arrow">
-<p>先有人的判断，再让 AI 加速</p>
-</div>
 <section id="带着框架和-ai-协作" class="level3 contrast-card good" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="带着框架和-ai-协作"><span class="header-section-number">1.2</span> 带着框架和 AI 协作</h3>
 <ul>
