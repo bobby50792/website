@@ -3,7 +3,6 @@ title: "Continuity of Functions"
 page-layout: article
 search: true
 number-offset: [2]
-number-sections: false
 
 crossref:
   chapters: true      

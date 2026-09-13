@@ -3,7 +3,6 @@ title: "Kinetic Theory of Gases"
 page-layout: article
 search: true
 number-offset: [13]
-number-sections: false
 
 crossref:
   chapters: true      

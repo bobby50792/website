@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">乐理基础复习</title>
+  <desc id="desc">节拍网格与旋律曲线，配有乐理基础、节奏读谱音程和声标题</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17212f"/>
+      <stop offset="1" stop-color="#263c43"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#efb366"/>
+      <stop offset="1" stop-color="#72c1ad"/>
+    </linearGradient>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M100 0H0V100" fill="none" stroke="#ffffff" stroke-opacity=".055" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <circle cx="1350" cy="170" r="330" fill="#d9704f" opacity=".1"/>
+  <circle cx="230" cy="860" r="390" fill="#72c1ad" opacity=".08"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M155 650 C255 650 260 520 370 520 S475 675 580 675 690 430 805 430 900 570 1015 570 1120 335 1245 335 1340 490 1450 490" stroke="#ffffff" stroke-opacity=".15" stroke-width="32"/>
+    <path d="M155 650 C255 650 260 520 370 520 S475 675 580 675 690 430 805 430 900 570 1015 570 1120 335 1245 335 1340 490 1450 490" stroke="url(#line)" stroke-width="12"/>
+  </g>
+  <g fill="#f7f3ea" font-family="IBM Plex Sans, Noto Sans SC, PingFang SC, sans-serif">
+    <text x="150" y="205" font-size="40" font-weight="600" letter-spacing="8">MUSIC THEORY</text>
+    <text x="150" y="350" font-size="100" font-weight="650">乐理基础</text>
+    <text x="150" y="440" font-size="48" font-weight="650">节奏 · 读谱 · 音程 · 和声</text>
+  </g>
+  <g transform="translate(1240 685)">
+    <circle cx="0" cy="0" r="145" fill="#f7f3ea"/>
+    <circle cx="0" cy="0" r="125" fill="none" stroke="#d9704f" stroke-width="5"/>
+    <text x="0" y="45" fill="#17212f" font-family="Georgia, serif" font-size="140" font-weight="700" text-anchor="middle">G</text>
+  </g>
+  <text x="150" y="875" fill="#c9d8d7" font-family="IBM Plex Sans, Noto Sans SC, PingFang SC, sans-serif" font-size="34" letter-spacing="2">BPM · RHYTHM · HARMONY · EAR TRAINING · COMPOSITION</text>
+</svg>

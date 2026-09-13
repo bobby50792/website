@@ -3,7 +3,6 @@ title: "Second Law of Thermodynamics"
 page-layout: article
 search: true
 number-offset: [14]
-number-sections: false
 
 crossref:
   chapters: true      

@@ -3,7 +3,6 @@ title: " Series of Functions and Power Series"
 page-layout: article
 search: true
 number-offset: [9]
-number-sections: false
 
 crossref:
   chapters: true      

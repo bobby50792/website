@@ -3,7 +3,6 @@ title: "Integrals with Parameters and Improper Integrals"
 page-layout: article
 search: true
 number-offset: [4]
-number-sections: false
 
 crossref:
   chapters: true      

@@ -3,7 +3,6 @@ title: "Rigid Body"
 page-layout: article
 search: true
 number-offset: [7]
-number-sections: false
 
 crossref:
   chapters: true      

@@ -3,7 +3,6 @@ title: "Generating Functions"
 page-layout: article
 search: true
 number-offset: [3]
-number-sections: false
 
 crossref:
   chapters: true      
@@ -581,4 +580,3 @@ $$
 
 where $C_r(z_0)$ is any positively oriented circle of radius $r$ centered at $z_0$ lying entirely within the domain of holomorphy. Consequently, this integral representation guarantees the uniqueness of the coefficients in the Laurent series.
 :::
-

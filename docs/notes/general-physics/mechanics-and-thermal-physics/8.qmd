@@ -3,7 +3,6 @@ title: "Oscillation"
 page-layout: article
 search: true
 number-offset: [8]
-number-sections: false
 
 crossref:
   chapters: true      

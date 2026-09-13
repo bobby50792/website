@@ -3,7 +3,6 @@ title: "Discrete Probability"
 page-layout: article
 search: true
 number-offset: [1]
-number-sections: false
 
 crossref:
   chapters: true      

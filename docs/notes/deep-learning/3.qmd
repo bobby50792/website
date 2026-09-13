@@ -3,7 +3,6 @@ title: "Generative Adversarial Network"
 page-layout: article
 search: true
 number-offset: [3]
-number-sections: false
 
 crossref:
   chapters: true      
@@ -223,4 +222,3 @@ crossref:
             * Ignore samples when $D$ make a correct output with high confidence ($z$ is too high)
             * Adaptive hinge loss margin $t$ to include sufficient training data
 :::
-
