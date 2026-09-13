@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-0eca03ff95c49e7ccfcbd89edae8cb03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-abc70f88d31dbb260fcc8507eb5d0bc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-0eca03ff95c49e7ccfcbd89edae8cb03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-593db7dcfba35752a8b7393e026e179e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -704,11 +704,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#markovs-inequality" id="toc-markovs-inequality" class="nav-link active" data-scroll-target="#markovs-inequality">Markov’s Inequality</a></li>
-  <li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality" class="nav-link" data-scroll-target="#chebyshevs-inequality">Chebyshev’s Inequality</a></li>
-  <li><a href="#chernoff-bounds" id="toc-chernoff-bounds" class="nav-link" data-scroll-target="#chernoff-bounds">Chernoff Bounds</a></li>
-  <li><a href="#hoeffdings-inequality-for-bounded-variable" id="toc-hoeffdings-inequality-for-bounded-variable" class="nav-link" data-scroll-target="#hoeffdings-inequality-for-bounded-variable">Hoeffding’s Inequality for Bounded Variable</a></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  <li><a href="#markovs-inequality" id="toc-markovs-inequality" class="nav-link active" data-scroll-target="#markovs-inequality"><span class="header-section-number">2.1</span> Markov’s Inequality</a></li>
+  <li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality" class="nav-link" data-scroll-target="#chebyshevs-inequality"><span class="header-section-number">2.2</span> Chebyshev’s Inequality</a></li>
+  <li><a href="#chernoff-bounds" id="toc-chernoff-bounds" class="nav-link" data-scroll-target="#chernoff-bounds"><span class="header-section-number">2.3</span> Chernoff Bounds</a></li>
+  <li><a href="#hoeffdings-inequality-for-bounded-variable" id="toc-hoeffdings-inequality-for-bounded-variable" class="nav-link" data-scroll-target="#hoeffdings-inequality-for-bounded-variable"><span class="header-section-number">2.4</span> Hoeffding’s Inequality for Bounded Variable</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">2.5</span> Appendix</a></li>
   </ul>
 </nav>
     </div>
@@ -735,8 +735,8 @@ window.Quarto = {
 </header>
 
 
-<section id="markovs-inequality" class="level2">
-<h2 class="anchored" data-anchor-id="markovs-inequality">Markov’s Inequality</h2>
+<section id="markovs-inequality" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="markovs-inequality"><span class="header-section-number">2.1</span> Markov’s Inequality</h2>
 <div id="thm-1" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.1 (Markov’s inequality)</strong></span> If <span class="math inline">\(X\)</span> is a non-negative random variable, i.e., <span class="math inline">\(\Pr[X \geq 0] = 1\)</span>, then for every <span class="math inline">\(a &gt; 0\)</span>,</p>
 <p><span class="math display">\[
@@ -771,8 +771,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="chebyshevs-inequality" class="level2">
-<h2 class="anchored" data-anchor-id="chebyshevs-inequality">Chebyshev’s Inequality</h2>
+<section id="chebyshevs-inequality" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="chebyshevs-inequality"><span class="header-section-number">2.2</span> Chebyshev’s Inequality</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -897,8 +897,8 @@ window.Quarto = {
 \]</span></p>
 </div>
 </section>
-<section id="chernoff-bounds" class="level2">
-<h2 class="anchored" data-anchor-id="chernoff-bounds">Chernoff Bounds</h2>
+<section id="chernoff-bounds" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="chernoff-bounds"><span class="header-section-number">2.3</span> Chernoff Bounds</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1014,8 +1014,8 @@ I_X(a) := \sup_{t \in \mathbb{R}} \left\{ ta - \log M_X(t) \right\},
 \]</span></p>
 </div>
 </section>
-<section id="hoeffdings-inequality-for-bounded-variable" class="level2">
-<h2 class="anchored" data-anchor-id="hoeffdings-inequality-for-bounded-variable">Hoeffding’s Inequality for Bounded Variable</h2>
+<section id="hoeffdings-inequality-for-bounded-variable" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="hoeffdings-inequality-for-bounded-variable"><span class="header-section-number">2.4</span> Hoeffding’s Inequality for Bounded Variable</h2>
 <div id="thm-12" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.12</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in <span class="math inline">\([l, u]\)</span> for some <span class="math inline">\(l \leq u\)</span>. Then for all <span class="math inline">\(t \in \mathbb{R}\)</span>,</p>
 <p><span class="math display">\[
@@ -1185,8 +1185,8 @@ Z_i := \mathbb{E}[f(X_1, \dots, X_n) \mid X_1, \dots, X_i].
 \]</span></p>
 </div>
 </section>
-<section id="appendix" class="level2">
-<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<section id="appendix" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="appendix"><span class="header-section-number">2.5</span> Appendix</h2>
 <div id="thm-22" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.22 (Paley–Zygmund inequality and anti-concentration)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable.</p>
 <ol type="1">

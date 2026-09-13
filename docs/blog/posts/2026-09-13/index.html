@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-13">
+<meta name="description" content="从节奏、读谱到和声、编曲的复习笔记。">
+
+<title>乐理基础 – Bobby</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-42a78bc315f5c3e6c43fbb43369e2080.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-593db7dcfba35752a8b7393e026e179e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../docs/notes/index.html"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../docs/blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bobby50792/website"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#节奏与时值" id="toc-节奏与时值" class="nav-link active" data-scroll-target="#节奏与时值"><span class="header-section-number">1</span> 节奏与时值</a>
+  <ul class="collapse">
+  <li><a href="#拍速度与拍号" id="toc-拍速度与拍号" class="nav-link" data-scroll-target="#拍速度与拍号"><span class="header-section-number">1.1</span> 拍、速度与拍号</a></li>
+  <li><a href="#音符附点延音线与休止" id="toc-音符附点延音线与休止" class="nav-link" data-scroll-target="#音符附点延音线与休止"><span class="header-section-number">1.2</span> 音符、附点、延音线与休止</a></li>
+  <li><a href="#时长计算" id="toc-时长计算" class="nav-link" data-scroll-target="#时长计算"><span class="header-section-number">1.3</span> 时长计算</a></li>
+  <li><a href="#细分三连音与切分" id="toc-细分三连音与切分" class="nav-link" data-scroll-target="#细分三连音与切分"><span class="header-section-number">1.4</span> 细分、三连音与切分</a></li>
+  </ul></li>
+  <li><a href="#音名与读谱" id="toc-音名与读谱" class="nav-link" data-scroll-target="#音名与读谱"><span class="header-section-number">2</span> 音名与读谱</a>
+  <ul class="collapse">
+  <li><a href="#键盘与音高" id="toc-键盘与音高" class="nav-link" data-scroll-target="#键盘与音高"><span class="header-section-number">2.1</span> 键盘与音高</a></li>
+  <li><a href="#五线谱的定位顺序" id="toc-五线谱的定位顺序" class="nav-link" data-scroll-target="#五线谱的定位顺序"><span class="header-section-number">2.2</span> 五线谱的定位顺序</a></li>
+  <li><a href="#升降记号与作用范围" id="toc-升降记号与作用范围" class="nav-link" data-scroll-target="#升降记号与作用范围"><span class="header-section-number">2.3</span> 升降记号与作用范围</a></li>
+  </ul></li>
+  <li><a href="#音程" id="toc-音程" class="nav-link" data-scroll-target="#音程"><span class="header-section-number">3</span> 音程</a>
+  <ul class="collapse">
+  <li><a href="#先算度数再算性质" id="toc-先算度数再算性质" class="nav-link" data-scroll-target="#先算度数再算性质"><span class="header-section-number">3.1</span> 先算度数，再算性质</a></li>
+  <li><a href="#音程转位" id="toc-音程转位" class="nav-link" data-scroll-target="#音程转位"><span class="header-section-number">3.2</span> 音程转位</a></li>
+  </ul></li>
+  <li><a href="#音阶调号与调性" id="toc-音阶调号与调性" class="nav-link" data-scroll-target="#音阶调号与调性"><span class="header-section-number">4</span> 音阶、调号与调性</a>
+  <ul class="collapse">
+  <li><a href="#大调与小调结构" id="toc-大调与小调结构" class="nav-link" data-scroll-target="#大调与小调结构"><span class="header-section-number">4.1</span> 大调与小调结构</a></li>
+  <li><a href="#级数关系调与同主音调" id="toc-级数关系调与同主音调" class="nav-link" data-scroll-target="#级数关系调与同主音调"><span class="header-section-number">4.2</span> 级数、关系调与同主音调</a></li>
+  <li><a href="#调号速查" id="toc-调号速查" class="nav-link" data-scroll-target="#调号速查"><span class="header-section-number">4.3</span> 调号速查</a></li>
+  </ul></li>
+  <li><a href="#和弦构造与转位" id="toc-和弦构造与转位" class="nav-link" data-scroll-target="#和弦构造与转位"><span class="header-section-number">5</span> 和弦构造与转位</a>
+  <ul class="collapse">
+  <li><a href="#三和弦" id="toc-三和弦" class="nav-link" data-scroll-target="#三和弦"><span class="header-section-number">5.1</span> 三和弦</a></li>
+  <li><a href="#七和弦" id="toc-七和弦" class="nav-link" data-scroll-target="#七和弦"><span class="header-section-number">5.2</span> 七和弦</a></li>
+  <li><a href="#根音最低音与转位" id="toc-根音最低音与转位" class="nav-link" data-scroll-target="#根音最低音与转位"><span class="header-section-number">5.3</span> 根音、最低音与转位</a></li>
+  </ul></li>
+  <li><a href="#功能和声" id="toc-功能和声" class="nav-link" data-scroll-target="#功能和声"><span class="header-section-number">6</span> 功能和声</a>
+  <ul class="collapse">
+  <li><a href="#大调调内和弦" id="toc-大调调内和弦" class="nav-link" data-scroll-target="#大调调内和弦"><span class="header-section-number">6.1</span> 大调调内和弦</a></li>
+  <li><a href="#属和弦与解决" id="toc-属和弦与解决" class="nav-link" data-scroll-target="#属和弦与解决"><span class="header-section-number">6.2</span> 属和弦与解决</a></li>
+  <li><a href="#终止式与和声节奏" id="toc-终止式与和声节奏" class="nav-link" data-scroll-target="#终止式与和声节奏"><span class="header-section-number">6.3</span> 终止式与和声节奏</a></li>
+  <li><a href="#次属和弦与短暂主音化" id="toc-次属和弦与短暂主音化" class="nav-link" data-scroll-target="#次属和弦与短暂主音化"><span class="header-section-number">6.4</span> 次属和弦与短暂主音化</a></li>
+  </ul></li>
+  <li><a href="#旋律低音与编曲" id="toc-旋律低音与编曲" class="nav-link" data-scroll-target="#旋律低音与编曲"><span class="header-section-number">7</span> 旋律、低音与编曲</a>
+  <ul class="collapse">
+  <li><a href="#和弦音与非和弦音" id="toc-和弦音与非和弦音" class="nav-link" data-scroll-target="#和弦音与非和弦音"><span class="header-section-number">7.1</span> 和弦音与非和弦音</a></li>
+  <li><a href="#动机与乐句" id="toc-动机与乐句" class="nav-link" data-scroll-target="#动机与乐句"><span class="header-section-number">7.2</span> 动机与乐句</a></li>
+  <li><a href="#低音声部连接与织体" id="toc-低音声部连接与织体" class="nav-link" data-scroll-target="#低音声部连接与织体"><span class="header-section-number">7.3</span> 低音、声部连接与织体</a></li>
+  </ul></li>
+  <li><a href="#分析与听写流程" id="toc-分析与听写流程" class="nav-link" data-scroll-target="#分析与听写流程"><span class="header-section-number">8</span> 分析与听写流程</a>
+  <ul class="collapse">
+  <li><a href="#分析一段音乐" id="toc-分析一段音乐" class="nav-link" data-scroll-target="#分析一段音乐"><span class="header-section-number">8.1</span> 分析一段音乐</a></li>
+  <li><a href="#听写一条旋律" id="toc-听写一条旋律" class="nav-link" data-scroll-target="#听写一条旋律"><span class="header-section-number">8.2</span> 听写一条旋律</a></li>
+  </ul></li>
+  <li><a href="#综合例题与自检" id="toc-综合例题与自检" class="nav-link" data-scroll-target="#综合例题与自检"><span class="header-section-number">9</span> 综合例题与自检</a>
+  <ul class="collapse">
+  <li><a href="#和声与低音综合分析" id="toc-和声与低音综合分析" class="nav-link" data-scroll-target="#和声与低音综合分析"><span class="header-section-number">9.1</span> 和声与低音综合分析</a></li>
+  <li><a href="#闭卷检查" id="toc-闭卷检查" class="nav-link" data-scroll-target="#闭卷检查"><span class="header-section-number">9.2</span> 闭卷检查</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">乐理基础</h1>
+<p class="subtitle lead">概念、公式与实例</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Music</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    从节奏、读谱到和声、编曲的复习笔记。
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 13, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>本文以十二平均律和大小调调性音乐为基础。复习顺序如下；前一项是后一项的计算或分析基础。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>顺序</th>
+<th>内容</th>
+<th>应能独立完成</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>节奏与时值</td>
+<td>根据拍号、速度标记计算音符及小节时长</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>音名与读谱</td>
+<td>从谱号、调号、临时记号确定实际音高</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>音程</td>
+<td>同时用字母跨度与半音数确定音程</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>音阶与调性</td>
+<td>构造大小调音阶，区分关系调与同主音调</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>和弦</td>
+<td>构造三和弦、七和弦，识别转位与低音</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>功能和声</td>
+<td>分析调内进行、终止式和次属和弦</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>旋律与编曲</td>
+<td>安排和弦音、非和弦音、动机与声部</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>分析与听写</td>
+<td>依次提取时间、音高和和声结构</td>
+</tr>
+</tbody>
+</table>
+<section id="节奏与时值" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="节奏与时值"><span class="header-section-number">1</span> 节奏与时值</h2>
+<section id="拍速度与拍号" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="拍速度与拍号"><span class="header-section-number">1.1</span> 拍、速度与拍号</h3>
+<p><strong>拍</strong>是组织节奏的周期性单位；<strong>节奏</strong>是起音、持续、休止与重音在时间中的安排。拍的层级强弱不要求每拍都实际奏出强弱变化。</p>
+<p>BPM 表示每分钟多少个指定单位。必须同时知道速度标记采用什么单位：</p>
+<ul>
+<li>四分音符 = 120：每分钟 120 个四分音符。</li>
+<li>附点四分音符 = 60：每分钟 60 个附点四分音符。</li>
+</ul>
+<p>若速度为每分钟 <span class="math inline">\(B\)</span> 个单位，则每单位时长为 <span class="math inline">\(60/B\)</span> 秒。速度可能改变；自由节奏段落也可能没有固定 BPM。</p>
+<p>拍号 <span class="math inline">\(x/y\)</span> 表示一小节含 <span class="math inline">\(x\)</span> 个 <span class="math inline">\(y\)</span> 分音符单位。<strong>分母单位与实际感受到的大拍可能不同。</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>拍号</th>
+<th>小节容量</th>
+<th>常见大拍组织</th>
+<th>每大拍内部</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2/4</td>
+<td>2 个四分音符</td>
+<td>2 拍</td>
+<td>二等分</td>
+</tr>
+<tr class="even">
+<td>3/4</td>
+<td>3 个四分音符</td>
+<td>3 拍</td>
+<td>二等分</td>
+</tr>
+<tr class="odd">
+<td>4/4</td>
+<td>4 个四分音符</td>
+<td>4 拍</td>
+<td>二等分</td>
+</tr>
+<tr class="even">
+<td>6/8</td>
+<td>6 个八分音符</td>
+<td>2 个附点四分音符大拍</td>
+<td>三等分</td>
+</tr>
+<tr class="odd">
+<td>9/8</td>
+<td>9 个八分音符</td>
+<td>3 个附点四分音符大拍</td>
+<td>三等分</td>
+</tr>
+<tr class="even">
+<td>12/8</td>
+<td>12 个八分音符</td>
+<td>4 个附点四分音符大拍</td>
+<td>三等分</td>
+</tr>
+</tbody>
+</table>
+<p>3/4 与 6/8 的小节总时值相同，但分组不同：</p>
+<pre class="text"><code>3/4： [1 &amp;] [2 &amp;] [3 &amp;]      2 + 2 + 2
+6/8： [1 la li] [2 la li]    3 + 3</code></pre>
+</section>
+<section id="音符附点延音线与休止" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="音符附点延音线与休止"><span class="header-section-number">1.2</span> 音符、附点、延音线与休止</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>音符</th>
+<th style="text-align: right;">全音符的比例</th>
+<th style="text-align: right;">以四分音符为一拍时</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>全音符</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4 拍</td>
+</tr>
+<tr class="even">
+<td>二分音符</td>
+<td style="text-align: right;">1/2</td>
+<td style="text-align: right;">2 拍</td>
+</tr>
+<tr class="odd">
+<td>四分音符</td>
+<td style="text-align: right;">1/4</td>
+<td style="text-align: right;">1 拍</td>
+</tr>
+<tr class="even">
+<td>八分音符</td>
+<td style="text-align: right;">1/8</td>
+<td style="text-align: right;">1/2 拍</td>
+</tr>
+<tr class="odd">
+<td>十六分音符</td>
+<td style="text-align: right;">1/16</td>
+<td style="text-align: right;">1/4 拍</td>
+</tr>
+<tr class="even">
+<td>三十二分音符</td>
+<td style="text-align: right;">1/32</td>
+<td style="text-align: right;">1/8 拍</td>
+</tr>
+</tbody>
+</table>
+<p>音符名称是比例，不是秒数。全音符也不恒等于一小节：它等于一个 4/4 小节，却超过一个 3/4 小节的容量。“一分音符”通常应称全音符；比全音符更长的标准时值有二全音符，不称“0.5 分音符”。</p>
+<ul>
+<li><strong>附点</strong>增加原时值的一半：附点四分音符 = 四分 + 八分 = 1.5 个四分音符。</li>
+<li><strong>双附点</strong>增加原时值的 <span class="math inline">\(1/2+1/4\)</span>，总长为原来的 <span class="math inline">\(7/4\)</span>。</li>
+<li><strong>延音线（tie）</strong>连接同音高音符，只起音一次，时值相加，可跨小节。</li>
+<li><strong>连音线（slur）</strong>标示连贯奏法或分句，不把多个音合成一个起音。</li>
+<li><strong>休止符</strong>占用时间而不发声。整小节休止常用全休止符表示，即使拍号不是 4/4。</li>
+</ul>
+<p>普通完整小节内，各时值之和必须等于小节容量；弱起小节可以不满。</p>
+</section>
+<section id="时长计算" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="时长计算"><span class="header-section-number">1.3</span> 时长计算</h3>
+<p>设一个速度单位占全音符的比例为 <span class="math inline">\(u\)</span>，目标音符占比为 <span class="math inline">\(v\)</span>，速度为 <span class="math inline">\(B\)</span>：</p>
+<p><span class="math display">\[
+t_{\text{音符}}=\frac{v}{u}\frac{60}{B},
+\qquad
+t_{\text{小节}}=\frac{x/y}{u}\frac{60}{B}.
+\]</span></p>
+<p>若以四分音符计速，<span class="math inline">\(u=1/4\)</span>；一个普通 <span class="math inline">\(n\)</span> 分音符的时长为：</p>
+<p><span class="math display">\[
+t_n=\frac{4}{n}\frac{60}{B}.
+\]</span></p>
+<p>例：4/4、四分音符 = 120。八分音符长 <span class="math inline">\(0.25\)</span> 秒，附点四分音符长 <span class="math inline">\(0.75\)</span> 秒，一小节长 <span class="math inline">\(2\)</span> 秒。</p>
+<p>例：6/8、附点四分音符 = 60。每大拍长 <span class="math inline">\(1\)</span> 秒，每个八分音符长 <span class="math inline">\(1/3\)</span> 秒，一小节长 <span class="math inline">\(2\)</span> 秒。若改为八分音符 = 60，同一小节就长 <span class="math inline">\(6\)</span> 秒。</p>
+</section>
+<section id="细分三连音与切分" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="细分三连音与切分"><span class="header-section-number">1.4</span> 细分、三连音与切分</h3>
+<p>以四分音符为一拍：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>组织</th>
+<th>一拍内的分割</th>
+<th style="text-align: right;">每个单位占拍数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>直八分</td>
+<td>2 等份</td>
+<td style="text-align: right;">1/2</td>
+</tr>
+<tr class="even">
+<td>十六分</td>
+<td>4 等份</td>
+<td style="text-align: right;">1/4</td>
+</tr>
+<tr class="odd">
+<td>八分三连音</td>
+<td>通常容纳 2 个八分的位置改为 3 个</td>
+<td style="text-align: right;">1/3</td>
+</tr>
+</tbody>
+</table>
+<p>三连音是 <strong>3:2 的时值替代</strong>，不限定只能占一拍。例如三个四分三连音合计占两个普通四分音符的时值。</p>
+<p>摇摆八分把一对八分处理为长短不等，常用约 2:1 作入门示范；实际比例随速度与风格变化，不能固定等同于三连音。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>术语</th>
+<th>判断依据</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>正拍</td>
+<td>起音落在所选拍点上</td>
+</tr>
+<tr class="even">
+<td>反拍 offbeat</td>
+<td>起音落在拍间位置，如“1 和”中的“和”</td>
+</tr>
+<tr class="odd">
+<td>Backbeat</td>
+<td>4/4 中突出第 2、4 拍，常由军鼓承担</td>
+</tr>
+<tr class="even">
+<td>切分 syncopation</td>
+<td>弱位置被强调，或起音后跨过强位置而不重新起音</td>
+</tr>
+</tbody>
+</table>
+<p>音符密度、BPM、音游流速分别描述起音数量、时间单位速度和画面移动速度，不能互相替代。</p>
+</section>
+</section>
+<section id="音名与读谱" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="音名与读谱"><span class="header-section-number">2</span> 音名与读谱</h2>
+<section id="键盘与音高" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="键盘与音高"><span class="header-section-number">2.1</span> 键盘与音高</h3>
+<p>白键循环为 C–D–E–F–G–A–B。C 位于两枚黑键组紧邻左侧。<strong>E–F、B–C 是半音，其余相邻白键间是全音</strong>；包括黑键在内，任意相邻琴键相差半音。</p>
+<p>八度包含 12 个半音，频率比为 2:1。十二平均律中，相差 <span class="math inline">\(n\)</span> 个半音的频率比为 <span class="math inline">\(2^{n/12}\)</span>。以 A4 = 440 Hz 为参照：</p>
+<p><span class="math display">\[
+f=440\times2^{n/12}.
+\]</span></p>
+<p>音名 C 没有指定八度；科学音高记法 C4 表示中央 C，C5 比 C4 高一个八度。</p>
+</section>
+<section id="五线谱的定位顺序" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="五线谱的定位顺序"><span class="header-section-number">2.2</span> 五线谱的定位顺序</h3>
+<p>五线谱的线与间交替表示连续字母音名，超出谱表使用加线。从下往上：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>谱号</th>
+<th>五条线</th>
+<th>四个间</th>
+<th>定位点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>高音谱号 G 谱号</td>
+<td>E4 G4 B4 D5 F5</td>
+<td>F4 A4 C5 E5</td>
+<td>第二线是 G4</td>
+</tr>
+<tr class="even">
+<td>低音谱号 F 谱号</td>
+<td>G2 B2 D3 F3 A3</td>
+<td>A2 C3 E3 G3</td>
+<td>第四线是 F3</td>
+</tr>
+</tbody>
+</table>
+<p>读一个音按以下顺序：</p>
+<ol type="1">
+<li>谱号与位置确定字母、八度。</li>
+<li>调号确定默认升降。</li>
+<li>当前有效的临时记号覆盖默认值。</li>
+<li>音符形状、附点与延音线确定时值。</li>
+</ol>
+</section>
+<section id="升降记号与作用范围" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="升降记号与作用范围"><span class="header-section-number">2.3</span> 升降记号与作用范围</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>记号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>♯</td>
+<td>比该自然音高半音</td>
+</tr>
+<tr class="even">
+<td>♭</td>
+<td>比该自然音低半音</td>
+</tr>
+<tr class="odd">
+<td>♮</td>
+<td>恢复该字母的自然音</td>
+</tr>
+<tr class="even">
+<td>重升、重降</td>
+<td>比自然音高或低两个半音</td>
+</tr>
+</tbody>
+</table>
+<p>还原号不是“退回调号”：G 大调中的 F♮ 要弹 F，自然音取代调号中的 F♯。</p>
+<p>临时记号通常作用于同一小节、同一谱表内同字母且同八度的后续音；小节线后恢复调号默认值。跨小节延音线连接的音保持原音高，但不使下一小节所有同名音自动沿用这个临时记号。调号则作用于相应字母的所有八度。</p>
+<p>十二平均律中 C♯ 与 D♭同音高，称等音异名。拼写仍影响音程和和弦分析。</p>
+</section>
+</section>
+<section id="音程" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="音程"><span class="header-section-number">3</span> 音程</h2>
+<section id="先算度数再算性质" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="先算度数再算性质"><span class="header-section-number">3.1</span> 先算度数，再算性质</h3>
+<p>音程有两个信息：<strong>字母跨度决定度数，半音距离决定性质。</strong></p>
+<ol type="1">
+<li>连起点计数字母：C–D–E 是三度，C–D–E–F 是四度。</li>
+<li>数实际半音，确定大、小、纯、增、减。</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>度数</th>
+<th>常见性质与半音数</th>
+<th>从 C 向上的例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>一度</td>
+<td>纯 0</td>
+<td>C</td>
+</tr>
+<tr class="even">
+<td>二度</td>
+<td>小 1、大 2</td>
+<td>D♭、D</td>
+</tr>
+<tr class="odd">
+<td>三度</td>
+<td>小 3、大 4</td>
+<td>E♭、E</td>
+</tr>
+<tr class="even">
+<td>四度</td>
+<td>纯 5</td>
+<td>F</td>
+</tr>
+<tr class="odd">
+<td>五度</td>
+<td>纯 7</td>
+<td>G</td>
+</tr>
+<tr class="even">
+<td>六度</td>
+<td>小 8、大 9</td>
+<td>A♭、A</td>
+</tr>
+<tr class="odd">
+<td>七度</td>
+<td>小 10、大 11</td>
+<td>B♭、B</td>
+</tr>
+<tr class="even">
+<td>八度</td>
+<td>纯 12</td>
+<td>高八度 C</td>
+</tr>
+</tbody>
+</table>
+<p>一、四、五、八度以“纯”为基准；二、三、六、七度有“大、小”。纯音程增加半音为增，减少半音为减；大音程减半音为小，小音程再减半音为减，大音程增半音为增。</p>
+<p><strong>C–F♯ 是增四度，C–G♭ 是减五度。</strong> 两者均为 6 半音，不能只数琴键而忽略字母。</p>
+</section>
+<section id="音程转位" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="音程转位"><span class="header-section-number">3.2</span> 音程转位</h3>
+<p>把低音移高一个八度，或高音移低一个八度，得到音程转位：</p>
+<ul>
+<li>度数相加为 9，如三度 ↔︎ 六度。</li>
+<li>大 ↔︎ 小，增 ↔︎ 减，纯 ↔︎ 纯。</li>
+<li>原音程与转位音程的半音数相加为 12。</li>
+</ul>
+<p>例：C–E 是大三度，E–高 C 是小六度。前后发声称旋律音程，同时发声称和声音程。</p>
+</section>
+</section>
+<section id="音阶调号与调性" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="音阶调号与调性"><span class="header-section-number">4</span> 音阶、调号与调性</h2>
+<section id="大调与小调结构" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="大调与小调结构"><span class="header-section-number">4.1</span> 大调与小调结构</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>音阶</th>
+<th>相邻距离</th>
+<th>相对主音的半音位置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>大调</td>
+<td>全 全 半 全 全 全 半</td>
+<td>0 2 4 5 7 9 11 12</td>
+</tr>
+<tr class="even">
+<td>自然小调</td>
+<td>全 半 全 全 半 全 全</td>
+<td>0 2 3 5 7 8 10 12</td>
+</tr>
+<tr class="odd">
+<td>和声小调</td>
+<td>自然小调升高第 7 级</td>
+<td>0 2 3 5 7 8 11 12</td>
+</tr>
+</tbody>
+</table>
+<p>构造七声音阶时，每个字母依次使用一次，再补升降记号：</p>
+<ul>
+<li>C 大调：C D E F G A B C。</li>
+<li>G 大调：G A B C D E F♯ G。</li>
+<li>E 自然小调：E F♯ G A B C D E。</li>
+<li>E 和声小调：E F♯ G A B C D♯ E。</li>
+</ul>
+<p>E 和声小调中的 C–D♯ 是增二度。D♯ 到 E 只有半音，形成导音的上行解决倾向。传统旋律小调上行升高第 6、7 级，下行常用自然小调；使用时需结合风格。</p>
+</section>
+<section id="级数关系调与同主音调" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="级数关系调与同主音调"><span class="header-section-number">4.2</span> 级数、关系调与同主音调</h3>
+<p>音阶级数以主音为 1，顺次编号。上方五度是第 5 级，不是“第 5 个半音”。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>关系</th>
+<th>例子</th>
+<th>保持不变</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>关系大小调</td>
+<td>G 大调 / E 自然小调</td>
+<td>调号与自然音集</td>
+</tr>
+<tr class="even">
+<td>同主音大小调</td>
+<td>G 大调 / G 小调</td>
+<td>主音 G</td>
+</tr>
+<tr class="odd">
+<td>移调</td>
+<td>C 大调旋律整体移到 G 大调</td>
+<td>对应级数、节奏及音程结构</td>
+</tr>
+</tbody>
+</table>
+<p>关系小调主音位于大调第 6 级，比大调主音低小三度。关系大调主音位于自然小调第 3 级。</p>
+<p>调性由主音、和声与乐句组织共同确立。仅凭调号不能区分关系大小调，仅凭最后一个旋律音也不能保证判断正确。</p>
+</section>
+<section id="调号速查" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="调号速查"><span class="header-section-number">4.3</span> 调号速查</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">个数</th>
+<th>升号大调</th>
+<th>新增升号</th>
+<th>降号大调</th>
+<th>新增降号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td>C</td>
+<td>—</td>
+<td>C</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>G</td>
+<td>F♯</td>
+<td>F</td>
+<td>B♭</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>D</td>
+<td>C♯</td>
+<td>B♭</td>
+<td>E♭</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td>A</td>
+<td>G♯</td>
+<td>E♭</td>
+<td>A♭</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td>E</td>
+<td>D♯</td>
+<td>A♭</td>
+<td>D♭</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td>B</td>
+<td>A♯</td>
+<td>D♭</td>
+<td>G♭</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td>F♯</td>
+<td>E♯</td>
+<td>G♭</td>
+<td>C♭</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td>C♯</td>
+<td>B♯</td>
+<td>C♭</td>
+<td>F♭</td>
+</tr>
+</tbody>
+</table>
+<p>升号顺序 F C G D A E B；降号顺序 B E A D G C F。每行包含此前所有记号。小调使用其关系大调的调号，小调中的导音升高常写成临时记号。</p>
+</section>
+</section>
+<section id="和弦构造与转位" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="和弦构造与转位"><span class="header-section-number">5</span> 和弦构造与转位</h2>
+<section id="三和弦" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="三和弦"><span class="header-section-number">5.1</span> 三和弦</h3>
+<p>以下公式中的 1、3、5 等以<strong>根音同主音大调音阶</strong>为参照；半音集合均相对根音。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>级数公式</th>
+<th>半音集合</th>
+<th>C 根音例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>大三和弦</td>
+<td>1–3–5</td>
+<td>0, 4, 7</td>
+<td>C E G</td>
+</tr>
+<tr class="even">
+<td>小三和弦</td>
+<td>1–♭3–5</td>
+<td>0, 3, 7</td>
+<td>C E♭ G</td>
+</tr>
+<tr class="odd">
+<td>减三和弦</td>
+<td>1–♭3–♭5</td>
+<td>0, 3, 6</td>
+<td>C E♭ G♭</td>
+</tr>
+<tr class="even">
+<td>增三和弦</td>
+<td>1–3–♯5</td>
+<td>0, 4, 8</td>
+<td>C E G♯</td>
+</tr>
+</tbody>
+</table>
+<p>和弦名 C、Cm、Cdim、Caug 分别对应以上四类。琶音是将和弦音先后奏出，不改变和弦的音高材料。</p>
+</section>
+<section id="七和弦" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="七和弦"><span class="header-section-number">5.2</span> 七和弦</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>级数公式</th>
+<th>半音集合</th>
+<th>C 根音例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>大七 Cmaj7</td>
+<td>1–3–5–7</td>
+<td>0, 4, 7, 11</td>
+<td>C E G B</td>
+</tr>
+<tr class="even">
+<td>属七型 C7</td>
+<td>1–3–5–♭7</td>
+<td>0, 4, 7, 10</td>
+<td>C E G B♭</td>
+</tr>
+<tr class="odd">
+<td>小七 Cm7</td>
+<td>1–♭3–5–♭7</td>
+<td>0, 3, 7, 10</td>
+<td>C E♭ G B♭</td>
+</tr>
+<tr class="even">
+<td>半减七 Cø7 / Cm7♭5</td>
+<td>1–♭3–♭5–♭7</td>
+<td>0, 3, 6, 10</td>
+<td>C E♭ G♭ B♭</td>
+</tr>
+<tr class="odd">
+<td>减七 C°7</td>
+<td>1–♭3–♭5–𝄫7</td>
+<td>0, 3, 6, 9</td>
+<td>C E♭ G♭ B𝄫</td>
+</tr>
+</tbody>
+</table>
+<p>C7 的 7 默认小七度，Cmaj7 才是大七度。“属七型”描述结构；是否执行属功能，要看调性与进行。</p>
+</section>
+<section id="根音最低音与转位" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="根音最低音与转位"><span class="header-section-number">5.3</span> 根音、最低音与转位</h3>
+<p>根音是和弦构造基准，最低音是当前实际最低的音。三和弦由哪个成员在最低处决定转位：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>排列</th>
+<th>C 和弦示例</th>
+<th>常用低音数字</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>原位：根音在最低处</td>
+<td>C E G</td>
+<td>5/3，常省略</td>
+</tr>
+<tr class="even">
+<td>第一转位：三音在最低处</td>
+<td>E G C</td>
+<td>6/3，简写 6</td>
+</tr>
+<tr class="odd">
+<td>第二转位：五音在最低处</td>
+<td>G C E</td>
+<td>6/4</td>
+</tr>
+</tbody>
+</table>
+<p>七和弦还可让七音在最低处形成第三转位；原位到第三转位的数字为 7、6/5、4/3、4/2。</p>
+<p>斜线后指定最低音：C/E 是 C 和弦第一转位，Em/B 是 Em 第二转位。斜线低音也可能不是和弦音，因此斜线记法不必然等于转位。上方声部换排列、扩大间距，只要最低和弦成员不变，转位就不变。</p>
+</section>
+</section>
+<section id="功能和声" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="功能和声"><span class="header-section-number">6</span> 功能和声</h2>
+<section id="大调调内和弦" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="大调调内和弦"><span class="header-section-number">6.1</span> 大调调内和弦</h3>
+<p>在大调每一级上叠置三度，得到固定的三和弦性质序列：</p>
+<p><strong>大、小、小、大、大、小、减。</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>级数</th>
+<th>C 大调</th>
+<th>G 大调</th>
+<th>入门功能归类</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td>C</td>
+<td>G</td>
+<td>主功能 T</td>
+</tr>
+<tr class="even">
+<td>ii</td>
+<td>Dm</td>
+<td>Am</td>
+<td>下属／前属功能 PD</td>
+</tr>
+<tr class="odd">
+<td>iii</td>
+<td>Em</td>
+<td>Bm</td>
+<td>随上下文判断</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td>F</td>
+<td>C</td>
+<td>下属／前属功能 PD</td>
+</tr>
+<tr class="odd">
+<td>V</td>
+<td>G</td>
+<td>D</td>
+<td>属功能 D</td>
+</tr>
+<tr class="even">
+<td>vi</td>
+<td>Am</td>
+<td>Em</td>
+<td>常作主功能替代</td>
+</tr>
+<tr class="odd">
+<td>vii°</td>
+<td>Bdim</td>
+<td>F♯dim</td>
+<td>属功能 D</td>
+</tr>
+</tbody>
+</table>
+<p>罗马数字大小写区分大、小和弦，° 表示减三和弦。功能分析是调性语境中的归纳，同一个和弦不在所有作品里承担相同作用。</p>
+<p>基础路线是 <strong>T → PD → D → T</strong>。G–Em–Am–D–G 对应 I–vi–ii–V–I。</p>
+</section>
+<section id="属和弦与解决" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="属和弦与解决"><span class="header-section-number">6.2</span> 属和弦与解决</h3>
+<p>C 大调的 G7 = G–B–D–F。B 是导音，倾向上行到 C；和弦七音 F 倾向下行到 E。B–F 的三全音由此解决到 C–E。</p>
+<p>G 大调同理：D7 = D–F♯–A–C，常以 F♯→G、C→B 解决。</p>
+<p>小调为了构成大三和弦 V 或 V7，常升高自然小调第 7 级：E 小调的 B7 = B–D♯–F♯–A，D♯→E。</p>
+</section>
+<section id="终止式与和声节奏" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="终止式与和声节奏"><span class="header-section-number">6.3</span> 终止式与和声节奏</h3>
+<p>终止式发生在乐句结尾。仅在中途出现一个 V–I，不必然构成终止。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>基础形式</th>
+<th>C 大调例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>正格终止</td>
+<td>V–I，V 可带七音</td>
+<td>G7–C</td>
+</tr>
+<tr class="even">
+<td>半终止</td>
+<td>乐句停在 V</td>
+<td>Dm–G</td>
+</tr>
+<tr class="odd">
+<td>变格终止</td>
+<td>IV–I</td>
+<td>F–C</td>
+</tr>
+<tr class="even">
+<td>欺骗终止</td>
+<td>V 转向预期 I 之外，常为 vi</td>
+<td>G–Am</td>
+</tr>
+</tbody>
+</table>
+<p>完全正格终止的常见判定：V 和 I 均原位，最终高声部落在主音。未满足这些条件的正格终止通常归为不完全正格终止。</p>
+<p><strong>和声节奏</strong>是和弦更换速率。4/4 中每小节换一次与每两拍换一次不同，但两者可使用相同 BPM。</p>
+</section>
+<section id="次属和弦与短暂主音化" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="次属和弦与短暂主音化"><span class="header-section-number">6.4</span> 次属和弦与短暂主音化</h3>
+<p>次属和弦临时执行某个调内目标和弦的属功能。记号 V7/ii 意为“ii 的属七和弦”，这里的斜线与 C/E 的低音斜线含义不同。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>G 大调目标</th>
+<th>目标根音</th>
+<th>对应次属七和弦</th>
+<th>变化音的解决</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ii = Am</td>
+<td>A</td>
+<td>E7，V7/ii</td>
+<td>G♯→A</td>
+</tr>
+<tr class="even">
+<td>V = D</td>
+<td>D</td>
+<td>A7，V7/V</td>
+<td>C♯→D</td>
+</tr>
+<tr class="odd">
+<td>vi = Em</td>
+<td>E</td>
+<td>B7，V7/vi</td>
+<td>D♯→E</td>
+</tr>
+</tbody>
+</table>
+<p>构造方法：目标根音上方纯五度找属根音，再建立属七型和弦。E7–Am 暂时强调 Am，并不自动意味着整首作品转入 A 小调；持续建立新的调性中心才涉及转调。</p>
+</section>
+</section>
+<section id="旋律低音与编曲" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="旋律低音与编曲"><span class="header-section-number">7</span> 旋律、低音与编曲</h2>
+<section id="和弦音与非和弦音" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="和弦音与非和弦音"><span class="header-section-number">7.1</span> 和弦音与非和弦音</h3>
+<p>先明确当前和弦及换和弦时刻，再判断旋律音身份。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>典型运动</th>
+<th>例子与条件</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>和弦音</td>
+<td>属于当前和弦</td>
+<td>C 和弦中的 C、E、G</td>
+</tr>
+<tr class="even">
+<td>经过音</td>
+<td>两端音之间级进填充</td>
+<td>C 和弦上 C–D–E，D 连接 C 与 E</td>
+</tr>
+<tr class="odd">
+<td>邻音</td>
+<td>离开一个音，再级进回到它</td>
+<td>C–D–C</td>
+</tr>
+<tr class="even">
+<td>预现音</td>
+<td>下一和弦的音提前出现</td>
+<td>G→C 前先奏 C，并保持到 C 和弦</td>
+</tr>
+<tr class="odd">
+<td>挂留音</td>
+<td>旧和弦音保留到新和弦形成不协和，再下行级进解决</td>
+<td>F 和弦的 F 保持到 C 和弦，再 F→E，构成 4–3 挂留</td>
+</tr>
+</tbody>
+</table>
+<p>入门写作可先让长音、强拍和乐句目标落在和弦音，再用级进填充。非和弦音也可落强拍，例如挂留；“强拍必须是和弦音”不是普遍规则。</p>
+</section>
+<section id="动机与乐句" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="动机与乐句"><span class="header-section-number">7.2</span> 动机与乐句</h3>
+<p>动机是可辨认的短节奏或音高材料。乐句具有较完整的进行与结束感，长度不必固定四小节。动机可通过重复、模进和变奏发展：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>操作</th>
+<th>原动机 G–B–A 的处理</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>重复</td>
+<td>G–B–A</td>
+</tr>
+<tr class="even">
+<td>变奏：改结尾</td>
+<td>G–B–G</td>
+</tr>
+<tr class="odd">
+<td>调内上行模进</td>
+<td>A–C–B</td>
+</tr>
+</tbody>
+</table>
+<p>G–B–A 的半音步幅为 +4、−2，A–C–B 为 +3、−1。这是保持音阶位置关系的<strong>调内模进</strong>，不是保持所有半音距离的严格移调。</p>
+<p>A–A′–B–A′ 描述重复与对比关系；字母可以标记动机、乐句或段落，必须先说明分析层级。</p>
+</section>
+<section id="低音声部连接与织体" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="低音声部连接与织体"><span class="header-section-number">7.3</span> 低音、声部连接与织体</h3>
+<p>低音可使用根音、转位和弦音、经过音或持续音。转位提供选择，实际是否平滑取决于低音线与其他声部的运动。</p>
+<p>例：G–Em–C–D–G 配低音 G–G–G–F♯–G，完整写法为：</p>
+<p><strong>G → Em/G → C/G → D/F♯ → G。</strong></p>
+<p>前面保持共同低音 G，最后 F♯→G 半音上行。连接上方声部时，可保留共同音并让其余音就近移动；若写传统四部和声，还需检查平行五、八度等规则。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>声部</th>
+<th>主要任务</th>
+<th>改动时检查</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>旋律</td>
+<td>提供主要动机与乐句</td>
+<td>音域、目标音、呼吸与结束</td>
+</tr>
+<tr class="even">
+<td>和弦伴奏</td>
+<td>呈现和声</td>
+<td>音区是否遮盖旋律，换和弦是否清楚</td>
+</tr>
+<tr class="odd">
+<td>低音</td>
+<td>提供和声底部与线性运动</td>
+<td>最低音与和弦身份、连接距离</td>
+</tr>
+<tr class="even">
+<td>鼓</td>
+<td>呈现拍点、细分和重音</td>
+<td>底鼓、军鼓、踩镲是否相互配合</td>
+</tr>
+</tbody>
+</table>
+<p>织体包括声部数量、相互关系与活动密度；力度指响度。增加声部是加厚织体，逐渐变响才是渐强。二者可同时发生，但不是同一参数。</p>
+</section>
+</section>
+<section id="分析与听写流程" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="分析与听写流程"><span class="header-section-number">8</span> 分析与听写流程</h2>
+<section id="分析一段音乐" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="分析一段音乐"><span class="header-section-number">8.1</span> 分析一段音乐</h3>
+<ol type="1">
+<li>标出拍号、速度单位、弱起及节奏分组。</li>
+<li>结合调号、低音、导音解决和乐句终止判断调性。</li>
+<li>在每个换和弦点列出和弦音，确定根音、性质和转位。</li>
+<li>用罗马数字标出功能，检查次属和弦的目标。</li>
+<li>标出旋律的和弦音、非和弦音及解决。</li>
+<li>按重复、变化、对比分出动机与乐句。</li>
+<li>比较段落的织体、力度、音区与和声节奏。</li>
+</ol>
+</section>
+<section id="听写一条旋律" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="听写一条旋律"><span class="header-section-number">8.2</span> 听写一条旋律</h3>
+<ol type="1">
+<li>建立拍点，确定起音数、休止和分组。</li>
+<li>先写节奏，再记录上行、下行、同音与跳进。</li>
+<li>用已知主音或参照音定位首音、末音和长音。</li>
+<li>把短组块转成级数，再按调性转换音名。</li>
+<li>重听核对每小节时值、临时记号及终止位置。</li>
+</ol>
+<p>以 G 为参照：G→A 是大二度，G→B 是大三度，G→D 是纯五度。先固定音色与八度练关系，再扩大音域和音串长度。</p>
+<p>大、小和弦听辨可先做同根比较：C–E–G 与 C–E♭–G 只有三音不同。熟悉差异后再换根音、排列与音色。“明亮／暗淡”只能辅助描述，不能代替音程结构判断。</p>
+</section>
+</section>
+<section id="综合例题与自检" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="综合例题与自检"><span class="header-section-number">9</span> 综合例题与自检</h2>
+<section id="和声与低音综合分析" class="level3" data-number="9.1">
+<h3 data-number="9.1" class="anchored" data-anchor-id="和声与低音综合分析"><span class="header-section-number">9.1</span> 和声与低音综合分析</h3>
+<p>分析 G 大调进行：</p>
+<p><strong>G → E7/G♯ → Am → D/F♯ → G。</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>和弦</th>
+<th>和弦音</th>
+<th>功能</th>
+<th>最低音</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>G</td>
+<td>G B D</td>
+<td>I</td>
+<td>G</td>
+</tr>
+<tr class="even">
+<td>E7/G♯</td>
+<td>E G♯ B D</td>
+<td>V6/5/ii</td>
+<td>G♯</td>
+</tr>
+<tr class="odd">
+<td>Am</td>
+<td>A C E</td>
+<td>ii</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td>D/F♯</td>
+<td>D F♯ A</td>
+<td>V6</td>
+<td>F♯</td>
+</tr>
+<tr class="odd">
+<td>G</td>
+<td>G B D</td>
+<td>I</td>
+<td>G</td>
+</tr>
+</tbody>
+</table>
+<p>E7 的根音是 E，最低音是 G♯，属于第一转位。低音线 G–G♯–A–F♯–G 包含 G→G♯→A 的半音推进，以及 F♯→G 的导音解决。E7 中的七音 D 可下行到 Am 中的 C。</p>
+<p>末尾 D/F♯→G 是 V6→I；若位于乐句结尾，可形成不完全正格终止，不能仅因旋律落 G 就称完全正格终止。</p>
+</section>
+<section id="闭卷检查" class="level3" data-number="9.2">
+<h3 data-number="9.2" class="anchored" data-anchor-id="闭卷检查"><span class="header-section-number">9.2</span> 闭卷检查</h3>
+<ol type="1">
+<li>4/4、四分音符 = 96，八分音符与一小节分别多长？</li>
+<li>6/8、附点四分音符 = 72，一小节多长？</li>
+<li>附点八分音符加十六分音符，共几个四分音符拍？</li>
+<li>C–E♭、C–D♯、C–G♭ 分别是什么音程？</li>
+<li>G 大调与 E 自然小调共享什么，又区别在哪里？</li>
+<li>写出 D7 与 Dmaj7 的和弦音。</li>
+<li>Em/B 的根音、低音与转位分别是什么？</li>
+<li>G 大调的 E7 为什么可以接 Am？</li>
+<li>G–B–A → A–C–B 是严格移调吗？</li>
+<li>加入鼓和低音，是否必然改变 BPM 或构成渐强？</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>答案
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>八分音符 <span class="math inline">\(0.3125\)</span> 秒；一小节 <span class="math inline">\(2.5\)</span> 秒。</li>
+<li>两个大拍，共 <span class="math inline">\(2\times60/72=5/3\)</span> 秒。</li>
+<li>一拍：<span class="math inline">\(3/4+1/4=1\)</span>。</li>
+<li>小三度、增二度、减五度。</li>
+<li>共享调号与自然音集；主音和调性组织不同。</li>
+<li>D7：D F♯ A C；Dmaj7：D F♯ A C♯。</li>
+<li>根音 E，低音 B，第二转位。</li>
+<li>E7 是 Am 的属七和弦；G♯ 倾向到 A，D 倾向到 C。</li>
+<li>不是；是调内模进，部分半音距离发生变化。</li>
+<li>不必然。声部增加改变织体；BPM 和力度需分别判断。</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bobby50792\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

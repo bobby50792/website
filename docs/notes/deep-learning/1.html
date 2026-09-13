@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-0eca03ff95c49e7ccfcbd89edae8cb03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-abc70f88d31dbb260fcc8507eb5d0bc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-0eca03ff95c49e7ccfcbd89edae8cb03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-593db7dcfba35752a8b7393e026e179e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -704,19 +704,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#classification" id="toc-classification" class="nav-link active" data-scroll-target="#classification">Classification</a>
+  <li><a href="#classification" id="toc-classification" class="nav-link active" data-scroll-target="#classification"><span class="header-section-number">1.1</span> Classification</a>
   <ul class="collapse">
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
-  <li><a href="#single-layer-perceptron" id="toc-single-layer-perceptron" class="nav-link" data-scroll-target="#single-layer-perceptron">Single-Layer Perceptron</a></li>
-  <li><a href="#multi-class-classification" id="toc-multi-class-classification" class="nav-link" data-scroll-target="#multi-class-classification">Multi-Class Classification</a></li>
-  <li><a href="#multi-layer-perception" id="toc-multi-layer-perception" class="nav-link" data-scroll-target="#multi-layer-perception">Multi-Layer Perception</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">1.1.1</span> Logistic Regression</a></li>
+  <li><a href="#single-layer-perceptron" id="toc-single-layer-perceptron" class="nav-link" data-scroll-target="#single-layer-perceptron"><span class="header-section-number">1.1.2</span> Single-Layer Perceptron</a></li>
+  <li><a href="#multi-class-classification" id="toc-multi-class-classification" class="nav-link" data-scroll-target="#multi-class-classification"><span class="header-section-number">1.1.3</span> Multi-Class Classification</a></li>
+  <li><a href="#multi-layer-perception" id="toc-multi-layer-perception" class="nav-link" data-scroll-target="#multi-layer-perception"><span class="header-section-number">1.1.4</span> Multi-Layer Perception</a></li>
   </ul></li>
-  <li><a href="#convolutional-neural-network" id="toc-convolutional-neural-network" class="nav-link" data-scroll-target="#convolutional-neural-network">Convolutional Neural Network</a>
+  <li><a href="#convolutional-neural-network" id="toc-convolutional-neural-network" class="nav-link" data-scroll-target="#convolutional-neural-network"><span class="header-section-number">1.2</span> Convolutional Neural Network</a>
   <ul class="collapse">
-  <li><a href="#convex-optimization" id="toc-convex-optimization" class="nav-link" data-scroll-target="#convex-optimization">Convex Optimization</a></li>
-  <li><a href="#advanced-neural-network-training-regimes-tricks" id="toc-advanced-neural-network-training-regimes-tricks" class="nav-link" data-scroll-target="#advanced-neural-network-training-regimes-tricks">Advanced Neural Network Training Regimes &amp; Tricks</a></li>
-  <li><a href="#residual-network" id="toc-residual-network" class="nav-link" data-scroll-target="#residual-network">Residual Network</a></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  <li><a href="#convex-optimization" id="toc-convex-optimization" class="nav-link" data-scroll-target="#convex-optimization"><span class="header-section-number">1.2.1</span> Convex Optimization</a></li>
+  <li><a href="#advanced-neural-network-training-regimes-tricks" id="toc-advanced-neural-network-training-regimes-tricks" class="nav-link" data-scroll-target="#advanced-neural-network-training-regimes-tricks"><span class="header-section-number">1.2.2</span> Advanced Neural Network Training Regimes &amp; Tricks</a></li>
+  <li><a href="#residual-network" id="toc-residual-network" class="nav-link" data-scroll-target="#residual-network"><span class="header-section-number">1.2.3</span> Residual Network</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">1.2.4</span> Appendix</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -744,10 +744,10 @@ window.Quarto = {
 </header>
 
 
-<section id="classification" class="level2">
-<h2 class="anchored" data-anchor-id="classification">Classification</h2>
-<section id="logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<section id="classification" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="classification"><span class="header-section-number">1.1</span> Classification</h2>
+<section id="logistic-regression" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">1.1.1</span> Logistic Regression</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -789,8 +789,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="single-layer-perceptron" class="level3">
-<h3 class="anchored" data-anchor-id="single-layer-perceptron">Single-Layer Perceptron</h3>
+<section id="single-layer-perceptron" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="single-layer-perceptron"><span class="header-section-number">1.1.2</span> Single-Layer Perceptron</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -825,8 +825,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="multi-class-classification" class="level3">
-<h3 class="anchored" data-anchor-id="multi-class-classification">Multi-Class Classification</h3>
+<section id="multi-class-classification" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="multi-class-classification"><span class="header-section-number">1.1.3</span> Multi-Class Classification</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -860,8 +860,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="multi-layer-perception" class="level3">
-<h3 class="anchored" data-anchor-id="multi-layer-perception">Multi-Layer Perception</h3>
+<section id="multi-layer-perception" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="multi-layer-perception"><span class="header-section-number">1.1.4</span> Multi-Layer Perception</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -948,8 +948,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="convolutional-neural-network" class="level2">
-<h2 class="anchored" data-anchor-id="convolutional-neural-network">Convolutional Neural Network</h2>
+<section id="convolutional-neural-network" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="convolutional-neural-network"><span class="header-section-number">1.2</span> Convolutional Neural Network</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1049,8 +1049,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="convex-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="convex-optimization">Convex Optimization</h3>
+<section id="convex-optimization" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="convex-optimization"><span class="header-section-number">1.2.1</span> Convex Optimization</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1288,8 +1288,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="advanced-neural-network-training-regimes-tricks" class="level3">
-<h3 class="anchored" data-anchor-id="advanced-neural-network-training-regimes-tricks">Advanced Neural Network Training Regimes &amp; Tricks</h3>
+<section id="advanced-neural-network-training-regimes-tricks" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="advanced-neural-network-training-regimes-tricks"><span class="header-section-number">1.2.2</span> Advanced Neural Network Training Regimes &amp; Tricks</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1430,8 +1430,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="residual-network" class="level3">
-<h3 class="anchored" data-anchor-id="residual-network">Residual Network</h3>
+<section id="residual-network" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="residual-network"><span class="header-section-number">1.2.3</span> Residual Network</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1463,8 +1463,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="appendix" class="level3">
-<h3 class="anchored" data-anchor-id="appendix">Appendix</h3>
+<section id="appendix" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="appendix"><span class="header-section-number">1.2.4</span> Appendix</h3>
 <div id="thm-1" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline">\(f: \mathbb{R}^d \to \mathbb{R}\)</span> be a differentiable, <span class="math inline">\(\mu\)</span>-strongly-convex function. Then for any <span class="math inline">\(x, y \in \mathbb{R}^d\)</span>: <span class="math display">\[\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \mu\|x - y\|^2\]</span></p>
 </div>

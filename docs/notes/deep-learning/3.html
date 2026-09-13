@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-0eca03ff95c49e7ccfcbd89edae8cb03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-abc70f88d31dbb260fcc8507eb5d0bc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-0eca03ff95c49e7ccfcbd89edae8cb03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-593db7dcfba35752a8b7393e026e179e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -704,21 +704,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#generative-adversarial-network" id="toc-generative-adversarial-network" class="nav-link active" data-scroll-target="#generative-adversarial-network">Generative Adversarial Network</a>
+  <li><a href="#generative-adversarial-network" id="toc-generative-adversarial-network" class="nav-link active" data-scroll-target="#generative-adversarial-network"><span class="header-section-number">3.1</span> Generative Adversarial Network</a>
   <ul class="collapse">
-  <li><a href="#implicit-generative-model" id="toc-implicit-generative-model" class="nav-link" data-scroll-target="#implicit-generative-model">Implicit Generative Model</a></li>
-  <li><a href="#gan-the-minimax-game" id="toc-gan-the-minimax-game" class="nav-link" data-scroll-target="#gan-the-minimax-game">GAN: The Minimax Game</a></li>
-  <li><a href="#optimal-discriminator" id="toc-optimal-discriminator" class="nav-link" data-scroll-target="#optimal-discriminator">Optimal Discriminator</a></li>
-  <li><a href="#gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" id="toc-gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" class="nav-link" data-scroll-target="#gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior">GAN Mechanics: Forward vs.&nbsp;Reverse KL and JSD Behavior</a></li>
-  <li><a href="#evaluation-of-gans" id="toc-evaluation-of-gans" class="nav-link" data-scroll-target="#evaluation-of-gans">Evaluation of GANs</a></li>
+  <li><a href="#implicit-generative-model" id="toc-implicit-generative-model" class="nav-link" data-scroll-target="#implicit-generative-model"><span class="header-section-number">3.1.1</span> Implicit Generative Model</a></li>
+  <li><a href="#gan-the-minimax-game" id="toc-gan-the-minimax-game" class="nav-link" data-scroll-target="#gan-the-minimax-game"><span class="header-section-number">3.1.2</span> GAN: The Minimax Game</a></li>
+  <li><a href="#optimal-discriminator" id="toc-optimal-discriminator" class="nav-link" data-scroll-target="#optimal-discriminator"><span class="header-section-number">3.1.3</span> Optimal Discriminator</a></li>
+  <li><a href="#gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" id="toc-gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" class="nav-link" data-scroll-target="#gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior"><span class="header-section-number">3.1.4</span> GAN Mechanics: Forward vs.&nbsp;Reverse KL and JSD Behavior</a></li>
+  <li><a href="#evaluation-of-gans" id="toc-evaluation-of-gans" class="nav-link" data-scroll-target="#evaluation-of-gans"><span class="header-section-number">3.1.5</span> Evaluation of GANs</a></li>
   </ul></li>
-  <li><a href="#gan-techniques" id="toc-gan-techniques" class="nav-link" data-scroll-target="#gan-techniques">GAN Techniques</a>
+  <li><a href="#gan-techniques" id="toc-gan-techniques" class="nav-link" data-scroll-target="#gan-techniques"><span class="header-section-number">3.2</span> GAN Techniques</a>
   <ul class="collapse">
-  <li><a href="#deep-convolutional-gan" id="toc-deep-convolutional-gan" class="nav-link" data-scroll-target="#deep-convolutional-gan">Deep Convolutional GAN</a></li>
-  <li><a href="#improved-training-techniques-for-gan" id="toc-improved-training-techniques-for-gan" class="nav-link" data-scroll-target="#improved-training-techniques-for-gan">Improved Training Techniques for GAN</a></li>
-  <li><a href="#wasserstein-gan" id="toc-wasserstein-gan" class="nav-link" data-scroll-target="#wasserstein-gan">Wasserstein GAN</a></li>
-  <li><a href="#improved-training-of-wasserstein-gans" id="toc-improved-training-of-wasserstein-gans" class="nav-link" data-scroll-target="#improved-training-of-wasserstein-gans">Improved Training of Wasserstein GANs</a></li>
-  <li><a href="#biggan" id="toc-biggan" class="nav-link" data-scroll-target="#biggan">BigGAN</a></li>
+  <li><a href="#deep-convolutional-gan" id="toc-deep-convolutional-gan" class="nav-link" data-scroll-target="#deep-convolutional-gan"><span class="header-section-number">3.2.1</span> Deep Convolutional GAN</a></li>
+  <li><a href="#improved-training-techniques-for-gan" id="toc-improved-training-techniques-for-gan" class="nav-link" data-scroll-target="#improved-training-techniques-for-gan"><span class="header-section-number">3.2.2</span> Improved Training Techniques for GAN</a></li>
+  <li><a href="#wasserstein-gan" id="toc-wasserstein-gan" class="nav-link" data-scroll-target="#wasserstein-gan"><span class="header-section-number">3.2.3</span> Wasserstein GAN</a></li>
+  <li><a href="#improved-training-of-wasserstein-gans" id="toc-improved-training-of-wasserstein-gans" class="nav-link" data-scroll-target="#improved-training-of-wasserstein-gans"><span class="header-section-number">3.2.4</span> Improved Training of Wasserstein GANs</a></li>
+  <li><a href="#biggan" id="toc-biggan" class="nav-link" data-scroll-target="#biggan"><span class="header-section-number">3.2.5</span> BigGAN</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -746,10 +746,10 @@ window.Quarto = {
 </header>
 
 
-<section id="generative-adversarial-network" class="level2">
-<h2 class="anchored" data-anchor-id="generative-adversarial-network">Generative Adversarial Network</h2>
-<section id="implicit-generative-model" class="level3">
-<h3 class="anchored" data-anchor-id="implicit-generative-model">Implicit Generative Model</h3>
+<section id="generative-adversarial-network" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="generative-adversarial-network"><span class="header-section-number">3.1</span> Generative Adversarial Network</h2>
+<section id="implicit-generative-model" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="implicit-generative-model"><span class="header-section-number">3.1.1</span> Implicit Generative Model</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -825,8 +825,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="gan-the-minimax-game" class="level3">
-<h3 class="anchored" data-anchor-id="gan-the-minimax-game">GAN: The Minimax Game</h3>
+<section id="gan-the-minimax-game" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="gan-the-minimax-game"><span class="header-section-number">3.1.2</span> GAN: The Minimax Game</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -861,8 +861,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="optimal-discriminator" class="level3">
-<h3 class="anchored" data-anchor-id="optimal-discriminator">Optimal Discriminator</h3>
+<section id="optimal-discriminator" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="optimal-discriminator"><span class="header-section-number">3.1.3</span> Optimal Discriminator</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -917,8 +917,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" class="level3">
-<h3 class="anchored" data-anchor-id="gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior">GAN Mechanics: Forward vs.&nbsp;Reverse KL and JSD Behavior</h3>
+<section id="gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="gan-mechanics-forward-vs.-reverse-kl-and-jsd-behavior"><span class="header-section-number">3.1.4</span> GAN Mechanics: Forward vs.&nbsp;Reverse KL and JSD Behavior</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -967,8 +967,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="evaluation-of-gans" class="level3">
-<h3 class="anchored" data-anchor-id="evaluation-of-gans">Evaluation of GANs</h3>
+<section id="evaluation-of-gans" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="evaluation-of-gans"><span class="header-section-number">3.1.5</span> Evaluation of GANs</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1004,10 +1004,10 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="gan-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="gan-techniques">GAN Techniques</h2>
-<section id="deep-convolutional-gan" class="level3">
-<h3 class="anchored" data-anchor-id="deep-convolutional-gan">Deep Convolutional GAN</h3>
+<section id="gan-techniques" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="gan-techniques"><span class="header-section-number">3.2</span> GAN Techniques</h2>
+<section id="deep-convolutional-gan" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="deep-convolutional-gan"><span class="header-section-number">3.2.1</span> Deep Convolutional GAN</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1039,8 +1039,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="improved-training-techniques-for-gan" class="level3">
-<h3 class="anchored" data-anchor-id="improved-training-techniques-for-gan">Improved Training Techniques for GAN</h3>
+<section id="improved-training-techniques-for-gan" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="improved-training-techniques-for-gan"><span class="header-section-number">3.2.2</span> Improved Training Techniques for GAN</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1074,8 +1074,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="wasserstein-gan" class="level3">
-<h3 class="anchored" data-anchor-id="wasserstein-gan">Wasserstein GAN</h3>
+<section id="wasserstein-gan" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="wasserstein-gan"><span class="header-section-number">3.2.3</span> Wasserstein GAN</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1111,8 +1111,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="improved-training-of-wasserstein-gans" class="level3">
-<h3 class="anchored" data-anchor-id="improved-training-of-wasserstein-gans">Improved Training of Wasserstein GANs</h3>
+<section id="improved-training-of-wasserstein-gans" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="improved-training-of-wasserstein-gans"><span class="header-section-number">3.2.4</span> Improved Training of Wasserstein GANs</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1153,8 +1153,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="biggan" class="level3">
-<h3 class="anchored" data-anchor-id="biggan">BigGAN</h3>
+<section id="biggan" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="biggan"><span class="header-section-number">3.2.5</span> BigGAN</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
