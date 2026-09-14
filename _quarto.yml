@@ -131,7 +131,7 @@ website:
             - section: "Algorithm Design"
               href: docs/notes/algorithm-design/0.qmd
               contents:
-                - text: "Introduction to Algorithm Design"
+                - text: "Introduction"
                   href: docs/notes/algorithm-design/1.qmd
                 - text: "Graphs"
                   href: docs/notes/algorithm-design/2.qmd

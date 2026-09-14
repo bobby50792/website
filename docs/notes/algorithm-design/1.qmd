@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Algorithm Design"
+title: "Introduction"
 page-layout: article
 search: true
 number-offset: [1]
