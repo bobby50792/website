@@ -1,0 +1,11 @@
+---
+title: "Algorithm Design"
+output-file: index.html
+home-order: 5
+home-symbol: "O"
+home-description: "Notes on algorithm design and analysis."
+page-layout: article
+search: true
+---
+
+本界面梳理了**算法设计与分析**相关知识, 希望对你能有所启发。
