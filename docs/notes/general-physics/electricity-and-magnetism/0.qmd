@@ -1,0 +1,9 @@
+---
+title: "Electricity and Magnetism"
+output-file: index.html
+home-description: "Electric and magnetic fields, Maxwell equations, circuits, and waves."
+page-layout: article
+search: true
+---
+
+本界面梳理了**电学与磁学**相关知识, 希望对你能有所启发。

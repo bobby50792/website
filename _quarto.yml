@@ -128,13 +128,27 @@ website:
                     href: docs/notes/general-physics/mechanics-and-thermal-physics/14.qmd
                   - text: "Statistical Mechanics"
                     href: docs/notes/general-physics/mechanics-and-thermal-physics/15.qmd
-            - section: "Algorithm Design"
-              href: docs/notes/algorithm-design/0.qmd
-              contents:
-                - text: "Introduction"
-                  href: docs/notes/algorithm-design/1.qmd
-                - text: "Graphs"
-                  href: docs/notes/algorithm-design/2.qmd
+                - section: "Electricity and Magnetism"
+                  href: docs/notes/general-physics/electricity-and-magnetism/0.qmd
+                  contents:
+                    - text: "Scalar and Vector Fields"
+                      href: docs/notes/general-physics/electricity-and-magnetism/1.qmd
+                    - text: "Electrostatics"
+                      href: docs/notes/general-physics/electricity-and-magnetism/2.qmd
+                    - text: "Magnetostatics"
+                      href: docs/notes/general-physics/electricity-and-magnetism/3.qmd
+                    - text: "Laws of Induction"
+                      href: docs/notes/general-physics/electricity-and-magnetism/4.qmd
+                    - text: "Maxwell Equations and Solutions"
+                      href: docs/notes/general-physics/electricity-and-magnetism/5.qmd
+                    - text: "AC Circuits"
+                      href: docs/notes/general-physics/electricity-and-magnetism/6.qmd
+                    - text: "Resonators"
+                      href: docs/notes/general-physics/electricity-and-magnetism/7.qmd
+                    - text: "Waveguides"
+                      href: docs/notes/general-physics/electricity-and-magnetism/8.qmd
+                    - text: "Quantum Information Processing"
+                      href: docs/notes/general-physics/electricity-and-magnetism/9.qmd
             - section: "Deep Learning"
               href: docs/notes/deep-learning/0.qmd
               contents: 
@@ -150,6 +164,13 @@ website:
                   href: docs/notes/deep-learning/5.qmd
                 - text: "Sequence Modeling"
                   href: docs/notes/deep-learning/6.qmd
+            - section: "Algorithm Design"
+              href: docs/notes/algorithm-design/0.qmd
+              contents:
+                - text: "Introduction"
+                  href: docs/notes/algorithm-design/1.qmd
+                - text: "Graphs"
+                  href: docs/notes/algorithm-design/2.qmd
 
 format:
   html:

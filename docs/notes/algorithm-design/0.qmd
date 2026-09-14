@@ -3,7 +3,7 @@ title: "Algorithm Design"
 output-file: index.html
 home-order: 5
 home-symbol: "O"
-home-description: "Notes on algorithm design and analysis."
+home-description: "Algorithm design, correctness, and complexity analysis."
 page-layout: article
 search: true
 ---

@@ -1,0 +1,10 @@
+---
+title: "Scalar and Vector Fields"
+page-layout: article
+search: true
+number-offset: [1]
+
+crossref:
+  chapters: true
+
+---

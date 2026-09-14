@@ -1,6 +1,7 @@
 ---
 title: "Multivariable Calculus"
 output-file: index.html
+home-description: "Multivariable differentiation, integration, vector fields, and series."
 page-layout: article
 search: true
 ---

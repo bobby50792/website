@@ -1,0 +1,10 @@
+---
+title: "Resonators"
+page-layout: article
+search: true
+number-offset: [7]
+
+crossref:
+  chapters: true
+
+---

@@ -1,9 +1,9 @@
 ---
 title: "Math for CS and AI"
 output-file: index.html
-home-order: 3
+home-order: 2
 home-symbol: "P"
-home-description: "Probability, generating functions, sampling, optimization, and continuous approximations."
+home-description: "Probability, concentration, generating functions, and optimization."
 page-layout: article
 search: true
 ---

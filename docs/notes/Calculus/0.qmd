@@ -3,7 +3,7 @@ title: "Calculus"
 output-file: index.html
 home-order: 1
 home-symbol: "∫"
-home-description: "From single-variable calculus to vector fields and Fourier series."
+home-description: "Limits, derivatives, integrals, vector calculus, and series."
 page-layout: article
 search: true
 ---

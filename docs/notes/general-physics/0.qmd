@@ -1,9 +1,9 @@
 ---
 title: "General Physics"
 output-file: index.html
-home-order: 2
+home-order: 3
 home-symbol: "φ"
-home-description: "Foundations of mechanics, thermodynamics, relativity, and statistical physics."
+home-description: "Mechanics, thermal physics, electromagnetism, and relativity."
 page-layout: article
 search: true
 ---

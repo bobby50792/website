@@ -1,0 +1,10 @@
+---
+title: "Magnetostatics"
+page-layout: article
+search: true
+number-offset: [3]
+
+crossref:
+  chapters: true
+
+---

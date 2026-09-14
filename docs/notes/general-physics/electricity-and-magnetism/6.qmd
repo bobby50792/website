@@ -1,0 +1,10 @@
+---
+title: "AC Circuits"
+page-layout: article
+search: true
+number-offset: [6]
+
+crossref:
+  chapters: true
+
+---

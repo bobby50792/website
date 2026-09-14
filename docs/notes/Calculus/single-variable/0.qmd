@@ -1,6 +1,7 @@
 ---
 title: "Single Variable Calculus"
 output-file: index.html
+home-description: "Limits, continuity, derivatives, integrals, and differential equations."
 page-layout: article
 search: true
 ---

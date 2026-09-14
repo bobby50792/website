@@ -1,0 +1,10 @@
+---
+title: "Quantum Information Processing"
+page-layout: article
+search: true
+number-offset: [9]
+
+crossref:
+  chapters: true
+
+---

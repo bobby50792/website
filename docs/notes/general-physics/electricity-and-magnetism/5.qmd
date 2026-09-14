@@ -1,0 +1,10 @@
+---
+title: "Maxwell Equations and Solutions"
+page-layout: article
+search: true
+number-offset: [5]
+
+crossref:
+  chapters: true
+
+---

@@ -1,6 +1,7 @@
 ---
 title: "Mechanics and Thermal Physics"
 output-file: index.html
+home-description: "Motion, energy, thermodynamics, relativity, and statistical mechanics."
 page-layout: article
 search: true
 ---
