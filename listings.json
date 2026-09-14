@@ -9,6 +9,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/docs/notes/algorithm-design/index.html",
       "/docs/notes/deep-learning/index.html",
       "/docs/notes/math-for-cs-and-ai/index.html",
       "/docs/notes/general-physics/index.html",

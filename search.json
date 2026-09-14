@@ -52,6 +52,17 @@
     ]
   },
   {
+    "objectID": "docs/notes/algorithm-design/index.html",
+    "href": "docs/notes/algorithm-design/index.html",
+    "title": "Algorithm Design",
+    "section": "",
+    "text": "本界面梳理了算法设计与分析相关知识, 希望对你能有所启发。",
+    "crumbs": [
+      "Notes",
+      "Algorithm Design"
+    ]
+  },
+  {
     "objectID": "docs/notes/Calculus/index.html",
     "href": "docs/notes/Calculus/index.html",
     "title": "Calculus",
@@ -864,6 +875,20 @@
     "title": "Series of Functions and Power Series",
     "section": "",
     "text": "TipUniform and Pointwise Convergence\n\n\n\n\n\nLet \\(I \\subseteq \\mathbb{R}^m\\), for a function \\(f : I \\to \\mathbb{R}\\), we denote:\n\\[\n\\|f\\|_\\infty = \\sup_{\\mathbf{x} \\in I} |f(\\mathbf{x})|.\n\\]\nFor a sequence of functions \\(f_n : I \\to \\mathbb{R}\\), we say that \\(f_n\\) uniformly converges to \\(f\\) on \\(I\\) (denoted as \\(f_n \\overset{I}{\\rightrightarrows} f\\)), if:\n\\[\n\\lim_{n \\to +\\infty} \\|f_n - f\\|_\\infty = 0,\n\\]\nThat is: for any \\(\\varepsilon &gt; 0\\), there exists an \\(N(\\varepsilon)\\) such that for any positive integer \\(n &gt; N(\\varepsilon)\\) and for any \\(\\mathbf{x} \\in I\\), \\(|f_n(\\mathbf{x}) - f(\\mathbf{x})| &lt; \\varepsilon\\). Here, “uniform” means that \\(N(\\varepsilon)\\) is independent of \\(\\mathbf{x} \\in I\\).\nIf for any \\(\\mathbf{x} \\in I\\), we have \\(\\lim_{n \\to +\\infty} f_n(\\mathbf{x}) = f(\\mathbf{x})\\), then \\(f_n\\) is said to pointwise converge to \\(f\\) on \\(I\\), which means for any \\(\\mathbf{x} \\in I\\) and any \\(\\varepsilon &gt; 0\\), there exists an \\(N(\\mathbf{x}, \\varepsilon)\\) such that for any positive integer \\(n &gt; N(\\mathbf{x}, \\varepsilon)\\), \\(|f_n(\\mathbf{x}) - f(\\mathbf{x})| &lt; \\varepsilon\\).\nA sequence of functions \\(f_n\\) is said to converge non-uniformly to \\(f\\) on \\(I\\) if \\(f_n\\) converges pointwise to \\(f\\) on \\(I\\), but does not converge uniformly to \\(f\\)."
+  },
+  {
+    "objectID": "docs/notes/algorithm-design/1.html",
+    "href": "docs/notes/algorithm-design/1.html",
+    "title": "Lecture 1",
+    "section": "",
+    "text": "Assume two sets of \\(n\\) participants with strict, complete preferences. A stable matching pairs everyone with no pair who prefer each other to their assigned partners.\n\n\n\n\n\n\nTipGale–Shapley\n\n\n\n\n\n\nStart unmatched. Free proposers approach their next preferred receiver; receivers keep their best offer so far. Repeat until all are matched.\nResult: Proposer-optimal among stable matchings; \\(O(n^2)\\) worst-case time and space with precomputed preference ranks.\n\n\n\n\n\n\n\n\n\n\nNoteRandom Preferences: \\(O(n \\log n)\\) Expected Proposals\n\n\n\n\n\n\nAssume all preference lists are independent, uniformly random permutations.\nCoupon collector: Sample receivers uniformly, ignoring repeated proposals by the same proposer. Once every receiver has received a proposal, everyone is matched.\nCounting these extra attempts gives \\(\\mathbb{E}[P] \\le nH_n = n\\sum_{k=1}^{n}1/k = O(n\\log n)\\) for the number of actual proposals \\(P\\).\nThis bounds the proposal phase; explicitly building preference ranks still takes \\(O(n^2)\\) time."
+  },
+  {
+    "objectID": "docs/notes/algorithm-design/1.html#stable-matching",
+    "href": "docs/notes/algorithm-design/1.html#stable-matching",
+    "title": "Lecture 1",
+    "section": "",
+    "text": "Assume two sets of \\(n\\) participants with strict, complete preferences. A stable matching pairs everyone with no pair who prefer each other to their assigned partners.\n\n\n\n\n\n\nTipGale–Shapley\n\n\n\n\n\n\nStart unmatched. Free proposers approach their next preferred receiver; receivers keep their best offer so far. Repeat until all are matched.\nResult: Proposer-optimal among stable matchings; \\(O(n^2)\\) worst-case time and space with precomputed preference ranks.\n\n\n\n\n\n\n\n\n\n\nNoteRandom Preferences: \\(O(n \\log n)\\) Expected Proposals\n\n\n\n\n\n\nAssume all preference lists are independent, uniformly random permutations.\nCoupon collector: Sample receivers uniformly, ignoring repeated proposals by the same proposer. Once every receiver has received a proposal, everyone is matched.\nCounting these extra attempts gives \\(\\mathbb{E}[P] \\le nH_n = n\\sum_{k=1}^{n}1/k = O(n\\log n)\\) for the number of actual proposals \\(P\\).\nThis bounds the proposal phase; explicitly building preference ranks still takes \\(O(n^2)\\) time."
   },
   {
     "objectID": "docs/notes/general-physics/mechanics-and-thermal-physics/index.html",
