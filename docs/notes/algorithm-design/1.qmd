@@ -1,5 +1,5 @@
 ---
-title: "Lecture 1"
+title: "Introduction to Algorithm Design"
 page-layout: article
 search: true
 number-offset: [1]
