@@ -8,3 +8,171 @@ crossref:
   chapters: true
 
 ---
+
+## Scalar and Vector Fields
+
+A **scalar field** assigns $f:\mathbb R^3\to\mathbb R$. 
+
+A **vector field** assigns $\mathbf F:\mathbb R^3\to\mathbb R^3$. 
+
+Assume smooth fields throughout.
+
+## Flux and Circulation
+
+::: {.callout-tip collapse="true"}
+## Surface and Line Integrals
+
+Flux measures flow through an oriented surface:
+
+$$
+\int_{\Sigma}\mathbf F\cdot\mathbf n\,\mathrm dS = \int_{\Sigma}\mathbf F\cdot\mathrm d\mathbf S.
+$$
+
+Here $\mathbf n$ is the unit normal.
+
+Circulation measures flow along a closed curve:
+$$
+\oint_L\mathbf F\cdot\mathrm d\mathbf l.
+$$
+:::
+
+## Exterior Derivative
+
+::: {.callout-tip collapse="true"}
+## Differential Forms and Definition
+
+A **differential $k$-form** on an open subset of $\mathbb R^m$ has the form
+
+$$
+\omega=\sum_{i_1<\cdots<i_k}f_{i_1\cdots i_k}\,
+\mathrm dx_{i_1}\wedge\cdots\wedge\mathrm dx_{i_k}.
+$$
+
+The **exterior derivative** maps $k$-forms to $(k+1)$-forms:
+
+$$
+\mathrm d\omega=\sum_{i_1<\cdots<i_k}\mathrm df_{i_1\cdots i_k}
+\wedge\mathrm dx_{i_1}\wedge\cdots\wedge\mathrm dx_{i_k},
+\qquad
+\mathrm df=\sum_{j=1}^{m}\frac{\partial f}{\partial x_j}\,\mathrm dx_j.
+$$
+
+We have $\mathrm d(\mathrm d\omega)=0$.
+:::
+
+## Gradient, Divergence, and Curl
+
+::: {.callout-tip collapse="true"}
+## Definitions and Interpretation
+
+$$
+\begin{aligned}
+\nabla f&=(\partial_x f,\partial_y f,\partial_z f),\\
+\nabla\cdot\mathbf F&=\partial_xF_x+\partial_yF_y+\partial_zF_z,\\
+\nabla\times\mathbf F&=(\partial_yF_z-\partial_zF_y,\,
+\partial_zF_x-\partial_xF_z,\,
+\partial_xF_y-\partial_yF_x).
+\end{aligned}
+$$
+
+These describe steepest increase, local outflow, and local rotation, respectively. 
+:::
+
+## Stokes Theorem
+
+::: {#thm-1}
+## Stokes Theorem
+
+Let $M\subseteq\mathbb R^m$ be a compact, oriented, smooth $k$-dimensional manifold with boundary, where $1\le k\le m$. Let $\omega$ be a smooth $(k-1)$-form defined on an open neighborhood of $M$.
+
+Give $\partial M$ the induced boundary orientation: an outward-pointing normal within $M$, followed by a positively oriented basis of $T_p(\partial M)$, forms a positively oriented basis of $T_pM$. Then
+
+$$
+\int_M\mathrm d\omega=\int_{\partial M}\omega.
+$$
+:::
+
+\
+
+::: {#cor-1}
+
+## Green's Theorem with $m = 2, k = 2$
+
+\
+
+For $\omega=F_x\,\mathrm dx+F_y\,\mathrm dy$, $\mathrm d\omega=(\partial_xF_y-\partial_yF_x)\,\mathrm dx\wedge\mathrm dy.$
+
+Let $L=\partial\Sigma$ be positively oriented: traverse $L$ with $\Sigma$ on your left.
+
+$$
+\oint_{L}\mathbf F\cdot\mathrm d\mathbf l
+=\int_{\Sigma}(\partial_xF_y-\partial_yF_x)\,\mathrm dS.
+$$
+
+:::
+
+\
+
+::: {#cor-2}
+
+## Specific Case: Stokes Theorem with $m = 3, k = 2$
+
+\ 
+
+Orient $L$ by the right-hand rule relative to $\mathbf n$.
+
+$$
+\oint_{L}\mathbf F\cdot\mathrm d\mathbf l
+=\int_{\Sigma}(\nabla\times\mathbf F)\cdot \mathrm d \mathbf S.
+$$
+
+:::
+
+\
+
+::: {#cor-3}
+
+## Gauss's Theorem with $m = 3, k = 3$
+
+\ 
+
+Orient $\Sigma$ by the outward-pointing normal.
+
+$$
+\oint_{\Sigma}\mathbf F \cdot \mathrm d \mathbf S
+=\int_{\Omega}(\nabla\cdot\mathbf F)\,\mathrm dV.
+$$
+
+
+:::
+
+
+## Identities and the Laplacian
+
+::: {.callout-note collapse="true"}
+## Key Identities
+
+$$
+\nabla\times\nabla f=\mathbf0,
+\qquad
+\nabla\cdot(\nabla\times\mathbf F)=0.
+$$
+
+Converse statements require domain assumptions; both hold on star-shaped domains.
+
+$$
+\Delta f=\nabla\cdot\nabla f
+=\partial_x^2f+\partial_y^2f+\partial_z^2f.
+$$
+
+A field satisfying $\Delta f=0$ is **harmonic**.
+
+For a smooth vector field, the **vector Laplacian** satisfies
+
+$$
+\nabla^2\mathbf F
+=\nabla(\nabla\cdot\mathbf F)-\nabla\times(\nabla\times\mathbf F).
+$$
+
+In Cartesian coordinates, $\nabla^2\mathbf F=(\Delta F_x,\Delta F_y,\Delta F_z)$.
+:::
