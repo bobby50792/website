@@ -1,0 +1,11 @@
+---
+title: "Artificial Intelligence"
+output-file: index.html
+home-order: 9
+home-symbol: "∀"
+home-description: "Artificial intelligence concepts, methods, and applications."
+page-layout: article
+search: true
+---
+
+本界面梳理了**人工智能**相关知识, 希望对你能有所启发。

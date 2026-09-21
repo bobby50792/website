@@ -172,6 +172,18 @@ website:
                 - text: "Graphs"
                   href: docs/notes/algorithm-design/2.qmd
 
+            - section: "Advanced Applied Probability"
+              href: docs/notes/advanced-applied-probability/0.qmd
+              contents:
+                - text: "Measure Theory"
+                  href: docs/notes/advanced-applied-probability/1.qmd
+            - section: "Machine Learning"
+              href: docs/notes/machine-learning/0.qmd
+            - section: "Advanced Computer Graphics"
+              href: docs/notes/advanced-computer-graphics/0.qmd
+            - section: "Artificial Intelligence"
+              href: docs/notes/artificial-intelligence/0.qmd
+
 format:
   html:
     respect-user-color-scheme: true

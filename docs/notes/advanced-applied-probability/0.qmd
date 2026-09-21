@@ -1,0 +1,11 @@
+---
+title: "Advanced Applied Probability"
+output-file: index.html
+home-order: 6
+home-symbol: "𝔼"
+home-description: "Advanced probability methods and applications."
+page-layout: article
+search: true
+---
+
+本界面梳理了**高等应用概率**相关知识, 希望对你能有所启发。
