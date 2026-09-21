@@ -357,6 +357,17 @@ span.color-box {
   border: 1px solid #000; /* Border color */
 }
 
+/* Use native list markers, including in Safari. */
+@counter-style parenthesized-roman {
+  system: extends lower-roman;
+  prefix: "(";
+  suffix: ") ";
+}
+
+#quarto-document-content ol[type="i"] {
+  list-style-type: parenthesized-roman;
+}
+
 .theorem-title::after,
 .lemma-title::after,
 .corollary-title::after,

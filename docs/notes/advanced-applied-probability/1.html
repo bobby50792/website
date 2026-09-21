@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Scalar and Vector Fields – Bobby</title>
+<title>Measure Theory – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,30 +29,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../../docs/notes/general-physics/electricity-and-magnetism/2.html" rel="next">
-<link href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html" rel="prev">
-<link href="../../../../favicon.svg" rel="icon" type="image/svg+xml">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-42a78bc315f5c3e6c43fbb43369e2080.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-593db7dcfba35752a8b7393e026e179e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/machine-learning/index.html" rel="next">
+<link href="../../../docs/notes/advanced-applied-probability/index.html" rel="prev">
+<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-42a78bc315f5c3e6c43fbb43369e2080.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-593db7dcfba35752a8b7393e026e179e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-b0859526a334c423c6c2c450062b859d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +111,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../../../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -292,9 +292,9 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
-    <img src="../../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -304,11 +304,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../../docs/notes/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../docs/notes/index.html" aria-current="page"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../docs/blog/index.html"> 
+    <a class="nav-link" href="../../../docs/blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -330,7 +330,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/general-physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html">Electricity and Magnetism</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/general-physics/electricity-and-magnetism/1.html">Scalar and Vector Fields</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/advanced-applied-probability/index.html">Advanced Applied Probability</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/advanced-applied-probability/1.html">Measure Theory</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -344,7 +344,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -353,7 +353,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/calculus/0.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -362,7 +362,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/single-variable/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/calculus/single-variable/0.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -371,37 +371,37 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -409,7 +409,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/multivariable/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/calculus/multivariable/0.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -418,61 +418,61 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series of Functions and Power Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -482,7 +482,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math for CS and AI</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -491,43 +491,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Discrete Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sampling and Concentration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generating Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Central Limit Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous Approximations</span></a>
   </div>
 </li>
@@ -535,16 +535,16 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mechanics and Thermal Physics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -553,91 +553,91 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinematics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Newton’s Laws</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy and Work</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Angular Momentum</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collision Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rigid Body</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Oscillation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Waves</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lagrangian and Hamiltonian Mechanics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Special Relativity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Temperature, Heat, and the First Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kinetic Theory of Gases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Second Law of Thermodynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Mechanics</span></a>
   </div>
 </li>
@@ -645,64 +645,64 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Electricity and Magnetism</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scalar and Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Electrostatics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Magnetostatics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Laws of Induction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Maxwell Equations and Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">AC Circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/7.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resonators</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/8.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Waveguides</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/9.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/general-physics/electricity-and-magnetism/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum Information Processing</span></a>
   </div>
 </li>
@@ -712,7 +712,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -721,37 +721,37 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Energy-Based Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generative Adversarial Network</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalizing Flow &amp; Variational Autoencoder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diffusion Models &amp; Flow Matching</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sequence Modeling</span></a>
   </div>
 </li>
@@ -759,7 +759,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/algorithm-design/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/algorithm-design/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Algorithm Design</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -768,13 +768,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/algorithm-design/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/algorithm-design/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/algorithm-design/2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/algorithm-design/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Graphs</span></a>
   </div>
 </li>
@@ -782,16 +782,16 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../docs/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Applied Probability</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../docs/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Measure Theory</span></a>
   </div>
 </li>
@@ -821,12 +821,16 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#scalar-and-vector-fields" id="toc-scalar-and-vector-fields" class="nav-link active" data-scroll-target="#scalar-and-vector-fields"><span class="header-section-number">1.1</span> Scalar and Vector Fields</a></li>
-  <li><a href="#flux-and-circulation" id="toc-flux-and-circulation" class="nav-link" data-scroll-target="#flux-and-circulation"><span class="header-section-number">1.2</span> Flux and Circulation</a></li>
-  <li><a href="#exterior-derivative" id="toc-exterior-derivative" class="nav-link" data-scroll-target="#exterior-derivative"><span class="header-section-number">1.3</span> Exterior Derivative</a></li>
-  <li><a href="#gradient-divergence-and-curl" id="toc-gradient-divergence-and-curl" class="nav-link" data-scroll-target="#gradient-divergence-and-curl"><span class="header-section-number">1.4</span> Gradient, Divergence, and Curl</a></li>
-  <li><a href="#stokes-theorem" id="toc-stokes-theorem" class="nav-link" data-scroll-target="#stokes-theorem"><span class="header-section-number">1.5</span> Stokes Theorem</a></li>
-  <li><a href="#identities-and-the-laplacian" id="toc-identities-and-the-laplacian" class="nav-link" data-scroll-target="#identities-and-the-laplacian"><span class="header-section-number">1.6</span> Identities and the Laplacian</a></li>
+  <li><a href="#probability-spaces" id="toc-probability-spaces" class="nav-link active" data-scroll-target="#probability-spaces"><span class="header-section-number">1.1</span> Probability Spaces</a></li>
+  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables"><span class="header-section-number">1.2</span> Random Variables</a></li>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="header-section-number">1.3</span> Distributions</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration"><span class="header-section-number">1.4</span> Integration</a>
+  <ul class="collapse">
+  <li><a href="#simple-functions" id="toc-simple-functions" class="nav-link" data-scroll-target="#simple-functions"><span class="header-section-number">1.4.1</span> Simple Functions</a></li>
+  <li><a href="#bounded-functions" id="toc-bounded-functions" class="nav-link" data-scroll-target="#bounded-functions"><span class="header-section-number">1.4.2</span> Bounded Functions</a></li>
+  <li><a href="#nonnegative-functions" id="toc-nonnegative-functions" class="nav-link" data-scroll-target="#nonnegative-functions"><span class="header-section-number">1.4.3</span> Nonnegative Functions</a></li>
+  <li><a href="#general-functions" id="toc-general-functions" class="nav-link" data-scroll-target="#general-functions"><span class="header-section-number">1.4.4</span> General Functions</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -834,9 +838,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/general-physics/index.html">General Physics</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html">Electricity and Magnetism</a></li><li class="breadcrumb-item"><a href="../../../../docs/notes/general-physics/electricity-and-magnetism/1.html">Scalar and Vector Fields</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../docs/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/advanced-applied-probability/index.html">Advanced Applied Probability</a></li><li class="breadcrumb-item"><a href="../../../docs/notes/advanced-applied-probability/1.html">Measure Theory</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Scalar and Vector Fields</h1>
+<h1 class="title">Measure Theory</h1>
 </div>
 
 
@@ -853,175 +857,303 @@ window.Quarto = {
 </header>
 
 
-<section id="scalar-and-vector-fields" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="scalar-and-vector-fields"><span class="header-section-number">1.1</span> Scalar and Vector Fields</h2>
-<p>A <strong>scalar field</strong> assigns <span class="math inline">\(f:\mathbb R^3\to\mathbb R\)</span>.</p>
-<p>A <strong>vector field</strong> assigns <span class="math inline">\(\mathbf F:\mathbb R^3\to\mathbb R^3\)</span>.</p>
-<p>Assume smooth fields throughout.</p>
-</section>
-<section id="flux-and-circulation" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="flux-and-circulation"><span class="header-section-number">1.2</span> Flux and Circulation</h2>
+<section id="probability-spaces" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="probability-spaces"><span class="header-section-number">1.1</span> Probability Spaces</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Surface and Line Integrals
+<span class="screen-reader-only">Tip</span>Probability Space
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Flux measures flow through an oriented surface:</p>
-<p><span class="math display">\[
-\int_{\Sigma}\mathbf F\cdot\mathbf n\,\mathrm dS = \int_{\Sigma}\mathbf F\cdot\mathrm d\mathbf S.
-\]</span></p>
-<p>Here <span class="math inline">\(\mathbf n\)</span> is the unit normal.</p>
-<p>Circulation measures flow along a closed curve: <span class="math display">\[
-\oint_L\mathbf F\cdot\mathrm d\mathbf l.
-\]</span></p>
+<p>A <strong>probability space</strong> is a triple <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span> where <span class="math inline">\(\Omega\)</span> is a set of “outcomes,” <span class="math inline">\(\mathcal{F}\)</span> is a set of “events,” and <span class="math inline">\(P : \mathcal{F} \to [0,1]\)</span> is a function that assigns probabilities to events. We assume that <span class="math inline">\(\mathcal{F}\)</span> is a <span class="math inline">\(\sigma\)</span>-field (or <span class="math inline">\(\sigma\)</span>-algebra), i.e., a (nonempty) collection of subsets of <span class="math inline">\(\Omega\)</span> that satisfy</p>
+<ol type="i">
+<li><p>if <span class="math inline">\(A \in \mathcal{F}\)</span> then <span class="math inline">\(A^c \in \mathcal{F}\)</span>, and</p></li>
+<li><p>if <span class="math inline">\(A_i \in \mathcal{F}\)</span> is a countable sequence of sets then <span class="math inline">\(\bigcup_i A_i \in \mathcal{F}\)</span>.</p></li>
+</ol>
 </div>
 </div>
 </div>
-</section>
-<section id="exterior-derivative" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="exterior-derivative"><span class="header-section-number">1.3</span> Exterior Derivative</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Differential Forms and Definition
+<span class="screen-reader-only">Tip</span>Measure
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A <strong>differential <span class="math inline">\(k\)</span>-form</strong> on an open subset of <span class="math inline">\(\mathbb R^m\)</span> has the form</p>
+<p>A <strong>measure</strong> is a nonnegative countably additive set function; that is, a function <span class="math inline">\(\mu : \mathcal{F} \to \mathbb{R} \cup \{\infty\}\)</span> with</p>
+<ol type="i">
+<li><p><span class="math inline">\(\mu(A) \ge \mu(\emptyset) = 0\)</span> for all <span class="math inline">\(A \in \mathcal{F}\)</span>, and</p></li>
+<li><p>if <span class="math inline">\(A_i \in \mathcal{F}\)</span> is a countable sequence of disjoint sets, then</p>
 <p><span class="math display">\[
-\omega=\sum_{i_1&lt;\cdots&lt;i_k}f_{i_1\cdots i_k}\,
-\mathrm dx_{i_1}\wedge\cdots\wedge\mathrm dx_{i_k}.
-\]</span></p>
-<p>The <strong>exterior derivative</strong> maps <span class="math inline">\(k\)</span>-forms to <span class="math inline">\((k+1)\)</span>-forms:</p>
+\mu\left(\bigcup_i A_i\right) = \sum_i \mu(A_i).
+\]</span></p></li>
+</ol>
+<p>If <span class="math inline">\(\mu(\Omega) = 1\)</span>, we call <span class="math inline">\(\mu\)</span> a <strong>probability measure</strong>. Probability measures are usually denoted by <span class="math inline">\(P\)</span>.</p>
+<p>In general, a measure may take the value <span class="math inline">\(\infty\)</span>, i.e.,</p>
 <p><span class="math display">\[
-\mathrm d\omega=\sum_{i_1&lt;\cdots&lt;i_k}\mathrm df_{i_1\cdots i_k}
-\wedge\mathrm dx_{i_1}\wedge\cdots\wedge\mathrm dx_{i_k},
-\qquad
-\mathrm df=\sum_{j=1}^{m}\frac{\partial f}{\partial x_j}\,\mathrm dx_j.
+\mu : \mathcal{F} \to [0,\infty].
 \]</span></p>
-<p>We have <span class="math inline">\(\mathrm d(\mathrm d\omega)=0\)</span>.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="gradient-divergence-and-curl" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="gradient-divergence-and-curl"><span class="header-section-number">1.4</span> Gradient, Divergence, and Curl</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline">\(\mu\)</span> be a measure on <span class="math inline">\((\Omega, \mathcal{F})\)</span> (a <span class="math inline">\(\sigma\)</span>-field).</p>
+<ol type="i">
+<li><p><strong>monotonicity.</strong> If <span class="math inline">\(A \subset B\)</span> then <span class="math inline">\(\mu(A) \le \mu(B)\)</span>.</p></li>
+<li><p><strong>subadditivity.</strong> If <span class="math inline">\(A \subset \bigcup_{m=1}^{\infty} A_m\)</span> then <span class="math display">\[
+\mu(A) \le \sum_{m=1}^{\infty} \mu(A_m).
+\]</span></p></li>
+<li><p><strong>continuity from below.</strong> If <span class="math inline">\(A_i \uparrow A\)</span> (i.e., <span class="math inline">\(A_1 \subset A_2 \subset \cdots\)</span> and <span class="math inline">\(\bigcup_i A_i = A\)</span>) then <span class="math display">\[
+\mu(A_i) \uparrow \mu(A).
+\]</span></p></li>
+<li><p><strong>continuity from above.</strong> If <span class="math inline">\(A_i \downarrow A\)</span> (i.e., <span class="math inline">\(A_1 \supset A_2 \supset \cdots\)</span> and <span class="math inline">\(\bigcap_i A_i = A\)</span>), with <span class="math inline">\(\mu(A_1) &lt; \infty\)</span>, then <span class="math display">\[
+\mu(A_i) \downarrow \mu(A).
+\]</span></p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Definitions and Interpretation
+<span class="screen-reader-only">Note</span>Generated <span class="math inline">\(\sigma\)</span>-Fields
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span class="math display">\[
-\begin{aligned}
-\nabla f&amp;=(\partial_x f,\partial_y f,\partial_z f),\\
-\nabla\cdot\mathbf F&amp;=\partial_xF_x+\partial_yF_y+\partial_zF_z,\\
-\nabla\times\mathbf F&amp;=(\partial_yF_z-\partial_zF_y,\,
-\partial_zF_x-\partial_xF_z,\,
-\partial_xF_y-\partial_yF_x).
-\end{aligned}
+<p>If we are given a set <span class="math inline">\(\Omega\)</span> and a collection <span class="math inline">\(\mathcal{A}\)</span> of subsets of <span class="math inline">\(\Omega\)</span>, then there is a smallest <span class="math inline">\(\sigma\)</span>-field containing <span class="math inline">\(\mathcal{A}\)</span>. We call this the <span class="math inline">\(\sigma\)</span>-field <strong>generated by</strong> <span class="math inline">\(\mathcal{A}\)</span> and denote it by <span class="math inline">\(\sigma(\mathcal{A})\)</span>.</p>
+<p>Let <span class="math inline">\(\mathbb{R}^d\)</span> be the set of vectors <span class="math inline">\((x_1,\ldots,x_d)\)</span> of real numbers and <span class="math inline">\(\mathcal{R}^d\)</span> be the <strong>Borel sets</strong>, the smallest <span class="math inline">\(\sigma\)</span>-field containing the open sets. When <span class="math inline">\(d=1\)</span> we drop the superscript.</p>
+<p><strong>Measures on the real line.</strong> Measures on <span class="math inline">\((\mathbb{R},\mathcal{R})\)</span> are defined by giving a <strong>Stieltjes measure function</strong> with the following properties:</p>
+<ol type="i">
+<li><p><span class="math inline">\(F\)</span> is nondecreasing.</p></li>
+<li><p><span class="math inline">\(F\)</span> is right continuous, i.e.&nbsp;<span class="math inline">\(\lim_{y\downarrow x} F(y)=F(x)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Associated with each Stieltjes measure function <span class="math inline">\(F\)</span> there is a unique measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\((\mathbb{R}, \mathcal{R})\)</span> with <span class="math display">\[
+\mu((a,b]) = F(b) - F(a)
 \]</span></p>
-<p>These describe steepest increase, local outflow, and local rotation, respectively.</p>
-</div>
-</div>
+<p>When <span class="math inline">\(F(x) = x\)</span> the resulting measure is called <strong>Lebesgue measure</strong>.</p>
 </div>
 </section>
-<section id="stokes-theorem" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="stokes-theorem"><span class="header-section-number">1.5</span> Stokes Theorem</h2>
-<div id="thm-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.1 (Stokes Theorem)</strong></span> Let <span class="math inline">\(M\subseteq\mathbb R^m\)</span> be a compact, oriented, smooth <span class="math inline">\(k\)</span>-dimensional manifold with boundary, where <span class="math inline">\(1\le k\le m\)</span>. Let <span class="math inline">\(\omega\)</span> be a smooth <span class="math inline">\((k-1)\)</span>-form defined on an open neighborhood of <span class="math inline">\(M\)</span>.</p>
-<p>Give <span class="math inline">\(\partial M\)</span> the induced boundary orientation: an outward-pointing normal within <span class="math inline">\(M\)</span>, followed by a positively oriented basis of <span class="math inline">\(T_p(\partial M)\)</span>, forms a positively oriented basis of <span class="math inline">\(T_pM\)</span>. Then</p>
-<p><span class="math display">\[
-\int_M\mathrm d\omega=\int_{\partial M}\omega.
-\]</span></p>
-</div>
-<p><br>
-</p>
-<div id="cor-1" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.1 (Green’s Theorem with <span class="math inline">\(m = 2, k = 2\)</span>)</strong></span> <br>
-</p>
-<p>For <span class="math inline">\(\omega=F_x\,\mathrm dx+F_y\,\mathrm dy\)</span>, <span class="math inline">\(\mathrm d\omega=(\partial_xF_y-\partial_yF_x)\,\mathrm dx\wedge\mathrm dy.\)</span></p>
-<p>Let <span class="math inline">\(L=\partial\Sigma\)</span> be positively oriented: traverse <span class="math inline">\(L\)</span> with <span class="math inline">\(\Sigma\)</span> on your left.</p>
-<p><span class="math display">\[
-\oint_{L}\mathbf F\cdot\mathrm d\mathbf l
-=\int_{\Sigma}(\partial_xF_y-\partial_yF_x)\,\mathrm dS.
-\]</span></p>
-</div>
-<p><br>
-</p>
-<div id="cor-2" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.2 (Specific Case: Stokes Theorem with <span class="math inline">\(m = 3, k = 2\)</span>)</strong></span> &nbsp;</p>
-<p>Orient <span class="math inline">\(L\)</span> by the right-hand rule relative to <span class="math inline">\(\mathbf n\)</span>.</p>
-<p><span class="math display">\[
-\oint_{L}\mathbf F\cdot\mathrm d\mathbf l
-=\int_{\Sigma}(\nabla\times\mathbf F)\cdot \mathrm d \mathbf S.
-\]</span></p>
-</div>
-<p><br>
-</p>
-<div id="cor-3" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.3 (Gauss’s Theorem with <span class="math inline">\(m = 3, k = 3\)</span>)</strong></span> &nbsp;</p>
-<p>Orient <span class="math inline">\(\Sigma\)</span> by the outward-pointing normal.</p>
-<p><span class="math display">\[
-\oint_{\Sigma}\mathbf F \cdot \mathrm d \mathbf S
-=\int_{\Omega}(\nabla\cdot\mathbf F)\,\mathrm dV.
-\]</span></p>
-</div>
-</section>
-<section id="identities-and-the-laplacian" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="identities-and-the-laplacian"><span class="header-section-number">1.6</span> Identities and the Laplacian</h2>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="random-variables" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">1.2</span> Random Variables</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Key Identities
+<span class="screen-reader-only">Tip</span>Measurable Map and Random Vector
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>A function <span class="math inline">\(X : \Omega \to S\)</span> is said to be a <strong>measurable map</strong> from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((S, \mathcal{S})\)</span> if</p>
 <p><span class="math display">\[
-\nabla\times\nabla f=\mathbf0,
+X^{-1}(B) \equiv \{\omega : X(\omega) \in B\} \in \mathcal{F}
+\quad \text{for all } B \in \mathcal{S}.
+\]</span></p>
+<p>If <span class="math inline">\((S, \mathcal{S}) = (\mathbb{R}^d, \mathcal{R}^d)\)</span> and <span class="math inline">\(d &gt; 1\)</span>, then <span class="math inline">\(X\)</span> is called a <strong>random vector</strong>. Of course, if <span class="math inline">\(d = 1\)</span>, <span class="math inline">\(X\)</span> is called a <strong>random variable</strong>.</p>
+<p>We define <span class="math inline">\(\sigma(X)\)</span> to be the smallest <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\Omega\)</span> such that <span class="math inline">\(X\)</span> is measurable.</p>
+</div>
+</div>
+</div>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.3</strong></span> For <span class="math inline">\(\mathcal{A}\)</span> generates <span class="math inline">\(\mathcal{S}\)</span>, and for all <span class="math inline">\(A \in \mathcal{A}\)</span>, <span class="math inline">\(X^{-1}(A) \in \mathcal{F}\)</span>, then <span class="math inline">\(X\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((S, \mathcal{S})\)</span>.</p>
+</div>
+<p>&nbsp;</p>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.4</strong></span> If</p>
+<p><span class="math display">\[
+X : (\Omega, \mathcal{F}) \to (S, \mathcal{S})
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+f : (S, \mathcal{S}) \to (T, \mathcal{T})
+\]</span></p>
+<p>are measurable maps, then <span class="math inline">\(f(X)\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((T, \mathcal{T})\)</span>.</p>
+</div>
+</section>
+<section id="distributions" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="distributions"><span class="header-section-number">1.3</span> Distributions</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Indicator Function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <strong>indicator function</strong> of a set <span class="math inline">\(A \in \mathcal{F}\)</span>:</p>
+<p><span class="math display">\[
+1_A(\omega) =
+\begin{cases}
+1, &amp; \omega \in A, \\
+0, &amp; \omega \notin A.
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Distribution on <span class="math inline">\((\mathbb{R}, \mathcal{R})\)</span>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(X\)</span> is a random variable, then <span class="math inline">\(X\)</span> induces a probability measure on <span class="math inline">\(\mathbb{R}\)</span>, called its <strong>distribution</strong> by setting <span class="math inline">\(\mu(A) = P(X \in A)\)</span> for Borel sets <span class="math inline">\(A\)</span>. The right-hand side can be written as <span class="math inline">\(P(X^{-1}(A))\)</span>.</p>
+<p>The distribution of a random variable <span class="math inline">\(X\)</span> is usually described by giving its <strong>distribution function</strong>,</p>
+<p><span class="math display">\[
+F(x) = P(X \le x).
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.5</strong></span> Any distribution function <span class="math inline">\(F\)</span> has the following properties:</p>
+<ol type="i">
+<li><p><span class="math inline">\(F\)</span> is nondecreasing.</p></li>
+<li><p><span class="math display">\[
+\lim_{x\to\infty}F(x)=1,
 \qquad
-\nabla\cdot(\nabla\times\mathbf F)=0.
-\]</span></p>
-<p>Converse statements require domain assumptions; both hold on star-shaped domains.</p>
+\lim_{x\to-\infty}F(x)=0.
+\]</span></p></li>
+<li><p><span class="math inline">\(F\)</span> is right continuous, i.e., <span class="math display">\[
+\lim_{y\downarrow x}F(y)=F(x).
+\]</span></p></li>
+<li><p>If <span class="math display">\[
+F(x-)=\lim_{y\uparrow x}F(y),
+\]</span> then <span class="math display">\[
+F(x-)=P(X&lt;x).
+\]</span></p></li>
+<li><p><span class="math display">\[
+P(X=x)=F(x)-F(x-).
+\]</span></p></li>
+</ol>
+</div>
+<p>&nbsp;</p>
+<div id="thm-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.6</strong></span> If <span class="math inline">\(F\)</span> satisfies properties (i), (ii), and (iii), then <span class="math inline">\(F\)</span> is the distribution function of some random variable.</p>
+</div>
+</section>
+<section id="integration" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="integration"><span class="header-section-number">1.4</span> Integration</h2>
+<section id="simple-functions" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="simple-functions"><span class="header-section-number">1.4.1</span> Simple Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Simple Function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\varphi\)</span> is said to be a <strong>simple function</strong> if</p>
 <p><span class="math display">\[
-\Delta f=\nabla\cdot\nabla f
-=\partial_x^2f+\partial_y^2f+\partial_z^2f.
+\varphi(\omega) = \sum_{i=1}^n a_i 1_{A_i}
 \]</span></p>
-<p>A field satisfying <span class="math inline">\(\Delta f=0\)</span> is <strong>harmonic</strong>.</p>
-<p>For a smooth vector field, the <strong>vector Laplacian</strong> satisfies</p>
+<p>and <span class="math inline">\(A_i\)</span> are disjoint sets with <span class="math inline">\(\mu(A_i) &lt; \infty\)</span>. If <span class="math inline">\(\varphi\)</span> is a simple function, we let</p>
 <p><span class="math display">\[
-\nabla^2\mathbf F
-=\nabla(\nabla\cdot\mathbf F)-\nabla\times(\nabla\times\mathbf F).
+\int \varphi \, d\mu = \sum_{i=1}^n a_i \mu(A_i).
 \]</span></p>
-<p>In Cartesian coordinates, <span class="math inline">\(\nabla^2\mathbf F=(\Delta F_x,\Delta F_y,\Delta F_z)\)</span>.</p>
 </div>
 </div>
 </div>
+<div id="thm-7" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.7</strong></span> <span class="math inline">\(\varphi \ge \psi\)</span> <span class="math inline">\(\mu\)</span>-<strong>almost everywhere</strong> (or <span class="math inline">\(\varphi \ge \psi\)</span> <span class="math inline">\(\mu\)</span>-a.e.) means</p>
+<p><span class="math display">\[
+\mu(\{\omega : \varphi(\omega) &lt; \psi(\omega)\}) = 0.
+\]</span></p>
+<p>Let <span class="math inline">\(\varphi\)</span> and <span class="math inline">\(\psi\)</span> be simple functions.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\varphi \ge 0\)</span> a.e. then</p>
+<p><span class="math display">\[
+  \int \varphi \, d\mu \ge 0.
+  \]</span></p></li>
+<li><p>For any <span class="math inline">\(a \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\int a\varphi \, d\mu
+=
+a \int \varphi \, d\mu.
+\]</span></p></li>
+<li><p><span class="math display">\[
+\int (\varphi + \psi) \, d\mu
+=
+\int \varphi \, d\mu
++
+\int \psi \, d\mu.
+\]</span></p></li>
+</ol>
+<p>If (i) and (iii) hold then we have:</p>
+<ol start="4" type="i">
+<li><p>If <span class="math inline">\(\varphi \le \psi\)</span> a.e. then</p>
+<p><span class="math display">\[
+\int \varphi \, d\mu
+\le
+\int \psi \, d\mu.
+\]</span></p></li>
+<li><p>If <span class="math inline">\(\varphi = \psi\)</span> a.e. then</p>
+<p><span class="math display">\[
+  \int \varphi \, d\mu
+  =
+  \int \psi \, d\mu.
+  \]</span></p></li>
+</ol>
+<p>If, in addition, (ii) holds when <span class="math inline">\(a=-1\)</span> we have</p>
+<ol start="6" type="i">
+<li><span class="math display">\[
+  \left|
+  \int \varphi \, d\mu
+  \right|
+  \le
+  \int |\varphi| \, d\mu.
+  \]</span></li>
+</ol>
+</div>
+</section>
+<section id="bounded-functions" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="bounded-functions"><span class="header-section-number">1.4.2</span> Bounded Functions</h3>
+</section>
+<section id="nonnegative-functions" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="nonnegative-functions"><span class="header-section-number">1.4.3</span> Nonnegative Functions</h3>
+</section>
+<section id="general-functions" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="general-functions"><span class="header-section-number">1.4.4</span> General Functions</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1440,13 +1572,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html" class="pagination-link" aria-label="Electricity and Magnetism">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Electricity and Magnetism</span>
+      <a href="../../../docs/notes/advanced-applied-probability/index.html" class="pagination-link" aria-label="Advanced Applied Probability">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced Applied Probability</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/2.html" class="pagination-link" aria-label="Electrostatics">
-        <span class="nav-page-text">Electrostatics</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/machine-learning/index.html" class="pagination-link" aria-label="Machine Learning">
+        <span class="nav-page-text">Machine Learning</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
