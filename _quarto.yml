@@ -164,14 +164,6 @@ website:
                   href: docs/notes/deep-learning/5.qmd
                 - text: "Sequence Modeling"
                   href: docs/notes/deep-learning/6.qmd
-            - section: "Algorithm Design"
-              href: docs/notes/algorithm-design/0.qmd
-              contents:
-                - text: "Introduction"
-                  href: docs/notes/algorithm-design/1.qmd
-                - text: "Graphs"
-                  href: docs/notes/algorithm-design/2.qmd
-
             - section: "Advanced Applied Probability"
               href: docs/notes/advanced-applied-probability/0.qmd
               contents:
@@ -179,6 +171,9 @@ website:
                   href: docs/notes/advanced-applied-probability/1.qmd
             - section: "Machine Learning"
               href: docs/notes/machine-learning/0.qmd
+              contents:
+                - text: "Optimization"
+                  href: docs/notes/machine-learning/1.qmd
             - section: "Advanced Computer Graphics"
               href: docs/notes/advanced-computer-graphics/0.qmd
               contents:

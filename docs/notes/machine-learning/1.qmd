@@ -1,0 +1,337 @@
+---
+title: "Optimization"
+page-layout: article
+search: true
+number-offset: [1]
+
+crossref:
+  chapters: true
+
+---
+
+**Optimization = Gradient Descent:**
+(almost) just one algorithm
+
+## Gradient Descent
+
+- To minimize a function $f(x)$:
+  $$
+  x_{t+1}=x_t-\eta \nabla f(x_t)
+  $$
+- $\eta$ is the step size (learning rate).
+
+### Smoothness Assumption
+
+- Gradient is Lipschitz:
+  $$
+  \|\nabla f(w)-\nabla f(w')\|
+  \leq
+  L\|w-w'\|,
+  \qquad \forall\, w,w'.
+  $$
+
+- Equivalent to:
+  $$
+  \left|
+  f(w')-f(w)
+  -
+  \left\langle
+  \nabla f(w),\, w'-w
+  \right\rangle
+  \right|
+  \leq
+  \frac{L}{2}\|w-w'\|^2.
+  $$
+
+- Equivalent to:
+  $$
+  \|\nabla^2 f(x)\|
+  \leq L.
+  $$
+
+If $w' = w - \eta \nabla f(w)$, we have
+
+$$
+f(w') - f(w)
+\leq
+\left\langle \nabla f(w),\, w' - w \right\rangle
++
+\frac{L}{2}\|w' - w\|^2
+$$
+
+$$
+=
+\left\langle \nabla f(w),\, -\eta \nabla f(w) \right\rangle
++
+\frac{L\eta^2}{2}\|\nabla f(w)\|^2
+=
+-\eta
+\left(
+1-\frac{L\eta}{2}
+\right)
+\|\nabla f(w)\|^2.
+$$
+
+So we should set
+
+$$
+\eta < \frac{2}{L}
+$$
+
+to make sure
+
+$$
+f(w') - f(w) < 0.
+$$
+
+
+$$
+\eta=O\left(\frac{1}{L}\right).
+$$ 
+
+### $\mu$-Strongly Convex Function
+
+- A function $f$ is $\mu$-strongly convex if
+
+$$
+f(w')
+\ge
+f(w)
++
+\left\langle \nabla f(w),\, w'-w \right\rangle
++
+\frac{\mu}{2}\|w'-w\|^2.
+$$
+
+- Equivalently, if $f$ is twice differentiable,
+
+$$
+\lambda_{\min}\left(\nabla^2 f(w)\right)
+\ge
+\mu
+>
+0,
+$$
+
+i.e., the Hessian is positive definite.
+
+- Strong convexity is a stronger notion than convexity.
+
+- The gradient is strongly monotone:
+
+$$
+\left\langle
+\nabla f(w')-\nabla f(w),\,
+w'-w
+\right\rangle
+\ge
+\mu \|w'-w\|^2.
+$$
+
+### Convergence Guarantee
+
+- If $f$ is $L$-smooth and convex, and
+
+$$
+w^*=\arg\min_w f(w),
+$$
+
+then running gradient descent with step size
+
+$$
+\eta\leq \frac{1}{L}
+$$
+
+satisfies
+
+$$
+f(w_t)
+\leq
+f(w^*)
++
+\frac{\|w_0-w^*\|^2}{2\eta t}.
+$$
+
+- Therefore, if $\eta = \frac{1}{L}$, we only need
+
+$$
+T
+=
+\frac{L\|w_0-w^*\|^2}{2\epsilon}
+$$
+
+iterations to find a solution such that
+
+$$
+f(w_T)\leq f(w^*)+\epsilon.
+$$
+
+- This is called a convergence rate of
+
+$$
+\frac{1}{T},
+$$
+
+or equivalently, gradient descent needs
+
+$$
+O\left(\frac{1}{\epsilon}\right)
+$$
+
+iterations to converge to an $\epsilon$-optimal solution.
+
+- Step 1: 
+
+$$
+f(w_{i+1})
+\le
+f(w_i)
+-
+\frac{\eta}{2}
+\|\nabla f(w_i)\|^2.
+$$
+
+
+- Step 2: By convexity, we have
+
+$$
+f(w_i)
+\le
+f(w^*)
++
+\left\langle
+\nabla f(w_i),\,
+w_i-w^*
+\right\rangle.
+$$
+
+## Stochastic Gradient Descent 
+
+Similar to GD, but the gradient has some randomness:
+
+$$
+w_{t+1}
+=
+w_t-\eta G_t,
+$$
+
+with
+
+$$
+\mathbb E[G_t]
+=
+\nabla L(w_t).
+$$
+
+$$
+G_t
+=
+\frac{1}{|S|}
+\sum_{i\in S}
+\nabla l(w,x_i,y_i),
+$$
+
+where $S\subseteq[N]$ is a randomly selected subset.
+
+### Analysis of SGD
+
+If $f$ is an $L$-smooth convex function, and we run SGD with
+
+$$
+\operatorname{Var}(G_t)\leq \sigma^2,
+$$
+
+and step size
+
+$$
+\eta\leq \frac{1}{L},
+$$
+
+then
+
+$$
+\mathbb E\left[f(\bar w_t)\right]
+\leq
+f(w^*)
++
+\frac{\|w_0-w^*\|^2}{2t\eta}
++
+\eta\sigma^2,
+$$
+
+where
+
+$$
+\bar w_t
+=
+\frac{\sum_{i=1}^{t} w_i}{t}.
+$$
+
+- Step 1: 
+
+$$
+\mathbb E\left[f(w_{i+1})\right]
+\le
+f(w_i)
+-
+\frac{\eta}{2}
+\|\nabla f(w_i)\|^2
++
+\frac{\eta}{2}\sigma^2.
+$$
+
+- Step 2: By convexity
+
+$$
+\mathbb E\left[f(\bar w_t)\right]
+\le
+f(w^*)
++
+\frac{\|w_0-w^*\|^2}{2t\eta}
++
+\eta\sigma^2.
+$$
+
+
+### Convergence Speed
+If we set
+
+$$
+T
+=
+\frac{2\|w_0-w^*\|^2\sigma^2}{\epsilon^2},
+\qquad
+\eta
+=
+\frac{\epsilon}{2\sigma^2},
+$$
+
+then the two error terms are bounded by $\epsilon$.
+
+- Notice that
+
+$$
+\eta \le \frac{1}{L},
+$$
+
+Therefore, SGD converges at rate
+
+$$
+\frac{1}{\sqrt{T}}.
+$$
+
+### Convergence Comparison
+
+If the function is smooth and strongly convex:
+
+  - GD achieves linear convergence, so the convergence is exponentially fast:
+
+    $$
+    T = O\left(\log \frac{1}{\epsilon}\right).
+    $$
+
+  - SGD achieves a
+
+    $$
+    T = O\left(\frac{1}{\epsilon}\right).
+    $$

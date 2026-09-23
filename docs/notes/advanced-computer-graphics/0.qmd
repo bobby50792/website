@@ -1,7 +1,7 @@
 ---
 title: "Advanced Computer Graphics"
 output-file: index.html
-home-order: 8
+home-order: 7
 home-symbol: "△"
 home-description: "Advanced computer graphics methods and applications."
 page-layout: article

@@ -1,7 +1,7 @@
 ---
 title: "Artificial Intelligence"
 output-file: index.html
-home-order: 9
+home-order: 8
 home-symbol: "∀"
 home-description: "Artificial intelligence concepts, methods, and applications."
 page-layout: article

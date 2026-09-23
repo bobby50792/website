@@ -1,7 +1,7 @@
 ---
 title: "Advanced Applied Probability"
 output-file: index.html
-home-order: 6
+home-order: 5
 home-symbol: "𝔼"
 home-description: "Advanced probability methods and applications."
 page-layout: article
