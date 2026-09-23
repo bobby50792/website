@@ -1,0 +1,136 @@
+---
+title: "Geometry"
+page-layout: article
+search: true
+number-offset: [1]
+
+crossref:
+  chapters: true
+
+---
+
+## Basic Geometric Entities
+
+### Curve
+
+Camera Paths, Animation Curves, Vector Fonts ...
+
+**Spline:** 
+Interpolation v.s Approximation
+
+**Bézier Curve:**
+
+$$
+\mathbf{b}^n(t)
+=
+\sum_{i=0}^{n}
+\mathbf{b}_i B_i^n(t),
+\qquad
+t\in[0,1].
+$$
+
+$$
+B_i^n(t)
+=
+\binom{n}{i}t^i(1-t)^{n-i}
+=
+\frac{n!}{i!(n-i)!}t^i(1-t)^{n-i}.
+$$
+
+**de Casteljau Algorithm:** To evaluate Bézier curves, we can use the de Casteljau algorithm, which is a recursive method that linearly interpolates between control points.
+
+**Properties of Cubic Bézier Curves:**
+Endpoint interpolation, Endpoint tangents, Affine invariance, Convex hull property.
+
+**Higher-Order Bézier Curves:** Very hard to control,
+in practice, Piecewise cubic Bézier is the most common technique (chain many low-order curves).
+
+**Continuity of Piecewise Bézier Curves:** 
+$C^1$ continuity:
+$$
+\mathbf a_n=\mathbf b_0=\frac{1}{2}\left(\mathbf a_{n-1}+\mathbf b_1\right).
+$$
+
+**General Spline Formulation:** 
+
+$$
+Q(t) = \mathbf{G}\mathbf{B}\mathbf{T}(t)
+= \text{Geometry }\mathbf{G}
+\cdot \text{Spline Basis }\mathbf{B}
+\cdot \text{Power Basis }\mathbf{T}(t)
+$$
+
+
+### Surface
+
+**Bézier Surfaces:** Smoothly interpolate between a set of points $\mathbf{P}_i$:
+
+$$
+\mathbf{s}(u,v)
+=
+\sum_{i=0}^{m}
+\sum_{j=0}^{n}
+\mathbf{p}_{i,j}
+B_i^m(u)
+B_j^n(v).
+\qquad (u,v)\in[0,1]^2
+$$
+
+**Separable 1D de Casteljau Algorithm**
+
+## Explicit Geometric Representations
+
+**3D representations:** Rasterized form v.s. Geometric form
+
+### Taxonomy
+**Origin-dependent:** Acquired real-world object, Modeling “by hand”, Procedural modeling.
+
+**Application-dependent:** Needs to be stored in the computer, Creation of new shapes, Operations, Rendering, Animation.
+
+**Multiview 3D representation:** No explicit 3D geometry, Multiview reconstruction possible (nontrivial
+though), Viewpoint matters a lot.
+
+**Depth map:** Incomplete 3D, Resolution issue, Object properties matter.
+
+**Volumetric representation:** 
+Storage and computation cost, Obvious artifacts.
+
+### Point Cloud
+
+**Point Cloud Representation:** only points, no connectivity. A point cloud is a collection of 3D coordinates $(x,y,z)$, optionally with a normal vector. Points with orientation (normal directions) are called **surfels**.
+
+**Acquiring Point Clouds:** Many techniques: 
+Laser, Infrared, Stereo. Many challenges: resolution,
+occlusion, noise, registration.
+
+**Light-weight Shape Representation:** Compact to store, Generally easy to build algorithms.
+
+**Sampling Methods:** Uniform Sampling, Farthest Point Sampling.
+
+### Mesh and Processing
+
+**Polygonal Mesh:** 
+$$
+M=\langle V,E,F\rangle
+$$
+
+where:
+$V$: vertices
+$E$: edges
+$F$: faces
+
+**Manifold Mesh:** 1.Each edge is incident to one or two faces. 2. Faces incident to a vertex form a closed or open fan.
+
+**Techniques to Improve Mesh Quality:** Cleaning, Repairing, Remeshing.
+
+**Simple Data Structures:** Triangle List, Indexed Face Set.
+
+While real-data 3D are often point clouds, meshes are quite often used to visualize 3D and generate ground truth for machine learning algorithms.
+
+**Mesh Reconstruction:** Input: point cloud (with or without normals), Output: triangle mesh. Using Ball Pivoting Algorithm.
+
+**Implicit Mesh Reconstruction:** Estimate an implicit field function from data. 2.Extract the zero iso-surface.
+
+**Watertight Manifold Surface Generation:** Creating a mesh that is both watertight (no holes) and manifold (each edge is shared by at most two faces).
+
+**Subdivision:** Loop Subdivision and Catmull-Clark Subdivision.

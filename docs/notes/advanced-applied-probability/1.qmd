@@ -108,6 +108,27 @@ When $F(x) = x$ the resulting measure is called **Lebesgue measure**.
 
 :::
 
+::: {#thm-2.1}
+
+Let $\mathcal{C}(\mathbb{R}^d)$ be the collection of **countable** open rectangles
+
+$$
+\mathcal{C}(\mathbb{R}^d)
+= \left\{
+(a_1,b_1) \times \cdots \times (a_d,b_d)
+\;\middle|\;
+a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\},\quad i=1,\ldots,d
+\right\}.
+$$
+
+Then $\mathcal{C}(\mathbb{R}^d)$ generates the Borel $\sigma$-field on $\mathbb{R}^d$; that is,
+
+$$
+\sigma\bigl(\mathcal{C}(\mathbb{R}^d)\bigr) = \mathcal{R}^d.
+$$
+
+:::
+
 ## Random Variables
 
 
