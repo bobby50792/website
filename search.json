@@ -52,14 +52,14 @@
     ]
   },
   {
-    "objectID": "docs/notes/algorithm-design/index.html",
-    "href": "docs/notes/algorithm-design/index.html",
-    "title": "Algorithm Design",
+    "objectID": "docs/notes/machine-learning/index.html",
+    "href": "docs/notes/machine-learning/index.html",
+    "title": "Machine Learning",
     "section": "",
-    "text": "本界面梳理了算法设计与分析相关知识, 希望对你能有所启发。",
+    "text": "本界面梳理了机器学习相关知识, 希望对你能有所启发。",
     "crumbs": [
       "Notes",
-      "Algorithm Design"
+      "Machine Learning"
     ]
   },
   {
@@ -1006,38 +1006,39 @@
     ]
   },
   {
-    "objectID": "docs/notes/machine-learning/index.html",
-    "href": "docs/notes/machine-learning/index.html",
-    "title": "Machine Learning",
+    "objectID": "docs/notes/machine-learning/1.html",
+    "href": "docs/notes/machine-learning/1.html",
+    "title": "Optimization",
     "section": "",
-    "text": "本界面梳理了机器学习相关知识, 希望对你能有所启发。",
+    "text": "Optimization = Gradient Descent: (almost) just one algorithm",
     "crumbs": [
       "Notes",
-      "Machine Learning"
+      "Machine Learning",
+      "Optimization"
     ]
   },
   {
-    "objectID": "docs/notes/algorithm-design/1.html",
-    "href": "docs/notes/algorithm-design/1.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "Assume two sets of \\(n\\) participants with strict, complete preferences. A stable matching pairs everyone with no pair who prefer each other to their assigned partners.\n\n\n\n\n\n\nTipGale–Shapley\n\n\n\n\n\n\nStart unmatched. Free proposers approach their next preferred receiver; receivers keep their best offer so far. Repeat until all are matched.\nResult: Proposer-optimal among stable matchings; \\(O(n^2)\\) worst-case time and space with precomputed preference ranks.\n\n\n\n\n\n\n\n\n\n\nNoteRandom Preferences: \\(O(n \\log n)\\) Expected Proposals\n\n\n\n\n\n\nAssume all preference lists are independent, uniformly random permutations.\nCoupon collector: Sample receivers uniformly, ignoring repeated proposals by the same proposer. Once every receiver has received a proposal, everyone is matched.\nCounting these extra attempts gives \\(\\mathbb{E}[P] \\le nH_n = n\\sum_{k=1}^{n}1/k = O(n\\log n)\\) for the number of actual proposals \\(P\\).\nThis bounds the proposal phase; explicitly building preference ranks still takes \\(O(n^2)\\) time.",
+    "objectID": "docs/notes/machine-learning/1.html#gradient-descent",
+    "href": "docs/notes/machine-learning/1.html#gradient-descent",
+    "title": "Optimization",
+    "section": "1.1 Gradient Descent",
+    "text": "1.1 Gradient Descent\n\nTo minimize a function \\(f(x)\\): \\[\nx_{t+1}=x_t-\\eta \\nabla f(x_t)\n\\]\n\\(\\eta\\) is the step size (learning rate).\n\n\n1.1.1 Smoothness Assumption\n\nGradient is Lipschitz: \\[\n\\|\\nabla f(w)-\\nabla f(w')\\|\n\\leq\nL\\|w-w'\\|,\n\\qquad \\forall\\, w,w'.\n\\]\nEquivalent to: \\[\n\\left|\nf(w')-f(w)\n-\n\\left\\langle\n\\nabla f(w),\\, w'-w\n\\right\\rangle\n\\right|\n\\leq\n\\frac{L}{2}\\|w-w'\\|^2.\n\\]\nEquivalent to: \\[\n\\|\\nabla^2 f(x)\\|\n\\leq L.\n\\]\n\nIf \\(w' = w - \\eta \\nabla f(w)\\), we have\n\\[\nf(w') - f(w)\n\\leq\n\\left\\langle \\nabla f(w),\\, w' - w \\right\\rangle\n+\n\\frac{L}{2}\\|w' - w\\|^2\n\\]\n\\[\n=\n\\left\\langle \\nabla f(w),\\, -\\eta \\nabla f(w) \\right\\rangle\n+\n\\frac{L\\eta^2}{2}\\|\\nabla f(w)\\|^2\n=\n-\\eta\n\\left(\n1-\\frac{L\\eta}{2}\n\\right)\n\\|\\nabla f(w)\\|^2.\n\\]\nSo we should set\n\\[\n\\eta &lt; \\frac{2}{L}\n\\]\nto make sure\n\\[\nf(w') - f(w) &lt; 0.\n\\]\n\\[\n\\eta=O\\left(\\frac{1}{L}\\right).\n\\]\n\n\n1.1.2 \\(\\mu\\)-Strongly Convex Function\n\nA function \\(f\\) is \\(\\mu\\)-strongly convex if\n\n\\[\nf(w')\n\\ge\nf(w)\n+\n\\left\\langle \\nabla f(w),\\, w'-w \\right\\rangle\n+\n\\frac{\\mu}{2}\\|w'-w\\|^2.\n\\]\n\nEquivalently, if \\(f\\) is twice differentiable,\n\n\\[\n\\lambda_{\\min}\\left(\\nabla^2 f(w)\\right)\n\\ge\n\\mu\n&gt;\n0,\n\\]\ni.e., the Hessian is positive definite.\n\nStrong convexity is a stronger notion than convexity.\nThe gradient is strongly monotone:\n\n\\[\n\\left\\langle\n\\nabla f(w')-\\nabla f(w),\\,\nw'-w\n\\right\\rangle\n\\ge\n\\mu \\|w'-w\\|^2.\n\\]\n\n\n1.1.3 Convergence Guarantee\n\nIf \\(f\\) is \\(L\\)-smooth and convex, and\n\n\\[\nw^*=\\arg\\min_w f(w),\n\\]\nthen running gradient descent with step size\n\\[\n\\eta\\leq \\frac{1}{L}\n\\]\nsatisfies\n\\[\nf(w_t)\n\\leq\nf(w^*)\n+\n\\frac{\\|w_0-w^*\\|^2}{2\\eta t}.\n\\]\n\nTherefore, if \\(\\eta = \\frac{1}{L}\\), we only need\n\n\\[\nT\n=\n\\frac{L\\|w_0-w^*\\|^2}{2\\epsilon}\n\\]\niterations to find a solution such that\n\\[\nf(w_T)\\leq f(w^*)+\\epsilon.\n\\]\n\nThis is called a convergence rate of\n\n\\[\n\\frac{1}{T},\n\\]\nor equivalently, gradient descent needs\n\\[\nO\\left(\\frac{1}{\\epsilon}\\right)\n\\]\niterations to converge to an \\(\\epsilon\\)-optimal solution.\n\nStep 1:\n\n\\[\nf(w_{i+1})\n\\le\nf(w_i)\n-\n\\frac{\\eta}{2}\n\\|\\nabla f(w_i)\\|^2.\n\\]\n\nStep 2: By convexity, we have\n\n\\[\nf(w_i)\n\\le\nf(w^*)\n+\n\\left\\langle\n\\nabla f(w_i),\\,\nw_i-w^*\n\\right\\rangle.\n\\]",
     "crumbs": [
       "Notes",
-      "Algorithm Design",
-      "Introduction"
+      "Machine Learning",
+      "Optimization"
     ]
   },
   {
-    "objectID": "docs/notes/algorithm-design/1.html#stable-matching",
-    "href": "docs/notes/algorithm-design/1.html#stable-matching",
-    "title": "Introduction",
-    "section": "",
-    "text": "Assume two sets of \\(n\\) participants with strict, complete preferences. A stable matching pairs everyone with no pair who prefer each other to their assigned partners.\n\n\n\n\n\n\nTipGale–Shapley\n\n\n\n\n\n\nStart unmatched. Free proposers approach their next preferred receiver; receivers keep their best offer so far. Repeat until all are matched.\nResult: Proposer-optimal among stable matchings; \\(O(n^2)\\) worst-case time and space with precomputed preference ranks.\n\n\n\n\n\n\n\n\n\n\nNoteRandom Preferences: \\(O(n \\log n)\\) Expected Proposals\n\n\n\n\n\n\nAssume all preference lists are independent, uniformly random permutations.\nCoupon collector: Sample receivers uniformly, ignoring repeated proposals by the same proposer. Once every receiver has received a proposal, everyone is matched.\nCounting these extra attempts gives \\(\\mathbb{E}[P] \\le nH_n = n\\sum_{k=1}^{n}1/k = O(n\\log n)\\) for the number of actual proposals \\(P\\).\nThis bounds the proposal phase; explicitly building preference ranks still takes \\(O(n^2)\\) time.",
+    "objectID": "docs/notes/machine-learning/1.html#stochastic-gradient-descent",
+    "href": "docs/notes/machine-learning/1.html#stochastic-gradient-descent",
+    "title": "Optimization",
+    "section": "1.2 Stochastic Gradient Descent",
+    "text": "1.2 Stochastic Gradient Descent\nSimilar to GD, but the gradient has some randomness:\n\\[\nw_{t+1}\n=\nw_t-\\eta G_t,\n\\]\nwith\n\\[\n\\mathbb E[G_t]\n=\n\\nabla L(w_t).\n\\]\n\\[\nG_t\n=\n\\frac{1}{|S|}\n\\sum_{i\\in S}\n\\nabla l(w,x_i,y_i),\n\\]\nwhere \\(S\\subseteq[N]\\) is a randomly selected subset.\n\n1.2.1 Analysis of SGD\nIf \\(f\\) is an \\(L\\)-smooth convex function, and we run SGD with\n\\[\n\\operatorname{Var}(G_t)\\leq \\sigma^2,\n\\]\nand step size\n\\[\n\\eta\\leq \\frac{1}{L},\n\\]\nthen\n\\[\n\\mathbb E\\left[f(\\bar w_t)\\right]\n\\leq\nf(w^*)\n+\n\\frac{\\|w_0-w^*\\|^2}{2t\\eta}\n+\n\\eta\\sigma^2,\n\\]\nwhere\n\\[\n\\bar w_t\n=\n\\frac{\\sum_{i=1}^{t} w_i}{t}.\n\\]\n\nStep 1:\n\n\\[\n\\mathbb E\\left[f(w_{i+1})\\right]\n\\le\nf(w_i)\n-\n\\frac{\\eta}{2}\n\\|\\nabla f(w_i)\\|^2\n+\n\\frac{\\eta}{2}\\sigma^2.\n\\]\n\nStep 2: By convexity\n\n\\[\n\\mathbb E\\left[f(\\bar w_t)\\right]\n\\le\nf(w^*)\n+\n\\frac{\\|w_0-w^*\\|^2}{2t\\eta}\n+\n\\eta\\sigma^2.\n\\]\n\n\n1.2.2 Convergence Speed\nIf we set\n\\[\nT\n=\n\\frac{2\\|w_0-w^*\\|^2\\sigma^2}{\\epsilon^2},\n\\qquad\n\\eta\n=\n\\frac{\\epsilon}{2\\sigma^2},\n\\]\nthen the two error terms are bounded by \\(\\epsilon\\).\n\nNotice that\n\n\\[\n\\eta \\le \\frac{1}{L},\n\\]\nTherefore, SGD converges at rate\n\\[\n\\frac{1}{\\sqrt{T}}.\n\\]\n\n\n1.2.3 Convergence Comparison\nIf the function is smooth and strongly convex:\n\nGD achieves linear convergence, so the convergence is exponentially fast:\n\\[\nT = O\\left(\\log \\frac{1}{\\epsilon}\\right).\n\\]\nSGD achieves a\n\\[\nT = O\\left(\\frac{1}{\\epsilon}\\right).\n\\]",
     "crumbs": [
       "Notes",
-      "Algorithm Design",
-      "Introduction"
+      "Machine Learning",
+      "Optimization"
     ]
   },
   {
