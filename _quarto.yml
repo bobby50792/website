@@ -181,6 +181,9 @@ website:
                   href: docs/notes/advanced-computer-graphics/1.qmd
             - section: "Artificial Intelligence"
               href: docs/notes/artificial-intelligence/0.qmd
+              contents:
+                - text: "Search"
+                  href: docs/notes/artificial-intelligence/1.qmd
 
 format:
   html:

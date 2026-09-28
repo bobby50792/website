@@ -113,6 +113,12 @@ $$
 0,
 $$
 
+- Equivalently
+
+$$
+f(ax + (1 - a)y) \le af(x) + (1 - a)f(y) - \frac{\mu}{2}a(1 - a)\|x - y\|^2, \quad \forall  a \in [0, 1].
+$$
+
 i.e., the Hessian is positive definite.
 
 - Strong convexity is a stronger notion than convexity.

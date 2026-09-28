@@ -1,0 +1,207 @@
+---
+title: "Search"
+page-layout: article
+search: true
+number-offset: [1]
+
+crossref:
+  chapters: true
+
+---
+
+## Single-Agent Search
+
+### Planning as Search Problems
+
+- A **search problem** consists of:
+  - $S$: a state space
+  - $s_{\mathrm{start}}$: start state
+  - $\operatorname{Actions}(s)$: possible actions
+  - $\operatorname{Succ}(s,a)$: successor
+  - $\operatorname{Cost}(s,a)$: action cost
+  - $\operatorname{IsEnd}(s)$: a goal test
+
+- A **solution** is a sequence of actions (a plan)
+  which transforms the start state to a goal state.
+
+
+### Uninformed Search
+
+Can only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by $g(x)$ = work done so far.
+
+
+### Informed Search
+
+Can know whether one non-goal is more promising than another.
+
+**Search Heuristics:** A function that estimates how close a state is to a goal.
+
+**Greedy Search:** Fringe: nodes ordered by $h(x)$ = heuristic evaluation of cost from $x$ to goal.
+
+**A* Search:** Fringe: nodes ordered by $f(x) = g(x) + h(x)$. only stop when we expand a goal.
+
+**Admissible Heuristics:** A heuristic $h$ is admissible (optimistic) if:
+
+$$
+  0 \le h(n) \le h^*(n)
+$$
+
+where $h^*(n)$ is the true cost to a nearest goal.
+
+Coming up with admissible heuristics is most of what's involved in using A* in practice.
+
+**Graph Search:** Never expand a state twice. 
+
+**Consistency of Heuristics:** A heuristic is consistent if for every node $n$ and its successor $n'$:
+
+$$
+h(n) \le \operatorname{cost}(n \text{ to } n') + h(n')
+$$
+
+A* graph search is optimal.
+
+Consistency implies admissibility
+
+UCS (Uniform Cost Search) is a special case ($h = 0$).
+
+
+**Create Heuristics:** Often, heuristics are solutions to relaxed problems, where new actions are available.
+
+### General Framework of Relaxed Problems
+
+A **relaxation** $P^j$ of a search problem $P$ has costs that satisfy:
+
+$$
+\operatorname{Cost}^j(s,a) \le \operatorname{Cost}(s,a).
+$$
+
+Given a relaxed search problem $P^j$, define the **relaxed heuristic**
+
+$$
+h(s) = \operatorname{FutureCost}^j(s),
+$$
+
+the minimum cost from $s$ to an end state using $\operatorname{Cost}^j(s,a)$.
+
+- Suppose $h(s) = \operatorname{FutureCost}^j(s)$ for some relaxed problem $P^j$. Then $h(s)$ is a consistent heuristic.
+
+- Suppose $h_1(s)$ and $h_2(s)$ are consistent.
+Then $h(s) = \max\{h_1(s), h_2(s)\}$ is consistent.
+
+### Application in Robotics: Motion Planning
+
+**Cell Decomposition:** Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles.
+If no path found, subdivide the mixed cells.
+
+**The Optimal Path:** Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.
+
+**Visibility Graph.** 
+
+**Weighted A\*:** expands states in the order of $f = g + \varepsilon h$ values, $\varepsilon > 1$ = bias towards states that are closer to goal.
+
+**Weighted A\* Search:**
+  
+  - trades off optimality for speed
+  - $\varepsilon$-suboptimal:
+$$
+    \operatorname{cost}(\text{solution})
+    \le \varepsilon \cdot \operatorname{cost}(\text{optimal solution})
+$$
+
+  - in many domains, it has been shown to be orders of magnitude faster than A*
+
+  - research becomes to develop a heuristic function that has shallow local minima
+
+
+## Adversarial Problems
+
+**Deterministic Games:** Many possible formalizations, one is:
+  - States: $S$ (start at $s_0$)
+  - Players: $P = \{1, \ldots, N\}$ (usually take turns)
+  - Actions: $A$ (may depend on player / state)
+  - Transition Function: $S \times A \to S$
+  - Terminal Test: $S \to \{t, f\}$
+  - Terminal Utilities: $S \times P \to \mathbb{R}$
+
+- Solution for a player is a **policy**: $S \to A$
+
+Zero-Sum Games vs. General-Sum Games
+
+
+### Minimax Search
+
+**Deterministic, zero-sum games:** e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.
+
+**The efficient:** Time: $O(bm)$, Space: $O(bm)$, is completely infeasible.
+
+### Alpha-Beta Search
+
+```cpp
+#include <algorithm>
+#include <limits>
+
+constexpr double INF = std::numeric_limits<double>::infinity();
+
+double min_value(const State& state, double alpha, double beta);
+
+double max_value(const State& state, double alpha, double beta) {
+    if (is_terminal(state)) return utility(state);
+
+    double v = -INF;
+    for (const auto& successor : successors(state)) {
+        v = std::max(v, min_value(successor, alpha, beta));
+        if (v >= beta) return v;
+        alpha = std::max(alpha, v);
+    }
+    return v;
+}
+
+double min_value(const State& state, double alpha, double beta) {
+    if (is_terminal(state)) return utility(state);
+
+    double v = INF;
+    for (const auto& successor : successors(state)) {
+        v = std::min(v, max_value(successor, alpha, beta));
+        if (v <= alpha) return v;
+        beta = std::min(beta, v);
+    }
+    return v;
+}
+
+```
+
+**With perfect ordering:**
+
+- Time complexity drops to $O(b^{m/2})$.
+- Doubles solvable depth!
+
+### Heuristic Minimax
+
+**Depth-limited search:** Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.
+
+In practice: typically weighted linear sum of features:
+
+$$
+\operatorname{Eval}(s)
+=
+w_1 f_1(s)
++
+w_2 f_2(s)
++
+\cdots
++
+w_n f_n(s)
+$$
+
+e.g.
+
+$$
+f_1(s)
+=
+(\text{num white queens} - \text{num black queens}),
+$$
+
+etc.
+
+
+

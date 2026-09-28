@@ -13,6 +13,7 @@ listing:
     contents: "docs/notes/*/0.qmd"
     template: topic-listing.ejs
     sort: "home-order desc"
+    max-items: 4
     sort-ui: false
     filter-ui: false
   - id: recent-writing-list
