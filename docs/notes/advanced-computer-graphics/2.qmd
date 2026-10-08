@@ -1,0 +1,371 @@
+---
+title: "Transformations"
+page-layout: article
+search: true
+number-offset: [2]
+
+crossref:
+  chapters: true
+
+---
+
+## Transformations and Homogeneous Coordinates
+
+**Transformations:** Translation (not linear), Rotation, Reflection, Scaling, Shear.
+
+We could leverage matrix multiplication without translation.
+
+**Homogeneous Coordinates:** Represent 3D transformations as 3×3 matrices and 3D-H transformations as 4×4 matrices
+
+**Scale:**
+
+$$
+S_s =
+\begin{bmatrix}
+S_x & 0 & 0 & 0 \\
+0 & S_y & 0 & 0 \\
+0 & 0 & S_z & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+**Shear:**
+
+$$
+H_{x,d} =
+\begin{bmatrix}
+1 & d_y & d_z & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+**Translation:**
+
+$$
+T_b =
+\begin{bmatrix}
+1 & 0 & 0 & b_x \\
+0 & 1 & 0 & b_y \\
+0 & 0 & 1 & b_z \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+## Rotation
+
+**Topology:** Structural Properties of a Manifold
+
+Two surfaces $M$ and $N$ are topologically equivalent if
+there is a differentiable bijection between $M$ and $N$.
+
+**Orientation:** Space Frame and Body Frame
+
+**The Set of Rotations:** The special orthogonal group is
+
+$$
+SO(n) = \{R \in \mathbb{R}^{n\times n} : \det(R)=1,\ RR^T=I\}.
+$$
+
+**Topology of SO(n):** The topology of $SO(2)$ and $SO(3)$ is different from $(-1,1)^n$, thus Parameterizing Rotation in Networks is Tricky
+
+## 3D Rotation Representations
+
+### Euler Angles
+
+$$
+R_x(\alpha)
+:=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\alpha & -\sin\alpha \\
+0 & \sin\alpha & \cos\alpha
+\end{bmatrix}
+$$
+
+$$
+R_y(\beta)
+:=
+\begin{bmatrix}
+\cos\beta & 0 & \sin\beta \\
+0 & 1 & 0 \\
+-\sin\beta & 0 & \cos\beta
+\end{bmatrix}
+$$
+
+$$
+R_z(\gamma)
+:=
+\begin{bmatrix}
+\cos\gamma & -\sin\gamma & 0 \\
+\sin\gamma & \cos\gamma & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+For an arbitrary rotation,
+
+$$
+R = R_z(\gamma)R_y(\beta)R_x(\alpha).
+$$
+
+Euler Angle is not unique for some rotations (gimbal lock).
+
+### Axis-Angle
+
+**Euler Theorem:**
+
+- Any rotation in $SO(3)$ is equivalent to rotation about a fixed axis $\omega \in \mathbb{R}^3$ through a positive angle $\theta$.
+
+- $\hat{\omega}$: unit vector of rotation axis $(\|\hat{\omega}\| = 1)$.
+
+- $\theta$: angle of rotation.
+
+- $R \in SO(3) := \operatorname{Rot}(\hat{\omega}, \theta)$.
+
+**Skew-Symmetric Matrix:**
+
+- $A$ is skew-symmetric if
+
+  $$
+  A = -A^T.
+  $$
+
+- Skew-symmetric matrix operator:
+
+  $$
+  \omega =
+  \begin{bmatrix}
+  \omega_1 \\
+  \omega_2 \\
+  \omega_3
+  \end{bmatrix},
+  \qquad
+  [\omega]
+  :=
+  \begin{bmatrix}
+  0 & -\omega_3 & \omega_2 \\
+  \omega_3 & 0 & -\omega_1 \\
+  -\omega_2 & \omega_1 & 0
+  \end{bmatrix}.
+  $$
+
+- Cross product can be represented as a linear transformation:
+
+  $$
+  a \times b = [a]b.
+  $$
+
+**Rodrigues Formula:**
+
+- Can prove that
+
+    $$
+    [\hat{\omega}]^3 = -[\hat{\omega}].
+    $$
+
+- Then, use Taylor expansion of $\sin$ and $\cos$:
+
+    $$
+    e^{[\hat{\omega}]\theta}
+    =
+    I
+    +
+    [\hat{\omega}]\sin\theta
+    +
+    [\hat{\omega}]^2(1-\cos\theta).
+    $$
+
+**Recover Axis-Angle from Rotation Matrix:**
+
+- For $0 < \theta < \pi$,
+
+  $$
+  \begin{aligned}
+  \theta &= \arccos\left(\frac{\operatorname{tr}(R)-1}{2}\right), \\
+  [\hat{\omega}] &= \frac{R-R^T}{2\sin\theta}.
+  \end{aligned}
+  $$
+
+- When $\theta=0$, $R=I$. There is no actual rotation, so the rotation axis $\hat{\omega}$ can be arbitrary.
+- When $\theta=\pi$, $(\hat{\omega},\pi)$ and $(-\hat{\omega},\pi)$ represent the same rotation.
+
+### Quaternion
+
+**Mathematical Definition:**
+Quaternion is a more generalized complex number:
+
+$$
+q = w + xi + yj + zk
+$$
+
+- $w$ is the real part and $\vec{v} = (x,y,z)$ is the imaginary part.
+
+- Imaginary units satisfy
+
+  $$
+  i^2 = j^2 = k^2 = ijk = -1
+  $$
+
+- They are anti-commutative:
+
+  $$
+  \begin{aligned}
+  ij &= k = -ji, \\
+  jk &= i = -kj, \\
+  ki &= j = -ik.
+  \end{aligned}
+  $$
+
+**Properties of General Quaternions:**
+
+- In vector form, the product of two quaternions:
+
+  For $q_1 = (w_1, \vec{v}_1)$ and $q_2 = (w_2, \vec{v}_2)$,
+
+  $$
+  q_1 q_2
+  =
+  \left(
+  w_1 w_2 - \vec{v}_1^{\,T}\vec{v}_2,\;
+  w_1 \vec{v}_2 + w_2 \vec{v}_1 + \vec{v}_1 \times \vec{v}_2
+  \right).
+  $$
+
+- Conjugate, norm, and inverse:
+
+  $$
+  \begin{aligned}
+  q^* &= (w, -\vec{v}), \\
+  \|q\|^2 &= w^2 + \vec{v}^{\,T}\vec{v} = qq^* = q^*q, \\
+  q^{-1} &:= \frac{q^*}{\|q\|^2}.
+  \end{aligned}
+  $$
+
+**Unit Quaternion as Rotation:**
+
+- Rotate a vector $\vec{x}$ by quaternion $q$:
+
+  1. Augment $\vec{x}$ to
+
+     $$
+     x = (0, \vec{x})
+     $$
+
+  2. Rotate by
+
+     $$
+     x' = qxq^{-1}
+     $$
+
+- Compose rotations by quaternion:
+
+  - First rotate by $q_1$ and then by $q_2$:
+
+    $$
+    q_2(q_1xq_1^*)q_2^*
+    $$
+
+  - Since
+
+    $$
+    q_2(q_1xq_1^*)q_2^*
+    =
+    (q_2q_1)x(q_1^*q_2^*),
+    $$
+
+    and
+
+    $$
+    (q_2q_1)^*
+    =
+    q_1^*q_2^*,
+    $$
+
+    we conclude that composing rotations is as simple as multiplying quaternions:
+
+    $$
+    q_{\text{total}} = q_2q_1.
+    $$
+
+**Conversion between Quaternions and Angle-Axis:**
+
+- Given the rotation axis $\hat{\omega}$ and rotation angle $\theta$,
+
+  $$
+  q
+  =
+  \left[
+  \cos\left(\frac{\theta}{2}\right),
+  \sin\left(\frac{\theta}{2}\right)\hat{\omega}
+  \right].
+  $$
+
+  Quaternion is very close to the angle-axis representation.
+
+- For a unit quaternion $q=(w,\vec{v})$, the rotation angle is
+
+  $$
+  \theta
+  =
+  2\arccos(w).
+  $$
+
+  The rotation axis is
+
+  $$
+  \hat{\omega}
+  =
+  \begin{cases}
+  \displaystyle
+  \frac{1}{\sin(\theta/2)}\vec{v},
+  & \theta\neq 0, \\[8pt]
+  0,
+  & \theta=0.
+  \end{cases}
+  $$
+
+**Inspection from Learning Perspective:** Each rotation corresponds to two quaternions, Need to normalize to unit length in networks. This
+normalization may cause big/small gradients in
+practice.
+
+**Summary of Rotation Representations:**
+
+| Representation | Inverse? | Composing? |
+|---|---|---|
+| Rotation Matrix | ✓ | ✓ |
+| Euler Angle | Complicated | Complicated |
+| Angle-axis | ✓ | Complicated |
+| Skew-symmetrical Matrix | ✓ | Complicated |
+| Quaternion | ✓ | ✓ |
+
+## Viewing Transformation
+
+The standard graphics transformation pipeline is
+
+$$
+\begin{aligned}
+p_{\text{object}} &\xrightarrow{M} p_{\text{world}}
+\xrightarrow{V} p_{\text{camera}} \\
+p_{\text{camera}} &\xrightarrow{P} p_{\text{canonical}}
+\xrightarrow{\text{viewport}} p_{\text{screen}}.
+\end{aligned}
+$$
+
+where:
+
+- $M$: modeling transformation
+- $V$: view / camera transformation
+- $P$: projection transformation
+- viewport: maps canonical coordinates to screen coordinates
+
+The first three transformations are often combined as
+
+$$
+\boxed{
+p_{\text{clip}}
+=
+PVM\,p_{\text{object}}.
+}
+$$

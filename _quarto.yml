@@ -179,6 +179,8 @@ website:
               contents:
                 - text: "Geometry"
                   href: docs/notes/advanced-computer-graphics/1.qmd
+                - text: "Transformations"
+                  href: docs/notes/advanced-computer-graphics/2.qmd
             - section: "Artificial Intelligence"
               href: docs/notes/artificial-intelligence/0.qmd
               contents:

@@ -2,11 +2,29 @@
 title: "Search"
 page-layout: article
 search: true
+format:
+  html:
+    grid:
+      body-width: 760px
+    include-in-header:
+      text: |
+        <style>
+        #quarto-document-content { line-height: 1.65; }
+        #quarto-document-content h2,
+        #quarto-document-content h3 { text-wrap: balance; }
+        #quarto-document-content li + li { margin-top: .35rem; }
+        #quarto-document-content .math.display {
+          display: block;
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-block: .25rem;
+        }
+        </style>
 number-offset: [1]
 
 crossref:
   chapters: true
-
 ---
 
 ## Single-Agent Search
@@ -24,11 +42,9 @@ crossref:
 - A **solution** is a sequence of actions (a plan)
   which transforms the start state to a goal state.
 
-
 ### Uninformed Search
 
 Can only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by $g(x)$ = work done so far.
-
 
 ### Informed Search
 
@@ -38,32 +54,31 @@ Can know whether one non-goal is more promising than another.
 
 **Greedy Search:** Fringe: nodes ordered by $h(x)$ = heuristic evaluation of cost from $x$ to goal.
 
-**A* Search:** Fringe: nodes ordered by $f(x) = g(x) + h(x)$. only stop when we expand a goal.
+**A\* Search:** Fringe: nodes ordered by $f(x) = g(x) + h(x)$. Stop only when a goal is expanded.
 
 **Admissible Heuristics:** A heuristic $h$ is admissible (optimistic) if:
 
 $$
-  0 \le h(n) \le h^*(n)
+0 \le h(n) \le h^*(n)
 $$
 
 where $h^*(n)$ is the true cost to a nearest goal.
 
-Coming up with admissible heuristics is most of what's involved in using A* in practice.
+Coming up with admissible heuristics is most of what's involved in using A\* in practice.
 
-**Graph Search:** Never expand a state twice. 
+**Graph Search:** Never expand a state twice.
 
-**Consistency of Heuristics:** A heuristic is consistent if for every node $n$ and its successor $n'$:
+**Consistent Heuristics:** A heuristic is consistent if for every node $n$ and its successor $n'$:
 
 $$
 h(n) \le \operatorname{cost}(n \text{ to } n') + h(n')
 $$
 
-A* graph search is optimal.
+A\* graph search is optimal.
 
-Consistency implies admissibility
+Consistency implies admissibility.
 
 UCS (Uniform Cost Search) is a special case ($h = 0$).
-
 
 **Create Heuristics:** Often, heuristics are solutions to relaxed problems, where new actions are available.
 
@@ -86,7 +101,7 @@ the minimum cost from $s$ to an end state using $\operatorname{Cost}^j(s,a)$.
 - Suppose $h(s) = \operatorname{FutureCost}^j(s)$ for some relaxed problem $P^j$. Then $h(s)$ is a consistent heuristic.
 
 - Suppose $h_1(s)$ and $h_2(s)$ are consistent.
-Then $h(s) = \max\{h_1(s), h_2(s)\}$ is consistent.
+  Then $h(s) = \max\{h_1(s), h_2(s)\}$ is consistent.
 
 ### Application in Robotics: Motion Planning
 
@@ -95,44 +110,43 @@ If no path found, subdivide the mixed cells.
 
 **The Optimal Path:** Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.
 
-**Visibility Graph.** 
+**Visibility Graph:** Connect mutually visible obstacle vertices and the start and goal positions.
 
 **Weighted A\*:** expands states in the order of $f = g + \varepsilon h$ values, $\varepsilon > 1$ = bias towards states that are closer to goal.
 
 **Weighted A\* Search:**
-  
-  - trades off optimality for speed
-  - $\varepsilon$-suboptimal:
-$$
-    \operatorname{cost}(\text{solution})
-    \le \varepsilon \cdot \operatorname{cost}(\text{optimal solution})
-$$
 
-  - in many domains, it has been shown to be orders of magnitude faster than A*
+- Trades off optimality for speed.
+- $\varepsilon$-suboptimal:
 
-  - research becomes to develop a heuristic function that has shallow local minima
+  $$
+  \operatorname{cost}(\text{solution})
+  \le \varepsilon \cdot \operatorname{cost}(\text{optimal solution})
+  $$
 
+- In many domains, it has been shown to be orders of magnitude faster than A\*.
+- Research focuses on developing a heuristic function that has shallow local minima.
 
 ## Adversarial Problems
 
 **Deterministic Games:** Many possible formalizations, one is:
-  - States: $S$ (start at $s_0$)
-  - Players: $P = \{1, \ldots, N\}$ (usually take turns)
-  - Actions: $A$ (may depend on player / state)
-  - Transition Function: $S \times A \to S$
-  - Terminal Test: $S \to \{t, f\}$
-  - Terminal Utilities: $S \times P \to \mathbb{R}$
 
-- Solution for a player is a **policy**: $S \to A$
+- States: $S$ (start at $s_0$)
+- Players: $P = \{1, \ldots, N\}$ (usually take turns)
+- Actions: $A$ (may depend on player / state)
+- Transition Function: $S \times A \to S$
+- Terminal Test: $S \to \{t, f\}$
+- Terminal Utilities: $S \times P \to \mathbb{R}$
+
+A solution for a player is a **policy**: $S \to A$
 
 Zero-Sum Games vs. General-Sum Games
-
 
 ### Minimax Search
 
 **Deterministic, zero-sum games:** e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.
 
-**The efficient:** Time: $O(bm)$, Space: $O(bm)$, is completely infeasible.
+**Complexity:** Time: $O(b^m)$, Space: $O(b^m)$, is completely infeasible.
 
 ### Alpha-Beta Search
 
@@ -167,7 +181,6 @@ double min_value(const State& state, double alpha, double beta) {
     }
     return v;
 }
-
 ```
 
 **With perfect ordering:**
@@ -182,26 +195,169 @@ double min_value(const State& state, double alpha, double beta) {
 In practice: typically weighted linear sum of features:
 
 $$
-\operatorname{Eval}(s)
-=
-w_1 f_1(s)
-+
-w_2 f_2(s)
-+
-\cdots
-+
-w_n f_n(s)
+\operatorname{Eval}(s) = w_1 f_1(s) + w_2 f_2(s) + \cdots + w_n f_n(s)
 $$
 
 e.g.
 
 $$
-f_1(s)
-=
-(\text{num white queens} - \text{num black queens}),
+f_1(s) = (\text{num white queens} - \text{num black queens}),
 $$
 
 etc.
 
+### Game Theory
 
+**Normal Form Game:** Approximate games as single shot,
+Represent only actions and utilities.
+
+**Pure vs Mixed Strategies:** deterministic ($p = 1$) selection of actions vs. randomization over actions.
+
+$$
+u(\text{action}) = \sum_{\text{world}} p(\text{world}) \cdot u(\text{action}, \text{world})
+$$
+
+$$
+u(s) = \sum_{a \in s} p(a) \cdot \sum_{\text{world}} p(\text{world}) \cdot u(a, \text{world})
+$$
+
+**Best Response:** Given the strategies of all other players $s_{-i}$, a best response for player $i$ is:
+
+$$
+\operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})
+$$
+
+**Nash Equilibrium:** Nash Equilibria are strategy profiles $\vec{s}$ where none of the participants benefit from unilaterally changing their decision.
+
+$$
+\forall i \quad u_i(\vec{s}) \geq u_i(\operatorname{neighbor}(\vec{s}))
+$$
+
+**Nash Equilibria always exist:** If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.
+
+**Indifference Principle:** In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.
+
+**von Neumann Minimax Theorem:** For every finite two-player zero-sum game:
+
+$$
+\max_{\sigma_1}\min_{\sigma_2} u(\sigma_1,\sigma_2)
+=
+\min_{\sigma_2}\max_{\sigma_1} u(\sigma_1,\sigma_2)
+$$
+
+There exists a value $v$ such that:
+
+$$
+v = \max_{\sigma_1}\min_{\sigma_2} u
+= \min_{\sigma_2}\max_{\sigma_1} u
+$$
+
+The equilibrium strategies guarantee this value.
+
+$$
+u(\sigma_1,\sigma_2^*) \le v \le u(\sigma_1^*,\sigma_2)
+$$
+
+Two-player zero-sum Nash equilibrium = Minimax solution
+
+**Game Types:**
+
+- Perfect-information, zero-sum: Minimax or Alpha–Beta
+
+- General-sum games: Nash Equilibrium
+
+- Large game trees: Heuristic Search or Monte Carlo Tree Search
+
+### Monte Carlo Tree Search
+
+Combination of Simulation and Bandit-Based Method
+
+**Two Fundamental Concepts:**
+
+1. The true value of any action can be approximated by running several random simulations.
+2. These values can be efficiently used to adjust the policy (strategy) towards a best-first strategy.
+
+**MCTS Algorithm:**
+
+1. **Selection:** Start at the root node and select children using the tree policy. Stop when an expandable node is reached.
+2. **Expansion:** Add one or more child nodes to the tree.
+3. **Simulation:** Run a simulation from the newly added node. The default policy (or rollout policy) determines how the simulation is run.
+4. **Backpropagation:** Update values based on the outcome.
+
+**Policies:** Tree policy, Default policy, Decision policy (selecting the best child).
+
+**Upper Confidence Bound on Trees (UCT):** Formulated node selection as Multi-Arm Bandit problem.
+
+**UCT Node Selection (UCB1):** UCB1 applied for each child selection.
+
+$$
+UCT = \overline{X}_j + 2C_p \sqrt{\frac{2\ln n}{n_j}}
+$$
+
+- $\overline{X}_j$: mean reward of selecting this position
+- $n$: number of times current(parent) node has been visited
+- $n_j$: number of times child $j$ has been visited
+- $C_p$: some constant $> 0$
+
+**Advantages and Disadvantages of MCTS:**
+
+- Advantages:
+  - Proved MCTS converges to minimax solution
+  - Domain-independent
+  - Anytime algorithm
+  - Achieving better with a large branch factor
+
+- Disadvantages:
+  - Basic version converges very slowly
+  - Leading to small-probability failures
+
+### Principle of Maximum Expected Utility
+
+A rational agent should choose the action that maximizes its expected utility, given its knowledge.
+
+**Utilities:** Utilities are functions from outcomes (states of the world) to real numbers that describe an agent's preferences. We hard-wire utilities and let behaviors emerge.
+
+**The Axioms of Rationality:**
+
+- **Orderability**
+
+  $$
+  (A \succ B) \lor (B \succ A) \lor (A \sim B)
+  $$
+
+- **Transitivity**
+
+  $$
+  (A \succ B) \land (B \succ C) \Rightarrow (A \succ C)
+  $$
+
+- **Continuity**
+
+  $$
+  A \succ B \succ C
+  \Rightarrow
+  \exists p \; [p, A;\ 1-p, C] \sim B
+  $$
+
+- **Substitutability**
+
+  $$
+  A \sim B
+  \Rightarrow
+  [p, A;\ 1-p, C] \sim [p, B;\ 1-p, C]
+  $$
+
+- **Monotonicity**
+
+  $$
+  A \succ B
+  \Rightarrow
+  \left(
+  p \ge q
+  \iff
+  [p, A;\ 1-p, B] \succeq [q, A;\ 1-q, B]
+  \right)
+  $$
+
+Rational preferences imply behavior describable as maximization of expected utility.
 
