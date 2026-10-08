@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -79,14 +79,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-42a78bc315f5c3e6c43fbb43369e2080.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-0b01b88a1466b51120c33ddbc02ed688.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-3437602f61f36c0ccf5eea54bde2a4ec.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-d2de20584d3d090aca7cc20a9b65bb77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-130e1223bb759dc93b5823ef5bc2c36c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-d2c688c9aa3ed9538723f62696880ce0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-130e1223bb759dc93b5823ef5bc2c36c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,6 +114,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>
+#quarto-document-content { line-height: 1.65; }
+#quarto-document-content h2,
+#quarto-document-content h3 { text-wrap: balance; }
+#quarto-document-content li + li { margin-top: .35rem; }
+#quarto-document-content .math.display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: .25rem;
+}
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -840,6 +853,12 @@ window.Quarto = {
  <span class="menu-text">Geometry</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/advanced-computer-graphics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transformations</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +903,9 @@ window.Quarto = {
   <li><a href="#minimax-search" id="toc-minimax-search" class="nav-link" data-scroll-target="#minimax-search"><span class="header-section-number">1.2.1</span> Minimax Search</a></li>
   <li><a href="#alpha-beta-search" id="toc-alpha-beta-search" class="nav-link" data-scroll-target="#alpha-beta-search"><span class="header-section-number">1.2.2</span> Alpha-Beta Search</a></li>
   <li><a href="#heuristic-minimax" id="toc-heuristic-minimax" class="nav-link" data-scroll-target="#heuristic-minimax"><span class="header-section-number">1.2.3</span> Heuristic Minimax</a></li>
+  <li><a href="#game-theory" id="toc-game-theory" class="nav-link" data-scroll-target="#game-theory"><span class="header-section-number">1.2.4</span> Game Theory</a></li>
+  <li><a href="#monte-carlo-tree-search" id="toc-monte-carlo-tree-search" class="nav-link" data-scroll-target="#monte-carlo-tree-search"><span class="header-section-number">1.2.5</span> Monte Carlo Tree Search</a></li>
+  <li><a href="#principle-of-maximum-expected-utility" id="toc-principle-of-maximum-expected-utility" class="nav-link" data-scroll-target="#principle-of-maximum-expected-utility"><span class="header-section-number">1.2.6</span> Principle of Maximum Expected Utility</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -937,20 +959,20 @@ window.Quarto = {
 <p>Can know whether one non-goal is more promising than another.</p>
 <p><strong>Search Heuristics:</strong> A function that estimates how close a state is to a goal.</p>
 <p><strong>Greedy Search:</strong> Fringe: nodes ordered by <span class="math inline">\(h(x)\)</span> = heuristic evaluation of cost from <span class="math inline">\(x\)</span> to goal.</p>
-<p><strong>A* Search:</strong> Fringe: nodes ordered by <span class="math inline">\(f(x) = g(x) + h(x)\)</span>. only stop when we expand a goal.</p>
+<p><strong>A* Search:</strong> Fringe: nodes ordered by <span class="math inline">\(f(x) = g(x) + h(x)\)</span>. Stop only when a goal is expanded.</p>
 <p><strong>Admissible Heuristics:</strong> A heuristic <span class="math inline">\(h\)</span> is admissible (optimistic) if:</p>
 <p><span class="math display">\[
-  0 \le h(n) \le h^*(n)
+0 \le h(n) \le h^*(n)
 \]</span></p>
 <p>where <span class="math inline">\(h^*(n)\)</span> is the true cost to a nearest goal.</p>
 <p>Coming up with admissible heuristics is most of what’s involved in using A* in practice.</p>
 <p><strong>Graph Search:</strong> Never expand a state twice.</p>
-<p><strong>Consistency of Heuristics:</strong> A heuristic is consistent if for every node <span class="math inline">\(n\)</span> and its successor <span class="math inline">\(n'\)</span>:</p>
+<p><strong>Consistent Heuristics:</strong> A heuristic is consistent if for every node <span class="math inline">\(n\)</span> and its successor <span class="math inline">\(n'\)</span>:</p>
 <p><span class="math display">\[
 h(n) \le \operatorname{cost}(n \text{ to } n') + h(n')
 \]</span></p>
 <p>A* graph search is optimal.</p>
-<p>Consistency implies admissibility</p>
+<p>Consistency implies admissibility.</p>
 <p>UCS (Uniform Cost Search) is a special case (<span class="math inline">\(h = 0\)</span>).</p>
 <p><strong>Create Heuristics:</strong> Often, heuristics are solutions to relaxed problems, where new actions are available.</p>
 </section>
@@ -974,31 +996,38 @@ h(s) = \operatorname{FutureCost}^j(s),
 <h3 data-number="1.1.5" class="anchored" data-anchor-id="application-in-robotics-motion-planning"><span class="header-section-number">1.1.5</span> Application in Robotics: Motion Planning</h3>
 <p><strong>Cell Decomposition:</strong> Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles. If no path found, subdivide the mixed cells.</p>
 <p><strong>The Optimal Path:</strong> Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.</p>
-<p><strong>Visibility Graph.</strong></p>
+<p><strong>Visibility Graph:</strong> Connect mutually visible obstacle vertices and the start and goal positions.</p>
 <p><strong>Weighted A*:</strong> expands states in the order of <span class="math inline">\(f = g + \varepsilon h\)</span> values, <span class="math inline">\(\varepsilon &gt; 1\)</span> = bias towards states that are closer to goal.</p>
 <p><strong>Weighted A* Search:</strong></p>
 <ul>
-<li><p>trades off optimality for speed</p></li>
-<li><p><span class="math inline">\(\varepsilon\)</span>-suboptimal: <span class="math display">\[
+<li><p>Trades off optimality for speed.</p></li>
+<li><p><span class="math inline">\(\varepsilon\)</span>-suboptimal:</p>
+<p><span class="math display">\[
 \operatorname{cost}(\text{solution})
 \le \varepsilon \cdot \operatorname{cost}(\text{optimal solution})
 \]</span></p></li>
-<li><p>in many domains, it has been shown to be orders of magnitude faster than A*</p></li>
-<li><p>research becomes to develop a heuristic function that has shallow local minima</p></li>
+<li><p>In many domains, it has been shown to be orders of magnitude faster than A*.</p></li>
+<li><p>Research focuses on developing a heuristic function that has shallow local minima.</p></li>
 </ul>
 </section>
 </section>
 <section id="adversarial-problems" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="adversarial-problems"><span class="header-section-number">1.2</span> Adversarial Problems</h2>
-<p><strong>Deterministic Games:</strong> Many possible formalizations, one is: - States: <span class="math inline">\(S\)</span> (start at <span class="math inline">\(s_0\)</span>) - Players: <span class="math inline">\(P = \{1, \ldots, N\}\)</span> (usually take turns) - Actions: <span class="math inline">\(A\)</span> (may depend on player / state) - Transition Function: <span class="math inline">\(S \times A \to S\)</span> - Terminal Test: <span class="math inline">\(S \to \{t, f\}\)</span> - Terminal Utilities: <span class="math inline">\(S \times P \to \mathbb{R}\)</span></p>
+<p><strong>Deterministic Games:</strong> Many possible formalizations, one is:</p>
 <ul>
-<li>Solution for a player is a <strong>policy</strong>: <span class="math inline">\(S \to A\)</span></li>
+<li>States: <span class="math inline">\(S\)</span> (start at <span class="math inline">\(s_0\)</span>)</li>
+<li>Players: <span class="math inline">\(P = \{1, \ldots, N\}\)</span> (usually take turns)</li>
+<li>Actions: <span class="math inline">\(A\)</span> (may depend on player / state)</li>
+<li>Transition Function: <span class="math inline">\(S \times A \to S\)</span></li>
+<li>Terminal Test: <span class="math inline">\(S \to \{t, f\}\)</span></li>
+<li>Terminal Utilities: <span class="math inline">\(S \times P \to \mathbb{R}\)</span></li>
 </ul>
+<p>A solution for a player is a <strong>policy</strong>: <span class="math inline">\(S \to A\)</span></p>
 <p>Zero-Sum Games vs.&nbsp;General-Sum Games</p>
 <section id="minimax-search" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="minimax-search"><span class="header-section-number">1.2.1</span> Minimax Search</h3>
 <p><strong>Deterministic, zero-sum games:</strong> e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.</p>
-<p><strong>The efficient:</strong> Time: <span class="math inline">\(O(bm)\)</span>, Space: <span class="math inline">\(O(bm)\)</span>, is completely infeasible.</p>
+<p><strong>Complexity:</strong> Time: <span class="math inline">\(O(b^m)\)</span>, Space: <span class="math inline">\(O(b^m)\)</span>, is completely infeasible.</p>
 </section>
 <section id="alpha-beta-search" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="alpha-beta-search"><span class="header-section-number">1.2.2</span> Alpha-Beta Search</h3>
@@ -1043,23 +1072,138 @@ h(s) = \operatorname{FutureCost}^j(s),
 <p><strong>Depth-limited search:</strong> Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.</p>
 <p>In practice: typically weighted linear sum of features:</p>
 <p><span class="math display">\[
-\operatorname{Eval}(s)
-=
-w_1 f_1(s)
-+
-w_2 f_2(s)
-+
-\cdots
-+
-w_n f_n(s)
+\operatorname{Eval}(s) = w_1 f_1(s) + w_2 f_2(s) + \cdots + w_n f_n(s)
 \]</span></p>
 <p>e.g.</p>
 <p><span class="math display">\[
-f_1(s)
-=
-(\text{num white queens} - \text{num black queens}),
+f_1(s) = (\text{num white queens} - \text{num black queens}),
 \]</span></p>
 <p>etc.</p>
+</section>
+<section id="game-theory" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="game-theory"><span class="header-section-number">1.2.4</span> Game Theory</h3>
+<p><strong>Normal Form Game:</strong> Approximate games as single shot, Represent only actions and utilities.</p>
+<p><strong>Pure vs Mixed Strategies:</strong> deterministic (<span class="math inline">\(p = 1\)</span>) selection of actions vs.&nbsp;randomization over actions.</p>
+<p><span class="math display">\[
+u(\text{action}) = \sum_{\text{world}} p(\text{world}) \cdot u(\text{action}, \text{world})
+\]</span></p>
+<p><span class="math display">\[
+u(s) = \sum_{a \in s} p(a) \cdot \sum_{\text{world}} p(\text{world}) \cdot u(a, \text{world})
+\]</span></p>
+<p><strong>Best Response:</strong> Given the strategies of all other players <span class="math inline">\(s_{-i}\)</span>, a best response for player <span class="math inline">\(i\)</span> is:</p>
+<p><span class="math display">\[
+\operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})
+\]</span></p>
+<p><strong>Nash Equilibrium:</strong> Nash Equilibria are strategy profiles <span class="math inline">\(\vec{s}\)</span> where none of the participants benefit from unilaterally changing their decision.</p>
+<p><span class="math display">\[
+\forall i \quad u_i(\vec{s}) \geq u_i(\operatorname{neighbor}(\vec{s}))
+\]</span></p>
+<p><strong>Nash Equilibria always exist:</strong> If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.</p>
+<p><strong>Indifference Principle:</strong> In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.</p>
+<p><strong>von Neumann Minimax Theorem:</strong> For every finite two-player zero-sum game:</p>
+<p><span class="math display">\[
+\max_{\sigma_1}\min_{\sigma_2} u(\sigma_1,\sigma_2)
+=
+\min_{\sigma_2}\max_{\sigma_1} u(\sigma_1,\sigma_2)
+\]</span></p>
+<p>There exists a value <span class="math inline">\(v\)</span> such that:</p>
+<p><span class="math display">\[
+v = \max_{\sigma_1}\min_{\sigma_2} u
+= \min_{\sigma_2}\max_{\sigma_1} u
+\]</span></p>
+<p>The equilibrium strategies guarantee this value.</p>
+<p><span class="math display">\[
+u(\sigma_1,\sigma_2^*) \le v \le u(\sigma_1^*,\sigma_2)
+\]</span></p>
+<p>Two-player zero-sum Nash equilibrium = Minimax solution</p>
+<p><strong>Game Types:</strong></p>
+<ul>
+<li><p>Perfect-information, zero-sum: Minimax or Alpha–Beta</p></li>
+<li><p>General-sum games: Nash Equilibrium</p></li>
+<li><p>Large game trees: Heuristic Search or Monte Carlo Tree Search</p></li>
+</ul>
+</section>
+<section id="monte-carlo-tree-search" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="monte-carlo-tree-search"><span class="header-section-number">1.2.5</span> Monte Carlo Tree Search</h3>
+<p>Combination of Simulation and Bandit-Based Method</p>
+<p><strong>Two Fundamental Concepts:</strong></p>
+<ol type="1">
+<li>The true value of any action can be approximated by running several random simulations.</li>
+<li>These values can be efficiently used to adjust the policy (strategy) towards a best-first strategy.</li>
+</ol>
+<p><strong>MCTS Algorithm:</strong></p>
+<ol type="1">
+<li><strong>Selection:</strong> Start at the root node and select children using the tree policy. Stop when an expandable node is reached.</li>
+<li><strong>Expansion:</strong> Add one or more child nodes to the tree.</li>
+<li><strong>Simulation:</strong> Run a simulation from the newly added node. The default policy (or rollout policy) determines how the simulation is run.</li>
+<li><strong>Backpropagation:</strong> Update values based on the outcome.</li>
+</ol>
+<p><strong>Policies:</strong> Tree policy, Default policy, Decision policy (selecting the best child).</p>
+<p><strong>Upper Confidence Bound on Trees (UCT):</strong> Formulated node selection as Multi-Arm Bandit problem.</p>
+<p><strong>UCT Node Selection (UCB1):</strong> UCB1 applied for each child selection.</p>
+<p><span class="math display">\[
+UCT = \overline{X}_j + 2C_p \sqrt{\frac{2\ln n}{n_j}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\overline{X}_j\)</span>: mean reward of selecting this position</li>
+<li><span class="math inline">\(n\)</span>: number of times current(parent) node has been visited</li>
+<li><span class="math inline">\(n_j\)</span>: number of times child <span class="math inline">\(j\)</span> has been visited</li>
+<li><span class="math inline">\(C_p\)</span>: some constant <span class="math inline">\(&gt; 0\)</span></li>
+</ul>
+<p><strong>Advantages and Disadvantages of MCTS:</strong></p>
+<ul>
+<li>Advantages:
+<ul>
+<li>Proved MCTS converges to minimax solution</li>
+<li>Domain-independent</li>
+<li>Anytime algorithm</li>
+<li>Achieving better with a large branch factor</li>
+</ul></li>
+<li>Disadvantages:
+<ul>
+<li>Basic version converges very slowly</li>
+<li>Leading to small-probability failures</li>
+</ul></li>
+</ul>
+</section>
+<section id="principle-of-maximum-expected-utility" class="level3" data-number="1.2.6">
+<h3 data-number="1.2.6" class="anchored" data-anchor-id="principle-of-maximum-expected-utility"><span class="header-section-number">1.2.6</span> Principle of Maximum Expected Utility</h3>
+<p>A rational agent should choose the action that maximizes its expected utility, given its knowledge.</p>
+<p><strong>Utilities:</strong> Utilities are functions from outcomes (states of the world) to real numbers that describe an agent’s preferences. We hard-wire utilities and let behaviors emerge.</p>
+<p><strong>The Axioms of Rationality:</strong></p>
+<ul>
+<li><p><strong>Orderability</strong></p>
+<p><span class="math display">\[
+(A \succ B) \lor (B \succ A) \lor (A \sim B)
+\]</span></p></li>
+<li><p><strong>Transitivity</strong></p>
+<p><span class="math display">\[
+(A \succ B) \land (B \succ C) \Rightarrow (A \succ C)
+\]</span></p></li>
+<li><p><strong>Continuity</strong></p>
+<p><span class="math display">\[
+A \succ B \succ C
+\Rightarrow
+\exists p \; [p, A;\ 1-p, C] \sim B
+\]</span></p></li>
+<li><p><strong>Substitutability</strong></p>
+<p><span class="math display">\[
+A \sim B
+\Rightarrow
+[p, A;\ 1-p, C] \sim [p, B;\ 1-p, C]
+\]</span></p></li>
+<li><p><strong>Monotonicity</strong></p>
+<p><span class="math display">\[
+A \succ B
+\Rightarrow
+\left(
+p \ge q
+\iff
+[p, A;\ 1-p, B] \succeq [q, A;\ 1-q, B]
+\right)
+\]</span></p></li>
+</ul>
+<p>Rational preferences imply behavior describable as maximization of expected utility.</p>
 
 
 </section>
