@@ -1,0 +1,30 @@
+---
+title: "Generalization"
+page-layout: article
+search: true
+number-offset: [2]
+
+crossref:
+  chapters: true
+---
+
+## No Free Lunch Theorem
+
+::: {#thm-1}
+
+## No Free Lunch
+
+Let $A$ be any learning algorithm for the task of binary classification with respect to the $0$–$1$ loss over a domain $X$. Let $m$ be any number smaller than $|X|/2$, representing a training set size. Then, there exists a distribution $D$ over $X \times \{0,1\}$ such that:
+
+1. There exists a function $f : X \to \{0,1\}$ with $L_D(f) = 0$.
+
+2. With probability of at least $\frac{1}{7}$ over the choice of $S \sim D^m$, we have
+
+   $$
+   L_D(A(S)) \ge \frac{1}{8}
+   $$
+
+   (that is, the training algorithm fails).
+
+:::
+

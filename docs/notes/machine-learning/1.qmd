@@ -15,6 +15,7 @@ crossref:
 ## Gradient Descent
 
 - To minimize a function $f(x)$:
+
   $$
   x_{t+1}=x_t-\eta \nabla f(x_t)
   $$
@@ -23,6 +24,7 @@ crossref:
 ### Smoothness Assumption
 
 - Gradient is Lipschitz:
+
   $$
   \|\nabla f(w)-\nabla f(w')\|
   \leq
@@ -31,6 +33,7 @@ crossref:
   $$
 
 - Equivalent to:
+
   $$
   \left|
   f(w')-f(w)
@@ -44,6 +47,7 @@ crossref:
   $$
 
 - Equivalent to:
+
   $$
   \|\nabla^2 f(x)\|
   \leq L.
@@ -84,109 +88,108 @@ $$
 f(w') - f(w) < 0.
 $$
 
-
 $$
 \eta=O\left(\frac{1}{L}\right).
-$$ 
+$$
 
 ### $\mu$-Strongly Convex Function
 
 - A function $f$ is $\mu$-strongly convex if
 
-$$
-f(w')
-\ge
-f(w)
-+
-\left\langle \nabla f(w),\, w'-w \right\rangle
-+
-\frac{\mu}{2}\|w'-w\|^2.
-$$
+  $$
+  f(w')
+  \ge
+  f(w)
+  +
+  \left\langle \nabla f(w),\, w'-w \right\rangle
+  +
+  \frac{\mu}{2}\|w'-w\|^2.
+  $$
 
 - Equivalently, if $f$ is twice differentiable,
 
-$$
-\lambda_{\min}\left(\nabla^2 f(w)\right)
-\ge
-\mu
->
-0,
-$$
+  $$
+  \lambda_{\min}\left(\nabla^2 f(w)\right)
+  \ge
+  \mu
+  >
+  0,
+  $$
 
 - Equivalently
 
-$$
-f(ax + (1 - a)y) \le af(x) + (1 - a)f(y) - \frac{\mu}{2}a(1 - a)\|x - y\|^2, \quad \forall  a \in [0, 1].
-$$
+  $$
+  f(ax + (1 - a)y) \le af(x) + (1 - a)f(y) - \frac{\mu}{2}a(1 - a)\|x - y\|^2, \quad \forall  a \in [0, 1].
+  $$
 
-i.e., the Hessian is positive definite.
+  i.e., the Hessian is positive definite.
 
 - Strong convexity is a stronger notion than convexity.
 
 - The gradient is strongly monotone:
 
-$$
-\left\langle
-\nabla f(w')-\nabla f(w),\,
-w'-w
-\right\rangle
-\ge
-\mu \|w'-w\|^2.
-$$
+  $$
+  \left\langle
+  \nabla f(w')-\nabla f(w),\,
+  w'-w
+  \right\rangle
+  \ge
+  \mu \|w'-w\|^2.
+  $$
 
 ### Convergence Guarantee
 
 - If $f$ is $L$-smooth and convex, and
 
-$$
-w^*=\arg\min_w f(w),
-$$
+  $$
+  w^*=\arg\min_w f(w),
+  $$
 
-then running gradient descent with step size
+  then running gradient descent with step size
 
-$$
-\eta\leq \frac{1}{L}
-$$
+  $$
+  \eta\leq \frac{1}{L}
+  $$
 
-satisfies
+  satisfies
 
-$$
-f(w_t)
-\leq
-f(w^*)
-+
-\frac{\|w_0-w^*\|^2}{2\eta t}.
-$$
+  $$
+  f(w_t)
+  \leq
+  f(w^*)
+  +
+  \frac{\|w_0-w^*\|^2}{2\eta t}.
+  $$
 
 - Therefore, if $\eta = \frac{1}{L}$, we only need
 
-$$
-T
-=
-\frac{L\|w_0-w^*\|^2}{2\epsilon}
-$$
+  $$
+  T
+  =
+  \frac{L\|w_0-w^*\|^2}{2\epsilon}
+  $$
 
-iterations to find a solution such that
+  iterations to find a solution such that
 
-$$
-f(w_T)\leq f(w^*)+\epsilon.
-$$
+  $$
+  f(w_T)\leq f(w^*)+\epsilon.
+  $$
 
 - This is called a convergence rate of
 
-$$
-\frac{1}{T},
-$$
+  $$
+  \frac{1}{T},
+  $$
 
-or equivalently, gradient descent needs
+  or equivalently, gradient descent needs
 
-$$
-O\left(\frac{1}{\epsilon}\right)
-$$
+  $$
+  O\left(\frac{1}{\epsilon}\right)
+  $$
 
-iterations to converge to an $\epsilon$-optimal solution.
+  iterations to converge to an $\epsilon$-optimal solution.
 
-- Step 1: 
+**Step 1:**
 
 $$
 f(w_{i+1})
@@ -197,8 +200,7 @@ f(w_i)
 \|\nabla f(w_i)\|^2.
 $$
 
-
-- Step 2: By convexity, we have
+**Step 2:** By convexity, we have
 
 $$
 f(w_i)
@@ -211,7 +213,7 @@ w_i-w^*
 \right\rangle.
 $$
 
-## Stochastic Gradient Descent 
+## Stochastic Gradient Descent
 
 Similar to GD, but the gradient has some randomness:
 
@@ -273,7 +275,7 @@ $$
 \frac{\sum_{i=1}^{t} w_i}{t}.
 $$
 
-- Step 1: 
+**Step 1:**
 
 $$
 \mathbb E\left[f(w_{i+1})\right]
@@ -286,7 +288,7 @@ f(w_i)
 \frac{\eta}{2}\sigma^2.
 $$
 
-- Step 2: By convexity
+**Step 2:** By convexity
 
 $$
 \mathbb E\left[f(\bar w_t)\right]
@@ -298,8 +300,8 @@ f(w^*)
 \eta\sigma^2.
 $$
 
-
 ### Convergence Speed
+
 If we set
 
 $$
@@ -314,7 +316,7 @@ $$
 
 then the two error terms are bounded by $\epsilon$.
 
-- Notice that
+**Notice that**
 
 $$
 \eta \le \frac{1}{L},
@@ -330,14 +332,304 @@ $$
 
 If the function is smooth and strongly convex:
 
-  - GD achieves linear convergence, so the convergence is exponentially fast:
+- GD achieves linear convergence, so the convergence is exponentially fast:
 
-    $$
-    T = O\left(\log \frac{1}{\epsilon}\right).
-    $$
+  $$
+  T = O\left(\log \frac{1}{\epsilon}\right).
+  $$
 
-  - SGD achieves a
+- SGD achieves a
 
-    $$
-    T = O\left(\frac{1}{\epsilon}\right).
-    $$
+  $$
+  T = O\left(\frac{1}{\epsilon}\right).
+  $$
+
+### SVRG algorithm
+
+For $s=1,2,\ldots$
+
+1. $\widetilde{w}=\widetilde{w}_{s-1}$
+
+   $$
+   \widetilde{u}
+   =
+   \frac{1}{N}\sum_{i=1}^{N}\nabla l_i(\widetilde{w})
+   =
+   \nabla f(\widetilde{w})
+   $$
+
+2. $$
+   w_0=\widetilde{w}
+   $$
+
+3. For $t=1,2,\ldots,m$
+
+   - Random pick $i\in[N]$
+
+     $$
+     w_t
+     =
+     w_{t-1}
+     -
+     \eta
+     \left(
+     \nabla l_i(w_{t-1})
+     -
+     \nabla l_i(\widetilde{w})
+     +
+     \widetilde{u}
+     \right)
+     $$
+
+- **Option I:**
+
+  $$
+  \widetilde{w}_s=w_m
+  $$
+
+- **Option II:**
+
+  $$
+  \widetilde{w}_s=w_t
+  \quad
+  \text{for randomly chosen }
+  t\in\{0,1,\ldots,m-1\}.
+  $$
+
+### SAG
+
+$$
+x_{t+1}=x_t-\eta\left[
+\bar g^t+\frac1n\left(\nabla f_{i_t}(x_t)-g_{i_t}^t\right)
+\right]
+$$
+
+### SAGA
+
+$$
+x_{t+1}=x_t-\eta\left[
+\bar g^t+\nabla f_{i_t}(x_t)-g_{i_t}^t
+\right]
+$$
+
+### Comparison of SGD, SAG, SAGA, and SVRG
+
+::: {.table-responsive}
+
+| Property | SGD | SAG | SAGA | SVRG |
+|---|---|---|---|---|
+| Gradient estimator | $\nabla f_{i_t}(x_t)$ | $\bar g^t+\frac1n(\nabla f_{i_t}(x_t)-g_{i_t}^t)$ | $\bar g^t+\nabla f_{i_t}(x_t)-g_{i_t}^t$ | $\mu_s+\nabla f_{i_t}(x_t)-\nabla f_{i_t}(\tilde x_s)$ |
+| Unbiased | Yes | No | Yes | Yes |
+| Variance reduction | No | Yes | Yes | Yes |
+| Variance vanishes asymptotically | Not generally | Yes, under convergence conditions | Yes, under convergence conditions | Yes, under convergence conditions |
+| New component gradients per inner iteration | 1 | 1 | 1 | Usually 2 |
+| Periodic full gradient | No | No | No | Yes |
+| Additional storage | $O(d)$ | $O(nd)$ | $O(nd)$ | $O(d)$ |
+| Strongly convex convergence | $O(1/T)$ (suitable averaging) | Linear | Linear | Linear |
+
+:::
+
+Here,
+
+$$
+\kappa=\frac{L}{\mu},
+$$
+
+where each $f_i$ is convex and $L$-smooth, and $f$ is $\mu$-strongly convex.
+
+The complexity bounds assume standard algorithm-specific conditions and parameter choices.
+
+The four gradient estimators can be summarized as
+
+$$
+\boxed{
+\begin{aligned}
+v_t^{\mathrm{SGD}}
+&=\nabla f_{i_t}(x_t),\\[6pt]
+v_t^{\mathrm{SAG}}
+&=\bar g^t+\frac1n\left(\nabla f_{i_t}(x_t)-g_{i_t}^t\right),\\[6pt]
+v_t^{\mathrm{SAGA}}
+&=\bar g^t+\nabla f_{i_t}(x_t)-g_{i_t}^t,\\[6pt]
+v_t^{\mathrm{SVRG}}
+&=\mu_s+\nabla f_{i_t}(x_t)-\nabla f_{i_t}(\tilde x_s).
+\end{aligned}
+}
+$$
+
+## Mirror Descent
+
+### Bregman divergence:
+
+- Given any **1-strongly convex function** $w$ as the distance generating function, we can define distance between $x$ and $y$.
+
+  $$
+  V_x(y) = w(y) - \langle \nabla w(x), y-x \rangle - w(x)
+  $$
+
+- So
+
+  $$
+  V_x(y) \ge \frac{1}{2}\|x-y\|^2
+  $$
+
+- Three-point identity of Bregman divergence:
+
+  $$
+  \langle \nabla w(x)-\nabla w(y), y-u \rangle
+  =
+  V_x(u)-V_y(u)-V_x(y)
+  $$
+
+### Mirror Descent Algorithm
+
+Mirror step with length $\alpha$ is:
+
+$$
+x_{k+1} = \operatorname{Mirr}_{x_k}(\alpha \cdot \nabla f(x_k)),
+$$
+
+where
+
+$$
+\operatorname{Mirr}_x(g)
+=
+\arg\min_y
+\left\{
+V_x(y) + \langle g, y-x\rangle
+\right\}.
+$$
+
+equation:
+
+$$
+\nabla w(y) = \nabla w(x) - \alpha \nabla f(x_k).
+$$
+
+### Convergence Analysis
+
+We have:
+
+$$
+\begin{aligned}
+\alpha(f(x_k)-f(u))
+&\le \alpha\langle\nabla f(x_k),x_k-u\rangle\\
+&\le \frac{\alpha^2}{2}\|\nabla f(x_k)\|^2
++V_{x_k}(u)-V_{x_{k+1}}(u).
+\end{aligned}
+$$
+
+### Convergence Rate
+
+Assume $f$ is $\rho$-Lipschitz. Then
+
+$$
+\|\nabla f(x_k)\|\le\rho.
+$$
+
+Let
+
+$$
+\bar{x}=\frac1T\sum_{k=0}^{T-1}x_k,
+\qquad
+\Theta=V_{x_0}(x^*).
+$$
+
+Summing over $k=0,\ldots,T-1$, we obtain
+
+$$
+f(\bar{x})-f(x^*)
+\le
+\frac{\alpha\rho^2}{2}
++\frac{\Theta}{\alpha T}.
+$$
+
+Let
+
+$$
+\alpha=\frac{\sqrt{2\Theta}}{\rho\sqrt{T}}.
+$$
+
+Then
+
+$$
+f(\bar{x})-f(x^*)
+\le
+\frac{\sqrt{2\Theta}\cdot\rho}{\sqrt{T}}.
+$$
+
+To guarantee $f(\bar{x})-f(x^*)\le\epsilon$, it suffices to take
+
+$$
+T=O\left(\frac{\Theta\rho^2}{\epsilon^2}\right).
+$$
+
+## Matrix Completion
+
+**Matrix completion problem:**
+
+- $n \times m$ matrix $A$
+- Score is in $\{1,2,3,4,5\}$
+- Some are known (existing ratings)
+- Some are unknown (?)
+- Want to recommend movies to users
+
+**Assumptions:**
+
+- $A$ is low rank
+- Known entries are uniformly distributed
+- Incoherence. Formally, for $A = U\Sigma V^T$, $\forall i  \in [n], j \in [m]$,
+
+  $$
+  \|e_i^T U\| \le \sqrt{\frac{ur}{n}},
+  \qquad
+  \|e_j^T V\| \le \sqrt{\frac{ur}{m}}
+  $$
+
+  for some constant $u$ (scan every row of $U,V$). Here $U \in \mathbb{R}^{n \times r}$, $V \in \mathbb{R}^{m \times r}$,
+
+  $$
+  1 \le u \le \frac{\min\{n,m\}}{r}.
+  $$
+
+## Appendix
+
+- If $f$ is $L$-smooth and convex, then 
+$$
+f(y) \ge f(x) + \langle \nabla f(x), y-x\rangle + \frac{1}{2L} \|\nabla f(x)-\nabla f(y)\|^2.
+$$
+which implies
+
+$$
+\langle \nabla f(x)-\nabla f(y), x-y\rangle
+\ge \frac{1}{L} \|\nabla f(x)-\nabla f(y)\|^2.
+$$
+
+\
+
+- We have the Hölder's inequality:
+$$\langle x, y \rangle \le \|x\|_{p} \cdot \|y\|_{q}$$
+    where $\frac{1}{p} + \frac{1}{q} = 1$.
+When $p = q = 2$, this becomes the Cauchy-Schwarz inequality.
+
+\
+
+- For a finite probality function $p(x)$, we define
+$$
+w(p) = \sum_x p(x) \log p(x) .
+$$
+Then $w(p)$ is 1-strongly convex with respect to $\|\cdot\|_1$. The Bregman divergence is the KL divergence:
+$$
+V_p(q) = \sum_x p(x) \log \frac{p(x)}
+{q(x)} = D_{\mathrm{KL}}(p \| q) \ge \frac{1}{2}\|p-q\|_1^2.
+$$
+
+\ 
+
+- Let $C \subseteq \mathbb{R}^n$ be a nonempty closed convex set. The Euclidean projection onto $C$ is defined as
+$$
+\Pi_C(x) = \arg\min_{y \in C} \|x-y\|_2.
+$$
+For any $x,y \in \mathbb{R}^n$,
+$$
+\|\Pi_C(x)-\Pi_C(y)\|_2 \leq \|x-y\|_2.
+$$

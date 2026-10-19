@@ -7,6 +7,27 @@ number-offset: [1]
 crossref:
   chapters: true
 
+format:
+  html:
+    include-in-header:
+      text: |
+        <style>
+        #quarto-document-content { line-height: 1.65; }
+        #quarto-document-content h2,
+        #quarto-document-content h3 { text-wrap: balance; }
+        #quarto-document-content li + li { margin-top: .35rem; }
+        #quarto-document-content .math.inline {
+          display: inline-block;
+          white-space: nowrap;
+        }
+        #quarto-document-content .math.display {
+          display: block;
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-block: .25rem;
+        }
+        </style>
 ---
 
 ## Probability Spaces
@@ -15,15 +36,16 @@ crossref:
 
 ## Probability Space
 
-A **probability space** is a triple
-$(\Omega, \mathcal{F}, P)$ where $\Omega$ is a set of “outcomes,” $\mathcal{F}$ is a set of “events,” and
-$P : \mathcal{F} \to [0,1]$ is a function that assigns probabilities to events. We
-assume that $\mathcal{F}$ is a $\sigma$-field (or $\sigma$-algebra), i.e., a (nonempty) collection
-of subsets of $\Omega$ that satisfy
+A **probability space** is a triple $(\Omega, \mathcal{F}, P)$ where
+$\Omega$ is a set of “outcomes,” $\mathcal{F}$ is a set of “events,” and
+$P : \mathcal{F} \to [0,1]$ is a function that assigns probabilities to events.
 
-(i) if $A \in \mathcal{F}$ then $A^c \in \mathcal{F}$, and
+We assume that $\mathcal{F}$ is a $\sigma$-field (or $\sigma$-algebra), i.e.,
+a (nonempty) collection of subsets of $\Omega$ that satisfy
 
-(ii) if $A_i \in \mathcal{F}$ is a countable sequence of sets then $\bigcup_i A_i \in \mathcal{F}$.
+i) if $A \in \mathcal{F}$ then $A^c \in \mathcal{F}$, and
+
+ii) if $A_i \in \mathcal{F}$ is a countable sequence of sets then $\bigcup_i A_i \in \mathcal{F}$.
 
 :::
 
@@ -34,13 +56,13 @@ of subsets of $\Omega$ that satisfy
 A **measure** is a nonnegative countably
 additive set function; that is, a function $\mu : \mathcal{F} \to \mathbb{R} \cup \{\infty\}$ with
 
-(i) $\mu(A) \ge \mu(\emptyset) = 0$ for all $A \in \mathcal{F}$, and
+i) $\mu(A) \ge \mu(\emptyset) = 0$ for all $A \in \mathcal{F}$, and
 
-(ii) if $A_i \in \mathcal{F}$ is a countable sequence of disjoint sets, then
+ii) if $A_i \in \mathcal{F}$ is a countable sequence of disjoint sets, then
 
-      $$
-      \mu\left(\bigcup_i A_i\right) = \sum_i \mu(A_i).
-      $$
+    $$
+    \mu\left(\bigcup_i A_i\right) = \sum_i \mu(A_i).
+    $$
 
 If $\mu(\Omega) = 1$, we call $\mu$ a **probability measure**. Probability
 measures are usually denoted by $P$.
@@ -53,30 +75,68 @@ $$
 
 :::
 
-::: {#thm-1}
+::: {#thm-1 name="Properties of Measures"}
 
 Let $\mu$ be a measure on $(\Omega, \mathcal{F})$ (a $\sigma$-field).
 
-(i) **monotonicity.** If $A \subset B$ then $\mu(A) \le \mu(B)$.
+i) **Monotonicity.** If $A \subset B$ then $\mu(A) \le \mu(B)$.
 
-(ii) **subadditivity.** If $A \subset \bigcup_{m=1}^{\infty} A_m$ then
-$$
-\mu(A) \le \sum_{m=1}^{\infty} \mu(A_m).
-$$
+ii) **Subadditivity.** If $A \subset \bigcup_{m=1}^{\infty} A_m$ then
 
-(iii) **continuity from below.** If $A_i \uparrow A$ (i.e., $A_1 \subset A_2 \subset \cdots$ and $\bigcup_i A_i = A$) then
-$$
-\mu(A_i) \uparrow \mu(A).
-$$
+    $$
+    \mu(A) \le \sum_{m=1}^{\infty} \mu(A_m).
+    $$
 
-(iv) **continuity from above.** If $A_i \downarrow A$ (i.e., $A_1 \supset A_2 \supset \cdots$ and $\bigcap_i A_i = A$), with $\mu(A_1) < \infty$, then
-$$
-\mu(A_i) \downarrow \mu(A).
-$$
+iii) **Continuity from below.** If $A_i \uparrow A$ (i.e.,
+     $A_1 \subset A_2 \subset \cdots$ and $\bigcup_i A_i = A$), then
+     $\mu(A_i) \uparrow \mu(A)$.
+
+iv) **Continuity from above.** If $A_i \downarrow A$ (i.e.,
+    $A_1 \supset A_2 \supset \cdots$ and $\bigcap_i A_i = A$), with
+    $\mu(A_1) < \infty$, then $\mu(A_i) \downarrow \mu(A)$.
 
 :::
 
-::: {.callout-note collapse="true"} 
+::: {.callout-note collapse="true"}
+
+## Classification of Measures
+
+Let $(X,\mathcal A,\mu)$ be a measure space. The following classes are not mutually exclusive.
+
+1. **Finite measure.** A measure $\mu$ is finite if $\mu(X)<\infty$.
+
+   For example, Lebesgue measure on $[0,2]$ is finite, with total mass $2$.
+
+2. **Probability measure.** A measure $\mu$ is a probability measure if $\mu(X)=1$.
+
+   Thus, every probability measure is a finite measure. For example, Lebesgue measure on $[0,1]$ is a probability measure.
+
+3. **$\sigma$-finite measure.** A measure $\mu$ is $\sigma$-finite if there exist
+   measurable sets $E_1,E_2,\ldots$ such that
+
+   $$
+   \begin{gathered}
+   X = \bigcup_{n=1}^{\infty} E_n, \\
+   \mu(E_n) < \infty \quad \text{for every } n.
+   \end{gathered}
+   $$
+
+   For example, Lebesgue measure on $\mathbb R$ is $\sigma$-finite because
+
+   $$
+   \begin{gathered}
+   \mathbb R = \bigcup_{n=1}^{\infty} [-n,n], \\
+   m([-n,n]) = 2n < \infty.
+   \end{gathered}
+   $$
+
+4. **Infinite measure.** A measure $\mu$ is infinite if $\mu(X)=\infty$.
+
+   An infinite measure may or may not be $\sigma$-finite. Counting measure on $\mathbb N$ is $\sigma$-finite, whereas counting measure on $\mathbb R$ is not.
+
+:::
+
+::: {.callout-tip collapse="true"}
 
 ## Generated $\sigma$-Fields
 
@@ -88,18 +148,17 @@ we drop the superscript.
 
 **Measures on the real line.** Measures on $(\mathbb{R},\mathcal{R})$ are defined by giving a **Stieltjes measure function** with the following properties:
 
-(i) $F$ is nondecreasing.
+i) $F$ is nondecreasing.
 
-(ii) $F$ is right continuous, i.e. $\lim_{y\downarrow x} F(y)=F(x)$.
+ii) $F$ is right continuous, i.e. $\lim_{y\downarrow x} F(y)=F(x)$.
 
 :::
 
-\ 
-
-::: {#thm-2}
+::: {#thm-2 name="Stieltjes Measures"}
 
 Associated with each Stieltjes measure function $F$ there
 is a unique measure $\mu$ on $(\mathbb{R}, \mathcal{R})$ with
+
 $$
 \mu((a,b]) = F(b) - F(a)
 $$
@@ -108,18 +167,22 @@ When $F(x) = x$ the resulting measure is called **Lebesgue measure**.
 
 :::
 
-::: {#thm-2.1}
+::: {#cor-1 name="Generating the Borel σ-Field"}
 
 Let $\mathcal{C}(\mathbb{R}^d)$ be the collection of **countable** open rectangles
+of the form
 
 $$
-\mathcal{C}(\mathbb{R}^d)
-= \left\{
-(a_1,b_1) \times \cdots \times (a_d,b_d)
-\;\middle|\;
-a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\},\quad i=1,\ldots,d
-\right\}.
+(a_1,b_1) \times \cdots \times (a_d,b_d),
 $$
+
+where the endpoints satisfy
+
+$$
+a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\}
+$$
+
+for $i = 1,\ldots,d$.
 
 Then $\mathcal{C}(\mathbb{R}^d)$ generates the Borel $\sigma$-field on $\mathbb{R}^d$; that is,
 
@@ -131,7 +194,6 @@ $$
 
 ## Random Variables
 
-
 ::: {.callout-tip collapse="true"}
 
 ## Measurable Map and Random Vector
@@ -140,8 +202,9 @@ A function $X : \Omega \to S$ is said to be a **measurable map** from $(\Omega, 
 
 $$
 X^{-1}(B) \equiv \{\omega : X(\omega) \in B\} \in \mathcal{F}
-\quad \text{for all } B \in \mathcal{S}.
 $$
+
+for all $B \in \mathcal{S}$.
 
 If $(S, \mathcal{S}) = (\mathbb{R}^d, \mathcal{R}^d)$ and $d > 1$, then $X$ is called a **random vector**. Of course, if $d = 1$, $X$ is called a **random variable**.
 
@@ -149,28 +212,43 @@ We define $\sigma(X)$ to be the smallest $\sigma$-algebra on $\Omega$ such that 
 
 :::
 
-::: {#thm-3}
+::: {#thm-3 name="Measurability on a Generating Collection"}
 
-For $\mathcal{A}$ generates $\mathcal{S}$, and for all $A \in \mathcal{A}$, $X^{-1}(A) \in \mathcal{F}$, then $X$ is a measurable map from $(\Omega, \mathcal{F})$ to $(S, \mathcal{S})$.
+Suppose $\mathcal{A}$ generates $\mathcal{S}$. If $X^{-1}(A) \in \mathcal{F}$ for every $A \in \mathcal{A}$, then $X$ is a measurable map from $(\Omega, \mathcal{F})$ to $(S, \mathcal{S})$.
+
 :::
 
-\ 
+::: {#thm-4 name="Composition of Measurable Maps"}
 
-::: {#thm-4}
-
-If 
+If the maps
 
 $$
-X : (\Omega, \mathcal{F}) \to (S, \mathcal{S})
+\begin{aligned}
+X &: (\Omega, \mathcal{F}) \to (S, \mathcal{S}), \\
+f &: (S, \mathcal{S}) \to (T, \mathcal{T})
+\end{aligned}
 $$
 
-and
+are measurable, then $f(X)$ is a measurable map from $(\Omega, \mathcal{F})$ to $(T, \mathcal{T})$.
+
+:::
+
+::: {.callout-note collapse="true"}
+
+## Why We Use the Borel $\sigma$-Field on $\mathbb{R}^d$
+
+The Borel $\sigma$-field $\mathcal{B}(\mathbb{R}^d)$ is the smallest $\sigma$-field that contains all open sets in $\mathbb{R}^d$.
+
+An important property is that **every continuous function is Borel measurable**.
+
+Let $f : \mathbb{R}^d \to \mathbb{R}$ be continuous. Then, for every
+$B \in \mathcal{B}(\mathbb{R})$,
 
 $$
-f : (S, \mathcal{S}) \to (T, \mathcal{T})
+f^{-1}(B) \in \mathcal{B}(\mathbb{R}^d).
 $$
 
-are measurable maps, then $f(X)$ is a measurable map from $(\Omega, \mathcal{F})$ to $(T, \mathcal{T})$.
+More generally, if $X$ is an $\mathbb{R}^d$-valued random vector and $f$ is continuous, then $f(X)$ is a random variable.
 
 :::
 
@@ -210,43 +288,33 @@ $$
 
 :::
 
-::: {#thm-5}
+::: {#thm-5 name="Properties of Distribution Functions"}
 
 Any distribution function $F$ has the following properties:
 
-(i) $F$ is nondecreasing.
+i) $F$ is nondecreasing.
 
-(ii) 
-$$
-\lim_{x\to\infty}F(x)=1,
-\qquad
-\lim_{x\to-\infty}F(x)=0.
-$$
+ii) The limits at infinity are
 
-(iii) $F$ is right continuous, i.e.,
-$$
-\lim_{y\downarrow x}F(y)=F(x).
-$$
+    $$
+    \lim_{x\to\infty} F(x) = 1,
+    \qquad
+    \lim_{x\to-\infty} F(x) = 0.
+    $$
 
-(iv) If
-$$
-F(x-)=\lim_{y\uparrow x}F(y),
-$$
-then
-$$
-F(x-)=P(X<x).
-$$
+iii) $F$ is right continuous, i.e., $\lim_{y\downarrow x} F(y) = F(x)$.
 
-(v) 
-$$
-P(X=x)=F(x)-F(x-).
-$$
+iv) If $F(x-) = \lim_{y\uparrow x} F(y)$, then $F(x-) = P(X < x)$.
+
+v) The probability at a point is
+
+   $$
+   P(X = x) = F(x) - F(x-).
+   $$
 
 :::
 
-\ 
-
-::: {#thm-6}
+::: {#thm-6 name="Existence of a Distribution"}
 
 If $F$ satisfies properties (i), (ii), and (iii), then $F$ is the distribution function of some random variable.
 
@@ -274,7 +342,7 @@ $$
 
 :::
 
-::: {#thm-7}
+::: {#thm-7 name="Properties of the Integral"}
 
 $\varphi \ge \psi$ $\mu$-**almost everywhere** (or $\varphi \ge \psi$ $\mu$-a.e.) means
 
@@ -284,66 +352,427 @@ $$
 
 Let $\varphi$ and $\psi$ be simple functions.
 
-(i) If $\varphi \ge 0$ a.e. then
+i) **Nonnegativity.** If $\varphi \ge 0$ a.e., then $\int \varphi \, d\mu \ge 0$.
 
-      $$
-      \int \varphi \, d\mu \ge 0.
-      $$
+ii) **Homogeneity.** For any $a \in \mathbb{R}$, $\int a\varphi \, d\mu = a \int \varphi \, d\mu$.
 
-(ii) For any $a \in \mathbb{R}$,
+iii) **Additivity.**
 
-      $$
-      \int a\varphi \, d\mu
-      =
-      a \int \varphi \, d\mu.
-      $$
+     $$
+     \int (\varphi + \psi) \, d\mu
+     = \int \varphi \, d\mu + \int \psi \, d\mu.
+     $$
 
-(iii)
+iv) **Monotonicity.** If $\varphi \le \psi$ a.e., then $\int \varphi \, d\mu \le \int \psi \, d\mu$.
 
-      $$
-      \int (\varphi + \psi) \, d\mu
-      =
-      \int \varphi \, d\mu
-      +
-      \int \psi \, d\mu.
-      $$
+v) **Equality almost everywhere.** If $\varphi = \psi$ a.e., then $\int \varphi \, d\mu = \int \psi \, d\mu$.
 
-If (i) and (iii) hold then we have:
+vi) **Triangle inequality.**
 
-(iv) If $\varphi \le \psi$ a.e. then
-
-      $$
-      \int \varphi \, d\mu
-      \le
-      \int \psi \, d\mu.
-      $$
-
-(v) If $\varphi = \psi$ a.e. then
-
-      $$
-      \int \varphi \, d\mu
-      =
-      \int \psi \, d\mu.
-      $$
-
-If, in addition, (ii) holds when $a=-1$ we have
-
-(vi)
-
-      $$
-      \left|
-      \int \varphi \, d\mu
-      \right|
-      \le
-      \int |\varphi| \, d\mu.
-      $$
+    $$
+    \left|\int \varphi \, d\mu\right| \le \int |\varphi| \, d\mu.
+    $$
 
 :::
 
 ### Bounded Functions
 
+::: {.callout-tip collapse="true"}
+
+## Bounded Function
+
+Let $E$ be a set with $\mu(E) < \infty$ and let $f$ be a bounded function that
+vanishes on $E^c$.
+
+To define the integral of $f$, we observe that if $\varphi, \psi$ are simple
+functions that have $\varphi \le f \le \psi$, then we want to have
+
+$$
+\int \varphi \, d\mu \le \int f \, d\mu \le \int \psi \, d\mu,
+$$
+
+so we let
+
+$$
+\begin{aligned}
+\int f \, d\mu
+&= \sup_{\varphi \le f} \int \varphi \, d\mu \\
+&= \inf_{\psi \ge f} \int \psi \, d\mu.
+\end{aligned}
+$$
+
+:::
+
+::: {#cor-2 name="Properties of the Integral for Bounded Functions"}
+
+Let $E$ be a set with $\mu(E) < \infty$. If $f$ and $g$ are bounded functions that vanish on $E^c$, then:
+
+i) **Nonnegativity.** If $f \ge 0$ a.e., then $\int f \, d\mu \ge 0$.
+
+ii) **Homogeneity.** For any $a \in \mathbb{R}$, $\int af \, d\mu = a \int f \, d\mu$.
+
+iii) **Additivity.**
+
+     $$
+     \int (f + g) \, d\mu = \int f \, d\mu + \int g \, d\mu.
+     $$
+
+iv) **Monotonicity.** If $g \le f$ a.e., then $\int g \, d\mu \le \int f \, d\mu$.
+
+v) **Equality almost everywhere.** If $g = f$ a.e., then $\int g \, d\mu = \int f \, d\mu$.
+
+vi) **Triangle inequality.**
+
+    $$
+    \left|\int f \, d\mu\right| \le \int |f| \, d\mu.
+    $$
+
+:::
 
 ### Nonnegative Functions
 
+::: {.callout-tip collapse="true"}
+
+## Nonnegative Function
+
+For $f\ge 0$, define
+
+$$
+\int f\,d\mu = \sup_{h\in\mathcal{H}_f}\int h\,d\mu,
+$$
+
+where $\mathcal{H}_f$ consists of bounded functions $h$ such that
+
+$$
+0 \le h \le f,
+\qquad
+\mu(\{x : h(x) > 0\}) < \infty.
+$$
+
+:::
+
+::: {#lem-1 name="Approximation by Truncation"}
+
+Let $E_n \uparrow \Omega$ have $\mu(E_n) < \infty$ and let $a \wedge b = \min(a,b)$. Then
+
+$$
+\int_{E_n} f \wedge n\, d\mu
+\uparrow
+\int f\, d\mu
+\qquad \text{as } n \uparrow \infty.
+$$
+
+:::
+
+::: {#cor-3 name="Properties of the Integral for Nonnegative Functions"}
+
+Suppose $f,g \ge 0$.
+
+i) **Nonnegativity.** $\int f \, d\mu \ge 0$.
+
+ii) **Homogeneity.** If $a > 0$, then $\int af \, d\mu = a \int f \, d\mu$.
+
+iii) **Additivity.**
+
+     $$
+     \int (f + g) \, d\mu = \int f \, d\mu + \int g \, d\mu.
+     $$
+
+iv) **Monotonicity.** If $0 \le g \le f$ a.e., then $\int g \, d\mu \le \int f \, d\mu$.
+
+v) **Equality almost everywhere.** If $0 \le g = f$ a.e., then $\int g \, d\mu = \int f \, d\mu$.
+
+:::
+
+::: {.callout-note collapse="true"}
+
+## The Standard Definition of the Lebesgue Integral
+
+Let $(X,\mathcal A,\mu)$ be a measure space. For a nonnegative measurable
+function $f:X\to[0,\infty]$, define
+
+$$
+\int_X f \, d\mu
+= \sup_{\substack{s\text{ nonnegative simple} \\ s \le f}}
+  \int_X s \, d\mu.
+$$
+
+In other words, approximate $f$ from below using nonnegative simple functions
+and take the supremum of their integrals. The integral is allowed to equal
+$+\infty$.
+
+:::
 
 ### General Functions
+
+::: {.callout-tip collapse="true"}
+
+## General Function
+
+We say $f$ is integrable if
+
+$$
+\int |f|\,d\mu < \infty.
+$$
+
+The **positive and negative parts** of $f$ are
+
+$$
+\begin{aligned}
+f^+(x) &= f(x)\vee 0, \\
+f^-(x) &= (-f(x))\vee 0,
+\end{aligned}
+$$
+
+where $a\vee b=\max(a,b)$. They satisfy
+
+$$
+\begin{aligned}
+f(x) &= f^+(x)-f^-(x), \\
+|f(x)| &= f^+(x)+f^-(x).
+\end{aligned}
+$$
+
+We define the integral of $f$ by
+
+$$
+\int f \, d\mu = \int f^+ \, d\mu - \int f^- \, d\mu.
+$$
+
+:::
+
+::: {#lem-2 name="Integral of a Difference"}
+
+If $f=f_1-f_2$, where $f_1,f_2\ge 0$ and $\int f_i\,d\mu<\infty$ for $i=1,2$, then
+
+$$
+\int f\,d\mu = \int f_1\,d\mu - \int f_2\,d\mu.
+$$
+
+:::
+
+::: {#thm-8 name="Properties of the Integral for General Functions"}
+
+Suppose $f$ and $g$ are integrable.
+
+i) **Nonnegativity.** If $f \ge 0$ a.e., then $\int f \, d\mu \ge 0$.
+
+ii) **Homogeneity.** For all $a \in \mathbb{R}$, $\int af \, d\mu = a \int f \, d\mu$.
+
+iii) **Additivity.**
+
+     $$
+     \int (f + g) \, d\mu = \int f \, d\mu + \int g \, d\mu.
+     $$
+
+iv) **Monotonicity.** If $g \le f$ a.e., then $\int g \, d\mu \le \int f \, d\mu$.
+
+v) **Equality almost everywhere.** If $g = f$ a.e., then $\int g \, d\mu = \int f \, d\mu$.
+
+vi) **Triangle inequality.**
+
+    $$
+    \left|\int f \, d\mu\right| \le \int |f| \, d\mu.
+    $$
+
+:::
+
+### Notation for Special Cases
+
+The notation for an integral depends on the underlying measure:
+
+**Lebesgue measure.** For $\lambda$ on $(\mathbb{R}^d, \mathcal{R}^d)$,
+
+$$
+\int f(x) \, dx = \int f \, d\lambda.
+$$
+
+**Lebesgue measure on an interval.** For $E = [a,b] \subset \mathbb{R}$,
+
+$$
+\int_a^b f(x) \, dx = \int_E f \, d\lambda.
+$$
+
+**Stieltjes measure.** For $\mu$ on $(\mathbb{R}, \mathcal{R})$, with
+$\mu((a,b]) = G(b) - G(a)$ for $a < b$,
+
+$$
+\int f(x) \, dG(x) = \int f \, d\mu.
+$$
+
+**Counting measure.** For a countable set $\Omega$, with $\mathcal{F}$
+containing all subsets,
+
+$$
+\sum_{i \in \Omega} f(i) = \int f \, d\mu.
+$$
+
+## Properties of the Integral
+
+### Radon–Nikodym Derivatives
+
+::: {#thm-9 name="Radon–Nikodym Theorem"}
+
+Let $\mu$ and $\nu$ be **$\sigma$-finite measures** on the same measurable space $(\Omega,\mathcal F)$. If
+
+$$
+\nu\ll\mu,
+$$
+
+meaning
+
+$$
+\mu(A)=0\implies\nu(A)=0,
+$$
+
+then there exists a nonnegative measurable function $f$ such that
+
+$$
+\nu(A)=\int_A f\,d\mu
+$$
+
+for every $A\in\mathcal F$.
+
+The function $f$ is unique **up to a $\mu$-null set** and is called the **Radon–Nikodym derivative**:
+
+$$
+f=\frac{d\nu}{d\mu}.
+$$
+
+:::
+
+### Integral Inequalities
+
+::: {#thm-10 name="Jensen's Inequality"}
+
+Suppose $\varphi$ is convex, that is,
+
+$$
+\lambda\varphi(x) + (1-\lambda)\varphi(y)
+\ge
+\varphi\bigl(\lambda x + (1-\lambda)y\bigr)
+$$
+
+for all $\lambda \in (0,1)$ and $x,y \in \mathbb{R}$. If $\mu$ is a probability measure, and $f$ and $\varphi(f)$ are integrable, then
+
+$$
+\varphi\left(\int f \, d\mu\right)
+\le
+\int \varphi(f) \, d\mu.
+$$
+
+:::
+
+For $1 \le p < \infty$, let
+
+$$
+\|f\|_p = \left(\int |f|^p \, d\mu\right)^{1/p}.
+$$
+
+Notice that $\|cf\|_p = |c| \cdot \|f\|_p$ for any real number $c$.
+
+::: {#thm-11 name="Hölder's Inequality"}
+
+If $p,q \in (1,\infty)$ with
+
+$$
+\frac{1}{p} + \frac{1}{q} = 1,
+$$
+
+then
+
+$$
+\int |fg| \, d\mu \le \|f\|_p \|g\|_q.
+$$
+
+:::
+
+::: {#cor-4 name="Cauchy–Schwarz Inequality"}
+
+If $p=q=2$, then Hölder's inequality becomes the Cauchy–Schwarz inequality:
+
+$$
+\int |fg| \, d\mu \le \|f\|_2 \|g\|_2.
+$$
+
+:::
+
+### Convergence Theorems
+
+::: {.callout-tip collapse="true"}
+
+## Convergence in Measure and Almost Everywhere
+
+Let $(X,\mathcal A,\mu)$ be a measure space, and let
+$f_n,f:X\to\mathbb R$ be measurable functions.
+
+**Convergence in measure.** We say that $f_n \to f$ in measure if, for any
+$\epsilon > 0$,
+
+$$
+\mu\bigl(\{x : |f_n(x)-f(x)| > \epsilon\}\bigr) \to 0
+$$
+
+as $n \to \infty$.
+
+**Almost-everywhere convergence.** We say that $f_n$ converges to $f$ almost
+everywhere if there exists a measurable set $Z\subseteq X$ with $\mu(Z)=0$ such that
+
+$$
+\lim_{n\to\infty}f_n(x)=f(x)
+$$
+
+for every $x\in X\setminus Z$.
+
+We write
+
+$$
+f_n\xrightarrow{\mathrm{a.e.}}f.
+$$
+
+On a space of finite measure, convergence in measure is a weaker assumption than
+convergence a.e., but the next result is easier to prove in this greater generality.
+
+:::
+
+::: {#thm-12 name="Bounded Convergence Theorem"}
+
+Let $E$ be a set with $\mu(E)<\infty$. Suppose $f_n$ vanishes on $E^c$, $|f_n(x)|\le M$, and $f_n\to f$ in measure. Then
+
+$$
+\int f \, d\mu = \lim_{n\to\infty} \int f_n \, d\mu.
+$$
+
+:::
+
+::: {#thm-13 name="Fatou's Lemma"}
+
+If $f_n \ge 0$ then
+
+$$
+\liminf_{n\to\infty}\int f_n\,d\mu
+\ge
+\int\left(\liminf_{n\to\infty}f_n\right)\,d\mu.
+$$
+
+:::
+
+::: {#thm-14 name="Monotone Convergence Theorem"}
+
+If $f_n\ge0$ and $f_n\uparrow f$, then
+
+$$
+\int f_n\,d\mu \uparrow \int f\,d\mu.
+$$
+
+:::
+
+::: {#thm-15 name="Dominated Convergence Theorem"}
+
+If $f_n\to f$ a.e., $|f_n|\le g$ for all $n$, and $g$ is integrable, then
+
+$$
+\int f_n\,d\mu \longrightarrow \int f\,d\mu.
+$$
+
+:::

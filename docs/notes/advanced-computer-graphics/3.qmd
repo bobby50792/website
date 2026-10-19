@@ -1,0 +1,57 @@
+---
+title: "Learning Geometry"
+page-layout: article
+search: true
+number-offset: [3]
+
+crossref:
+  chapters: true
+---
+
+## Geometric Datasets
+
+[WordNet](https://wordnet.princeton.edu/) (semantic category),
+[ImageNet](https://www.image-net.org/) (semantic category images),
+[ShapeNet](https://huggingface.co/ShapeNet) (rich in attributes).
+
+**Other 3D Object and Scene Datasets:**
+
+- [A Large Dataset of Object Scans](http://redwood-data.org/3dscan/) ([paper](https://arxiv.org/abs/1602.02481))
+- [Thingi10K: A Dataset of 10,000 3D-Printing Models](https://ten-thousand-models.appspot.com/)
+- [ABC: A Big CAD Model Dataset for Geometric Deep Learning](https://deep-geometry.github.io/abc-dataset/)
+- [Objaverse-XL](https://objaverse.allenai.org/)
+- [ScanNet](https://www.scan-net.org/ScanNet/)
+- [ScanNet++](https://scannetpp.mlsg.cit.tum.de/scannetpp/)
+- [SceneNet](https://github.com/ankurhanda/SceneNetv1.0)
+
+**Driving Datasets:**
+
+- [Waymo Open Dataset](https://waymo.com/open/)
+- [SemanticKITTI](https://www.semantic-kitti.org/)
+
+**4D Datasets:**
+
+- [HOI4D: A 4D Egocentric Dataset for Category-Level Human-Object Interaction](https://hoi4d.github.io/)
+- [BEHAVE: Dataset and Method for Tracking Human Object Interactions](https://virtualhumans.mpi-inf.mpg.de/behave/)
+- [EgoBody: Human Body Shape and Motion of Interacting People from Head-Mounted Devices](https://sanweiliti.github.io/egobody/egobody.html)
+- [ARCTIC: A Dataset for Dexterous Bimanual Hand-Object Manipulation](https://arctic.is.tue.mpg.de/)
+
+**Virtual Environments:**
+
+- [ThreeDWorld (TDW)](https://github.com/threedworld-mit/tdw)
+- [AI2-THOR](https://ai2thor.allenai.org/)
+- [DeepMind Lab](https://github.com/google-deepmind/lab)
+- [Gibson](https://gibsonenv.github.io/)
+- [Habitat](https://aihabitat.org/)
+- [HoME](https://arxiv.org/abs/1711.11017)
+- [MuJoCo](https://mujoco.org/)
+- [PyBullet](https://pybullet.org/)
+- [VirtualHome](https://github.com/xavierpuigf/virtualhome)
+- [iGibson](https://svl.stanford.edu/igibson/)
+- [SAPIEN: A SimulAted Part-Based Interactive ENvironment](https://sapien.ucsd.edu/)
+
+## Data-Driven Shape Analysis
+
+
+## Data-Driven Shape Synthesis
+

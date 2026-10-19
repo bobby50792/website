@@ -369,3 +369,56 @@ p_{\text{clip}}
 PVM\,p_{\text{object}}.
 }
 $$
+
+### Projection Transformation
+
+
+- 3D to 2D
+- Orthographic Projection vs. Perspective Projection
+
+**Orthographic Projection:**
+
+- Camera located at origin, looking at -Z, up at Y
+- Drop Z coordinate
+- Translate and scale the resulting rectangle to $[-1, 1]^2$
+
+Translate (**center to origin**) first, then scale (length/width/height to **2**).
+
+$$
+M_{\text{ortho}} =
+\begin{bmatrix}
+\frac{2}{r-l} & 0 & 0 & 0 \\
+0 & \frac{2}{t-b} & 0 & 0 \\
+0 & 0 & \frac{2}{n-f} & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0 & -\frac{r+l}{2} \\
+0 & 1 & 0 & -\frac{t+b}{2} \\
+0 & 0 & 1 & -\frac{n+f}{2} \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+**Perspective Projection:**
+
+- Most common in Computer Graphics
+- Further objects are smaller
+- Parallel lines not parallel; converge to single point
+
+First "squish" the frustum into a cuboid, then apply orthographic projection.
+
+
+### Viewport Transformation
+
+- After MVP (Model-View-Projection) transformation $\rightarrow$ normalized device coordinate (NDC).
+
+- Transform the NDC space $(-1,1)^3$ to the screen space
+
+  $$
+  (s_x,s_x+w_s)\times(s_y,s_y+h_s)\times(f_s,n_s)
+  $$
+
+  $\rightarrow$ another affine transformation.
+
+- Usually set $s_x,s_y$ to $0$, treat $w_s,h_s$ as the screen width and height, and set $f_s,n_s$ to $-1,1$ so that the $z$ coordinates are untouched.
