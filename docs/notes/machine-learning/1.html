@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../docs/notes/advanced-computer-graphics/index.html" rel="next">
+<link href="../../../docs/notes/machine-learning/2.html" rel="next">
 <link href="../../../docs/notes/machine-learning/index.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -789,6 +789,12 @@ window.Quarto = {
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/machine-learning/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalization</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -812,6 +818,12 @@ window.Quarto = {
  <span class="menu-text">Transformations</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/advanced-computer-graphics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learning Geometry</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -827,6 +839,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../docs/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/artificial-intelligence/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logic</span></a>
   </div>
 </li>
       </ul>
@@ -854,7 +872,20 @@ window.Quarto = {
   <li><a href="#analysis-of-sgd" id="toc-analysis-of-sgd" class="nav-link" data-scroll-target="#analysis-of-sgd"><span class="header-section-number">1.2.1</span> Analysis of SGD</a></li>
   <li><a href="#convergence-speed" id="toc-convergence-speed" class="nav-link" data-scroll-target="#convergence-speed"><span class="header-section-number">1.2.2</span> Convergence Speed</a></li>
   <li><a href="#convergence-comparison" id="toc-convergence-comparison" class="nav-link" data-scroll-target="#convergence-comparison"><span class="header-section-number">1.2.3</span> Convergence Comparison</a></li>
+  <li><a href="#svrg-algorithm" id="toc-svrg-algorithm" class="nav-link" data-scroll-target="#svrg-algorithm"><span class="header-section-number">1.2.4</span> SVRG algorithm</a></li>
+  <li><a href="#sag" id="toc-sag" class="nav-link" data-scroll-target="#sag"><span class="header-section-number">1.2.5</span> SAG</a></li>
+  <li><a href="#saga" id="toc-saga" class="nav-link" data-scroll-target="#saga"><span class="header-section-number">1.2.6</span> SAGA</a></li>
+  <li><a href="#comparison-of-sgd-sag-saga-and-svrg" id="toc-comparison-of-sgd-sag-saga-and-svrg" class="nav-link" data-scroll-target="#comparison-of-sgd-sag-saga-and-svrg"><span class="header-section-number">1.2.7</span> Comparison of SGD, SAG, SAGA, and SVRG</a></li>
   </ul></li>
+  <li><a href="#mirror-descent" id="toc-mirror-descent" class="nav-link" data-scroll-target="#mirror-descent"><span class="header-section-number">1.3</span> Mirror Descent</a>
+  <ul class="collapse">
+  <li><a href="#bregman-divergence" id="toc-bregman-divergence" class="nav-link" data-scroll-target="#bregman-divergence"><span class="header-section-number">1.3.1</span> Bregman divergence:</a></li>
+  <li><a href="#mirror-descent-algorithm" id="toc-mirror-descent-algorithm" class="nav-link" data-scroll-target="#mirror-descent-algorithm"><span class="header-section-number">1.3.2</span> Mirror Descent Algorithm</a></li>
+  <li><a href="#convergence-analysis" id="toc-convergence-analysis" class="nav-link" data-scroll-target="#convergence-analysis"><span class="header-section-number">1.3.3</span> Convergence Analysis</a></li>
+  <li><a href="#convergence-rate" id="toc-convergence-rate" class="nav-link" data-scroll-target="#convergence-rate"><span class="header-section-number">1.3.4</span> Convergence Rate</a></li>
+  </ul></li>
+  <li><a href="#matrix-completion" id="toc-matrix-completion" class="nav-link" data-scroll-target="#matrix-completion"><span class="header-section-number">1.4</span> Matrix Completion</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">1.5</span> Appendix</a></li>
   </ul>
 </nav>
     </div>
@@ -885,21 +916,24 @@ window.Quarto = {
 <section id="gradient-descent" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">1.1</span> Gradient Descent</h2>
 <ul>
-<li>To minimize a function <span class="math inline">\(f(x)\)</span>: <span class="math display">\[
+<li><p>To minimize a function <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[
 x_{t+1}=x_t-\eta \nabla f(x_t)
-\]</span></li>
-<li><span class="math inline">\(\eta\)</span> is the step size (learning rate).</li>
+\]</span></p></li>
+<li><p><span class="math inline">\(\eta\)</span> is the step size (learning rate).</p></li>
 </ul>
 <section id="smoothness-assumption" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="smoothness-assumption"><span class="header-section-number">1.1.1</span> Smoothness Assumption</h3>
 <ul>
-<li><p>Gradient is Lipschitz: <span class="math display">\[
+<li><p>Gradient is Lipschitz:</p>
+<p><span class="math display">\[
 \|\nabla f(w)-\nabla f(w')\|
 \leq
 L\|w-w'\|,
 \qquad \forall\, w,w'.
 \]</span></p></li>
-<li><p>Equivalent to: <span class="math display">\[
+<li><p>Equivalent to:</p>
+<p><span class="math display">\[
 \left|
 f(w')-f(w)
 -
@@ -910,7 +944,8 @@ f(w')-f(w)
 \leq
 \frac{L}{2}\|w-w'\|^2.
 \]</span></p></li>
-<li><p>Equivalent to: <span class="math display">\[
+<li><p>Equivalent to:</p>
+<p><span class="math display">\[
 \|\nabla^2 f(x)\|
 \leq L.
 \]</span></p></li>
@@ -950,8 +985,7 @@ f(w') - f(w) &lt; 0.
 <section id="mu-strongly-convex-function" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="mu-strongly-convex-function"><span class="header-section-number">1.1.2</span> <span class="math inline">\(\mu\)</span>-Strongly Convex Function</h3>
 <ul>
-<li>A function <span class="math inline">\(f\)</span> is <span class="math inline">\(\mu\)</span>-strongly convex if</li>
-</ul>
+<li><p>A function <span class="math inline">\(f\)</span> is <span class="math inline">\(\mu\)</span>-strongly convex if</p>
 <p><span class="math display">\[
 f(w')
 \ge
@@ -960,28 +994,22 @@ f(w)
 \left\langle \nabla f(w),\, w'-w \right\rangle
 +
 \frac{\mu}{2}\|w'-w\|^2.
-\]</span></p>
-<ul>
-<li>Equivalently, if <span class="math inline">\(f\)</span> is twice differentiable,</li>
-</ul>
+\]</span></p></li>
+<li><p>Equivalently, if <span class="math inline">\(f\)</span> is twice differentiable,</p>
 <p><span class="math display">\[
 \lambda_{\min}\left(\nabla^2 f(w)\right)
 \ge
 \mu
 &gt;
 0,
-\]</span></p>
-<ul>
-<li>Equivalently</li>
-</ul>
+\]</span></p></li>
+<li><p>Equivalently</p>
 <p><span class="math display">\[
 f(ax + (1 - a)y) \le af(x) + (1 - a)f(y) - \frac{\mu}{2}a(1 - a)\|x - y\|^2, \quad \forall  a \in [0, 1].
 \]</span></p>
-<p>i.e., the Hessian is positive definite.</p>
-<ul>
+<p>i.e., the Hessian is positive definite.</p></li>
 <li><p>Strong convexity is a stronger notion than convexity.</p></li>
-<li><p>The gradient is strongly monotone:</p></li>
-</ul>
+<li><p>The gradient is strongly monotone:</p>
 <p><span class="math display">\[
 \left\langle
 \nabla f(w')-\nabla f(w),\,
@@ -989,13 +1017,13 @@ w'-w
 \right\rangle
 \ge
 \mu \|w'-w\|^2.
-\]</span></p>
+\]</span></p></li>
+</ul>
 </section>
 <section id="convergence-guarantee" class="level3" data-number="1.1.3">
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="convergence-guarantee"><span class="header-section-number">1.1.3</span> Convergence Guarantee</h3>
 <ul>
-<li>If <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-smooth and convex, and</li>
-</ul>
+<li><p>If <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-smooth and convex, and</p>
 <p><span class="math display">\[
 w^*=\arg\min_w f(w),
 \]</span></p>
@@ -1010,10 +1038,8 @@ f(w_t)
 f(w^*)
 +
 \frac{\|w_0-w^*\|^2}{2\eta t}.
-\]</span></p>
-<ul>
-<li>Therefore, if <span class="math inline">\(\eta = \frac{1}{L}\)</span>, we only need</li>
-</ul>
+\]</span></p></li>
+<li><p>Therefore, if <span class="math inline">\(\eta = \frac{1}{L}\)</span>, we only need</p>
 <p><span class="math display">\[
 T
 =
@@ -1022,10 +1048,8 @@ T
 <p>iterations to find a solution such that</p>
 <p><span class="math display">\[
 f(w_T)\leq f(w^*)+\epsilon.
-\]</span></p>
-<ul>
-<li>This is called a convergence rate of</li>
-</ul>
+\]</span></p></li>
+<li><p>This is called a convergence rate of</p>
 <p><span class="math display">\[
 \frac{1}{T},
 \]</span></p>
@@ -1033,10 +1057,9 @@ f(w_T)\leq f(w^*)+\epsilon.
 <p><span class="math display">\[
 O\left(\frac{1}{\epsilon}\right)
 \]</span></p>
-<p>iterations to converge to an <span class="math inline">\(\epsilon\)</span>-optimal solution.</p>
-<ul>
-<li>Step 1:</li>
+<p>iterations to converge to an <span class="math inline">\(\epsilon\)</span>-optimal solution.</p></li>
 </ul>
+<p><strong>Step 1:</strong></p>
 <p><span class="math display">\[
 f(w_{i+1})
 \le
@@ -1045,9 +1068,7 @@ f(w_i)
 \frac{\eta}{2}
 \|\nabla f(w_i)\|^2.
 \]</span></p>
-<ul>
-<li>Step 2: By convexity, we have</li>
-</ul>
+<p><strong>Step 2:</strong> By convexity, we have</p>
 <p><span class="math display">\[
 f(w_i)
 \le
@@ -1108,9 +1129,7 @@ f(w^*)
 =
 \frac{\sum_{i=1}^{t} w_i}{t}.
 \]</span></p>
-<ul>
-<li>Step 1:</li>
-</ul>
+<p><strong>Step 1:</strong></p>
 <p><span class="math display">\[
 \mathbb E\left[f(w_{i+1})\right]
 \le
@@ -1121,9 +1140,7 @@ f(w_i)
 +
 \frac{\eta}{2}\sigma^2.
 \]</span></p>
-<ul>
-<li>Step 2: By convexity</li>
-</ul>
+<p><strong>Step 2:</strong> By convexity</p>
 <p><span class="math display">\[
 \mathbb E\left[f(\bar w_t)\right]
 \le
@@ -1147,9 +1164,7 @@ T
 \frac{\epsilon}{2\sigma^2},
 \]</span></p>
 <p>then the two error terms are bounded by <span class="math inline">\(\epsilon\)</span>.</p>
-<ul>
-<li>Notice that</li>
-</ul>
+<p><strong>Notice that</strong></p>
 <p><span class="math display">\[
 \eta \le \frac{1}{L},
 \]</span></p>
@@ -1171,9 +1186,324 @@ T = O\left(\log \frac{1}{\epsilon}\right).
 T = O\left(\frac{1}{\epsilon}\right).
 \]</span></p></li>
 </ul>
-
-
 </section>
+<section id="svrg-algorithm" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="svrg-algorithm"><span class="header-section-number">1.2.4</span> SVRG algorithm</h3>
+<p>For <span class="math inline">\(s=1,2,\ldots\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(\widetilde{w}=\widetilde{w}_{s-1}\)</span></p>
+<p><span class="math display">\[
+\widetilde{u}
+=
+\frac{1}{N}\sum_{i=1}^{N}\nabla l_i(\widetilde{w})
+=
+\nabla f(\widetilde{w})
+\]</span></p></li>
+<li><p><span class="math display">\[
+w_0=\widetilde{w}
+\]</span></p></li>
+<li><p>For <span class="math inline">\(t=1,2,\ldots,m\)</span></p>
+<ul>
+<li><p>Random pick <span class="math inline">\(i\in[N]\)</span></p>
+<p><span class="math display">\[
+w_t
+=
+w_{t-1}
+-
+\eta
+\left(
+\nabla l_i(w_{t-1})
+-
+\nabla l_i(\widetilde{w})
++
+\widetilde{u}
+\right)
+\]</span></p></li>
+</ul></li>
+</ol>
+<ul>
+<li><p><strong>Option I:</strong></p>
+<p><span class="math display">\[
+\widetilde{w}_s=w_m
+\]</span></p></li>
+<li><p><strong>Option II:</strong></p>
+<p><span class="math display">\[
+\widetilde{w}_s=w_t
+\quad
+\text{for randomly chosen }
+t\in\{0,1,\ldots,m-1\}.
+\]</span></p></li>
+</ul>
+</section>
+<section id="sag" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="sag"><span class="header-section-number">1.2.5</span> SAG</h3>
+<p><span class="math display">\[
+x_{t+1}=x_t-\eta\left[
+\bar g^t+\frac1n\left(\nabla f_{i_t}(x_t)-g_{i_t}^t\right)
+\right]
+\]</span></p>
+</section>
+<section id="saga" class="level3" data-number="1.2.6">
+<h3 data-number="1.2.6" class="anchored" data-anchor-id="saga"><span class="header-section-number">1.2.6</span> SAGA</h3>
+<p><span class="math display">\[
+x_{t+1}=x_t-\eta\left[
+\bar g^t+\nabla f_{i_t}(x_t)-g_{i_t}^t
+\right]
+\]</span></p>
+</section>
+<section id="comparison-of-sgd-sag-saga-and-svrg" class="level3" data-number="1.2.7">
+<h3 data-number="1.2.7" class="anchored" data-anchor-id="comparison-of-sgd-sag-saga-and-svrg"><span class="header-section-number">1.2.7</span> Comparison of SGD, SAG, SAGA, and SVRG</h3>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>SGD</th>
+<th>SAG</th>
+<th>SAGA</th>
+<th>SVRG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gradient estimator</td>
+<td><span class="math inline">\(\nabla f_{i_t}(x_t)\)</span></td>
+<td><span class="math inline">\(\bar g^t+\frac1n(\nabla f_{i_t}(x_t)-g_{i_t}^t)\)</span></td>
+<td><span class="math inline">\(\bar g^t+\nabla f_{i_t}(x_t)-g_{i_t}^t\)</span></td>
+<td><span class="math inline">\(\mu_s+\nabla f_{i_t}(x_t)-\nabla f_{i_t}(\tilde x_s)\)</span></td>
+</tr>
+<tr class="even">
+<td>Unbiased</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Variance reduction</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Variance vanishes asymptotically</td>
+<td>Not generally</td>
+<td>Yes, under convergence conditions</td>
+<td>Yes, under convergence conditions</td>
+<td>Yes, under convergence conditions</td>
+</tr>
+<tr class="odd">
+<td>New component gradients per inner iteration</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Usually 2</td>
+</tr>
+<tr class="even">
+<td>Periodic full gradient</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Additional storage</td>
+<td><span class="math inline">\(O(d)\)</span></td>
+<td><span class="math inline">\(O(nd)\)</span></td>
+<td><span class="math inline">\(O(nd)\)</span></td>
+<td><span class="math inline">\(O(d)\)</span></td>
+</tr>
+<tr class="even">
+<td>Strongly convex convergence</td>
+<td><span class="math inline">\(O(1/T)\)</span> (suitable averaging)</td>
+<td>Linear</td>
+<td>Linear</td>
+<td>Linear</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here,</p>
+<p><span class="math display">\[
+\kappa=\frac{L}{\mu},
+\]</span></p>
+<p>where each <span class="math inline">\(f_i\)</span> is convex and <span class="math inline">\(L\)</span>-smooth, and <span class="math inline">\(f\)</span> is <span class="math inline">\(\mu\)</span>-strongly convex.</p>
+<p>The complexity bounds assume standard algorithm-specific conditions and parameter choices.</p>
+<p>The four gradient estimators can be summarized as</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+v_t^{\mathrm{SGD}}
+&amp;=\nabla f_{i_t}(x_t),\\[6pt]
+v_t^{\mathrm{SAG}}
+&amp;=\bar g^t+\frac1n\left(\nabla f_{i_t}(x_t)-g_{i_t}^t\right),\\[6pt]
+v_t^{\mathrm{SAGA}}
+&amp;=\bar g^t+\nabla f_{i_t}(x_t)-g_{i_t}^t,\\[6pt]
+v_t^{\mathrm{SVRG}}
+&amp;=\mu_s+\nabla f_{i_t}(x_t)-\nabla f_{i_t}(\tilde x_s).
+\end{aligned}
+}
+\]</span></p>
+</section>
+</section>
+<section id="mirror-descent" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="mirror-descent"><span class="header-section-number">1.3</span> Mirror Descent</h2>
+<section id="bregman-divergence" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="bregman-divergence"><span class="header-section-number">1.3.1</span> Bregman divergence:</h3>
+<ul>
+<li><p>Given any <strong>1-strongly convex function</strong> <span class="math inline">\(w\)</span> as the distance generating function, we can define distance between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<p><span class="math display">\[
+V_x(y) = w(y) - \langle \nabla w(x), y-x \rangle - w(x)
+\]</span></p></li>
+<li><p>So</p>
+<p><span class="math display">\[
+V_x(y) \ge \frac{1}{2}\|x-y\|^2
+\]</span></p></li>
+<li><p>Three-point identity of Bregman divergence:</p>
+<p><span class="math display">\[
+\langle \nabla w(x)-\nabla w(y), y-u \rangle
+=
+V_x(u)-V_y(u)-V_x(y)
+\]</span></p></li>
+</ul>
+</section>
+<section id="mirror-descent-algorithm" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="mirror-descent-algorithm"><span class="header-section-number">1.3.2</span> Mirror Descent Algorithm</h3>
+<p>Mirror step with length <span class="math inline">\(\alpha\)</span> is:</p>
+<p><span class="math display">\[
+x_{k+1} = \operatorname{Mirr}_{x_k}(\alpha \cdot \nabla f(x_k)),
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\operatorname{Mirr}_x(g)
+=
+\arg\min_y
+\left\{
+V_x(y) + \langle g, y-x\rangle
+\right\}.
+\]</span></p>
+<p>equation:</p>
+<p><span class="math display">\[
+\nabla w(y) = \nabla w(x) - \alpha \nabla f(x_k).
+\]</span></p>
+</section>
+<section id="convergence-analysis" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="convergence-analysis"><span class="header-section-number">1.3.3</span> Convergence Analysis</h3>
+<p>We have:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha(f(x_k)-f(u))
+&amp;\le \alpha\langle\nabla f(x_k),x_k-u\rangle\\
+&amp;\le \frac{\alpha^2}{2}\|\nabla f(x_k)\|^2
++V_{x_k}(u)-V_{x_{k+1}}(u).
+\end{aligned}
+\]</span></p>
+</section>
+<section id="convergence-rate" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="convergence-rate"><span class="header-section-number">1.3.4</span> Convergence Rate</h3>
+<p>Assume <span class="math inline">\(f\)</span> is <span class="math inline">\(\rho\)</span>-Lipschitz. Then</p>
+<p><span class="math display">\[
+\|\nabla f(x_k)\|\le\rho.
+\]</span></p>
+<p>Let</p>
+<p><span class="math display">\[
+\bar{x}=\frac1T\sum_{k=0}^{T-1}x_k,
+\qquad
+\Theta=V_{x_0}(x^*).
+\]</span></p>
+<p>Summing over <span class="math inline">\(k=0,\ldots,T-1\)</span>, we obtain</p>
+<p><span class="math display">\[
+f(\bar{x})-f(x^*)
+\le
+\frac{\alpha\rho^2}{2}
++\frac{\Theta}{\alpha T}.
+\]</span></p>
+<p>Let</p>
+<p><span class="math display">\[
+\alpha=\frac{\sqrt{2\Theta}}{\rho\sqrt{T}}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+f(\bar{x})-f(x^*)
+\le
+\frac{\sqrt{2\Theta}\cdot\rho}{\sqrt{T}}.
+\]</span></p>
+<p>To guarantee <span class="math inline">\(f(\bar{x})-f(x^*)\le\epsilon\)</span>, it suffices to take</p>
+<p><span class="math display">\[
+T=O\left(\frac{\Theta\rho^2}{\epsilon^2}\right).
+\]</span></p>
+</section>
+</section>
+<section id="matrix-completion" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="matrix-completion"><span class="header-section-number">1.4</span> Matrix Completion</h2>
+<p><strong>Matrix completion problem:</strong></p>
+<ul>
+<li><span class="math inline">\(n \times m\)</span> matrix <span class="math inline">\(A\)</span></li>
+<li>Score is in <span class="math inline">\(\{1,2,3,4,5\}\)</span></li>
+<li>Some are known (existing ratings)</li>
+<li>Some are unknown (?)</li>
+<li>Want to recommend movies to users</li>
+</ul>
+<p><strong>Assumptions:</strong></p>
+<ul>
+<li><p><span class="math inline">\(A\)</span> is low rank</p></li>
+<li><p>Known entries are uniformly distributed</p></li>
+<li><p>Incoherence. Formally, for <span class="math inline">\(A = U\Sigma V^T\)</span>, <span class="math inline">\(\forall i  \in [n], j \in [m]\)</span>,</p>
+<p><span class="math display">\[
+\|e_i^T U\| \le \sqrt{\frac{ur}{n}},
+\qquad
+\|e_j^T V\| \le \sqrt{\frac{ur}{m}}
+\]</span></p>
+<p>for some constant <span class="math inline">\(u\)</span> (scan every row of <span class="math inline">\(U,V\)</span>). Here <span class="math inline">\(U \in \mathbb{R}^{n \times r}\)</span>, <span class="math inline">\(V \in \mathbb{R}^{m \times r}\)</span>,</p>
+<p><span class="math display">\[
+1 \le u \le \frac{\min\{n,m\}}{r}.
+\]</span></p></li>
+</ul>
+</section>
+<section id="appendix" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="appendix"><span class="header-section-number">1.5</span> Appendix</h2>
+<ul>
+<li>If <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-smooth and convex, then <span class="math display">\[
+f(y) \ge f(x) + \langle \nabla f(x), y-x\rangle + \frac{1}{2L} \|\nabla f(x)-\nabla f(y)\|^2.
+\]</span> which implies</li>
+</ul>
+<p><span class="math display">\[
+\langle \nabla f(x)-\nabla f(y), x-y\rangle
+\ge \frac{1}{L} \|\nabla f(x)-\nabla f(y)\|^2.
+\]</span></p>
+<p><br>
+</p>
+<ul>
+<li>We have the Hölder’s inequality: <span class="math display">\[\langle x, y \rangle \le \|x\|_{p} \cdot \|y\|_{q}\]</span> where <span class="math inline">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>. When <span class="math inline">\(p = q = 2\)</span>, this becomes the Cauchy-Schwarz inequality.</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>For a finite probality function <span class="math inline">\(p(x)\)</span>, we define <span class="math display">\[
+w(p) = \sum_x p(x) \log p(x) .
+\]</span> Then <span class="math inline">\(w(p)\)</span> is 1-strongly convex with respect to <span class="math inline">\(\|\cdot\|_1\)</span>. The Bregman divergence is the KL divergence: <span class="math display">\[
+V_p(q) = \sum_x p(x) \log \frac{p(x)}
+{q(x)} = D_{\mathrm{KL}}(p \| q) \ge \frac{1}{2}\|p-q\|_1^2.
+\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Let <span class="math inline">\(C \subseteq \mathbb{R}^n\)</span> be a nonempty closed convex set. The Euclidean projection onto <span class="math inline">\(C\)</span> is defined as <span class="math display">\[
+\Pi_C(x) = \arg\min_{y \in C} \|x-y\|_2.
+\]</span> For any <span class="math inline">\(x,y \in \mathbb{R}^n\)</span>, <span class="math display">\[
+\|\Pi_C(x)-\Pi_C(y)\|_2 \leq \|x-y\|_2.
+\]</span></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1597,8 +1927,8 @@ T = O\left(\frac{1}{\epsilon}\right).
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../docs/notes/advanced-computer-graphics/index.html" class="pagination-link" aria-label="Advanced Computer Graphics">
-        <span class="nav-page-text">Advanced Computer Graphics</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/machine-learning/2.html" class="pagination-link" aria-label="Generalization">
+        <span class="nav-page-text">Generalization</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

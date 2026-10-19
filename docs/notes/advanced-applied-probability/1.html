@@ -80,6 +80,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+#quarto-document-content { line-height: 1.65; }
+#quarto-document-content h2,
+#quarto-document-content h3 { text-wrap: balance; }
+#quarto-document-content li + li { margin-top: .35rem; }
+#quarto-document-content .math.inline {
+  display: inline-block;
+  white-space: nowrap;
+}
+#quarto-document-content .math.display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: .25rem;
+}
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -789,6 +806,12 @@ window.Quarto = {
  <span class="menu-text">Optimization</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/machine-learning/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalization</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -812,6 +835,12 @@ window.Quarto = {
  <span class="menu-text">Transformations</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/advanced-computer-graphics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learning Geometry</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -827,6 +856,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../docs/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/artificial-intelligence/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logic</span></a>
   </div>
 </li>
       </ul>
@@ -852,6 +887,13 @@ window.Quarto = {
   <li><a href="#bounded-functions" id="toc-bounded-functions" class="nav-link" data-scroll-target="#bounded-functions"><span class="header-section-number">1.4.2</span> Bounded Functions</a></li>
   <li><a href="#nonnegative-functions" id="toc-nonnegative-functions" class="nav-link" data-scroll-target="#nonnegative-functions"><span class="header-section-number">1.4.3</span> Nonnegative Functions</a></li>
   <li><a href="#general-functions" id="toc-general-functions" class="nav-link" data-scroll-target="#general-functions"><span class="header-section-number">1.4.4</span> General Functions</a></li>
+  <li><a href="#notation-for-special-cases" id="toc-notation-for-special-cases" class="nav-link" data-scroll-target="#notation-for-special-cases"><span class="header-section-number">1.4.5</span> Notation for Special Cases</a></li>
+  </ul></li>
+  <li><a href="#properties-of-the-integral" id="toc-properties-of-the-integral" class="nav-link" data-scroll-target="#properties-of-the-integral"><span class="header-section-number">1.5</span> Properties of the Integral</a>
+  <ul class="collapse">
+  <li><a href="#radonnikodym-derivatives" id="toc-radonnikodym-derivatives" class="nav-link" data-scroll-target="#radonnikodym-derivatives"><span class="header-section-number">1.5.1</span> Radon–Nikodym Derivatives</a></li>
+  <li><a href="#integral-inequalities" id="toc-integral-inequalities" class="nav-link" data-scroll-target="#integral-inequalities"><span class="header-section-number">1.5.2</span> Integral Inequalities</a></li>
+  <li><a href="#convergence-theorems" id="toc-convergence-theorems" class="nav-link" data-scroll-target="#convergence-theorems"><span class="header-section-number">1.5.3</span> Convergence Theorems</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -893,7 +935,8 @@ window.Quarto = {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A <strong>probability space</strong> is a triple <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span> where <span class="math inline">\(\Omega\)</span> is a set of “outcomes,” <span class="math inline">\(\mathcal{F}\)</span> is a set of “events,” and <span class="math inline">\(P : \mathcal{F} \to [0,1]\)</span> is a function that assigns probabilities to events. We assume that <span class="math inline">\(\mathcal{F}\)</span> is a <span class="math inline">\(\sigma\)</span>-field (or <span class="math inline">\(\sigma\)</span>-algebra), i.e., a (nonempty) collection of subsets of <span class="math inline">\(\Omega\)</span> that satisfy</p>
+<p>A <strong>probability space</strong> is a triple <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span> where <span class="math inline">\(\Omega\)</span> is a set of “outcomes,” <span class="math inline">\(\mathcal{F}\)</span> is a set of “events,” and <span class="math inline">\(P : \mathcal{F} \to [0,1]\)</span> is a function that assigns probabilities to events.</p>
+<p>We assume that <span class="math inline">\(\mathcal{F}\)</span> is a <span class="math inline">\(\sigma\)</span>-field (or <span class="math inline">\(\sigma\)</span>-algebra), i.e., a (nonempty) collection of subsets of <span class="math inline">\(\Omega\)</span> that satisfy</p>
 <ol type="i">
 <li><p>if <span class="math inline">\(A \in \mathcal{F}\)</span> then <span class="math inline">\(A^c \in \mathcal{F}\)</span>, and</p></li>
 <li><p>if <span class="math inline">\(A_i \in \mathcal{F}\)</span> is a countable sequence of sets then <span class="math inline">\(\bigcup_i A_i \in \mathcal{F}\)</span>.</p></li>
@@ -930,18 +973,15 @@ window.Quarto = {
 </div>
 </div>
 <div id="thm-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline">\(\mu\)</span> be a measure on <span class="math inline">\((\Omega, \mathcal{F})\)</span> (a <span class="math inline">\(\sigma\)</span>-field).</p>
+<p><span class="theorem-title"><strong>Theorem 1.1 (Properties of Measures)</strong></span> Let <span class="math inline">\(\mu\)</span> be a measure on <span class="math inline">\((\Omega, \mathcal{F})\)</span> (a <span class="math inline">\(\sigma\)</span>-field).</p>
 <ol type="i">
-<li><p><strong>monotonicity.</strong> If <span class="math inline">\(A \subset B\)</span> then <span class="math inline">\(\mu(A) \le \mu(B)\)</span>.</p></li>
-<li><p><strong>subadditivity.</strong> If <span class="math inline">\(A \subset \bigcup_{m=1}^{\infty} A_m\)</span> then <span class="math display">\[
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(A \subset B\)</span> then <span class="math inline">\(\mu(A) \le \mu(B)\)</span>.</p></li>
+<li><p><strong>Subadditivity.</strong> If <span class="math inline">\(A \subset \bigcup_{m=1}^{\infty} A_m\)</span> then</p>
+<p><span class="math display">\[
 \mu(A) \le \sum_{m=1}^{\infty} \mu(A_m).
 \]</span></p></li>
-<li><p><strong>continuity from below.</strong> If <span class="math inline">\(A_i \uparrow A\)</span> (i.e., <span class="math inline">\(A_1 \subset A_2 \subset \cdots\)</span> and <span class="math inline">\(\bigcup_i A_i = A\)</span>) then <span class="math display">\[
-\mu(A_i) \uparrow \mu(A).
-\]</span></p></li>
-<li><p><strong>continuity from above.</strong> If <span class="math inline">\(A_i \downarrow A\)</span> (i.e., <span class="math inline">\(A_1 \supset A_2 \supset \cdots\)</span> and <span class="math inline">\(\bigcap_i A_i = A\)</span>), with <span class="math inline">\(\mu(A_1) &lt; \infty\)</span>, then <span class="math display">\[
-\mu(A_i) \downarrow \mu(A).
-\]</span></p></li>
+<li><p><strong>Continuity from below.</strong> If <span class="math inline">\(A_i \uparrow A\)</span> (i.e., <span class="math inline">\(A_1 \subset A_2 \subset \cdots\)</span> and <span class="math inline">\(\bigcup_i A_i = A\)</span>), then <span class="math inline">\(\mu(A_i) \uparrow \mu(A)\)</span>.</p></li>
+<li><p><strong>Continuity from above.</strong> If <span class="math inline">\(A_i \downarrow A\)</span> (i.e., <span class="math inline">\(A_1 \supset A_2 \supset \cdots\)</span> and <span class="math inline">\(\bigcap_i A_i = A\)</span>), with <span class="math inline">\(\mu(A_1) &lt; \infty\)</span>, then <span class="math inline">\(\mu(A_i) \downarrow \mu(A)\)</span>.</p></li>
 </ol>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -950,11 +990,49 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Generated <span class="math inline">\(\sigma\)</span>-Fields
+<span class="screen-reader-only">Note</span>Classification of Measures
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space. The following classes are not mutually exclusive.</p>
+<ol type="1">
+<li><p><strong>Finite measure.</strong> A measure <span class="math inline">\(\mu\)</span> is finite if <span class="math inline">\(\mu(X)&lt;\infty\)</span>.</p>
+<p>For example, Lebesgue measure on <span class="math inline">\([0,2]\)</span> is finite, with total mass <span class="math inline">\(2\)</span>.</p></li>
+<li><p><strong>Probability measure.</strong> A measure <span class="math inline">\(\mu\)</span> is a probability measure if <span class="math inline">\(\mu(X)=1\)</span>.</p>
+<p>Thus, every probability measure is a finite measure. For example, Lebesgue measure on <span class="math inline">\([0,1]\)</span> is a probability measure.</p></li>
+<li><p><strong><span class="math inline">\(\sigma\)</span>-finite measure.</strong> A measure <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite if there exist measurable sets <span class="math inline">\(E_1,E_2,\ldots\)</span> such that</p>
+<p><span class="math display">\[
+\begin{gathered}
+X = \bigcup_{n=1}^{\infty} E_n, \\
+\mu(E_n) &lt; \infty \quad \text{for every } n.
+\end{gathered}
+\]</span></p>
+<p>For example, Lebesgue measure on <span class="math inline">\(\mathbb R\)</span> is <span class="math inline">\(\sigma\)</span>-finite because</p>
+<p><span class="math display">\[
+\begin{gathered}
+\mathbb R = \bigcup_{n=1}^{\infty} [-n,n], \\
+m([-n,n]) = 2n &lt; \infty.
+\end{gathered}
+\]</span></p></li>
+<li><p><strong>Infinite measure.</strong> A measure <span class="math inline">\(\mu\)</span> is infinite if <span class="math inline">\(\mu(X)=\infty\)</span>.</p>
+<p>An infinite measure may or may not be <span class="math inline">\(\sigma\)</span>-finite. Counting measure on <span class="math inline">\(\mathbb N\)</span> is <span class="math inline">\(\sigma\)</span>-finite, whereas counting measure on <span class="math inline">\(\mathbb R\)</span> is not.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Generated <span class="math inline">\(\sigma\)</span>-Fields
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If we are given a set <span class="math inline">\(\Omega\)</span> and a collection <span class="math inline">\(\mathcal{A}\)</span> of subsets of <span class="math inline">\(\Omega\)</span>, then there is a smallest <span class="math inline">\(\sigma\)</span>-field containing <span class="math inline">\(\mathcal{A}\)</span>. We call this the <span class="math inline">\(\sigma\)</span>-field <strong>generated by</strong> <span class="math inline">\(\mathcal{A}\)</span> and denote it by <span class="math inline">\(\sigma(\mathcal{A})\)</span>.</p>
 <p>Let <span class="math inline">\(\mathbb{R}^d\)</span> be the set of vectors <span class="math inline">\((x_1,\ldots,x_d)\)</span> of real numbers and <span class="math inline">\(\mathcal{R}^d\)</span> be the <strong>Borel sets</strong>, the smallest <span class="math inline">\(\sigma\)</span>-field containing the open sets. When <span class="math inline">\(d=1\)</span> we drop the superscript.</p>
@@ -966,23 +1044,23 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>&nbsp;</p>
 <div id="thm-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Associated with each Stieltjes measure function <span class="math inline">\(F\)</span> there is a unique measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\((\mathbb{R}, \mathcal{R})\)</span> with <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 1.2 (Stieltjes Measures)</strong></span> Associated with each Stieltjes measure function <span class="math inline">\(F\)</span> there is a unique measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\((\mathbb{R}, \mathcal{R})\)</span> with</p>
+<p><span class="math display">\[
 \mu((a,b]) = F(b) - F(a)
 \]</span></p>
 <p>When <span class="math inline">\(F(x) = x\)</span> the resulting measure is called <strong>Lebesgue measure</strong>.</p>
 </div>
-<div id="thm-2.1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.3</strong></span> Let <span class="math inline">\(\mathcal{C}(\mathbb{R}^d)\)</span> be the collection of <strong>countable</strong> open rectangles</p>
+<div id="cor-1" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1.1 (Generating the Borel σ-Field)</strong></span> Let <span class="math inline">\(\mathcal{C}(\mathbb{R}^d)\)</span> be the collection of <strong>countable</strong> open rectangles of the form</p>
 <p><span class="math display">\[
-\mathcal{C}(\mathbb{R}^d)
-= \left\{
-(a_1,b_1) \times \cdots \times (a_d,b_d)
-\;\middle|\;
-a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\},\quad i=1,\ldots,d
-\right\}.
+(a_1,b_1) \times \cdots \times (a_d,b_d),
 \]</span></p>
+<p>where the endpoints satisfy</p>
+<p><span class="math display">\[
+a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\}
+\]</span></p>
+<p>for <span class="math inline">\(i = 1,\ldots,d\)</span>.</p>
 <p>Then <span class="math inline">\(\mathcal{C}(\mathbb{R}^d)\)</span> generates the Borel <span class="math inline">\(\sigma\)</span>-field on <span class="math inline">\(\mathbb{R}^d\)</span>; that is,</p>
 <p><span class="math display">\[
 \sigma\bigl(\mathcal{C}(\mathbb{R}^d)\bigr) = \mathcal{R}^d.
@@ -992,7 +1070,7 @@ a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\},\quad i=1,\ldots,d
 <section id="random-variables" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">1.2</span> Random Variables</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1001,38 +1079,58 @@ a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\},\quad i=1,\ldots,d
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A function <span class="math inline">\(X : \Omega \to S\)</span> is said to be a <strong>measurable map</strong> from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((S, \mathcal{S})\)</span> if</p>
 <p><span class="math display">\[
 X^{-1}(B) \equiv \{\omega : X(\omega) \in B\} \in \mathcal{F}
-\quad \text{for all } B \in \mathcal{S}.
 \]</span></p>
+<p>for all <span class="math inline">\(B \in \mathcal{S}\)</span>.</p>
 <p>If <span class="math inline">\((S, \mathcal{S}) = (\mathbb{R}^d, \mathcal{R}^d)\)</span> and <span class="math inline">\(d &gt; 1\)</span>, then <span class="math inline">\(X\)</span> is called a <strong>random vector</strong>. Of course, if <span class="math inline">\(d = 1\)</span>, <span class="math inline">\(X\)</span> is called a <strong>random variable</strong>.</p>
 <p>We define <span class="math inline">\(\sigma(X)\)</span> to be the smallest <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\Omega\)</span> such that <span class="math inline">\(X\)</span> is measurable.</p>
 </div>
 </div>
 </div>
 <div id="thm-3" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.4</strong></span> For <span class="math inline">\(\mathcal{A}\)</span> generates <span class="math inline">\(\mathcal{S}\)</span>, and for all <span class="math inline">\(A \in \mathcal{A}\)</span>, <span class="math inline">\(X^{-1}(A) \in \mathcal{F}\)</span>, then <span class="math inline">\(X\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((S, \mathcal{S})\)</span>.</p>
+<p><span class="theorem-title"><strong>Theorem 1.3 (Measurability on a Generating Collection)</strong></span> Suppose <span class="math inline">\(\mathcal{A}\)</span> generates <span class="math inline">\(\mathcal{S}\)</span>. If <span class="math inline">\(X^{-1}(A) \in \mathcal{F}\)</span> for every <span class="math inline">\(A \in \mathcal{A}\)</span>, then <span class="math inline">\(X\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((S, \mathcal{S})\)</span>.</p>
 </div>
-<p>&nbsp;</p>
 <div id="thm-4" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.5</strong></span> If</p>
+<p><span class="theorem-title"><strong>Theorem 1.4 (Composition of Measurable Maps)</strong></span> If the maps</p>
 <p><span class="math display">\[
-X : (\Omega, \mathcal{F}) \to (S, \mathcal{S})
+\begin{aligned}
+X &amp;: (\Omega, \mathcal{F}) \to (S, \mathcal{S}), \\
+f &amp;: (S, \mathcal{S}) \to (T, \mathcal{T})
+\end{aligned}
 \]</span></p>
-<p>and</p>
+<p>are measurable, then <span class="math inline">\(f(X)\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((T, \mathcal{T})\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why We Use the Borel <span class="math inline">\(\sigma\)</span>-Field on <span class="math inline">\(\mathbb{R}^d\)</span>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Borel <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal{B}(\mathbb{R}^d)\)</span> is the smallest <span class="math inline">\(\sigma\)</span>-field that contains all open sets in <span class="math inline">\(\mathbb{R}^d\)</span>.</p>
+<p>An important property is that <strong>every continuous function is Borel measurable</strong>.</p>
+<p>Let <span class="math inline">\(f : \mathbb{R}^d \to \mathbb{R}\)</span> be continuous. Then, for every <span class="math inline">\(B \in \mathcal{B}(\mathbb{R})\)</span>,</p>
 <p><span class="math display">\[
-f : (S, \mathcal{S}) \to (T, \mathcal{T})
+f^{-1}(B) \in \mathcal{B}(\mathbb{R}^d).
 \]</span></p>
-<p>are measurable maps, then <span class="math inline">\(f(X)\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((T, \mathcal{T})\)</span>.</p>
+<p>More generally, if <span class="math inline">\(X\)</span> is an <span class="math inline">\(\mathbb{R}^d\)</span>-valued random vector and <span class="math inline">\(f\)</span> is continuous, then <span class="math inline">\(f(X)\)</span> is a random variable.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="distributions" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="distributions"><span class="header-section-number">1.3</span> Distributions</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1041,7 +1139,7 @@ f : (S, \mathcal{S}) \to (T, \mathcal{T})
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <strong>indicator function</strong> of a set <span class="math inline">\(A \in \mathcal{F}\)</span>:</p>
 <p><span class="math display">\[
@@ -1055,7 +1153,7 @@ f : (S, \mathcal{S}) \to (T, \mathcal{T})
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1064,7 +1162,7 @@ f : (S, \mathcal{S}) \to (T, \mathcal{T})
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If <span class="math inline">\(X\)</span> is a random variable, then <span class="math inline">\(X\)</span> induces a probability measure on <span class="math inline">\(\mathbb{R}\)</span>, called its <strong>distribution</strong> by setting <span class="math inline">\(\mu(A) = P(X \in A)\)</span> for Borel sets <span class="math inline">\(A\)</span>. The right-hand side can be written as <span class="math inline">\(P(X^{-1}(A))\)</span>.</p>
 <p>The distribution of a random variable <span class="math inline">\(X\)</span> is usually described by giving its <strong>distribution function</strong>,</p>
@@ -1075,30 +1173,25 @@ F(x) = P(X \le x).
 </div>
 </div>
 <div id="thm-5" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.6</strong></span> Any distribution function <span class="math inline">\(F\)</span> has the following properties:</p>
+<p><span class="theorem-title"><strong>Theorem 1.5 (Properties of Distribution Functions)</strong></span> Any distribution function <span class="math inline">\(F\)</span> has the following properties:</p>
 <ol type="i">
 <li><p><span class="math inline">\(F\)</span> is nondecreasing.</p></li>
-<li><p><span class="math display">\[
-\lim_{x\to\infty}F(x)=1,
+<li><p>The limits at infinity are</p>
+<p><span class="math display">\[
+\lim_{x\to\infty} F(x) = 1,
 \qquad
-\lim_{x\to-\infty}F(x)=0.
+\lim_{x\to-\infty} F(x) = 0.
 \]</span></p></li>
-<li><p><span class="math inline">\(F\)</span> is right continuous, i.e., <span class="math display">\[
-\lim_{y\downarrow x}F(y)=F(x).
-\]</span></p></li>
-<li><p>If <span class="math display">\[
-F(x-)=\lim_{y\uparrow x}F(y),
-\]</span> then <span class="math display">\[
-F(x-)=P(X&lt;x).
-\]</span></p></li>
-<li><p><span class="math display">\[
-P(X=x)=F(x)-F(x-).
+<li><p><span class="math inline">\(F\)</span> is right continuous, i.e., <span class="math inline">\(\lim_{y\downarrow x} F(y) = F(x)\)</span>.</p></li>
+<li><p>If <span class="math inline">\(F(x-) = \lim_{y\uparrow x} F(y)\)</span>, then <span class="math inline">\(F(x-) = P(X &lt; x)\)</span>.</p></li>
+<li><p>The probability at a point is</p>
+<p><span class="math display">\[
+P(X = x) = F(x) - F(x-).
 \]</span></p></li>
 </ol>
 </div>
-<p>&nbsp;</p>
 <div id="thm-6" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.7</strong></span> If <span class="math inline">\(F\)</span> satisfies properties (i), (ii), and (iii), then <span class="math inline">\(F\)</span> is the distribution function of some random variable.</p>
+<p><span class="theorem-title"><strong>Theorem 1.6 (Existence of a Distribution)</strong></span> If <span class="math inline">\(F\)</span> satisfies properties (i), (ii), and (iii), then <span class="math inline">\(F\)</span> is the distribution function of some random variable.</p>
 </div>
 </section>
 <section id="integration" class="level2" data-number="1.4">
@@ -1106,7 +1199,7 @@ P(X=x)=F(x)-F(x-).
 <section id="simple-functions" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="simple-functions"><span class="header-section-number">1.4.1</span> Simple Functions</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1115,7 +1208,7 @@ P(X=x)=F(x)-F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\(\varphi\)</span> is said to be a <strong>simple function</strong> if</p>
 <p><span class="math display">\[
@@ -1129,65 +1222,353 @@ P(X=x)=F(x)-F(x-).
 </div>
 </div>
 <div id="thm-7" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.8</strong></span> <span class="math inline">\(\varphi \ge \psi\)</span> <span class="math inline">\(\mu\)</span>-<strong>almost everywhere</strong> (or <span class="math inline">\(\varphi \ge \psi\)</span> <span class="math inline">\(\mu\)</span>-a.e.) means</p>
+<p><span class="theorem-title"><strong>Theorem 1.7 (Properties of the Integral)</strong></span> <span class="math inline">\(\varphi \ge \psi\)</span> <span class="math inline">\(\mu\)</span>-<strong>almost everywhere</strong> (or <span class="math inline">\(\varphi \ge \psi\)</span> <span class="math inline">\(\mu\)</span>-a.e.) means</p>
 <p><span class="math display">\[
 \mu(\{\omega : \varphi(\omega) &lt; \psi(\omega)\}) = 0.
 \]</span></p>
 <p>Let <span class="math inline">\(\varphi\)</span> and <span class="math inline">\(\psi\)</span> be simple functions.</p>
 <ol type="i">
-<li><p>If <span class="math inline">\(\varphi \ge 0\)</span> a.e. then</p>
+<li><p><strong>Nonnegativity.</strong> If <span class="math inline">\(\varphi \ge 0\)</span> a.e., then <span class="math inline">\(\int \varphi \, d\mu \ge 0\)</span>.</p></li>
+<li><p><strong>Homogeneity.</strong> For any <span class="math inline">\(a \in \mathbb{R}\)</span>, <span class="math inline">\(\int a\varphi \, d\mu = a \int \varphi \, d\mu\)</span>.</p></li>
+<li><p><strong>Additivity.</strong></p>
 <p><span class="math display">\[
-  \int \varphi \, d\mu \ge 0.
-  \]</span></p></li>
-<li><p>For any <span class="math inline">\(a \in \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\int a\varphi \, d\mu
-=
-a \int \varphi \, d\mu.
-\]</span></p></li>
-<li><p><span class="math display">\[
 \int (\varphi + \psi) \, d\mu
-=
-\int \varphi \, d\mu
-+
-\int \psi \, d\mu.
+= \int \varphi \, d\mu + \int \psi \, d\mu.
 \]</span></p></li>
-</ol>
-<p>If (i) and (iii) hold then we have:</p>
-<ol start="4" type="i">
-<li><p>If <span class="math inline">\(\varphi \le \psi\)</span> a.e. then</p>
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(\varphi \le \psi\)</span> a.e., then <span class="math inline">\(\int \varphi \, d\mu \le \int \psi \, d\mu\)</span>.</p></li>
+<li><p><strong>Equality almost everywhere.</strong> If <span class="math inline">\(\varphi = \psi\)</span> a.e., then <span class="math inline">\(\int \varphi \, d\mu = \int \psi \, d\mu\)</span>.</p></li>
+<li><p><strong>Triangle inequality.</strong></p>
 <p><span class="math display">\[
-\int \varphi \, d\mu
-\le
-\int \psi \, d\mu.
+\left|\int \varphi \, d\mu\right| \le \int |\varphi| \, d\mu.
 \]</span></p></li>
-<li><p>If <span class="math inline">\(\varphi = \psi\)</span> a.e. then</p>
-<p><span class="math display">\[
-  \int \varphi \, d\mu
-  =
-  \int \psi \, d\mu.
-  \]</span></p></li>
-</ol>
-<p>If, in addition, (ii) holds when <span class="math inline">\(a=-1\)</span> we have</p>
-<ol start="6" type="i">
-<li><span class="math display">\[
-  \left|
-  \int \varphi \, d\mu
-  \right|
-  \le
-  \int |\varphi| \, d\mu.
-  \]</span></li>
 </ol>
 </div>
 </section>
 <section id="bounded-functions" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="bounded-functions"><span class="header-section-number">1.4.2</span> Bounded Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Bounded Function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E) &lt; \infty\)</span> and let <span class="math inline">\(f\)</span> be a bounded function that vanishes on <span class="math inline">\(E^c\)</span>.</p>
+<p>To define the integral of <span class="math inline">\(f\)</span>, we observe that if <span class="math inline">\(\varphi, \psi\)</span> are simple functions that have <span class="math inline">\(\varphi \le f \le \psi\)</span>, then we want to have</p>
+<p><span class="math display">\[
+\int \varphi \, d\mu \le \int f \, d\mu \le \int \psi \, d\mu,
+\]</span></p>
+<p>so we let</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int f \, d\mu
+&amp;= \sup_{\varphi \le f} \int \varphi \, d\mu \\
+&amp;= \inf_{\psi \ge f} \int \psi \, d\mu.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="cor-2" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1.2 (Properties of the Integral for Bounded Functions)</strong></span> Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E) &lt; \infty\)</span>. If <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are bounded functions that vanish on <span class="math inline">\(E^c\)</span>, then:</p>
+<ol type="i">
+<li><p><strong>Nonnegativity.</strong> If <span class="math inline">\(f \ge 0\)</span> a.e., then <span class="math inline">\(\int f \, d\mu \ge 0\)</span>.</p></li>
+<li><p><strong>Homogeneity.</strong> For any <span class="math inline">\(a \in \mathbb{R}\)</span>, <span class="math inline">\(\int af \, d\mu = a \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Additivity.</strong></p>
+<p><span class="math display">\[
+\int (f + g) \, d\mu = \int f \, d\mu + \int g \, d\mu.
+\]</span></p></li>
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(g \le f\)</span> a.e., then <span class="math inline">\(\int g \, d\mu \le \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Equality almost everywhere.</strong> If <span class="math inline">\(g = f\)</span> a.e., then <span class="math inline">\(\int g \, d\mu = \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Triangle inequality.</strong></p>
+<p><span class="math display">\[
+\left|\int f \, d\mu\right| \le \int |f| \, d\mu.
+\]</span></p></li>
+</ol>
+</div>
 </section>
 <section id="nonnegative-functions" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="nonnegative-functions"><span class="header-section-number">1.4.3</span> Nonnegative Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Nonnegative Function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(f\ge 0\)</span>, define</p>
+<p><span class="math display">\[
+\int f\,d\mu = \sup_{h\in\mathcal{H}_f}\int h\,d\mu,
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{H}_f\)</span> consists of bounded functions <span class="math inline">\(h\)</span> such that</p>
+<p><span class="math display">\[
+0 \le h \le f,
+\qquad
+\mu(\{x : h(x) &gt; 0\}) &lt; \infty.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="lem-1" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1.1 (Approximation by Truncation)</strong></span> Let <span class="math inline">\(E_n \uparrow \Omega\)</span> have <span class="math inline">\(\mu(E_n) &lt; \infty\)</span> and let <span class="math inline">\(a \wedge b = \min(a,b)\)</span>. Then</p>
+<p><span class="math display">\[
+\int_{E_n} f \wedge n\, d\mu
+\uparrow
+\int f\, d\mu
+\qquad \text{as } n \uparrow \infty.
+\]</span></p>
+</div>
+<div id="cor-3" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1.3 (Properties of the Integral for Nonnegative Functions)</strong></span> Suppose <span class="math inline">\(f,g \ge 0\)</span>.</p>
+<ol type="i">
+<li><p><strong>Nonnegativity.</strong> <span class="math inline">\(\int f \, d\mu \ge 0\)</span>.</p></li>
+<li><p><strong>Homogeneity.</strong> If <span class="math inline">\(a &gt; 0\)</span>, then <span class="math inline">\(\int af \, d\mu = a \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Additivity.</strong></p>
+<p><span class="math display">\[
+\int (f + g) \, d\mu = \int f \, d\mu + \int g \, d\mu.
+\]</span></p></li>
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(0 \le g \le f\)</span> a.e., then <span class="math inline">\(\int g \, d\mu \le \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Equality almost everywhere.</strong> If <span class="math inline">\(0 \le g = f\)</span> a.e., then <span class="math inline">\(\int g \, d\mu = \int f \, d\mu\)</span>.</p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Standard Definition of the Lebesgue Integral
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space. For a nonnegative measurable function <span class="math inline">\(f:X\to[0,\infty]\)</span>, define</p>
+<p><span class="math display">\[
+\int_X f \, d\mu
+= \sup_{\substack{s\text{ nonnegative simple} \\ s \le f}}
+  \int_X s \, d\mu.
+\]</span></p>
+<p>In other words, approximate <span class="math inline">\(f\)</span> from below using nonnegative simple functions and take the supremum of their integrals. The integral is allowed to equal <span class="math inline">\(+\infty\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="general-functions" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="general-functions"><span class="header-section-number">1.4.4</span> General Functions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>General Function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We say <span class="math inline">\(f\)</span> is integrable if</p>
+<p><span class="math display">\[
+\int |f|\,d\mu &lt; \infty.
+\]</span></p>
+<p>The <strong>positive and negative parts</strong> of <span class="math inline">\(f\)</span> are</p>
+<p><span class="math display">\[
+\begin{aligned}
+f^+(x) &amp;= f(x)\vee 0, \\
+f^-(x) &amp;= (-f(x))\vee 0,
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(a\vee b=\max(a,b)\)</span>. They satisfy</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(x) &amp;= f^+(x)-f^-(x), \\
+|f(x)| &amp;= f^+(x)+f^-(x).
+\end{aligned}
+\]</span></p>
+<p>We define the integral of <span class="math inline">\(f\)</span> by</p>
+<p><span class="math display">\[
+\int f \, d\mu = \int f^+ \, d\mu - \int f^- \, d\mu.
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="lem-2" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1.2 (Integral of a Difference)</strong></span> If <span class="math inline">\(f=f_1-f_2\)</span>, where <span class="math inline">\(f_1,f_2\ge 0\)</span> and <span class="math inline">\(\int f_i\,d\mu&lt;\infty\)</span> for <span class="math inline">\(i=1,2\)</span>, then</p>
+<p><span class="math display">\[
+\int f\,d\mu = \int f_1\,d\mu - \int f_2\,d\mu.
+\]</span></p>
+</div>
+<div id="thm-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.8 (Properties of the Integral for General Functions)</strong></span> Suppose <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are integrable.</p>
+<ol type="i">
+<li><p><strong>Nonnegativity.</strong> If <span class="math inline">\(f \ge 0\)</span> a.e., then <span class="math inline">\(\int f \, d\mu \ge 0\)</span>.</p></li>
+<li><p><strong>Homogeneity.</strong> For all <span class="math inline">\(a \in \mathbb{R}\)</span>, <span class="math inline">\(\int af \, d\mu = a \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Additivity.</strong></p>
+<p><span class="math display">\[
+\int (f + g) \, d\mu = \int f \, d\mu + \int g \, d\mu.
+\]</span></p></li>
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(g \le f\)</span> a.e., then <span class="math inline">\(\int g \, d\mu \le \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Equality almost everywhere.</strong> If <span class="math inline">\(g = f\)</span> a.e., then <span class="math inline">\(\int g \, d\mu = \int f \, d\mu\)</span>.</p></li>
+<li><p><strong>Triangle inequality.</strong></p>
+<p><span class="math display">\[
+\left|\int f \, d\mu\right| \le \int |f| \, d\mu.
+\]</span></p></li>
+</ol>
+</div>
+</section>
+<section id="notation-for-special-cases" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="notation-for-special-cases"><span class="header-section-number">1.4.5</span> Notation for Special Cases</h3>
+<p>The notation for an integral depends on the underlying measure:</p>
+<p><strong>Lebesgue measure.</strong> For <span class="math inline">\(\lambda\)</span> on <span class="math inline">\((\mathbb{R}^d, \mathcal{R}^d)\)</span>,</p>
+<p><span class="math display">\[
+\int f(x) \, dx = \int f \, d\lambda.
+\]</span></p>
+<p><strong>Lebesgue measure on an interval.</strong> For <span class="math inline">\(E = [a,b] \subset \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\int_a^b f(x) \, dx = \int_E f \, d\lambda.
+\]</span></p>
+<p><strong>Stieltjes measure.</strong> For <span class="math inline">\(\mu\)</span> on <span class="math inline">\((\mathbb{R}, \mathcal{R})\)</span>, with <span class="math inline">\(\mu((a,b]) = G(b) - G(a)\)</span> for <span class="math inline">\(a &lt; b\)</span>,</p>
+<p><span class="math display">\[
+\int f(x) \, dG(x) = \int f \, d\mu.
+\]</span></p>
+<p><strong>Counting measure.</strong> For a countable set <span class="math inline">\(\Omega\)</span>, with <span class="math inline">\(\mathcal{F}\)</span> containing all subsets,</p>
+<p><span class="math display">\[
+\sum_{i \in \Omega} f(i) = \int f \, d\mu.
+\]</span></p>
+</section>
+</section>
+<section id="properties-of-the-integral" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="properties-of-the-integral"><span class="header-section-number">1.5</span> Properties of the Integral</h2>
+<section id="radonnikodym-derivatives" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="radonnikodym-derivatives"><span class="header-section-number">1.5.1</span> Radon–Nikodym Derivatives</h3>
+<div id="thm-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.9 (Radon–Nikodym Theorem)</strong></span> Let <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span> be <strong><span class="math inline">\(\sigma\)</span>-finite measures</strong> on the same measurable space <span class="math inline">\((\Omega,\mathcal F)\)</span>. If</p>
+<p><span class="math display">\[
+\nu\ll\mu,
+\]</span></p>
+<p>meaning</p>
+<p><span class="math display">\[
+\mu(A)=0\implies\nu(A)=0,
+\]</span></p>
+<p>then there exists a nonnegative measurable function <span class="math inline">\(f\)</span> such that</p>
+<p><span class="math display">\[
+\nu(A)=\int_A f\,d\mu
+\]</span></p>
+<p>for every <span class="math inline">\(A\in\mathcal F\)</span>.</p>
+<p>The function <span class="math inline">\(f\)</span> is unique <strong>up to a <span class="math inline">\(\mu\)</span>-null set</strong> and is called the <strong>Radon–Nikodym derivative</strong>:</p>
+<p><span class="math display">\[
+f=\frac{d\nu}{d\mu}.
+\]</span></p>
+</div>
+</section>
+<section id="integral-inequalities" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="integral-inequalities"><span class="header-section-number">1.5.2</span> Integral Inequalities</h3>
+<div id="thm-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.10 (Jensen’s Inequality)</strong></span> Suppose <span class="math inline">\(\varphi\)</span> is convex, that is,</p>
+<p><span class="math display">\[
+\lambda\varphi(x) + (1-\lambda)\varphi(y)
+\ge
+\varphi\bigl(\lambda x + (1-\lambda)y\bigr)
+\]</span></p>
+<p>for all <span class="math inline">\(\lambda \in (0,1)\)</span> and <span class="math inline">\(x,y \in \mathbb{R}\)</span>. If <span class="math inline">\(\mu\)</span> is a probability measure, and <span class="math inline">\(f\)</span> and <span class="math inline">\(\varphi(f)\)</span> are integrable, then</p>
+<p><span class="math display">\[
+\varphi\left(\int f \, d\mu\right)
+\le
+\int \varphi(f) \, d\mu.
+\]</span></p>
+</div>
+<p>For <span class="math inline">\(1 \le p &lt; \infty\)</span>, let</p>
+<p><span class="math display">\[
+\|f\|_p = \left(\int |f|^p \, d\mu\right)^{1/p}.
+\]</span></p>
+<p>Notice that <span class="math inline">\(\|cf\|_p = |c| \cdot \|f\|_p\)</span> for any real number <span class="math inline">\(c\)</span>.</p>
+<div id="thm-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.11 (Hölder’s Inequality)</strong></span> If <span class="math inline">\(p,q \in (1,\infty)\)</span> with</p>
+<p><span class="math display">\[
+\frac{1}{p} + \frac{1}{q} = 1,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+\int |fg| \, d\mu \le \|f\|_p \|g\|_q.
+\]</span></p>
+</div>
+<div id="cor-4" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1.4 (Cauchy–Schwarz Inequality)</strong></span> If <span class="math inline">\(p=q=2\)</span>, then Hölder’s inequality becomes the Cauchy–Schwarz inequality:</p>
+<p><span class="math display">\[
+\int |fg| \, d\mu \le \|f\|_2 \|g\|_2.
+\]</span></p>
+</div>
+</section>
+<section id="convergence-theorems" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="convergence-theorems"><span class="header-section-number">1.5.3</span> Convergence Theorems</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Convergence in Measure and Almost Everywhere
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space, and let <span class="math inline">\(f_n,f:X\to\mathbb R\)</span> be measurable functions.</p>
+<p><strong>Convergence in measure.</strong> We say that <span class="math inline">\(f_n \to f\)</span> in measure if, for any <span class="math inline">\(\epsilon &gt; 0\)</span>,</p>
+<p><span class="math display">\[
+\mu\bigl(\{x : |f_n(x)-f(x)| &gt; \epsilon\}\bigr) \to 0
+\]</span></p>
+<p>as <span class="math inline">\(n \to \infty\)</span>.</p>
+<p><strong>Almost-everywhere convergence.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> almost everywhere if there exists a measurable set <span class="math inline">\(Z\subseteq X\)</span> with <span class="math inline">\(\mu(Z)=0\)</span> such that</p>
+<p><span class="math display">\[
+\lim_{n\to\infty}f_n(x)=f(x)
+\]</span></p>
+<p>for every <span class="math inline">\(x\in X\setminus Z\)</span>.</p>
+<p>We write</p>
+<p><span class="math display">\[
+f_n\xrightarrow{\mathrm{a.e.}}f.
+\]</span></p>
+<p>On a space of finite measure, convergence in measure is a weaker assumption than convergence a.e., but the next result is easier to prove in this greater generality.</p>
+</div>
+</div>
+</div>
+<div id="thm-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.12 (Bounded Convergence Theorem)</strong></span> Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E)&lt;\infty\)</span>. Suppose <span class="math inline">\(f_n\)</span> vanishes on <span class="math inline">\(E^c\)</span>, <span class="math inline">\(|f_n(x)|\le M\)</span>, and <span class="math inline">\(f_n\to f\)</span> in measure. Then</p>
+<p><span class="math display">\[
+\int f \, d\mu = \lim_{n\to\infty} \int f_n \, d\mu.
+\]</span></p>
+</div>
+<div id="thm-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.13 (Fatou’s Lemma)</strong></span> If <span class="math inline">\(f_n \ge 0\)</span> then</p>
+<p><span class="math display">\[
+\liminf_{n\to\infty}\int f_n\,d\mu
+\ge
+\int\left(\liminf_{n\to\infty}f_n\right)\,d\mu.
+\]</span></p>
+</div>
+<div id="thm-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.14 (Monotone Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\ge0\)</span> and <span class="math inline">\(f_n\uparrow f\)</span>, then</p>
+<p><span class="math display">\[
+\int f_n\,d\mu \uparrow \int f\,d\mu.
+\]</span></p>
+</div>
+<div id="thm-15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.15 (Dominated Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\to f\)</span> a.e., <span class="math inline">\(|f_n|\le g\)</span> for all <span class="math inline">\(n\)</span>, and <span class="math inline">\(g\)</span> is integrable, then</p>
+<p><span class="math display">\[
+\int f_n\,d\mu \longrightarrow \int f\,d\mu.
+\]</span></p>
+</div>
 
 
 </section>
