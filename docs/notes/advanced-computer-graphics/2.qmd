@@ -11,11 +11,11 @@ crossref:
 
 ## Transformations and Homogeneous Coordinates
 
-**Transformations:** Translation (not linear), Rotation, Reflection, Scaling, Shear.
+**Transformations:** Translation (not linear), rotation, reflection, scaling, and shear.
 
 We could leverage matrix multiplication without translation.
 
-**Homogeneous Coordinates:** Represent 3D transformations as 3×3 matrices and 3D-H transformations as 4×4 matrices
+**Homogeneous Coordinates:** Use 4×4 matrices to represent translation and linear transformations together in 3D.
 
 **Scale:**
 
@@ -55,12 +55,12 @@ $$
 
 ## Rotation
 
-**Topology:** Structural Properties of a Manifold
+**Topology:** Structural properties of a manifold.
 
 Two surfaces $M$ and $N$ are topologically equivalent if
 there is a differentiable bijection between $M$ and $N$.
 
-**Orientation:** Space Frame and Body Frame
+**Orientation:** Space frame and body frame.
 
 **The Set of Rotations:** The special orthogonal group is
 
@@ -68,7 +68,7 @@ $$
 SO(n) = \{R \in \mathbb{R}^{n\times n} : \det(R)=1,\ RR^T=I\}.
 $$
 
-**Topology of SO(n):** The topology of $SO(2)$ and $SO(3)$ is different from $(-1,1)^n$, thus Parameterizing Rotation in Networks is Tricky
+The topology of $SO(2)$ and $SO(3)$ is different from $(-1,1)^n$, so parameterizing rotations in networks is tricky.
 
 ## 3D Rotation Representations
 
@@ -114,7 +114,7 @@ Euler Angle is not unique for some rotations (gimbal lock).
 
 ### Axis-Angle
 
-**Euler Theorem:**
+**Euler's Rotation Theorem:**
 
 - Any rotation in $SO(3)$ is equivalent to rotation about a fixed axis $\omega \in \mathbb{R}^3$ through a positive angle $\theta$.
 
@@ -165,17 +165,17 @@ Euler Angle is not unique for some rotations (gimbal lock).
     [\hat{\omega}]^3 = -[\hat{\omega}].
     $$
 
-- Then, use Taylor expansion of $\sin$ and $\cos$:
+Then, use Taylor expansion of $\sin$ and $\cos$:
 
-    $$
-    e^{[\hat{\omega}]\theta}
-    =
-    I
-    +
-    [\hat{\omega}]\sin\theta
-    +
-    [\hat{\omega}]^2(1-\cos\theta).
-    $$
+$$
+e^{[\hat{\omega}]\theta}
+=
+I
++
+[\hat{\omega}]\sin\theta
++
+[\hat{\omega}]^2(1-\cos\theta).
+$$
 
 **Recover Axis-Angle from Rotation Matrix:**
 
@@ -194,6 +194,7 @@ Euler Angle is not unique for some rotations (gimbal lock).
 ### Quaternion
 
 **Mathematical Definition:**
+
 Quaternion is a more generalized complex number:
 
 $$
@@ -289,7 +290,7 @@ $$
     q_{\text{total}} = q_2q_1.
     $$
 
-**Conversion between Quaternions and Angle-Axis:**
+**Conversion between Quaternions and Axis-Angle:**
 
 - Given the rotation axis $\hat{\omega}$ and rotation angle $\theta$,
 
@@ -326,9 +327,9 @@ $$
   \end{cases}
   $$
 
-**Inspection from Learning Perspective:** Each rotation corresponds to two quaternions, Need to normalize to unit length in networks. This
-normalization may cause big/small gradients in
-practice.
+**Learning Perspective:**
+
+Each rotation corresponds to two quaternions. Networks need to normalize quaternions to unit length, which may cause large or small gradients in practice.
 
 **Summary of Rotation Representations:**
 
@@ -363,15 +364,12 @@ where:
 The first three transformations are often combined as
 
 $$
-\boxed{
 p_{\text{clip}}
 =
 PVM\,p_{\text{object}}.
-}
 $$
 
 ### Projection Transformation
-
 
 - 3D to 2D
 - Orthographic Projection vs. Perspective Projection
@@ -382,7 +380,7 @@ $$
 - Drop Z coordinate
 - Translate and scale the resulting rectangle to $[-1, 1]^2$
 
-Translate (**center to origin**) first, then scale (length/width/height to **2**).
+Translate the center to the origin first, then scale each dimension to length 2.
 
 $$
 M_{\text{ortho}} =
@@ -408,6 +406,30 @@ $$
 
 First "squish" the frustum into a cuboid, then apply orthographic projection.
 
+$$
+M_{\mathrm{persp}\to\mathrm{ortho}}
+=
+\begin{bmatrix}
+n & 0 & 0 & 0 \\
+0 & n & 0 & 0 \\
+0 & 0 & n+f & -nf \\
+0 & 0 & 1 & 0
+\end{bmatrix}
+$$
+
+$$
+M_{\mathrm{ortho}}
+=
+\begin{bmatrix}
+\dfrac{2}{r-l} & 0 & 0 & -\dfrac{r+l}{r-l} \\[6pt]
+0 & \dfrac{2}{t-b} & 0 & -\dfrac{t+b}{t-b} \\[6pt]
+0 & 0 & -\dfrac{2}{f-n} & -\dfrac{f+n}{f-n} \\[6pt]
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+- Aspect ratio = width / height
+- Field of view (FOV) = angle of the camera lens = $2\arctan(\frac{h}{2n})$ where $h$ is the height of the near plane and $n$ is the distance from the camera to the near plane.
 
 ### Viewport Transformation
 

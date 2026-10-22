@@ -50,8 +50,32 @@ crossref:
 - [iGibson](https://svl.stanford.edu/igibson/)
 - [SAPIEN: A SimulAted Part-Based Interactive ENvironment](https://sapien.ucsd.edu/)
 
+**AI+Geometry:**
+
+- $S$ — Shape, $c$ — label or condition
+
+- $P(c \mid S)$ — Shape analysis
+  - Learning shape descriptors
+  - Shape classification, segmentation, view estimation, etc.
+
+- $P(S)$ or $P(S \mid c)$ — Shape synthesis
+  - Learning (conditional) shape priors
+  - Shape generation, completion, & reconstruction
+
 ## Data-Driven Shape Analysis
 
+**Multi-View Representations:** 
+
+- $\mathrm{CNN}_1$: a ConvNet extracting image features
+- $\mathrm{CNN}_2$: a second ConvNet producing shape descriptors
+
+- Need projection
+
+**3D CNN on Volumetric Data:**
+
+Information loss in voxelization.
+
+- Learn to Project
 
 ## Data-Driven Shape Synthesis
 

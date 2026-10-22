@@ -97,6 +97,30 @@ iv) **Continuity from above.** If $A_i \downarrow A$ (i.e.,
 
 :::
 
+
+::: {.callout-note collapse="true"}
+
+## Why is the finite-measure condition needed for continuity from above?
+
+The proof uses subtraction, so we must avoid the undefined expression $\infty-\infty$. Moreover, the conclusion may fail without this condition.
+
+For example, consider Lebesgue measure on $\mathbb R$. Let
+
+$$
+A_n=[n,\infty)\downarrow\varnothing.
+$$
+
+However,
+
+$$
+\mu(A_n)=\infty
+\quad\text{for every }n,
+$$
+
+so $\mu(A_n)$ does not converge to $\mu(\varnothing)=0$.
+
+:::
+
 ::: {.callout-note collapse="true"}
 
 ## Classification of Measures
@@ -700,40 +724,77 @@ $$
 ### Convergence Theorems
 
 ::: {.callout-tip collapse="true"}
-
-## Convergence in Measure and Almost Everywhere
+## Modes of Convergence
 
 Let $(X,\mathcal A,\mu)$ be a measure space, and let
 $f_n,f:X\to\mathbb R$ be measurable functions.
 
-**Convergence in measure.** We say that $f_n \to f$ in measure if, for any
-$\epsilon > 0$,
-
+**Convergence in measure.** We say that $f_n$ converges to $f$ in measure if, for every $\epsilon>0$,
 $$
-\mu\bigl(\{x : |f_n(x)-f(x)| > \epsilon\}\bigr) \to 0
+\mu\bigl(\{x\in X:|f_n(x)-f(x)|>\epsilon\}\bigr)\to0
 $$
+as $n\to\infty$.
 
-as $n \to \infty$.
-
-**Almost-everywhere convergence.** We say that $f_n$ converges to $f$ almost
-everywhere if there exists a measurable set $Z\subseteq X$ with $\mu(Z)=0$ such that
-
+**Almost-everywhere convergence.** We say that $f_n$ converges to $f$ almost everywhere if there exists a measurable set $Z\subseteq X$ with $\mu(Z)=0$ such that
 $$
 \lim_{n\to\infty}f_n(x)=f(x)
 $$
-
-for every $x\in X\setminus Z$.
-
-We write
-
+for every $x\in X\setminus Z$. We write
 $$
 f_n\xrightarrow{\mathrm{a.e.}}f.
 $$
 
-On a space of finite measure, convergence in measure is a weaker assumption than
-convergence a.e., but the next result is easier to prove in this greater generality.
+**Uniform convergence.** We say that $f_n$ converges to $f$ uniformly on $X$ if, for every $\epsilon>0$, there exists an integer $N\ge1$ such that
+$$
+|f_n(x)-f(x)|<\epsilon
+$$
+for every $n\ge N$ and every $x\in X$. The integer $N$ may depend on $\epsilon$, but not on $x$.
+
+**Almost-uniform convergence.** We say that $f_n$ converges to $f$ almost uniformly on $X$ if, for every $\delta>0$, there exists a measurable set $D_\delta\subseteq X$ such that
+$$
+\mu(D_\delta)<\delta
+$$
+and $f_n$ converges to $f$ uniformly on $X\setminus D_\delta$.
+
+The exceptional set $D_\delta$ may depend on $\delta$, but not on $n$.
+
+On a space of finite measure, almost-everywhere convergence implies convergence in measure, but the converse need not hold.
+:::
+
+
+
+::: {.callout-note collapse="true"}
+
+## Properties of Convergence
+
+For measurable functions on a measure space $(X,\mathcal F,\mu)$, we have
+$$
+\text{uniform convergence}
+\;\Longrightarrow\;
+\text{almost-uniform convergence}
+\;\Longrightarrow\;
+\text{almost-everywhere convergence},
+$$
+and
+$$
+\text{almost-uniform convergence}
+\;\Longrightarrow\;
+\text{convergence in measure}.
+$$
+
+If $\mu(X)<\infty$, Egorov's theorem also gives
+$$
+\text{almost-everywhere convergence (almost surely)}
+\;\Longrightarrow\;
+\text{almost-uniform convergence}
+\;\Longrightarrow\;
+\text{convergence in measure (convergence in probability)}.
+$$
+The finite-measure assumption cannot generally be omitted from this implication.
 
 :::
+
+
 
 ::: {#thm-12 name="Bounded Convergence Theorem"}
 
@@ -774,5 +835,11 @@ If $f_n\to f$ a.e., $|f_n|\le g$ for all $n$, and $g$ is integrable, then
 $$
 \int f_n\,d\mu \longrightarrow \int f\,d\mu.
 $$
+
+:::
+
+::: {.callout-note collapse="true"}
+
+Although the versions of @thm-13, @thm-14, and @thm-15 presented in class assume that $\mu$ is $\sigma$-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods.
 
 :::

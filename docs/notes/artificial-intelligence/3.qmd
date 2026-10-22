@@ -1,0 +1,66 @@
+---
+title: "Probabilistic Models"
+page-layout: article
+search: true
+number-offset: [3]
+
+crossref:
+  chapters: true
+---
+
+## Basics on Probability
+
+**Random Variables:** A random variable is some aspect of the world about which we (may) have uncertainty.
+
+**Probability Distribution:** A probability distribution over a random variable associates a probability with each value.
+
+**Joint Distributions:** A joint distribution over a set of random variables: specifies a real number for each assignment.
+
+**Marginal Distributions:** Marginalization (summing out): Combine collapsed rows by adding.
+
+**Conditional Probabilities:** Conditional distributions are probability distributions over some variables given fixed values of others.
+
+**Bayes' Rule:** Bayes' rule allows us to compute conditional probabilities in terms of other conditional probabilities.
+
+## Bayesian nets: Representation
+
+**Bayes' nets:** a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)
+
+- More properly called **graphical models**
+- Local interactions chain together to give global, indirect interactions
+
+**Graphical Model Notation:** 
+
+- Nodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)
+
+- Arcs: interactions: Formally: encode conditional independence 
+
+**Bayes' Net Semantics:**
+
+- A set of nodes, one per random variable $X$
+- A directed, acyclic graph
+- A conditional distribution for each node
+  - A collection of distributions over $X$, one for each combination of parents’ values
+
+    $$
+    P(X \mid a_1 \ldots a_n)
+    $$
+
+  - CPT: conditional probability table
+  - Description of a noisy causal process
+
+**Bayes Nets: Assumptions:**
+
+Assumptions we are required to make to define the Bayes net when given the graph:
+
+$$
+P(x_i \mid x_1,\ldots,x_{i-1})
+=
+P(x_i \mid \operatorname{parents}(X_i)).
+$$
+
+**D-Separation:** 
+
+
+## Bayesian nets: inference
+

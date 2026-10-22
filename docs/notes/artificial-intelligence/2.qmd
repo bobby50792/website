@@ -65,26 +65,20 @@ $$
 ### First-order logic
 
 - Syntax
-  - Terms: Constant symbol, Variable, Function of terms
-  - Formulas:
-    - Atomic formulas (atoms): predicate applied to terms 
-    - Connectives applied to formulas 
-    - Quantifiers applied to formulas (\forall, \exists)
+  - Terms denote objects: constant symbols $c$, variables $x$, and function applications $f(t_1,\ldots,t_n)$, where each $t_i$ is a term.
+  - Formulas are built from:
+    - Atomic formulas: $P(t_1,\ldots,t_n)$; also $t_1=t_2$ in logic with equality.
+    - Connectives applied to formulas: $\neg,\land,\lor,\to,\leftrightarrow$.
+    - Quantifiers applied to formulas: $\forall x\,\varphi$, $\exists x\,\varphi$.
 
 - Models
-  A model $w$ in first-order logic maps:
+  - A model $w$ specifies a nonempty domain $D$ and interprets:
+    - Constant symbols as objects: $w(c)\in D$.
+    - Function symbols as functions: $w(f):D^n\to D$.
+    - Predicate symbols as sets of tuples: $w(P)\subseteq D^n$, equivalently functions $D^n\to\{0,1\}$.
+  - A separate variable assignment $s:\mathrm{Var}\to D$ gives variables their values: $s(x)\in D$.
 
-  - constant symbols to objects
-
-    $$
-    w(\mathrm{alice}) = o_1,\quad w(\mathrm{bob}) = o_2,\quad w(\mathrm{arithmetic}) = o_3
-    $$
-
-  - predicate symbols to tuples of objects
-
-    $$
-    w(\mathrm{Knows}) = \{(o_1,o_3), (o_2,o_3), \ldots\}
-    $$
+For example, if $w(\mathrm{alice})=o_1$, $w(\mathrm{arithmetic})=o_3$, and $(o_1,o_3)\in w(\mathrm{Knows})$, then $\mathrm{Knows}(\mathrm{alice},\mathrm{arithmetic})$ is true.
 
 
 ## Inference  
@@ -213,10 +207,32 @@ $$
 
 **Conjunctive normal form (CNF):** A CNF formula is a conjunction of clauses.
 
-**Proposition: conversion to CNF**
+**Proposition: conversion to CNF:**
 
 Every formula $f$ in propositional logic can be converted into an equivalent CNF formula $f'$:
 
 $$
 \mathcal{M}(f) = \mathcal{M}(f')
 $$
+
+**FOL: Conversion to CNF:**
+
+- All variable have universal quantifiers by default
+- Introduce Skolem functions (e.g., $Y(x)$) to represent existentially quantified variables.
+
+
+**Resolution rule (first-order logic):**
+
+$$
+\frac{
+f_1 \lor \cdots \lor f_n \lor p,\qquad
+\neg q \lor g_1 \lor \cdots \lor g_m
+}{
+\operatorname{Subst}[\theta,\,
+f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
+}
+$$
+
+where $\theta = \operatorname{Unify}[p,q]$.
+
+## Semantics

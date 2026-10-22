@@ -192,6 +192,8 @@ website:
                   href: docs/notes/artificial-intelligence/1.qmd
                 - text: "Logic"
                   href: docs/notes/artificial-intelligence/2.qmd
+                - text: "Probabilistic Models"
+                  href: docs/notes/artificial-intelligence/3.qmd
 
 format:
   html:
