@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-d2de20584d3d090aca7cc20a9b65bb77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-7b55db5257b4a169278f51aaec36e689.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -847,6 +847,12 @@ window.Quarto = {
  <span class="menu-text">Logic</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/artificial-intelligence/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -902,9 +908,9 @@ window.Quarto = {
 
 <section id="transformations-and-homogeneous-coordinates" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="transformations-and-homogeneous-coordinates"><span class="header-section-number">2.1</span> Transformations and Homogeneous Coordinates</h2>
-<p><strong>Transformations:</strong> Translation (not linear), Rotation, Reflection, Scaling, Shear.</p>
+<p><strong>Transformations:</strong> Translation (not linear), rotation, reflection, scaling, and shear.</p>
 <p>We could leverage matrix multiplication without translation.</p>
-<p><strong>Homogeneous Coordinates:</strong> Represent 3D transformations as 3×3 matrices and 3D-H transformations as 4×4 matrices</p>
+<p><strong>Homogeneous Coordinates:</strong> Use 4×4 matrices to represent translation and linear transformations together in 3D.</p>
 <p><strong>Scale:</strong></p>
 <p><span class="math display">\[
 S_s =
@@ -938,14 +944,14 @@ T_b =
 </section>
 <section id="rotation" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="rotation"><span class="header-section-number">2.2</span> Rotation</h2>
-<p><strong>Topology:</strong> Structural Properties of a Manifold</p>
+<p><strong>Topology:</strong> Structural properties of a manifold.</p>
 <p>Two surfaces <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> are topologically equivalent if there is a differentiable bijection between <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span>.</p>
-<p><strong>Orientation:</strong> Space Frame and Body Frame</p>
+<p><strong>Orientation:</strong> Space frame and body frame.</p>
 <p><strong>The Set of Rotations:</strong> The special orthogonal group is</p>
 <p><span class="math display">\[
 SO(n) = \{R \in \mathbb{R}^{n\times n} : \det(R)=1,\ RR^T=I\}.
 \]</span></p>
-<p><strong>Topology of SO(n):</strong> The topology of <span class="math inline">\(SO(2)\)</span> and <span class="math inline">\(SO(3)\)</span> is different from <span class="math inline">\((-1,1)^n\)</span>, thus Parameterizing Rotation in Networks is Tricky</p>
+<p>The topology of <span class="math inline">\(SO(2)\)</span> and <span class="math inline">\(SO(3)\)</span> is different from <span class="math inline">\((-1,1)^n\)</span>, so parameterizing rotations in networks is tricky.</p>
 </section>
 <section id="d-rotation-representations" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="d-rotation-representations"><span class="header-section-number">2.3</span> 3D Rotation Representations</h2>
@@ -986,7 +992,7 @@ R = R_z(\gamma)R_y(\beta)R_x(\alpha).
 </section>
 <section id="axis-angle" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="axis-angle"><span class="header-section-number">2.3.2</span> Axis-Angle</h3>
-<p><strong>Euler Theorem:</strong></p>
+<p><strong>Euler’s Rotation Theorem:</strong></p>
 <ul>
 <li><p>Any rotation in <span class="math inline">\(SO(3)\)</span> is equivalent to rotation about a fixed axis <span class="math inline">\(\omega \in \mathbb{R}^3\)</span> through a positive angle <span class="math inline">\(\theta\)</span>.</p></li>
 <li><p><span class="math inline">\(\hat{\omega}\)</span>: unit vector of rotation axis <span class="math inline">\((\|\hat{\omega}\| = 1)\)</span>.</p></li>
@@ -1027,17 +1033,17 @@ a \times b = [a]b.
 <p><span class="math display">\[
   [\hat{\omega}]^3 = -[\hat{\omega}].
   \]</span></p></li>
-<li><p>Then, use Taylor expansion of <span class="math inline">\(\sin\)</span> and <span class="math inline">\(\cos\)</span>:</p>
-<p><span class="math display">\[
-  e^{[\hat{\omega}]\theta}
-  =
-  I
-  +
-  [\hat{\omega}]\sin\theta
-  +
-  [\hat{\omega}]^2(1-\cos\theta).
-  \]</span></p></li>
 </ul>
+<p>Then, use Taylor expansion of <span class="math inline">\(\sin\)</span> and <span class="math inline">\(\cos\)</span>:</p>
+<p><span class="math display">\[
+e^{[\hat{\omega}]\theta}
+=
+I
++
+[\hat{\omega}]\sin\theta
++
+[\hat{\omega}]^2(1-\cos\theta).
+\]</span></p>
 <p><strong>Recover Axis-Angle from Rotation Matrix:</strong></p>
 <ul>
 <li><p>For <span class="math inline">\(0 &lt; \theta &lt; \pi\)</span>,</p>
@@ -1053,7 +1059,8 @@ a \times b = [a]b.
 </section>
 <section id="quaternion" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="quaternion"><span class="header-section-number">2.3.3</span> Quaternion</h3>
-<p><strong>Mathematical Definition:</strong> Quaternion is a more generalized complex number:</p>
+<p><strong>Mathematical Definition:</strong></p>
+<p>Quaternion is a more generalized complex number:</p>
 <p><span class="math display">\[
 q = w + xi + yj + zk
 \]</span></p>
@@ -1130,7 +1137,7 @@ q_{\text{total}} = q_2q_1.
 \]</span></p></li>
 </ul></li>
 </ul>
-<p><strong>Conversion between Quaternions and Angle-Axis:</strong></p>
+<p><strong>Conversion between Quaternions and Axis-Angle:</strong></p>
 <ul>
 <li><p>Given the rotation axis <span class="math inline">\(\hat{\omega}\)</span> and rotation angle <span class="math inline">\(\theta\)</span>,</p>
 <p><span class="math display">\[
@@ -1161,7 +1168,8 @@ q
 \end{cases}
 \]</span></p></li>
 </ul>
-<p><strong>Inspection from Learning Perspective:</strong> Each rotation corresponds to two quaternions, Need to normalize to unit length in networks. This normalization may cause big/small gradients in practice.</p>
+<p><strong>Learning Perspective:</strong></p>
+<p>Each rotation corresponds to two quaternions. Networks need to normalize quaternions to unit length, which may cause large or small gradients in practice.</p>
 <p><strong>Summary of Rotation Representations:</strong></p>
 <table class="caption-top table">
 <thead>
@@ -1221,11 +1229,9 @@ p_{\text{camera}} &amp;\xrightarrow{P} p_{\text{canonical}}
 </ul>
 <p>The first three transformations are often combined as</p>
 <p><span class="math display">\[
-\boxed{
 p_{\text{clip}}
 =
 PVM\,p_{\text{object}}.
-}
 \]</span></p>
 <section id="projection-transformation" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="projection-transformation"><span class="header-section-number">2.4.1</span> Projection Transformation</h3>
@@ -1239,7 +1245,7 @@ PVM\,p_{\text{object}}.
 <li>Drop Z coordinate</li>
 <li>Translate and scale the resulting rectangle to <span class="math inline">\([-1, 1]^2\)</span></li>
 </ul>
-<p>Translate (<strong>center to origin</strong>) first, then scale (length/width/height to <strong>2</strong>).</p>
+<p>Translate the center to the origin first, then scale each dimension to length 2.</p>
 <p><span class="math display">\[
 M_{\text{ortho}} =
 \begin{bmatrix}
@@ -1262,6 +1268,30 @@ M_{\text{ortho}} =
 <li>Parallel lines not parallel; converge to single point</li>
 </ul>
 <p>First “squish” the frustum into a cuboid, then apply orthographic projection.</p>
+<p><span class="math display">\[
+M_{\mathrm{persp}\to\mathrm{ortho}}
+=
+\begin{bmatrix}
+n &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; n &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; n+f &amp; -nf \\
+0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+M_{\mathrm{ortho}}
+=
+\begin{bmatrix}
+\dfrac{2}{r-l} &amp; 0 &amp; 0 &amp; -\dfrac{r+l}{r-l} \\[6pt]
+0 &amp; \dfrac{2}{t-b} &amp; 0 &amp; -\dfrac{t+b}{t-b} \\[6pt]
+0 &amp; 0 &amp; -\dfrac{2}{f-n} &amp; -\dfrac{f+n}{f-n} \\[6pt]
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Aspect ratio = width / height</li>
+<li>Field of view (FOV) = angle of the camera lens = <span class="math inline">\(2\arctan(\frac{h}{2n})\)</span> where <span class="math inline">\(h\)</span> is the height of the near plane and <span class="math inline">\(n\)</span> is the distance from the camera to the near plane.</li>
+</ul>
 </section>
 <section id="viewport-transformation" class="level3" data-number="2.4.2">
 <h3 data-number="2.4.2" class="anchored" data-anchor-id="viewport-transformation"><span class="header-section-number">2.4.2</span> Viewport Transformation</h3>

@@ -36,6 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
+<link href="../../../docs/notes/artificial-intelligence/3.html" rel="next">
 <link href="../../../docs/notes/artificial-intelligence/1.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -49,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-d2de20584d3d090aca7cc20a9b65bb77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-7b55db5257b4a169278f51aaec36e689.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -846,6 +847,12 @@ window.Quarto = {
  <span class="menu-text">Logic</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/artificial-intelligence/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -871,6 +878,7 @@ window.Quarto = {
   <li><a href="#sat-and-model-checking" id="toc-sat-and-model-checking" class="nav-link" data-scroll-target="#sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and model-checking</a></li>
   <li><a href="#inference-rules" id="toc-inference-rules" class="nav-link" data-scroll-target="#inference-rules"><span class="header-section-number">2.2.3</span> Inference rules</a></li>
   </ul></li>
+  <li><a href="#semantics" id="toc-semantics" class="nav-link" data-scroll-target="#semantics"><span class="header-section-number">2.3</span> Semantics</a></li>
   </ul>
 </nav>
     </div>
@@ -946,28 +954,28 @@ Let <span class="math inline">\(w\)</span> be a model. An interpretation functio
 <section id="first-order-logic" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="first-order-logic"><span class="header-section-number">2.1.2</span> First-order logic</h3>
 <ul>
-<li><p>Syntax</p>
+<li>Syntax
 <ul>
-<li>Terms: Constant symbol, Variable, Function of terms</li>
-<li>Formulas:
+<li>Terms denote objects: constant symbols <span class="math inline">\(c\)</span>, variables <span class="math inline">\(x\)</span>, and function applications <span class="math inline">\(f(t_1,\ldots,t_n)\)</span>, where each <span class="math inline">\(t_i\)</span> is a term.</li>
+<li>Formulas are built from:
 <ul>
-<li>Atomic formulas (atoms): predicate applied to terms</li>
-<li>Connectives applied to formulas</li>
-<li>Quantifiers applied to formulas (, )</li>
+<li>Atomic formulas: <span class="math inline">\(P(t_1,\ldots,t_n)\)</span>; also <span class="math inline">\(t_1=t_2\)</span> in logic with equality.</li>
+<li>Connectives applied to formulas: <span class="math inline">\(\neg,\land,\lor,\to,\leftrightarrow\)</span>.</li>
+<li>Quantifiers applied to formulas: <span class="math inline">\(\forall x\,\varphi\)</span>, <span class="math inline">\(\exists x\,\varphi\)</span>.</li>
 </ul></li>
 </ul></li>
-<li><p>Models A model <span class="math inline">\(w\)</span> in first-order logic maps:</p>
+<li>Models
 <ul>
-<li><p>constant symbols to objects</p>
-<p><span class="math display">\[
-w(\mathrm{alice}) = o_1,\quad w(\mathrm{bob}) = o_2,\quad w(\mathrm{arithmetic}) = o_3
-\]</span></p></li>
-<li><p>predicate symbols to tuples of objects</p>
-<p><span class="math display">\[
-w(\mathrm{Knows}) = \{(o_1,o_3), (o_2,o_3), \ldots\}
-\]</span></p></li>
+<li>A model <span class="math inline">\(w\)</span> specifies a nonempty domain <span class="math inline">\(D\)</span> and interprets:
+<ul>
+<li>Constant symbols as objects: <span class="math inline">\(w(c)\in D\)</span>.</li>
+<li>Function symbols as functions: <span class="math inline">\(w(f):D^n\to D\)</span>.</li>
+<li>Predicate symbols as sets of tuples: <span class="math inline">\(w(P)\subseteq D^n\)</span>, equivalently functions <span class="math inline">\(D^n\to\{0,1\}\)</span>.</li>
+</ul></li>
+<li>A separate variable assignment <span class="math inline">\(s:\mathrm{Var}\to D\)</span> gives variables their values: <span class="math inline">\(s(x)\in D\)</span>.</li>
 </ul></li>
 </ul>
+<p>For example, if <span class="math inline">\(w(\mathrm{alice})=o_1\)</span>, <span class="math inline">\(w(\mathrm{arithmetic})=o_3\)</span>, and <span class="math inline">\((o_1,o_3)\in w(\mathrm{Knows})\)</span>, then <span class="math inline">\(\mathrm{Knows}(\mathrm{alice},\mathrm{arithmetic})\)</span> is true.</p>
 </section>
 </section>
 <section id="inference" class="level2" data-number="2.2">
@@ -1060,14 +1068,33 @@ Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm
 {f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
 \]</span></p>
 <p><strong>Conjunctive normal form (CNF):</strong> A CNF formula is a conjunction of clauses.</p>
-<p><strong>Proposition: conversion to CNF</strong></p>
+<p><strong>Proposition: conversion to CNF:</strong></p>
 <p>Every formula <span class="math inline">\(f\)</span> in propositional logic can be converted into an equivalent CNF formula <span class="math inline">\(f'\)</span>:</p>
 <p><span class="math display">\[
 \mathcal{M}(f) = \mathcal{M}(f')
 \]</span></p>
-
-
+<p><strong>FOL: Conversion to CNF:</strong></p>
+<ul>
+<li>All variable have universal quantifiers by default</li>
+<li>Introduce Skolem functions (e.g., <span class="math inline">\(Y(x)\)</span>) to represent existentially quantified variables.</li>
+</ul>
+<p><strong>Resolution rule (first-order logic):</strong></p>
+<p><span class="math display">\[
+\frac{
+f_1 \lor \cdots \lor f_n \lor p,\qquad
+\neg q \lor g_1 \lor \cdots \lor g_m
+}{
+\operatorname{Subst}[\theta,\,
+f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
+}
+\]</span></p>
+<p>where <span class="math inline">\(\theta = \operatorname{Unify}[p,q]\)</span>.</p>
 </section>
+</section>
+<section id="semantics" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="semantics"><span class="header-section-number">2.3</span> Semantics</h2>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1491,6 +1518,9 @@ Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../../docs/notes/artificial-intelligence/3.html" class="pagination-link" aria-label="Probabilistic Models">
+        <span class="nav-page-text">Probabilistic Models</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-d2de20584d3d090aca7cc20a9b65bb77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-7b55db5257b4a169278f51aaec36e689.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -864,6 +864,12 @@ window.Quarto = {
  <span class="menu-text">Logic</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/artificial-intelligence/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -990,11 +996,37 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Classification of Measures
+<span class="screen-reader-only">Note</span>Why is the finite-measure condition needed for continuity from above?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The proof uses subtraction, so we must avoid the undefined expression <span class="math inline">\(\infty-\infty\)</span>. Moreover, the conclusion may fail without this condition.</p>
+<p>For example, consider Lebesgue measure on <span class="math inline">\(\mathbb R\)</span>. Let</p>
+<p><span class="math display">\[
+A_n=[n,\infty)\downarrow\varnothing.
+\]</span></p>
+<p>However,</p>
+<p><span class="math display">\[
+\mu(A_n)=\infty
+\quad\text{for every }n,
+\]</span></p>
+<p>so <span class="math inline">\(\mu(A_n)\)</span> does not converge to <span class="math inline">\(\mu(\varnothing)=0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Classification of Measures
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space. The following classes are not mutually exclusive.</p>
 <ol type="1">
@@ -1023,7 +1055,7 @@ m([-n,n]) = 2n &lt; \infty.
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1032,7 +1064,7 @@ m([-n,n]) = 2n &lt; \infty.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If we are given a set <span class="math inline">\(\Omega\)</span> and a collection <span class="math inline">\(\mathcal{A}\)</span> of subsets of <span class="math inline">\(\Omega\)</span>, then there is a smallest <span class="math inline">\(\sigma\)</span>-field containing <span class="math inline">\(\mathcal{A}\)</span>. We call this the <span class="math inline">\(\sigma\)</span>-field <strong>generated by</strong> <span class="math inline">\(\mathcal{A}\)</span> and denote it by <span class="math inline">\(\sigma(\mathcal{A})\)</span>.</p>
 <p>Let <span class="math inline">\(\mathbb{R}^d\)</span> be the set of vectors <span class="math inline">\((x_1,\ldots,x_d)\)</span> of real numbers and <span class="math inline">\(\mathcal{R}^d\)</span> be the <strong>Borel sets</strong>, the smallest <span class="math inline">\(\sigma\)</span>-field containing the open sets. When <span class="math inline">\(d=1\)</span> we drop the superscript.</p>
@@ -1070,7 +1102,7 @@ a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\}
 <section id="random-variables" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">1.2</span> Random Variables</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1079,7 +1111,7 @@ a_i,b_i \in \mathbb{Q} \cup \{-\infty,+\infty\}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A function <span class="math inline">\(X : \Omega \to S\)</span> is said to be a <strong>measurable map</strong> from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((S, \mathcal{S})\)</span> if</p>
 <p><span class="math display">\[
@@ -1105,7 +1137,7 @@ f &amp;: (S, \mathcal{S}) \to (T, \mathcal{T})
 <p>are measurable, then <span class="math inline">\(f(X)\)</span> is a measurable map from <span class="math inline">\((\Omega, \mathcal{F})\)</span> to <span class="math inline">\((T, \mathcal{T})\)</span>.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1114,7 +1146,7 @@ f &amp;: (S, \mathcal{S}) \to (T, \mathcal{T})
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The Borel <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal{B}(\mathbb{R}^d)\)</span> is the smallest <span class="math inline">\(\sigma\)</span>-field that contains all open sets in <span class="math inline">\(\mathbb{R}^d\)</span>.</p>
 <p>An important property is that <strong>every continuous function is Borel measurable</strong>.</p>
@@ -1130,7 +1162,7 @@ f^{-1}(B) \in \mathcal{B}(\mathbb{R}^d).
 <section id="distributions" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="distributions"><span class="header-section-number">1.3</span> Distributions</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1139,7 +1171,7 @@ f^{-1}(B) \in \mathcal{B}(\mathbb{R}^d).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <strong>indicator function</strong> of a set <span class="math inline">\(A \in \mathcal{F}\)</span>:</p>
 <p><span class="math display">\[
@@ -1153,7 +1185,7 @@ f^{-1}(B) \in \mathcal{B}(\mathbb{R}^d).
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1162,7 +1194,7 @@ f^{-1}(B) \in \mathcal{B}(\mathbb{R}^d).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If <span class="math inline">\(X\)</span> is a random variable, then <span class="math inline">\(X\)</span> induces a probability measure on <span class="math inline">\(\mathbb{R}\)</span>, called its <strong>distribution</strong> by setting <span class="math inline">\(\mu(A) = P(X \in A)\)</span> for Borel sets <span class="math inline">\(A\)</span>. The right-hand side can be written as <span class="math inline">\(P(X^{-1}(A))\)</span>.</p>
 <p>The distribution of a random variable <span class="math inline">\(X\)</span> is usually described by giving its <strong>distribution function</strong>,</p>
@@ -1199,7 +1231,7 @@ P(X = x) = F(x) - F(x-).
 <section id="simple-functions" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="simple-functions"><span class="header-section-number">1.4.1</span> Simple Functions</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1208,7 +1240,7 @@ P(X = x) = F(x) - F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\(\varphi\)</span> is said to be a <strong>simple function</strong> if</p>
 <p><span class="math display">\[
@@ -1247,7 +1279,7 @@ P(X = x) = F(x) - F(x-).
 <section id="bounded-functions" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="bounded-functions"><span class="header-section-number">1.4.2</span> Bounded Functions</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1256,7 +1288,7 @@ P(X = x) = F(x) - F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E) &lt; \infty\)</span> and let <span class="math inline">\(f\)</span> be a bounded function that vanishes on <span class="math inline">\(E^c\)</span>.</p>
 <p>To define the integral of <span class="math inline">\(f\)</span>, we observe that if <span class="math inline">\(\varphi, \psi\)</span> are simple functions that have <span class="math inline">\(\varphi \le f \le \psi\)</span>, then we want to have</p>
@@ -1295,7 +1327,7 @@ P(X = x) = F(x) - F(x-).
 <section id="nonnegative-functions" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="nonnegative-functions"><span class="header-section-number">1.4.3</span> Nonnegative Functions</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1304,7 +1336,7 @@ P(X = x) = F(x) - F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For <span class="math inline">\(f\ge 0\)</span>, define</p>
 <p><span class="math display">\[
@@ -1342,7 +1374,7 @@ P(X = x) = F(x) - F(x-).
 </ol>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1351,7 +1383,7 @@ P(X = x) = F(x) - F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space. For a nonnegative measurable function <span class="math inline">\(f:X\to[0,\infty]\)</span>, define</p>
 <p><span class="math display">\[
@@ -1367,7 +1399,7 @@ P(X = x) = F(x) - F(x-).
 <section id="general-functions" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="general-functions"><span class="header-section-number">1.4.4</span> General Functions</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1376,7 +1408,7 @@ P(X = x) = F(x) - F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We say <span class="math inline">\(f\)</span> is integrable if</p>
 <p><span class="math display">\[
@@ -1513,33 +1545,67 @@ f=\frac{d\nu}{d\mu}.
 <section id="convergence-theorems" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="convergence-theorems"><span class="header-section-number">1.5.3</span> Convergence Theorems</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Convergence in Measure and Almost Everywhere
+<span class="screen-reader-only">Tip</span>Modes of Convergence
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space, and let <span class="math inline">\(f_n,f:X\to\mathbb R\)</span> be measurable functions.</p>
-<p><strong>Convergence in measure.</strong> We say that <span class="math inline">\(f_n \to f\)</span> in measure if, for any <span class="math inline">\(\epsilon &gt; 0\)</span>,</p>
-<p><span class="math display">\[
-\mu\bigl(\{x : |f_n(x)-f(x)| &gt; \epsilon\}\bigr) \to 0
-\]</span></p>
-<p>as <span class="math inline">\(n \to \infty\)</span>.</p>
-<p><strong>Almost-everywhere convergence.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> almost everywhere if there exists a measurable set <span class="math inline">\(Z\subseteq X\)</span> with <span class="math inline">\(\mu(Z)=0\)</span> such that</p>
-<p><span class="math display">\[
+<p><strong>Convergence in measure.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> in measure if, for every <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math display">\[
+\mu\bigl(\{x\in X:|f_n(x)-f(x)|&gt;\epsilon\}\bigr)\to0
+\]</span> as <span class="math inline">\(n\to\infty\)</span>.</p>
+<p><strong>Almost-everywhere convergence.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> almost everywhere if there exists a measurable set <span class="math inline">\(Z\subseteq X\)</span> with <span class="math inline">\(\mu(Z)=0\)</span> such that <span class="math display">\[
 \lim_{n\to\infty}f_n(x)=f(x)
-\]</span></p>
-<p>for every <span class="math inline">\(x\in X\setminus Z\)</span>.</p>
-<p>We write</p>
-<p><span class="math display">\[
+\]</span> for every <span class="math inline">\(x\in X\setminus Z\)</span>. We write <span class="math display">\[
 f_n\xrightarrow{\mathrm{a.e.}}f.
 \]</span></p>
-<p>On a space of finite measure, convergence in measure is a weaker assumption than convergence a.e., but the next result is easier to prove in this greater generality.</p>
+<p><strong>Uniform convergence.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> uniformly on <span class="math inline">\(X\)</span> if, for every <span class="math inline">\(\epsilon&gt;0\)</span>, there exists an integer <span class="math inline">\(N\ge1\)</span> such that <span class="math display">\[
+|f_n(x)-f(x)|&lt;\epsilon
+\]</span> for every <span class="math inline">\(n\ge N\)</span> and every <span class="math inline">\(x\in X\)</span>. The integer <span class="math inline">\(N\)</span> may depend on <span class="math inline">\(\epsilon\)</span>, but not on <span class="math inline">\(x\)</span>.</p>
+<p><strong>Almost-uniform convergence.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> almost uniformly on <span class="math inline">\(X\)</span> if, for every <span class="math inline">\(\delta&gt;0\)</span>, there exists a measurable set <span class="math inline">\(D_\delta\subseteq X\)</span> such that <span class="math display">\[
+\mu(D_\delta)&lt;\delta
+\]</span> and <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> uniformly on <span class="math inline">\(X\setminus D_\delta\)</span>.</p>
+<p>The exceptional set <span class="math inline">\(D_\delta\)</span> may depend on <span class="math inline">\(\delta\)</span>, but not on <span class="math inline">\(n\)</span>.</p>
+<p>On a space of finite measure, almost-everywhere convergence implies convergence in measure, but the converse need not hold.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Properties of Convergence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For measurable functions on a measure space <span class="math inline">\((X,\mathcal F,\mu)\)</span>, we have <span class="math display">\[
+\text{uniform convergence}
+\;\Longrightarrow\;
+\text{almost-uniform convergence}
+\;\Longrightarrow\;
+\text{almost-everywhere convergence},
+\]</span> and <span class="math display">\[
+\text{almost-uniform convergence}
+\;\Longrightarrow\;
+\text{convergence in measure}.
+\]</span></p>
+<p>If <span class="math inline">\(\mu(X)&lt;\infty\)</span>, Egorov’s theorem also gives <span class="math display">\[
+\text{almost-everywhere convergence (almost surely)}
+\;\Longrightarrow\;
+\text{almost-uniform convergence}
+\;\Longrightarrow\;
+\text{convergence in measure (convergence in probability)}.
+\]</span> The finite-measure assumption cannot generally be omitted from this implication.</p>
 </div>
 </div>
 </div>
@@ -1568,6 +1634,22 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 <p><span class="math display">\[
 \int f_n\,d\mu \longrightarrow \int f\,d\mu.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Although the versions of <a href="#thm-13" class="quarto-xref">Theorem&nbsp;1.13</a>, <a href="#thm-14" class="quarto-xref">Theorem&nbsp;1.14</a>, and <a href="#thm-15" class="quarto-xref">Theorem&nbsp;1.15</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods.</p>
+</div>
+</div>
 </div>
 
 
