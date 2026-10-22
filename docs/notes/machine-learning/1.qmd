@@ -591,6 +591,51 @@ $$
   1 \le u \le \frac{\min\{n,m\}}{r}.
   $$
 
+**Minimizing the nuclear norm:** the sum of singular values (SDP Problem).
+
+**Alternating least square minimization:** 
+We solve the following problem:
+
+$$
+\min_{U,V\in\mathbb{R}^{n\times r}}
+\left\|P_{\Omega}(UV^T)-P_{\Omega}(A)\right\|_F^2.
+$$
+
+- For $t=0,1,\ldots,T-1$:
+
+  $$
+  \begin{aligned}
+  V^{t+1}
+  &\leftarrow
+  \arg\min_V
+  \left\|P_\Omega\left(U^tV^T-A\right)\right\|_F^2,\\
+  U^{t+1}
+  &\leftarrow
+  \arg\min_U
+  \left\|P_\Omega\left(U(V^{t+1})^T-A\right)\right\|_F^2.
+  \end{aligned}
+  $$
+
+- Every subproblem is convex and can be solved efficiently.
+
+- In practice, way faster than the convex relaxation
+
+## Nonconvex Optimization
+
+**Important property:** No-spurious-local-min (all the local min are equally good).
+
+- For stationary points, $\nabla L(w)=0$:
+  - If $\nabla^2L(w)\succ0$, it’s a local minimum.
+  - If $\nabla^2L(w)\prec0$, it’s a local maximum.
+  - If $\nabla^2L(w)$ has both positive and negative eigenvalues, it’s a **strict saddle point**.
+    - At least one direction to escape!
+  - If $\nabla^2L(w)\succeq0$, it’s a local minimum or a **flat saddle point**.
+    - No good direction to get out!
+
+- We call a function **strict saddle** if it does not contain any flat saddle points.
+
+**Theorem:** If $L$ is **smooth, bounded and strict saddle** (actually a more general version applies to points with small gradients rather than zero gradients), and the **Hessian is smooth**, and if **SGD noise has non-negligible variance in every direction with constant probability**, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.
+
 ## Appendix
 
 - If $f$ is $L$-smooth and convex, then 
