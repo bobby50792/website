@@ -891,7 +891,8 @@ window.Quarto = {
   <li><a href="#convergence-rate" id="toc-convergence-rate" class="nav-link" data-scroll-target="#convergence-rate"><span class="header-section-number">1.3.4</span> Convergence Rate</a></li>
   </ul></li>
   <li><a href="#matrix-completion" id="toc-matrix-completion" class="nav-link" data-scroll-target="#matrix-completion"><span class="header-section-number">1.4</span> Matrix Completion</a></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">1.5</span> Appendix</a></li>
+  <li><a href="#nonconvex-optimization" id="toc-nonconvex-optimization" class="nav-link" data-scroll-target="#nonconvex-optimization"><span class="header-section-number">1.5</span> Nonconvex Optimization</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">1.6</span> Appendix</a></li>
   </ul>
 </nav>
     </div>
@@ -1473,9 +1474,53 @@ T=O\left(\frac{\Theta\rho^2}{\epsilon^2}\right).
 1 \le u \le \frac{\min\{n,m\}}{r}.
 \]</span></p></li>
 </ul>
+<p><strong>Minimizing the nuclear norm:</strong> the sum of singular values (SDP Problem).</p>
+<p><strong>Alternating least square minimization:</strong> We solve the following problem:</p>
+<p><span class="math display">\[
+\min_{U,V\in\mathbb{R}^{n\times r}}
+\left\|P_{\Omega}(UV^T)-P_{\Omega}(A)\right\|_F^2.
+\]</span></p>
+<ul>
+<li><p>For <span class="math inline">\(t=0,1,\ldots,T-1\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+V^{t+1}
+&amp;\leftarrow
+\arg\min_V
+\left\|P_\Omega\left(U^tV^T-A\right)\right\|_F^2,\\
+U^{t+1}
+&amp;\leftarrow
+\arg\min_U
+\left\|P_\Omega\left(U(V^{t+1})^T-A\right)\right\|_F^2.
+\end{aligned}
+\]</span></p></li>
+<li><p>Every subproblem is convex and can be solved efficiently.</p></li>
+<li><p>In practice, way faster than the convex relaxation</p></li>
+</ul>
 </section>
-<section id="appendix" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="appendix"><span class="header-section-number">1.5</span> Appendix</h2>
+<section id="nonconvex-optimization" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="nonconvex-optimization"><span class="header-section-number">1.5</span> Nonconvex Optimization</h2>
+<p><strong>Important property:</strong> No-spurious-local-min (all the local min are equally good).</p>
+<ul>
+<li>For stationary points, <span class="math inline">\(\nabla L(w)=0\)</span>:
+<ul>
+<li>If <span class="math inline">\(\nabla^2L(w)\succ0\)</span>, it’s a local minimum.</li>
+<li>If <span class="math inline">\(\nabla^2L(w)\prec0\)</span>, it’s a local maximum.</li>
+<li>If <span class="math inline">\(\nabla^2L(w)\)</span> has both positive and negative eigenvalues, it’s a <strong>strict saddle point</strong>.
+<ul>
+<li>At least one direction to escape!</li>
+</ul></li>
+<li>If <span class="math inline">\(\nabla^2L(w)\succeq0\)</span>, it’s a local minimum or a <strong>flat saddle point</strong>.
+<ul>
+<li>No good direction to get out!</li>
+</ul></li>
+</ul></li>
+<li>We call a function <strong>strict saddle</strong> if it does not contain any flat saddle points.</li>
+</ul>
+<p><strong>Theorem:</strong> If <span class="math inline">\(L\)</span> is <strong>smooth, bounded and strict saddle</strong> (actually a more general version applies to points with small gradients rather than zero gradients), and the <strong>Hessian is smooth</strong>, and if <strong>SGD noise has non-negligible variance in every direction with constant probability</strong>, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.</p>
+</section>
+<section id="appendix" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="appendix"><span class="header-section-number">1.6</span> Appendix</h2>
 <ul>
 <li>If <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-smooth and convex, then <span class="math display">\[
 f(y) \ge f(x) + \langle \nabla f(x), y-x\rangle + \frac{1}{2L} \|\nabla f(x)-\nabla f(y)\|^2.

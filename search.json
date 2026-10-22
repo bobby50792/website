@@ -714,7 +714,19 @@
     "href": "docs/notes/machine-learning/1.html#matrix-completion",
     "title": "Optimization",
     "section": "1.4 Matrix Completion",
-    "text": "1.4 Matrix Completion\nMatrix completion problem:\n\n\\(n \\times m\\) matrix \\(A\\)\nScore is in \\(\\{1,2,3,4,5\\}\\)\nSome are known (existing ratings)\nSome are unknown (?)\nWant to recommend movies to users\n\nAssumptions:\n\n\\(A\\) is low rank\nKnown entries are uniformly distributed\nIncoherence. Formally, for \\(A = U\\Sigma V^T\\), \\(\\forall i  \\in [n], j \\in [m]\\),\n\\[\n\\|e_i^T U\\| \\le \\sqrt{\\frac{ur}{n}},\n\\qquad\n\\|e_j^T V\\| \\le \\sqrt{\\frac{ur}{m}}\n\\]\nfor some constant \\(u\\) (scan every row of \\(U,V\\)). Here \\(U \\in \\mathbb{R}^{n \\times r}\\), \\(V \\in \\mathbb{R}^{m \\times r}\\),\n\\[\n1 \\le u \\le \\frac{\\min\\{n,m\\}}{r}.\n\\]",
+    "text": "1.4 Matrix Completion\nMatrix completion problem:\n\n\\(n \\times m\\) matrix \\(A\\)\nScore is in \\(\\{1,2,3,4,5\\}\\)\nSome are known (existing ratings)\nSome are unknown (?)\nWant to recommend movies to users\n\nAssumptions:\n\n\\(A\\) is low rank\nKnown entries are uniformly distributed\nIncoherence. Formally, for \\(A = U\\Sigma V^T\\), \\(\\forall i  \\in [n], j \\in [m]\\),\n\\[\n\\|e_i^T U\\| \\le \\sqrt{\\frac{ur}{n}},\n\\qquad\n\\|e_j^T V\\| \\le \\sqrt{\\frac{ur}{m}}\n\\]\nfor some constant \\(u\\) (scan every row of \\(U,V\\)). Here \\(U \\in \\mathbb{R}^{n \\times r}\\), \\(V \\in \\mathbb{R}^{m \\times r}\\),\n\\[\n1 \\le u \\le \\frac{\\min\\{n,m\\}}{r}.\n\\]\n\nMinimizing the nuclear norm: the sum of singular values (SDP Problem).\nAlternating least square minimization: We solve the following problem:\n\\[\n\\min_{U,V\\in\\mathbb{R}^{n\\times r}}\n\\left\\|P_{\\Omega}(UV^T)-P_{\\Omega}(A)\\right\\|_F^2.\n\\]\n\nFor \\(t=0,1,\\ldots,T-1\\):\n\\[\n\\begin{aligned}\nV^{t+1}\n&\\leftarrow\n\\arg\\min_V\n\\left\\|P_\\Omega\\left(U^tV^T-A\\right)\\right\\|_F^2,\\\\\nU^{t+1}\n&\\leftarrow\n\\arg\\min_U\n\\left\\|P_\\Omega\\left(U(V^{t+1})^T-A\\right)\\right\\|_F^2.\n\\end{aligned}\n\\]\nEvery subproblem is convex and can be solved efficiently.\nIn practice, way faster than the convex relaxation",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Optimization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/1.html#nonconvex-optimization",
+    "href": "docs/notes/machine-learning/1.html#nonconvex-optimization",
+    "title": "Optimization",
+    "section": "1.5 Nonconvex Optimization",
+    "text": "1.5 Nonconvex Optimization\nImportant property: No-spurious-local-min (all the local min are equally good).\n\nFor stationary points, \\(\\nabla L(w)=0\\):\n\nIf \\(\\nabla^2L(w)\\succ0\\), it’s a local minimum.\nIf \\(\\nabla^2L(w)\\prec0\\), it’s a local maximum.\nIf \\(\\nabla^2L(w)\\) has both positive and negative eigenvalues, it’s a strict saddle point.\n\nAt least one direction to escape!\n\nIf \\(\\nabla^2L(w)\\succeq0\\), it’s a local minimum or a flat saddle point.\n\nNo good direction to get out!\n\n\nWe call a function strict saddle if it does not contain any flat saddle points.\n\nTheorem: If \\(L\\) is smooth, bounded and strict saddle (actually a more general version applies to points with small gradients rather than zero gradients), and the Hessian is smooth, and if SGD noise has non-negligible variance in every direction with constant probability, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.",
     "crumbs": [
       "Notes",
       "Machine Learning",
@@ -725,8 +737,8 @@
     "objectID": "docs/notes/machine-learning/1.html#appendix",
     "href": "docs/notes/machine-learning/1.html#appendix",
     "title": "Optimization",
-    "section": "1.5 Appendix",
-    "text": "1.5 Appendix\n\nIf \\(f\\) is \\(L\\)-smooth and convex, then \\[\nf(y) \\ge f(x) + \\langle \\nabla f(x), y-x\\rangle + \\frac{1}{2L} \\|\\nabla f(x)-\\nabla f(y)\\|^2.\n\\] which implies\n\n\\[\n\\langle \\nabla f(x)-\\nabla f(y), x-y\\rangle\n\\ge \\frac{1}{L} \\|\\nabla f(x)-\\nabla f(y)\\|^2.\n\\]\n\n\n\nWe have the Hölder’s inequality: \\[\\langle x, y \\rangle \\le \\|x\\|_{p} \\cdot \\|y\\|_{q}\\] where \\(\\frac{1}{p} + \\frac{1}{q} = 1\\). When \\(p = q = 2\\), this becomes the Cauchy-Schwarz inequality.\n\n\n\n\nFor a finite probality function \\(p(x)\\), we define \\[\nw(p) = \\sum_x p(x) \\log p(x) .\n\\] Then \\(w(p)\\) is 1-strongly convex with respect to \\(\\|\\cdot\\|_1\\). The Bregman divergence is the KL divergence: \\[\nV_p(q) = \\sum_x p(x) \\log \\frac{p(x)}\n{q(x)} = D_{\\mathrm{KL}}(p \\| q) \\ge \\frac{1}{2}\\|p-q\\|_1^2.\n\\]\n\n \n\nLet \\(C \\subseteq \\mathbb{R}^n\\) be a nonempty closed convex set. The Euclidean projection onto \\(C\\) is defined as \\[\n\\Pi_C(x) = \\arg\\min_{y \\in C} \\|x-y\\|_2.\n\\] For any \\(x,y \\in \\mathbb{R}^n\\), \\[\n\\|\\Pi_C(x)-\\Pi_C(y)\\|_2 \\leq \\|x-y\\|_2.\n\\]",
+    "section": "1.6 Appendix",
+    "text": "1.6 Appendix\n\nIf \\(f\\) is \\(L\\)-smooth and convex, then \\[\nf(y) \\ge f(x) + \\langle \\nabla f(x), y-x\\rangle + \\frac{1}{2L} \\|\\nabla f(x)-\\nabla f(y)\\|^2.\n\\] which implies\n\n\\[\n\\langle \\nabla f(x)-\\nabla f(y), x-y\\rangle\n\\ge \\frac{1}{L} \\|\\nabla f(x)-\\nabla f(y)\\|^2.\n\\]\n\n\n\nWe have the Hölder’s inequality: \\[\\langle x, y \\rangle \\le \\|x\\|_{p} \\cdot \\|y\\|_{q}\\] where \\(\\frac{1}{p} + \\frac{1}{q} = 1\\). When \\(p = q = 2\\), this becomes the Cauchy-Schwarz inequality.\n\n\n\n\nFor a finite probality function \\(p(x)\\), we define \\[\nw(p) = \\sum_x p(x) \\log p(x) .\n\\] Then \\(w(p)\\) is 1-strongly convex with respect to \\(\\|\\cdot\\|_1\\). The Bregman divergence is the KL divergence: \\[\nV_p(q) = \\sum_x p(x) \\log \\frac{p(x)}\n{q(x)} = D_{\\mathrm{KL}}(p \\| q) \\ge \\frac{1}{2}\\|p-q\\|_1^2.\n\\]\n\n \n\nLet \\(C \\subseteq \\mathbb{R}^n\\) be a nonempty closed convex set. The Euclidean projection onto \\(C\\) is defined as \\[\n\\Pi_C(x) = \\arg\\min_{y \\in C} \\|x-y\\|_2.\n\\] For any \\(x,y \\in \\mathbb{R}^n\\), \\[\n\\|\\Pi_C(x)-\\Pi_C(y)\\|_2 \\leq \\|x-y\\|_2.\n\\]",
     "crumbs": [
       "Notes",
       "Machine Learning",
@@ -1001,7 +1013,7 @@
     "href": "docs/notes/machine-learning/2.html",
     "title": "Generalization",
     "section": "",
-    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).",
+    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).\n\n\nFinite hypothesis class:\n\nHypothesis class (\\(H\\)): The class of functions can be finite or infinite.\n\\(\\mathrm{ERM}_H\\): Pick the hypothesis with the smallest training loss.\n\\[\n\\mathrm{ERM}_H(S)\\in\\arg\\min_{h\\in H}L_S(h).\n\\]\n\nRealizability assumption: There exists \\(h^*\\in H\\) such that \\(L_{D,f}(h^*)=0\\). Therefore, for every training set \\(S\\), we have \\(L_S(h^*)=0\\).\nTheorem. Let \\(H\\) be a finite hypothesis class. Let \\(\\delta\\in(0,1)\\) and \\(\\epsilon&gt;0\\), and let \\(m\\) be an integer that satisfies \\[\nm\\ge\\frac{\\log(|H|/\\delta)}{\\epsilon}.\n\\] Then, for any labeling function \\(f\\) and any distribution \\(D\\) for which the realizability assumption holds (that is, for some \\(h\\in H\\), \\(L_{D,f}(h)=0\\)), with probability at least \\(1-\\delta\\) over the choice of an i.i.d. sample \\(S\\) of size \\(m\\), every ERM hypothesis \\(h_S\\) satisfies \\[\nL_{D,f}(h_S)\\le\\epsilon.\n\\]",
     "crumbs": [
       "Notes",
       "Machine Learning",
@@ -1013,7 +1025,31 @@
     "href": "docs/notes/machine-learning/2.html#no-free-lunch-theorem",
     "title": "Generalization",
     "section": "",
-    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).",
+    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).\n\n\nFinite hypothesis class:\n\nHypothesis class (\\(H\\)): The class of functions can be finite or infinite.\n\\(\\mathrm{ERM}_H\\): Pick the hypothesis with the smallest training loss.\n\\[\n\\mathrm{ERM}_H(S)\\in\\arg\\min_{h\\in H}L_S(h).\n\\]\n\nRealizability assumption: There exists \\(h^*\\in H\\) such that \\(L_{D,f}(h^*)=0\\). Therefore, for every training set \\(S\\), we have \\(L_S(h^*)=0\\).\nTheorem. Let \\(H\\) be a finite hypothesis class. Let \\(\\delta\\in(0,1)\\) and \\(\\epsilon&gt;0\\), and let \\(m\\) be an integer that satisfies \\[\nm\\ge\\frac{\\log(|H|/\\delta)}{\\epsilon}.\n\\] Then, for any labeling function \\(f\\) and any distribution \\(D\\) for which the realizability assumption holds (that is, for some \\(h\\in H\\), \\(L_{D,f}(h)=0\\)), with probability at least \\(1-\\delta\\) over the choice of an i.i.d. sample \\(S\\) of size \\(m\\), every ERM hypothesis \\(h_S\\) satisfies \\[\nL_{D,f}(h_S)\\le\\epsilon.\n\\]",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Generalization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/2.html#pac-learning",
+    "href": "docs/notes/machine-learning/2.html#pac-learning",
+    "title": "Generalization",
+    "section": "2.2 PAC learning",
+    "text": "2.2 PAC learning\nPAC learning: A hypothesis class \\(H\\) is PAC learnable if there exist a function \\(m_H:(0,1)^2\\to\\mathbb N\\) and a learning algorithm with the following property:\nFor every \\(\\epsilon,\\delta\\in(0,1)\\), every distribution \\(D\\) over \\(X\\), and every labeling function \\(f:X\\to\\{0,1\\}\\), if the realizability assumption holds with respect to \\(H,D,f\\), then, when running the learning algorithm on \\[\nm\\ge m_H(\\epsilon,\\delta)\n\\] i.i.d. examples generated by \\(D\\) and labeled by \\(f\\), the algorithm returns a hypothesis \\(h\\) such that, with probability at least \\(1-\\delta\\) over the choice of the examples, \\[\nL_{D,f}(h)\\le\\epsilon.\n\\]\nAgnostic PAC learnable: A hypothesis class \\(H\\) is agnostic PAC learnable if there exist a function \\(m_H:(0,1)^2\\to\\mathbb N\\) and a learning algorithm with the following property:\nFor every \\(\\epsilon,\\delta\\in(0,1)\\) and every distribution \\(D\\) over \\(X\\times Y\\), when running the learning algorithm on \\(m\\ge m_H(\\epsilon,\\delta)\\) i.i.d. examples generated by \\(D\\), the algorithm returns a hypothesis \\(h\\) such that, with probability at least \\(1-\\delta\\) over the choice of the \\(m\\) training examples, \\[\nL_D(h)\\le\\min_{h'\\in H}L_D(h')+\\epsilon.\n\\]\nError Decomposition:\n\n\\(L_D(h_S)=\\epsilon_{\\mathrm{app}}+\\epsilon_{\\mathrm{est}}\\).\n\\(\\epsilon_{\\mathrm{app}}=\\min_{h\\in H}L_D(h)\\).\n\\(\\epsilon_{\\mathrm{est}}=L_D(h_S)-\\epsilon_{\\mathrm{app}}\\).\n\\(\\epsilon_{\\mathrm{app}}=L_D(\\mathrm{BO})+\\min_{h\\in H}L_D(h)-L_D(\\mathrm{BO})\\).\n\nIs Infinite \\(H\\) Learnable?\nLet \\(H\\) be the class of threshold functions. Then \\(H\\) is PAC learnable using the ERM rule, with sample complexity \\[\nm_H(\\epsilon,\\delta)\n\\le\n\\frac{\\left\\lceil\\log(2/\\delta)\\right\\rceil}{\\epsilon}.\n\\]",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Generalization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/2.html#vc-dimension",
+    "href": "docs/notes/machine-learning/2.html#vc-dimension",
+    "title": "Generalization",
+    "section": "2.3 VC dimension",
+    "text": "2.3 VC dimension",
     "crumbs": [
       "Notes",
       "Machine Learning",
