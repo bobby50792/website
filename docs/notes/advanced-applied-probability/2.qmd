@@ -1,0 +1,171 @@
+---
+title: "Laws of Large Numbers"
+page-layout: article
+search: true
+number-offset: [2]
+
+crossref:
+  chapters: true
+---
+
+## Independence
+
+### Basic Definitions
+
+::: {.callout-tip title="Definitions of Independence" collapse="true"}
+
+**Events:** Two events $A$ and $B$ are **independent** if
+
+$$
+P(A\cap B)=P(A)P(B).
+$$
+
+**Random variables:** Let $X$ and $Y$ be random variables defined on the same
+probability space $(\Omega,\mathcal F,P)$:
+
+$$
+X,Y:(\Omega,\mathcal F,P)\to(\mathbb R,\mathcal R).
+$$
+
+They are **independent** if, for all $C,D\in\mathcal R$,
+
+$$
+P(X\in C,Y\in D)=P(X\in C)P(Y\in D).
+$$
+
+That is, the events $A=\{X\in C\}$ and $B=\{Y\in D\}$ are independent.
+
+**$\sigma$-fields:** Let $(\Omega,\mathcal H,P)$ be a probability space, and let
+$\mathcal F,\mathcal G\subseteq\mathcal H$ be two sub-$\sigma$-fields. They are
+**independent** if
+
+$$
+P(A\cap B)=P(A)P(B),
+\qquad\forall A\in\mathcal F,\ \forall B\in\mathcal G.
+$$
+
+That is, every event in $\mathcal F$ is independent of every event in $\mathcal G$.
+
+:::
+
+::: {#thm-1 name="Independence and Generated σ-Fields"}
+
+Let $X$ and $Y$ be random variables on the same probability space $(\Omega,\mathcal H,P)$.
+
+i) If $X$ and $Y$ are independent, then $\sigma(X)$ and $\sigma(Y)$ are independent.
+
+ii) Conversely, if $\mathcal F,\mathcal G\subseteq\mathcal H$ are independent
+    sub-$\sigma$-fields, $X$ is $\mathcal F$-measurable, and $Y$ is
+    $\mathcal G$-measurable, then $X$ and $Y$ are independent.
+
+:::
+
+### Independence of Finite Families
+
+::: {.callout-tip title="Independence of Finite Families" collapse="true"}
+
+Work on a common probability space $(\Omega,\mathcal H,P)$.
+
+**$\sigma$-fields:** The sub-$\sigma$-fields
+$\mathcal F_1,\ldots,\mathcal F_n\subseteq\mathcal H$ are **independent** if,
+whenever $A_i\in\mathcal F_i$ for $i=1,\ldots,n$,
+
+$$
+P\left(\bigcap_{i=1}^n A_i\right)=\prod_{i=1}^n P(A_i).
+$$
+
+**Random variables:** The random variables $X_1,\ldots,X_n$ are **independent**
+if, whenever $B_i\in\mathcal R$ for $i=1,\ldots,n$,
+
+$$
+P\left(\bigcap_{i=1}^n\{X_i\in B_i\}\right)
+=\prod_{i=1}^n P(X_i\in B_i).
+$$
+
+**Events:** The events $A_1,\ldots,A_n\in\mathcal H$ are **independent** if, for
+every nonempty subset $I\subseteq\{1,\ldots,n\}$,
+
+$$
+P\left(\bigcap_{i\in I}A_i\right)=\prod_{i\in I}P(A_i).
+$$
+
+:::
+
+### Joint Distributions
+
+::: {#thm-2 name="Joint Distribution of Independent Random Variables"}
+
+Suppose $X_1,\ldots,X_n$ are independent random variables and $X_i$ has
+distribution $\mu_i$ for $i=1,\ldots,n$. Then $(X_1,\ldots,X_n)$ has distribution
+
+$$
+\mu_1\times\cdots\times\mu_n.
+$$
+
+:::
+
+### Expectations
+
+::: {#thm-3 name="Expectations of Functions of Independent Random Variables"}
+
+Suppose $X$ and $Y$ are independent and have distributions $\mu$ and $\nu$.
+Let $h:\mathbb R^2\to\mathbb R$ be measurable. If either
+
+a) $h\ge0$, or
+
+b) $E|h(X,Y)|<\infty$,
+
+then
+
+$$
+E[h(X,Y)]=\iint_{\mathbb R^2}h(x,y)\,\mu(dx)\,\nu(dy).
+$$
+
+In particular, let $h(x,y)=f(x)g(y)$, where $f,g:\mathbb R\to\mathbb R$ are
+measurable functions. If either
+
+a) $f,g\ge0$, or
+
+b) both $E|f(X)|<\infty$ and $E|g(Y)|<\infty$,
+
+then
+
+$$
+E[f(X)g(Y)]=E[f(X)]\cdot E[g(Y)].
+$$
+
+:::
+
+::: {#thm-4 name="Expectation of a Product of Independent Random Variables"}
+
+Let $X_1,\ldots,X_n$ be independent random variables. If either
+
+a) $X_i\ge0$ for all $i$, or
+
+b) $E|X_i|<\infty$ for all $i$,
+
+then
+
+$$
+E\left[\prod_{i=1}^n X_i\right]=\prod_{i=1}^n EX_i.
+$$
+
+:::
+
+### Sums and Convolution
+
+::: {#thm-5 name="Distribution of the Sum of Independent Random Variables"}
+
+If $X$ and $Y$ are independent, $F(x)=P(X\le x)$, and $G(y)=P(Y\le y)$,
+then
+
+$$
+P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y).
+$$
+
+:::
+
+**Convolution:** The integral on the right-hand side is called the
+**convolution** of $F$ and $G$ and is denoted by $(F*G)(z)$.
+
+Here $dG(y)$ denotes integration with respect to the distribution measure of $Y$.

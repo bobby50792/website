@@ -169,6 +169,8 @@ website:
               contents:
                 - text: "Measure Theory"
                   href: docs/notes/advanced-applied-probability/1.qmd
+                - text: "Laws of Large Numbers"
+                  href: docs/notes/advanced-applied-probability/2.qmd
             - section: "Machine Learning"
               href: docs/notes/machine-learning/0.qmd
               contents:

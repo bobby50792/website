@@ -2,6 +2,25 @@
 title: "Probabilistic Models"
 page-layout: article
 search: true
+format:
+  html:
+    grid:
+      body-width: 760px
+    include-in-header:
+      text: |
+        <style>
+        #quarto-document-content { line-height: 1.65; }
+        #quarto-document-content h2,
+        #quarto-document-content h3 { text-wrap: balance; }
+        #quarto-document-content li + li { margin-top: .35rem; }
+        #quarto-document-content .math.display {
+          display: block;
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-block: .25rem;
+        }
+        </style>
 number-offset: [3]
 
 crossref:
@@ -9,6 +28,8 @@ crossref:
 ---
 
 ## Basics on Probability
+
+### Random variables and distributions
 
 **Random Variables:** A random variable is some aspect of the world about which we (may) have uncertainty.
 
@@ -18,38 +39,37 @@ crossref:
 
 **Marginal Distributions:** Marginalization (summing out): Combine collapsed rows by adding.
 
+### Conditional probability and Bayes' rule
+
 **Conditional Probabilities:** Conditional distributions are probability distributions over some variables given fixed values of others.
 
 **Bayes' Rule:** Bayes' rule allows us to compute conditional probabilities in terms of other conditional probabilities.
 
-## Bayesian nets: Representation
+## Bayesian Nets: Representation
 
 **Bayes' nets:** a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)
 
 - More properly called **graphical models**
 - Local interactions chain together to give global, indirect interactions
 
-**Graphical Model Notation:** 
+### Graphical model notation
 
-- Nodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)
+- **Nodes:** variables (with domains): can be assigned (observed) or unassigned (unobserved)
+- **Arcs:** interactions: Formally: encode conditional independence
 
-- Arcs: interactions: Formally: encode conditional independence 
-
-**Bayes' Net Semantics:**
+### Bayes' net semantics
 
 - A set of nodes, one per random variable $X$
 - A directed, acyclic graph
-- A conditional distribution for each node
-  - A collection of distributions over $X$, one for each combination of parents’ values
+- A conditional distribution for each node: a collection of distributions over $X$, one for each combination of parents’ values
 
-    $$
-    P(X \mid a_1 \ldots a_n)
-    $$
+  $$
+  P(X \mid a_1 \ldots a_n)
+  $$
 
-  - CPT: conditional probability table
-  - Description of a noisy causal process
+**CPT (conditional probability table):** description of a noisy causal process.
 
-**Bayes Nets: Assumptions:**
+### Assumptions
 
 Assumptions we are required to make to define the Bayes net when given the graph:
 
@@ -59,8 +79,20 @@ P(x_i \mid x_1,\ldots,x_{i-1})
 P(x_i \mid \operatorname{parents}(X_i)).
 $$
 
-**D-Separation:** 
+### D-Separation
 
+If all paths between $A$ and $B$ are blocked given observed variables $Z$, then $A \perp\!\!\!\perp B \mid Z$.
 
-## Bayesian nets: inference
+- **Chain / fork:** observing the middle node blocks the path.
+- **Collider** ($A \to M \leftarrow B$): blocks the path unless $M$ or a descendant is observed.
+- One blocked segment blocks a path; any active path means independence is not guaranteed.
 
+## Bayesian Nets: Inference
+
+**Inference:** Calculating some useful quantity from a joint probability distribution.
+
+### Inference by enumeration
+
+1. **Join** all factors.
+2. **Eliminate** all hidden variables.
+3. **Normalize** the result.

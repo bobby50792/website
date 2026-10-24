@@ -2,61 +2,76 @@
 title: "Logic"
 page-layout: article
 search: true
+format:
+  html:
+    grid:
+      body-width: 760px
+    include-in-header:
+      text: |
+        <style>
+        #quarto-document-content { line-height: 1.65; }
+        #quarto-document-content h2,
+        #quarto-document-content h3 { text-wrap: balance; }
+        #quarto-document-content li + li { margin-top: .35rem; }
+        #quarto-document-content .math.display {
+          display: block;
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-block: .25rem;
+        }
+        </style>
 number-offset: [2]
 
 crossref:
   chapters: true
 ---
 
-
-**Representation (Syntax):** defines a set of valid formulas.
-
-**Semantics:** for each formula, specify a set of models (assignments / configurations of the world).
-
-**Inference rule:** a rule that allows us to derive new formulas from existing ones.
+- **Representation (Syntax):** defines a set of valid formulas.
+- **Semantics:** for each formula, specify a set of models (assignments / configurations of the world).
+- **Inference rule:** a rule that allows us to derive new formulas from existing ones.
 
 ## Representation
 
 Formal languages: syntax and model
 
-
 ### Propositional logic
 
-- Syntax
+**Syntax:**
 
-  - Propositional symbols (atomic formulas): $A, B, C$
+- Propositional symbols (atomic formulas): $A, B, C$
+- Logical connectives: $\neg, \land, \lor, \to, \leftrightarrow$
+- Build up formulas recursively—if $f$ and $g$ are formulas, so are the following:
+  - Negation: $\neg f$
+  - Conjunction: $f \land g$
+  - Disjunction: $f \lor g$
+  - Implication: $f \to g$
+  - Biconditional: $f \leftrightarrow g$
 
-  - Logical connectives: $\neg, \land, \lor, \to, \leftrightarrow$
+**Model:**
 
-  - Build up formulas recursively—if $f$ and $g$ are formulas, so are the following:
+A model $w$ in propositional logic is an assignment of truth values to propositional symbols.
 
-    - Negation: $\neg f$
-    - Conjunction: $f \land g$
-    - Disjunction: $f \lor g$
-    - Implication: $f \to g$
-    - Biconditional: $f \leftrightarrow g$
+**Interpretation function:**
 
-- Model
-
-  - A model $w$ in propositional logic is an assignment of truth values to propositional symbols.
-
-**Interpretation function:** Let $f$ be a formula.  
-Let $w$ be a model. An interpretation function $\mathcal{I}(f,w)$ returns:
+Let $f$ be a formula and $w$ be a model. An interpretation function $\mathcal{I}(f,w)$ returns:
 
 - true (1) (say that $w$ satisfies $f$)
-- false (0) (say that $w$ does not satisfy $f$) 
+- false (0) (say that $w$ does not satisfy $f$)
 
-- Base case: For a propositional symbol $p$ (e.g., $A, B, C$):
+**Base case:** For a propositional symbol $p$ (e.g., $A, B, C$):
 
 $$
 \mathcal{I}(p,w) = w(p)
 $$
 
-- Recursive case
+**Recursive case**
 
 Let $\mathcal{M}(f)$ be the set of **models** $w$ for which $\mathcal{I}(f,w) = 1$.
 
-**Knowledge base:** A knowledge base $\mathrm{KB}$ is a set of formulas representing their conjunction / intersection:
+**Knowledge base:**
+
+A knowledge base $\mathrm{KB}$ is a set of formulas representing their conjunction / intersection:
 
 $$
 \mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f).
@@ -64,24 +79,25 @@ $$
 
 ### First-order logic
 
-- Syntax
-  - Terms denote objects: constant symbols $c$, variables $x$, and function applications $f(t_1,\ldots,t_n)$, where each $t_i$ is a term.
-  - Formulas are built from:
-    - Atomic formulas: $P(t_1,\ldots,t_n)$; also $t_1=t_2$ in logic with equality.
-    - Connectives applied to formulas: $\neg,\land,\lor,\to,\leftrightarrow$.
-    - Quantifiers applied to formulas: $\forall x\,\varphi$, $\exists x\,\varphi$.
+**Syntax:**
 
-- Models
-  - A model $w$ specifies a nonempty domain $D$ and interprets:
-    - Constant symbols as objects: $w(c)\in D$.
-    - Function symbols as functions: $w(f):D^n\to D$.
-    - Predicate symbols as sets of tuples: $w(P)\subseteq D^n$, equivalently functions $D^n\to\{0,1\}$.
-  - A separate variable assignment $s:\mathrm{Var}\to D$ gives variables their values: $s(x)\in D$.
+- Terms denote objects: constant symbols $c$, variables $x$, and function applications $f(t_1,\ldots,t_n)$, where each $t_i$ is a term.
+- Formulas are built from:
+  - Atomic formulas: $P(t_1,\ldots,t_n)$; also $t_1=t_2$ in logic with equality.
+  - Connectives applied to formulas: $\neg,\land,\lor,\to,\leftrightarrow$.
+  - Quantifiers applied to formulas: $\forall x\,\varphi$, $\exists x\,\varphi$.
+
+**Models:**
+
+- A model $w$ specifies a nonempty domain $D$ and interprets:
+  - Constant symbols as objects: $w(c)\in D$.
+  - Function symbols as functions: $w(f):D^n\to D$.
+  - Predicate symbols as sets of tuples: $w(P)\subseteq D^n$, equivalently functions $D^n\to\{0,1\}$.
+- A separate variable assignment $s:\mathrm{Var}\to D$ gives variables their values: $s(x)\in D$.
 
 For example, if $w(\mathrm{alice})=o_1$, $w(\mathrm{arithmetic})=o_3$, and $(o_1,o_3)\in w(\mathrm{Knows})$, then $\mathrm{Knows}(\mathrm{alice},\mathrm{arithmetic})$ is true.
 
-
-## Inference  
+## Inference
 
 ### Entailment and satisfiability
 
@@ -89,7 +105,8 @@ For example, if $w(\mathrm{alice})=o_1$, $w(\mathrm{arithmetic})=o_3$, and $(o_1
 
 **Contradiction:** $\mathrm{KB}$ contradicts $f$ iff $\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset$.
 
-**Contingency:** 
+**Contingency:**
+
 $$
 \emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})
 $$
@@ -100,8 +117,8 @@ $$
 
 **Model checking:**
 
-Input: knowledge base $\mathrm{KB}$  
-Output: exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
+- **Input:** knowledge base $\mathrm{KB}$
+- **Output:** exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
 
 **Popular algorithms:**
 
@@ -110,14 +127,15 @@ Output: exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
 
 ### Inference rules
 
-**Modus ponens inference rule:** For any propositional symbols $p$ and $q$:
+**Modus ponens inference rule:**
+
+For any propositional symbols $p$ and $q$:
 
 $$
 \frac{p,\quad p \to q}{q}
 $$
 
-
-**Inference rule:**
+**General inference rule:**
 
 If $f_1, \ldots, f_k, g$ are formulas, then the following is an inference rule:
 
@@ -125,19 +143,22 @@ $$
 \frac{f_1,\quad \ldots,\quad f_k}{g}
 $$
 
-
 **Algorithm: forward inference:**
 
 Input: set of inference rules $\mathrm{Rules}$.
 
 Repeat until no changes to $\mathrm{KB}$:
 
-- Choose set of formulas $f_1, \ldots, f_k \in \mathrm{KB}$.
-- If matching rule $\frac{f_1,\quad \cdots,\quad f_k}{g}$ exists, Add $g$ to $\mathrm{KB}$.
+1. Choose set of formulas $f_1, \ldots, f_k \in \mathrm{KB}$.
+2. If matching rule $\frac{f_1,\quad \cdots,\quad f_k}{g}$ exists, add $g$ to $\mathrm{KB}$.
 
 **Derivation:**
 
 $\mathrm{KB}$ derives/proves $f$ ($\mathrm{KB} \vdash f$) iff $f$ eventually gets added to $\mathrm{KB}$.
+
+### Horn clauses and modus ponens
+
+**Propositional logic:**
 
 **Definite clause:** A definite clause has the following form:
 
@@ -152,12 +173,15 @@ where $p_1, \ldots, p_k, q$ are propositional symbols.
 - a definite clause $(p_1 \land \cdots \land p_k \to q)$
 - a goal clause $(p_1 \land \cdots \land p_k \to \mathrm{false})$
 
-**Modus ponens:** 
+**Modus ponens:**
+
 $$
 \frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
 $$
 
-**Definite clause (first-order logic):** A definite clause has the following form:
+**First-order logic:**
+
+**Definite clause:** A definite clause has the following form:
 
 $$
 \forall x_1 \cdots \forall x_n \bigl((a_1 \land \cdots \land a_k) \to b\bigr)
@@ -165,17 +189,21 @@ $$
 
 for variables $x_1, \ldots, x_n$ and atomic formulas $a_1, \ldots, a_k, b$ (which contain those variables).
 
-**Modus ponens (first-order logic):**
+**Modus ponens:**
 
 $$
 \frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
 $$
 
-**Substitution:** A substitution $\theta$ is a mapping from variables to terms.
+**Substitution:**
+
+A substitution $\theta$ is a mapping from variables to terms.
 
 $\operatorname{Subst}[\theta, f]$ returns the result of performing substitution $\theta$ on $f$.
 
-**Unification:** Unification takes two formulas $f$ and $g$ and returns a substitution $\theta$ which is the most general unifier:
+**Unification:**
+
+Unification takes two formulas $f$ and $g$ and returns a substitution $\theta$ which is the most general unifier:
 
 $$
 \operatorname{Unify}[f,g] = \theta
@@ -185,27 +213,31 @@ $$
 
 or "fail" if no such $\theta$ exists.
 
-**Complexity:** 
+### Complexity
 
-- Theorem: completeness 
+**Theorem: completeness:**
 
-  Modus ponens is complete for first-order logic with only Horn clauses.
+Modus ponens is complete for first-order logic with only Horn clauses.
 
-- Theorem: semi-decidability
+**Theorem: semi-decidability:**
 
-  First-order logic (even restricted to only Horn clauses) is **semi-decidable**.
+First-order logic (even restricted to only Horn clauses) is **semi-decidable**.
 
-  - If $\mathrm{KB} \models f$, forward inference on complete inference rules will prove $f$ in finite time.
-  - If $\mathrm{KB} \not\models f$, no algorithm can show this in finite time.
+- If $\mathrm{KB} \models f$, forward inference on complete inference rules will prove $f$ in finite time.
+- If $\mathrm{KB} \not\models f$, no algorithm can show this in finite time.
 
-**Resolution inference rule:** 
+### Resolution
+
+**Propositional resolution rule:**
 
 $$
 \frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
 {f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
 $$
 
-**Conjunctive normal form (CNF):** A CNF formula is a conjunction of clauses.
+**Conjunctive normal form (CNF):**
+
+A CNF formula is a conjunction of clauses.
 
 **Proposition: conversion to CNF:**
 
@@ -215,13 +247,12 @@ $$
 \mathcal{M}(f) = \mathcal{M}(f')
 $$
 
-**FOL: Conversion to CNF:**
+**First-order conversion to CNF:**
 
 - All variable have universal quantifiers by default
 - Introduce Skolem functions (e.g., $Y(x)$) to represent existentially quantified variables.
 
-
-**Resolution rule (first-order logic):**
+**First-order resolution rule:**
 
 $$
 \frac{
@@ -236,3 +267,52 @@ $$
 where $\theta = \operatorname{Unify}[p,q]$.
 
 ## Semantics
+
+### Desiderata for inference rules
+
+**Semantics:**
+
+Interpretation defines **entailed/true** formulas: $\mathrm{KB} \models f$.
+
+$$
+\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)
+$$
+
+**Syntax:**
+
+Inference rules **derive** formulas: $\mathrm{KB} \vdash f$
+
+### Soundness
+
+A set of inference rules $\mathrm{Rules}$ is **sound** if:
+
+$$
+\{f : \mathrm{KB} \vdash f\}
+\subseteq
+\{f : \mathrm{KB} \models f\}.
+$$
+
+### Completeness
+
+A set of inference rules $\mathrm{Rules}$ is **complete** if:
+
+$$
+\{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}
+$$
+
+### Fixing completeness
+
+1. **Option 1: Restrict the allowed set of formulas**
+
+   propositional logic $\to$ propositional logic with only Horn clauses
+
+2. **Option 2: Use more powerful inference rules**
+
+   Modus ponens $\to$ resolution
+
+### Theorem: Modus ponens on Horn clauses
+
+Modus ponens is **complete** with respect to Horn clauses:
+
+- Suppose $\mathrm{KB}$ contains only Horn clauses and $p$ is an entailed propositional symbol.
+- Then applying modus ponens will derive $p$.
