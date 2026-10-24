@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-7b55db5257b4a169278f51aaec36e689.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-d2de20584d3d090aca7cc20a9b65bb77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -772,6 +772,12 @@ window.Quarto = {
  <span class="menu-text">Measure Theory</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/advanced-applied-probability/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laws of Large Numbers</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -868,8 +874,20 @@ window.Quarto = {
    
   <ul>
   <li><a href="#no-free-lunch-theorem" id="toc-no-free-lunch-theorem" class="nav-link active" data-scroll-target="#no-free-lunch-theorem"><span class="header-section-number">2.1</span> No Free Lunch Theorem</a></li>
-  <li><a href="#pac-learning" id="toc-pac-learning" class="nav-link" data-scroll-target="#pac-learning"><span class="header-section-number">2.2</span> PAC learning</a></li>
-  <li><a href="#vc-dimension" id="toc-vc-dimension" class="nav-link" data-scroll-target="#vc-dimension"><span class="header-section-number">2.3</span> VC dimension</a></li>
+  <li><a href="#finite-hypothesis-classes" id="toc-finite-hypothesis-classes" class="nav-link" data-scroll-target="#finite-hypothesis-classes"><span class="header-section-number">2.2</span> Finite Hypothesis Classes</a></li>
+  <li><a href="#pac-learning" id="toc-pac-learning" class="nav-link" data-scroll-target="#pac-learning"><span class="header-section-number">2.3</span> PAC Learning</a>
+  <ul class="collapse">
+  <li><a href="#realizable-pac-learning" id="toc-realizable-pac-learning" class="nav-link" data-scroll-target="#realizable-pac-learning"><span class="header-section-number">2.3.1</span> Realizable PAC Learning</a></li>
+  <li><a href="#agnostic-pac-learning" id="toc-agnostic-pac-learning" class="nav-link" data-scroll-target="#agnostic-pac-learning"><span class="header-section-number">2.3.2</span> Agnostic PAC Learning</a></li>
+  <li><a href="#error-decomposition" id="toc-error-decomposition" class="nav-link" data-scroll-target="#error-decomposition"><span class="header-section-number">2.3.3</span> Error Decomposition</a></li>
+  <li><a href="#infinite-hypothesis-classes" id="toc-infinite-hypothesis-classes" class="nav-link" data-scroll-target="#infinite-hypothesis-classes"><span class="header-section-number">2.3.4</span> Infinite Hypothesis Classes</a></li>
+  </ul></li>
+  <li><a href="#vc-dimension" id="toc-vc-dimension" class="nav-link" data-scroll-target="#vc-dimension"><span class="header-section-number">2.4</span> VC Dimension</a>
+  <ul class="collapse">
+  <li><a href="#restriction-and-shattering" id="toc-restriction-and-shattering" class="nav-link" data-scroll-target="#restriction-and-shattering"><span class="header-section-number">2.4.1</span> Restriction and Shattering</a></li>
+  <li><a href="#vc-dimension-and-learnability" id="toc-vc-dimension-and-learnability" class="nav-link" data-scroll-target="#vc-dimension-and-learnability"><span class="header-section-number">2.4.2</span> VC Dimension and Learnability</a></li>
+  <li><a href="#sample-complexity" id="toc-sample-complexity" class="nav-link" data-scroll-target="#sample-complexity"><span class="header-section-number">2.4.3</span> Sample Complexity</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -909,51 +927,142 @@ L_D(A(S)) \ge \frac{1}{8}
 <p>(that is, the training algorithm fails).</p></li>
 </ol>
 </div>
-<p><strong>Finite hypothesis class:</strong></p>
-<ul>
-<li><p>Hypothesis class (<span class="math inline">\(H\)</span>): The class of functions can be finite or infinite.</p></li>
-<li><p><span class="math inline">\(\mathrm{ERM}_H\)</span>: Pick the hypothesis with the smallest training loss.</p>
+</section>
+<section id="finite-hypothesis-classes" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="finite-hypothesis-classes"><span class="header-section-number">2.2</span> Finite Hypothesis Classes</h2>
+<p><strong>Hypothesis class (<span class="math inline">\(H\)</span>):</strong> The class of functions can be finite or infinite.</p>
+<p><strong>Empirical Risk Minimization (ERM):</strong> Pick the hypothesis with the smallest training loss.</p>
 <p><span class="math display">\[
 \mathrm{ERM}_H(S)\in\arg\min_{h\in H}L_S(h).
-\]</span></p></li>
-</ul>
+\]</span></p>
 <p><strong>Realizability assumption:</strong> There exists <span class="math inline">\(h^*\in H\)</span> such that <span class="math inline">\(L_{D,f}(h^*)=0\)</span>. Therefore, for every training set <span class="math inline">\(S\)</span>, we have <span class="math inline">\(L_S(h^*)=0\)</span>.</p>
-<p><strong>Theorem.</strong> Let <span class="math inline">\(H\)</span> be a finite hypothesis class. Let <span class="math inline">\(\delta\in(0,1)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, and let <span class="math inline">\(m\)</span> be an integer that satisfies <span class="math display">\[
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.2 (ERM for Finite Hypothesis Classes)</strong></span> Let <span class="math inline">\(H\)</span> be a finite hypothesis class. Let <span class="math inline">\(\delta\in(0,1)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, and let <span class="math inline">\(m\)</span> be an integer that satisfies</p>
+<p><span class="math display">\[
 m\ge\frac{\log(|H|/\delta)}{\epsilon}.
-\]</span> Then, for any labeling function <span class="math inline">\(f\)</span> and any distribution <span class="math inline">\(D\)</span> for which the realizability assumption holds (that is, for some <span class="math inline">\(h\in H\)</span>, <span class="math inline">\(L_{D,f}(h)=0\)</span>), with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of an i.i.d. sample <span class="math inline">\(S\)</span> of size <span class="math inline">\(m\)</span>, every ERM hypothesis <span class="math inline">\(h_S\)</span> satisfies <span class="math display">\[
+\]</span></p>
+<p>Then, for any labeling function <span class="math inline">\(f\)</span> and any distribution <span class="math inline">\(D\)</span> for which the realizability assumption holds (that is, for some <span class="math inline">\(h\in H\)</span>, <span class="math inline">\(L_{D,f}(h)=0\)</span>), with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of an i.i.d. sample <span class="math inline">\(S\)</span> of size <span class="math inline">\(m\)</span>, every ERM hypothesis <span class="math inline">\(h_S\)</span> satisfies</p>
+<p><span class="math display">\[
 L_{D,f}(h_S)\le\epsilon.
 \]</span></p>
+</div>
 </section>
-<section id="pac-learning" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="pac-learning"><span class="header-section-number">2.2</span> PAC learning</h2>
+<section id="pac-learning" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="pac-learning"><span class="header-section-number">2.3</span> PAC Learning</h2>
+<section id="realizable-pac-learning" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="realizable-pac-learning"><span class="header-section-number">2.3.1</span> Realizable PAC Learning</h3>
 <p><strong>PAC learning:</strong> A hypothesis class <span class="math inline">\(H\)</span> is PAC learnable if there exist a function <span class="math inline">\(m_H:(0,1)^2\to\mathbb N\)</span> and a learning algorithm with the following property:</p>
-<p>For every <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span>, every distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\)</span>, and every labeling function <span class="math inline">\(f:X\to\{0,1\}\)</span>, if the realizability assumption holds with respect to <span class="math inline">\(H,D,f\)</span>, then, when running the learning algorithm on <span class="math display">\[
+<p>For every <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span>, every distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\)</span>, and every labeling function <span class="math inline">\(f:X\to\{0,1\}\)</span>, if the realizability assumption holds with respect to <span class="math inline">\(H,D,f\)</span>, then, when running the learning algorithm on</p>
+<p><span class="math display">\[
 m\ge m_H(\epsilon,\delta)
-\]</span> i.i.d. examples generated by <span class="math inline">\(D\)</span> and labeled by <span class="math inline">\(f\)</span>, the algorithm returns a hypothesis <span class="math inline">\(h\)</span> such that, with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of the examples, <span class="math display">\[
+\]</span></p>
+<p>i.i.d. examples generated by <span class="math inline">\(D\)</span> and labeled by <span class="math inline">\(f\)</span>, the algorithm returns a hypothesis <span class="math inline">\(h\)</span> such that, with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of the examples,</p>
+<p><span class="math display">\[
 L_{D,f}(h)\le\epsilon.
 \]</span></p>
+</section>
+<section id="agnostic-pac-learning" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="agnostic-pac-learning"><span class="header-section-number">2.3.2</span> Agnostic PAC Learning</h3>
 <p><strong>Agnostic PAC learnable:</strong> A hypothesis class <span class="math inline">\(H\)</span> is agnostic PAC learnable if there exist a function <span class="math inline">\(m_H:(0,1)^2\to\mathbb N\)</span> and a learning algorithm with the following property:</p>
-<p>For every <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span> and every distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\times Y\)</span>, when running the learning algorithm on <span class="math inline">\(m\ge m_H(\epsilon,\delta)\)</span> i.i.d. examples generated by <span class="math inline">\(D\)</span>, the algorithm returns a hypothesis <span class="math inline">\(h\)</span> such that, with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of the <span class="math inline">\(m\)</span> training examples, <span class="math display">\[
+<p>For every <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span> and every distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\times Y\)</span>, when running the learning algorithm on <span class="math inline">\(m\ge m_H(\epsilon,\delta)\)</span> i.i.d. examples generated by <span class="math inline">\(D\)</span>, the algorithm returns a hypothesis <span class="math inline">\(h\)</span> such that, with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of the <span class="math inline">\(m\)</span> training examples,</p>
+<p><span class="math display">\[
 L_D(h)\le\min_{h'\in H}L_D(h')+\epsilon.
 \]</span></p>
-<p><strong>Error Decomposition:</strong></p>
-<ul>
-<li><span class="math inline">\(L_D(h_S)=\epsilon_{\mathrm{app}}+\epsilon_{\mathrm{est}}\)</span>.</li>
-<li><span class="math inline">\(\epsilon_{\mathrm{app}}=\min_{h\in H}L_D(h)\)</span>.</li>
-<li><span class="math inline">\(\epsilon_{\mathrm{est}}=L_D(h_S)-\epsilon_{\mathrm{app}}\)</span>.</li>
-<li><span class="math inline">\(\epsilon_{\mathrm{app}}=L_D(\mathrm{BO})+\min_{h\in H}L_D(h)-L_D(\mathrm{BO})\)</span>.</li>
-</ul>
-<p><strong>Is Infinite <span class="math inline">\(H\)</span> Learnable?</strong></p>
-<p>Let <span class="math inline">\(H\)</span> be the class of threshold functions. Then <span class="math inline">\(H\)</span> is PAC learnable using the ERM rule, with sample complexity <span class="math display">\[
+</section>
+<section id="error-decomposition" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="error-decomposition"><span class="header-section-number">2.3.3</span> Error Decomposition</h3>
+<p><span class="math display">\[
+L_D(h_S)=\epsilon_{\mathrm{app}}+\epsilon_{\mathrm{est}}.
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\epsilon_{\mathrm{app}}
+&amp;=\min_{h\in H}L_D(h),\\
+\epsilon_{\mathrm{est}}
+&amp;=L_D(h_S)-\epsilon_{\mathrm{app}}.
+\end{aligned}
+\]</span></p>
+<p><strong>Bayes decomposition:</strong></p>
+<p><span class="math display">\[
+\epsilon_{\mathrm{app}}
+=L_D(\mathrm{BO})+\min_{h\in H}L_D(h)-L_D(\mathrm{BO}).
+\]</span></p>
+</section>
+<section id="infinite-hypothesis-classes" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="infinite-hypothesis-classes"><span class="header-section-number">2.3.4</span> Infinite Hypothesis Classes</h3>
+<p><strong>Threshold functions:</strong> Let <span class="math inline">\(H\)</span> be the class of threshold functions (<span class="math inline">\(h_a(x) = \mathbf{1}_{\{x&lt;a\}}\)</span>). Then <span class="math inline">\(H\)</span> is PAC learnable using the ERM rule, with sample complexity</p>
+<p><span class="math display">\[
 m_H(\epsilon,\delta)
 \le
 \frac{\left\lceil\log(2/\delta)\right\rceil}{\epsilon}.
 \]</span></p>
 </section>
-<section id="vc-dimension" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="vc-dimension"><span class="header-section-number">2.3</span> VC dimension</h2>
+</section>
+<section id="vc-dimension" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="vc-dimension"><span class="header-section-number">2.4</span> VC Dimension</h2>
+<section id="restriction-and-shattering" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="restriction-and-shattering"><span class="header-section-number">2.4.1</span> Restriction and Shattering</h3>
+<p><strong>Restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span>:</strong> Let <span class="math inline">\(H\)</span> be a class of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(\{0,1\}\)</span>, and let <span class="math inline">\(C=\{c_1,\ldots,c_m\}\subset X\)</span>. The restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span> is the set of functions from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span> that can be derived from <span class="math inline">\(H\)</span>. That is,</p>
+<p><span class="math display">\[
+H_C=\left\{\bigl(h(c_1),\ldots,h(c_m)\bigr):h\in H\right\}.
+\]</span></p>
+<p>Here we represent each function from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span> as a vector in <span class="math inline">\(\{0,1\}^{|C|}\)</span>.</p>
+<p><strong>Shattering:</strong> A hypothesis class <span class="math inline">\(H\)</span> shatters a finite set <span class="math inline">\(C\subset X\)</span> if the restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span> is the set of all functions from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span>. That is,</p>
+<p><span class="math display">\[
+|H_C|=2^{|C|}.
+\]</span></p>
+<div id="thm-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.3 (Sample Lower Bound from Shattering)</strong></span> Let <span class="math inline">\(H\)</span> be a hypothesis class of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(\{0,1\}\)</span>. Let <span class="math inline">\(m\)</span> be a training set size. Assume that there exists a set <span class="math inline">\(C\subset X\)</span> of size <span class="math inline">\(2m\)</span> that is shattered by <span class="math inline">\(H\)</span>. Then, for any learning algorithm <span class="math inline">\(A\)</span>, there exist a distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\times\{0,1\}\)</span> and a predictor <span class="math inline">\(h\in H\)</span> such that <span class="math inline">\(L_D(h)=0\)</span>, but with probability at least <span class="math inline">\(\frac17\)</span> over the choice of <span class="math inline">\(S\sim D^m\)</span>, we have</p>
+<p><span class="math display">\[
+L_D(A(S))\ge\frac18.
+\]</span></p>
+</div>
+</section>
+<section id="vc-dimension-and-learnability" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="vc-dimension-and-learnability"><span class="header-section-number">2.4.2</span> VC Dimension and Learnability</h3>
+<p><strong>VC-dimension:</strong> The VC dimension of a hypothesis class <span class="math inline">\(H\)</span>, denoted <span class="math inline">\(\mathrm{VCdim}(H)\)</span>, is the maximal size of a set <span class="math inline">\(C\subset X\)</span> that can be shattered by <span class="math inline">\(H\)</span>. If <span class="math inline">\(H\)</span> can shatter sets of arbitrarily large size, we say that <span class="math inline">\(H\)</span> has infinite VC dimension.</p>
+<div id="thm-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.4 (Infinite VC Dimension)</strong></span> Let <span class="math inline">\(H\)</span> be a class of infinite VC dimension. Then <span class="math inline">\(H\)</span> is not PAC learnable.</p>
+</div>
+</section>
+<section id="sample-complexity" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="sample-complexity"><span class="header-section-number">2.4.3</span> Sample Complexity</h3>
+<div id="thm-5" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.5 (Fundamental Theorem of Statistical Learning — Quantitative Version)</strong></span> Let <span class="math inline">\(H\)</span> be a hypothesis class of functions from a domain <span class="math inline">\(X\)</span> to <span class="math inline">\(\{0,1\}\)</span>, and let the loss function be the <span class="math inline">\(0\)</span>–<span class="math inline">\(1\)</span> loss. Assume that <span class="math inline">\(\mathrm{VCdim}(H)=d&lt;\infty\)</span>. Then there are absolute constants <span class="math inline">\(C_1,C_2\)</span> such that:</p>
+<ul>
+<li><p><span class="math inline">\(H\)</span> is agnostic PAC learnable with sample complexity</p>
+<p><span class="math display">\[
+C_1\frac{d+\log(1/\delta)}{\epsilon^2}
+\le m_H(\epsilon,\delta)
+\le C_2\frac{d+\log(1/\delta)}{\epsilon^2}.
+\]</span></p></li>
+<li><p><span class="math inline">\(H\)</span> is PAC learnable with sample complexity</p>
+<p><span class="math display">\[
+C_1\frac{d+\log(1/\delta)}{\epsilon}
+\le m_H(\epsilon,\delta)
+\le C_2\frac{d\log(1/\epsilon)+\log(1/\delta)}{\epsilon}.
+\]</span></p></li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How do these learning guarantees get around the No-Free-Lunch barrier?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>These assumptions limit the tasks covered or the benchmark promised, making learning guarantees possible without providing a universal learner. Real-world tasks share patterns and structure. The key is to find a balance between model complexity and population loss.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

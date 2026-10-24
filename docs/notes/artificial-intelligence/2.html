@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-7b55db5257b4a169278f51aaec36e689.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-130e1223bb759dc93b5823ef5bc2c36c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-d2c688c9aa3ed9538723f62696880ce0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-130e1223bb759dc93b5823ef5bc2c36c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -80,6 +80,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+#quarto-document-content { line-height: 1.65; }
+#quarto-document-content h2,
+#quarto-document-content h3 { text-wrap: balance; }
+#quarto-document-content li + li { margin-top: .35rem; }
+#quarto-document-content .math.display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: .25rem;
+}
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -772,6 +785,12 @@ window.Quarto = {
  <span class="menu-text">Measure Theory</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/advanced-applied-probability/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laws of Large Numbers</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -877,8 +896,18 @@ window.Quarto = {
   <li><a href="#entailment-and-satisfiability" id="toc-entailment-and-satisfiability" class="nav-link" data-scroll-target="#entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and satisfiability</a></li>
   <li><a href="#sat-and-model-checking" id="toc-sat-and-model-checking" class="nav-link" data-scroll-target="#sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and model-checking</a></li>
   <li><a href="#inference-rules" id="toc-inference-rules" class="nav-link" data-scroll-target="#inference-rules"><span class="header-section-number">2.2.3</span> Inference rules</a></li>
+  <li><a href="#horn-clauses-and-modus-ponens" id="toc-horn-clauses-and-modus-ponens" class="nav-link" data-scroll-target="#horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn clauses and modus ponens</a></li>
+  <li><a href="#complexity" id="toc-complexity" class="nav-link" data-scroll-target="#complexity"><span class="header-section-number">2.2.5</span> Complexity</a></li>
+  <li><a href="#resolution" id="toc-resolution" class="nav-link" data-scroll-target="#resolution"><span class="header-section-number">2.2.6</span> Resolution</a></li>
   </ul></li>
-  <li><a href="#semantics" id="toc-semantics" class="nav-link" data-scroll-target="#semantics"><span class="header-section-number">2.3</span> Semantics</a></li>
+  <li><a href="#semantics" id="toc-semantics" class="nav-link" data-scroll-target="#semantics"><span class="header-section-number">2.3</span> Semantics</a>
+  <ul class="collapse">
+  <li><a href="#desiderata-for-inference-rules" id="toc-desiderata-for-inference-rules" class="nav-link" data-scroll-target="#desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for inference rules</a></li>
+  <li><a href="#soundness" id="toc-soundness" class="nav-link" data-scroll-target="#soundness"><span class="header-section-number">2.3.2</span> Soundness</a></li>
+  <li><a href="#completeness" id="toc-completeness" class="nav-link" data-scroll-target="#completeness"><span class="header-section-number">2.3.3</span> Completeness</a></li>
+  <li><a href="#fixing-completeness" id="toc-fixing-completeness" class="nav-link" data-scroll-target="#fixing-completeness"><span class="header-section-number">2.3.4</span> Fixing completeness</a></li>
+  <li><a href="#theorem-modus-ponens-on-horn-clauses" id="toc-theorem-modus-ponens-on-horn-clauses" class="nav-link" data-scroll-target="#theorem-modus-ponens-on-horn-clauses"><span class="header-section-number">2.3.5</span> Theorem: Modus ponens on Horn clauses</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -905,20 +934,21 @@ window.Quarto = {
 </header>
 
 
-<p><strong>Representation (Syntax):</strong> defines a set of valid formulas.</p>
-<p><strong>Semantics:</strong> for each formula, specify a set of models (assignments / configurations of the world).</p>
-<p><strong>Inference rule:</strong> a rule that allows us to derive new formulas from existing ones.</p>
+<ul>
+<li><strong>Representation (Syntax):</strong> defines a set of valid formulas.</li>
+<li><strong>Semantics:</strong> for each formula, specify a set of models (assignments / configurations of the world).</li>
+<li><strong>Inference rule:</strong> a rule that allows us to derive new formulas from existing ones.</li>
+</ul>
 <section id="representation" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="representation"><span class="header-section-number">2.1</span> Representation</h2>
 <p>Formal languages: syntax and model</p>
 <section id="propositional-logic" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="propositional-logic"><span class="header-section-number">2.1.1</span> Propositional logic</h3>
+<p><strong>Syntax:</strong></p>
 <ul>
-<li><p>Syntax</p>
-<ul>
-<li><p>Propositional symbols (atomic formulas): <span class="math inline">\(A, B, C\)</span></p></li>
-<li><p>Logical connectives: <span class="math inline">\(\neg, \land, \lor, \to, \leftrightarrow\)</span></p></li>
-<li><p>Build up formulas recursively—if <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are formulas, so are the following:</p>
+<li>Propositional symbols (atomic formulas): <span class="math inline">\(A, B, C\)</span></li>
+<li>Logical connectives: <span class="math inline">\(\neg, \land, \lor, \to, \leftrightarrow\)</span></li>
+<li>Build up formulas recursively—if <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are formulas, so are the following:
 <ul>
 <li>Negation: <span class="math inline">\(\neg f\)</span></li>
 <li>Conjunction: <span class="math inline">\(f \land g\)</span></li>
@@ -926,35 +956,30 @@ window.Quarto = {
 <li>Implication: <span class="math inline">\(f \to g\)</span></li>
 <li>Biconditional: <span class="math inline">\(f \leftrightarrow g\)</span></li>
 </ul></li>
-</ul></li>
-<li><p>Model</p>
-<ul>
-<li>A model <span class="math inline">\(w\)</span> in propositional logic is an assignment of truth values to propositional symbols.</li>
-</ul></li>
 </ul>
-<p><strong>Interpretation function:</strong> Let <span class="math inline">\(f\)</span> be a formula.<br>
-Let <span class="math inline">\(w\)</span> be a model. An interpretation function <span class="math inline">\(\mathcal{I}(f,w)\)</span> returns:</p>
+<p><strong>Model:</strong></p>
+<p>A model <span class="math inline">\(w\)</span> in propositional logic is an assignment of truth values to propositional symbols.</p>
+<p><strong>Interpretation function:</strong></p>
+<p>Let <span class="math inline">\(f\)</span> be a formula and <span class="math inline">\(w\)</span> be a model. An interpretation function <span class="math inline">\(\mathcal{I}(f,w)\)</span> returns:</p>
 <ul>
-<li><p>true (1) (say that <span class="math inline">\(w\)</span> satisfies <span class="math inline">\(f\)</span>)</p></li>
-<li><p>false (0) (say that <span class="math inline">\(w\)</span> does not satisfy <span class="math inline">\(f\)</span>)</p></li>
-<li><p>Base case: For a propositional symbol <span class="math inline">\(p\)</span> (e.g., <span class="math inline">\(A, B, C\)</span>):</p></li>
+<li>true (1) (say that <span class="math inline">\(w\)</span> satisfies <span class="math inline">\(f\)</span>)</li>
+<li>false (0) (say that <span class="math inline">\(w\)</span> does not satisfy <span class="math inline">\(f\)</span>)</li>
 </ul>
+<p><strong>Base case:</strong> For a propositional symbol <span class="math inline">\(p\)</span> (e.g., <span class="math inline">\(A, B, C\)</span>):</p>
 <p><span class="math display">\[
 \mathcal{I}(p,w) = w(p)
 \]</span></p>
-<ul>
-<li>Recursive case</li>
-</ul>
+<p><strong>Recursive case</strong></p>
 <p>Let <span class="math inline">\(\mathcal{M}(f)\)</span> be the set of <strong>models</strong> <span class="math inline">\(w\)</span> for which <span class="math inline">\(\mathcal{I}(f,w) = 1\)</span>.</p>
-<p><strong>Knowledge base:</strong> A knowledge base <span class="math inline">\(\mathrm{KB}\)</span> is a set of formulas representing their conjunction / intersection:</p>
+<p><strong>Knowledge base:</strong></p>
+<p>A knowledge base <span class="math inline">\(\mathrm{KB}\)</span> is a set of formulas representing their conjunction / intersection:</p>
 <p><span class="math display">\[
 \mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f).
 \]</span></p>
 </section>
 <section id="first-order-logic" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="first-order-logic"><span class="header-section-number">2.1.2</span> First-order logic</h3>
-<ul>
-<li>Syntax
+<p><strong>Syntax:</strong></p>
 <ul>
 <li>Terms denote objects: constant symbols <span class="math inline">\(c\)</span>, variables <span class="math inline">\(x\)</span>, and function applications <span class="math inline">\(f(t_1,\ldots,t_n)\)</span>, where each <span class="math inline">\(t_i\)</span> is a term.</li>
 <li>Formulas are built from:
@@ -963,8 +988,8 @@ Let <span class="math inline">\(w\)</span> be a model. An interpretation functio
 <li>Connectives applied to formulas: <span class="math inline">\(\neg,\land,\lor,\to,\leftrightarrow\)</span>.</li>
 <li>Quantifiers applied to formulas: <span class="math inline">\(\forall x\,\varphi\)</span>, <span class="math inline">\(\exists x\,\varphi\)</span>.</li>
 </ul></li>
-</ul></li>
-<li>Models
+</ul>
+<p><strong>Models:</strong></p>
 <ul>
 <li>A model <span class="math inline">\(w\)</span> specifies a nonempty domain <span class="math inline">\(D\)</span> and interprets:
 <ul>
@@ -973,7 +998,6 @@ Let <span class="math inline">\(w\)</span> be a model. An interpretation functio
 <li>Predicate symbols as sets of tuples: <span class="math inline">\(w(P)\subseteq D^n\)</span>, equivalently functions <span class="math inline">\(D^n\to\{0,1\}\)</span>.</li>
 </ul></li>
 <li>A separate variable assignment <span class="math inline">\(s:\mathrm{Var}\to D\)</span> gives variables their values: <span class="math inline">\(s(x)\in D\)</span>.</li>
-</ul></li>
 </ul>
 <p>For example, if <span class="math inline">\(w(\mathrm{alice})=o_1\)</span>, <span class="math inline">\(w(\mathrm{arithmetic})=o_3\)</span>, and <span class="math inline">\((o_1,o_3)\in w(\mathrm{Knows})\)</span>, then <span class="math inline">\(\mathrm{Knows}(\mathrm{alice},\mathrm{arithmetic})\)</span> is true.</p>
 </section>
@@ -984,7 +1008,8 @@ Let <span class="math inline">\(w\)</span> be a model. An interpretation functio
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and satisfiability</h3>
 <p><strong>Entailment:</strong> <span class="math inline">\(\mathrm{KB}\)</span> entails <span class="math inline">\(f\)</span> (written <span class="math inline">\(\mathrm{KB} \models f\)</span>) iff <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)\)</span>.</p>
 <p><strong>Contradiction:</strong> <span class="math inline">\(\mathrm{KB}\)</span> contradicts <span class="math inline">\(f\)</span> iff <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset\)</span>.</p>
-<p><strong>Contingency:</strong> <span class="math display">\[
+<p><strong>Contingency:</strong></p>
+<p><span class="math display">\[
 \emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})
 \]</span></p>
 <p><strong>Satisfiability:</strong> A knowledge base <span class="math inline">\(\mathrm{KB}\)</span> is satisfiable if <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \neq \emptyset\)</span>.</p>
@@ -992,8 +1017,10 @@ Let <span class="math inline">\(w\)</span> be a model. An interpretation functio
 <section id="sat-and-model-checking" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and model-checking</h3>
 <p><strong>Model checking:</strong></p>
-<p>Input: knowledge base <span class="math inline">\(\mathrm{KB}\)</span><br>
-Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \neq \emptyset\)</span>)?</p>
+<ul>
+<li><strong>Input:</strong> knowledge base <span class="math inline">\(\mathrm{KB}\)</span></li>
+<li><strong>Output:</strong> exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \neq \emptyset\)</span>)?</li>
+</ul>
 <p><strong>Popular algorithms:</strong></p>
 <ul>
 <li>DPLL (backtracking + propagation + pruning)</li>
@@ -1002,11 +1029,12 @@ Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm
 </section>
 <section id="inference-rules" class="level3" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="inference-rules"><span class="header-section-number">2.2.3</span> Inference rules</h3>
-<p><strong>Modus ponens inference rule:</strong> For any propositional symbols <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>:</p>
+<p><strong>Modus ponens inference rule:</strong></p>
+<p>For any propositional symbols <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>:</p>
 <p><span class="math display">\[
 \frac{p,\quad p \to q}{q}
 \]</span></p>
-<p><strong>Inference rule:</strong></p>
+<p><strong>General inference rule:</strong></p>
 <p>If <span class="math inline">\(f_1, \ldots, f_k, g\)</span> are formulas, then the following is an inference rule:</p>
 <p><span class="math display">\[
 \frac{f_1,\quad \ldots,\quad f_k}{g}
@@ -1014,12 +1042,16 @@ Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm
 <p><strong>Algorithm: forward inference:</strong></p>
 <p>Input: set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span>.</p>
 <p>Repeat until no changes to <span class="math inline">\(\mathrm{KB}\)</span>:</p>
-<ul>
+<ol type="1">
 <li>Choose set of formulas <span class="math inline">\(f_1, \ldots, f_k \in \mathrm{KB}\)</span>.</li>
-<li>If matching rule <span class="math inline">\(\frac{f_1,\quad \cdots,\quad f_k}{g}\)</span> exists, Add <span class="math inline">\(g\)</span> to <span class="math inline">\(\mathrm{KB}\)</span>.</li>
-</ul>
+<li>If matching rule <span class="math inline">\(\frac{f_1,\quad \cdots,\quad f_k}{g}\)</span> exists, add <span class="math inline">\(g\)</span> to <span class="math inline">\(\mathrm{KB}\)</span>.</li>
+</ol>
 <p><strong>Derivation:</strong></p>
 <p><span class="math inline">\(\mathrm{KB}\)</span> derives/proves <span class="math inline">\(f\)</span> (<span class="math inline">\(\mathrm{KB} \vdash f\)</span>) iff <span class="math inline">\(f\)</span> eventually gets added to <span class="math inline">\(\mathrm{KB}\)</span>.</p>
+</section>
+<section id="horn-clauses-and-modus-ponens" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn clauses and modus ponens</h3>
+<p><strong>Propositional logic:</strong></p>
 <p><strong>Definite clause:</strong> A definite clause has the following form:</p>
 <p><span class="math display">\[
 (p_1 \land \cdots \land p_k) \to q
@@ -1030,55 +1062,63 @@ Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm
 <li>a definite clause <span class="math inline">\((p_1 \land \cdots \land p_k \to q)\)</span></li>
 <li>a goal clause <span class="math inline">\((p_1 \land \cdots \land p_k \to \mathrm{false})\)</span></li>
 </ul>
-<p><strong>Modus ponens:</strong> <span class="math display">\[
+<p><strong>Modus ponens:</strong></p>
+<p><span class="math display">\[
 \frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
 \]</span></p>
-<p><strong>Definite clause (first-order logic):</strong> A definite clause has the following form:</p>
+<p><strong>First-order logic:</strong></p>
+<p><strong>Definite clause:</strong> A definite clause has the following form:</p>
 <p><span class="math display">\[
 \forall x_1 \cdots \forall x_n \bigl((a_1 \land \cdots \land a_k) \to b\bigr)
 \]</span></p>
 <p>for variables <span class="math inline">\(x_1, \ldots, x_n\)</span> and atomic formulas <span class="math inline">\(a_1, \ldots, a_k, b\)</span> (which contain those variables).</p>
-<p><strong>Modus ponens (first-order logic):</strong></p>
+<p><strong>Modus ponens:</strong></p>
 <p><span class="math display">\[
 \frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
 \]</span></p>
-<p><strong>Substitution:</strong> A substitution <span class="math inline">\(\theta\)</span> is a mapping from variables to terms.</p>
+<p><strong>Substitution:</strong></p>
+<p>A substitution <span class="math inline">\(\theta\)</span> is a mapping from variables to terms.</p>
 <p><span class="math inline">\(\operatorname{Subst}[\theta, f]\)</span> returns the result of performing substitution <span class="math inline">\(\theta\)</span> on <span class="math inline">\(f\)</span>.</p>
-<p><strong>Unification:</strong> Unification takes two formulas <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> and returns a substitution <span class="math inline">\(\theta\)</span> which is the most general unifier:</p>
+<p><strong>Unification:</strong></p>
+<p>Unification takes two formulas <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> and returns a substitution <span class="math inline">\(\theta\)</span> which is the most general unifier:</p>
 <p><span class="math display">\[
 \operatorname{Unify}[f,g] = \theta
 \quad \text{such that} \quad
 \operatorname{Subst}[\theta,f] = \operatorname{Subst}[\theta,g]
 \]</span></p>
 <p>or “fail” if no such <span class="math inline">\(\theta\)</span> exists.</p>
-<p><strong>Complexity:</strong></p>
-<ul>
-<li><p>Theorem: completeness</p>
-<p>Modus ponens is complete for first-order logic with only Horn clauses.</p></li>
-<li><p>Theorem: semi-decidability</p>
+</section>
+<section id="complexity" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="complexity"><span class="header-section-number">2.2.5</span> Complexity</h3>
+<p><strong>Theorem: completeness:</strong></p>
+<p>Modus ponens is complete for first-order logic with only Horn clauses.</p>
+<p><strong>Theorem: semi-decidability:</strong></p>
 <p>First-order logic (even restricted to only Horn clauses) is <strong>semi-decidable</strong>.</p>
 <ul>
 <li>If <span class="math inline">\(\mathrm{KB} \models f\)</span>, forward inference on complete inference rules will prove <span class="math inline">\(f\)</span> in finite time.</li>
 <li>If <span class="math inline">\(\mathrm{KB} \not\models f\)</span>, no algorithm can show this in finite time.</li>
-</ul></li>
 </ul>
-<p><strong>Resolution inference rule:</strong></p>
+</section>
+<section id="resolution" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="resolution"><span class="header-section-number">2.2.6</span> Resolution</h3>
+<p><strong>Propositional resolution rule:</strong></p>
 <p><span class="math display">\[
 \frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
 {f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
 \]</span></p>
-<p><strong>Conjunctive normal form (CNF):</strong> A CNF formula is a conjunction of clauses.</p>
+<p><strong>Conjunctive normal form (CNF):</strong></p>
+<p>A CNF formula is a conjunction of clauses.</p>
 <p><strong>Proposition: conversion to CNF:</strong></p>
 <p>Every formula <span class="math inline">\(f\)</span> in propositional logic can be converted into an equivalent CNF formula <span class="math inline">\(f'\)</span>:</p>
 <p><span class="math display">\[
 \mathcal{M}(f) = \mathcal{M}(f')
 \]</span></p>
-<p><strong>FOL: Conversion to CNF:</strong></p>
+<p><strong>First-order conversion to CNF:</strong></p>
 <ul>
 <li>All variable have universal quantifiers by default</li>
 <li>Introduce Skolem functions (e.g., <span class="math inline">\(Y(x)\)</span>) to represent existentially quantified variables.</li>
 </ul>
-<p><strong>Resolution rule (first-order logic):</strong></p>
+<p><strong>First-order resolution rule:</strong></p>
 <p><span class="math display">\[
 \frac{
 f_1 \lor \cdots \lor f_n \lor p,\qquad
@@ -1093,8 +1133,51 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
 </section>
 <section id="semantics" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="semantics"><span class="header-section-number">2.3</span> Semantics</h2>
+<section id="desiderata-for-inference-rules" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for inference rules</h3>
+<p><strong>Semantics:</strong></p>
+<p>Interpretation defines <strong>entailed/true</strong> formulas: <span class="math inline">\(\mathrm{KB} \models f\)</span>.</p>
+<p><span class="math display">\[
+\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)
+\]</span></p>
+<p><strong>Syntax:</strong></p>
+<p>Inference rules <strong>derive</strong> formulas: <span class="math inline">\(\mathrm{KB} \vdash f\)</span></p>
+</section>
+<section id="soundness" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="soundness"><span class="header-section-number">2.3.2</span> Soundness</h3>
+<p>A set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span> is <strong>sound</strong> if:</p>
+<p><span class="math display">\[
+\{f : \mathrm{KB} \vdash f\}
+\subseteq
+\{f : \mathrm{KB} \models f\}.
+\]</span></p>
+</section>
+<section id="completeness" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="completeness"><span class="header-section-number">2.3.3</span> Completeness</h3>
+<p>A set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span> is <strong>complete</strong> if:</p>
+<p><span class="math display">\[
+\{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}
+\]</span></p>
+</section>
+<section id="fixing-completeness" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="fixing-completeness"><span class="header-section-number">2.3.4</span> Fixing completeness</h3>
+<ol type="1">
+<li><p><strong>Option 1: Restrict the allowed set of formulas</strong></p>
+<p>propositional logic <span class="math inline">\(\to\)</span> propositional logic with only Horn clauses</p></li>
+<li><p><strong>Option 2: Use more powerful inference rules</strong></p>
+<p>Modus ponens <span class="math inline">\(\to\)</span> resolution</p></li>
+</ol>
+</section>
+<section id="theorem-modus-ponens-on-horn-clauses" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="theorem-modus-ponens-on-horn-clauses"><span class="header-section-number">2.3.5</span> Theorem: Modus ponens on Horn clauses</h3>
+<p>Modus ponens is <strong>complete</strong> with respect to Horn clauses:</p>
+<ul>
+<li>Suppose <span class="math inline">\(\mathrm{KB}\)</span> contains only Horn clauses and <span class="math inline">\(p\)</span> is an entailed propositional symbol.</li>
+<li>Then applying modus ponens will derive <span class="math inline">\(p\)</span>.</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

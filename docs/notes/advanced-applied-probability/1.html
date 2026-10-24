@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../docs/notes/machine-learning/index.html" rel="next">
+<link href="../../../docs/notes/advanced-applied-probability/2.html" rel="next">
 <link href="../../../docs/notes/advanced-applied-probability/index.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-7b55db5257b4a169278f51aaec36e689.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-a55d411f8579d0fe6dadda4ce7ddfdd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-d2de20584d3d090aca7cc20a9b65bb77.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-99c6914008ece84889ed41141cf9ac53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -789,6 +789,12 @@ window.Quarto = {
  <span class="menu-text">Measure Theory</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/advanced-applied-probability/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laws of Large Numbers</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -901,6 +907,8 @@ window.Quarto = {
   <li><a href="#integral-inequalities" id="toc-integral-inequalities" class="nav-link" data-scroll-target="#integral-inequalities"><span class="header-section-number">1.5.2</span> Integral Inequalities</a></li>
   <li><a href="#convergence-theorems" id="toc-convergence-theorems" class="nav-link" data-scroll-target="#convergence-theorems"><span class="header-section-number">1.5.3</span> Convergence Theorems</a></li>
   </ul></li>
+  <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value"><span class="header-section-number">1.6</span> Expected Value</a></li>
+  <li><a href="#product-measures" id="toc-product-measures" class="nav-link" data-scroll-target="#product-measures"><span class="header-section-number">1.7</span> Product Measures</a></li>
   </ul>
 </nav>
     </div>
@@ -1503,6 +1511,34 @@ f(x) &amp;= f^+(x)-f^-(x), \\
 f=\frac{d\nu}{d\mu}.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Probability Density Function of a Random Variable
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a real-valued random variable with distribution <span class="math inline">\(\mu_X(A)=P(X\in A)\)</span> for Borel sets <span class="math inline">\(A\)</span>, and let <span class="math inline">\(\lambda\)</span> denote Lebesgue measure on <span class="math inline">\(\mathbb R\)</span>.</p>
+<p><strong>Probability density function (PDF):</strong> If <span class="math inline">\(\mu_X\ll\lambda\)</span>, the Radon–Nikodym derivative</p>
+<p><span class="math display">\[
+f_X=\frac{d\mu_X}{d\lambda}
+\]</span></p>
+<p>is called a probability density function of <span class="math inline">\(X\)</span>. Thus, for every Borel set <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+P(X\in A)=\int_A f_X\,d\lambda=\int_A f_X(x)\,dx.
+\]</span></p>
+<p>The density is nonnegative, unique up to a <span class="math inline">\(\lambda\)</span>-null set, and satisfies</p>
+<p><span class="math display">\[
+\int_{\mathbb R}f_X(x)\,dx=1.
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="integral-inequalities" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="integral-inequalities"><span class="header-section-number">1.5.2</span> Integral Inequalities</h3>
@@ -1545,7 +1581,7 @@ f=\frac{d\nu}{d\mu}.
 <section id="convergence-theorems" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="convergence-theorems"><span class="header-section-number">1.5.3</span> Convergence Theorems</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1554,7 +1590,7 @@ f=\frac{d\nu}{d\mu}.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space, and let <span class="math inline">\(f_n,f:X\to\mathbb R\)</span> be measurable functions.</p>
 <p><strong>Convergence in measure.</strong> We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> in measure if, for every <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math display">\[
@@ -1577,7 +1613,7 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1586,7 +1622,7 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For measurable functions on a measure space <span class="math inline">\((X,\mathcal F,\mu)\)</span>, we have <span class="math display">\[
 \text{uniform convergence}
@@ -1636,7 +1672,7 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1645,15 +1681,96 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Although the versions of <a href="#thm-13" class="quarto-xref">Theorem&nbsp;1.13</a>, <a href="#thm-14" class="quarto-xref">Theorem&nbsp;1.14</a>, and <a href="#thm-15" class="quarto-xref">Theorem&nbsp;1.15</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods.</p>
 </div>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="expected-value" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="expected-value"><span class="header-section-number">1.6</span> Expected Value</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Expected Value
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We now specialize to integration with respect to a probability measure <span class="math inline">\(P\)</span>.</p>
+<p>If <span class="math inline">\(X\)</span> is a random variable on <span class="math inline">\((\Omega,\mathcal F,P)\)</span>, then we define its <strong>expected value</strong> to be <span class="math display">\[
+EX=\int X\,dP,
+\]</span></p>
+<p>if the integral exists. This is the case if <span class="math inline">\(X\)</span> is integrable, i.e., if <span class="math inline">\(EX&lt;\infty\)</span>.</p>
+<p>When <span class="math inline">\(X \ge 0\)</span>, which always makes sense, but may be <span class="math inline">\(\infty\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-16" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.16 (Expected Value of a Function of a Random Variable)</strong></span> Let <span class="math inline">\(X\)</span> be a random element of <span class="math inline">\((S,\mathcal S)\)</span> with distribution <span class="math inline">\(\mu\)</span>, i.e., <span class="math inline">\(\mu(A)=P(X\in A)\)</span>. If <span class="math inline">\(f\)</span> is a measurable function from <span class="math inline">\((S,\mathcal S)\)</span> to <span class="math inline">\((\mathbb R,\mathcal R)\)</span> such that <span class="math inline">\(f\ge0\)</span> or <span class="math inline">\(E|f(X)|&lt;\infty\)</span>, then <span class="math display">\[
+Ef(X)=\int_S f(y)\,\mu(dy) = \int_S f(y) f_X(y)\,dy.
+\]</span></p>
+</div>
+</section>
+<section id="product-measures" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="product-measures"><span class="header-section-number">1.7</span> Product Measures</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Product Measure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((X,\mathcal A,\mu_1)\)</span> and <span class="math inline">\((Y,\mathcal B,\mu_2)\)</span> be two <span class="math inline">\(\sigma\)</span>-finite measure spaces. Let</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Omega&amp;=X\times Y=\{(x,y):x\in X,\ y\in Y\},\\
+\mathcal S&amp;=\{A\times B:A\in\mathcal A,\ B\in\mathcal B\}.
+\end{aligned}
+\]</span></p>
+<p>Sets in <span class="math inline">\(\mathcal S\)</span> are called <strong>rectangles</strong>. It is easy to see that <span class="math inline">\(\mathcal S\)</span> is a semi-algebra:</p>
+<p><span class="math display">\[
+(A\times B)\cap(C\times D)=(A\cap C)\times(B\cap D),
+\]</span></p>
+<p><span class="math display">\[
+(A\times B)^c
+=(A^c\times B)\cup(A\times B^c)\cup(A^c\times B^c).
+\]</span></p>
+<p>Let <span class="math inline">\(\mathcal F=\mathcal A\times\mathcal B\)</span> be the <span class="math inline">\(\sigma\)</span>-algebra generated by <span class="math inline">\(\mathcal S\)</span>.</p>
+</div>
+</div>
+<div id="thm-17" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.17 (Existence and Uniqueness of Product Measures)</strong></span> There exists a unique measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\(\mathcal F\)</span> such that</p>
+<p><span class="math display">\[
+\mu(A\times B)=\mu_1(A)\mu_2(B)
+\]</span></p>
+<p>for every <span class="math inline">\(A\in\mathcal A\)</span> and <span class="math inline">\(B\in\mathcal B\)</span>. This measure is called the <strong>product measure</strong> and is denoted by <span class="math inline">\(\mu_1\times\mu_2\)</span>.</p>
+</div>
+<div id="thm-18" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.18 (Fubini’s Theorem)</strong></span> Let <span class="math inline">\(\mu=\mu_1\times\mu_2\)</span>, and let <span class="math inline">\(f:X\times Y\to\mathbb R\)</span> be <span class="math inline">\(\mathcal F\)</span>-measurable. If <span class="math inline">\(f\ge0\)</span> or</p>
+<p><span class="math display">\[
+\int_{X\times Y}|f|\,d\mu&lt;\infty,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int_{X\times Y}f\,d\mu
+&amp;=\int_X\left(\int_Y f(x,y)\,\mu_2(dy)\right)\mu_1(dx)\\
+&amp;=\int_Y\left(\int_X f(x,y)\,\mu_1(dx)\right)\mu_2(dy).
+\end{aligned}
+\]</span></p>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -2077,8 +2194,8 @@ Note
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../docs/notes/machine-learning/index.html" class="pagination-link" aria-label="Machine Learning">
-        <span class="nav-page-text">Machine Learning</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../docs/notes/advanced-applied-probability/2.html" class="pagination-link" aria-label="Laws of Large Numbers">
+        <span class="nav-page-text">Laws of Large Numbers</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
