@@ -6,28 +6,6 @@ number-offset: [1]
 
 crossref:
   chapters: true
-
-format:
-  html:
-    include-in-header:
-      text: |
-        <style>
-        #quarto-document-content { line-height: 1.65; }
-        #quarto-document-content h2,
-        #quarto-document-content h3 { text-wrap: balance; }
-        #quarto-document-content li + li { margin-top: .35rem; }
-        #quarto-document-content .math.inline {
-          display: inline-block;
-          white-space: nowrap;
-        }
-        #quarto-document-content .math.display {
-          display: block;
-          max-width: 100%;
-          overflow-x: auto;
-          overflow-y: hidden;
-          padding-block: .25rem;
-        }
-        </style>
 ---
 
 ## Probability Spaces
