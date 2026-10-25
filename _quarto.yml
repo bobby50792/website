@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - docs/blog/posts/2026-10-25-tower-defense/game/**
 
 highlight-style: a11y
 number-sections: true
