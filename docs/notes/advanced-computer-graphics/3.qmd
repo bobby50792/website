@@ -145,3 +145,40 @@ A caricature recipe for learning:
 - Step 2: Learn a predictor
 - Step 3: Evaluate the predictor
 - Use the predictor!
+
+
+**Learning to Predict Volumetric 3D:**
+
+- 2D Encoder: Image to latent code.
+- 3D Decoder: Latent code to $D^3$ volume.
+- Loss: Compare the predicted 3D volume with the ground-truth 3D volume.
+- Training data: Renderings of CAD models on random backgrounds (helps transfer to real images)
+
+**Implicit Volumetric Representation:** 
+
+- Instead of explicitly predicting a 3D voxel grid, learn a continuous occupancy function.
+- Given a latent code $c$ and an arbitrary 3D query point $p = (x,y,z)$, predict the probability that the point lies inside the object.
+
+
+**Learning to Predict Point Clouds:** 
+
+Latent vector to a fixed size point cloud
+
+$$
+d_{CD}(S_1, S_2) =
+\sum_{x \in S_1} \min_{y \in S_2} \|x-y\|_2^2
++
+\sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2
+$$
+
+**Learning to Predict Parametric Point Clouds:**
+
+Latent vector and planar point generated 3D point
+
+**Learning to Predict Meshes & Learning to Deform Meshes:**
+
+**The advantages of using meshes:**
+
+- Smoothness objectives respect connectivity (Laplacian Smoothness and Normal Consistency)
+
+- Can sample varying number of points
