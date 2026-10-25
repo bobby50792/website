@@ -2837,6 +2837,42 @@
     ]
   },
   {
+    "objectID": "docs/notes/advanced-computer-graphics/4.html",
+    "href": "docs/notes/advanced-computer-graphics/4.html",
+    "title": "Rasterization",
+    "section": "",
+    "text": "An image is a 2D array of pixel colors. Display hardware converts these values into visible light.\nCathode Ray Tube (CRT): An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen. Beam intensity controls brightness. Applications include oscilloscopes and traditional televisions.\nRaster Scan: The beam sweeps across the screen line by line while its intensity is modulated. Interlaced scanning alternates odd and even lines in successive fields.\nFrame Buffer: Memory storing the color of each pixel. For analog CRT displays, DACs (Digital-to-Analog Converters) convert digital RGB values into analog signals.\nFlat-Panel Displays:\n\n\n\n\n\n\n\nTechnology\nPrinciple\n\n\n\n\nLCD\nLiquid crystals change light polarization; polarizers control how much backlight passes through. Partial rotation produces intermediate brightness levels.\n\n\nOLED\nOrganic light-emitting materials produce their own light.\n\n\nLED array\nIndividually controlled LEDs form an image.\n\n\nE-Ink\nElectric fields move charged black and white particles to change the visible color.",
+    "crumbs": [
+      "Notes",
+      "Advanced Computer Graphics",
+      "Rasterization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/advanced-computer-graphics/4.html#display",
+    "href": "docs/notes/advanced-computer-graphics/4.html#display",
+    "title": "Rasterization",
+    "section": "",
+    "text": "An image is a 2D array of pixel colors. Display hardware converts these values into visible light.\nCathode Ray Tube (CRT): An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen. Beam intensity controls brightness. Applications include oscilloscopes and traditional televisions.\nRaster Scan: The beam sweeps across the screen line by line while its intensity is modulated. Interlaced scanning alternates odd and even lines in successive fields.\nFrame Buffer: Memory storing the color of each pixel. For analog CRT displays, DACs (Digital-to-Analog Converters) convert digital RGB values into analog signals.\nFlat-Panel Displays:\n\n\n\n\n\n\n\nTechnology\nPrinciple\n\n\n\n\nLCD\nLiquid crystals change light polarization; polarizers control how much backlight passes through. Partial rotation produces intermediate brightness levels.\n\n\nOLED\nOrganic light-emitting materials produce their own light.\n\n\nLED array\nIndividually controlled LEDs form an image.\n\n\nE-Ink\nElectric fields move charged black and white particles to change the visible color.",
+    "crumbs": [
+      "Notes",
+      "Advanced Computer Graphics",
+      "Rasterization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/advanced-computer-graphics/4.html#rasterizing-a-triangle",
+    "href": "docs/notes/advanced-computer-graphics/4.html#rasterizing-a-triangle",
+    "title": "Rasterization",
+    "section": "4.2 Rasterizing a triangle",
+    "text": "4.2 Rasterizing a triangle\nTriangles - Fundamental Shape Primitives",
+    "crumbs": [
+      "Notes",
+      "Advanced Computer Graphics",
+      "Rasterization"
+    ]
+  },
+  {
     "objectID": "docs/notes/artificial-intelligence/3.html",
     "href": "docs/notes/artificial-intelligence/3.html",
     "title": "Probabilistic Models",

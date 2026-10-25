@@ -904,8 +904,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#display" id="toc-display" class="nav-link active" data-scroll-target="#display"><span class="header-section-number">4.1</span> Display</a></li>
+  <li><a href="#rasterizing-a-triangle" id="toc-rasterizing-a-triangle" class="nav-link" data-scroll-target="#rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a triangle</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -930,8 +937,50 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="display" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="display"><span class="header-section-number">4.1</span> Display</h2>
+<p>An image is a <strong>2D array of pixel colors</strong>. Display hardware converts these values into visible light.</p>
+<p><strong>Cathode Ray Tube (CRT):</strong> An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen. Beam intensity controls brightness. Applications include oscilloscopes and traditional televisions.</p>
+<p><strong>Raster Scan:</strong> The beam sweeps across the screen line by line while its intensity is modulated. <strong>Interlaced scanning</strong> alternates odd and even lines in successive fields.</p>
+<p><strong>Frame Buffer:</strong> Memory storing the color of each pixel. For analog CRT displays, <strong>DACs (Digital-to-Analog Converters)</strong> convert digital RGB values into analog signals.</p>
+<p><strong>Flat-Panel Displays:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Technology</th>
+<th>Principle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>LCD</strong></td>
+<td>Liquid crystals change light polarization; polarizers control how much backlight passes through. Partial rotation produces intermediate brightness levels.</td>
+</tr>
+<tr class="even">
+<td><strong>OLED</strong></td>
+<td>Organic light-emitting materials produce their own light.</td>
+</tr>
+<tr class="odd">
+<td><strong>LED array</strong></td>
+<td>Individually controlled LEDs form an image.</td>
+</tr>
+<tr class="even">
+<td><strong>E-Ink</strong></td>
+<td>Electric fields move charged black and white particles to change the visible color.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rasterizing-a-triangle" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a triangle</h2>
+<p>Triangles - Fundamental Shape Primitives</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
