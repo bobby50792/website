@@ -2865,7 +2865,19 @@
     "href": "docs/notes/advanced-computer-graphics/4.html#rasterizing-a-triangle",
     "title": "Rasterization",
     "section": "4.2 Rasterizing a triangle",
-    "text": "4.2 Rasterizing a triangle\nTriangles - Fundamental Shape Primitives",
+    "text": "4.2 Rasterizing a triangle\nTriangles: Fundamental Shape Primitives:\n\nGuaranteed to be planar\nWell-defined interior\nWell-defined method for interpolating values at vertices over triangle\n\nRasterization = Sampling A 2D Indicator Function: Sample If Each Pixel Center Is Inside Triangle.\nIncremental Triangle Traversal: Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel. For each triangle edge:\n\\[\n\\begin{aligned}\nE(x,y) &= Ax + By + C, \\\\\nE(x+1,y) &= E(x,y) + A, \\\\\nE(x,y+1) &= E(x,y) + B.\n\\end{aligned}\n\\]\nCompute the three edge functions at the starting pixel, then update them as traversal proceeds. Their signs determine coverage, using a consistent vertex winding and boundary rule.\nHierarchical Rasterization: Test blocks of pixels before testing individual samples.\n\nFully outside: Skip the entire block.\nFully inside: Mark all samples as covered; color and depth still need to be computed.\nPartially intersecting: Subdivide into smaller blocks until individual pixel tests are needed.\n\nFor example, subdivide a \\(4\\times4\\) block into \\(2\\times2\\) blocks, then individual pixels. Incremental edge-function updates can be used within the remaining blocks.",
+    "crumbs": [
+      "Notes",
+      "Advanced Computer Graphics",
+      "Rasterization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/advanced-computer-graphics/4.html#antialiasing",
+    "href": "docs/notes/advanced-computer-graphics/4.html#antialiasing",
+    "title": "Rasterization",
+    "section": "4.3 Antialiasing",
+    "text": "4.3 Antialiasing\nAliasing: Sampling a continuous signal at discrete intervals can produce artifacts. In rasterization, aliasing appears as jagged edges on diagonal lines.",
     "crumbs": [
       "Notes",
       "Advanced Computer Graphics",

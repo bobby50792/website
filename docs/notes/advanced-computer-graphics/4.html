@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -911,6 +940,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#display" id="toc-display" class="nav-link active" data-scroll-target="#display"><span class="header-section-number">4.1</span> Display</a></li>
   <li><a href="#rasterizing-a-triangle" id="toc-rasterizing-a-triangle" class="nav-link" data-scroll-target="#rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a triangle</a></li>
+  <li><a href="#antialiasing" id="toc-antialiasing" class="nav-link" data-scroll-target="#antialiasing"><span class="header-section-number">4.3</span> Antialiasing</a></li>
   </ul>
 </nav>
     </div>
@@ -977,7 +1007,33 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="rasterizing-a-triangle" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a triangle</h2>
-<p>Triangles - Fundamental Shape Primitives</p>
+<p><strong>Triangles: Fundamental Shape Primitives:</strong></p>
+<ul>
+<li>Guaranteed to be planar</li>
+<li>Well-defined interior</li>
+<li>Well-defined method for interpolating values at vertices over triangle</li>
+</ul>
+<p><strong>Rasterization = Sampling A 2D Indicator Function:</strong> Sample If Each Pixel Center Is Inside Triangle.</p>
+<p><strong>Incremental Triangle Traversal:</strong> Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel. For each triangle edge:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(x,y) &amp;= Ax + By + C, \\
+E(x+1,y) &amp;= E(x,y) + A, \\
+E(x,y+1) &amp;= E(x,y) + B.
+\end{aligned}
+\]</span></p>
+<p>Compute the three edge functions at the starting pixel, then update them as traversal proceeds. Their signs determine coverage, using a consistent vertex winding and boundary rule.</p>
+<p><strong>Hierarchical Rasterization:</strong> Test blocks of pixels before testing individual samples.</p>
+<ul>
+<li><strong>Fully outside:</strong> Skip the entire block.</li>
+<li><strong>Fully inside:</strong> Mark all samples as covered; color and depth still need to be computed.</li>
+<li><strong>Partially intersecting:</strong> Subdivide into smaller blocks until individual pixel tests are needed.</li>
+</ul>
+<p>For example, subdivide a <span class="math inline">\(4\times4\)</span> block into <span class="math inline">\(2\times2\)</span> blocks, then individual pixels. Incremental edge-function updates can be used within the remaining blocks.</p>
+</section>
+<section id="antialiasing" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="antialiasing"><span class="header-section-number">4.3</span> Antialiasing</h2>
+<p><strong>Aliasing:</strong> Sampling a continuous signal at discrete intervals can produce artifacts. In rasterization, aliasing appears as jagged edges on diagonal lines.</p>
 
 
 </section>
