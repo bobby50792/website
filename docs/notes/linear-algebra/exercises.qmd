@@ -2,7 +2,6 @@
 title: "Linear Algebra Exercises"
 page-layout: article
 search: true
-number-offset: [8]
 
 crossref:
   chapters: true
@@ -10,7 +9,7 @@ crossref:
 
 :::: {.exercise-set}
 
-::: {#exr-la-structured-system name="A Structured Homogeneous System"}
+::: {#exr-1}
 
 Consider the homogeneous linear system
 
@@ -26,7 +25,7 @@ b. The system has nonzero solutions. In this case, determine its solution set.
 
 :::
 
-::: {#exr-la-product-rank name="Rank of a Matrix Product"}
+::: {#exr-2}
 
 Let $A$ and $B$ be $n\times n$ matrices. Prove both bounds:
 
@@ -41,7 +40,7 @@ $$
 
 :::
 
-::: {#exr-la-sum-rank name="Rank of a Matrix Sum"}
+::: {#exr-3}
 
 Let $A$ and $B$ be $n\times m$ matrices. Prove
 
@@ -52,7 +51,7 @@ $$
 
 :::
 
-::: {#exr-la-annihilation name="Rank Under Mutual Annihilation"}
+::: {#exr-4}
 
 Let $A,B\in M_{n\times n}(\mathbb R)$. Suppose $AB=BA=0$ and $\operatorname{rank}(A^2)=\operatorname{rank}(A)$. Prove
 
@@ -62,7 +61,7 @@ $$
 
 :::
 
-::: {#exr-la-commuting-rank name="Commuting Matrices"}
+::: {#exr-5}
 
 Let $A,B,C,D$ be pairwise commuting $n\times n$ matrices satisfying $AC+BD=I_n$. Prove
 
@@ -72,7 +71,7 @@ $$
 
 :::
 
-::: {#exr-la-transpose name="A Matrix and Its Transpose"}
+::: {#exr-6}
 
 Let $A$ be an $n\times n$ real matrix satisfying $AA^t=k^2I_n$, where $k\in\mathbb R$. Prove
 
@@ -82,7 +81,7 @@ $$
 
 :::
 
-::: {#exr-la-square-zero name="A Square-Zero Matrix"}
+::: {#exr-7}
 
 Let $A$ be an $n\times n$ matrix with rank $r$, where $1\le r\le n/2$, and suppose $A^2=0$. Prove that an invertible matrix $P$ exists such that
 
@@ -100,13 +99,13 @@ where $I_r$ is the $r\times r$ identity matrix and each $0$ denotes a zero matri
 
 :::
 
-::: {#exr-la-involution name="An Involution"}
+::: {#exr-8}
 
 Let $A$ be a real square matrix satisfying $A^2=I_n$. Prove that $A$ is diagonalizable.
 
 :::
 
-::: {#exr-la-self-adjoint name="Commuting Self-Adjoint Operators"}
+::: {#exr-9}
 
 Let $V$ be a finite-dimensional real inner product space, and let $U$ and $T$ be self-adjoint linear operators on $V$ satisfying $UT=TU$.
 
@@ -114,7 +113,7 @@ Prove that $V$ has an orthonormal basis consisting of common eigenvectors of $U$
 
 :::
 
-::: {#exr-la-triangularization name="Simultaneous Triangularization"}
+::: {#exr-10}
 
 Let $A$ and $B$ be $n\times n$ complex matrices satisfying $AB=A+B$.
 
@@ -122,7 +121,7 @@ Prove that $A$ and $B$ are simultaneously triangularizable: there is a basis in 
 
 :::
 
-::: {#exr-la-polynomial name="A Polynomial Constraint"}
+::: {#exr-11}
 
 Let $A$ be an $n\times n$ matrix satisfying
 

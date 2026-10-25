@@ -8,4 +8,4 @@ home-symbol: "L"
 home-description: "Vector spaces, linear maps, determinants, spectral theory, and canonical forms."
 ---
 
-Definitions, theorems, and exercises from the first-year linear algebra course.
+本界面梳理了**线性代数**相关知识, 希望对你能有所启发。
