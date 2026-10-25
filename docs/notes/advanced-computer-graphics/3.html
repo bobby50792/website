@@ -1026,11 +1026,55 @@ window.Quarto = {
 <p><strong>3D CNN on Volumetric Data:</strong></p>
 <p>Information loss in voxelization.</p>
 <ul>
-<li>Learn to Project</li>
+<li><p>Learn to Project (Sparsity of 3D Shapes, Store the sparse surface signals)</p></li>
+<li><p>Sparse Convolution: output feature <span class="math inline">\(+=\)</span> input feature <span class="math inline">\(\times\)</span> kernel</p></li>
 </ul>
+<p><strong>Octree: Recursively Partition the Space:</strong> Each internal node has exactly eight children. Use hash tables to store the octree structure.</p>
+<p><strong>PointNet: First Learning Tool for Point Clouds:</strong> - End-to-end learning for irregular point data - Unified framework for various tasks - Unordered input (Construct symmetric functions by neural networks)</p>
+<p><strong>Limitation of PointNet:</strong> - No local context for each point - Global feature depends on absolute coordinate. Hard to generalize to unseen scene configurations</p>
+<p><strong>PointNet++:</strong> Recursively apply pointnet at local regions.</p>
+<ul>
+<li>Hierarchical feature learning</li>
+<li>Local translation invariance</li>
+</ul>
+<p><strong>Monte Carlo Convolution:</strong> A method for performing convolution on point clouds using Monte Carlo sampling.</p>
 </section>
 <section id="data-driven-shape-synthesis" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="data-driven-shape-synthesis"><span class="header-section-number">3.3</span> Data-Driven Shape Synthesis</h2>
+<p><strong>Single-View Conditioned 3D Modeling:</strong> A canonical problem.</p>
+<p><strong>The first vision thesis: Model-based fitting:</strong></p>
+<ul>
+<li>Fit predefined 3D models to image features.</li>
+<li>Limited by the expressiveness of simple geometric models.</li>
+</ul>
+<p><strong>Data-driven Modeling: A modern view:</strong></p>
+<ul>
+<li>Learn image-to-3D mappings from large datasets using neural networks.</li>
+<li>Reduce explicit geometric reasoning, though it remains helpful.</li>
+</ul>
+<p><strong>2D to 2.5D: a Data-Driven Approach:</strong></p>
+<p>Input Image <span class="math inline">\(\to\)</span> Convolutional Network <span class="math inline">\(\to\)</span> Predicted Depth</p>
+<p>Compare the predicted depth with the ground-truth depth (GT Depth) using the loss:</p>
+<p><span class="math display">\[
+L(y, y^*) = \sum_i \|y_i - y_i^*\|^2
+\]</span></p>
+<p>Or</p>
+<p><span class="math display">\[
+L(y,y^*) = \sum_i \left\| \log y_i - \log y_i^* + \alpha(y,y^*) \right\|^2
+\]</span></p>
+<p><span class="math display">\[
+\alpha(y,y^*) = \frac{1}{n} \sum_i \left(\log y_i^* - \log y_i\right)
+\]</span></p>
+<p><strong>Image-Based 3D Object Modeling:</strong> Object-centric 3D: Supervised Learning</p>
+<p>Input Image <span class="math inline">\(\to\)</span> CNN <span class="math inline">\(\to\)</span> Predicted 3D <span class="math inline">\(\leftrightarrow\)</span> Ground-truth 3D</p>
+<p>A caricature recipe for learning:</p>
+<ul>
+<li>Step 0: Decide on model and objectives</li>
+<li><strong>Step 1: Collect training data (lots of [image, 3D] pairs)</strong> — not easy to do</li>
+<li>Step 2: Learn a predictor</li>
+<li>Step 3: Evaluate the predictor</li>
+<li>Use the predictor!</li>
+</ul>
 
 
 </section>

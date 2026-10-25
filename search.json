@@ -1477,16 +1477,16 @@
     ]
   },
   {
-    "objectID": "docs/blog/posts/2026-10-25-tower-defense/index.html",
-    "href": "docs/blog/posts/2026-10-25-tower-defense/index.html",
-    "title": "Tower Defense：我的 Unity 塔防游戏",
+    "objectID": "docs/blog/posts/2026-10-25/index.html",
+    "href": "docs/blog/posts/2026-10-25/index.html",
+    "title": "Tower Defense：Unity 塔防游戏",
     "section": "",
     "text": "这是我之前用 Unity 做的一个塔防小游戏。选择建筑、收集资源，再用箭塔应对不断到来的敌人。现在把它搬进了博客，可以直接在浏览器里试玩。"
   },
   {
-    "objectID": "docs/blog/posts/2026-10-25-tower-defense/index.html#怎么玩",
-    "href": "docs/blog/posts/2026-10-25-tower-defense/index.html#怎么玩",
-    "title": "Tower Defense：我的 Unity 塔防游戏",
+    "objectID": "docs/blog/posts/2026-10-25/index.html#怎么玩",
+    "href": "docs/blog/posts/2026-10-25/index.html#怎么玩",
+    "title": "Tower Defense：Unity 塔防游戏",
     "section": "1 怎么玩",
     "text": "1 怎么玩\n\n\n\n操作\n用途\n\n\n\n\n左键点击\n选择建筑；建造完成后选择并放置到地图上\n\n\n按住右键拖动\n移动视角\n\n\n滚轮\n缩放地图\n\n\n游戏内设置\n调整音乐、音效，或返回主菜单\n\n\n\n建筑需要消耗金币、木材或石材。伐木场、采石场和炼金场提供资源，箭塔负责防守。建造需要一点时间，也要留意建筑的放置位置。\n敌人会一波接着一波出现。资源有限，先发展还是先防守，由你决定。\n网页版保留了原来的单机玩法，关闭了调试用的账号登录和成绩上传。游戏在你的浏览器中运行；点击“结束试玩”可以关闭画面和声音，再次开始会开启新的一局。"
   },
@@ -2769,7 +2769,7 @@
     "href": "docs/notes/advanced-computer-graphics/3.html#data-driven-shape-analysis",
     "title": "Learning Geometry",
     "section": "3.2 Data-Driven Shape Analysis",
-    "text": "3.2 Data-Driven Shape Analysis\nMulti-View Representations:\n\n\\(\\mathrm{CNN}_1\\): a ConvNet extracting image features\n\\(\\mathrm{CNN}_2\\): a second ConvNet producing shape descriptors\nNeed projection\n\n3D CNN on Volumetric Data:\nInformation loss in voxelization.\n\nLearn to Project",
+    "text": "3.2 Data-Driven Shape Analysis\nMulti-View Representations:\n\n\\(\\mathrm{CNN}_1\\): a ConvNet extracting image features\n\\(\\mathrm{CNN}_2\\): a second ConvNet producing shape descriptors\nNeed projection\n\n3D CNN on Volumetric Data:\nInformation loss in voxelization.\n\nLearn to Project (Sparsity of 3D Shapes, Store the sparse surface signals)\nSparse Convolution: output feature \\(+=\\) input feature \\(\\times\\) kernel\n\nOctree: Recursively Partition the Space: Each internal node has exactly eight children. Use hash tables to store the octree structure.\nPointNet: First Learning Tool for Point Clouds: - End-to-end learning for irregular point data - Unified framework for various tasks - Unordered input (Construct symmetric functions by neural networks)\nLimitation of PointNet: - No local context for each point - Global feature depends on absolute coordinate. Hard to generalize to unseen scene configurations\nPointNet++: Recursively apply pointnet at local regions.\n\nHierarchical feature learning\nLocal translation invariance\n\nMonte Carlo Convolution: A method for performing convolution on point clouds using Monte Carlo sampling.",
     "crumbs": [
       "Notes",
       "Advanced Computer Graphics",
@@ -2781,7 +2781,7 @@
     "href": "docs/notes/advanced-computer-graphics/3.html#data-driven-shape-synthesis",
     "title": "Learning Geometry",
     "section": "3.3 Data-Driven Shape Synthesis",
-    "text": "3.3 Data-Driven Shape Synthesis",
+    "text": "3.3 Data-Driven Shape Synthesis\nSingle-View Conditioned 3D Modeling: A canonical problem.\nThe first vision thesis: Model-based fitting:\n\nFit predefined 3D models to image features.\nLimited by the expressiveness of simple geometric models.\n\nData-driven Modeling: A modern view:\n\nLearn image-to-3D mappings from large datasets using neural networks.\nReduce explicit geometric reasoning, though it remains helpful.\n\n2D to 2.5D: a Data-Driven Approach:\nInput Image \\(\\to\\) Convolutional Network \\(\\to\\) Predicted Depth\nCompare the predicted depth with the ground-truth depth (GT Depth) using the loss:\n\\[\nL(y, y^*) = \\sum_i \\|y_i - y_i^*\\|^2\n\\]\nOr\n\\[\nL(y,y^*) = \\sum_i \\left\\| \\log y_i - \\log y_i^* + \\alpha(y,y^*) \\right\\|^2\n\\]\n\\[\n\\alpha(y,y^*) = \\frac{1}{n} \\sum_i \\left(\\log y_i^* - \\log y_i\\right)\n\\]\nImage-Based 3D Object Modeling: Object-centric 3D: Supervised Learning\nInput Image \\(\\to\\) CNN \\(\\to\\) Predicted 3D \\(\\leftrightarrow\\) Ground-truth 3D\nA caricature recipe for learning:\n\nStep 0: Decide on model and objectives\nStep 1: Collect training data (lots of [image, 3D] pairs) — not easy to do\nStep 2: Learn a predictor\nStep 3: Evaluate the predictor\nUse the predictor!",
     "crumbs": [
       "Notes",
       "Advanced Computer Graphics",
