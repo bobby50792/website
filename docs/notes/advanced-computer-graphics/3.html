@@ -963,7 +963,28 @@ window.Quarto = {
 
 <section id="geometric-datasets" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="geometric-datasets"><span class="header-section-number">3.1</span> Geometric Datasets</h2>
-<p><a href="https://wordnet.princeton.edu/">WordNet</a> (semantic category), <a href="https://www.image-net.org/">ImageNet</a> (semantic category images), <a href="https://huggingface.co/ShapeNet">ShapeNet</a> (rich in attributes).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://wordnet.princeton.edu/" class="text-nowrap">WordNet</a></td>
+<td>Semantic categories</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.image-net.org/" class="text-nowrap">ImageNet</a></td>
+<td>Images organized by semantic category</td>
+</tr>
+<tr class="odd">
+<td><a href="https://huggingface.co/ShapeNet" class="text-nowrap">ShapeNet</a></td>
+<td>Richly annotated 3D shapes</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Other 3D Object and Scene Datasets:</strong></p>
 <ul>
 <li><a href="http://redwood-data.org/3dscan/">A Large Dataset of Object Scans</a> (<a href="https://arxiv.org/abs/1602.02481">paper</a>)</li>
@@ -1000,18 +1021,17 @@ window.Quarto = {
 <li><a href="https://svl.stanford.edu/igibson/">iGibson</a></li>
 <li><a href="https://sapien.ucsd.edu/">SAPIEN: A SimulAted Part-Based Interactive ENvironment</a></li>
 </ul>
-<p><strong>AI+Geometry:</strong></p>
+<p><strong>AI + Geometry:</strong> Let <span class="math inline">\(S\)</span> denote a shape and <span class="math inline">\(c\)</span> a label or condition.</p>
 <ul>
-<li><p><span class="math inline">\(S\)</span> — Shape, <span class="math inline">\(c\)</span> — label or condition</p></li>
-<li><p><span class="math inline">\(P(c \mid S)\)</span> — Shape analysis</p>
+<li><p><strong>Shape analysis — <span class="math inline">\(P(c \mid S)\)</span>:</strong></p>
 <ul>
 <li>Learning shape descriptors</li>
 <li>Shape classification, segmentation, view estimation, etc.</li>
 </ul></li>
-<li><p><span class="math inline">\(P(S)\)</span> or <span class="math inline">\(P(S \mid c)\)</span> — Shape synthesis</p>
+<li><p><strong>Shape synthesis — <span class="math inline">\(P(S)\)</span> or <span class="math inline">\(P(S \mid c)\)</span>:</strong></p>
 <ul>
 <li>Learning (conditional) shape priors</li>
-<li>Shape generation, completion, &amp; reconstruction</li>
+<li>Shape generation, completion, and reconstruction</li>
 </ul></li>
 </ul>
 </section>
@@ -1019,20 +1039,29 @@ window.Quarto = {
 <h2 data-number="3.2" class="anchored" data-anchor-id="data-driven-shape-analysis"><span class="header-section-number">3.2</span> Data-Driven Shape Analysis</h2>
 <p><strong>Multi-View Representations:</strong></p>
 <ul>
-<li><p><span class="math inline">\(\mathrm{CNN}_1\)</span>: a ConvNet extracting image features</p></li>
-<li><p><span class="math inline">\(\mathrm{CNN}_2\)</span>: a second ConvNet producing shape descriptors</p></li>
-<li><p>Need projection</p></li>
+<li>Projection is required.</li>
+<li><span class="math inline">\(\mathrm{CNN}_1\)</span>: a ConvNet extracting image features</li>
+<li><span class="math inline">\(\mathrm{CNN}_2\)</span>: a second ConvNet producing shape descriptors</li>
 </ul>
 <p><strong>3D CNN on Volumetric Data:</strong></p>
-<p>Information loss in voxelization.</p>
 <ul>
-<li><p>Learn to Project (Sparsity of 3D Shapes, Store the sparse surface signals)</p></li>
-<li><p>Sparse Convolution: output feature <span class="math inline">\(+=\)</span> input feature <span class="math inline">\(\times\)</span> kernel</p></li>
+<li><strong>Voxelization:</strong> Information loss.</li>
+<li><strong>Learn to project:</strong> Exploit the sparsity of 3D shapes and store sparse surface signals.</li>
+<li><strong>Sparse convolution:</strong> Output feature <span class="math inline">\(\mathrel{+}=\)</span> input feature <span class="math inline">\(\times\)</span> kernel.</li>
 </ul>
-<p><strong>Octree: Recursively Partition the Space:</strong> Each internal node has exactly eight children. Use hash tables to store the octree structure.</p>
-<p><strong>PointNet: First Learning Tool for Point Clouds:</strong> - End-to-end learning for irregular point data - Unified framework for various tasks - Unordered input (Construct symmetric functions by neural networks)</p>
-<p><strong>Limitation of PointNet:</strong> - No local context for each point - Global feature depends on absolute coordinate. Hard to generalize to unseen scene configurations</p>
-<p><strong>PointNet++:</strong> Recursively apply pointnet at local regions.</p>
+<p><strong>Octree:</strong> Recursively partition space. Each internal node has exactly eight children; hash tables store the octree structure.</p>
+<p><strong>PointNet:</strong> The first learning tool for point clouds.</p>
+<ul>
+<li>End-to-end learning for irregular point data</li>
+<li>Unified framework for various tasks</li>
+<li>Unordered input: construct symmetric functions using neural networks</li>
+</ul>
+<p><strong>Limitations of PointNet:</strong></p>
+<ul>
+<li>No local context for each point</li>
+<li>Global features depend on absolute coordinates, making it hard to generalize to unseen scene configurations</li>
+</ul>
+<p><strong>PointNet++:</strong> Recursively apply PointNet to local regions.</p>
 <ul>
 <li>Hierarchical feature learning</li>
 <li>Local translation invariance</li>
@@ -1042,45 +1071,51 @@ window.Quarto = {
 <section id="data-driven-shape-synthesis" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="data-driven-shape-synthesis"><span class="header-section-number">3.3</span> Data-Driven Shape Synthesis</h2>
 <p><strong>Single-View Conditioned 3D Modeling:</strong> A canonical problem.</p>
-<p><strong>The first vision thesis: Model-based fitting:</strong></p>
+<p><strong>Model-Based Fitting (the first vision thesis):</strong></p>
 <ul>
 <li>Fit predefined 3D models to image features.</li>
 <li>Limited by the expressiveness of simple geometric models.</li>
 </ul>
-<p><strong>Data-driven Modeling: A modern view:</strong></p>
+<p><strong>Data-Driven Modeling (a modern view):</strong></p>
 <ul>
 <li>Learn image-to-3D mappings from large datasets using neural networks.</li>
 <li>Reduce explicit geometric reasoning, though it remains helpful.</li>
 </ul>
-<p><strong>2D to 2.5D: a Data-Driven Approach:</strong></p>
-<p>Input Image <span class="math inline">\(\to\)</span> Convolutional Network <span class="math inline">\(\to\)</span> Predicted Depth</p>
-<p>Compare the predicted depth with the ground-truth depth (GT Depth) using the loss:</p>
+<p><strong>2D to 2.5D — Depth Prediction:</strong></p>
+<p>Input image <span class="math inline">\(\to\)</span> convolutional network <span class="math inline">\(\to\)</span> predicted depth.</p>
+<p>Compare predicted depth <span class="math inline">\(y\)</span> with ground-truth depth <span class="math inline">\(y^*\)</span>:</p>
+<p><strong>Squared error:</strong></p>
 <p><span class="math display">\[
-L(y, y^*) = \sum_i \|y_i - y_i^*\|^2
+L(y, y^*) = \sum_i \|y_i - y_i^*\|^2.
 \]</span></p>
-<p>Or</p>
+<p><strong>Log-space loss:</strong> With <span class="math inline">\(\alpha = \alpha(y, y^*)\)</span>,</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Log-space loss formula">
 <p><span class="math display">\[
-L(y,y^*) = \sum_i \left\| \log y_i - \log y_i^* + \alpha(y,y^*) \right\|^2
+L(y, y^*) = \sum_i
+\left\|\log y_i - \log y_i^* + \alpha\right\|^2,
 \]</span></p>
+</div>
+<p>where</p>
 <p><span class="math display">\[
-\alpha(y,y^*) = \frac{1}{n} \sum_i \left(\log y_i^* - \log y_i\right)
+\alpha = \frac{1}{n}
+\sum_i \left(\log y_i^* - \log y_i\right).
 \]</span></p>
-<p><strong>Image-Based 3D Object Modeling:</strong> Object-centric 3D: Supervised Learning</p>
-<p>Input Image <span class="math inline">\(\to\)</span> CNN <span class="math inline">\(\to\)</span> Predicted 3D <span class="math inline">\(\leftrightarrow\)</span> Ground-truth 3D</p>
-<p>A caricature recipe for learning:</p>
-<ul>
-<li>Step 0: Decide on model and objectives</li>
-<li><strong>Step 1: Collect training data (lots of [image, 3D] pairs)</strong> — not easy to do</li>
-<li>Step 2: Learn a predictor</li>
-<li>Step 3: Evaluate the predictor</li>
-<li>Use the predictor!</li>
-</ul>
+<p><strong>Image-Based 3D Object Modeling:</strong> Object-centric, supervised 3D learning.</p>
+<p>Input image <span class="math inline">\(\to\)</span> CNN <span class="math inline">\(\to\)</span> predicted 3D; compare with ground-truth 3D.</p>
+<p><strong>Learning Workflow:</strong></p>
+<ol start="0" type="1">
+<li>Decide on the model and objectives.</li>
+<li><strong>Collect training data:</strong> lots of [image, 3D] pairs — not easy to obtain.</li>
+<li>Learn a predictor.</li>
+<li>Evaluate the predictor.</li>
+<li>Use the predictor.</li>
+</ol>
 <p><strong>Learning to Predict Volumetric 3D:</strong></p>
 <ul>
-<li>2D Encoder: Image to latent code.</li>
-<li>3D Decoder: Latent code to <span class="math inline">\(D^3\)</span> volume.</li>
-<li>Loss: Compare the predicted 3D volume with the ground-truth 3D volume.</li>
-<li>Training data: Renderings of CAD models on random backgrounds (helps transfer to real images)</li>
+<li><strong>2D encoder:</strong> Image <span class="math inline">\(\to\)</span> latent code.</li>
+<li><strong>3D decoder:</strong> Latent code <span class="math inline">\(\to\)</span> <span class="math inline">\(D^3\)</span> volume.</li>
+<li><strong>Loss:</strong> Compare the predicted and ground-truth 3D volumes.</li>
+<li><strong>Training data:</strong> Renderings of CAD models on random backgrounds, helping transfer to real images.</li>
 </ul>
 <p><strong>Implicit Volumetric Representation:</strong></p>
 <ul>
@@ -1088,20 +1123,23 @@ L(y,y^*) = \sum_i \left\| \log y_i - \log y_i^* + \alpha(y,y^*) \right\|^2
 <li>Given a latent code <span class="math inline">\(c\)</span> and an arbitrary 3D query point <span class="math inline">\(p = (x,y,z)\)</span>, predict the probability that the point lies inside the object.</li>
 </ul>
 <p><strong>Learning to Predict Point Clouds:</strong></p>
-<p>Latent vector to a fixed size point cloud</p>
+<p>Latent vector <span class="math inline">\(\to\)</span> fixed-size point cloud. Compare two point sets with the <strong>Chamfer distance</strong>:</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Chamfer distance formula">
 <p><span class="math display">\[
-d_{CD}(S_1, S_2) =
-\sum_{x \in S_1} \min_{y \in S_2} \|x-y\|_2^2
-+
-\sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2
+\begin{aligned}
+d_{\mathrm{CD}}(S_1, S_2)
+&amp;= \sum_{x \in S_1} \min_{y \in S_2} \|x-y\|_2^2 \\
+&amp;\quad + \sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2.
+\end{aligned}
 \]</span></p>
+</div>
 <p><strong>Learning to Predict Parametric Point Clouds:</strong></p>
-<p>Latent vector and planar point generated 3D point</p>
-<p><strong>Learning to Predict Meshes &amp; Learning to Deform Meshes:</strong></p>
-<p><strong>The advantages of using meshes:</strong></p>
+<p>Latent vector + planar point <span class="math inline">\(\to\)</span> generated 3D point.</p>
+<p><strong>Learning to Predict and Deform Meshes:</strong></p>
+<p>Advantages of using meshes:</p>
 <ul>
-<li><p>Smoothness objectives respect connectivity (Laplacian Smoothness and Normal Consistency)</p></li>
-<li><p>Can sample varying number of points</p></li>
+<li>Smoothness objectives respect connectivity: Laplacian smoothness and normal consistency.</li>
+<li>Can sample a varying number of points.</li>
 </ul>
 
 
