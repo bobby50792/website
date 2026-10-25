@@ -7,3 +7,26 @@ number-offset: [4]
 crossref:
   chapters: true
 ---
+
+## Display
+
+An image is a **2D array of pixel colors**. Display hardware converts these values into visible light.
+
+**Cathode Ray Tube (CRT):** An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen. Beam intensity controls brightness. Applications include oscilloscopes and traditional televisions.
+
+**Raster Scan:** The beam sweeps across the screen line by line while its intensity is modulated. **Interlaced scanning** alternates odd and even lines in successive fields.
+
+**Frame Buffer:** Memory storing the color of each pixel. For analog CRT displays, **DACs (Digital-to-Analog Converters)** convert digital RGB values into analog signals.
+
+**Flat-Panel Displays:**
+
+| Technology | Principle |
+|---|---|
+| **LCD** | Liquid crystals change light polarization; polarizers control how much backlight passes through. Partial rotation produces intermediate brightness levels. |
+| **OLED** | Organic light-emitting materials produce their own light. |
+| **LED array** | Individually controlled LEDs form an image. |
+| **E-Ink** | Electric fields move charged black and white particles to change the visible color. |
+
+## Rasterizing a triangle
+
+Triangles - Fundamental Shape Primitives
