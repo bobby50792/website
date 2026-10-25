@@ -7,12 +7,3 @@ search: true
 ---
 
 本界面梳理了**一元微积分**相关知识, 希望对你能有所启发。
-
-## Chapters
-
-- [Real Numbers and Limits of Sequences](1.qmd)
-- [Continuity of Functions](2.qmd)
-- [Derivatives and Differentials of Functions](3.qmd)
-- [Indefinite Integrals](4.qmd)
-- [Definite Integral](5.qmd)
-- [Ordinary Differential Equations](6.qmd)
