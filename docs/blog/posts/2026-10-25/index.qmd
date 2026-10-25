@@ -1,5 +1,5 @@
 ---
-title: "Tower Defense：我的 Unity 塔防游戏"
+title: "Tower Defense：Unity 塔防游戏"
 subtitle: "建造、收集资源，守住下一波进攻。"
 home-title: "Tower Defense"
 home-description: "A small Unity tower defense game, playable right in the browser."

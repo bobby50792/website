@@ -75,7 +75,73 @@ crossref:
 
 Information loss in voxelization.
 
-- Learn to Project
+- Learn to Project (Sparsity of 3D Shapes, Store the sparse surface signals)
+
+- Sparse Convolution: output feature $+=$ input feature $\times$ kernel
+
+
+**Octree: Recursively Partition the Space:** Each internal node has exactly eight children. Use hash tables to store the octree structure.
+
+**PointNet: First Learning Tool for Point Clouds:** 
+- End-to-end learning for irregular point data
+- Unified framework for various tasks
+- Unordered input (Construct symmetric functions by neural networks)
+
+**Limitation of PointNet:** 
+- No local context for each point
+- Global feature depends on absolute coordinate. Hard to generalize to unseen scene configurations
+
+
+**PointNet++:** Recursively apply pointnet at local regions.
+
+- Hierarchical feature learning
+- Local translation invariance
+
+**Monte Carlo Convolution:** A method for performing convolution on point clouds using Monte Carlo sampling.
 
 ## Data-Driven Shape Synthesis
 
+**Single-View Conditioned 3D Modeling:** A canonical problem.
+
+
+**The first vision thesis: Model-based fitting:**
+
+- Fit predefined 3D models to image features.
+- Limited by the expressiveness of simple geometric models.
+
+**Data-driven Modeling: A modern view:**
+
+- Learn image-to-3D mappings from large datasets using neural networks.
+- Reduce explicit geometric reasoning, though it remains helpful.
+
+**2D to 2.5D: a Data-Driven Approach:**
+
+Input Image $\to$ Convolutional Network $\to$ Predicted Depth
+
+Compare the predicted depth with the ground-truth depth (GT Depth) using the loss:
+
+$$
+L(y, y^*) = \sum_i \|y_i - y_i^*\|^2
+$$
+
+Or 
+
+$$
+L(y,y^*) = \sum_i \left\| \log y_i - \log y_i^* + \alpha(y,y^*) \right\|^2
+$$
+
+$$
+\alpha(y,y^*) = \frac{1}{n} \sum_i \left(\log y_i^* - \log y_i\right)
+$$
+
+**Image-Based 3D Object Modeling:** Object-centric 3D: Supervised Learning
+
+Input Image $\to$ CNN $\to$ Predicted 3D $\leftrightarrow$ Ground-truth 3D
+
+A caricature recipe for learning:
+
+- Step 0: Decide on model and objectives
+- **Step 1: Collect training data (lots of [image, 3D] pairs)** — not easy to do
+- Step 2: Learn a predictor
+- Step 3: Evaluate the predictor
+- Use the predictor!
