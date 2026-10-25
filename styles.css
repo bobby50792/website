@@ -386,14 +386,15 @@ span.color-box {
 
 /* Shared presentation for Quarto exercise blocks. */
 #quarto-document-content .exercise-set {
-  max-inline-size: 72ch;
-  margin-inline: auto;
+  inline-size: 100%;
+  margin-inline: 0;
   line-height: 1.7;
 }
 
 #quarto-document-content .exercise {
   min-inline-size: 0;
   margin-block: 1.25rem;
+  margin-inline: 0;
   padding: clamp(1rem, 2.5vw, 1.5rem);
   border: 1px solid var(--bs-border-color);
   border-inline-start: 3px solid var(--bs-link-color);
@@ -432,7 +433,11 @@ span.color-box {
   max-inline-size: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-block: .35rem;
+  padding-block: .15rem;
+}
+
+#quarto-document-content .exercise .math.display mjx-container[display="true"] {
+  margin-block: .5rem;
 }
 
 @media (max-width: 575.98px) {
