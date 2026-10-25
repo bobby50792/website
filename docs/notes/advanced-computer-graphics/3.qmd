@@ -10,9 +10,11 @@ crossref:
 
 ## Geometric Datasets
 
-[WordNet](https://wordnet.princeton.edu/) (semantic category),
-[ImageNet](https://www.image-net.org/) (semantic category images),
-[ShapeNet](https://huggingface.co/ShapeNet) (rich in attributes).
+| Dataset | Focus |
+|---|---|
+| [WordNet](https://wordnet.princeton.edu/){.text-nowrap} | Semantic categories |
+| [ImageNet](https://www.image-net.org/){.text-nowrap} | Images organized by semantic category |
+| [ShapeNet](https://huggingface.co/ShapeNet){.text-nowrap} | Richly annotated 3D shapes |
 
 **Other 3D Object and Scene Datasets:**
 
@@ -50,49 +52,46 @@ crossref:
 - [iGibson](https://svl.stanford.edu/igibson/)
 - [SAPIEN: A SimulAted Part-Based Interactive ENvironment](https://sapien.ucsd.edu/)
 
-**AI+Geometry:**
+**AI + Geometry:** Let $S$ denote a shape and $c$ a label or condition.
 
-- $S$ — Shape, $c$ — label or condition
+- **Shape analysis — $P(c \mid S)$:**
 
-- $P(c \mid S)$ — Shape analysis
   - Learning shape descriptors
   - Shape classification, segmentation, view estimation, etc.
 
-- $P(S)$ or $P(S \mid c)$ — Shape synthesis
+- **Shape synthesis — $P(S)$ or $P(S \mid c)$:**
+
   - Learning (conditional) shape priors
-  - Shape generation, completion, & reconstruction
+  - Shape generation, completion, and reconstruction
 
 ## Data-Driven Shape Analysis
 
-**Multi-View Representations:** 
+**Multi-View Representations:**
 
+- Projection is required.
 - $\mathrm{CNN}_1$: a ConvNet extracting image features
 - $\mathrm{CNN}_2$: a second ConvNet producing shape descriptors
 
-- Need projection
-
 **3D CNN on Volumetric Data:**
 
-Information loss in voxelization.
+- **Voxelization:** Information loss.
+- **Learn to project:** Exploit the sparsity of 3D shapes and store sparse surface signals.
+- **Sparse convolution:** Output feature $\mathrel{+}=$ input feature $\times$ kernel.
 
-- Learn to Project (Sparsity of 3D Shapes, Store the sparse surface signals)
+**Octree:** Recursively partition space. Each internal node has exactly eight children; hash tables store the octree structure.
 
-- Sparse Convolution: output feature $+=$ input feature $\times$ kernel
+**PointNet:** The first learning tool for point clouds.
 
-
-**Octree: Recursively Partition the Space:** Each internal node has exactly eight children. Use hash tables to store the octree structure.
-
-**PointNet: First Learning Tool for Point Clouds:** 
 - End-to-end learning for irregular point data
 - Unified framework for various tasks
-- Unordered input (Construct symmetric functions by neural networks)
+- Unordered input: construct symmetric functions using neural networks
 
-**Limitation of PointNet:** 
+**Limitations of PointNet:**
+
 - No local context for each point
-- Global feature depends on absolute coordinate. Hard to generalize to unseen scene configurations
+- Global features depend on absolute coordinates, making it hard to generalize to unseen scene configurations
 
-
-**PointNet++:** Recursively apply pointnet at local regions.
+**PointNet++:** Recursively apply PointNet to local regions.
 
 - Hierarchical feature learning
 - Local translation invariance
@@ -103,82 +102,89 @@ Information loss in voxelization.
 
 **Single-View Conditioned 3D Modeling:** A canonical problem.
 
-
-**The first vision thesis: Model-based fitting:**
+**Model-Based Fitting (the first vision thesis):**
 
 - Fit predefined 3D models to image features.
 - Limited by the expressiveness of simple geometric models.
 
-**Data-driven Modeling: A modern view:**
+**Data-Driven Modeling (a modern view):**
 
 - Learn image-to-3D mappings from large datasets using neural networks.
 - Reduce explicit geometric reasoning, though it remains helpful.
 
-**2D to 2.5D: a Data-Driven Approach:**
+**2D to 2.5D — Depth Prediction:**
 
-Input Image $\to$ Convolutional Network $\to$ Predicted Depth
+Input image $\to$ convolutional network $\to$ predicted depth.
 
-Compare the predicted depth with the ground-truth depth (GT Depth) using the loss:
+Compare predicted depth $y$ with ground-truth depth $y^*$:
 
-$$
-L(y, y^*) = \sum_i \|y_i - y_i^*\|^2
-$$
-
-Or 
+**Squared error:**
 
 $$
-L(y,y^*) = \sum_i \left\| \log y_i - \log y_i^* + \alpha(y,y^*) \right\|^2
+L(y, y^*) = \sum_i \|y_i - y_i^*\|^2.
 $$
 
+**Log-space loss:** With $\alpha = \alpha(y, y^*)$,
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Log-space loss formula"}
 $$
-\alpha(y,y^*) = \frac{1}{n} \sum_i \left(\log y_i^* - \log y_i\right)
+L(y, y^*) = \sum_i
+\left\|\log y_i - \log y_i^* + \alpha\right\|^2,
+$$
+:::
+
+where
+
+$$
+\alpha = \frac{1}{n}
+\sum_i \left(\log y_i^* - \log y_i\right).
 $$
 
-**Image-Based 3D Object Modeling:** Object-centric 3D: Supervised Learning
+**Image-Based 3D Object Modeling:** Object-centric, supervised 3D learning.
 
-Input Image $\to$ CNN $\to$ Predicted 3D $\leftrightarrow$ Ground-truth 3D
+Input image $\to$ CNN $\to$ predicted 3D; compare with ground-truth 3D.
 
-A caricature recipe for learning:
+**Learning Workflow:**
 
-- Step 0: Decide on model and objectives
-- **Step 1: Collect training data (lots of [image, 3D] pairs)** — not easy to do
-- Step 2: Learn a predictor
-- Step 3: Evaluate the predictor
-- Use the predictor!
-
+0. Decide on the model and objectives.
+1. **Collect training data:** lots of [image, 3D] pairs — not easy to obtain.
+2. Learn a predictor.
+3. Evaluate the predictor.
+4. Use the predictor.
 
 **Learning to Predict Volumetric 3D:**
 
-- 2D Encoder: Image to latent code.
-- 3D Decoder: Latent code to $D^3$ volume.
-- Loss: Compare the predicted 3D volume with the ground-truth 3D volume.
-- Training data: Renderings of CAD models on random backgrounds (helps transfer to real images)
+- **2D encoder:** Image $\to$ latent code.
+- **3D decoder:** Latent code $\to$ $D^3$ volume.
+- **Loss:** Compare the predicted and ground-truth 3D volumes.
+- **Training data:** Renderings of CAD models on random backgrounds, helping transfer to real images.
 
-**Implicit Volumetric Representation:** 
+**Implicit Volumetric Representation:**
 
 - Instead of explicitly predicting a 3D voxel grid, learn a continuous occupancy function.
 - Given a latent code $c$ and an arbitrary 3D query point $p = (x,y,z)$, predict the probability that the point lies inside the object.
 
+**Learning to Predict Point Clouds:**
 
-**Learning to Predict Point Clouds:** 
+Latent vector $\to$ fixed-size point cloud. Compare two point sets with the **Chamfer distance**:
 
-Latent vector to a fixed size point cloud
-
+::: {.overflow-auto tabindex="0" role="region" aria-label="Chamfer distance formula"}
 $$
-d_{CD}(S_1, S_2) =
-\sum_{x \in S_1} \min_{y \in S_2} \|x-y\|_2^2
-+
-\sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2
+\begin{aligned}
+d_{\mathrm{CD}}(S_1, S_2)
+&= \sum_{x \in S_1} \min_{y \in S_2} \|x-y\|_2^2 \\
+&\quad + \sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2.
+\end{aligned}
 $$
+:::
 
 **Learning to Predict Parametric Point Clouds:**
 
-Latent vector and planar point generated 3D point
+Latent vector + planar point $\to$ generated 3D point.
 
-**Learning to Predict Meshes & Learning to Deform Meshes:**
+**Learning to Predict and Deform Meshes:**
 
-**The advantages of using meshes:**
+Advantages of using meshes:
 
-- Smoothness objectives respect connectivity (Laplacian Smoothness and Normal Consistency)
-
-- Can sample varying number of points
+- Smoothness objectives respect connectivity: Laplacian smoothness and normal consistency.
+- Can sample a varying number of points.
