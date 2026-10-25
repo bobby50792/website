@@ -6,6 +6,7 @@ home-description: "How to express real requirements clearly and use AI to build 
 date: 2026-05-29
 categories:
   - AI
+  - Projects
 image: cover.png
 ---
 
