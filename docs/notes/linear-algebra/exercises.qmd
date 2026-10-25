@@ -10,8 +10,6 @@ crossref:
 
 :::: {.exercise-set}
 
-## Linear Systems and Rank
-
 ::: {#exr-la-structured-system name="A Structured Homogeneous System"}
 
 Consider the homogeneous linear system
@@ -101,8 +99,6 @@ $$
 where $I_r$ is the $r\times r$ identity matrix and each $0$ denotes a zero matrix of the appropriate size.
 
 :::
-
-## Eigenvalues and Canonical Forms
 
 ::: {#exr-la-involution name="An Involution"}
 
