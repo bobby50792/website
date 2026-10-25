@@ -1,0 +1,22 @@
+---
+title: "Linear Algebra"
+output-file: index.html
+page-layout: article
+search: true
+home-order: 1.5
+home-symbol: "L"
+home-description: "Vector spaces, linear maps, determinants, spectral theory, and canonical forms."
+---
+
+Definitions, theorems, and exercises from the first-year linear algebra course.
+
+## Chapters
+
+- [Vector Spaces](1.qmd)
+- [Linear Transformations and Matrices](2.qmd)
+- [Elementary Matrix Operations and Systems of Linear Equations](3.qmd)
+- [Determinants](4.qmd)
+- [Diagonalization](5.qmd)
+- [Inner Product Spaces](6.qmd)
+- [Canonical Forms](7.qmd)
+- [Exercises](exercises.qmd)

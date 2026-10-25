@@ -5,8 +5,116 @@ search: true
 number-offset: [6]
 
 crossref:
-  chapters: true      
+  chapters: true
 
 ---
 
-## Hello
+## Characterizing Collisions
+
+In a collision, the ratio of the magnitudes of the final and initial *relative velocities*, $v_B$ and $v_h$, is called the coefficient of restitution and denoted by the symbol $e$,
+
+$$
+\begin{aligned}
+e = \frac{v_B}{v_h}
+\end{aligned}
+$$
+
+Considering the conservation of momentum, the kinetic energy of the center of mass of the system is constant during the collision. Thus, from Koenig theorem, the change in kinetic energy of the system during the collision is given by
+
+$$
+\begin{aligned}
+\Delta K = \frac{1}{2}\mu(v_B^2 - v_h^2) = \frac{1}{2}\mu(e^2 - 1)v_h^2,
+\end{aligned}
+$$
+
+where $\mu = \frac{m_1 m_2}{m_1 + m_2}$ is the reduced mass of the system. The change in kinetic energy depends on the value of $e$ as follows.
+
+If the magnitude of the relative velocity does not change during a collision, indicating $e = 1$, then the change in kinetic energy is zero. Collisions in which there is no change in kinetic energy are called **elastic collisions**,
+
+$$
+\begin{aligned}
+\Delta K = 0, \text{elastic collision.}
+\end{aligned}
+$$
+
+If the magnitude of the final relative velocity is less than the magnitude of the initial relative velocity, indicating $e < 1$, then the change in kinetic energy is negative. Collisions in which the kinetic energy decreases are called **inelastic collisions**,
+
+$$
+\begin{aligned}
+\Delta K < 0, \text{inelastic collision.}
+\end{aligned}
+$$
+
+If the two objects stick together after the collision, then the relative final velocity is zero, indicating $e = 0$. Such collisions are called **totally inelastic collisions**. The change in kinetic energy is
+
+$$
+\begin{aligned}
+\Delta K = -\frac{1}{2}\mu v_h^2 = -\frac{1}{2} \frac{m_1 m_2}{m_1 + m_2} v_h^2, \text{totally inelastic collision.}
+\end{aligned}
+$$
+
+If the magnitude of the final relative velocity is greater than the magnitude of the initial relative velocity, indicating $e > 1$, then the change in kinetic energy is positive. Collisions in which the kinetic energy increases are called **superelastic collisions**,
+
+$$
+\begin{aligned}
+\Delta K > 0, \text{superelastic collision.}
+\end{aligned}
+$$
+
+## Serveral Pepresentative Scenarios and Corresponding Examples
+
+::: {.callout-tip collapse="true"}
+
+## One-Dimensional Elastic Collision Between Two Objects
+
+In the CM frame, the final $x$-components of the velocities are given by Eq. (30). The final $x$-components of the velocities in the laboratory reference frame are then given by
+
+$$
+\begin{aligned}
+v_{1x,f} &= v'_{1x,f} + v_{x,cm} \\
+&= (v_{2x,i} - v_{1x,i}) \frac{m_2}{m_1 + m_2} + \frac{m_1 v_{1x,i} + m_2 v_{2x,i}}{m_1 + m_2} \\
+&= v_{1x,i} \frac{m_1 - m_2}{m_1 + m_2} + v_{2x,i} \frac{2m_2}{m_1 + m_2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+v_{2x,f} &= v'_{2x,f} + v_{x,cm} \\
+&= (v_{1x,i} - v_{2x,i}) \frac{m_1}{m_1 + m_2} + \frac{m_1 v_{1x,i} + m_2 v_{2x,i}}{m_1 + m_2} \\
+&= v_{2x,i} \frac{m_2 - m_1}{m_1 + m_2} + v_{1x,i} \frac{2m_1}{m_1 + m_2}
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Two-Dimensional Elastic Collision Between Two Objects
+
+Conserved independently along $x$ and $y$ axes.
+$$
+\begin{aligned}
+m_1 \vec{v}_{1,i} + m_2 \vec{v}_{2,i} = m_1 \vec{v}_{1,f} + m_2 \vec{v}_{2,f}
+\end{aligned}
+$$
+
+Total scalar sum is conserved. Does not hold for individual axes.
+$$
+\begin{aligned}
+\frac{1}{2}m_1 v_{1,i}^2 + \frac{1}{2}m_2 v_{2,i}^2 = \frac{1}{2}m_1 v_{1,f}^2 + \frac{1}{2}m_2 v_{2,f}^2
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{v}_{cm} = \frac{m_1 \vec{v}_{1,i} + m_2 \vec{v}_{2,i}}{m_1 + m_2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{v}_{lab} = \vec{v}' + \vec{v}_{cm}
+\end{aligned}
+$$
+
+:::

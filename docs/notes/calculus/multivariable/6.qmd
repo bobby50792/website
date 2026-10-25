@@ -1,0 +1,135 @@
+---
+title: "Integration of Functions on Curves and Surfaces"
+page-layout: article
+search: true
+number-offset: [6]
+
+crossref:
+  chapters: true
+---
+
+## Line Integrals of the First Kind
+
+::: {.callout-tip collapse="true"}
+
+## Arc Length of a Curve
+
+A **regular $\mathscr{C}^1$ parameterized curve** $\mathbf{x} : [a, b] \to \mathbb{R}^m$ is defined if it is injective and, for any $t \in [a, b]$, $\|\mathbf{x}'(t)\| > 0$. We define
+
+$$
+\begin{aligned}
+\int_{[a,b]} \|\mathbf{x}'(t)\| dt = \int_{a}^{b} \|\mathbf{x}'(t)\| dt.
+\end{aligned}
+$$
+
+as the **arc length** of the regular $\mathscr{C}^1$ parameterized curve $\mathbf{x} : [a, b] \to \mathbb{R}^m$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Integration of a Function Along a Curve
+
+Let $f : \gamma \to \mathbb{R}$ be a continuous function, and let $\mathbf{x}(t)$ be any $\mathscr{C}^1$ parameterization of the curve $\gamma$. Denote
+
+$$
+\begin{aligned}
+\int_{\gamma} f dl = \int_{[a,b]} f(\mathbf{x}(t))\|\mathbf{x}'(t)\| dt,
+\end{aligned}
+$$
+
+which is called the **integral of $f$ along $\gamma$**. From the chain rule and the change of variables formula for integration, it is known that the value of the above integral is independent of the choice of the parameterization form of the curve $\gamma$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Arc Length in Different Coordinate Systems
+
+In the Euclidean rectangular coordinate system:
+
+$$
+\begin{aligned}
+dl = \|\mathbf{x}'(t)\| dt = \sqrt{\langle \mathbf{x}'(t), \mathbf{x}'(t) \rangle} dt = \sqrt{\sum_{k=1}^{m} x'_k(t)^2} dt = \sqrt{\sum_{k=1}^{m} (dx_k)^2}
+\end{aligned}
+$$
+
+If we consider a coordinate transformation $\mathbf{x} = \varphi(\mathbf{u})$, then:
+
+$$
+\begin{aligned}
+dl &= \|\mathbf{x}'(t)\| dt = \sqrt{\langle \mathbf{x}'(t), \mathbf{x}'(t) \rangle} dt \\
+&= \sqrt{\langle \partial \varphi(\mathbf{u}(t)) \mathbf{u}'(t), \partial \varphi(\mathbf{u}(t)) \mathbf{u}'(t) \rangle} dt \\
+&= \sqrt{\left\langle \sum_{i=1}^{m} \frac{\partial \mathbf{x}}{\partial u_i}(\mathbf{u}(t)) u'_i(t), \sum_{j=1}^{m} \frac{\partial \mathbf{x}}{\partial u_j}(\mathbf{u}(t)) u'_j(t) \right\rangle} dt \\
+&= \sqrt{\sum_{i,j=1}^{m} \left\langle \frac{\partial \mathbf{x}}{\partial u_i}(\mathbf{u}(t)), \frac{\partial \mathbf{x}}{\partial u_j}(\mathbf{u}(t)) \right\rangle du_i du_j} \\
+&= \sqrt{(du_1, \dots, du_m) \left( \left\langle \frac{\partial \mathbf{x}}{\partial u_i}(\mathbf{u}(t)), \frac{\partial \mathbf{x}}{\partial u_j}(\mathbf{u}(t)) \right\rangle \right)_{m \times m} \begin{pmatrix} du_1 \\ \vdots \\ du_m \end{pmatrix}}
+\end{aligned}
+$$
+
+This is a form independent of coordinates and related only to the metric (i.e., the inner product). It is applicable to various coordinate systems $(u_1, \dots, u_m)$. The matrix
+
+$$
+\begin{aligned}
+\left( \left\langle \frac{\partial \mathbf{x}}{\partial u_i}(\mathbf{u}), \frac{\partial \mathbf{x}}{\partial u_j}(\mathbf{u}) \right\rangle \right)_{m \times m}
+\end{aligned}
+$$
+
+is called the **Metric Matrix** or the **Gram Matrix**. In particular, when $\partial \varphi(\mathbf{u})$ is an orthogonal transformation, the metric matrix becomes the identity matrix. Consequently, the infinitesimal arc length in the coordinate system $(u_1, \dots, u_m)$ is equal to the infinitesimal arc length in the coordinate system $(x_1, \dots, x_m)$.
+
+:::
+
+## Surface Integrals of the First Kind on 2D Surfaces
+
+::: {.callout-tip collapse="true"}
+
+## Surface Area Element
+
+A $\mathscr{C}^1$ regular parameterization of a 2D surface $\Sigma$ in $\mathbb{R}^m (m \ge 3)$ is a $\mathscr{C}^1$ injective mapping
+
+$$
+\begin{aligned}
+\mathbf{x} : D \to \mathbb{R}^m, \quad \mathbf{x}(u_1, u_2) = \begin{pmatrix}
+x_1(u_1, u_2) \\
+x_2(u_1, u_2) \\
+\vdots \\
+x_m(u_1, u_2)
+\end{pmatrix}, \quad (u_1, u_2) \in D \subseteq \mathbb{R}^2
+\end{aligned}
+$$
+
+that satisfies the condition that $\frac{\partial(x_1, x_2, \dots, x_m)}{\partial(u_1, u_2)}$ is a full-rank matrix. This means that the vectors $\frac{\partial \mathbf{x}}{\partial u_1}$ and $\frac{\partial \mathbf{x}}{\partial u_2}$ are linearly independent, and they span the tangent space of the surface $\Sigma$ at $\mathbf{x}$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Area of the Surface
+
+Considering $\frac{\partial \mathbf{x}}{\partial u_1} \Delta u_1$ and $\frac{\partial \mathbf{x}}{\partial u_2} \Delta u_2$ as a pair of infinitesimal tangent vectors, let their angle be $\theta$. Then the area of the infinitesimal parallelogram they form is:
+
+$$
+\begin{aligned}
+\Delta \sigma &= \left\| \frac{\partial \mathbf{x}}{\partial u_1} \Delta u_1 \right\| \left\| \frac{\partial \mathbf{x}}{\partial u_2} \Delta u_2 \right\| \sin \theta = \left\| \frac{\partial \mathbf{x}}{\partial u_1} \Delta u_1 \right\| \left\| \frac{\partial \mathbf{x}}{\partial u_2} \Delta u_2 \right\| \sqrt{1 - \cos^2 \theta} \\
+&= \sqrt{ \left\| \frac{\partial \mathbf{x}}{\partial u_1} \Delta u_1 \right\|^2 \left\| \frac{\partial \mathbf{x}}{\partial u_2} \Delta u_2 \right\|^2 - \left\langle \frac{\partial \mathbf{x}}{\partial u_1} \Delta u_1, \frac{\partial \mathbf{x}}{\partial u_2} \Delta u_2 \right\rangle^2 } \\
+&= \sqrt{ \det \left( \left\langle \frac{\partial \mathbf{x}}{\partial u_i}, \frac{\partial \mathbf{x}}{\partial u_j} \right\rangle \right)_{2 \times 2} } \Delta u_1 \Delta u_2 \\
+&= \sqrt{EG - F^2} \Delta u_1 \Delta u_2,
+\end{aligned}
+$$
+
+where
+
+$$
+\begin{aligned}
+E = \left\langle \frac{\partial \mathbf{x}}{\partial u_1}, \frac{\partial \mathbf{x}}{\partial u_1} \right\rangle = \left\| \frac{\partial \mathbf{x}}{\partial u_1} \right\|^2, \quad F = \left\langle \frac{\partial \mathbf{x}}{\partial u_1}, \frac{\partial \mathbf{x}}{\partial u_2} \right\rangle, \quad G = \left\langle \frac{\partial \mathbf{x}}{\partial u_2}, \frac{\partial \mathbf{x}}{\partial u_2} \right\rangle = \left\| \frac{\partial \mathbf{x}}{\partial u_2} \right\|^2.
+\end{aligned}
+$$
+
+We call $d\sigma = \sqrt{EG - F^2} du_1 du_2$ the **surface area element** of $\Sigma$, and define the **area of the surface** $\Sigma$ as:
+
+$$
+\begin{aligned}
+\sigma(\Sigma) = \int_{\Sigma} d\sigma = \int_{D} \sqrt{ \det \left( \left\langle \frac{\partial \mathbf{x}}{\partial u_i}, \frac{\partial \mathbf{x}}{\partial u_j} \right\rangle \right)_{2 \times 2} } du_1 du_2.
+\end{aligned}
+$$
+
+:::

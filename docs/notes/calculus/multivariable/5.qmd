@@ -1,0 +1,331 @@
+---
+title: "Multiple Integrals"
+page-layout: article
+search: true
+number-offset: [5]
+
+crossref:
+  chapters: true
+---
+
+## The Concept of Multiple Integrals
+
+::: {.callout-tip collapse="true"}
+
+## Riemann Integral
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Integral on a Rectangular Region
+
+A subset of $\mathbb{R}^m$ of the form
+$$
+\begin{aligned}
+R &= \{(x^1, x^2, \dots, x^m) \in \mathbb{R}^m \mid a^k \le x^k \le b^k, k=1, 2, \dots, m\} \\
+&= [a^1, b^1] \times [a^2, b^2] \times \dots \times [a^m, b^m]
+\end{aligned}
+$$
+is called an **$m$-dimensional rectangle** in $\mathbb{R}^m$, denoted as
+$$
+\begin{aligned}
+\mu_m(R) := (b^1 - a^1)(b^2 - a^2) \dots (b^m - a^m)
+\end{aligned}
+$$
+which is called the **volume** of $R$. When it does not lead to confusion, we also denote $\mu(R) = \mu_m(R)$.
+
+A collection $\{R_k\}_{k=1}^p$ is called a **partition** $\mathcal{P}$ of the rectangle $R$ if each $R_k$ is an $m$-dimensional rectangle in $\mathbb{R}^m$, and
+$$
+\begin{aligned}
+\bigcup_{k=1}^p R_k = R, \quad \text{int} R_i \cap \text{int} R_j = \emptyset \quad (\text{for any } 1 \le i < j \le p).
+\end{aligned}
+$$
+
+Given a function $f: R \to \mathbb{R}$, for a partition $\mathcal{P} = \{R_k\}_{k=1}^p$ of the rectangle $R$ and a corresponding set of **tagged points** $\xi = \{\xi_k\}_{k=1}^p$ (where each $\xi_k \in R_k$), let
+$$
+\begin{aligned}
+S(f, \mathcal{P}, \xi) = \sum_{k=1}^p f(\xi_k) \mu(R_k)
+\end{aligned}
+$$
+This is called the **Riemann sum** of $f$ on $R$ with respect to the partition $\mathcal{P}$ and the set of tagged points $\xi$.
+
+We say that $f$ is **Riemann integrable** on $R$ if there exists $I \in \mathbb{R}$ such that for any $\epsilon > 0$, there exists $\delta > 0$ such that for any partition $\mathcal{P}$ of $R$, as long as
+$$
+\begin{aligned}
+\|\mathcal{P}\| = \max_{1 \le k \le p} \left( \sup_{x,y \in R_k} \|x - y\| \right) < \delta
+\end{aligned}
+$$
+we have $|S(f, \mathcal{P}, \xi) - I| < \epsilon$ for any set of tagged points $\xi$. At this time, we denote
+$$
+\begin{aligned}
+I = \int_R f(x) d\mu = \int_R f(x) dx = \int_R f(x) dx_1 \dots dx_m,
+\end{aligned}
+$$
+and call it the **Riemann integral** of $f$ on $R$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Darboux Integral
+
+Let $f: R \to \mathbb{R}$ be a bounded function on a rectangle $R$, and $\mathcal{P} = \{R_k\}_{k=1}^p$ be a partition of $R$. Let
+$$
+\begin{aligned}
+\overline{S}(f, \mathcal{P}) = \sum_{k=1}^p \sup_{x \in R_k} f(x) \mu(R_k), \quad \underline{S}(f, \mathcal{P}) = \sum_{k=1}^p \inf_{x \in R_k} f(x) \mu(R_k),
+\end{aligned}
+$$
+which are called the **Darboux upper sum** and **Darboux lower sum** of $f$ on $R$ with respect to the partition $\mathcal{P}$, respectively.
+
+A partition $\mathcal{Q} = \{\tilde{R}_j\}_{j=1}^q$ of $R$ is called a **refinement** of $\mathcal{P} = \{R_k\}_{k=1}^p$ if each rectangle $R_k$ in $\mathcal{P}$ is a union of some rectangles in $\mathcal{Q}$.
+
+It is easy to see that for any two partitions $\mathcal{P}_1, \mathcal{P}_2$ of the rectangle $R$, there exists a **common refinement** denoted by $\mathcal{P}_1 \lor \mathcal{P}_2$, and
+$$
+\begin{aligned}
+\underline{S}(f, \mathcal{P}_1) \le \underline{S}(f, \mathcal{P}_1 \lor \mathcal{P}_2) \le \overline{S}(f, \mathcal{P}_1 \lor \mathcal{P}_2) \le \overline{S}(f, \mathcal{P}_2).
+\end{aligned}
+$$
+
+Let $\mathfrak{P}$ be the set of all possible partitions of the rectangle $R$. We call
+$$
+\begin{aligned}
+\overline{S}(f) = \inf_{\mathcal{P} \in \mathfrak{P}} \overline{S}(f, \mathcal{P}), \quad \underline{S}(f) = \sup_{\mathcal{P} \in \mathfrak{P}} \underline{S}(f, \mathcal{P})
+\end{aligned}
+$$
+the **Darboux upper integral** and **Darboux lower integral** of $f$ on $R$, respectively.
+
+If $\overline{S}(f) = \underline{S}(f)$, then $f$ is said to be **Darboux integrable** on $R$. Their common value is denoted as
+$$
+\begin{aligned}
+I = \int_R f(x) d\mu = \int_R f(x) dx = \int_R f(x) dx_1 \dots dx_m
+\end{aligned}
+$$
+and is called the **Darboux integral** of $f$ on $R$.
+
+:::
+
+::: {#thm-calc2-5-1}
+
+The following conclusions are equivalent:
+
+1. $f$ is Riemann integrable on the rectangle $R$;
+2. $f$ is bounded and Darboux integrable on the rectangle $R$;
+3. $f$ is bounded on the rectangle $R$, and the set of discontinuities of $f$ in $R$ is a set of volume zero (measure zero);
+4. For any $\epsilon > 0$, there exists a partition $\mathcal{P}$ of the rectangle $R$ such that
+$$
+\begin{aligned}
+\overline{S}(f, \mathcal{P}) - \underline{S}(f, \mathcal{P}) < \epsilon.
+\end{aligned}
+$$
+
+If $f$ is Riemann (Darboux) integrable on $R$, then the Riemann integral of $f$ is equal to the Darboux integral of $f$.
+
+:::
+
+::: {#thm-calc2-5-2}
+
+Let $R \subset \mathbb{R}^m$ be an $m$-dimensional rectangle. Let $\mathscr{R}(R)$ be the set of all Riemann integrable functions on $R$, and $\mathscr{C}(R)$ be the set of all continuous functions on $R$. Then:
+
+1. **(Linearity)** $\mathscr{R}(R)$ is a linear space, and $\mathscr{C}(R)$ is a linear subspace of $\mathscr{R}(R)$. Furthermore, for any $f, g \in \mathscr{R}(R)$ and any $\alpha, \beta \in \mathbb{R}$:
+$$
+\begin{aligned}
+\int_R (\alpha f(x) + \beta g(x)) d\mu = \alpha \int_R f(x) d\mu + \beta \int_R g(x) d\mu;
+\end{aligned}
+$$
+
+2. **(Monotonicity)** If $f, g \in \mathscr{R}(R)$ satisfy $f(x) \le g(x)$ for all $x \in R$, then:
+$$
+\begin{aligned}
+\int_R f(x) d\mu \le \int_R g(x) d\mu;
+\end{aligned}
+$$
+
+3. $f \in \mathscr{R}(R)$ if and only if $f_+, f_- \in \mathscr{R}(R)$, where:
+$$
+\begin{aligned}
+f_+(x) &= \max\{f(x), 0\} = \frac{|f(x)| + f(x)}{2}, \\
+f_-(x) &= \max\{-f(x), 0\} = \frac{|f(x)| - f(x)}{2}.
+\end{aligned}
+$$
+Thus $f = f_+ - f_-$ and $|f| = f_+ + f_-$.
+Furthermore:
+$$
+\begin{aligned}
+\left| \int_R f(x) d\mu \right| \le \int_R |f(x)| d\mu;
+\end{aligned}
+$$
+
+4. **(Cauchy-Schwarz Inequality)** For any $f, g \in \mathscr{R}(R)$, it follows that $fg \in \mathscr{R}(R)$, and:
+$$
+\begin{aligned}
+\left| \int_R f(x)g(x) d\mu \right| \le \sqrt{\int_R |f(x)|^2 d\mu \cdot \int_R |g(x)|^2 d\mu};
+\end{aligned}
+$$
+
+5. **(Mean Value Theorem for Integrals)** If $f \in \mathscr{C}(R)$, $g \in \mathscr{R}(R)$, and $g(x) \ge 0$ for all $x \in R$, then there exists $\eta \in R$ such that:
+
+$$
+\begin{aligned}
+\int_R f(x)g(x) d\mu = f(\eta) \int_R g(x) d\mu.
+\end{aligned}
+$$
+
+:::
+
+## Jordan Measurable Sets and Riemann Integrals
+
+::: {.callout-tip collapse="true"}
+
+## Riemann Integrable
+
+Let $D \subset \mathbb{R}^m$ be a non-empty bounded subset. For a function $f : D \to \mathbb{R}$, we choose a rectangle $R \subset \mathbb{R}^m$ that covers $D$ (i.e., $D \subseteq R$), and define
+$$
+\begin{aligned}
+\tilde{f}(x) = \begin{cases} f(x), & x \in D; \\ 0, & x \in R \setminus D, \end{cases}
+\end{aligned}
+$$
+If $\tilde{f}$ is Riemann integrable on $R$, then we say $f$ is **Riemann integrable** on $D$, and denote
+$$
+\begin{aligned}
+\int_D f(x) d\mu = \int_R \tilde{f}(x) d\mu.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Jordan Measurable Set
+
+A set $D \subset \mathbb{R}^m$ is called a **Jordan measurable set** if the boundary set $\partial D$ of $D$ is a set of volume zero.
+
+If $D$ is a bounded Jordan measurable set, we denote
+$$
+\begin{aligned}
+\mu(D) = \int_D 1_D(x) d\mu,
+\end{aligned}
+$$
+which is called the **$m$-dimensional volume** of $D$.
+
+:::
+
+::: {#thm-calc2-5-3}
+
+Let $D_1 \subset \mathbb{R}^m$ be a bounded closed Jordan measurable set, and $a, b : D_1 \to \mathbb{R}$ be continuous functions. Then
+$$
+\begin{aligned}
+D = \{(\mathbf{x}, y) \in \mathbb{R}^{m+1} \mid \mathbf{x} \in D_1, a(\mathbf{x}) \le y \le b(\mathbf{x})\}
+\end{aligned}
+$$
+is a bounded closed Jordan measurable set in $\mathbb{R}^{m+1}$.
+
+:::
+
+::: {#thm-calc2-5-4}
+
+Let $D \subset \mathbb{R}^m$ be a bounded Jordan measurable set. Then:
+
+1. A function $f : D \to \mathbb{R}$ is Riemann integrable if and only if $f$ is bounded and the set of discontinuities of $f$ is a set of volume zero.
+
+2. If $D$ is also a closed set, then all continuous functions on $D$ are Riemann integrable functions.
+
+:::
+
+::: {#thm-calc2-5-5}
+
+If the function $f$ is Riemann integrable on the bounded Jordan measurable sets $D_1$ and $D_2$, and $D_1 \cap D_2 \subseteq \partial D_1 \cup \partial D_2$, then $f$ is also Riemann integrable on $D_1 \cup D_2$, and
+$$
+\begin{aligned}
+\int_{D_1 \cup D_2} f(x) d\mu = \int_{D_1} f(x) d\mu + \int_{D_2} f(x) d\mu.
+\end{aligned}
+$$
+
+:::
+
+## Calculation of Multiple Integrals
+
+::: {#thm-calc2-5-6}
+
+If $f : [a, b] \times [\alpha, \beta] \to \mathbb{R}$ is a continuous function, then
+$$
+\begin{aligned}
+\int_{[a, b] \times [\alpha, \beta]} f(x, y) dx dy = \int_{\alpha}^{\beta} \left( \int_{a}^{b} f(x, y) dx \right) dy = \int_{a}^{b} \left( \int_{\alpha}^{\beta} f(x, y) dy \right) dx.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-5-7}
+
+Let $R_1, R_2$ be rectangles in $\mathbb{R}^m$ and $\mathbb{R}^n$, respectively. Let $f : R_1 \times R_2 \to \mathbb{R}$ be a Riemann integrable function. Then for any $y \in R_2$, the Darboux upper integral and Darboux lower integral of $f(x, y)$ with respect to $x$:
+$$
+\begin{aligned}
+\overline{\int_{R_1}} f(x, y) dx, \quad \underline{\int_{R_1}} f(x, y) dx
+\end{aligned}
+$$
+are both Riemann integrable functions (with respect to $y$), and
+$$
+\begin{aligned}
+\int_{R_1 \times R_2} f(x, y) dx dy = \int_{R_2} \left( \overline{\int_{R_1}} f(x, y) dx \right) dy = \int_{R_2} \left( \underline{\int_{R_1}} f(x, y) dx \right) dy.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-5-8}
+
+If $D \subset \mathbb{R}^{m+n}$ is a bounded closed Jordan measurable set, then:
+$$
+\begin{aligned}
+D_2 = \{y \in \mathbb{R}^n \mid \exists x \in \mathbb{R}^m \text{ s.t. } (x, y) \in D\}
+\end{aligned}
+$$
+
+is a bounded closed Jordan measurable set in $\mathbb{R}^n$, and for almost all $y \in D_2$,
+
+$$
+\begin{aligned}
+D_y = \{x \in \mathbb{R}^m \mid (x, y) \in D\}
+\end{aligned}
+$$
+
+is a bounded closed Jordan measurable set in $\mathbb{R}^m$. For any continuous function $f : D \to \mathbb{R}$,
+
+$$
+\begin{aligned}
+\int_D f(x, y) dx dy = \int_{D_2} \left( \int_{D_y} f(x, y) dx \right) dy.
+\end{aligned}
+$$
+
+:::
+
+## Calculation of Multiple Integrals: Change of Variables Formula
+
+::: {#thm-calc2-5-9}
+
+Let $\tilde{\Omega} \subset \mathbb{R}^m$ be a bounded closed Jordan measurable set, and $\varphi : \tilde{\Omega} \to \Omega = \varphi(\tilde{\Omega}) \subseteq \mathbb{R}^m$ be a $\mathscr{C}^1$ diffeomorphism. Then for any $f \in \mathscr{R}(\Omega)$,
+$$
+\begin{aligned}
+\int_{\Omega} f(u) d\mu_{\Omega} = \int_{\tilde{\Omega}} f(\varphi(x)) |\det D\varphi(x)| d\mu_{\tilde{\Omega}}.
+\end{aligned}
+$$
+In traditional notation, the above equation is expressed as:
+$$
+\begin{aligned}
+\int_{\Omega} f(u) du_1 \dots du_m = \int_{\tilde{\Omega}} f(\varphi(x)) \left| \det \frac{\partial(u_1, \dots, u_m)}{\partial(x_1, \dots, x_m)} \right| dx_1 \dots dx_m.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-5-10}
+
+Let $\Sigma$ be an $m \times m$ symmetric positive-definite matrix, and let $\mu \in \mathbb{R}^m$. The integral of the multivariate Gaussian density function over the entire space $\mathbb{R}^m$ is equal to 1:
+$$
+\begin{aligned}
+\int_{\mathbb{R}^m} \frac{1}{\sqrt{(2\pi)^m \det \Sigma}} e^{-\frac{1}{2}(\mathbf{x}-\mu)^T \Sigma^{-1}(\mathbf{x}-\mu)} dx_1 \dots dx_m = 1.
+\end{aligned}
+$$
+
+:::

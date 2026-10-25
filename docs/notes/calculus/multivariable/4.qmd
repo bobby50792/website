@@ -1,0 +1,479 @@
+---
+title: "Integrals with Parameters and Improper Integrals"
+page-layout: article
+search: true
+number-offset: [4]
+
+crossref:
+  chapters: true
+---
+
+## Continuity, Integrability, and Differentiability of Integrals with Respect to Parameters
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let the function $f : [a,b] \times U \to \mathbb{R}$ (where $U \subseteq \mathbb{R}^n$) satisfy the condition that for any $\mathbf{y} \in U$, the function $f(\cdot, \mathbf{y}) : [a,b] \to \mathbb{R}$ is Riemann integrable. In this case, we call $\int_{a}^{b} f(x, \mathbf{y}) dx$ a **definite integral depending on a parameter $\mathbf{y}$**.
+
+This integral defines a function of $\mathbf{y}$ as follows:
+$$
+\begin{aligned}
+F(\mathbf{y}) = \int_{a}^{b} f(x, \mathbf{y}) dx.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-1}
+
+Let the function $f : [a,b] \times U \to \mathbb{R}$ (where $U \subseteq \mathbb{R}^n$) satisfy the following conditions:
+
+1. For any $\mathbf{y} \in U$, the Riemann integral
+    $$
+    \begin{aligned}
+    F(\mathbf{y}) = \int_{a}^{b} f(x, \mathbf{y}) dx
+    \end{aligned}
+    $$
+    exists.
+
+2. $f(x, \mathbf{y})$ is continuous with respect to $\mathbf{y}$ at $\mathbf{y}_0 \in U$, and this continuity is **uniform** with respect to the integration variable $x \in [a, b]$. That is, for any $\epsilon > 0$, there exists a $\delta(\mathbf{y}_0, \epsilon) > 0$ such that for any $x \in [a, b]$, whenever $\mathbf{y} \in U$ satisfies $\|\mathbf{y} - \mathbf{y}_0\| < \delta(\mathbf{y}_0, \epsilon)$, we have:
+    $$
+    \begin{aligned}
+    |f(x, \mathbf{y}) - f(x, \mathbf{y}_0)| < \epsilon.
+    \end{aligned}
+    $$
+
+Then $F$ is continuous at $\mathbf{y}_0$, which implies:
+$$
+\begin{aligned}
+\lim_{\mathbf{y} \to \mathbf{y}_0} \int_{a}^{b} f(x, \mathbf{y}) dx = \int_{a}^{b} f(x, \mathbf{y}_0) dx = \int_{a}^{b} \lim_{\mathbf{y} \to \mathbf{y}_0} f(x, \mathbf{y}) dx.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-2}
+
+If $U \subset \mathbb{R}^n$ is a closed set or an open set, and $f : [a,b] \times U \to \mathbb{R}$ is continuous, then $F$ is continuous on $U$.
+
+:::
+
+::: {#thm-calc2-4-3}
+
+Let $U \subseteq \mathbb{R}^n$ be an open set. Suppose the function $f : [a,b] \times U \to \mathbb{R}$ satisfies:
+
+1.  For any $\mathbf{y} \in U$, the Riemann integral
+    $$
+    \begin{aligned}
+    F(\mathbf{y}) = \int_{a}^{b} f(x, \mathbf{y}) dx
+    \end{aligned}
+    $$
+    exists.
+
+2.  The partial derivatives $\frac{\partial f}{\partial y_1}, \dots, \frac{\partial f}{\partial y_n}$ are bounded on $[a,b] \times U$.
+
+Then $F$ is continuous on $U$.
+
+:::
+
+::: {#thm-calc2-4-4}
+
+Let $U \subseteq \mathbb{R}^n$ be an open set, and let the function $f : [a,b] \times U \to \mathbb{R}$ satisfy the following conditions:
+
+1.  For any $\mathbf{y} \in U$, $f(x, \mathbf{y})$ is Riemann integrable with respect to $x$ on the interval $[a, b]$.
+
+2.  For any $x \in [a, b]$, $f(x, \mathbf{y})$ is differentiable with respect to $\mathbf{y} \in U$.
+
+3.  For each $k = 1, 2, \dots, n$, the partial derivative $\frac{\partial f}{\partial y_k}(x, \mathbf{y})$ is Riemann integrable with respect to $x$, and is continuous with respect to $\mathbf{y}$. Furthermore, this continuity is **uniform** with respect to the integration variable $x \in [a, b]$. That is, for any $\mathbf{y}_0 \in U$ and any $\epsilon > 0$, there exists a $\delta(\mathbf{y}_0, \epsilon) > 0$ such that for any $x \in [a, b]$, whenever $\mathbf{y} \in U$ satisfies $\|\mathbf{y} - \mathbf{y}_0\| < \delta(\mathbf{y}_0, \epsilon)$, we have:
+    $$
+    \begin{aligned}
+    \left| \frac{\partial f}{\partial y_k}(x, \mathbf{y}) - \frac{\partial f}{\partial y_k}(x, \mathbf{y}_0) \right| < \epsilon.
+    \end{aligned}
+    $$
+
+Then $F(\mathbf{y}) = \int_{a}^{b} f(x, \mathbf{y}) dx$ is of class $C^1$ on $U$, and:
+$$
+\begin{aligned}
+\frac{\partial F}{\partial y_k}(\mathbf{y}) = \frac{\partial}{\partial y_k} \int_{a}^{b} f(x, \mathbf{y}) dx = \int_{a}^{b} \frac{\partial f}{\partial y_k}(x, \mathbf{y}) dx.
+\end{aligned}
+$$
+
+:::
+
+::: {#cor-calc2-4-1}
+
+If in the aforementioned theorem, all partial derivatives of $f$ with respect to $\mathbf{y}$ up to order $k$ are continuous with respect to $(x, \mathbf{y})$, then $F$ is of class $C^k$ on $U$. Furthermore, all partial derivative operations of $F$ up to order $k$ can be interchanged with the integral operator:
+$$
+\begin{aligned}
+\frac{\partial^k F}{\partial y_{i_1} \partial y_{i_2} \dots \partial y_{i_k}} (\mathbf{y}) = \int_{a}^{b} \frac{\partial^k f}{\partial y_{i_1} \partial y_{i_2} \dots \partial y_{i_k}} (x, \mathbf{y}) dx.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-5 name="Interchanging the Order of Iterated Integration"}
+
+Let the function $f : [a,b] \times [c, d] \to \mathbb{R}$ be continuous. Then:
+$$
+\begin{aligned}
+\int_{a}^{b} \left( \int_{c}^{d} f(x, y) dy \right) dx = \int_{c}^{d} \left( \int_{a}^{b} f(x, y) dx \right) dy.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Calculus of Variations
+
+The above problem can be summarized as:
+$$
+\begin{aligned}
+\min \int_{a}^{b} L(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) dt, \quad \mathbf{x}(a) = A, \mathbf{x}(b) = B.
+\end{aligned}
+$$
+
+$L(t, \mathbf{x}, \dot{\mathbf{x}})$: **Lagrangian function**
+
+Embed the curve $\mathbf{x}(t)$ to be solved into a family of curves $X(t, s)$ (where for each fixed $s$, $X(t, s)$ is a curve) such that:
+$$
+\begin{aligned}
+X(t, 0) = \mathbf{x}(t), \quad \forall t,
+\end{aligned}
+$$
+and for all $s$, we have $X(a, s) = A$ and $X(b, s) = B$. For example: $X(t, s) = \mathbf{x}(t) + s\mathbf{y}(t)$, where $\mathbf{y}(a) = \mathbf{y}(b) = 0$.
+
+Consider:
+$$
+\begin{aligned}
+F(s) = \int_{a}^{b} L\left(t, X(t, s), \frac{\partial X}{\partial t}(t, s)\right) dt.
+\end{aligned}
+$$
+Then $F(0) = \int_{a}^{b} L(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) dt$ is the minimum value.
+
+Thus $F'(0) = 0$. Namely,
+$$
+\begin{aligned}
+\int_{a}^{b} \left[ L_{\mathbf{x}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) X_s(t, 0) + L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) X_{s,t}(t, 0) \right] dt = 0
+\end{aligned}
+$$
+
+By integration by parts, the second term becomes:
+$$
+\begin{aligned}
+\int_{a}^{b} L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) d_t X_s(t, 0) &= \left. L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) X_s(t, 0) \right|_{a}^{b} - \int_{a}^{b} \frac{d}{dt} L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) X_s(t, 0) dt \\
+&= - \int_{a}^{b} \frac{d}{dt} L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) X_s(t, 0) dt
+\end{aligned}
+$$
+
+Therefore,
+$$
+\begin{aligned}
+\int_{a}^{b} \left[ L_{\mathbf{x}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) - \frac{d}{dt} L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) \right] X_s(t, 0) dt = 0
+\end{aligned}
+$$
+
+Since $X_s(t, 0)$ is arbitrary, we obtain the **Euler-Lagrange equation**:
+$$
+\begin{aligned}
+L_{\mathbf{x}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) - \frac{d}{dt} L_{\dot{\mathbf{x}}}(t, \mathbf{x}(t), \dot{\mathbf{x}}(t)) = 0.
+\end{aligned}
+$$
+This is a second-order ordinary differential equation (ODE) with respect to $\mathbf{x}(t)$.
+
+**Reducible Case 1: $L = L(\mathbf{x}, \dot{\mathbf{x}})$:**
+
+The Euler-Lagrange equation is:
+$$
+\begin{aligned}
+L_x(x, \dot{x}) - \frac{d}{dt} L_{\dot{x}}(x, \dot{x}) = 0.
+\end{aligned}
+$$
+
+Multiplying by $\dot{x}$ and using the chain rule:
+$$
+\begin{aligned}
+L_x(x, \dot{x})\dot{x} + L_{\dot{x}}(x, \dot{x})\ddot{x} - \frac{d}{dt} \left( L_{\dot{x}}(x, \dot{x})\dot{x} \right) = 0.
+\end{aligned}
+$$
+
+Since $\frac{d}{dt} L(x, \dot{x}) = L_x\dot{x} + L_{\dot{x}}\ddot{x}$ when $L$ does not explicitly depend on $t$, we have:
+$$
+\begin{aligned}
+\frac{d}{dt} \left( L(x, \dot{x}) - L_{\dot{x}}(x, \dot{x})\dot{x} \right) = 0,
+\end{aligned}
+$$
+
+Which leads to the **Beltrami Identity**:
+$$
+\begin{aligned}
+L(x, \dot{x}) - L_{\dot{x}}(x, \dot{x})\dot{x} = C.
+\end{aligned}
+$$
+
+:::
+
+## Improper Integrals with Parameters
+
+For a function $f : [a, +\infty) \times U \to \mathbb{R}$ (where $U \subseteq \mathbb{R}^n$), the integral $\int_{a}^{+\infty} f(x, \mathbf{y}) dx$ is called an **improper integral depending on a parameter $\mathbf{y}$**.
+
+A convergent improper integral with a parameter defines a function with $\mathbf{y}$ as the independent variable:
+$$
+\begin{aligned}
+F(\mathbf{y}) = \int_{a}^{+\infty} f(x, \mathbf{y}) dx.
+\end{aligned}
+$$
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+The improper integral $\int_{a}^{+\infty} f(x, \mathbf{y}) dx$ is said to **converge uniformly** to $F(\mathbf{y})$ on $U$ if for every $\epsilon > 0$, there exists $A(\epsilon) > a$ such that for all $A > A(\epsilon)$ and for every $\mathbf{y} \in U$, we have:
+$$
+\begin{aligned}
+\left| \int_{a}^{A} f(x, \mathbf{y}) dx - F(\mathbf{y}) \right| < \epsilon.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-6}
+
+Let the function $f(x, \mathbf{y})$ be Riemann integrable with respect to $x$ on any bounded interval $I \subset [a, +\infty)$. The improper integral $\int_{a}^{+\infty} f(x, \mathbf{y}) dx$ converges uniformly with respect to $\mathbf{y} \in U$ if and only if it satisfies the **uniform Cauchy condition**: for any $\epsilon > 0$, there exists $A(\epsilon) > a$ such that
+$$
+\begin{aligned}
+\left| \int_{A_1}^{A_2} f(x, \mathbf{y}) dx \right| < \epsilon, \quad \forall A_2 > A_1 \ge A(\epsilon), \quad \forall \mathbf{y} \in U.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-7}
+
+Let the functions $f(x, \mathbf{y})$ and $g(x, \mathbf{y})$ satisfy:
+$$
+\begin{aligned}
+|f(x, \mathbf{y})| \le g(x, \mathbf{y}), \quad \forall x \ge a, \forall \mathbf{y} \in U
+\end{aligned}
+$$
+If the integral $\int_{a}^{+\infty} g(x, \mathbf{y}) dx$ converges uniformly with respect to $\mathbf{y} \in U$, then the integral $\int_{a}^{+\infty} f(x, \mathbf{y}) dx$ converges uniformly (and absolutely) with respect to $\mathbf{y} \in U$.
+
+:::
+
+::: {#thm-calc2-4-8 name="Dirichlet and Abel Tests"}
+
+Assume the finite-interval integrals exist. The improper integral $\int_a^\infty f(x,y)g(x,y)\,dx$ converges uniformly for $y\in U$ under either set of conditions:
+
+1. **Dirichlet's test:**
+   - $F(t,y)=\int_a^t f(x,y)\,dx$ is bounded uniformly in $t\ge a$ and $y\in U$.
+   - For each $y$, $g(x,y)$ is monotone in $x$.
+   - $g(x,y)\to0$ as $x\to\infty$, uniformly for $y\in U$.
+2. **Abel's test:**
+   - $\int_a^\infty f(x,y)\,dx$ converges uniformly for $y\in U$.
+   - For each $y$, $g(x,y)$ is monotone in $x$.
+   - $g(x,y)$ is bounded uniformly in $x\ge a$ and $y\in U$.
+
+:::
+
+::: {#thm-calc2-4-9}
+
+Let the function $f: [a, +\infty) \times U \to \mathbb{R} \ (U \subseteq \mathbb{R}^m)$ satisfy:
+
+1. The improper integral $F(\mathbf{y}) = \int_a^{+\infty} f(x, \mathbf{y}) \text{d}x$ converges uniformly on $U$;
+2. For any $x \ge a$, $f(x, \mathbf{y})$ is continuous with respect to $\mathbf{y}$ at $\mathbf{y}_0 \in U$, and this continuity is uniform with respect to $x$ in any bounded closed interval $[a, b]$: that is, for any $\epsilon > 0$, there exists $\delta(\mathbf{y}_0, \epsilon) > 0$, such that for any $x \in [a, b]$, as long as $\mathbf{y} \in U$ satisfies $\|\mathbf{y} - \mathbf{y}_0\| < \delta(\mathbf{y}_0, \epsilon)$, we have $|f(x, \mathbf{y}) - f(x, \mathbf{y}_0)| < \epsilon$.
+
+Then $F$ is continuous at $\mathbf{y}_0$, i.e.,
+$$
+\begin{aligned}
+\lim_{\mathbf{y} \to \mathbf{y}_0} \int_a^{+\infty} f(x, \mathbf{y}) \text{d}x = \int_a^{+\infty} f(x, \mathbf{y}_0) \text{d}x = \int_a^{+\infty} \lim_{\mathbf{y} \to \mathbf{y}_0} f(x, \mathbf{y}) \text{d}x.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-10}
+
+Let the continuous function of two variables $f: [a, +\infty) \times [1, +\infty) \to \mathbb{R}$ satisfy:
+
+1. The improper integral $F(y) = \int_a^{+\infty} f(x, y) \text{d}x$ converges uniformly on $[1, +\infty)$;
+2. For any $x \ge a$, the limit $\lim_{y \to +\infty} f(x, y) = g(x)$ exists, and this limit is uniform with respect to $x$ in any bounded closed interval $[a, b]$: that is, for any $\epsilon > 0$ and any interval $[a, b]$, there exists $N_{a,b,\epsilon} > 1$, such that for any $x \in [a, b]$, whenever $y > N_{a,b,\epsilon}$, we have $|f(x, y) - g(x)| < \epsilon$.
+
+Then
+$$
+\begin{aligned}
+\lim_{y \to +\infty} \int_a^{+\infty} f(x, y) \text{d}x = \int_a^{+\infty} g(x) \text{d}x = \int_a^{+\infty} \lim_{y \to +\infty} f(x, y) \text{d}x.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-11}
+
+Let $U \subseteq \mathbb{R}^m$ be an open set, $\mathbf{y}_0 \in U$, and let the function $f: [a, +\infty) \times U \to \mathbb{R}$ satisfy:
+
+1. The improper integral $\int_a^{+\infty} f(x, \mathbf{y}_0) \text{d}x$ converges;
+2. For each $k = 1, 2, \dots, m$, $\frac{\partial f}{\partial y_k}(x, \mathbf{y})$ is continuous, and the improper integral $\int_a^{+\infty} \frac{\partial f}{\partial y_k}(x, \mathbf{y}) \text{d}x$ converges uniformly with respect to $\mathbf{y}$ in $U$.
+
+Then $\int_a^{+\infty} f(x, \mathbf{y}) \text{d}x$ converges uniformly in a neighborhood of $\mathbf{y}_0$, is of class $\mathscr{C}^1$ with respect to $\mathbf{y}$, and
+$$
+\begin{aligned}
+\frac{\partial}{\partial y_k} \int_a^{+\infty} f(x, \mathbf{y}) \text{d}x = \int_a^{+\infty} \frac{\partial f}{\partial y_k}(x, \mathbf{y}) \text{d}x, \quad k = 1, 2, \dots, m.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-12}
+
+Let $f : [c, +\infty) \times [a, b] \to \mathbb{R}$ be continuous, and the improper integral $\int_c^{+\infty} f(x, y)dx$ converges uniformly with respect to $y$ on $[a, b]$. Then the improper integral $\int_c^{+\infty} \int_a^b f(x, y)dydx$ converges, and
+$$
+\begin{aligned}
+\int_a^b \int_c^{+\infty} f(x, y)dxdy = \int_c^{+\infty} \int_a^b f(x, y)dydx.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-4-13}
+
+Let $f: [c, +\infty) \times [a, +\infty) \to \mathbb{R}$ be continuous, satisfying:
+
+1. At least one of the iterated integrals $\int_a^{+\infty} \int_c^{+\infty} |f(x, y)| dx dy$ and $\int_c^{+\infty} \int_a^{+\infty} |f(x, y)| dy dx$ exists.
+2. The improper integral $\int_c^{+\infty} f(x, y) dx$ converges uniformly with respect to $y$ on any bounded closed interval $[a, b]$.
+3. The improper integral $\int_a^{+\infty} f(x, y) dy$ converges uniformly with respect to $x$ on any bounded closed interval $[c, d]$.
+
+Then
+$$
+\begin{aligned}
+\int_a^{+\infty} \int_c^{+\infty} f(x, y) dx dy = \int_c^{+\infty} \int_a^{+\infty} f(x, y) dy dx.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Gamma Function
+
+$$
+\begin{aligned}
+\Gamma(\alpha) = \int_{0}^{+\infty} x^{\alpha-1} \mathrm{e}^{-x} \mathrm{d}x
+\end{aligned}
+$$
+
+It is a $\mathscr{C}^\infty$ function for $\alpha > 0$, satisfying:
+
+$$
+\begin{aligned}
+\Gamma(1) &= 1 \\
+\Gamma(\alpha+1) &= \alpha\Gamma(\alpha), \quad \forall \alpha > 0
+\end{aligned}
+$$
+
+Thus, the $\Gamma$ function is a **generalization of the factorial** of natural numbers, embedding the factorial sequence into a $\mathscr{C}^\infty$ function. Additionally, the $\Gamma$ function possesses the **log-convex property**:
+
+$$
+\begin{aligned}
+\ln \Gamma\left(\frac{\alpha + \beta}{2}\right) \le \frac{\ln \Gamma(\alpha) + \ln \Gamma(\beta)}{2}, \quad \forall \alpha > 0, \beta > 0
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Beta Function
+
+$$
+\begin{aligned}
+B(\alpha, \beta) = \int_{0}^{1} x^{\alpha-1}(1 - x)^{\beta - 1} \mathrm{d}x, \quad \alpha > 0, \beta > 0
+\end{aligned}
+$$
+
+It is a $\mathscr{C}^\infty$ function, satisfying:
+
+$$
+\begin{aligned}
+B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}
+\end{aligned}
+$$
+
+:::
+
+## Integral Transforms
+
+By an integral transform, we refer to a transformation of the form:
+
+$$
+\begin{aligned}
+\mathscr{T}: f \mapsto \mathscr{T}(f) = g, \quad g(y) = \int_{-\infty}^{+\infty} K(x, y) f(x) \mathrm{d}x
+\end{aligned}
+$$
+
+::: {.callout-tip collapse="true"}
+
+## Convolution
+
+A convolution is of the form:
+
+$$
+\begin{aligned}
+(K \star f)(y) = \int_{-\infty}^{+\infty} K(y - x) f(x) \mathrm{d}x
+\end{aligned}
+$$
+
+We denote $K \star f$ as the **convolution** of $K$ and $f$.
+
+If $K(t)$ is a differentiable function, then (provided that the following improper integral converges uniformly):
+
+$$
+\begin{aligned}
+(K \star f)'(y) = \int_{-\infty}^{+\infty} K'(y - x) f(x) \mathrm{d}x = (K' \star f)(y) = (K \star f')(y).
+\end{aligned}
+$$
+
+For example, the probability density function (PDF) of a normal distribution $N(\mu, \sigma^2)$ is:
+
+$$
+\begin{aligned}
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Laplace Transform
+
+$$
+\begin{aligned}
+\mathscr{L}[f](p) = \int_{0}^{+\infty} \mathrm{e}^{-px} f(x) \mathrm{d}x = F(p)
+\end{aligned}
+$$
+
+$F$ is called the **Laplace transform** of $f$.
+
+If $f$ satisfies $|f(x)| \le M \mathrm{e}^{\alpha x}$, then for any $\delta > 0$, the aforementioned improper integral and the improper integral
+
+$$
+\begin{aligned}
+\int_{0}^{+\infty} \mathrm{e}^{-px} x^k f(x) \mathrm{d}x
+\end{aligned}
+$$
+
+converge uniformly for $p$ on the interval $[\alpha + \delta, +\infty)$. Consequently, $F$ is a $\mathscr{C}^\infty$ function on the interval $(\alpha, +\infty)$.
+
+In addition to linearity, the Laplace transform also satisfies:
+
+$$
+\begin{aligned}
+\mathscr{L}[f(\alpha x)](p) &= \frac{1}{\alpha} \mathscr{L}[f]\left(\frac{p}{\alpha}\right) \\
+\mathscr{L}[\mathrm{e}^{\alpha x} f(x)](p) &= \mathscr{L}[f](p - \alpha) \\
+\mathscr{L}[f'](p) &= -f(0) + p \mathscr{L}[f](p) \\
+\frac{\partial^k}{\partial p^k} \mathscr{L} \left[ \frac{f(x)}{x^k} \right](p) &= (-1)^k \mathscr{L}[f](p)
+\end{aligned}
+$$
+
+:::

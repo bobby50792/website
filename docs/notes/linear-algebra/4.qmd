@@ -1,0 +1,233 @@
+---
+title: "Determinants"
+page-layout: article
+search: true
+number-offset: [4]
+
+crossref:
+  chapters: true
+---
+
+## Determinants of Order 2
+
+::: {.callout-tip collapse="true"}
+
+## Determinant of Order 2
+
+If
+$$
+A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix},
+$$
+
+is a $2 \times 2$ matrix with entries from a field $F$,  then we define the **determinant** of $A$, denoted $\det(A)$ or $|A|$,  to be the scalar
+
+$$
+ad - bc.
+$$
+
+The function $\det : M_{2\times2}(F) \to F$ is a linear function of each row of a $2\times2$ matrix when the other row is held fixed.  That is, if $u, v,$ and $w$ are in $F^2$ and $k$ is a scalar, then
+$$
+\det \begin{pmatrix}
+u + kv \\
+w
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+u \\
+w
+\end{pmatrix}
++
+k \det \begin{pmatrix}
+v \\
+w
+\end{pmatrix}.
+$$
+
+and
+
+$$
+\det \begin{pmatrix}
+w \\
+u + kv
+\end{pmatrix}
+=
+\det \begin{pmatrix}
+w \\
+u
+\end{pmatrix}
++
+k \det \begin{pmatrix}
+w \\
+v
+\end{pmatrix}.
+$$
+
+:::
+
+## Determinants of Order n
+
+::: {.callout-tip collapse="true"}
+
+## Determinant of Order n
+
+For this definition, it is convenient to introduce the following notation:  Given $A \in M_{n\times n}(F)$, for $n \ge 2$, denote the $(n-1)\times(n-1)$ matrix obtained from $A$ by deleting row $i$ and column $j$ by $\tilde{A}_{ij}$.
+
+Let $A \in M_{n\times n}(F)$. If $n = 1$, so that $A = (A_{11})$, we define
+$$
+\det(A) = A_{11}.
+$$
+
+For $n \ge 2$, we define $\det(A)$ recursively as
+$$
+\det(A) = \sum_{j=1}^{n} (-1)^{1+j} A_{1j} \cdot \det(\tilde{A}_{1j}).
+$$
+
+The scalar $\det(A)$ is called the **determinant** of $A$ and is also denoted by $|A|$.  The scalar
+$$
+(-1)^{i+j} \det(\tilde{A}_{ij})
+$$
+is called the **cofactor** of the entry of $A$ in row $i$, column $j$.
+
+- Letting
+    $$
+    c_{ij} = (-1)^{i+j} \det(\tilde{A}_{ij})
+    $$
+
+    denote the cofactor of the row $i$, column $j$ entry of $A$, we can express the formula for the determinant of $A$ as
+    $$
+    \det(A) = A_{11} c_{11} + A_{12} c_{12} + \cdots + A_{1n} c_{1n}.
+    $$
+
+:::
+
+::: {#thm-la-4-1}
+
+The determinant of an $n \times n$ matrix is a linear function of each row when the remaining rows are held fixed.  That is, for $1 \le r \le n$, we have
+$$
+\det
+\begin{pmatrix}
+a_1 \\
+\vdots \\
+a_{r-1} \\
+u + kv \\
+a_{r+1} \\
+\vdots \\
+a_n
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+a_1 \\
+\vdots \\
+a_{r-1} \\
+u \\
+a_{r+1} \\
+\vdots \\
+a_n
+\end{pmatrix}
++
+k \det
+\begin{pmatrix}
+a_1 \\
+\vdots \\
+a_{r-1} \\
+v \\
+a_{r+1} \\
+\vdots \\
+a_n
+\end{pmatrix}.
+$$
+
+whenever $k$ is a scalar and $u$, $v$, and each $a_i$ are row vectors in $F^n$.
+
+:::
+
+## Properties of Determinants
+
+::: {#thm-la-4-2}
+
+If $A \in M_{n \times n}(F)$ has a row consisting entirely of zeros,  then
+$$
+\det(A) = 0.
+$$
+
+:::
+
+::: {#thm-la-4-3}
+
+The determinant of a square matrix can be evaluated by cofactor expansion along any row. That is, if $A \in M_{n \times n}(F)$, then for any integer  $i$ ($1 \le i \le n$),
+$$
+\det(A) = \sum_{j=1}^{n} (-1)^{i+j} A_{ij} \cdot \det(\tilde{A}_{ij}).
+$$
+
+:::
+
+::: {#thm-la-4-4}
+
+If $A \in M_{n \times n}(F)$ and $B$ is a matrix obtained from $A$ by interchanging any two rows of $A$, then
+$$
+\det(B) = -\det(A).
+$$
+
+:::
+
+::: {#thm-la-4-5}
+
+Let $A \in M_{n \times n}(F)$, and let $B$ be a matrix obtained by  adding a multiple of one row of $A$ to another row of $A$.  Then
+$$
+\det(B) = \det(A).
+$$
+
+:::
+
+::: {#thm-la-4-6}
+
+If $A \in M_{n \times n}(F)$ has rank less than $n$,  then
+$$
+\det(A) = 0.
+$$
+
+:::
+
+::: {#thm-la-4-7}
+
+For any $A, B \in M_{n \times n}(F)$, we have
+$$
+\det(AB) = \det(A)\,\det(B).
+$$
+
+:::
+
+::: {#thm-la-4-8}
+
+For any $A \in M_{n \times n}(F)$, we have
+$$
+\det(A^{t}) = \det(A).
+$$
+
+:::
+
+::: {#thm-la-4-9 name="Cramer's Rule"}
+
+Let $Ax = b$ be the matrix form of a system of $n$ linear equations in $n$ unknowns, where  $x = (x_1, x_2, \ldots, x_n)^t$. If $\det(A) \neq 0$, then the system has a unique solution, and for each $k$ ($k = 1,2,\ldots,n$),
+$$
+x_k = \frac{\det(M_k)}{\det(A)},
+$$
+
+where $M_k$ is the $n \times n$ matrix obtained from $A$ by replacing column $k$ of $A$ with $b$.
+
+:::
+
+::: {#thm-la-4-10}
+
+For invertible $A$, its inverse $A^{-1}$ may be described as
+$$
+(A^{-1})_{ij} = \frac{(-1)^{\,i+j} M_{ji}}{\det(A)}
+$$
+
+where $M_{ji}$ is the determinant of $A$ deleting the $j$-th row and $i$-th column.  Pay attention to the subscript inverse.
+
+:::

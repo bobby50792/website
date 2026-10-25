@@ -1,0 +1,933 @@
+---
+title: "Inner Product Spaces"
+page-layout: article
+search: true
+number-offset: [6]
+
+crossref:
+  chapters: true
+---
+
+## Inner Products and Norms
+
+::: {.callout-tip collapse="true"}
+
+## Inner Product
+
+Let $V$ be a vector space over $F$. An **inner product** on $V$ is a function that assigns, to every ordered pair of vectors $x$ and $y$ in $V$, a scalar in $F$, denoted $\langle x, y\rangle$, such that for all $x, y, z \in V$ and all $c \in F$, the following hold:
+
+$\text{(a)}\quad \langle x + z, y\rangle = \langle x, y\rangle + \langle z, y\rangle.$
+
+$\text{(b)}\quad \langle c x, y\rangle = c \langle x, y\rangle.$
+
+$\text{(c)}\quad \overline{\langle x, y\rangle} = \langle y, x\rangle$ where the bar denotes complex conjugation.
+
+$\text{(d)}\quad \langle x, x\rangle > 0 \quad \text{if } x \ne 0.$
+
+- We assume that all vector spaces are over the field $F$, where $F$ denotes either
+    $\mathbb{R}$ or $\mathbb{C}$.
+- Note that (c) reduces to $\langle x, y\rangle = \langle y, x\rangle$ if $F = \mathbb{R}$.
+
+:::
+
+::: {#thm-la-6-1}
+
+Let $V$ be an inner product space. Then for $x, y, z \in V$ and $c \in F$,  the following statements are true.
+
+$\text{(a)}\quad \langle x, y + z\rangle = \langle x, y\rangle + \langle x, z\rangle.$
+
+$\text{(b)}\quad \langle x, cy\rangle = \overline{c}\,\langle x, y\rangle.$
+
+$\text{(c)}\quad \langle x, 0\rangle = \langle 0, x\rangle = 0.$
+
+$\text{(d)}\quad \langle x, x\rangle = 0 \quad \text{if and only if} \quad x = 0.$
+
+$\text{(e)}\quad$If $\langle x, y\rangle = \langle x, z\rangle$ for all $x \in V$, then $y = z$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+For $x = (a_1, a_2, \ldots, a_n)$ and $y = (b_1, b_2, \ldots, b_n)$ in $F^n$, define
+$$
+\langle x, y\rangle = \sum_{i=1}^{n} a_i \overline{b_i}.
+$$
+
+The inner product is called the **standard inner product** on $F^n$.
+
+- When $F = \mathbb{R}$ the conjugations are not needed, and in early courses this
+    standard inner product is usually called the **dot product** and is denoted by
+    $x \cdot y$ instead of $\langle x, y\rangle$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Norm
+
+Let $V$ be an inner product space. For $x \in V$, we define the **norm** or **length**
+of $x$ by
+$$
+\|x\| = \sqrt{\langle x, x\rangle}.
+$$
+
+:::
+
+::: {#thm-la-6-2}
+
+Let $V$ be an inner product space over $F$. Then for all $x, y \in V$ and $c \in F$,  the following statements are true.
+
+$\text{(a)}\quad \|cx\| = |c| \cdot \|x\|.$
+
+$\text{(b)}\quad \|x\| = 0 \quad \text{if and only if} \quad x = 0.$ In any case, $\|x\| \ge 0$.
+
+$\text{(c)}\quad$**(Cauchy–Schwarz Inequality)**
+$$
+|\langle x, y\rangle| \le \|x\| \cdot \|y\|.
+$$
+
+$\text{(d)}\quad$**(Triangle Inequality)**
+$$
+\|x + y\| \le \|x\| + \|y\|.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $A \in M_{m \times n}(F)$. We define the **conjugate transpose** or **adjoint** of $A$ to be the $n \times m$ matrix $A^{*}$ such that
+$$
+(A^{*})_{ij} = \overline{A_{ji}} \quad \text{for all } i, j.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $V = M_{n \times n}(F)$, and define
+$$
+\langle A, B\rangle = \operatorname{tr}(B^{*} A)
+$$
+
+for $A, B \in V$.
+
+The inner product on $M_{n \times n}(F)$ in this example is called the **Frobenius inner product**.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+A vector space $V$ over $F$ endowed with a specific inner product is called
+an **inner product space**. If $F = \mathbb{C}$, we call $V$ a **complex inner product space**, whereas if $F = \mathbb{R}$, we call $V$ a **real inner product space**.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Orthogonal and Orthonormal
+
+Let $V$ be an inner product space. Vectors $x$ and $y$ in $V$ are **orthogonal (perpendicular)** if $\langle x, y\rangle = 0$.
+
+A subset $S$ of $V$ is **orthogonal** if any two distinct vectors in $S$ are orthogonal.
+
+- A vector $x$ in $V$ is a **unit vector** if $\|x\| = 1$.
+
+Finally, a subset $S$ of $V$ is **orthonormal** if $S$ is orthogonal and consists entirely of unit vectors.
+
+- Note that if $S = \{v_1, v_2, \ldots, v_r\}$ is orthonormal, then  $\langle v_i, v_j\rangle = \delta_{ij}$, where $\delta_{ij}$ denotes the Kronecker delta.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+If $x$ is any nonzero vector, then
+$$
+\frac{1}{\|x\|} x
+$$
+is a unit vector. The process of multiplying a nonzero vector by the reciprocal of its length is called **normalizing**.
+
+:::
+
+## The Gram–Schmidt Orthogonalization Process and Orthogonal Complements
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $V$ be an inner product space. A subset of $V$ is an **orthonormal basis** for $V$ if it is an ordered basis that is orthonormal.
+
+:::
+
+::: {#thm-la-6-3}
+
+Let $V$ be an inner product space and $S = \{v_1, v_2, \ldots, v_k\}$ be an orthogonal subset of $V$ consisting of nonzero vectors.  If $y \in \operatorname{span}(S)$, then
+$$
+y = \sum_{i=1}^{k} \frac{\langle y, v_i\rangle}{\|v_i\|^2}\, v_i.
+$$
+
+:::
+
+::: {#cor-la-6-1}
+
+Let $V$ be an inner product space, and let $S$ be an orthogonal subset of $V$
+
+consisting of nonzero vectors. Then $S$ is linearly independent.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Gram–Schmidt Process
+
+Let $V$ be an inner product space and $S = \{w_1, w_2, \ldots, w_n\}$  be a linearly independent subset of $V$. Define $S' = \{v_1, v_2, \ldots, v_n\}$,  where $v_1 = w_1$ and
+$$
+v_k = w_k - \sum_{j=1}^{k-1}
+\frac{\langle w_k, v_j\rangle}{\|v_j\|^2} \, v_j
+\quad \text{for } 2 \le k \le n.
+$$
+
+Then $S'$ is an orthogonal set of nonzero vectors such that  $\operatorname{span}(S') = \operatorname{span}(S)$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Orthogonal Complement
+
+Let $S$ be a nonempty subset of an inner product space $V$.  We define $S^{\perp}$ (read “$S$ perp”) to be the set of all vectors in $V$  that are orthogonal to every vector in $S$; that is,
+
+$$
+S^{\perp} = \{ x \in V : \langle x, y\rangle = 0 \text{ for all } y \in S \}.
+$$
+
+The set $S^{\perp}$ is called the **orthogonal complement** of $S$.
+
+- It is easily seen that $S^{\perp}$ is a subspace of $V$ for any subset $S$ of $V$.
+
+:::
+
+::: {#thm-la-6-4}
+
+Let $V$ be a nonzero finite-dimensional inner product space. Then $V$ has an orthonormal basis $\beta$. Furthermore, if  $\beta = \{v_1, v_2, \ldots, v_n\}$ and $x \in V$, then
+$$
+x = \sum_{i=1}^{n} \langle x, v_i\rangle \, v_i.
+$$
+
+:::
+
+::: {#cor-la-6-2}
+
+Let $V$ be a finite-dimensional inner product space with an orthonormal basis  $\beta = \{v_1, v_2, \ldots, v_n\}$. Let $T$ be a linear operator on $V$, and  let $A = [T]_{\beta}$. Then for any $i$ and $j$,
+$$
+A_{ij} = \langle T(v_j), v_i \rangle .
+$$
+
+:::
+
+::: {#thm-la-6-5}
+
+Let $W$ be a finite-dimensional subspace of an inner product space $V$,  and let $y \in V$. Then there exist unique vectors $u \in W$ and $z \in W^{\perp}$  such that $y = u + z$. Furthermore, if $\{v_1, v_2, \ldots, v_k\}$ is an  orthonormal basis for $W$, then
+$$
+u = \sum_{i=1}^{k} \langle y, v_i\rangle \, v_i.
+$$
+
+:::
+
+::: {#cor-la-6-3}
+
+The vector $u$ is the unique vector in $W$
+
+that is “closest” to $y$; that is, for any $x \in W$,
+
+$$
+\|y - x\| \ge \|y - u\|,
+$$
+
+and this inequality is an equality if and only if $x = u$.
+
+- The vector $u$ in the corollary is called the **orthogonal projection** of $y$ on $W$.
+
+:::
+
+::: {#thm-la-6-6}
+
+Suppose that $S = \{v_1, v_2, \ldots, v_k\}$ is an orthonormal set in an $n$-dimensional inner product space $V$. Then
+
+$\text{(a)}\quad S$ can be extended to an orthonormal basis $\{v_1, v_2, \ldots, v_k, v_{k+1}, \ldots, v_n\}$ for $V$.
+
+$\text{(b)}\quad$If $W = \operatorname{span}(S)$, then  $S_1 = \{v_{k+1}, v_{k+2}, \ldots, v_n\}$ is an orthonormal basis for $W^{\perp}$ .
+
+$\text{(c)}\quad$If $W$ is any subspace of $V$, then
+$$
+\dim(V) = \dim(W) + \dim(W^{\perp}).
+$$
+
+:::
+
+## The Adjoint of a Linear Operator
+
+::: {#thm-la-6-7}
+
+Let $V$ be a finite-dimensional inner product space over $\mathbb{F}$, and let
+$g : V \to \mathbb{F}$ be a linear transformation.  Then there exists a unique vector $y \in V$ such that
+$$
+g(x) = \langle x, y \rangle \quad \text{for all } x \in V.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Adjoint
+
+Let $V$ be a finite-dimensional inner product space, and let $T$ be a linear operator on $V$.  Then there exists a unique function $T^* : V \to V$ such that
+$$
+\langle T(x), y \rangle = \langle x, T^*(y) \rangle
+\quad \text{for all } x, y \in V.
+$$
+Furthermore, $T^*$ is linear. The linear operator $T^*$  is called the **adjoint** of the operator $T$.
+
+:::
+
+::: {#thm-la-6-8}
+
+Let $V$ be a finite-dimensional inner product space, and let  $\beta$ be an orthonormal basis for $V$.  If $T$ is a linear operator on $V$, then
+$$
+[T^*]_{\beta} = [T]_{\beta}^*.
+$$
+
+:::
+
+::: {#thm-la-6-9}
+
+Let $V$ be an inner product space, and let $T$ and $U$ be linear operators on $V$. Then:
+
+$\text{(a)}\quad (T + U)^* = T^* + U^*$;
+
+$\text{(b)}\quad (cT)^* = \overline{c}\, T^*$ for any $c \in \mathbb{F}$;
+
+$\text{(c)}\quad(TU)^* = U^* T^*$;
+
+$\text{(d)}\quad T^{**} = T$;
+
+$\text{(e)}\quad I^* = I$.
+
+:::
+
+::: {#cor-la-6-4}
+
+Let $A$ and $B$ be $n \times n$ matrices. Then:
+
+$\text{(a)}\quad(A + B)^* = A^* + B^*$;
+
+$\text{(b)}\quad(cA)^* = \overline{c}\, A^*$ for all $c \in \mathbb{F}$;
+
+$\text{(c)}\quad(AB)^* = B^* A^*$;
+
+$\text{(d)}\quad A^{**} = A$;
+
+$\text{(e)}\quad I^* = I$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Least Squares Problem
+
+The problem reduces to finding a vector $x_0 \in \mathbb{F}^n$ such that
+$$
+\|y - A x_0\| \le \|y - A x\|
+\quad \text{for all } x \in \mathbb{F}^n.
+$$
+
+That is, $Ax_0$ is the **orthogonal projection** of $y$ onto the column space of $A$.
+
+:::
+
+::: {#lem-la-6-1}
+
+Let $A \in M_{m \times n}(F)$, $x \in F^n$, and $y \in F^m$. Then
+$$
+\langle Ax, y \rangle_m = \langle x, A^* y \rangle_n.
+$$
+
+:::
+
+::: {#lem-la-6-2}
+
+Let $A \in M_{m \times n}(F)$. Then
+$$
+\operatorname{rank}(A^*A) = \operatorname{rank}(A).
+$$
+
+:::
+
+::: {#thm-la-6-10}
+
+Let $A \in M_{m \times n}(F)$ and $y \in F^m$. Then there exists $x_0 \in F^n$ such that
+$$
+(A^*A)x_0 = A^*y
+$$
+and
+$$
+\|Ax_0 - y\| \le \|Ax - y\|
+\quad \text{for all } x \in F^n.
+$$
+
+Furthermore, if $\operatorname{rank}(A) = n$, then
+$$
+x_0 = (A^*A)^{-1}A^*y.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Minimal Solutions to Systems of Linear Equations
+
+Even when a system of linear equations $Ax = b$ is consistent, there may be no unique solution.  In such cases, it may be desirable to find a solution of **minimal norm**.
+
+A solution $s$ to $Ax = b$ is called a **minimal solution** if
+$$
+\|s\| \le \|u\|
+$$
+for all other solutions $u$.
+
+:::
+
+::: {#thm-la-6-11}
+
+Let $A \in M_{m \times n}(F)$ and $b \in F^m$. Suppose that $Ax = b$ is consistent.  Then the following statements are true.
+
+$\text{(a)}\quad$There exists exactly one minimal solution $s$ of $Ax = b$, and
+$$
+s \in R(L_{A^*}).
+$$
+
+$\text{(b)}\quad$The vector $s$ is the only solution to $Ax = b$ that lies in $R(L_{A^*})$; that is,  if $u$ satisfies
+$$
+(AA^*)u = b,
+$$
+then
+$$
+s = A^*u.
+$$
+
+:::
+
+## Normal and Self-Adjoint Operators
+
+::: {#lem-la-6-3}
+
+Let $T$ be a linear operator on a finite-dimensional inner product space $V$. If $T$ has an eigenvector, then so does $T^*$.
+
+:::
+
+::: {#thm-la-6-12 name="Schur"}
+
+Let $T$ be a linear operator on a finite-dimensional inner product space $V$.Suppose that the characteristic polynomial of $T$ **splits**. Then there exists an orthonormal basis $\beta$ for $V$ such that the matrix $[T]_\beta$ is **upper triangular**.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Normal
+
+Let $V$ be an inner product space, and let $T$ be a linear operator on $V$. We say that $T$ is **normal** if $TT^* = T^*T$. An $n \times n$ real or complex matrix $A$ is **normal** if $AA^* = A^*A$.
+
+:::
+
+::: {#thm-la-6-13}
+
+Let $V$ be an inner product space, and let $T$ be a normal operator on $V$. Then the following statements are true.
+
+$\text{(a)}\quad \|T(x)\| = \|T^*(x)\|$ for all $x \in V$.
+
+$\text{(b)}\quad T - cI$ is normal for every $c \in F$.
+
+$\text{(c)}\quad$If $x$ is an eigenvector of $T$, then $x$ is also an eigenvector of $T^*$. In fact, if $T(x) = \lambda x$, then $T^*(x) = \overline{\lambda} x$.
+
+$\text{(d)}\quad$If $\lambda_1$ and $\lambda_2$ are distinct eigenvalues of $T$ with corresponding eigenvectors $x_1$ and $x_2$, then $x_1$ and $x_2$ are orthogonal.
+
+:::
+
+::: {#thm-la-6-14}
+
+Let $T$ be a linear operator on a finite-dimensional complex inner product space $V$. Then $T$ is normal if and only if there exists an orthonormal basis for $V$ consisting of eigenvectors of $T$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Self-Adjoint
+
+Let $T$ be a linear operator on an inner product space $V$.We say that $T$ is **self-adjoint (Hermitian)** if $T = T^*$. An $n \times n$ real or complex matrix $A$ is **self-adjoint (Hermitian)** if $A = A^*$.
+
+:::
+
+::: {#thm-la-6-15}
+
+Let $T$ be a self-adjoint operator on a finite-dimensional inner product space $V$. Then
+
+$\text{(a)}\quad$Every eigenvalue of $T$ is real.
+
+$\text{(b)}\quad$Suppose that $V$ is a real inner product space. Then the characteristic polynomial of $T$ splits.
+
+:::
+
+::: {#thm-la-6-16}
+
+Let $T$ be a linear operator on a finite-dimensional real inner product space $V$. Then $T$ is self-adjoint if and only if there exists an orthonormal basis $\beta$ for $V$ consisting of eigenvectors of $T$.
+
+:::
+
+## Unitary and Orthogonal Operators and Their Matrices
+
+::: {.callout-tip collapse="true"}
+
+## Unitary and Orthogonal Operator
+
+Let $T$ be a linear operator on a finite-dimensional inner product space $V$ over $F$. If $\|T(x)\| = \|x\|$ for all $x \in V$, we call $T$ a **unitary operator** if $F = \mathbb{C}$ and an **orthogonal operator** if $F = \mathbb{R}$.
+
+:::
+
+::: {#lem-la-6-4}
+
+Let $U$ be a self-adjoint operator on a finite-dimensional inner product space $V$. If $\langle x, U(x) \rangle = 0$ for all $x \in V$, then $U = T_0$.
+
+:::
+
+::: {#thm-la-6-17}
+
+Let $T$ be a linear operator on a finite-dimensional inner product space $V$. Then the following statements are equivalent.
+
+$\text{(a)}\quad TT^* = T^*T = I$.
+
+$\text{(b)}\quad\langle T(x), T(y) \rangle = \langle x, y \rangle$ for all $x, y \in V$.
+
+$\text{(c)}\quad$If $\beta$ is an orthonormal basis for $V$, then $T(\beta)$ is an orthonormal basis for $V$.
+
+$\text{(d)}\quad$There exists an orthonormal basis $\beta$ for $V$ such that $T(\beta)$ is an orthonormal basis for $V$.
+
+$\text{(e)}\quad\|T(x)\| = \|x\|$ for all $x \in V$.
+
+:::
+
+::: {#thm-la-6-18}
+
+Let $T$ be a linear operator on a finite-dimensional real inner product space $V$. Then $V$ has an orthonormal basis of eigenvectors of $T$ with corresponding eigenvalues of absolute value $1$ if and only if $T$ is both **self-adjoint** and **orthogonal**.
+
+:::
+
+::: {#thm-la-6-19}
+
+Let $T$ be a linear operator on a finite-dimensional complex inner product space $V$. Then $V$ has an orthonormal basis of eigenvectors of $T$ with corresponding eigenvalues of absolute value $1$ if and only if $T$ is **unitary**.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $L$ be a one-dimensional subspace of $\mathbb{R}^2$. We may view $L$ as a line in the plane through the origin. A linear operator $T$ on $\mathbb{R}^2$ is called a **reflection** of $\mathbb{R}^2$ about $L$ if
+$$
+T(x)=x \quad \text{for all } x\in L
+$$
+and
+$$
+T(x)=-x \quad \text{for all } x\in L^\perp.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+A square matrix $A$ is called an **orthogonal matrix** if
+$$
+A^t A = A A^t = I,
+$$
+and **unitary** if
+$$
+A^* A = A A^* = I.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+$A$ and $B$ are unitarily equivalent [orthogonally equivalent] if and only if there exists a unitary [orthogonal] matrix $P$ *such that* $A = P^*BP$.
+
+:::
+
+::: {#thm-la-6-20}
+
+Let $A$ be a complex $n \times n$ matrix. Then $A$ is **normal** if and only if $A$ is **unitarily equivalent** to a diagonal matrix.
+
+:::
+
+::: {#thm-la-6-21}
+
+Let $A$ be a real $n \times n$ matrix. Then $A$ is **symmetric (self-adjoint)** if and only if $A$ is **orthogonally equivalent** to a real diagonal matrix.
+
+:::
+
+## Orthogonal Projections and the Spectral Theorem
+
+::: {.callout-tip collapse="true"}
+
+## Orthogonal Projection
+
+If $V = W_1 \oplus W_2$, then a linear operator $T$ on $V$ is the **projection on $W_1$ along $W_2$** if, whenever
+$$
+x = x_1 + x_2,
+$$
+with $x_1 \in W_1$ and $x_2 \in W_2$, we have
+$$
+T(x) = x_1.
+$$
+
+Let $V$ be an inner product space, and let $T: V \to V$ be a projection. We say that $T$ is an **orthogonal projection** if
+$$
+R(T)^\perp = N(T)
+$$
+and
+$$
+N(T)^\perp = R(T).
+$$
+
+:::
+
+::: {#thm-la-6-22}
+
+Let $V$ be an inner product space, and let $T$ be a linear operator on $V$. Then $T$ is an **orthogonal projection** if and only if $T$ has an adjoint $T^*$ and
+$$
+T^2 = T = T^*.
+$$
+
+:::
+
+::: {#thm-la-6-23 name="The Spectral Theorem"}
+
+Suppose that $T$ is a linear operator on a finite-dimensional inner product space $V$ over $\mathbb{F}$ with the distinct eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_k$. Assume that $T$ is normal if $\mathbb{F} = \mathbb{C}$ and that $T$ is self-adjoint if $\mathbb{F} = \mathbb{R}$. For each $i$ $(1 \le i \le k)$, let $W_i$ be the eigenspace of $T$ corresponding to the eigenvalue $\lambda_i$, and let $T_i$ be the orthogonal projection of $V$ on $W_i$. Then the following statements are true.
+
+$\text{(a)}\quad$
+$$
+V = W_1 \oplus W_2 \oplus \cdots \oplus W_k.
+$$
+
+$\text{(b)}\quad$If $W_i'$ denotes the direct sum of the subspaces $W_j$ for $j \ne i$, then
+$$
+W_i^\perp = W_i'.
+$$
+
+$\text{(c)}\quad$
+$$
+T_i T_j = \delta_{ij} T_i \quad \text{for } 1 \le i, j \le k.
+$$
+
+$\text{(d)}\quad$
+$$
+I = T_1 + T_2 + \cdots + T_k.
+$$
+
+$\text{(e)}\quad$
+$$
+T = \lambda_1 T_1 + \lambda_2 T_2 + \cdots + \lambda_k T_k.
+$$
+
+:::
+
+::: {#cor-la-6-5}
+
+If $\mathbb{F} = \mathbb{C}$, then $T$ is **normal** if and only if
+$$
+T^* = g(T)
+$$
+for some polynomial $g$.
+
+:::
+
+::: {#cor-la-6-6}
+
+If $\mathbb{F} = \mathbb{C}$, then $T$ is **unitary** if and only if $T$ is normal and
+$$
+|\lambda| = 1
+$$
+for every eigenvalue $\lambda$ of $T$.
+
+:::
+
+::: {#cor-la-6-7}
+
+If $\mathbb{F} = \mathbb{C}$ and $T$ is normal, then $T$ is **self-adjoint** if and only if every eigenvalue of $T$ is real.
+
+:::
+
+::: {#cor-la-6-8}
+
+Let $T$ be as in the spectral theorem with spectral decomposition
+$$
+T = \lambda_1 T_1 + \lambda_2 T_2 + \cdots + \lambda_k T_k.
+$$
+Then each $T_j$ is a polynomial in $T$.
+
+:::
+
+## The Singular Value Decomposition
+
+::: {.callout-tip collapse="true"}
+
+## Singular Value Decomposition
+
+:::
+
+::: {#thm-la-6-24 name="Singular Value Theorem for Linear Transformations"}
+
+Let $V$ and $W$ be finite-dimensional inner product spaces, and let  $T : V \to W$ be a linear transformation of rank $r$. Then there exist orthonormal bases $\{v_1, v_2, \dots, v_n\}$ for $V$ and $\{u_1, u_2, \dots, u_r\}$ for $W$ and positive scalars
+$$
+\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r
+$$
+
+such that
+
+$$
+T(v_i) =
+\begin{cases}
+\sigma_i u_i, & 1 \le i \le r, \\
+0, & i > r.
+\end{cases}
+$$
+
+Thus
+$$
+T^*(u_i)
+= \sum_{j=1}^{n} \langle T^*(u_i), v_j \rangle v_j
+=
+\begin{cases}
+\sigma_i v_i, & i = j \le r, \\
+0, & \text{otherwise}.
+\end{cases}
+$$
+
+- Conversely, suppose that the preceding conditions are satisfied. Then for $1 \le i \le n$, $v_i$ is an eigenvector of $T^*T$ with corresponding eigenvalue $\sigma_i^2$ if $1 \le i \le r$, and $0$ if $i > r$. Therefore the scalars $\sigma_1, \sigma_2, \dots, \sigma_r$ are uniquely determined by $T$.
+
+- Each $v_i$ is an eigenvector of $T^*T$ with corresponding eigenvalue $\sigma_i^2$ if $i \le r$, and $0$ if $i > r$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+The unique scalars $\sigma_1, \sigma_2, \dots, \sigma_r$ are called the **singular values** of $T$. If $r$ is less than both $m$ and $n$, then the term singular value is extended to include $\sigma_{r+1} = \cdots = \sigma_k = 0$, where $k$ is the minimum of $m$ and $n$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $A$ be an $m \times n$ matrix. We define the **singular values** of $A$ to be the singular values of the linear transformation $L_A$.
+
+:::
+
+::: {#thm-la-6-25 name="Singular Value Decomposition Theorem for Matrices"}
+
+Let $A$ be an $m \times n$ matrix of rank $r$ with the positive singular values
+$$
+\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r,
+$$
+and let $\Sigma$ be the $m \times n$ matrix defined by
+$$
+\Sigma_{ij} =
+\begin{cases}
+\sigma_i, & i = j \le r, \\
+0, & \text{otherwise}.
+\end{cases}
+$$
+
+Then there exists an $m \times m$ unitary matrix $U$ and an $n \times n$ unitary matrix $V$ such that
+$$
+A = U \Sigma V^* .
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $A$ be an $m \times n$ matrix of rank $r$ with positive singula values $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r$. A factorization $A = U \Sigma V^*$ where $U$ and $V$ are unitary matrices and $\Sigma$ is the $m \times n$ matrix is called a **singular value decomposition** of $A$.
+
+:::
+
+## Bilinear and Quadratic Forms
+
+::: {.callout-tip collapse="true"}
+
+## Bilinear Form
+
+Let $V$ be a vector space over a field $F$. A function $H$ from the set $V \times V$ of ordered pairs of vectors to $F$ is called a **bilinear form** on $V$ if $H$ is linear in each variable when the other variable is held fixed; that is, $H$ is a bilinear form on $V$ if
+
+$\text{(a)}\quad H(ax_1 + x_2, y) = aH(x_1, y) + H(x_2, y)$ for all $x_1, x_2, y \in V$ and $a \in F$,
+
+$\text{(b)}\quad H(x, ay_1 + y_2) = aH(x, y_1) + H(x, y_2)$ for all $x, y_1, y_2 \in V$ and $a \in F$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $V$ be a vector space, let $H_1$ and $H_2$ be bilinear forms on $V$, and let $a$ be a scalar. We define the **sum** $H_1 + H_2$ and the **scalar product** $aH_1$ by the equations
+$$
+(H_1 + H_2)(x,y) = H_1(x,y) + H_2(x,y)
+$$
+
+and
+
+$$
+(aH_1)(x,y) = a(H_1(x,y)), \quad \text{for all } x,y \in V.
+$$
+
+- For any vector space $V$, the sum of two bilinear forms and the product of a scalar and a bilinear form on $V$ are again bilinear forms on $V$. Furthermore, $\mathcal{B}(V)$ is a vector space with respect to these operations.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $\beta = \{v_1, v_2, \dots, v_n\}$ be an ordered basis for an $n$-dimensional vector space $V$, and let $H \in \mathcal{B}(V)$. We can associate with $H$ an $n \times n$ matrix $A$ whose entry in row $i$ and column $j$ is defined by
+$$
+A_{ij} = H(v_i, v_j), \quad \text{for } i,j = 1,2,\dots,n.
+$$
+The matrix $A$ above is called the **matrix representation** of $H$ with respect to the ordered basis $\beta$ and is denoted by $\psi_\beta(H)$.
+
+:::
+
+::: {#thm-la-6-26}
+
+Let $F$ be a field, $n$ a positive integer, and $\beta$ be the standard ordered basis for $F^n$. Then for any $H \in \mathcal{B}(F^n)$, there exists a unique matrix $A \in M_{n \times n}(F)$, namely $A = \psi_\beta(H)$, such that
+$$
+H(x,y) = x^t A y \quad \text{for all } x,y \in F^n.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $A, B \in M_{n \times n}(F)$. Then $B$ is said to be **congruent** to $A$ if there exists an invertible matrix $Q \in M_{n \times n}(F)$ such that
+$$
+B = Q^t A Q.
+$$
+
+:::
+
+::: {#thm-la-6-27}
+
+Let $V$ be a finite-dimensional vector space with ordered bases $\beta = \{v_1, v_2, \dots, v_n\}$ and $\gamma = \{w_1, w_2, \dots, w_n\}$, and let $Q$ be the change-of-coordinate matrix changing $\gamma$-coordinates into $\beta$-coordinates. Then, for any $H \in \mathcal{B}(V)$, we have
+$$
+\psi_\gamma(H) = Q^t \psi_\beta(H) Q.
+$$
+Therefore $\psi_\gamma(H)$ is congruent to $\psi_\beta(H)$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Symmetric Bilinear Form
+
+A bilinear form $H$ on a vector space $V$ is **symmetric** if $H(x,y) = H(y,x)$ for all $x,y \in V$. As the name suggests, symmetric bilinear forms correspond to symmetric matrices.
+
+:::
+
+::: {#thm-la-6-28}
+
+Let $H$ be a bilinear form on a finite-dimensional vector space $V$,
+and let $\beta$ be an ordered basis for $V$. Then $H$ is symmetric if and only if $\psi_\beta(H)$ is symmetric.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+A bilinear form $H$ on a finite-dimensional vector space $V$ is called **diagonalizable** if there is an ordered basis $\beta$ for $V$ such that $\psi_\beta(H)$ is a diagonal matrix.
+
+:::
+
+::: {#lem-la-6-5}
+
+Let $H$ be a nonzero symmetric bilinear form on a vector space $V$ over a field $F$ not of characteristic two. Then there is a vector $x$ in $V$ such that $H(x,x) \neq 0$.
+
+:::
+
+::: {#thm-la-6-29}
+
+Let $V$ be a finite-dimensional vector space over a field $F$ not of characteristic two. Then every symmetric bilinear form on $V$ is diagonalizable.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Quadratic Form
+
+Let $V$ be a vector space over $F$. A function $K : V \to F$ is called a **quadratic form** if there exists a symmetric bilinear form $H \in \mathcal{B}(V)$ such that
+$$
+K(x) = H(x,x) \quad \text{for all } x \in V.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Given the variables $t_1, t_2, \dots, t_n$ that take values in a field $F$ not of characteristic two and given (not necessarily distinct) scalars $a_{ij}$ $(1 \le i \le j \le n)$, define the polynomial
+$$
+f(t_1, t_2, \dots, t_n)
+= \sum_{i \le j} a_{ij} t_i t_j .
+$$
+
+Any such polynomial is a quadratic form. In fact, if $\beta$ is the standard ordered basis for $F^n$, then the symmetric bilinear form $H$ corresponding to the quadratic form $f$ has the matrix representation $\psi_\beta(H) = A$, where
+$$
+A_{ij} = A_{ji} =
+\begin{cases}
+a_{ii}, & \text{if } i = j, \\
+\frac{1}{2} a_{ij}, & \text{if } i \ne j .
+\end{cases}
+$$
+
+:::
+
+::: {#thm-la-6-30}
+
+Let $K$ be a quadratic form on a finite-dimensional real inner product space $V$. There exists an orthonormal basis $\beta = \{v_1, v_2, \dots, v_n\}$ for $V$ and scalars $\lambda_1, \lambda_2, \dots, \lambda_n$ (not necessarily distinct) such that if $x \in V$ and
+$$
+x = \sum_{i=1}^{n} s_i v_i, \quad s_i \in \mathbb{R},
+$$
+
+then
+
+$$
+K(x) = \sum_{i=1}^{n} \lambda_i s_i^2.
+$$
+
+:::

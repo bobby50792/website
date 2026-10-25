@@ -1,0 +1,589 @@
+---
+title: "Differential of Multivariable Functions"
+page-layout: article
+search: true
+number-offset: [2]
+
+crossref:
+  chapters: true
+---
+
+## Derivatives, Differentials, and Directional Derivatives
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+We call $\mathbf{x}_0$ an **interior point** of a set $E \subseteq \mathbb{R}^m$ (we also say $E$ is a **neighborhood** of $\mathbf{x}_0$ in $\mathbb{R}^m$) if there exists a positive number $\delta_{\mathbf{x}_0} > 0$ such that
+$$
+\begin{aligned}
+B(\mathbf{x}_0, \delta_{\mathbf{x}_0}) \subseteq E.
+\end{aligned}
+$$
+
+In other words, $\mathbf{x}_0$ and all points in its immediate vicinity are contained within $E$. The set formed by all interior points of $E$ is called the **interior** of $E$, denoted as $\text{int} E$.
+
+We call $E$ an **open set** if $E = \text{int} E$. This implies that every point in $E$ is an interior point, or that $E$ is an open neighborhood for each of its members.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Differential
+
+Let $\mathbf{x}_0$ be an interior point of a set $E \subseteq \mathbb{R}^m$. We say that $f: E \to \mathbb{R}^n$ is **differentiable** at $\mathbf{x}_0$ if there exists a **linear mapping** $A: \mathbb{R}^m \to \mathbb{R}^n$ such that:
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) = f(\mathbf{x}_0) + A\mathbf{v} + o(\|\mathbf{v}\|), \quad \mathbf{v} \to \mathbf{0}.
+\end{aligned}
+$$
+
+That also means:
+$$
+\begin{aligned}
+\|f(\mathbf{x}_0 + \mathbf{v}) - f(\mathbf{x}_0) - A\mathbf{v} \| = o(\|\mathbf{v}\|), \quad \mathbf{v} \to \mathbf{0}.
+\end{aligned}
+$$
+
+In this case, we call the linear mapping $A$ the **differential** of $f$ at $\mathbf{x}_0$, denoted as:
+$$
+\begin{aligned}
+df(\mathbf{x}_0): \mathbb{R}^m \to \mathbb{R}^n, \quad df(\mathbf{x}_0)(\mathbf{v}) = A\mathbf{v}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-1}
+
+If $f$ is differentiable at $\mathbf{x}_0$, then $f$ is continuous at $\mathbf{x}_0$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Directional Derivative
+
+Let $f: E \to \mathbb{R}^n$, $\mathbf{x}_0 \in E$, and a vector $\mathbf{v} \in \mathbb{R}^m$ satisfy the following: there exists $\delta > 0$ such that for any $0 \le t < \delta$, we have $\mathbf{x}_0 + t\mathbf{v} \in E$.
+
+If the limit
+$$
+\begin{aligned}
+\left. \frac{d}{dt} (f(\mathbf{x}_0 + t\mathbf{v})) \right|_{t=0} = \lim_{t \to 0} \frac{f(\mathbf{x}_0 + t\mathbf{v}) - f(\mathbf{x}_0)}{t}
+\end{aligned}
+$$
+exists, then we denote it as $\frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0)$ or $\partial_{\mathbf{v}}f(\mathbf{x}_0)$, and call it the **derivative of $f$ at $\mathbf{x}_0$ along vector $\mathbf{v}$**.
+
+In particular, when $\mathbf{v} \in \mathbb{R}^m$ is a **unit vector** (i.e., $\|\mathbf{v}\| = 1$), we call it the **directional derivative** of $f$ at $\mathbf{x}_0$ along direction $\mathbf{v}$.
+$$
+\begin{aligned} \frac{df}{ds} = \lim_{\Delta s \to 0} \frac{\Delta f}{\Delta s} \end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-2}
+
+If $f$ is differentiable at $\mathbf{x}_0$, then $f$ has a derivative at $\mathbf{x}_0$ along every vector $\mathbf{v}$, and:
+$$
+\begin{aligned}
+df(\mathbf{x}_0)(\mathbf{v}) = \frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0).
+\end{aligned}
+$$
+
+Furthermore, in this case, the derivative $\frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0)$ is linear with respect to the vector $\mathbf{v}$.
+
+:::
+
+::: {#thm-calc2-2-3}
+
+1. Any **bilinear mapping** $B: \mathbb{R}^m \times \mathbb{R}^n \to \mathbb{R}^p$ is differentiable. For any point $(\mathbf{x}_0, \mathbf{y}_0)$ and increment $(\mathbf{u}, \mathbf{v})$, the differential is:
+
+$$
+\begin{aligned}
+dB(\mathbf{x}_0, \mathbf{y}_0)(\mathbf{u}, \mathbf{v}) = B(\mathbf{x}_0, \mathbf{v}) + B(\mathbf{u}, \mathbf{y}_0).
+\end{aligned}
+$$
+
+2. Any **multilinear mapping** $L: \mathbb{R}^{m_1} \times \mathbb{R}^{m_2} \times \dots \times \mathbb{R}^{m_k} \to \mathbb{R}^p$ is differentiable, with the differential given by:
+
+$$
+\begin{aligned}
+dL(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_k)(\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_k) = \sum_{j=1}^k L(\mathbf{x}_1, \dots, \mathbf{u}_j, \dots, \mathbf{x}_k).
+\end{aligned}
+$$
+
+3. The **determinant** $\det A$ of an $n \times n$ square matrix $A$ is a multilinear function of its column vectors $\mathbf{a}_1, \dots, \mathbf{a}_n$. Therefore, the determinant is a differentiable function:
+
+$$
+\begin{aligned}
+d\det(A)(B) = \sum_{j=1}^n \det(\mathbf{a}_1, \dots, \mathbf{b}_j, \dots, \mathbf{a}_n) = \sum_{j=1}^n \sum_{i=1}^n b_j^i A^{*i}_j = \text{tr}(A^{*T} B).
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-4}
+
+Let $A_0 \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^n)$ be an invertible matrix, and define the open set $U$ as:
+$$
+\begin{aligned}
+U = \left\{ A \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^n) \mid \|A - A_0\| < \frac{1}{\|A_0^{-1}\|} \right\}.
+\end{aligned}
+$$
+
+The **inversion mapping** $f$ is differentiable on $U$.
+$$
+\begin{aligned}
+f: U \to \mathcal{L}(\mathbb{R}^n, \mathbb{R}^n), \quad f(A) = A^{-1}.
+\end{aligned}
+$$
+
+and
+$$
+\begin{aligned}
+df(A)(B) = -A^{-1} B A^{-1}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-5 name="Chain Rule for Derivatives of Composite Functions"}
+
+Let $f$ be differentiable at $\mathbf{x}_0$, and let $g$ be differentiable at $\mathbf{y}_0 = f(\mathbf{x}_0)$. Then the composite function $g \circ f$ is differentiable at $\mathbf{x}_0$, and the **differential of the composite** is equal to the **composite of the differentials**:
+$$
+\begin{aligned}
+d(g \circ f)(\mathbf{x}_0) = dg(\mathbf{y}_0) \circ df(\mathbf{x}_0) = dg(f(\mathbf{x}_0)) \circ df(\mathbf{x}_0).
+\end{aligned}
+$$
+
+:::
+
+## Coordinate Systems and Partial Derivatives
+
+::: {.callout-tip collapse="true"}
+
+## Partial Derivative
+
+Let $(x^1, x^2, \dots, x^m)$ be the coordinates of a point in $E$. Suppose that at an interior point $\mathbf{x}_0 = (a^1, \dots, a^m)$ of $E$, the $m$-variable function $f: E \to \mathbb{R}$ has the following limit:
+$$
+\begin{aligned}
+\lim_{t \to 0} \frac{f(a^1, \dots, a^k + t, \dots, a^m) - f(a^1, \dots, a^k, \dots, a^m)}{t},
+\end{aligned}
+$$
+
+Then the value of this limit is denoted by $\frac{\partial f}{\partial x^k}(\mathbf{x}_0)$, $f_{x^k}(\mathbf{x}_0)$ (written as $f'_{x^k}(\mathbf{x}_0)$ in classical textbooks), $\partial_{x^k} f(\mathbf{x}_0)$, or $\partial_k f(\mathbf{x}_0)$, and is called the partial derivative of $f$ with respect to the coordinate $x^k$.
+
+:::
+
+::: {#thm-calc2-2-6}
+
+Let the $m$-variable function $f$ be differentiable at $\mathbf{x}_0$. Then for any $\mathbf{v} = (\xi^1, \dots, \xi^m)^T \in \mathbb{R}^m$,
+$$
+\begin{aligned}
+df(\mathbf{x}_0)(\mathbf{v}) &= \frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0) = \xi^1 \frac{\partial f}{\partial x^1}(\mathbf{x}_0) + \dots + \xi^m \frac{\partial f}{\partial x^m}(\mathbf{x}_0) \\
+&= \left( \frac{\partial f}{\partial x^1}(\mathbf{x}_0), \dots, \frac{\partial f}{\partial x^m}(\mathbf{x}_0) \right) \begin{pmatrix} \xi^1 \\ \vdots \\ \xi^m \end{pmatrix}.
+\end{aligned}
+$$
+
+Therefore, the differential of the function $f$ is
+$$
+\begin{aligned}
+df(\mathbf{x}_0) = \frac{\partial f}{\partial x^1}(\mathbf{x}_0) dx^1 + \dots + \frac{\partial f}{\partial x^m}(\mathbf{x}_0) dx^m,
+\end{aligned}
+$$
+
+where
+$$
+\begin{aligned}
+dx^i : \mathbb{R}^m \to \mathbb{R}, \quad dx^i(\mathbf{v}) = \xi^i,
+\end{aligned}
+$$
+is the differential of the coordinate function $x^i : \mathbb{R}^m \to \mathbb{R}, \quad (x^1, \dots, x^m) \mapsto x^i$; they are the coordinate functions of the vector.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Jacobian Matrix
+
+If the $m$-variable mapping $F: E \to \mathbb{R}^n$,
+$$
+\begin{aligned}
+F(x^1, \dots, x^m) = (f^1(x^1, \dots, x^m), \dots, f^n(x^1, \dots, x^m))^T
+\end{aligned}
+$$
+is differentiable at $\mathbf{x}_0$, then for any $\mathbf{v} = (\xi^1, \dots, \xi^m) \in \mathbb{R}^m$,
+$$
+\begin{aligned}
+dF(\mathbf{x}_0)(\mathbf{v}) = \begin{pmatrix}
+\frac{\partial f^1}{\partial x^1}(\mathbf{x}_0) & \cdots & \frac{\partial f^1}{\partial x^m}(\mathbf{x}_0) \\
+\vdots & \ddots & \vdots \\
+\frac{\partial f^n}{\partial x^1}(\mathbf{x}_0) & \cdots & \frac{\partial f^n}{\partial x^m}(\mathbf{x}_0)
+\end{pmatrix}
+\begin{pmatrix}
+\xi^1 \\
+\vdots \\
+\xi^m
+\end{pmatrix}.
+\end{aligned}
+$$
+
+Therefore, the coordinate representation of the differential of the mapping $F$ is
+$$
+\begin{aligned}
+\begin{pmatrix}
+\frac{\partial f^1}{\partial x^1}(\mathbf{x}_0) & \cdots & \frac{\partial f^1}{\partial x^m}(\mathbf{x}_0) \\
+\vdots & \ddots & \vdots \\
+\frac{\partial f^n}{\partial x^1}(\mathbf{x}_0) & \cdots & \frac{\partial f^n}{\partial x^m}(\mathbf{x}_0)
+\end{pmatrix},
+\end{aligned}
+$$
+
+Denote this matrix by $JF(\mathbf{x}_0) = \left. \frac{\partial(y^1, \dots, y^n)}{\partial(x^1, \dots, x^m)} \right|_{\mathbf{x}_0}$, called the **Jacobian matrix** of $F$ at $\mathbf{x}_0$.
+The determinant of $JF(\mathbf{x}_0)$, $\det JF(\mathbf{x}_0)$, is called the **Jacobian determinant** of $F$ at $\mathbf{x}_0$.
+
+:::
+
+::: {#thm-calc2-2-7}
+
+Let $G$ be differentiable at $\mathbf{x}_0$, and $F$ be differentiable at $\mathbf{y}_0 = G(\mathbf{x}_0)$, then
+$$
+\begin{aligned}
+J(F \circ G)(\mathbf{x}_0) = JF(\mathbf{y}_0) \cdot JG(\mathbf{x}_0).
+\end{aligned}
+$$
+If the inverse mapping $F^{-1}$ of a differentiable mapping $F$ is also differentiable, then
+$$
+\begin{aligned}
+J(F^{-1})(\mathbf{y}_0) = (JF(\mathbf{x}_0))^{-1}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-8}
+
+If all first-order partial derivatives $\frac{\partial f}{\partial x^1}(\mathbf{x}), \dots, \frac{\partial f}{\partial x^m}(\mathbf{x})$ are **continuous**, then $f$ is differentiable. (It is not a necessary condition.)
+
+:::
+
+## Gradient and Directional Derivative
+
+::: {#thm-calc2-2-9}
+
+Let $\langle \cdot, \cdot \rangle$ be an inner product on $\mathbb{R}^m$. Then for any linear function $L: \mathbb{R}^m \to \mathbb{R}$ on $\mathbb{R}^m$, there exists a unique vector $\nabla L \in \mathbb{R}^m$ such that
+$$
+\begin{aligned}
+L(\mathbf{v}) = \langle \mathbf{v}, \nabla L \rangle, \quad \forall \mathbf{v} \in \mathbb{R}^m.
+\end{aligned}
+$$
+
+Consequently, $\nabla L$ is orthogonal to $\operatorname{Ker} L$, and $\|\nabla L\| = \|L\| = \max_{\|\mathbf{v}\|=1} L(\mathbf{v})$. A unit vector $\mathbf{v}$ satisfies $L(\mathbf{v}) = \|\nabla L\|$ if and only if $\mathbf{v}$ is the unit vector in the direction of $\nabla L$. This unique vector $\nabla L$ is called the gradient vector of the linear function $L$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Gradient Vector
+
+Let $E$ be a subset of an inner product space, and the function $f : E \to \mathbb{R}$ be differentiable at $\mathbf{x}_0$. Denote the gradient vector of $df(\mathbf{x}_0)$ as $\operatorname{grad} f(\mathbf{x}_0)$ or $\nabla f(\mathbf{x}_0)$, called the **gradient vector** of $f$ at $\mathbf{x}_0$. Thus,
+$$
+\begin{aligned}
+df(\mathbf{x}_0)(\mathbf{v}) = \langle \mathbf{v}, \nabla f(\mathbf{x}_0) \rangle.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-10}
+
+Let $f$ be differentiable at $\mathbf{x}_0$. Then for any vector $\mathbf{v} \in \mathbb{R}^m$,
+$$
+\begin{aligned}
+\frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0) = df(\mathbf{x}_0)(\mathbf{v}) = \langle \mathbf{v}, \nabla f(\mathbf{x}_0) \rangle.
+\end{aligned}
+$$
+
+Consequently, for any unit vector $\mathbf{v}$,
+$$
+\begin{aligned}
+\frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0) \le \|\nabla f(\mathbf{x}_0)\|,
+\end{aligned}
+$$
+where equality holds if and only if $\mathbf{v}$ is in the direction of the gradient of $f$ at $\mathbf{x}_0$. Therefore, the gradient direction of $f$ is the direction in which $f$ increases most rapidly.
+
+:::
+
+::: {#thm-calc2-2-11}
+
+In any coordinate system $(x^1, \dots, x^m)$, the differential of a differentiable function $f$ is a row vector:
+$$
+\begin{aligned}
+df(\mathbf{x}) = \left( \frac{\partial f}{\partial x^1}(\mathbf{x}), \frac{\partial f}{\partial x^2}(\mathbf{x}), \dots, \frac{\partial f}{\partial x^m}(\mathbf{x}) \right).
+\end{aligned}
+$$
+
+In a Cartesian coordinate system $(x^1, \dots, x^m)$, the gradient of a differentiable function $f$ is a column vector:
+$$
+\begin{aligned}
+\nabla f(\mathbf{x}) = \begin{pmatrix}
+\frac{\partial f}{\partial x^1}(\mathbf{x}) \\
+\frac{\partial f}{\partial x^2}(\mathbf{x}) \\
+\vdots \\
+\frac{\partial f}{\partial x^m}(\mathbf{x})
+\end{pmatrix}.
+\end{aligned}
+$$
+
+:::
+
+## Higher-Order Partial Derivatives and Taylor Expansion
+
+::: {.callout-tip collapse="true"}
+
+## Higher-Order Partial Derivative
+
+For $i_1, \dots, i_k \in \{1, 2, \dots, m\}$, denote
+
+$$
+\begin{aligned}
+\frac{\partial^k f}{\partial (x^{i_k}) \cdots \partial (x^{i_1})}(\mathbf{x}_0) = \frac{\partial}{\partial (x^{i_k})} \left( \cdots \frac{\partial f}{\partial (x^{i_1})} \right) (\mathbf{x}_0).
+\end{aligned}
+$$
+
+This is called a $k$-th order partial derivative of $f$ at $\mathbf{x}_0$.
+
+Higher-order partial derivatives are sometimes also denoted by symbols such as: $\partial^k_{x^{i_k}, \dots, x^{i_1}} f$, $\partial^k_{i_k, \dots, i_2, i_1} f$, $f^{(k)}_{x^{i_1}, \dots, x^{i_k}}$, or even $f_{x^{i_1}, \dots, x^{i_k}}$.
+
+If for any $i_1, \dots, i_k \in \{1, 2, \dots, m\}$, the partial derivative functions $\frac{\partial^k f}{\partial x^{i_k} \cdots \partial x^{i_1}}(\mathbf{x})$ are all continuous, that is, any $k$-th order partial derivative of $f$ is continuous, then $f$ is called a $\mathscr{C}^k$ function, denoted as $f \in \mathscr{C}^k$.
+
+If for any positive integer $k$, $f \in \mathscr{C}^k$, it is denoted as $f \in \mathscr{C}^\infty$.
+
+For a multivariate mapping $F(x^1, \dots, x^m) = (f^1(x^1, \dots, x^m), \dots, f^n(x^1, \dots, x^m))^T$, $F$ is said to be $\mathscr{C}^k$ (or $\mathscr{C}^\infty$) if each of its component functions $f^i$ is $\mathscr{C}^k$ (or $\mathscr{C}^\infty$).
+
+:::
+
+::: {#thm-calc2-2-12}
+
+(1) If functions $f, g$ are both $\mathscr{C}^k$, then $f + g, fg$ are also $\mathscr{C}^k$.
+
+(2) If $f, g$ in the composite mapping $g \circ f$ are both $\mathscr{C}^k$, then the mapping $g \circ f$ is also $\mathscr{C}^k$.
+
+(3) If functions $f, g$ are both $\mathscr{C}^k$, and $g(x^1, \dots, x^m) \neq 0$, then $f/g$ is also $\mathscr{C}^k$.
+
+:::
+
+::: {#thm-calc2-2-13}
+
+For any $\mathscr{C}^k$ function $f$, for any $i_1, \dots, i_k \in \{1, 2, \dots, m\}$ and any permutation $\pi$ of $1, 2, \dots, k$,
+$$
+\begin{aligned}
+\frac{\partial^k f}{\partial x^{i_{\pi(k)}} \dots \partial x^{i_{\pi(1)}}}(\mathbf{x}) &= \frac{\partial^k f}{\partial x^{i_k} \dots \partial x^{i_1}}(\mathbf{x}).
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Higher-Order Differentials
+
+The first-order differential $\mathrm{d}f(\mathbf{x})$ of a function $f$ at $\mathbf{x}$ is a linear function with respect to a vector $\mathbf{v}$:
+
+$$
+\begin{aligned}
+\mathrm{d}f(\mathbf{x})(\mathbf{v}) &= \frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}) = \sum_i \frac{\partial f}{\partial x^i}(\mathbf{x})v^i.
+\end{aligned}
+$$
+
+Differentiating it again with respect to $\mathbf{x}$ yields the second-order differential of $f$, which is a bilinear function with respect to a pair of vectors $\mathbf{v, w}$:
+
+$$
+\begin{aligned}
+\mathrm{d}^2f(\mathbf{x})(\mathbf{v, w}) &= \frac{\partial}{\partial \mathbf{w}} \frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}) = \sum_i \left( \sum_j \frac{\partial^2 f}{\partial x^j \partial x^i}(\mathbf{x})w^j \right) v^i = \mathbf{w}^T H_f(\mathbf{x}) \mathbf{v},
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Hessian Matrix
+
+where the coefficient matrix
+
+$$
+\begin{aligned}
+H_f(\mathbf{x}) = \begin{pmatrix}
+\frac{\partial^2 f}{\partial(x^1)^2}(\mathbf{x}) & \frac{\partial^2 f}{\partial x^1 \partial x^2}(\mathbf{x}) & \cdots & \frac{\partial^2 f}{\partial x^1 \partial x^m}(\mathbf{x}) \\
+\frac{\partial^2 f}{\partial x^2 \partial x^1}(\mathbf{x}) & \frac{\partial^2 f}{\partial(x^2)^2}(\mathbf{x}) & \cdots & \frac{\partial^2 f}{\partial x^2 \partial x^m}(\mathbf{x}) \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x^m \partial x^1}(\mathbf{x}) & \frac{\partial^2 f}{\partial x^m \partial x^2}(\mathbf{x}) & \cdots & \frac{\partial^2 f}{\partial(x^m)^2}(\mathbf{x})
+\end{pmatrix},
+\end{aligned}
+$$
+
+is called the **Hessian matrix** of the function $f$ at $\mathbf{x}$.
+
+In general, the $k$-th order differential of the function $f$ is a $k$-multilinear function with respect to $k$ vectors $\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k$:
+
+$$
+\begin{aligned}
+\mathrm{d}^k f(\mathbf{x})(\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k) &= \sum_{i_1, i_2, \dots, i_k} \frac{\partial^k f}{\partial x^{i_k} \partial \dots x^{i_2} \partial x^{i_1}}(\mathbf{x}) v_1^{i_1} v_2^{i_2} \dots v_k^{i_k} \\
+&= \frac{\partial^k f}{\partial \mathbf{v}_k \dots \partial \mathbf{v}_1}(\mathbf{x}).
+\end{aligned}
+$$
+
+When $f \in \mathscr{C}^k$, $\mathrm{d}^k f(\mathbf{x})$ is a symmetric $k$-multilinear function.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Taylor Expansion
+
+For a $\mathscr{C}^k$ function $f$, consider $g(t) = f(\mathbf{x}_0 + t\mathbf{v})$. Then $g$ is $\mathscr{C}^k$,
+
+In general,
+
+$$
+\begin{aligned}
+g^{(k)}(t) &= \sum_{1 \le i_1, \dots, i_k \le m} \xi^{i_1} \dots \xi^{i_k} \frac{\partial^k f}{\partial x^{i_1} \dots \partial x^{i_k}}(\mathbf{x}_0 + t\mathbf{v}) = \left( \sum_{i=1}^m \xi^i \frac{\partial}{\partial x^i} \right)^k f(\mathbf{x}_0 + t\mathbf{v}).
+\end{aligned}
+$$
+
+where
+
+$$
+\begin{aligned}
+\left( \sum_{i=1}^m \xi^i \frac{\partial}{\partial x^i} \right)^k &= \sum_{i_1, \dots, i_k \in \{1, 2, \dots, m\}} \xi^{i_1} \dots \xi^{i_k} \frac{\partial^k}{\partial x^{i_1} \dots \partial x^{i_k}}.
+\end{aligned}
+$$
+
+Thus
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) = g(1) &= \sum_{j=0}^{k-1} \frac{g^{(j)}(0)}{j!} 1^j + \int_0^1 \frac{g^{(k)}(s)}{(k-1)!}(1 - s)^{k-1}\mathrm{d}s \\
+&= \sum_{j=0}^{k-1} \frac{\left( \sum_{i=1}^m \xi^i \frac{\partial}{\partial x^i} \right)^j f(\mathbf{x}_0)}{j!} + \int_0^1 \frac{\left( \sum_{i=1}^m \xi^i \frac{\partial}{\partial x^i} \right)^k f(\mathbf{x}_0 + s\mathbf{v})}{(k-1)!}(1 - s)^{k-1}\mathrm{d}s.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) &= \sum_{j=0}^{k-1} \frac{1}{j!} \sum_{1 \le i_1, \dots, i_j \le n} \frac{\partial^j f}{\partial x^{i_1} \dots \partial x^{i_j}}(\mathbf{x}_0)\xi^{i_1} \dots \xi^{i_j} \\
+&\quad + \frac{1}{k!} \sum_{1 \le i_1, \dots, i_k \le n} \frac{\partial^k f}{\partial x^{i_1} \dots \partial x^{i_k}}(\mathbf{x}_0 + \theta \mathbf{v})\xi^{i_1} \dots \xi^{i_k}, \quad 0 < \theta < 1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) &= \sum_{j=0}^{k} \frac{1}{j!} \sum_{1 \le i_1, \dots, i_j \le n} \frac{\partial^j f}{\partial x^{i_1} \dots \partial x^{i_j}}(\mathbf{x}_0)\xi^{i_1} \dots \xi^{i_j} + o(\|\mathbf{v}\|^k) \\
+&= \sum_{j=0}^{k} \sum_{\alpha_1 + \dots + \alpha_n = j} \frac{\partial^j f}{\partial (x^1)^{\alpha_1} \dots \partial (x^n)^{\alpha_n}}(\mathbf{x}_0) \frac{(\xi^1)^{\alpha_1} \dots (\xi^n)^{\alpha_n}}{\alpha_1! \cdots \alpha_n!} + o(\|\mathbf{v}\|^k).
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-14}
+
+Let $f$ be $k$ times continuously differentiable in a neighborhood of $\mathbf{x}_0$. Then a polynomial $P$ of degree at most $k$ satisfies
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) &= P(\mathbf{v}) + o(\|\mathbf{v}\|^k), \quad \mathbf{v} \to \mathbf{0},
+\end{aligned}
+$$
+
+if and only if $P$ is the $k$-th degree Taylor polynomial of $f$ at $\mathbf{x}_0$, that is,
+
+$$
+\begin{aligned}
+T_k f(\mathbf{x}_0)(\mathbf{v}) &= \sum_{j=0}^{k} \sum_{\alpha_1 + \dots + \alpha_n = j} \frac{\partial^j f}{\partial (x^1)^{\alpha_1} \dots \partial (x^n)^{\alpha_n}}(\mathbf{x}_0) \frac{(\xi^1)^{\alpha_1} \dots (\xi^n)^{\alpha_n}}{\alpha_1! \dots \alpha_n!},
+\end{aligned}
+$$
+
+where $\mathbf{v} = (\xi^1, \dots, \xi^n)^T$.
+
+:::
+
+## Extrema and Convexity of Multivariate Functions
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+$\mathbf{x}_0$ is called a local minimum (local maximum) point of $f: E \to \mathbb{R}$, if there exists a neighborhood $U$ of $\mathbf{x}_0$ such that for any $\mathbf{x} \in E \cap U$, $f(\mathbf{x}) \ge f(\mathbf{x}_0)$ ($f(\mathbf{x}) \le f(\mathbf{x}_0)$).
+
+$\mathbf{x}_0$ is called a critical point of the function $f$, if for any $\mathbf{v} \in \mathbb{R}^m$, $\frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0) = 0$.
+
+$\mathbf{x}_0$ is called a non-degenerate critical point of a $\mathscr{C}^2$ function $f$, if $\mathbf{x}_0$ is a critical point of the function $f$, and the Hessian matrix $H_f(\mathbf{x}_0)$ is an invertible matrix.
+
+:::
+
+::: {#thm-calc2-2-15}
+
+1. If $f$ is differentiable at an extremum point $\mathbf{x}_0$, then $\mathrm{d}f(\mathbf{x}_0) = 0$, i.e., $\mathbf{x}_0$ is a critical point of $f$.
+2. If $f$ is twice continuously differentiable at a local minimum point $\mathbf{x}_0$, then $H_f(\mathbf{x}_0)$ is positive semi-definite.
+3. If $f$ is twice continuously differentiable at a local maximum point $\mathbf{x}_0$, then $H_f(\mathbf{x}_0)$ is negative semi-definite.
+4. If $H_f(\mathbf{x}_0)$ at a critical point $\mathbf{x}_0$ has both positive and negative eigenvalues, then $\mathbf{x}_0$ is not an extremum point. If $H_f(\mathbf{x}_0)$ is invertible, and is neither positive definite nor negative definite, then $\mathbf{x}_0$ is called a saddle point of $f$. A saddle point is not an extremum point.
+
+:::
+
+::: {#thm-calc2-2-16}
+
+Let $f$ be twice continuously differentiable at a critical point $\mathbf{x}_0$. Then:
+
+(1) If $H_f(\mathbf{x}_0)$ is positive definite at $\mathbf{x}_0$, then $\mathbf{x}_0$ is a local minimum point of $f$;
+
+(2) If $H_f(\mathbf{x}_0)$ is negative definite at $\mathbf{x}_0$, then $\mathbf{x}_0$ is a local maximum point of $f$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Convex Function
+
+A set $C \subseteq \mathbb{R}^m$ is called a convex set if for any $\mathbf{x}, \mathbf{y} \in C$ and any $0 \leq t \leq 1$, $(1 - t)\mathbf{x} + t\mathbf{y} \in C$.
+
+Let $C \subseteq \mathbb{R}^m$ be a convex set. A function $f: C \to \mathbb{R}$ is called a convex function if for any $\mathbf{x}, \mathbf{y} \in C$ and any $0 \leq t \leq 1$,
+$$
+\begin{aligned}
+f((1 - t)\mathbf{x} + t\mathbf{y}) \leq (1 - t)f(\mathbf{x}) + t f(\mathbf{y}).
+\end{aligned}
+$$
+
+A function $f: C \to \mathbb{R}$ is called a concave function if $-f$ is a convex function.
+
+:::
+
+::: {#thm-calc2-2-17 name="Second-order Taylor expansion"}
+
+Let $f$ be twice continuously differentiable at $\mathbf{x}_0$. Then for $\mathbf{v} = (\xi^1, \dots, \xi^n)$,
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) &= f(\mathbf{x}_0) + \mathrm{d}f(\mathbf{x}_0)(\mathbf{v}) + \frac{1}{2}\mathbf{v}^T H_f(\mathbf{x}_0)\mathbf{v} + o(\|\mathbf{v}\|^2), \quad \|\mathbf{v}\| \to 0.
+\end{aligned}
+$$
+
+In addition, as long as $f$ is defined and twice continuously differentiable on the line segment connecting $\mathbf{x}_0$ and $\mathbf{x}_0 + \mathbf{v}$, there exists $0 < \theta < 1$ such that
+
+$$
+\begin{aligned}
+f(\mathbf{x}_0 + \mathbf{v}) &= f(\mathbf{x}_0) + \mathrm{d}f(\mathbf{x}_0)(\mathbf{v}) + \frac{1}{2}\mathbf{v}^T H_f(\mathbf{x}_0 + \theta\mathbf{v})\mathbf{v}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-2-18}
+
+If $\mathbf{x}_0$ is a local minimum of a strictly convex function $f$, then $\mathbf{x}_0$ is the global minimum of $f$, and it is the unique global minimum. If $\mathbf{x}_0$ is a local maximum of a strictly concave function $f$, then $\mathbf{x}_0$ is the global maximum of $f$, and it is the unique global maximum.
+
+:::
+
+::: {#thm-calc2-2-19}
+
+A $\mathcal{C}^2$ function $f$ is a convex/concave function if and only if the Hessian matrix of $f$ is positive semi-definite/negative semi-definite at all points.
+
+If the Hessian matrix of $f$ is positive definite/negative definite at all points, then $f$ is a strictly convex/strictly concave function.
+
+:::

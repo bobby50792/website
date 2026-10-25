@@ -1,0 +1,875 @@
+---
+title: "Definite Integral"
+page-layout: article
+search: true
+number-offset: [5]
+
+crossref:
+  chapters: true
+---
+
+## The Concept of the Definite Integrals
+
+::: {.callout-tip collapse="true"}
+
+## Darboux Integral
+
+Consider a bounded function $f$ on a closed interval $[a,b]$, and a partition of $[a,b]$:
+$$
+P: \quad a = x_0 < x_1 < \cdots < x_N = b.
+$$
+
+For each subinterval $[x_{k-1}, x_k]$, define
+
+$$
+M_k = \sup_{x \in [x_{k-1},x_k]} f(x),
+\qquad
+m_k = \inf_{x \in [x_{k-1},x_k]} f(x).
+$$
+
+The **upper Darboux sum** of $f$ with respect to the partition $P$ is
+
+$$
+\overline{S}(f,P)
+= \sum_{k=1}^{N} M_k (x_k - x_{k-1}),
+$$
+
+and the **lower Darboux sum** is
+
+$$
+\underline{S}(f,P)
+= \sum_{k=1}^{N} m_k (x_k - x_{k-1}).
+$$
+
+Define
+$$
+\underline{S}(f) = \sup_P\, \underline{S}(f,P), \qquad
+\overline{S}(f) = \inf_P\, \overline{S}(f,P),
+$$
+
+where the supremum and infimum are taken over all partitions $P$ of $[a,b]$.
+
+- $\underline{S}(f)$ is called the **Darboux lower integral** of $f$ on $[a,b]$;
+- $\overline{S}(f)$ is called the **Darboux upper integral** of $f$ on $[a,b]$.
+
+If
+$$
+\underline{S}(f) = \overline{S}(f),
+$$
+then $f$ is said to be **Darboux integrable** on $[a,b]$. The common value is denoted by
+$$
+\int_a^b f(x)\,dx,
+$$
+and is called the **Darboux integral** of $f$ on $[a,b]$.
+
+:::
+
+::: {#thm-calc1-5-1}
+
+For any two partitions $P, Q$ of the interval $[a,b]$,  let $P \lor Q$ denote the partition consisting of all points in $P \cup Q$.  We call $P \lor Q$ the **common refinement** of $P$ and $Q$.  Then
+$$
+\underline{S}(f, Q) \;\le\; \underline{S}(f, P \lor Q) \;\le\; \overline{S}(f, P \lor Q) \;\le\; \overline{S}(f, P).
+$$
+
+:::
+
+::: {#thm-calc1-5-2}
+
+A bounded function $f$ on the closed interval $[a,b]$ is Darboux integrable  **if and only if** for every $\varepsilon > 0$, there exists a partition $P$ of $[a,b]$ such that
+$$
+\overline{S}(f,P) - \underline{S}(f,P) < \varepsilon.
+$$
+
+:::
+
+::: {#thm-calc1-5-3}
+
+A bounded function $f$ on the closed interval $[a,b]$ is Darboux integrable,  and $I \in \mathbb{R}$ is its Darboux integral,  **if and only if** for every $\varepsilon > 0$, there exists a partition $P$ of $[a,b]$ such that
+$$
+I - \varepsilon < \underline{S}(f,P) \le I \le \overline{S}(f,P) < I + \varepsilon.
+$$
+
+:::
+
+::: {#thm-calc1-5-4}
+
+Every monotonic function on a bounded closed interval $[a,b]$ is Darboux integrable.  More precisely, for every $\varepsilon > 0$, there exists $\delta > 0$ such that  for any partition
+$$
+a = x_0 < x_1 < \cdots < x_N = b,
+$$
+ if
+$$
+\|P\| := \max_{1 \le k \le N} (x_k - x_{k-1}) < \delta,
+$$
+then
+$$
+\overline{S}(f,P) - \underline{S}(f,P) < \varepsilon .
+$$
+
+:::
+
+::: {#thm-calc1-5-5}
+
+If $f$ is a bounded function on the closed interval $[a,b]$, and $f$ is continuous on the open interval $(a,b)$,  then $f$ is Darboux integrable on $[a,b]$. More precisely, for every $\varepsilon > 0$,  there exists $\delta > 0$ such that for any partition  $P: a = x_0 < x_1 < \cdots < x_N = b$,
+
+if
+$$
+\|P\| := \max_{1 \le k \le N} (x_k - x_{k-1}) < \delta,
+$$
+then
+
+$$
+\overline{S}(f, P) - \underline{S}(f, P) < \varepsilon.
+$$
+
+:::
+
+::: {#cor-calc1-5-1}
+
+If a bounded function $f$ on the closed interval $[a,b]$ has only finitely many       discontinuities,  then $f$ is Darboux integrable on $[a,b]$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Riemann Integral
+
+For a function $f:[a,b]\to \mathbb{R}$, a partition of the interval $[a,b]$ is
+$$
+P:\ a = x_0 < x_1 < \cdots < x_N = b.
+$$
+
+Along with a set of sample points
+$$
+\xi = \{\xi_i\}_{i=1}^{N}, \qquad (\xi_i \in [x_{i-1}, x_i]),
+$$
+the **Riemann sum** is defined as
+$$
+S(f, P, \xi) = \sum_{i=1}^{N} f(\xi_i)(x_i - x_{i-1}).
+$$
+A function $f : [a,b] \to \mathbb{R}$ is said to be **Riemann integrable** on $[a,b]$ if there exists a real number $I \in \mathbb{R}$ such that for every $\varepsilon > 0$, there exists $\delta > 0$ with the property that for any tagged partition $(P,\xi)$ of $[a,b]$, if the norm of the partition satisfies $\|P\| < \delta$, then
+
+$$
+\left| S(f, P, \xi) - I \right| < \varepsilon.
+$$
+
+In this case, we call $I$ the **Riemann integral** of $f$ on $[a,b]$, and write
+
+$$
+I = \int_a^b f(x)\, dx.
+$$
+
+:::
+
+::: {#thm-calc1-5-6}
+
+For a function $f:[a,b]\to\mathbb{R}$, the following statements are equivalent:
+
+$\text{(1)}\quad f$ is **Riemann integrable** on $[a,b]$;
+
+$\text{(2)}\quad f$ is **bounded** on $[a,b]$, and **Darboux integrable**;
+
+$\text{(3)}\quad f$ is **bounded** on $[a,b]$, and the set of all discontinuities of $f$ in $[a,b]$ forms a **set of measure zero**.
+
+:::
+
+## Properties and Computation of Definite Integrals
+
+::: {#thm-calc1-5-7 name="Newton-Leibniz Formula"}
+
+If $f \in \mathcal{R}[a,b]$ and $F$ is an antiderivative of $f$, then
+$$
+\int_a^b f(u)\,du = F(b) - F(a).
+$$
+
+:::
+
+::: {#thm-calc1-5-8}
+
+If $f$ is Riemann integrable on $[a,b]$ and on $[b,c]$,  then $f$ is integrable on $[a,c]$, and
+$$
+\int_a^b f(x)\,dx + \int_b^c f(x)\,dx
+= \int_a^c f(x)\,dx.
+$$
+
+:::
+
+::: {#thm-calc1-5-9}
+
+Assume $f \in \mathcal{C}[a,b]$, $g \in \mathcal{R}[a,b]$, and $g(x) \ge 0$ for all $x \in [a,b]$.  Then there exists $\xi \in [a,b]$ such that
+$$
+\int_a^b f(x)g(x)\,dx
+= f(\xi)\int_a^b g(x)\,dx.
+$$
+
+:::
+
+::: {#thm-calc1-5-10}
+
+Assume that $f \in \mathcal{R}[a,b]$. Define
+$$
+F(x) = \int_a^x f(u)\,du.
+$$
+Then $F \in \mathcal{C}[a,b]$. Then
+
+$\text{(1)}\quad$Then the integral with variable upper limit $F(x) = \int_a^x f(t) \mathrm{d}t$ is continuous on $[a, b]$.
+
+$\text{(2)}\quad$Let function $f$ be continuous at a point $x_0 \in [a, b]$. Then $F$ is differentiable at $x_0$, and $F'(x_0) = f(x_0).$
+
+:::
+
+::: {#thm-calc1-5-11}
+
+Let function $f$ be continuous on $[a, b]$. Then
+$$
+\frac{\mathrm{d}}{\mathrm{d}x} \int_a^x f(t) \mathrm{d}t = f(x) \quad (a \leqslant x \leqslant b).
+$$
+
+:::
+
+::: {#thm-calc1-5-12}
+
+Let $f, g \in \mathcal{R}[a,b]$. Then
+$$
+\left|
+\int_a^b f(x)g(x)\,dx
+\right|
+\,\le\,
+\sqrt{\int_a^b |f(x)|^2\,dx}\;
+\sqrt{\int_a^b |g(x)|^2\,dx}.
+$$
+
+:::
+
+::: {#thm-calc1-5-13}
+
+If $f^{(n+1)} \in \mathcal{R}[a,b]$, then for every $x \in [a,b]$,
+$$
+f(x)
+=
+f(a)
++
+f'(a)(x-a)
++
+\cdots
++
+\frac{f^{(n)}(a)}{n!} (x-a)^n
++
+\int_{a}^{x}
+\frac{f^{(n+1)}(t)}{n!} (x - t)^n \, dt.
+$$
+
+:::
+
+::: {#thm-calc1-5-14}
+
+Suppose that $f$ is continuous on an interval $I$,  $a, b \in I$, and $\varphi : [\alpha, \beta] \to I$ satisfies  $\varphi(\alpha) = a$, $\varphi(\beta) = b$, and $\varphi' \in \mathcal{R}[\alpha, \beta]$.  Then
+$$
+\int_a^b f(x)\,dx
+= \int_\alpha^\beta f(\varphi(t))\, \varphi'(t)\, dt.
+$$
+
+:::
+
+## Improper Integrals
+
+::: {.callout-tip collapse="true"}
+
+## Improper Integral
+
+Let $f:[a,+\infty)\to \mathbb{R}$ be Riemann integrable on every bounded closed interval $[a,A]$.
+
+If
+
+$$
+\lim_{A\to+\infty} \int_a^A f(x)\,dx
+$$
+
+exists, then the **improper integral** $\displaystyle \int_a^{+\infty} f(x)\,dx$ is said to **converge**, and we define
+
+$$
+\int_a^{+\infty} f(x)\,dx
+=
+\lim_{A\to+\infty} \int_a^A f(x)\,dx.
+$$
+
+If the limit does not exist, the improper integral is said to **diverge**.
+
+Similarly, we define
+$$
+\int_{-\infty}^a g(x)\,dx
+=
+\lim_{A\to-\infty} \int_A^a g(x)\,dx.
+$$
+
+Let $f:\mathbb{R}\to\mathbb{R}$ be Riemann integrable on every bounded closed interval $[a,b]$.
+
+If both improper integrals
+
+$$
+\int_a^{+\infty} f(x)\,dx,
+\qquad
+\int_{-\infty}^{a} f(x)\,dx
+$$
+
+converge, then the improper integral
+
+$$
+\int_{-\infty}^{+\infty} f(x)\,dx
+$$
+
+is said to **converge**, and we define
+
+$$
+\int_{-\infty}^{+\infty} f(x)\,dx
+=
+\int_{-\infty}^{a} f(x)\,dx
++
+\int_{a}^{+\infty} f(x)\,dx.
+$$
+
+Let $f:[a,b)\to\mathbb{R}$ be unbounded, but Riemann integrable on every bounded closed interval $[a,b-\delta]$ for $\delta>0$.  In this case, the integral $\displaystyle \int_a^b f(x)\,dx$ is called an **improper integral**, and $b$ is called an **improper point**.
+
+If
+
+$$
+\lim_{\delta\to 0^+} \int_a^{\,b-\delta} f(x)\,dx
+$$
+
+exists, then the improper integral $\displaystyle \int_a^b f(x)\,dx$ is said to **converge**, and we define
+
+$$
+\int_a^b f(x)\,dx
+=
+\lim_{\delta\to 0^+} \int_a^{\,b-\delta} f(x)\,dx.
+$$
+
+Similarly, one may define improper integrals where the left endpoint is an improper point.
+
+:::
+
+**Examples**
+
+1.
+
+    $$
+    \int_{1}^{+\infty} \frac{1}{x^p} \mathrm{d}x
+    $$
+
+    **Solution:**
+    $$
+    \int_{1}^{A} \frac{1}{x^p} \mathrm{d}x =
+    \begin{cases}
+    \frac{1 - A^{1-p}}{p-1}, & p \neq 1, \\
+    \ln A, & p = 1.
+    \end{cases}
+    $$
+
+    Therefore, the integral converges if and only if $p > 1$. When it converges, the limit is:
+
+    $$
+    \int_{1}^{+\infty} \frac{1}{x^p} \mathrm{d}x = \frac{1}{p-1}
+    $$
+
+2.
+
+    $$
+    \int_{0}^{1} \frac{1}{x^p} \mathrm{d}x
+    $$
+
+    **Solution:**
+    $$
+    \int_{\delta}^{1} \frac{1}{x^p} \mathrm{d}x =
+    \begin{cases}
+    \frac{1 - \delta^{1-p}}{1-p}, & p \neq 1, \\
+    -\ln \delta, & p = 1.
+    \end{cases}
+    $$
+
+    Therefore, the integral converges if and only if $p < 1$. When it converges, the limit is:
+
+    $$
+    \int_{0}^{1} \frac{1}{x^p} \mathrm{d}x = \frac{1}{1-p}
+    $$
+
+::: {#thm-calc1-5-15}
+
+Suppose $\int_{a}^{\omega} f'(x)g(x) \mathrm{d}x$ converges and $\lim\limits_{x \to \omega^-} f(x)g(x)$ converges. Then $\int_{a}^{\omega} f(x)g'(x) \mathrm{d}x$ converges, and:
+$$
+\int_{a}^{\omega} f(x)g'(x) \mathrm{d}x = f(x)g(x) \bigg|_{a}^{\omega} - \int_{a}^{\omega} f'(x)g(x) \mathrm{d}x.
+$$
+
+:::
+
+::: {#thm-calc1-5-16}
+
+The improper integral $\int_{a}^{+\infty} f(x) \mathrm{d}x$ converges if and only if for any $\varepsilon > 0$, there exists $N_{\varepsilon} > 0$ such that for any $A_2 > A_1 > N_{\varepsilon}$, the following holds:
+$$
+\left| \int_{A_1}^{A_2} f(x) \mathrm{d}x \right| < \varepsilon.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Absolutely Convergent
+
+An improper integral $\int_{a}^{+\infty} f(x) \mathrm{d}x$ is said to be **absolutely convergent**, or $f$ is absolutely integrable on the interval $[a, +\infty)$, if the improper integral $\int_{a}^{+\infty} |f(x)| \mathrm{d}x$ converges.
+
+From the inequality:
+
+$$
+\left| \int_{A_1}^{A_2} f(x) \mathrm{d}x \right| \leq \int_{A_1}^{A_2} |f(x)| \mathrm{d}x
+$$
+
+It is known that any **absolutely convergent** improper integral is also **convergent**.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+An improper integral is said to be **conditionally convergent** if it converges but is not absolutely convergent.
+
+:::
+
+::: {#thm-calc1-5-17}
+
+Let $f$ be Riemann integrable on any bounded closed interval $[a, A]$, and let $g$ be monotonic. If:
+
+* $\int_{a}^{A} f(x) \mathrm{d}x$ is bounded for all $A > a$,
+* $\lim\limits_{x \to +\infty} g(x) = 0$,
+
+then the improper integral $\int_{a}^{+\infty} f(x)g(x) \mathrm{d}x$ converges.
+
+:::
+
+::: {#thm-calc1-5-18}
+
+Let $f$ be Riemann integrable on any bounded closed interval $[a, A]$, and let $g$ be monotonic. If:
+
+* The improper integral $\int_{a}^{+\infty} f(x) \mathrm{d}x$ converges,
+* $g(x)$ is bounded on the interval $[a, +\infty)$,
+
+then the improper integral $\int_{a}^{+\infty} f(x)g(x) \mathrm{d}x$ converges.
+
+:::
+
+## Applications of Definite Integrals
+
+::: {.callout-tip collapse="true"}
+
+## The Gamma Function
+
+For any $\alpha > 0$:
+
+$$
+\Gamma(\alpha) = \int_{0}^{+\infty} x^{\alpha-1}e^{-x} \mathrm{d}x
+$$
+
+The function satisfies $\Gamma(\alpha+1) = \alpha\Gamma(\alpha)$ and $\Gamma(1) = 1$. Therefore, for any positive integer $n$:
+
+$$
+\Gamma(n+1) = n!
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## The Beta Function
+
+For any $\alpha > 0, \beta > 0$:
+
+$$
+B(\alpha, \beta) = \int_{0}^{1} x^{\alpha-1}(1-x)^{\beta-1} \mathrm{d}x
+$$
+
+It satisfies $B(\alpha+1, \beta) = \frac{\alpha}{\beta} B(\alpha, \beta+1)$.
+
+- The relationship between the **Beta function** and the **Gamma function** is given by the following identity:
+
+$$
+B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## The area of a Plane Region
+
+**Area formula for a simple closed parametric curve**
+
+For a curve given by $\gamma: x = x(t),\, y = y(t),\, \alpha \le t \le \beta$,  the area enclosed by $\gamma$ is
+
+$$
+\begin{aligned}
+\text{Area}
+&= - \int_{\alpha}^{\beta} y(t)\, x'(t)\, dt
+   = \int_{\alpha}^{\beta} x(t)\, y'(t)\, dt.
+\end{aligned}
+$$
+
+Averaging these two expressions yields
+
+$$
+\begin{aligned}
+\text{Area}
+&= \frac{1}{2} \int_{\alpha}^{\beta}
+\bigl( x(t) y'(t) - x'(t) y(t) \bigr)\, dt.
+\end{aligned}
+$$
+
+Equivalently, using the determinant notation,
+
+$$
+\begin{aligned}
+\text{Area}
+&= \frac{1}{2}
+\int_{\alpha}^{\beta}
+\begin{vmatrix}
+x(t) & x'(t) \\
+y(t) & y'(t)
+\end{vmatrix}
+dt.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Length of a Curve
+
+Let $\mathbf{x}(t) = (x_1(t), \dots, x_n(t)) \in \mathbb{R}^n$  be a parametrization of the curve $\gamma$, where $\alpha \le t \le \beta$. A partition of the interval $[\alpha, \beta]$ is given by
+
+$$
+\mathcal{P} : \alpha = t_0 < t_1 < \cdots < t_n = \beta.
+$$
+
+For points on the curve defined by
+
+$$
+P_k = \mathbf{x}(t_k),
+$$
+
+the length of the polygonal line $P_0 P_1 \cdots P_n$ is
+
+$$
+L(\mathcal{P})
+=
+\sum_{k=1}^{n} \| P_{k-1} P_k \|
+=
+\sum_{k=1}^{n} \| \mathbf{x}(t_k) - \mathbf{x}(t_{k-1}) \|.
+$$
+
+In coordinates, this becomes
+
+$$
+L(\mathcal{P})
+=
+\sum_{k=1}^{n}
+\sqrt{
+\bigl( x_1(t_k) - x_1(t_{k-1}) \bigr)^2
++ \cdots +
+\bigl( x_n(t_k) - x_n(t_{k-1}) \bigr)^2 }.
+$$
+
+It is clear that as the partition is refined, the quantity $L(\mathcal{P})$ increases.
+
+If the supremum $\displaystyle \sup_{\mathcal{P}} L(\mathcal{P})$ exists,  then the curve $\gamma$ is said to be **rectifiable**, and
+
+$$
+L(\gamma) = \sup_{\mathcal{P}} L(\mathcal{P})
+$$
+
+is called the **length** of the curve $\gamma$.
+$$
+L(\gamma) = \int_{\alpha}^{\beta} \| \mathbf{x}'(t) \| \, dt.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Curvature and Torsion of a Curve
+
+$$
+l = l(t) = \int_{\alpha}^{t} \|\mathbf{x}'(s)\|\, ds
+$$
+
+$$
+l'(t) = \|\mathbf{x}'(t)\| > 0
+$$
+
+$$
+\tilde{\mathbf{x}}(l) = \mathbf{x}(t(l))
+\quad \text{(the reparametrization by arc length)}
+$$
+
+$$
+\tilde{\mathbf{x}}'(l)
+= \mathbf{x}'(t(l))\, t'(l)
+= \frac{\mathbf{x}'(t)}{l'(t)}
+= \frac{\mathbf{x}'(t)}{\|\mathbf{x}'(t)\|}
+\quad \text{is the unit tangent vector}
+$$
+
+$$
+\sin\frac{\Delta \theta}{2}
+= \frac{1}{2}\, \|\tilde{\mathbf{x}}'(l+\Delta l) - \tilde{\mathbf{x}}'(l)\|
+$$
+
+$$
+= \frac{1}{2}\, \|\tilde{\mathbf{x}}''(l)\,\Delta l + o(\Delta l)\|
+$$
+
+$$
+= \frac{1}{2}\, \|\tilde{\mathbf{x}}''(l)\|\,|\Delta l| + o(\Delta l)
+$$
+
+$$
+\Delta \theta
+= \|\tilde{\mathbf{x}}''(l)\|\,\Delta l + o(\Delta l)
+$$
+
+$$
+\lim_{\Delta l \to 0} \frac{\Delta \theta}{\Delta l}
+= \|\tilde{\mathbf{x}}''(l)\|
+$$
+
+$$
+\tilde{\mathbf{x}}''(l)
+= \frac{d^2}{dl^2}\mathbf{x}(t(l))
+= \frac{d}{dt}\left( \frac{d}{dt}\mathbf{x}(t)\, \frac{dt}{dl} \right)\frac{dt}{dl}
+$$
+
+$$
+= \left( \frac{\mathbf{x}'(t)}{\|\mathbf{x}'(t)\|} \right)' \frac{1}{\|\mathbf{x}'(t)\|}
+$$
+
+$$
+= \left(
+\frac{\mathbf{x}''(t)}{\|\mathbf{x}'(t)\|}
+-
+\frac{1}{2}\, \frac{\mathbf{x}'(t)\, 2\langle \mathbf{x}'(t),\mathbf{x}''(t)\rangle}{\|\mathbf{x}'(t)\|^3}
+\right)
+\frac{1}{\|\mathbf{x}'(t)\|}
+$$
+
+$$
+=
+\left(
+\mathbf{x}''(t)
+-
+\frac{\mathbf{x}'(t)}{\|\mathbf{x}'(t)\|}
+\left\langle
+\frac{\mathbf{x}'(t)}{\|\mathbf{x}'(t)\|},
+\mathbf{x}''(t)
+\right\rangle
+\right)
+\frac{1}{\|\mathbf{x}'(t)\|^2}
+$$
+
+$$
+\lim_{\Delta l \to 0}
+\frac{\Delta \theta}{\Delta l}
+= \|\tilde{\mathbf{x}}''(l)\|
+= \kappa
+\quad\text{(curvature)}
+$$
+
+$$
+\tilde{\mathbf{x}}''(l): \ \text{curvature vector}
+\qquad
+\kappa = \|\tilde{\mathbf{x}}''(l)\|: \ \text{curvature}
+$$
+
+$$
+\mathbf{T}(l) = \tilde{\mathbf{x}}'(l): \ \text{unit tangent vector of the curve}
+$$
+
+$$
+\mathbf{N}(l) =
+\frac{\tilde{\mathbf{x}}''(l)}{\|\tilde{\mathbf{x}}''(l)\|}:
+\ \text{(unit) principal normal vector of the curve}
+$$
+
+$$
+\mathbf{T}'(l) = \kappa \mathbf{N}(l)
+$$
+
+$$
+0 = \langle \mathbf{N}(l), \mathbf{N}(l) \rangle'
+= 2\langle \mathbf{N}(l), \mathbf{\dot{N}}(l) \rangle
+\qquad \Longrightarrow \qquad
+\mathbf{\dot{N}}(l) \ \text{is orthogonal to } \mathbf{N}(l)
+$$
+
+$$
+0 = \langle \mathbf{T}(l), \mathbf{N}(l) \rangle'
+= \kappa \langle \mathbf{N}(l), \mathbf{N}(l)\rangle
++ \langle \mathbf{T}(l), \mathbf{\dot{N}}(l) \rangle
+= \kappa + \langle \mathbf{T}(l), \mathbf{\dot{N}}(l) \rangle
+$$
+
+**Fundamental Equations of Plane Curve in $\mathbb{R}^2$:**
+
+$$
+\dot{\mathbf{N}}(l) = -\kappa \mathbf{T}(l)
+$$
+
+In arc-length parametrization, the moving frame $(\mathbf{T}, \mathbf{N})$  of a plane curve in $\mathbb{R}^2$ satisfies the fundamental equations:
+
+$$
+(\mathbf{T} \ \mathbf{N})'
+=
+(\mathbf{T} \ \mathbf{N})
+\begin{pmatrix}
+0 & -\kappa \\
+\kappa & 0
+\end{pmatrix}
+$$
+
+Given a curvature function $\kappa(l)$ and any orthonormal initial vectors  $\mathbf{T}_0, \mathbf{N}_0$, the above system has a unique solution.
+
+The curve is then obtained from
+
+$$
+\mathbf{x}(l)
+=
+\mathbf{x}_0
++
+\int_0^l \mathbf{T}(s)\, ds
+$$
+
+**A plane curve is uniquely determined by its curvature.**
+
+**Fundamental Equations of Plane Curve in $\mathbb{R}^3$:**
+
+$$
+\mathbf{B}(l) = \mathbf{T}(l) \times \mathbf{N}(l):
+\ \text{the (unit) binormal vector of the curve}
+$$
+
+$\dot{\mathbf{N}}(l)$ is orthogonal to $\mathbf{N}(l)$
+
+$$
+\langle \mathbf{T}(l), \dot{\mathbf{N}}(l) \rangle = -\kappa
+$$
+
+$$
+\dot{\mathbf{N}}(l)
+= -\kappa \mathbf{T}(l) + \tau \mathbf{B}(l)
+$$
+
+$$
+\tau = \langle \dot{\mathbf{N}}(l), \mathbf{B}(l) \rangle
+\quad
+\text{(torsion of the curve)}
+$$
+
+$$
+\dot{\mathbf{B}}(l)
+= \dot{\mathbf{T}}(l) \times \mathbf{N}(l)
++ \mathbf{T}(l) \times \dot{\mathbf{N}}(l)
+= \tau\, \mathbf{T}(l) \times \mathbf{B}(l)
+= -\tau\, \mathbf{N}(l)
+$$
+
+In arc-length parametrization, the moving frame  $(\mathbf{T}, \mathbf{N}, \mathbf{B})$ of a space curve in $\mathbb{R}^3$ satisfies:
+
+$$
+(\mathbf{T}\ \mathbf{N}\ \mathbf{B})'
+=
+(\mathbf{T}\ \mathbf{N}\ \mathbf{B})
+\begin{pmatrix}
+0 & -\kappa & 0 \\
+\kappa & 0 & -\tau \\
+0 & \tau & 0
+\end{pmatrix}
+$$
+
+**A space curve in $\mathbb{R}^3$ is uniquely determined by its curvature and torsion.**
+
+**Frenet–Serret Formulas:**
+
+$$
+\mathbf{T}
+= \frac{\mathbf{x}'}{\|\mathbf{x}'\|}
+$$
+
+$$
+\frac{dt}{dl} = \frac{1}{\|\mathbf{x}'\|}
+$$
+
+$$
+\mathbf{T}'
+= \frac{\mathbf{x}''}{\|\mathbf{x}'\|}
+- \frac{\mathbf{x}'}{\|\mathbf{x}'\|^{3}}
+\langle \mathbf{x}', \mathbf{x}'' \rangle
+= \frac{1}{\|\mathbf{x}'\|}
+\left( \mathbf{x}'' - \mathbf{T}\langle \mathbf{T}, \mathbf{x}'' \rangle \right)
+$$
+
+$$
+\dot{\mathbf{T}}
+= \mathbf{T}'\frac{dt}{dl}
+\quad\text{(curvature vector)}
+$$
+
+$$
+\kappa
+= \frac{1}{\|\mathbf{x}'\|^{2}}
+\left\|\mathbf{x}'' - \mathbf{T}\langle\mathbf{T}, \mathbf{x}''\rangle\right\|
+$$
+
+$$
+\mathbf{N}
+= \frac{\dot{\mathbf{T}}}{\|\dot{\mathbf{T}}\|}
+= \frac{\mathbf{x}'' - \mathbf{T}\langle \mathbf{T},\mathbf{x}''\rangle}
+{\left\|\mathbf{x}'' - \mathbf{T}\langle \mathbf{T},\mathbf{x}''\rangle\right\|}
+$$
+
+$$
+\mathbf{B}
+= \frac{\mathbf{x}' \times \mathbf{x}''}{\|\mathbf{x}' \times \mathbf{x}''\|}
+$$
+
+$$
+\mathbf{B}'
+=
+\frac{\mathbf{x}' \times \mathbf{x}''' - \mathbf{B}
+\langle \mathbf{B}, \mathbf{x}' \times \mathbf{x}''' \rangle}
+{\|\mathbf{x}' \times \mathbf{x}''\|}
+$$
+
+$$
+\dot{\mathbf{B}}
+=
+\mathbf{B}'\frac{dt}{dl}
+=
+- \tau \mathbf{N}
+$$
+
+$$
+\tau
+= -\langle \dot{\mathbf{B}}, \mathbf{N} \rangle
+$$
+
+$$
+\tau
+=
+\frac{\langle \mathbf{x}''',\mathbf{T}\times\mathbf{N}\rangle}
+{\|\mathbf{x}'\times\mathbf{x}''\|}
+=
+\frac{\langle\mathbf{x}''',\mathbf{B}\rangle}
+{\|\mathbf{x}'\times\mathbf{x}''\|}
+=
+\frac{\langle \mathbf{x}''', \mathbf{x}' \times \mathbf{x}'' \rangle}
+{\|\mathbf{x}' \times \mathbf{x}''\|^{2}}
+$$
+
+:::

@@ -5,8 +5,181 @@ search: true
 number-offset: [5]
 
 crossref:
-  chapters: true      
+  chapters: true
 
 ---
 
-## Hello
+## Angular Momentum for a Point Particle
+
+Define the angular momentum $\vec{L}_S$ about the point $S$ as the cross product of the vector from $S$ to the point particle, $\vec{r}_S$, and the momentum of the particle, $\vec{p}$,
+$$
+\begin{aligned}
+\vec{L}_S = \vec{r}_S \times \vec{p}.
+\end{aligned}
+$$
+
+Now, let us check out the relation between angular momentum and angular velocity. For simplicity, choose the fixed point to be the origin and the plane spanned by $\vec{r}$ and $\vec{v}$ for the polar coordinate system,
+
+$$
+\begin{aligned}
+\vec{L} &= \vec{r} \times \vec{p} \\
+&= m \vec{r} \times \vec{v} \\
+&= m r^2 \dot{\theta} \hat{r} \times \hat{\theta} \\
+&= m r^2 \dot{\theta} \hat{k} \\
+&= m r^2 \vec{\omega},
+\end{aligned}
+$$
+
+where we use the fact that in the polar coordinate system,
+
+$$
+\begin{aligned}
+\vec{v} &= \vec{v}_r + \vec{v}_\theta \\
+&= \dot{r} \hat{r} + r \dot{\theta} \hat{\theta}.
+\end{aligned}
+$$
+
+## Conservation of Angular Momentum
+
+::: {.callout-tip collapse="true"}
+
+## Torque
+
+$$
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S}{\mathrm{d}t} = \frac{\mathrm{d}}{\mathrm{d}t}(\vec{r}_S \times \vec{p}) = \left( \frac{\mathrm{d}\vec{r}_S}{\mathrm{d}t} \times \vec{p} \right) + \left( \vec{r}_S \times \frac{\mathrm{d}\vec{p}}{\mathrm{d}t} \right).
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{\mathrm{d}\vec{r}_S}{\mathrm{d}t} \times \vec{p} = \vec{v} \times m\vec{v} = 0.
+\end{aligned}
+$$
+
+The rate of angular momentum change about the point $S$ is then
+
+$$
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S}{\mathrm{d}t} = \vec{r}_S \times \frac{\mathrm{d}\vec{p}}{\mathrm{d}t} = \vec{r}_S \times \vec{F} = \vec{M}_S.
+\end{aligned}
+$$
+
+:::
+
+### Theorem of Angular Momentum for a Particle
+
+The change in angular momentum is caused by the torque,
+
+$$
+\begin{aligned}
+\vec{J}_S = \int_{t_1}^{t_2} \vec{M}_S \mathrm{d}t = \vec{L}_{S,t_2} - \vec{L}_{S,t_1},
+\end{aligned}
+$$
+
+where $\vec{J}_S$ is defined as the angular impulse about a point $S$.
+
+::: {#thm-phys-5-1 name="Conservation of Angular Momentum about a Point"}
+
+If the torque about point $S$ is zero,
+$$
+\begin{aligned}
+\vec{M}_S = \frac{\mathrm{d}\vec{L}_S}{\mathrm{d}t} = 0,
+\end{aligned}
+$$
+
+then $\vec{L}_S = \text{const}$.
+
+:::
+
+## System of Particles
+
+### Theorem of Angular Momentum
+
+The angular momentum $\vec{L}_{S,j}$ of the $j^{th}$ particle is
+
+$$
+\begin{aligned}
+\vec{L}_{S,j} = \vec{r}_{S,j} \times \vec{p}_j.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{L}_S^{sys} = \sum_{j=1}^{N} \vec{L}_{S,j} = \sum_{j=1}^{N} \vec{r}_{S,j} \times \vec{p}_j.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S^{sys}}{\mathrm{d}t} = \frac{\mathrm{d}}{\mathrm{d}t} \sum_{j=1}^{N} \vec{L}_{S,j} = \sum_{j=1}^{N} \left( \frac{\mathrm{d}\vec{r}_{S,j}}{\mathrm{d}t} \times \vec{p}_j + \vec{r}_{S,j} \times \frac{\mathrm{d}\vec{p}_j}{\mathrm{d}t} \right).
+\end{aligned}
+$$
+
+we have
+
+$$
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S^{sys}}{\mathrm{d}t} &= \sum_{j=1}^{N} \left( \vec{r}_{S,j} \times \frac{\mathrm{d}\vec{p}_j}{\mathrm{d}t} \right) \\
+&= \sum_{j=1}^{N} (\vec{r}_{S,j} \times \vec{F}_j) \\
+&= \sum_{j=1}^{N} (\vec{r}_{S,j} \times (\vec{F}_j^{ext} + \vec{F}_j^{int})) \\
+&= \vec{M}_S^{ext} + \vec{M}_S^{int} = \vec{M}_S^{ext}.
+\end{aligned}
+$$
+
+::: {#thm-phys-5-2}
+
+Angular Momentum of a System of Particles about Different Points A and B satisfies
+$$
+\begin{aligned}
+\vec{L}_A = \vec{L}_B + \vec{r}_{A,B} \times \vec{p}_{sys}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-phys-5-3 name="Conservation Law of Angular Momentum"}
+
+For a system of particles, when the net external torque equals zero, the angular momentum of the system becomes constant,
+$$
+\begin{aligned}
+\vec{M}_S^{ext} = 0 \Rightarrow \vec{L}_S^{sys} = \text{const}.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Center of Mass Reference Frame
+
+$$
+\begin{aligned}
+\vec{M}' = \frac{\mathrm{d}\vec{L}'}{\mathrm{d}t} = \sum_{i} \vec{r}'_i \times \vec{f}_i
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{L}' = \sum_{i} m_i \vec{r}'_i \times \vec{v}'_i.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{M}'_{inertial} = \sum_{i} \vec{r}'_i \times (-m_i\vec{a}_c) = \sum_{i} -m_i\vec{r}'_i \times \vec{a}_c = 0 \times \vec{a}_c = 0.
+\end{aligned}
+$$
+
+Here $(-m_i\vec{a}_c)$ is the inertial force. The inertial torque equals 0 since the overall effect of inertial force acts on the center of mass.
+
+The angular momentum of the system in an inertial reference frame is:
+$$
+\begin{aligned}
+\vec{L} = \sum_{i} m_i \vec{r}_i \times \vec{v}_i = \sum_{i} m_i (\vec{r}'_i + \vec{r}_c) \times (\vec{v}'_i + \vec{v}_c) = \sum_{i} m_i \vec{r}'_i \times \vec{v}'_i + \sum_{i} m_i \vec{r}_c \times \vec{v}_c = \vec{L}' + \vec{r}_c \times \vec{p}_c,
+\end{aligned}
+$$
+
+since $\sum_i m_i \vec{r}'_i = 0$ and $\sum_i m_i \vec{v}'_i = 0$.
+
+:::

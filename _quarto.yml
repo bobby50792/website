@@ -75,6 +75,26 @@ website:
                     - text: "Fourier Series"
                       href: docs/notes/calculus/multivariable/10.qmd
 
+            - section: "Linear Algebra"
+              href: docs/notes/linear-algebra/0.qmd
+              contents:
+                - text: "Vector Spaces"
+                  href: docs/notes/linear-algebra/1.qmd
+                - text: "Linear Transformations and Matrices"
+                  href: docs/notes/linear-algebra/2.qmd
+                - text: "Elementary Matrix Operations and Systems of Linear Equations"
+                  href: docs/notes/linear-algebra/3.qmd
+                - text: "Determinants"
+                  href: docs/notes/linear-algebra/4.qmd
+                - text: "Diagonalization"
+                  href: docs/notes/linear-algebra/5.qmd
+                - text: "Inner Product Spaces"
+                  href: docs/notes/linear-algebra/6.qmd
+                - text: "Canonical Forms"
+                  href: docs/notes/linear-algebra/7.qmd
+                - text: "Exercises"
+                  href: docs/notes/linear-algebra/exercises.qmd
+
             - section: "Math for CS and AI"
               href: docs/notes/math-for-cs-and-ai/0.qmd
               contents: 

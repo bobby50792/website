@@ -5,7 +5,7 @@ search: true
 number-offset: [2]
 
 crossref:
-  chapters: true      
+  chapters: true
 
 ---
 
@@ -37,6 +37,37 @@ $$
 $$
 
 :::
+
+::: {#cor-math2-upper-support name="An Upper-Support Bound"}
+
+If $X\le u$ almost surely and $a<u$, applying Markov's inequality to $u-X$ yields
+
+$$
+\Pr[X\le a]\le\frac{u-\mathbb E[X]}{u-a}.
+$$
+
+:::
+
+### FKS Perfect Hashing
+
+For a static dictionary with $n$ distinct keys, use two levels of universal hashing.
+
+1. Hash into $n$ buckets $B_0,\ldots,B_{n-1}$ and let $n_j=|B_j|$.
+2. For bucket $j$, allocate $n_j^2$ cells and independently resample its second-level hash function until that bucket has no collisions. Empty buckets need no table.
+3. Resample the first-level hash function if $M=\sum_{j=0}^{n-1}n_j^2\ge4n$.
+
+If $C$ counts unordered colliding key pairs at the first level, then
+
+$$
+M=n+2C,\qquad
+\mathbb E[M]\le n+\frac{2}{n}\binom n2=2n-1.
+$$
+
+Markov's inequality gives $\Pr[M\ge4n]<1/2$. A second-level bucket has expected collision count at most $\binom{n_j}{2}/n_j^2<1/2$, so each level needs only a constant expected number of trials.
+
+The construction takes expected $\mathcal O(n)$ time and $\mathcal O(n)$ space; lookup uses two hash evaluations and a key comparison, taking worst-case $\mathcal O(1)$ time in the standard constant-time hashing model.
+
+Reference: [MIT 6.854: Universal and Perfect Hashing](https://courses.csail.mit.edu/6.854/21/Scribe/s5-hashing/s5-hashing.html).
 
 ## Chebyshev's Inequality
 
@@ -346,7 +377,7 @@ $$
 $$
 :::
 
-\ 
+\
 
 ::: {#thm-18}
 ## Azuma–Hoeffding inequality
@@ -435,11 +466,11 @@ $$
 $$
 :::
 
-## Appendix 
+## Appendix
 ::: {#thm-22}
 ## Paley–Zygmund inequality and anti-concentration
 
-Let $X$ be a random variable. 
+Let $X$ be a random variable.
 
 1. For all $a \geq 0$, the following bound holds via the Cauchy–Schwarz inequality:
 
@@ -459,7 +490,7 @@ $$
 \operatorname{Pr}\left[|X - \mathbb{E}[X]| > \alpha \cdot \sigma(X)\right] \geq \frac{(1 - \alpha^2)^2}{\kappa(X)},
 $$
 
-where 
+where
 
 $$
 \kappa(X) := \frac{\mathbb{E}\left[|X - \mathbb{E}[X]|^4\right]}{\sigma(X)^4}
@@ -467,3 +498,16 @@ $$
 
 is called the kurtosis of $X$.
 :::
+
+::: {#thm-math2-levy name="Lévy's Lemma"}
+
+Let $U$ be uniform on the unit sphere $\mathbb S^{d-1}\subset\mathbb R^d$, where $d\ge2$. If $f:\mathbb S^{d-1}\to\mathbb R$ is $L$-Lipschitz in Euclidean distance, with $L>0$, then there is an absolute constant $c>0$ such that, for every $t>0$,
+
+$$
+\Pr\!\left[|f(U)-\mathbb E f(U)|\ge t\right]
+\le2\exp\!\left(-\frac{cdt^2}{L^2}\right).
+$$
+
+:::
+
+Reference: [MIT 18.409: Concentration on the Sphere](https://math.mit.edu/~goemans/18409-2006/lec6.pdf).

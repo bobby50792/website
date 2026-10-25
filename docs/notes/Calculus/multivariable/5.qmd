@@ -1,9 +1,0 @@
----
-title: "Multiple Integrals"
-page-layout: article
-search: true
-number-offset: [5]
-
-crossref:
-  chapters: true      
----

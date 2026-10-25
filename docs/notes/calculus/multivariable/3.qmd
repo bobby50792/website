@@ -1,0 +1,241 @@
+---
+title: "Implicit Function and Inverse Mapping Theorem"
+page-layout: article
+search: true
+number-offset: [3]
+
+crossref:
+  chapters: true
+---
+
+## Implicit Function Theorem
+
+::: {#thm-calc2-3-1 name="Implicit Function Theorem"}
+
+Let $F: W \to \mathbb{R}^n$ be a $\mathscr{C}^k$ differentiable mapping on an open set $W \subseteq \mathbb{R}^m \times \mathbb{R}^n$. Suppose $(\mathbf{x}_0, \mathbf{y}_0) \in W$ satisfies $F(\mathbf{x}_0, \mathbf{y}_0) = 0$ and the partial derivative $\partial_{\mathbf{y}} F(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
+
+Then there exist a neighborhood $U \subseteq \mathbb{R}^m$ of $\mathbf{x}_0$, a neighborhood $V \subseteq \mathbb{R}^n$ of $\mathbf{y}_0$, and a $\mathscr{C}^k$ mapping $f: U \to \mathbb{R}^n$ such that:
+
+(1) For all $\mathbf{x} \in U$,
+$$
+\begin{aligned}
+F(\mathbf{x}, f(\mathbf{x})) = 0,
+\end{aligned}
+$$
+and
+
+(2) If $(\mathbf{x}, \mathbf{y}) \in U \times V$ satisfies $F(\mathbf{x}, \mathbf{y}) = 0$, then
+$$
+\begin{aligned}
+\mathbf{y} = f(\mathbf{x}).
+\end{aligned}
+$$
+
+:::
+
+## Inverse Mapping Theorem
+
+::: {#thm-calc2-3-2 name="Inverse Mapping Theorem"}
+
+Let $f: U \to \mathbb{R}^n$ be $\mathscr{C}^k$ differentiable on an open set $U$. If $\mathrm{d}f(\mathbf{x}_0)$ is invertible, then there exist a neighborhood $V$ of $\mathbf{x}_0$ and a neighborhood $W$ of $f(\mathbf{x}_0)$ such that
+$$
+\begin{aligned}
+f: V \to W
+\end{aligned}
+$$
+has a $\mathscr{C}^k$ inverse mapping.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+A mapping $f: U \to V$ is called a $\mathscr{C}^k$ **diffeomorphism** if $f$ is a $\mathscr{C}^k$ mapping and there exists a $\mathscr{C}^k$ inverse mapping $g: V \to U$, such that
+$$
+\begin{aligned}
+g(f(\mathbf{x})) = \mathbf{x}, \quad f(g(\mathbf{y})) = \mathbf{y}, \quad \forall \mathbf{x} \in U, \mathbf{y} \in V.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-3-3}
+
+Let $U \subseteq \mathbb{R}^n$ be an open set, and let $f: U \to \mathbb{R}^n$ be a $\mathscr{C}^k$ mapping. Then
+$$
+\begin{aligned}
+V = f(U) \text{ is an open set and } f: U \to V \text{ is a } \mathscr{C}^k \text{ diffeomorphism}
+\end{aligned}
+$$
+
+if and only if
+
+$$
+\begin{aligned}
+f \text{ is injective, and for every } \mathbf{x} \in U, \mathrm{d}f(\mathbf{x}) \text{ is an invertible linear mapping.}
+\end{aligned}
+$$
+
+:::
+
+## Surfaces, Tangent Planes and Normal Vectors
+
+::: {.callout-tip collapse="true"}
+
+## Surface
+
+Let $1 \leq m \leq n-1$. We say that $\Sigma \subset \mathbb{R}^n$ is an $m$-dimensional $\mathscr{C}^k$ **surface**, if for any $\mathbf{x}_0 \in \Sigma$, $\Sigma$ is the graph of an $m$-variable $\mathscr{C}^k$ mapping in a neighborhood of $\mathbf{x}_0$. That is, there exists a neighborhood $U$ of $\mathbf{x}_0$, a permutation $\sigma(1), \sigma(2), \dots, \sigma(n)$ of $1, 2, \dots, n$, and a $\mathscr{C}^k$ mapping $g$ such that for any $\mathbf{x} = (x^1, x^2, \dots, x^n) \in U$,
+$$
+\begin{aligned}
+\mathbf{x} = (x^1, x^2, \dots, x^n) \in \Sigma \iff (x^{\sigma(m+1)}, \dots, x^{\sigma(n)}) = g(x^{\sigma(1)}, \dots, x^{\sigma(m)}).
+\end{aligned}
+$$
+
+When $m = n-1$, $\Sigma$ is called a $\mathscr{C}^k$ **hypersurface**.
+
+When $m = 1$, $\Sigma$ is a $\mathscr{C}^k$ **curve**.
+
+:::
+
+::: {#thm-calc2-3-4}
+
+1. If $a$ is a regular value of a $\mathscr{C}^k$ mapping $F: U \to \mathbb{R}^n$ (where $U \subseteq \mathbb{R}^m$ is a region), meaning that for any $\mathbf{x} \in U$ satisfying $F(\mathbf{x}) = a$, $\mathrm{d}F(\mathbf{x})$ has full row rank, then the level set of $F$
+
+$$
+\begin{aligned}
+\Sigma = \{\mathbf{x} \in U \mid F(\mathbf{x}) = a\}
+\end{aligned}
+$$
+
+is an $(m - n)$-dimensional $\mathscr{C}^k$ surface in $\mathbb{R}^m$.
+
+2. Let $U \subseteq \mathbb{R}^m$ be an open set. A $\mathscr{C}^k$ injective mapping $f: U \to \mathbb{R}^n$ ($\mathbf{x} = f(u^1, \dots, u^m)$) satisfies for any $\mathbf{u} \in U$, $\text{rank}(\mathrm{d}f(\mathbf{u})) = m$, i.e., $\mathrm{d}f(\mathbf{u})$ has full column rank. Then
+
+$$
+\begin{aligned}
+f(U) \subseteq \mathbb{R}^n
+\end{aligned}
+$$
+
+is an $m$-dimensional $\mathscr{C}^k$ surface in $\mathbb{R}^n$. $f$ is called a $\mathscr{C}^k$ parametric representation of this surface.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Tangent Space
+
+Let $\Sigma$ be a $\mathscr{C}^k$ surface in $\mathbb{R}^n$, and $\mathbf{x}_0 \in \Sigma$. Let $\gamma: (a, b) \to \mathbb{R}^n$ be a $\mathscr{C}^1$ curve on $\Sigma$ passing through $\mathbf{x}_0$, meaning that for any $t \in (a, b)$, $\gamma(t) \in \Sigma$, and $\gamma(t_0) = \mathbf{x}_0$. In this case, $\gamma'(t_0) \in \mathbb{R}^n$ is called a **tangent vector** of $\Sigma$ at $\mathbf{x}_0$. Let $T_{\mathbf{x}_0}\Sigma$ denote the set consisting of all tangent vectors of $\Sigma$ at $\mathbf{x}_0$, which is called the **tangent space** of $\Sigma$ at $\mathbf{x}_0$.
+
+The **tangent plane** of the surface $\Sigma$ at $\mathbf{x}_0 \in \Sigma$ is
+
+$$
+\begin{aligned}
+\mathbf{x}_0 + T_{\mathbf{x}_0}\Sigma.
+\end{aligned}
+$$
+
+The **normal space** of the surface $\Sigma$ at $\mathbf{x}_0 \in \Sigma$ is
+
+$$
+\begin{aligned}
+(T_{\mathbf{x}_0}\Sigma)^\perp,
+\end{aligned}
+$$
+
+where the vectors within this set are called **normal vectors** of $\Sigma$ at $\mathbf{x}_0 \in \Sigma$.
+
+The **normal line / normal plane** of the surface $\Sigma$ at $\mathbf{x}_0 \in \Sigma$ is
+$$
+\begin{aligned}
+\mathbf{x}_0 + (T_{\mathbf{x}_0}\Sigma)^\perp.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-calc2-3-5}
+
+Let $\Sigma \subseteq \mathbb{R}^n$ be an $m$-dimensional $\mathscr{C}^k$ surface. Then for any $\mathbf{x}_0 \in \Sigma$, the tangent space $T_{\mathbf{x}_0}\Sigma$ is an $m$-dimensional linear subspace of $\mathbb{R}^n$, and
+
+1. If $\Sigma$ is a regular level set of a $\mathscr{C}^k$ mapping $F$, $\Sigma = \{\mathbf{x} \in \mathbb{R}^n \mid F(\mathbf{x}) = a\}$, then
+
+$$
+\begin{aligned}
+T_{\mathbf{x}_0}\Sigma &= \text{Ker} \, \mathrm{d}F(\mathbf{x}_0) \\
+&= \{\mathbf{v} \in \mathbb{R}^n \mid \mathrm{d}F(\mathbf{x}_0)(\mathbf{v}) = \mathbf{0}\}
+\end{aligned}
+$$
+
+Equation of the tangent plane:
+
+$$
+\begin{aligned}
+\mathrm{d}F(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0) = \mathbf{0}
+\end{aligned}
+$$
+
+The gradient vector $\nabla F(\mathbf{x}_0)$ is a normal vector of the surface $\Sigma$ at $\mathbf{x}_0 \in \Sigma$.
+
+2. If $f: U \to \mathbb{R}^n$ is a $\mathscr{C}^k$ parametric representation of $\Sigma$, then for $\mathbf{x}_0 = f(\mathbf{u}_0)$,
+
+$$
+\begin{aligned}
+T_{\mathbf{x}_0}\Sigma &= \text{Range} \, \mathrm{d}f(\mathbf{u}_0) \\
+&= \{\mathrm{d}f(\mathbf{u}_0)(\mathbf{v}) \in \mathbb{R}^n \mid \mathbf{v} \in \mathbb{R}^m\}
+\end{aligned}
+$$
+
+Equation of the tangent plane:
+
+$$
+\begin{aligned}
+\mathbf{x} = \mathbf{x}_0 + \mathrm{d}f(\mathbf{u}_0)(\mathbf{v}), \quad \mathbf{v} \in \mathbb{R}^m
+\end{aligned}
+$$
+
+The normal space of the surface $\Sigma$ at $\mathbf{x}_0 \in \Sigma$ is $\text{Ker}((\mathrm{d}f(\mathbf{u}_0))^T)$.
+
+:::
+
+## Application: Constrained Extremum and Lagrange Multiplier Method
+
+Since the constraint $g = 0$ is usually not easy to solve, Lagrange proposed considering the following augmented function:
+
+$$
+\begin{aligned}
+F(\mathbf{x}, \lambda_1, \dots, \lambda_r) = f(\mathbf{x}) - \lambda_1 g_1(\mathbf{x}) - \dots - \lambda_r g_r(\mathbf{x}).
+\end{aligned}
+$$
+
+The critical points of $F$ satisfy:
+
+$$
+\begin{aligned}
+\begin{cases}
+\nabla_{\mathbf{x}} F(\mathbf{x}, \lambda_1, \dots, \lambda_r) = \nabla f(\mathbf{x}) - \lambda_1 \nabla g_1(\mathbf{x}) - \dots - \lambda_r \nabla g_r(\mathbf{x}) = 0, \\
+\frac{\partial F}{\partial \lambda_i}(\mathbf{x}, \lambda_1, \dots, \lambda_r) = -g_i(\mathbf{x}) = 0, \quad i = 1, \dots, r.
+\end{cases}
+\end{aligned}
+$$
+
+The first equation corresponds to the necessary condition for a constrained extremum point, while the subsequent equations are precisely the constraints themselves. In this way, the constrained extremum problem is transformed into an unconstrained extremum problem for the augmented function $F$. This method is called the **"Lagrange Multiplier Method,"** where $\lambda$ is called the **Lagrange Multiplier**.
+
+::: {#thm-calc2-3-6}
+
+Let $f$ be a $\mathscr{C}^r$ function, and let $g: \mathbb{R}^m \to \mathbb{R}^n$ ($m > n$) be a $\mathscr{C}^r$ mapping. Suppose $\mathbf{x}^*$ satisfies $g(\mathbf{x}^*) = 0$ and the Jacobian matrix $Jg(\mathbf{x}^*)$ has full rank (i.e., $n = \text{rank } \mathrm{d}g(\mathbf{x}^*)$). Then:
+
+1.  **(Fermat's Lemma, Necessary Condition for Constrained Extremum)**: If $f$ attains a (constrained) extremum at $\mathbf{x}^*$ under the constraint $g(\mathbf{x}) = 0$, then the gradient $\nabla f(\mathbf{x}^*)$ is orthogonal to the tangent space of the surface $\Sigma : g(\mathbf{x}) = 0$ at $\mathbf{x}^*$. In this case, there exists a unique set of real numbers $\lambda_1^*, \dots, \lambda_n^*$ such that:
+
+$$
+\begin{aligned}
+\nabla f(\mathbf{x}^*) = \lambda_1^* \nabla g_1(\mathbf{x}^*) + \dots + \lambda_n^* \nabla g_n(\mathbf{x}^*)
+\end{aligned}
+$$
+
+2.  **(Sufficient Condition for Constrained Extremum)**: If the Hessian matrix of $f(\mathbf{x}) - \lambda_1^* g_1(\mathbf{x}) - \dots - \lambda_n^* g_n(\mathbf{x})$ with respect to $\mathbf{x}$ is positive definite (or negative definite) when restricted to the tangent space $T_{\mathbf{x}^*} \Sigma$, then $\mathbf{x}^*$ is a constrained local minimum point (or respectively, a constrained local maximum point) of $f$ restricted to $\Sigma$.
+
+3.  **(Saddle Point)**: If the Hessian matrix of $f(\mathbf{x}) - \lambda_1^* g_1(\mathbf{x}) - \dots - \lambda_n^* g_n(\mathbf{x})$ with respect to $\mathbf{x}$, when restricted to the tangent space $T_{\mathbf{x}^*} \Sigma$, has both positive and negative eigenvalues, then $\mathbf{x}^*$ is not a constrained extremum point of $f$ restricted to $\Sigma$.
+
+:::

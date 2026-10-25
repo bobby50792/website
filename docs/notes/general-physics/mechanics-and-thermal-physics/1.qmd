@@ -5,8 +5,119 @@ search: true
 number-offset: [1]
 
 crossref:
-  chapters: true      
+  chapters: true
 
 ---
 
-## Hello
+## Basic Concepts
+
+::: {.callout-tip collapse="true"}
+
+## Coordinate System
+
+A coordinate system is a mathematical scheme that assigns one or more numbers (coordinates) to uniquely specify the position of a point in space, such as in one-, two-, or three-dimensional Euclidean Space.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Reference Frame
+
+A reference frame consists of a coordinate system together with a set of physical reference points and measuring devices (such as clocks and rulers) that fix the origin, orientation, and scale of the coordinates. It provides the standard for measuring space and time.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Relativity of Motion
+
+The description of motion depends on the choice of reference frame. Different observers using different reference frames may assign different positions, velocities, and accelerations to the same object. This fact is known as the relativity of motion.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Point Particle
+
+A point particle is an idealized object that has no spatial extension. It is treated as having zero size and occupying no volume.
+
+:::
+
+## Vector Description of Motion
+
+* Position:
+$$
+\begin{aligned}
+\vec{r}(t) = x(t)\hat{x} + y(t)\hat{y} + z(t)\hat{z}
+\end{aligned}
+$$
+
+* Velocity:
+$$
+\begin{aligned}
+\vec{v}(t) &= \frac{dx(t)}{dt}\hat{x} + \frac{dy(t)}{dt}\hat{y} + \frac{dz(t)}{dt}\hat{z} \\
+&= v_x(t)\hat{x} + v_y(t)\hat{y} + v_z(t)\hat{z}
+\end{aligned}
+$$
+
+* Acceleration:
+
+$$
+\begin{aligned}
+\vec{a}(t) &= \frac{dv_x(t)}{dt}\hat{x} + \frac{dv_y(t)}{dt}\hat{y} + \frac{dv_z(t)}{dt}\hat{z} \\
+&= a_x(t)\hat{x} + a_y(t)\hat{y} + a_z(t)\hat{z}
+\end{aligned}
+$$
+
+## Circular Two-Dimensional Motion
+
+::: {.callout-tip collapse="true"}
+
+## Polar Coordinates
+
+* Unit-vector transformations:
+$$
+\begin{aligned}
+\hat{r} &= \cos \theta \hat{x} + \sin \theta \hat{y}, \\
+\hat{\theta} &= -\sin \theta \hat{x} + \cos \theta \hat{y}.
+\end{aligned}
+$$
+
+* Position
+$$
+\begin{aligned}
+\vec{r}(t) = r(t)\hat{r}
+\end{aligned}
+$$
+
+* Velocity
+$$
+\begin{aligned}
+\vec{v} = \frac{d\vec{r}}{dt} = \frac{d}{dt}r(t)\hat{r} = \dot{r}\hat{r} + r\dot{\theta}\hat{\theta}
+\end{aligned}
+$$
+
+* Acceleration
+$$
+\begin{aligned} \vec{a} &= \frac{d\vec{v}}{dt} = \frac{d}{dt}(\dot{r}\hat{r} + r\dot{\theta}\hat{\theta}) \\ &= (\ddot{r}\hat{r} + \dot{r}\dot{\hat{r}}) + (\dot{r}\dot{\theta}\hat{\theta} + r\ddot{\theta}\hat{\theta} + r\dot{\theta}\dot{\hat{\theta}}) \\ &= \ddot{r}\hat{r} + \dot{r}(\dot{\theta}\hat{\theta}) + \dot{r}\dot{\theta}\hat{\theta} + r\ddot{\theta}\hat{\theta} + r\dot{\theta}(-\dot{\theta}\hat{r}) \\ &= (\ddot{r} - r\dot{\theta}^2)\hat{r} + (r\ddot{\theta} + 2\dot{r}\dot{\theta})\hat{\theta} \end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Circular Motion
+
+$$
+\begin{aligned}
+\vec{v} = \frac{r d\theta}{dt}\hat{\theta} = \vec{\omega} \times \vec{r},
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\vec{\omega} = \frac{d\theta}{dt}\hat{z} = \omega\hat{z}.
+\end{aligned}
+$$
+
+:::

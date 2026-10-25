@@ -5,8 +5,165 @@ search: true
 number-offset: [7]
 
 crossref:
-  chapters: true      
-
+  chapters: true
 ---
 
-## Hello
+## Rigid-Body Kinematics
+
+::: {.callout-tip collapse="true"}
+
+## Rigid Body
+
+A **rigid body** is an idealized system whose interparticle distances remain constant. Its motion combines translation of the center of mass with rotation about the center of mass.
+
+For two points $A$ and $B$ fixed in the body,
+
+$$
+\mathbf v_B=\mathbf v_A+\boldsymbol\omega\times\mathbf r_{B/A},
+$$
+
+where $\mathbf r_{B/A}=\mathbf r_B-\mathbf r_A$. Differentiating in an inertial frame gives
+
+$$
+\mathbf a_B=\mathbf a_A+\boldsymbol\alpha\times\mathbf r_{B/A}
++\boldsymbol\omega\times(\boldsymbol\omega\times\mathbf r_{B/A}).
+$$
+
+:::
+
+For rotation about a fixed axis, the angular variables are
+
+$$
+\omega=\frac{d\theta}{dt},\qquad
+\alpha=\frac{d\omega}{dt},\qquad
+v_t=\omega r_\perp,\qquad
+a_t=\alpha r_\perp,\qquad
+a_n=\omega^2r_\perp.
+$$
+
+Here $r_\perp$ is the perpendicular distance to the axis, $v_t$ and $a_t$ are signed tangential components, and $a_n$ is the magnitude of the inward normal acceleration.
+
+## Moment of Inertia
+
+::: {.callout-tip collapse="true"}
+
+## Moment of Inertia About an Axis
+
+The moment of inertia measures the distribution of mass relative to a specified axis:
+
+$$
+I=\sum_i m_i r_{\perp,i}^{\,2}
+\qquad\text{or}\qquad
+I=\int r_\perp^2\,dm.
+$$
+
+Its SI unit is $\mathrm{kg\,m^2}$. The same body generally has different moments of inertia about different axes.
+
+:::
+
+::: {#thm-phys-7-parallel-axis name="Parallel-Axis Theorem"}
+
+For a body of total mass $M$, let an axis be parallel to an axis through its center of mass and at perpendicular distance $d$ from it. Then
+
+$$
+I=I_{\mathrm{CM}}+Md^2.
+$$
+
+:::
+
+For uniform bodies:
+
+| Body | Axis | Moment of inertia |
+|---|---|---|
+| Thin hoop, radius $R$ | Symmetry axis perpendicular to its plane | $MR^2$ |
+| Solid disk or cylinder, radius $R$ | Symmetry axis | $\frac12MR^2$ |
+| Solid sphere, radius $R$ | Any diameter | $\frac25MR^2$ |
+| Thin rod, length $\ell$ | Through its center, perpendicular to the rod | $\frac1{12}M\ell^2$ |
+| Thin rod, length $\ell$ | Through one end, perpendicular to the rod | $\frac13M\ell^2$ |
+
+## Rotational Dynamics
+
+::: {.callout-tip collapse="true"}
+
+## Torque
+
+The torque of a force about a point $O$ is
+
+$$
+\boldsymbol\tau_O=\mathbf r\times\mathbf F,
+\qquad
+|\boldsymbol\tau_O|=rF\sin\phi,
+$$
+
+where $\mathbf r$ points from $O$ to the force's point of application and $\phi$ is the angle between $\mathbf r$ and $\mathbf F$.
+
+:::
+
+::: {#thm-phys-7-rotation name="Newton's Second Law for Fixed-Axis Rotation"}
+
+For a rigid body rotating about a fixed axis in an inertial frame,
+
+$$
+\sum\tau_z^{\mathrm{ext}}=\frac{dL_z}{dt}=I\alpha,
+\qquad L_z=I\omega.
+$$
+
+The subscript $z$ denotes the component along the rotation axis. The scalar relation $L_z=I\omega$ does not assert that the full vectors $\mathbf L$ and $\boldsymbol\omega$ are always parallel.
+
+:::
+
+Translation is governed by $\sum\mathbf F^{\mathrm{ext}}=M\mathbf a_{\mathrm{CM}}$. If the external torque component about a fixed axis vanishes, the corresponding angular momentum component is conserved.
+
+## Rotational Work and Energy
+
+For fixed-axis rotation,
+
+$$
+K_{\mathrm{rot}}=\frac12I\omega^2,\qquad
+W=\int_{\theta_i}^{\theta_f}\tau_z^{\mathrm{ext}}\,d\theta
+=\Delta K_{\mathrm{rot}},\qquad
+\mathcal P=\tau_z^{\mathrm{ext}}\omega.
+$$
+
+For planar motion, separating translation and rotation about the center of mass gives
+
+$$
+K=\frac12Mv_{\mathrm{CM}}^2+\frac12I_{\mathrm{CM}}\omega^2.
+$$
+
+## Rolling Without Slipping
+
+::: {.callout-tip collapse="true"}
+
+## Pure Rolling
+
+For a circular body rolling without slipping on a stationary surface, its contact point is instantaneously at rest relative to the surface. Along a straight surface, the speed and tangential acceleration satisfy
+
+$$
+v_{\mathrm{CM}}=R\omega,\qquad a_{\mathrm{CM}}=R\alpha.
+$$
+
+Static friction enforces this constraint when needed. Its magnitude must satisfy $|f_s|\le\mu_sN$; it need not equal $\mu_sN$.
+
+:::
+
+**Example: rolling down an incline.** For an axisymmetric body rolling freely down a fixed incline of angle $\beta$, with sufficient static friction and negligible rolling resistance,
+
+$$
+Ma=Mg\sin\beta-f_s,\qquad
+I_{\mathrm{CM}}\alpha=f_sR,\qquad a=R\alpha.
+$$
+
+Consequently,
+
+$$
+a=\frac{g\sin\beta}{1+I_{\mathrm{CM}}/(MR^2)}.
+$$
+
+A uniform solid cylinder therefore has $a=\frac23g\sin\beta$.
+
+## References
+
+- OpenStax, *University Physics Volume 1*: [Rotational Variables](https://openstax.org/books/university-physics-volume-1/pages/10-1-rotational-variables), [Moment of Inertia and Rotational Kinetic Energy](https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy).
+- [Calculating Moments of Inertia](https://openstax.org/books/university-physics-volume-1/pages/10-5-calculating-moments-of-inertia), [Work and Power for Rotational Motion](https://openstax.org/books/university-physics-volume-1/pages/10-8-work-and-power-for-rotational-motion).
+- [Torque](https://openstax.org/books/university-physics-volume-1/pages/10-6-torque), [Newton's Second Law for Rotation](https://openstax.org/books/university-physics-volume-1/pages/10-7-newtons-second-law-for-rotation), [Rolling Motion](https://openstax.org/books/university-physics-volume-1/pages/11-1-rolling-motion).

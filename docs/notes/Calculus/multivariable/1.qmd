@@ -1,9 +1,0 @@
----
-title: "Limits and Continuity of Multivariate Functions"
-page-layout: article
-search: true
-number-offset: [1]
-
-crossref:
-  chapters: true      
----

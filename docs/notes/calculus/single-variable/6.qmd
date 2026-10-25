@@ -1,0 +1,765 @@
+---
+title: "Ordinary Differential Equations"
+page-layout: article
+search: true
+number-offset: [6]
+
+crossref:
+  chapters: true
+---
+
+## Basic Concepts of Differential Equations
+
+**Differential Equation (System)**: An equation (or system of equations) containing unknown functions and their derivatives.
+
+**Order of a Differential Equation (System)**: The order of the highest-order derivative of the unknown functions involved in the equation.
+
+**Ordinary Differential Equation (ODE)**: A differential equation (or system) where all unknown functions are functions of a single independent variable.
+
+::: {.callout-tip collapse="true"}
+
+## General Form of an $n$-th Order ODE (Implicit Form)
+
+$$
+F(x, \mathbf{y}, \mathbf{y}', \dots, \mathbf{y}^{(n)}) = 0
+$$
+
+Where $\mathbf{y}(x) = (y_1(x), \dots, y_m(x))$ is a (set of) unknown function(s).
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Explicit Form of a Differential Equation
+
+$$
+\mathbf{y}^{(n)} = f(x, \mathbf{y}, \mathbf{y}', \dots, \mathbf{y}^{(n-1)})
+$$
+
+:::
+
+### Solution of a Differential Equation
+
+A **solution** of the differential equation $F(x, \mathbf{y}, \mathbf{y}', \dots, \mathbf{y}^{(n)}) = 0$ is a function $\mathbf{y} = \mathbf{y}(x)$ that satisfies the equation for all $x$ in its domain:
+
+$$
+F(x, \mathbf{y}(x), \mathbf{y}'(x), \dots, \mathbf{y}^{(n)}(x)) = 0, \quad \forall x
+$$
+
+::: {.callout-tip collapse="true"}
+
+## Initial Value Problem (Cauchy Problem)
+
+An **Initial Value Problem** (also known as a **Cauchy Problem**) consists of a differential equation along with a set of initial conditions at a specific point $x_0$:
+
+$$
+\begin{cases}
+F(x, \mathbf{y}, \mathbf{y}', \dots, \mathbf{y}^{(n)}) = 0, \\
+\mathbf{y}(x_0) = \mathbf{C}_0, \\
+\mathbf{y}'(x_0) = \mathbf{C}_1, \\
+\vdots \\
+\mathbf{y}^{(n-1)}(x_0) = \mathbf{C}_{n-1}
+\end{cases}
+$$
+
+Where $\mathbf{C}_0, \mathbf{C}_1, \dots, \mathbf{C}_{n-1}$ are given constant vectors. The goal is to find a specific solution $\mathbf{y} = \mathbf{y}(x)$ that satisfies both the equation and these conditions.
+
+For an **$n$-th order** differential equation $F(x, y, y', \dots, y^{(n)}) = 0$, the **General Solution** $y(x)$ is a family of functions that contains **$n$ arbitrary constants**:
+
+:::
+
+## Homogeneous Differential Equations
+
+Equations of the form $y' = f\left(\frac{y}{x}\right)$ are known as **homogeneous differential equations**. They can be solved by using a substitution that transforms them into a separable equation.
+
+Let $u = \frac{y}{x}$, which implies:
+$$
+\begin{aligned}
+y = ux
+\end{aligned}
+$$
+
+Differentiating both sides with respect to $x$ using the product rule, we get:
+$$
+\begin{aligned}
+y' = u + x \frac{du}{dx}
+\end{aligned}
+$$
+
+Substitute $y'$ and $\frac{y}{x}$ back into the original equation $y' = f\left(\frac{y}{x}\right)$:
+$$
+\begin{aligned}
+u + x \frac{du}{dx} = f(u)
+\end{aligned}
+$$
+
+Rearrange the equation to isolate $u$ and $x$:
+$$
+\begin{aligned}
+x \frac{du}{dx} = f(u) - u
+\end{aligned}
+$$
+$$
+\begin{aligned}
+\frac{du}{f(u) - u} = \frac{dx}{x}
+\end{aligned}
+$$
+
+Integrate both sides:
+$$
+\begin{aligned}
+\int \frac{1}{f(u) - u} du = \int \frac{1}{x} dx
+\end{aligned}
+$$
+After solving the integral, replace $u$ with $\frac{y}{x}$ to obtain the final general solution.
+
+## Differential Equations of the Form
+
+$$
+y'
+=
+f\!\left(
+\frac{a_1 x + b_1 y + c_1}
+     {a_2 x + b_2 y + c_2}
+\right).
+$$
+
+### Case 1
+
+Assume that the linear system
+$$
+\begin{cases}
+a_1 x + b_1 y + c_1 = 0, \\
+a_2 x + b_2 y + c_2 = 0
+\end{cases}
+$$
+has a solution $(x_0, y_0)$. This point serves as a **center of symmetry** of the direction field.
+
+**Translation of Variables:**
+
+Introduce the change of variables
+$$
+\xi = x - x_0,
+\qquad
+\eta = y - y_0.
+$$
+
+Then the differential equation becomes
+$$
+\eta'_\xi
+=
+f\!\left(
+\frac{a_1 \xi + b_1 \eta}
+     {a_2 \xi + b_2 \eta}
+\right)
+=
+f\!\left(
+\frac{a_1 + b_1 \dfrac{\eta}{\xi}}
+     {a_2 + b_2 \dfrac{\eta}{\xi}}
+\right).
+$$
+
+This is a **homogeneous differential equation**.
+
+### Case 2
+
+Assume that the linear system
+$$
+\begin{cases}
+a_1 x + b_1 y + c_1 = 0, \\
+a_2 x + b_2 y + c_2 = 0
+\end{cases}
+$$
+has **no solution**.
+
+The differential equation can be rewritten as
+$$
+y'
+=
+f\!\left(
+\alpha + \frac{\beta}{a_2 x + b_2 y + c_2}
+\right),
+$$
+where $\alpha$ and $\beta$ are constants.
+
+**Change of Variables:**
+
+Introduce the new variable
+$$
+\xi = a_2 x + b_2 y + c_2.
+$$
+
+Then
+$$
+\xi'_x
+= a_2 + b_2 y'_x
+= a_2 + b_2 f\!\left(\alpha + \frac{\beta}{\xi}\right).
+$$
+
+This is a **separable differential equation**.
+
+## Linear Differential Equations
+
+$$
+y' = a(x)\,y + f(x).
+$$
+
+Here $f(x)$ is the **nonhomogeneous term**.
+
+If $f(x) = 0$, the equation is called a **homogeneous linear equation**.
+
+If $f(x) \neq 0$, the equation is called a **nonhomogeneous linear equation**.
+
+::: {.callout-tip collapse="true"}
+
+## Homogeneous Linear Equation
+
+The homogeneous equation
+$$
+y' = a(x)\,y
+$$
+is a **separable differential equation**.
+
+Separating variables, we obtain
+$$
+\frac{dy}{y} = a(x)\,dx
+$$
+
+which implies
+$$
+\ln |y|
+= \int_{x_0}^{x} a(t)\,dt + C_1.
+$$
+
+Equivalently,
+$$
+|y|
+= e^{C_1}\, e^{\int_{x_0}^{x} a(t)\,dt}.
+$$
+
+Hence the general solution is
+$$
+y(x) = C\, e^{\int_{x_0}^{x} a(t)\,dt},
+$$
+where $C$ is an arbitrary constant.  This family of solutions includes the particular solution $y = 0$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Nonhomogeneous Linear Differential Equations
+
+$$
+y' = a(x)\,y + f(x).
+$$
+
+Assume a solution of the form
+$$
+y(x) = C(x)\, e^{\int_{x_0}^{x} a(t)\,dt}.
+$$
+
+Then
+$$
+f(x)
+= y'(x) - a(x)\,y(x).
+$$
+
+Substituting $y(x)$ into the equation, we obtain
+$$
+\begin{aligned}
+f(x)
+&= C'(x)\, e^{\int_{x_0}^{x} a(t)\,dt}
+ + C(x)\, e^{\int_{x_0}^{x} a(t)\,dt} a(x)
+ - a(x)\, C(x)\, e^{\int_{x_0}^{x} a(t)\,dt} \\
+&= C'(x)\, e^{\int_{x_0}^{x} a(t)\,dt}.
+\end{aligned}
+$$
+
+Hence,
+$$
+C'(x)
+= f(x)\, e^{-\int_{x_0}^{x} a(t)\,dt}.
+$$
+
+Integrating,
+$$
+C(x)
+= C_0 + \int_{x_0}^{x}
+f(u)\, e^{-\int_{x_0}^{u} a(t)\,dt}\,du.
+$$
+
+Finally, the general solution is
+$$
+y(x)
+= C_0\, e^{\int_{x_0}^{x} a(t)\,dt}
++ e^{\int_{x_0}^{x} a(t)\,dt}
+  \int_{x_0}^{x}
+  f(u)\, e^{-\int_{x_0}^{u} a(t)\,dt}\,du.
+$$
+
+:::
+
+### Example
+
+1.
+
+    $$
+    y' - y
+    =
+    e^{x}x^{2}
+    - 2e^{2x}x
+    + x\sin x
+    + e^{-x}\cos x.
+    $$
+
+## Reduction of Higher-Order Differential Equations to First-Order Systems
+
+::: {.callout-tip collapse="true"}
+
+## An $n$-th Order Differential Equation
+
+$$
+F\!\left(x, y, y', y^{(2)}, \dots, y^{(n)}\right) = 0.
+$$
+
+If the equation can be solved for the highest derivative, it can be written as
+$$
+y^{(n)} = f\!\left(x, y, y', y^{(2)}, \dots, y^{(n-1)}\right).
+$$
+
+Define
+$$
+u_k(x) = y^{(k)}(x),
+\qquad
+k = 0,1,\dots,n-1.
+$$
+
+The $n$-th order equation is equivalent to the system
+$$
+\begin{cases}
+u_0' = u_1, \\
+u_1' = u_2, \\
+\ \vdots \\
+F\!\left(x, u_0, u_1, \dots, u_{n-1}, u'_{n - 1}\right) = 0.
+\end{cases}
+$$
+
+If the highest derivative is explicitly given, we obtain
+$$
+\begin{cases}
+u_0' = u_1, \\
+u_1' = u_2, \\
+\ \vdots \\
+u'_{n - 1}
+=
+f\!\left(x, u_0, u_1, \dots, u_{n-1}\right).
+\end{cases}
+$$
+
+:::
+
+## Linear Systems of Differential Equations with Constant Coefficients
+
+Consider the linear system
+$$
+\mathbf{v}' = A\,\mathbf{v},
+$$
+where $A$ is a constant matrix.
+
+::: {.callout-tip collapse="true"}
+
+## Change of Variables
+
+Let
+$$
+\mathbf{v} = P\,\mathbf{u},
+$$
+where $P$ is an invertible matrix. Then
+$$
+\mathbf{u}'
+= P^{-1}\mathbf{v}'
+= P^{-1}A\mathbf{v}
+= P^{-1}AP\,\mathbf{u}.
+$$
+
+Hence, under the linear transformation $\mathbf{v}=P\mathbf{u}$,  the system is transformed into
+$$
+\mathbf{u}' = \left(P^{-1}AP\right)\mathbf{u}.
+$$
+
+:::
+
+## Order Reduction of Higher-Order Differential Equations
+
+::: {.callout-tip collapse="true"}
+
+## Differential Equations Not Explicitly Involving $y$
+
+Consider an $n$-th order differential equation of the form
+$$
+F\!\left(x, y^{(k)}, y^{(k+1)}, \dots, y^{(n)}\right) = 0.
+$$
+
+Introduce the new unknown function
+$$
+u(x) = y^{(k)}(x).
+$$
+
+Then the original equation is transformed into the system
+$$
+\begin{cases}
+F\!\left(x, u, u', \dots, u^{(n-k)}\right) = 0, \\
+y^{(k)} = u(x).
+\end{cases}
+$$
+
+The order of the differential equation is thus reduced by $k$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Differential Equations Not Explicitly Involving $x$
+
+Consider an $n$-th order differential equation of the form
+$$
+F\!\left(y, y', \dots, y^{(n)}\right) = 0.
+$$
+
+Introduce the substitution
+$$
+u(y) = y'(x).
+$$
+
+For any differentiable function $w = w(y) = w(y(x))$, by the chain rule we have
+$$
+\frac{dw}{dx}
+= \frac{dw}{dy}\frac{dy}{dx}
+= u\,\frac{dw}{dy},
+$$
+that is,
+$$
+\frac{d}{dx} = u\,\frac{d}{dy}.
+$$
+
+Using this relation, the original equation is transformed into
+$$
+\begin{cases}
+F\!\left(
+y,\,
+u,\,
+u\,\dfrac{du}{dy},\,
+\dots,\,
+\left(u\dfrac{d}{dy}\right)^{n-1}u
+\right) = 0, \\
+\dfrac{dy}{dx} = u(y).
+\end{cases}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Factorizable Linear Differential Equations
+
+Consider the second-order linear differential equation
+$$
+Ly = y'' - 3y' + 2y = x^2.
+$$
+
+Introduce the differential operator
+$$
+D = \frac{d}{dx},
+$$
+then
+$$
+L = D^2 - 3D + 2.
+$$
+
+Factor the characteristic polynomial:
+$$
+\lambda^2 - 3\lambda + 2 = (\lambda - 2)(\lambda - 1).
+$$
+
+Accordingly, the differential operator can be factorized as
+$$
+L
+= \left(\frac{d}{dx} - 2\right)
+  \left(\frac{d}{dx} - 1\right).
+$$
+
+Thus the equation becomes
+$$
+\left(\frac{d}{dx} - 2\right)
+\left(\frac{d}{dx} - 1\right)y
+= x^2.
+$$
+
+Define
+$$
+u = \left(\frac{d}{dx} - 1\right)y
+= y' - y.
+$$
+
+Then the original equation is equivalent to the system
+$$
+\begin{cases}
+u' - 2u = x^2, \\
+y' - y = u.
+\end{cases}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Factorizable Differential Equations (Euler Type)
+
+Consider the Euler-type differential equation
+$$
+Ly = x^2 y'' - 2x y' + 2y = f(x).
+$$
+
+Introduce the Euler differential operator
+$$
+D_x = x\frac{d}{dx}.
+$$
+
+Then the operator $L$ can be written as
+$$
+L = (D_x - \alpha)(D_x - \beta).
+$$
+
+Thus,
+$$
+Ly
+= \left(x\frac{d}{dx} - \alpha\right)
+  \left(x\frac{d}{dx} - \beta\right)y
+= f(x).
+$$
+
+Expanding the operator and comparing coefficients yields
+$$
+\begin{cases}
+x - \alpha x - \beta x = -2x, \\
+\alpha\beta = 2.
+\end{cases}
+$$
+
+Solving this system gives
+$$
+\alpha = 2, \qquad \beta = 1.
+$$
+
+Define
+$$
+u = \left(x\frac{d}{dx} - \beta\right)y
+= x y' - y.
+$$
+
+Then the original equation is equivalent to the system
+$$
+\begin{cases}
+x u' - 2u = f(x), \\
+x y' - y = u.
+\end{cases}
+$$
+
+:::
+
+## High-Order Linear Differential Equation and First-Order Linear System
+
+Consider the $n$-th order linear differential equation
+$$
+y^{(n)} + a_{n-1}(x)y^{(n-1)} + \cdots + a_1(x)y' + a_0(x)y = f(x).
+$$
+
+Introduce the state variables
+$$
+\begin{aligned}
+u_0 &= y, \\
+u_1 &= y', \\
+&\;\;\vdots \\
+u_{n-2} &= y^{(n-2)}, \\
+u_{n-1} &= y^{(n-1)}.
+\end{aligned}
+$$
+
+Then the equation can be rewritten as the first-order linear system
+$$
+\begin{pmatrix}
+u_0 \\
+u_1 \\
+\vdots \\
+u_{n-2} \\
+u_{n-1}
+\end{pmatrix}'
+=
+\begin{pmatrix}
+0 & 1 & 0 & \cdots & 0 \\
+0 & 0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 1 \\
+-a_0(x) & -a_1(x) & -a_2(x) & \cdots & -a_{n-1}(x)
+\end{pmatrix}
+\begin{pmatrix}
+u_0 \\
+u_1 \\
+\vdots \\
+u_{n-2} \\
+u_{n-1}
+\end{pmatrix}
++
+\begin{pmatrix}
+0 \\
+0 \\
+\vdots \\
+0 \\
+f(x)
+\end{pmatrix}.
+$$
+
+That is, the high-order linear differential equation is equivalent to a first-order linear differential system.
+
+## Superposition Principle for Linear Differential Systems
+
+::: {.callout-tip collapse="true"}
+
+## Homogeneous vs. Nonhomogeneous Systems
+
+Let $A(x)$ be a matrix-valued function.
+
+- **Homogeneous linear system**
+$$
+\mathbf{y}' = A(x)\mathbf{y}
+$$
+
+- **Nonhomogeneous linear system**
+$$
+\mathbf{y}' = A(x)\mathbf{y} + \mathbf{f}(x)
+$$
+
+Here $\mathbf{y}(x)$ is a vector-valued function and   $\mathbf{f}(x)$ is the nonhomogeneous (forcing) term.
+
+:::
+
+## Method of Variation of Constants (for Linear Systems)
+
+::: {.callout-tip collapse="true"}
+
+## Homogeneous Linear System
+
+Consider the homogeneous linear system
+$$
+\mathbf{y}' = A(x)\mathbf{y},
+$$
+where $A(x)$ is an $n \times n$ matrix-valued function.
+
+Let $\mathbf{y}_1(x), \ldots, \mathbf{y}_n(x)$ be $n$ linearly independent solutions of this system.  Define the **fundamental matrix**
+$$
+U(x) = \bigl(\mathbf{y}_1(x), \ldots, \mathbf{y}_n(x)\bigr).
+$$
+
+Then $U(x)$ is invertible and satisfies
+$$
+U'(x) = A(x)U(x).
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Nonhomogeneous Linear System
+
+Now consider the nonhomogeneous system
+$$
+\mathbf{y}' = A(x)\mathbf{y} + \mathbf{f}(x).
+$$
+
+Assume a solution of the form
+$$
+\mathbf{y}(x) = U(x)\mathbf{C}(x),
+$$
+where $\mathbf{C}(x)$ is an unknown vector-valued function.
+
+Differentiate $\mathbf{y}(x)$:
+$$
+\begin{aligned}
+\mathbf{y}'(x)
+&= U'(x)\mathbf{C}(x) + U(x)\mathbf{C}'(x) \\
+&= A(x)U(x)\mathbf{C}(x) + U(x)\mathbf{C}'(x) \\
+&= A(x)\mathbf{y}(x) + U(x)\mathbf{C}'(x).
+\end{aligned}
+$$
+
+Comparing with
+$$
+\mathbf{y}' = A(x)\mathbf{y} + \mathbf{f}(x),
+$$
+we obtain
+$$
+U(x)\mathbf{C}'(x) = \mathbf{f}(x).
+$$
+
+Since $U(x)$ is invertible,
+$$
+\mathbf{C}'(x) = U(x)^{-1}\mathbf{f}(x).
+$$
+
+Integrating,
+$$
+\mathbf{C}(x) = \mathbf{C}_0 + \int_{x_0}^x U(t)^{-1}\mathbf{f}(t)\,dt.
+$$
+
+Thus the general solution of the nonhomogeneous system is
+$$
+\mathbf{y}(x) = U(x)\mathbf{C}_0
++ U(x)\int_{x_0}^x U(t)^{-1}\mathbf{f}(t)\,dt.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Interpretation
+
+- $U(x)\mathbf{C}_0$ is the general solution of the homogeneous system.
+- The integral term provides one particular solution of the nonhomogeneous system.
+- This method generalizes the **variation of constants** technique from scalar equations to linear systems.
+
+Let $\mathbf{y}_1,\mathbf{y}_2$ be two solutions of the linear differential equation
+$$
+\mathbf{y}' = A(x)\mathbf{y} + \mathbf{f}(x),
+$$
+satisfying
+$$
+\mathbf{y}_1(x_0) = \mathbf{y}_2(x_0).
+$$
+
+Then
+$$
+\mathbf{y}_1(x) = \mathbf{y}_2(x), \qquad \forall x.
+$$
+
+**Liouville’s Theorem.**  Let $\mathbf{y}_1,\dots,\mathbf{y}_n$ be $n$ solutions of the homogeneous linear system
+$$
+\mathbf{y}' = A(x)\mathbf{y}.
+$$
+
+Define the matrix
+$$
+U(x) = \bigl(\mathbf{y}_1(x),\dots,\mathbf{y}_n(x)\bigr).
+$$
+
+Then $U(x)$ satisfies
+$$
+\bigl(\det U(x)\bigr)' = \operatorname{tr} A(x)\,\det U(x).
+$$
+
+:::
+
+::: {#cor-calc1-6-1}
+
+For any $x$, the functions $\mathbf{y}_1(x),\dots,\mathbf{y}_n(x)$ are linearly independent  **if and only if** there exists a point $x_0$ such that $\mathbf{y}_1(x_0),\dots,\mathbf{y}_n(x_0)$ are linearly independent.
+
+:::

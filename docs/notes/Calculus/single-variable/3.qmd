@@ -1,9 +1,0 @@
----
-title: "Derivatives and Differentials of Functions"
-page-layout: article
-search: true
-number-offset: [3]
-
-crossref:
-  chapters: true      
----

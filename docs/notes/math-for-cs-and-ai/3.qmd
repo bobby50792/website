@@ -5,11 +5,418 @@ search: true
 number-offset: [3]
 
 crossref:
-  chapters: true      
+  chapters: true
 
 ---
 
+## Generating Functions of Sequences
+
+::: {.callout-tip collapse="true"}
+
+## Ordinary Generating Functions
+
+The ordinary generating function (OGF) of a sequence of real numbers $(a_k)_{k \ge 0}$ is the power series
+$$
+\begin{aligned}
+A(x) := \sum_{k \ge 0} a_k x^k.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Tile Covering
+
+Consider a $2 \times n$ rectangle. We want to tile it using $1 \times 2$ dominoes, placed either horizontally or vertically, without overlap and without leaving any square uncovered. Let $a_n$ denote the number of such tilings. Considering the leftmost tile gives $a_n=a_{n-1}+a_{n-2}$ for $n\ge2$. The first two values are:
+
+$$
+\begin{aligned}
+a_0 = 1, \quad a_1 = 1.
+\end{aligned}
+$$
+
+What is the value of $a_n$ for general $n$?
+
+$$
+\begin{aligned}
+A(x) = \frac{1}{1 - x - x^2}.
+\end{aligned}
+$$
+
+Then we can decompose $A(x)$ into partial fractions:
+
+$$
+\begin{aligned}
+A(x) = \frac{\alpha}{1 - \varphi x} + \frac{\beta}{1 - \psi x}
+\end{aligned}
+$$
+
+where $\varphi=(1+\sqrt5)/2$, $\psi=(1-\sqrt5)/2$, and $(\alpha, \beta)$ is the solution to $\alpha(1 - \psi x) + \beta(1 - \varphi x) = 1$:
+
+$$
+\begin{aligned}
+\alpha = \frac{\sqrt{5} + 1}{2\sqrt{5}}, \quad \beta = \frac{\sqrt{5} - 1}{2\sqrt{5}}.
+\end{aligned}
+$$
+
+Expanding each term as a geometric series gives
+
+$$
+\begin{aligned}
+A(x) = \sum_{n \ge 0} \alpha \varphi^n x^n + \sum_{n \ge 0} \beta \psi^n x^n = \sum_{n \ge 0} (\alpha \varphi^n + \beta \psi^n) x^n.
+\end{aligned}
+$$
+
+Therefore, we obtain that the number of domino tilings of a $2 \times n$ rectangle is
+
+$$
+\begin{aligned}
+a_n = \alpha \varphi^n + \beta \psi^n = \frac{\sqrt{5} + 1}{2\sqrt{5}} \left( \frac{1 + \sqrt{5}}{2} \right)^n + \frac{\sqrt{5} - 1}{2\sqrt{5}} \left( \frac{1 - \sqrt{5}}{2} \right)^n.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Parenthesizing Expressions
+
+Let $a_n$ be the number of ways to fully parenthesize the following expression:
+
+$$
+\begin{aligned}
+x_1 + x_2 + \dots + x_n.
+\end{aligned}
+$$
+
+Here, "fully parenthesized" means that every addition operation is enclosed in parentheses. Equivalently, $a_n$ is the number of ways to evaluate the expression using only binary additions.
+
+$$
+\begin{aligned}
+a_1 = 1, \quad a_n = \sum_{k=1}^{n-1} a_k a_{n-k} \quad \text{for all } n \ge 2.
+\end{aligned}
+$$
+
+This can be further simplified as the following quadratic equation:
+
+$$
+\begin{aligned}
+A(x)^2 - A(x) + x = 0.
+\end{aligned}
+$$
+
+Solving this quadratic equation gives
+
+$$
+\begin{aligned}
+A(x) = \frac{1 \pm \sqrt{1 - 4x}}{2}.
+\end{aligned}
+$$
+
+There are two possible solutions, but since $A(0) = \sum_{n \ge 1} a_n 0^n = 0$, we must choose the minus sign:
+
+$$
+\begin{aligned}
+A(x) = \frac{1 - \sqrt{1 - 4x}}{2}.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Catalan Numbers
+
+we get
+
+$$
+\begin{aligned}
+a_n = -\frac{1}{2}(-4)^n \cdot \frac{(-1)^{n-1}}{2^{2n-1}} \cdot \frac{(2n-2)!}{(n-1)!n!} = \frac{(2n-2)!}{(n-1)!n!}.
+\end{aligned}
+$$
+
+In combinatorics, Catalan numbers, named after the French mathematician Eugène Catalan, are a sequence of natural numbers that appear in many counting problems. These numbers are defined as:
+
+$$
+\begin{aligned}
+C_n = \frac{1}{n + 1} \binom{2n}{n} = \frac{(2n)!}{n!(n + 1)!}
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Summing Variables with Reordering
+
+We ask: Given $n$ variables $x_1, \dots, x_n$, how many essentially different ways are there to compute their sum by repeatedly adding two terms at a time, where the order of operands in each addition is ignored?
+
+Using $a_1=1$ and the exponential generating function $A(x)=\sum_{n\ge1}a_nx^n/n!$, the recurrence is
+
+$$
+\begin{aligned}
+a_n = \frac{1}{2} \sum_{k=1}^{n-1} \binom{n}{k} a_k a_{n-k}.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+A(x)^2 - 2A(x) + 2x = 0.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+{A}(x) = 1 - \sqrt{1 - 2x}.
+\end{aligned}
+$$
+
+Therefore, the number of ways to compute the sum of $n$ variables is
+
+$$
+\begin{aligned}
+a_n = (2n - 3)!!.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Exponential Generating Functions
+
+The exponential generating function (EGF) of a sequence of real numbers $(a_k)_{k \ge 0}$ is the power series
+
+$$
+\begin{aligned}
+\widehat{A}(x) := \sum_{k \ge 0} a_k \frac{x^k}{k!}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-math3-sequences-1 name="EGF of Prefix Sums"}
+
+Let $s_n=\sum_{k=0}^n a_k$, $\hat A(x)=\sum_{n\ge0}a_nx^n/n!$, and $\hat S(x)=\sum_{n\ge0}s_nx^n/n!$. Since $s_{n+1}=s_n+a_{n+1}$, differentiating term by term gives
+$$
+\begin{aligned}
+\hat{S}'(x) &= \sum_{n \ge 0} s_{n+1} \frac{x^n}{n!} \\
+&= \sum_{n \ge 0} s_n \frac{x^n}{n!} + \sum_{n \ge 0} a_{n+1} \frac{x^n}{n!} \\
+&= \hat{S}(x) + \hat{A}'(x).
+\end{aligned}
+$$
+
+So $\hat{S}$ satisfies the linear differential equation
+$$
+\begin{aligned}
+\hat{S}'(x) - \hat{S}(x) &= \hat{A}'(x), & \hat{S}(0) &= s_0 = a_0.
+\end{aligned}
+$$
+
+Multiplying by $e^{-x}$ on both sides gives
+$$
+\begin{aligned}
+\frac{\text{d}}{\text{dx}} (\hat{S}(x)e^{-x}) = \hat{A}'(x)e^{-x}.
+\end{aligned}
+$$
+
+Integrating both sides from $0$ to $x$, we obtain
+$$
+\begin{aligned}
+\hat{S}(x)e^{-x} = a_0 + \int_0^x \hat{A}'(t)e^{-t} \text{dt},
+\end{aligned}
+$$
+
+where we used the initial condition $\hat{S}(0) = a_0$. Therefore, the EGF of the prefix sums is
+$$
+\begin{aligned}
+\hat{S}(x) = a_0 e^x + \int_0^x \hat{A}'(t)e^{x-t} \text{dt}.
+\end{aligned}
+$$
+
+Equivalently, by integrating by parts, we can also write this as
+$$
+\begin{aligned}
+\hat{S}(x) = \hat{A}(x) + \int_0^x \hat{A}(t)e^{x-t} \text{dt}.
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Laplace Transform
+
+The Laplace transform of a function $f$ is defined by
+$$
+\begin{aligned}
+\mathcal{L}[f](s) := \int_0^\infty f(t)e^{-st} \text{dt}.
+\end{aligned}
+$$
+
+If the OGF and EGF of a sequence $(a_n)_{n \ge 0}$ are given by
+$$
+\begin{aligned}
+A(z) := \sum_{n \ge 0} a_n z^n \quad \text{and} \quad \hat{A}(t) := \sum_{n \ge 0} a_n \frac{t^n}{n!},
+\end{aligned}
+$$
+
+then, whenever termwise integration is justified (for example by absolute convergence),
+$$
+\begin{aligned}
+\mathcal{L}[\hat{A}](s) &= \int_0^\infty \left( \sum_{n \ge 0} a_n \frac{t^n}{n!} \right) e^{-st} \text{dt} \\
+&= \sum_{n \ge 0} \frac{a_n}{n!} \int_0^\infty t^n e^{-st} \text{dt}.
+\end{aligned}
+$$
+With the change of variables $u = st$, we can rewrite the integral in terms of the Gamma function $\Gamma(z) := \int_0^\infty u^{z-1}e^{-u} \text{ du}$:
+$$
+\begin{aligned}
+\int_0^\infty t^n e^{-st} \text{ dt} = \frac{1}{s^{n+1}} \int_0^\infty u^n e^{-u} \text{ du} = \frac{1}{s^{n+1}} \Gamma(n+1) = \frac{n!}{s^{n+1}},
+\end{aligned}
+$$
+
+where the last step uses the fact that $\Gamma(n+1) = n!$ for all integers $n \ge 0$.
+
+Plugging this back into the Laplace transform, we obtain
+$$
+\begin{aligned}
+\mathcal{L}[\hat{A}](s) = \sum_{n \ge 0} \frac{a_n}{n!} \cdot \frac{n!}{s^{n+1}} = \frac{1}{s} A \left( \frac{1}{s} \right).
+\end{aligned}
+$$
+
+Setting $s = \frac{1}{z}$ gives
+$$
+\begin{aligned}
+\frac{1}{z} \mathcal{L}[\hat{A}] \left( \frac{1}{z} \right) = A(z).
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Sum of Powers
+
+Let $S_k(n)=\sum_{j=1}^n j^k$. Define the Bernoulli numbers by $x/(e^x-1)=\sum_{m\ge0}B_mx^m/m!$, so $B_0=1$ and $B_1=-1/2$.
+
+$$
+\begin{aligned}
+F_n(x) := \sum_{k \ge 0} S_k(n) \frac{x^k}{k!}.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+F_n(x) &= \sum_{k \ge 0} \left( \sum_{j=1}^n j^k \right) \frac{x^k}{k!}
+= \sum_{k \ge 0} \sum_{j=1}^n \frac{(jx)^k}{k!}
+= \sum_{j=1}^n \sum_{k \ge 0} \frac{(jx)^k}{k!}
+= \sum_{j=1}^n e^{jx}.
+\end{aligned}
+$$
+
+Of course, we can rewrite $F_n(x)$ as
+$$
+\begin{aligned}
+F_n(x) = \frac{e^{nx} - 1}{x} \cdot \frac{xe^x}{e^x - 1}.
+\end{aligned}
+$$
+
+Since $\frac{xe^x}{e^x - 1} = \frac{x}{1 - e^{-x}}$, we can further rewrite $F_n(x)$ as
+$$
+\begin{aligned}
+F_n(x) = \frac{e^{nx} - 1}{x} \cdot \frac{x}{1 - e^{-x}}.
+\end{aligned}
+$$
+
+The coefficients of the first term $\frac{e^{nx} - 1}{x}$ are easy to extract:
+$$
+\begin{aligned}
+\frac{e^{nx} - 1}{x} = \frac{1}{x} \sum_{k \ge 0} (n^k - \mathbb{1}_{[k=0]}) \frac{x^k}{k!} = \sum_{k \ge 0} \frac{n^{k+1}}{k+1} \frac{x^k}{k!}.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\hat{B}(x) = \frac{x}{e^x - 1}.
+\end{aligned}
+$$
+
+It is easy to check that
+$$
+\begin{aligned}
+\frac{x}{1 - e^{-x}} = \frac{-x}{e^{-x} - 1} = \hat{B}(-x).
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{x}{e^x - 1} = \sum_{m \ge 0} B_m \frac{x^m}{m!}.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+F_n(x) &= \frac{e^{nx} - 1}{x} \cdot \hat{B}(-x)
+= \left( \sum_{k \ge 0} \frac{n^{k+1}}{k+1} \frac{x^k}{k!} \right) \left( \sum_{m \ge 0} (-1)^m B_m \frac{x^m}{m!} \right).
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-math3-sequences-2 name="Faulhaber's formula"}
+
+For all $k \ge 0$ and $n \ge 1$,
+$$
+\begin{aligned}
+S_k(n) = \frac{1}{k+1} \sum_{j=0}^k (-1)^j \binom{k+1}{j} B_j n^{k+1-j}.
+\end{aligned}
+$$
+
+:::
+
 ## Complex Analysis
+
+::: {.callout-tip collapse="true"}
+
+## Complex Numbers
+
+A complex number is a number of the form
+$$
+\begin{aligned}
+z = x + iy, \quad x, y \in \mathbb{R},
+\end{aligned}
+$$
+
+where $i$ is the imaginary unit. The number $x$ is called the real part of $z$, and $y$ is called the imaginary part. We write
+$$
+\begin{aligned}
+\Re(z) = x, \quad \Im(z) = y.
+\end{aligned}
+$$
+
+The set of all complex numbers is denoted by $\mathbb{C}$.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+If $z = x + iy$, then its conjugate is
+$$
+\begin{aligned}
+\bar{z} = x - iy,
+\end{aligned}
+$$
+and its absolute value or modulus is
+$$
+\begin{aligned}
+|z| = (z\bar{z})^{1/2} = \sqrt{x^2 + y^2}.
+\end{aligned}
+$$
+
+:::
 
 ### Complex Functions and Power Series
 
@@ -151,6 +558,33 @@ Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subs
 Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is holomorphic at $z_0 \in S$ if it is differentiable in an open set containing $z_0$. Further, we say that $f$ is holomorphic on $S$ if it is differentiable at every point of $S$.
 :::
 
+::: {#thm-math3-cr-1 name="Cauchy–Riemann equations"}
+
+Let $f$ be differentiable at $z_0 = x_0 + iy_0$, and write
+$$
+\begin{aligned}
+f(x + iy) = u(x, y) + iv(x, y).
+\end{aligned}
+$$
+
+Then the following four partial derivatives exist at $(x_0, y_0)$:
+
+$$
+\begin{aligned}
+\frac{\partial u}{\partial x}, \quad \frac{\partial u}{\partial y}, \quad \frac{\partial v}{\partial x}, \quad \frac{\partial v}{\partial y}.
+\end{aligned}
+$$
+
+Furthermore, they satisfy the Cauchy–Riemann equations:
+
+$$
+\begin{aligned}
+\frac{\partial u}{\partial x}(x_0, y_0) = \frac{\partial v}{\partial y}(x_0, y_0), \quad \frac{\partial u}{\partial y}(x_0, y_0) = -\frac{\partial v}{\partial x}(x_0, y_0).
+\end{aligned}
+$$
+
+:::
+
 ::: {.callout-tip collapse="true"}
 ## Curve
 
@@ -190,6 +624,17 @@ If $\gamma = \gamma_1 + \dots + \gamma_n$ is a contour, then the contour integra
 $$
 \int_\gamma f(z) \, \mathrm{d}z := \sum_{i=1}^n \int_{\gamma_i} f(z) \, \mathrm{d}z.
 $$
+:::
+
+::: {#thm-math3-reparam-1 name="Reparameterization and reversal of direction"}
+
+Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. Let $\gamma_1 : [a, b] \to S$ and $\gamma_2 : [c, d] \to S$ be two smooth curves. If there exists an increasing continuously differentiable function $\phi : [c, d] \to [a, b]$ such that $\phi(c) = a$, $\phi(d) = b$, and $\gamma_2(t) = \gamma_1(\phi(t))$ for all $t \in [c, d]$, then
+$$
+\begin{aligned}
+\int_{\gamma_2} f(z) \mathrm{d}z = \int_{\gamma_1} f(z) \mathrm{d}z.
+\end{aligned}
+$$
+
 :::
 
 ::: {#thm-4}
@@ -268,7 +713,7 @@ $$
 ::: {#thm-10}
 ## Identity theorem
 
-Let $S \subseteq \mathbb{C}$ be a connected open set, and let $f,g : S \rightarrow \mathbb{C}$ be holomorphic. If there exists a non-empty open set $U \subseteq S$ such that $f(z) = g(z) for every $z \in U$, then $f(z) = g(z)$ for every $z \in S$.
+Let $S \subseteq \mathbb{C}$ be a connected open set, and let $f,g : S \rightarrow \mathbb{C}$ be holomorphic. If there exists a non-empty open set $U \subseteq S$ such that $f(z)=g(z)$ for every $z\in U$, then $f(z)=g(z)$ for every $z\in S$.
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -350,23 +795,23 @@ $$
 Let $z_0$ be an isolated singularity of $f$.
 
 1. If $\lim_{z \to z_0} (z - z_0)f(z)$ exists, then
-   
+
    $$
    \operatorname{Res}(f, z_0) = \lim_{z \to z_0} (z - z_0)f(z).
    $$
-   
+
    Moreover, $z_0$ is a simple pole if $\operatorname{Res}(f, z_0) \neq 0$, or a removable singularity if $\operatorname{Res}(f, z_0) = 0$.
 
 2. If $f(z) = \frac{g(z)}{h(z)}$ for some holomorphic functions $g$ and $h$ near $z_0$, with $h(z_0) = 0$ and $h'(z_0) \neq 0$, then
-   
+
    $$
    \operatorname{Res}(f, z_0) = \frac{g(z_0)}{h'(z_0)},
    $$
-   
+
    Moreover, $z_0$ is a simple pole if $\operatorname{Res}(f, z_0) \neq 0$, or a removable singularity if $\operatorname{Res}(f, z_0) = 0$.
 
 3. If $z_0$ is a pole of order at most $m$, then
-   
+
    $$
    \operatorname{Res}(f, z_0) = \frac{1}{(m - 1)!} \lim_{z \to z_0} \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}} \left[ (z - z_0)^m f(z) \right].
    $$
@@ -452,11 +897,11 @@ $$
 Let $c > 0$. For every $\delta \in \mathbb{R}$, we have
 
 $$
-\lim_{T \to +\infty} \frac{1}{2\pi i} \int_{c-iT}^{c+iT} \frac{e^{\delta z}}{z} \, \mathrm{d}z = 
-\begin{cases} 
-0 & \text{if } \delta < 0, \\ 
-1/2 & \text{if } \delta = 0, \\ 
-1 & \text{if } \delta > 0, 
+\lim_{T \to +\infty} \frac{1}{2\pi i} \int_{c-iT}^{c+iT} \frac{e^{\delta z}}{z} \, \mathrm{d}z =
+\begin{cases}
+0 & \text{if } \delta < 0, \\
+1/2 & \text{if } \delta = 0, \\
+1 & \text{if } \delta > 0,
 \end{cases}
 $$
 
@@ -538,7 +983,7 @@ $$
 \begin{aligned}
 M_Y(t) &= \frac{M_X(\lambda + t)}{M_X(\lambda)}, \\
 K_Y(t) &= K_X(\lambda + t) - K_X(\lambda), \\
-K_Y^{(m)}(0) &= K_X^{(m)}(\lambda), \quad \forall m \geq 1. 
+K_Y^{(m)}(0) &= K_X^{(m)}(\lambda), \quad \forall m \geq 1.
 \end{aligned}
 $$
 :::
@@ -548,7 +993,7 @@ $$
 ::: {#thm-22}
 Lagrange inversion formula via residues
 
-Let $S$ and $U$ be two open subsets of $\mathbb{C}$ containing $0$. Let $f : S \to U$ and $g : U \to S$ be holomorphic functions that are inverse to each other, meaning $f(g(z)) = z$ for all $z \in U$ and $g(f(w)) = w$ for all $w \in S$. Assume further that $f(0) = 0$. 
+Let $S$ and $U$ be two open subsets of $\mathbb{C}$ containing $0$. Let $f : S \to U$ and $g : U \to S$ be holomorphic functions that are inverse to each other, meaning $f(g(z)) = z$ for all $z \in U$ and $g(f(w)) = w$ for all $w \in S$. Assume further that $f(0) = 0$.
 
 Then there exists a radius $r > 0$ such that for all $z \in D_r(0)$, the inverse function $g(z)$ can be expanded as the power series
 

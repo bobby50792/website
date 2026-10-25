@@ -5,7 +5,7 @@ search: true
 number-offset: [1]
 
 crossref:
-  chapters: true      
+  chapters: true
 
 ---
 
@@ -31,7 +31,7 @@ $$
 ::: {.callout-note collapse="true"}
 ## Big-$\mathcal{O}$ notation properties
 
-Let $f, g : \mathbb{N} \to \mathbb{R}$ and $c \in \mathbb{R}$. If $f(n), g(n) \ge 0$ for all $n$, then 
+Let $f, g : \mathbb{N} \to \mathbb{R}$ and $c \in \mathbb{R}$. If $f(n), g(n) \ge 0$ for all $n$, then
 \begin{align*}
 f(n) &= \mathcal{O}(f(n)) \\
 c \cdot f(n) &= \mathcal{O}(f(n)) \\
@@ -64,7 +64,7 @@ Let $f,g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently lar
 * We write $f(n) = o(g(n))$ if $\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = 0$.
 * We write $f(n) = \omega(g(n))$ if $\lim\limits_{n \to \infty} \frac{|f(n)|}{g(n)} = +\infty$.
 
-::: 
+:::
 
 ::: {#thm-2}
 
@@ -118,6 +118,28 @@ $$
 $$
 :::
 
+::: {.callout-tip collapse="true"}
+
+## Big-$\mathcal{O}$ notation over a domain
+
+Let $f,g : D \to \mathbb{R}$ be functions defined on a domain $D$. We say that $f(n) = \mathcal{O}(g(n))$ for all $n \in D$ if there exists a constant $C > 0$ such that
+$$
+|f(n)| \le Cg(n), \quad \forall n \in D.
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Big-$\mathcal{O}$ notation for $x \to 0$
+
+Let $f,g : \mathbb{R} \to \mathbb{R}$ be functions defined on $\mathbb{R}$. We say that $f(x) = \mathcal{O}(g(x))$ as $x \to 0$ if there exist constants $C > 0$ and $\delta > 0$ such that
+$$
+|f(x)| \le Cg(x), \quad \forall x \in \mathbb{R} \text{ with } 0 < |x| < \delta.
+$$
+
+:::
+
 ## Probability Spaces and Event
 
 
@@ -145,20 +167,44 @@ $$
 ## Uniform Probability Means Counting
 
 
+::: {#thm-math1-counting-1 name="Addition Principle"}
+
+If a set $A$ is the union of $m$ disjoint sets $S_1, \dots, S_m$, i.e., $A = S_1 \sqcup \dots \sqcup S_m$, then
+$$
+\begin{aligned}
+|A| = |S_1 \sqcup \dots \sqcup S_m| = \sum_{i=1}^m |S_i|,
+\end{aligned}
+$$
+where $\sqcup$ denotes the union of two disjoint sets.
+
+:::
+
+::: {#thm-math1-counting-2 name="Multiplication Principle"}
+
+If a set $A$ is the Cartesian product of $m$ sets $S_1, \dots, S_m$, i.e., $A = S_1 \times S_2 \times \dots \times S_m$, then
+$$
+\begin{aligned}
+|A| = |S_1 \times S_2 \times \dots \times S_m| = \prod_{i=1}^m |S_i|,
+\end{aligned}
+$$
+where $\times$ denotes the Cartesian product of two sets, i.e., $A \times B = \{(a, b) : a \in A, b \in B\}$.
+
+:::
+
 ::: {.callout-note collapse="true"}
 
 ## The Secretary Problem
 
 [Problem Description](https://en.wikipedia.org/wiki/Secretary_problem)
 
-### Threshold Strategy 
+### Threshold Strategy
 
 For a fixed integer $k$ satisfying $1 \le k \le n - 1$, the $k$-strategy is an online decision strategy defined as follows:
 
 * Reject the first $k$ options and record the maximum value observed;
 * Starting from step $k + 1$, accept the first option whose value exceeds the recorded maximum.
 
-### Conclusion 
+### Conclusion
 
 For $n \ge 2$, the following two statements hold:
 
@@ -187,7 +233,7 @@ $$
 [Problem Description](https://zh.wikipedia.org/wiki/百囚問題)
 
 ### Pointer Chasing Strategy
- 
+
 Before opening any locker, students discuss and agree on a bijection between student names and $[n]$,
 $$
 \begin{align*}
@@ -205,7 +251,7 @@ For each student $s$, let $x \leftarrow \phi(s)$. The search rule is:
 If no success occurs, stop after $n/2$ opens (failure).
 
 ### Conclusion
-For all even $n \ge 2$, the success probability of the pointer chasing strategy is 
+For all even $n \ge 2$, the success probability of the pointer chasing strategy is
 $$
 \begin{align*} \Pr[\text{success}] = 1 - \sum_{j=n/2+1}^n \frac{1}{j} = 1 - \ln 2 + \mathcal{O}\left(\frac{1}{n}\right) \approx 0.307. \end{align*}
 $$
@@ -223,7 +269,7 @@ For events $A, B \subseteq \Omega$:
 - The union of two events $A$ and $B$, denoted by $A \cup B$, is the event that at least one of $A, B$  happens.
 
 As events are subsets of the sample space $\Omega$, the operations $\cap$ and $\cup$ are the same as set operations.
-::: 
+:::
 
 ::: {.callout-note collapse="true"}
 ## Properties of probability measures
@@ -244,13 +290,13 @@ $$
 $$
 
 
-3. For any sequence of events $A_1, \dots, A_m \subseteq \Omega$ with $m \geq 2$, 
+3. For any sequence of events $A_1, \dots, A_m \subseteq \Omega$ with $m \geq 2$,
 $$
 \begin{align*}
 \Pr\left[\bigcup_{i=1}^m A_i\right] \le \sum_{i=1}^m \Pr[A_i].
 \end{align*}
 $$
-::: 
+:::
 
 ::: {.callout-note collapse="true"}
 
@@ -270,7 +316,7 @@ $$
 \mathcal{H}_{p,m} := \{h_{a,b,p,m} : a \in \mathbb{Z}_p \setminus \{0\}, b \in \mathbb{Z}_p\}.
 \end{align*}
 $$
-That is, $\mathcal{H}_{p,m}$ is a family of linear hash functions with fixed prime $p$ and bucket number $m$. 
+That is, $\mathcal{H}_{p,m}$ is a family of linear hash functions with fixed prime $p$ and bucket number $m$.
 
 ### Conclusion
 
@@ -310,14 +356,14 @@ $$
 $$
 Thus $R(k) = 2^{\Theta(k)}$.
 
-2. For all $r, k, m \geq 2$, the multicolor Ramsey number $R_r^{(m)}(k)$ satisfies the following lower bound: 
+2. For all $r, k, m \geq 2$, the multicolor Ramsey number $R_r^{(m)}(k)$ satisfies the following lower bound:
 $$
 R_r^{(m)}(k) > r^{\frac{1}{m} \left( \binom{k}{m} - 1 \right)}.
 $$
 
 :::
 
-## Conditional Probability and Independence 
+## Conditional Probability and Independence
 
 ::: {.callout-tip collapse="true"}
 ## Conditional probability
@@ -357,6 +403,17 @@ $$
 $$
 :::
 
+::: {#thm-math1-chain-1}
+
+For $m \geq 2$, let $A_1, \ldots, A_m$ be events with all relevant conditional probabilities well-defined. Then
+$$
+\begin{aligned}
+\Pr\left[\bigcap_{i=1}^m A_i\right] &= \Pr[A_1] \prod_{i=2}^m \Pr\left[A_i \mid \bigcap_{j=1}^{i-1} A_j\right].
+\end{aligned}
+$$
+
+:::
+
 ::: {#thm-4}
 
 Let $B_1, \dots, B_m$ be mutually exclusive events that satisfy $\bigcup_{i=1}^m B_i = \Omega$ and $\Pr[B_i] > 0$ for all $i \in [m]$. Then for any event $A$,
@@ -380,23 +437,36 @@ $$
 :::
 
 ::: {.callout-tip collapse="true"}
+
+## Probability Distribution
+
+A random variable defined on a probability space induces a probability distribution on the real numbers. Here, the probability distribution of $X$ is defined as a function that assigns a probability to each subset of possible values of $X$. That is, for any subset $A \subseteq \mathbb{R}$,
+$$
+\begin{aligned}
+\Pr[X \in A] &= \sum_{\omega \in \Omega} \mathbb{1}_{[X(\omega) \in A]} p(\omega),
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
 ## Indicator function
 
 The indicator function of a condition $C$ is:
 
 $$
-\mathbb{1}_{[C]} = \begin{cases} 
-1 & \text{if the condition } C \text{ holds}, \\ 
-0 & \text{otherwise}. 
+\mathbb{1}_{[C]} = \begin{cases}
+1 & \text{if the condition } C \text{ holds}, \\
+0 & \text{otherwise}.
 \end{cases}
 $$
 
 For a set $A \subseteq U$, where $U$ is some universe, the indicator function of $A$ is:
 
 $$
-\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases} 
-1 & \text{if } x \in A, \\ 
-0 & \text{otherwise}. 
+\mathbb{1}_A : U \to \{0, 1\}, \quad \mathbb{1}_A(x) = \begin{cases}
+1 & \text{if } x \in A, \\
+0 & \text{otherwise}.
 \end{cases}
 $$
 :::
@@ -525,8 +595,108 @@ We say that random variables $X_1, \dots, X_n$ are independent and identically d
 - $X_1, \dots, X_n$ have the same probability distribution.
 :::
 
+## Data Deduplication via Hashing
+
+::: {.callout-tip collapse="true"}
+
+## Definition
+
+Let $S(D)$ be the set of 5-grams of document $D$. Define **Jaccard similarity** between two documents $D_1$ and $D_2$ as
+$$
+\begin{aligned}
+J(D_1, D_2) &= \frac{|S(D_1) \cap S(D_2)|}{|S(D_1) \cup S(D_2)|}.
+\end{aligned}
+$$
+
+Assume each document has a nonempty set of 5-grams. Fix a threshold $\tau \in (0, 1)$ and a tolerance $\epsilon \in (0, 1)$. Given a corpus of $n$ documents $D_1, \dots, D_n$, we build a graph where each document is a node. For any two documents $D_1$ and $D_2$, we compute their Jaccard similarity $J(D_1, D_2)$ and discuss the following three cases:
+
+* If $J(D_1, D_2) \ge \tau + \epsilon$, we add an edge between $D_1$ and $D_2$.
+* If $J(D_1, D_2) \le \tau - \epsilon$, we do nothing.
+* If $\tau - \epsilon < J(D_1, D_2) < \tau + \epsilon$, it is both ok to add an edge between $D_1$ and $D_2$ and not to add an edge.
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## MinHash
+
+First, we collect all 5-grams appearing in the $n$ documents in the corpus, and denote this set by $\mathcal{G}$. Next, we sample a random permutation on $\mathcal{G}$, and construct a hash function $h$ by mapping each 5-gram to its rank in the permutation. Finally, for each document $D$, the MinHash value of $D$ is defined as
+$$
+\begin{aligned}
+\text{MinHash}(D; h) &= \min\{h(x) : x \in S(D)\}.
+\end{aligned}
+$$
+
+:::
+
+::: {#thm-math1-minhash-1}
+
+For any two documents $D, D'$ in the corpus,
+$$
+\begin{aligned}
+\Pr[\text{MinHash}(D; h) = \text{MinHash}(D'; h)] &= J(D, D').
+\end{aligned}
+$$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## MinHash Signature
+
+Split $br$ independent MinHash functions into $b$ bands of $r$ rows. For each document $D$, define
+$$
+\begin{aligned}
+H_j^{(i)}(D) &= \text{MinHash}(D; h_j^{(i)}) \in \mathbb{Z} \quad \text{for } i \in [b] \text{ and } j \in [r].
+\end{aligned}
+$$
+
+Write $H^{(i)}(D)=(H_1^{(i)}(D),\ldots,H_r^{(i)}(D))$ and concatenate the $b$ bands to obtain $H(D)$. We call this vector $H(D)$ the MinHash signature of $D$.
+
+For two documents $D$ and $D'$, we say that their MinHash signatures collide if there exists an index $i \in [b]$ such that
+$$
+\begin{aligned}
+H^{(i)}(D) &= H^{(i)}(D').
+\end{aligned}
+$$
+
+We write $H(D) \sim H(D')$ when the two signatures collide.
+
+:::
+
+::: {#thm-math1-minhash-2}
+
+For any two documents $D, D'$ in the corpus,
+$$
+\begin{aligned}
+\Pr[H(D) \sim H(D')] &= 1 - (1 - J(D, D')^r)^b.
+\end{aligned}
+$$
+
+Choosing an integer $b$ close to $\tau^{-r}$ gives the approximation $\begin{aligned} P_{r,b}(s) \approx 1 - \exp(-bs^r) \approx 1 - \exp(-(s/\tau)^r). \end{aligned}$
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## The Banding Method
+
+The following algorithm clusters documents with colliding MinHash signatures into the same group.
+
+* Compute the MinHash signature $H(D)$ for each document $D$.
+* Build an empty graph $G$ with $n$ vertices.
+* For each band $i \in [b]$:
+    * Build an empty hash table $\mathcal{T}_i$ with $m = \Theta(n)$ buckets.
+    * For each document $D$:
+        * If the key $H^{(i)}(D)$ is already present in $\mathcal{T}_i$, select one stored document $D'$ and add an edge between $D$ and $D'$ in $G$.
+        * Otherwise, insert $D$ into $\mathcal{T}_i$ with key $H^{(i)}(D)$.
+* Identify all connected components of $G$ using breadth-first search (BFS).
+* Return the documents grouped by these connected components.
+
+:::
+
 ## Appendix
- 
+
 ::: {#thm-11}
 ## Nested conditional expectations
 

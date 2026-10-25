@@ -1,0 +1,460 @@
+---
+title: "Indefinite Integrals"
+page-layout: article
+search: true
+number-offset: [4]
+
+crossref:
+  chapters: true
+---
+
+## The Concept of Indefinite Integrals
+
+A function $F$ is called an **antiderivative** of a function $f$ on an interval $I \subset \mathbb{R}$ if
+$$
+F'(x) = f(x), \qquad \forall x \in I.
+$$
+
+The **indefinite integral** of $f$ on $I \subset \mathbb{R}$ is the **family of all antiderivatives** of $f$ on $I$, and is denoted by
+
+$$
+\int f(x)\, dx.
+$$
+
+Let $I \subset \mathbb{R}$ be an interval.  If $F_1$ and $F_2$ are two antiderivatives of $f$ on $I$,  then the difference $F_1(x) - F_2(x)$ is a constant. Consequently,
+$$
+\int f(x)\, dx = F(x) + C,
+$$
+
+where $F$ is any antiderivative of $f$ on $I$, and $C$ is an arbitrary constant.
+
+**Examples**
+
+1.
+
+    $$
+    \int e^{x}\, dx = e^{x} + C.
+    $$
+
+2.
+
+    $$
+    \int \sin x\, dx = -\cos x + C,
+    $$
+
+$$
+\int \cos x\, dx = \sin x + C.
+$$
+
+3.
+
+$$
+\int \sinh x\, dx = \cosh x + C,
+$$
+
+$$
+\int \cosh x\, dx = \sinh x + C.
+$$
+
+Where
+$$
+\sinh x = \frac{e^{x} - e^{-x}}{2},\qquad
+\cosh x = \frac{e^{x} + e^{-x}}{2}.
+$$
+
+4. For $\alpha \ne -1$,
+    $$
+    \int x^{\alpha}\, dx
+    = \frac{x^{\alpha+1}}{\alpha+1} + C.
+    $$
+
+5.
+
+    $$
+    \int \frac{1}{x}\, dx = \ln|x| + C.
+    $$
+
+6.
+
+    $$
+    \int \frac{1}{1+x^{2}}\, dx = \arctan x + C.
+    $$
+
+## The Computation of Indefinite Integrals
+
+::: {#thm-calc1-4-1}
+
+If $F$ and $G$ are antiderivatives of $f$ and $g$ on an interval $I$,  then $\lambda F + \mu G$ is an antiderivative of $\lambda f + \mu g$ on $I$.  Consequently,
+$$
+\int \bigl(\lambda f(x) + \mu g(x)\bigr)\, dx
+= \lambda \int f(x)\, dx
++ \mu \int g(x)\, dx.
+$$
+
+:::
+
+::: {#thm-calc1-4-2}
+
+If $F$ and $G$ are antiderivatives of $f$ and $g$, respectively,  then
+$$
+\int f(G(x))\, g(x)\, dx
+= F(G(x)) + C.
+$$
+
+:::
+
+::: {#thm-calc1-4-3}
+
+If $F$ and $G$ are antiderivatives of $f$ and $g$ on an interval $I$, then
+$$
+\int F(x)\, g(x)\, dx
+= F(x) G(x) - \int G(x)\, f(x)\, dx.
+$$
+
+:::
+
+**Examples**
+
+1. Compute
+    $$
+    \int \frac{x}{1+x^{2}}\, dx.
+    $$
+
+    Let
+    $$
+    y = 1 + x^{2}, \qquad dy = 2x\, dx.
+    $$
+
+    Then
+    $$
+    \int \frac{x}{1+x^{2}}\, dx
+    = \frac{1}{2} \int \frac{1}{1+x^{2}}\, d(1+x^{2})
+    = \frac{1}{2} \int \frac{1}{y}\, dy.
+    $$
+
+    Thus
+    $$
+    \frac{1}{2}\int \frac{1}{y}\, dy
+    = \frac{1}{2}\ln|y| + C
+    = \frac{1}{2}\ln(1+x^{2}) + C.
+    $$
+
+2. Compute
+$$
+\int \frac{1}{\cos^{2m} x}\, dx.
+$$
+
+Let
+$$
+t = \tan x, \qquad dt = \sec^{2}x\, dx = \frac{1}{\cos^{2}x}\, dx.
+$$
+
+Then
+$$
+\int \frac{1}{\cos^{2m} x}\, dx
+= \int \frac{1}{\cos^{2m-2} x}\, d(\tan x)
+= \int (1+t^{2})^{\,m-1}\, dt.
+$$
+
+Thus the integral can be reduced to a polynomial-type integral in $t$:
+$$
+\int \frac{1}{\cos^{2m} x}\, dx
+= \int (1+t^{2})^{\,m-1}\, dt,
+\qquad t=\tan x.
+$$
+
+3. Compute
+$$
+\int f(\cos^{2} x)\, dx.
+$$
+
+We first rewrite the integrand:
+$$
+\int f(\cos^{2} x)\, dx
+= \int \frac{f(\cos^{2} x)\,\cos^{2}x}{\cos^{2}x}\, dx.
+$$
+
+Let
+$$
+t = \tan x, \qquad dt = \frac{1}{\cos^{2}x}\, dx, \qquad
+\cos^{2}x = \frac{1}{1+t^{2}}.
+$$
+
+Then
+$$
+\int f(\cos^{2} x)\, dx
+= \int \frac{1}{1+t^{2}}\, f\!\left(\frac{1}{1+t^{2}}\right)\, dt.
+$$
+
+Thus the integral of $f(\cos^{2}x)$ is transformed into an integral in $t$:
+$$
+\int f(\cos^{2} x)\, dx
+= \int \frac{1}{1+t^{2}}\, f\!\left(\frac{1}{1+t^{2}}\right)\, dt,
+\qquad t=\tan x.
+$$
+
+4. Compute
+    $$
+    \int \frac{1}{\sqrt{x^{2}+a^{2}}}\, dx
+    $$
+
+    Let
+    $$
+    \theta = \arctan\!\left(\frac{x}{a}\right)
+    $$
+
+    Then
+    $$
+    \int \frac{1}{\sqrt{x^{2}+a^{2}}}\, dx
+    = \int \frac{1}{\sqrt{a^{2}\tan^{2}\theta + a^{2}}}\, d(a\tan\theta)
+    $$
+
+    Since
+    $$
+    \sqrt{a^{2}\tan^{2}\theta + a^{2}}
+    = a\sqrt{1+\tan^{2}\theta}
+    = \frac{a}{\cos\theta},
+    $$
+
+    we have
+    $$
+    \int \frac{1}{\sqrt{x^{2}+a^{2}}}\, dx
+    = \int \frac{1}{\cos\theta}\, d\theta
+    $$
+
+    Let
+    $$
+    t = \sin\theta,
+    \qquad dt = \cos\theta\, d\theta .
+    $$
+
+    Then
+    $$
+    \int \frac{1}{\cos\theta}\, d\theta
+    = \frac{1}{2}\int \left(\frac{1}{1-t} + \frac{1}{1+t}\right) dt
+    = \frac{1}{2}\ln\frac{1+t}{1-t} + C
+    $$
+
+    Thus
+    $$
+    \frac{1}{2}\ln\frac{1+\sin\theta}{1-\sin\theta} + C
+    $$
+
+    Since
+    $$
+    \sin\theta = \frac{x}{\sqrt{a^{2}+x^{2}}},
+    $$
+
+    we get
+    $$
+    \frac{1}{2}\ln
+    \left(
+    \frac{1+\frac{x}{\sqrt{a^{2}+x^{2}}}}
+         {1-\frac{x}{\sqrt{a^{2}+x^{2}}}}
+    \right)
+    = \ln\left(x+\sqrt{a^{2}+x^{2}}\right) + C_1.
+    $$
+
+    Therefore
+    $$
+    \int \frac{1}{\sqrt{x^{2}+a^{2}}}\, dx
+    = \ln\left(x+\sqrt{a^{2}+x^{2}}\right) + C .
+    $$
+
+5. Let
+    $$
+    I_n = \int e^{x}\sin^{n}x\, dx .
+    $$
+
+    Then
+    $$
+    I_n = \int e^{x}\sin^{n}x\, dx
+    = \int \sin^{n}x\, d(e^{x})
+    = e^{x}\sin^{n}x - \int e^{x} d(\sin^{n}x).
+    $$
+
+    Compute the differential:
+    $$
+    d(\sin^{n}x)
+    = n\sin^{\,n-1}x \cos x\, dx.
+    $$
+
+    Hence
+    $$
+    I_n
+    = e^{x}\sin^{n}x - n\int \sin^{\,n-1}x \cos x\, e^{x}\, dx.
+    $$
+
+    Rewrite the integral:
+    $$
+    I_n
+    = e^{x}\sin^{n}x - n e^{x}\sin^{\,n-1}x\cos x
+    + n\int e^{x} d(\sin^{\,n-1}x\cos x).
+    $$
+
+    Thus
+    $$
+    I_n
+    = e^{x}\bigl(\sin^{n}x - n\sin^{\,n-1}x\cos x\bigr)
+    + n(n-1)(I_{n-2} - I_n) - n I_n .
+    $$
+
+    Solve for $I_n$:
+    $$
+    I_n
+    = \frac{
+    e^{x}\sin^{\,n-1}x\bigl(\sin x - n\cos x\bigr)
+    + n(n-1)I_{n-2}
+    }{n^{2}+1}.
+    $$
+
+    Special case:
+    $$
+    I_1 = \frac{e^{x}(\sin x - \cos x)}{2}.
+    $$
+
+6. A **rational function** is a quotient of two polynomials:
+
+    $$
+    R(x)=\frac{P(x)}{Q(x)}, \qquad P, Q \in \mathbb{R}[x], \quad Q(x)\neq 0.
+    $$
+
+    To integrate $R(x)$, follow these steps.
+
+   **Polynomial Long Division**
+
+   If
+$$
+\deg P \ge \deg Q,
+$$
+   divide $P$ by $Q$:
+$$
+\frac{P(x)}{Q(x)} = S(x) + \frac{A(x)}{Q(x)},
+\qquad \deg A < \deg Q.
+$$
+   Thus,
+$$
+\int R(x)\,dx = \int S(x)\,dx + \int \frac{A(x)}{Q(x)}\, dx.
+$$
+
+   **Factor the Denominator**
+
+   Factor $Q(x)$ into irreducible real factors:
+
+$$
+Q(x)=
+\prod (x-a_i)^{k_i}
+\prod (x^2 + b_j x + c_j)^{m_j},
+$$
+
+   where each quadratic satisfies
+$$
+b_j^2 - 4c_j < 0.
+$$
+
+   **Partial Fraction Decomposition**
+$$
+\frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \cdots + \frac{A_k}{(x-a)^k}
+$$
+
+$$
+\frac{A_1x+B_1}{x^2+bx+c}
++ \frac{A_2x+B_2}{(x^2+bx+c)^2}
++ \cdots +
+\frac{A_mx+B_m}{(x^2+bx+c)^m}.
+$$
+
+   **Integrate Each Term**
+$$
+\int \frac{1}{x-a}\, dx = \ln |x-a| + C.
+$$
+
+$$
+\int \frac{1}{(x-a)^k}\, dx
+= \frac{-(x-a)^{-k+1}}{k-1} + C \qquad (k\ge 2).
+$$
+
+$$
+x^2+bx+c = \left(x+\frac{b}{2}\right)^2 + d, \quad d = c-\frac{b^2}{4}.
+$$
+
+$$
+\int \frac{1}{(x+\frac{b}{2})^2+d}\, dx
+= \frac{1}{\sqrt{d}} \arctan\!\left(\frac{x+\frac{b}{2}}{\sqrt{d}}\right) + C.
+$$
+
+$$
+\int \frac{x+\frac{b}{2}}{(x+\frac{b}{2})^2+d}\, dx
+= \frac{1}{2}\ln\left((x+\frac{b}{2})^2+d\right) + C.
+$$
+
+6.
+
+    $$
+    I_n = \int \frac{1}{(1+x^2)^n}\,dx
+    \qquad (n\ge 2).
+    $$
+
+    Write
+
+    $$
+    I_n = \int \frac{1}{(1+x^2)^n}\,dx
+    = \int \frac{(1+x^2)-x^2}{(1+x^2)^n}\,dx
+    = I_{n - 1}
+         - \int \frac{x^2}{(1+x^2)^n}\,dx.
+    $$
+
+    $$
+    \begin{aligned}
+    &\int \frac{x^2}{(1+x^2)^n}\,dx
+    = \frac{1}{2}\int \frac{x}{(1+x^2)^{n}} \,d(1 + x^2)
+    = \frac{1}{2 (1 - n)}\int x \,d\left((1 + x^2) ^ {1 - n}\right) \\
+    &= \frac{1}{2 (1 - n)} \left( \frac{x}{(1+x^2)^{n-1}} - \int \frac{1}{(1 + x^2)^{n - 1}} \, dx\right).
+    \end{aligned}
+    $$
+
+    Therefore
+
+    $$
+    I_n
+    = \left(1 - \frac{1}{2(n-1)}\right) I_{n-1}
+      + \frac{1}{2(n-1)}\frac{x}{(1+x^2)^{n-1}}.
+    $$
+
+    Thus the **reduction formula** is
+    $$
+    I_n
+    = \frac{x}{2(n-1)(1+x^2)^{n-1}}
+    + \frac{2n-3}{2(n-1)}\, I_{n-1},
+    \qquad n\ge 2.
+    $$
+
+    Together with
+
+    $$
+    I_1 = \int \frac{dx}{1+x^2} = \arctan x + C,
+    $$
+
+7.
+
+    $$
+    \int R(\cos\theta,\sin\theta)\, d\theta
+    =
+    \int
+    R\!\left(
+    \frac{1 - t^{2}}{1 + t^{2}},\;
+    \frac{2t}{1 + t^{2}}
+    \right)
+    \frac{2}{1+t^{2}}\, dt.
+    $$
+
+$$
+\int R(x,\sqrt{x^{2}-1})\, dx
+=
+\int
+R\!\left(
+\frac{1+t^{2}}{1-t^{2}},\;
+\frac{2t}{\,1-t^{2}\,}
+\right)
+\, d\!\left(\frac{1+t^{2}}{1-t^{2}}\right).
+$$

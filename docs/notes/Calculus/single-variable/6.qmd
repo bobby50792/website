@@ -1,9 +1,0 @@
----
-title: "Ordinary Differential Equations"
-page-layout: article
-search: true
-number-offset: [6]
-
-crossref:
-  chapters: true      
----

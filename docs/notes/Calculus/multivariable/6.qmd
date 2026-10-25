@@ -1,9 +1,0 @@
----
-title: "Integration of Functions on Curves and Surfaces"
-page-layout: article
-search: true
-number-offset: [6]
-
-crossref:
-  chapters: true      
----
