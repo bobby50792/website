@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
@@ -324,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/calculus/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -333,7 +362,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/single-variable/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/calculus/single-variable/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -342,37 +371,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -380,7 +409,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/multivariable/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/calculus/multivariable/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -389,61 +418,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series of Functions and Power Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -453,13 +482,72 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math for CS and AI</span></a>
+            <a href="../../../../docs/notes/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vector Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Transformations and Matrices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Elementary Matrix Operations and Systems of Linear Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Determinants</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagonalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inner Product Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Canonical Forms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math for CS and AI</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
@@ -508,20 +596,20 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mechanics and Thermal Physics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mechanics and Thermal Physics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
@@ -618,11 +706,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Electricity and Magnetism</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link">
@@ -685,11 +773,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -732,11 +820,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Applied Probability</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link">
@@ -755,11 +843,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/machine-learning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/machine-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -778,11 +866,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/advanced-computer-graphics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Computer Graphics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/advanced-computer-graphics/1.html" class="sidebar-item-text sidebar-link">
@@ -807,11 +895,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/artificial-intelligence/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Artificial Intelligence</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
@@ -844,7 +932,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#newtons-first-law" id="toc-newtons-first-law" class="nav-link active" data-scroll-target="#newtons-first-law"><span class="header-section-number">2.1</span> Newton’s First Law</a></li>
+  <li><a href="#forces-and-quantity-of-matter" id="toc-forces-and-quantity-of-matter" class="nav-link active" data-scroll-target="#forces-and-quantity-of-matter"><span class="header-section-number">2.1</span> Forces and Quantity of Matter</a></li>
+  <li><a href="#newtons-laws" id="toc-newtons-laws" class="nav-link" data-scroll-target="#newtons-laws"><span class="header-section-number">2.2</span> Newton’s Laws</a></li>
+  <li><a href="#non-inertial-frames-and-effective-forces" id="toc-non-inertial-frames-and-effective-forces" class="nav-link" data-scroll-target="#non-inertial-frames-and-effective-forces"><span class="header-section-number">2.3</span> Non-Inertial Frames and Effective Forces</a></li>
   </ul>
 </nav>
     </div>
@@ -871,8 +961,362 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="newtons-first-law" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="newtons-first-law"><span class="header-section-number">2.1</span> Newton’s First Law</h2>
+<section id="forces-and-quantity-of-matter" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="forces-and-quantity-of-matter"><span class="header-section-number">2.1</span> Forces and Quantity of Matter</h2>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{F} = m\vec{a}.
+\end{aligned}
+\]</span></p>
+<p>There are four fundamental forces.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 21%">
+<col style="width: 17%">
+<col style="width: 13%">
+<col style="width: 27%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Interaction</th>
+<th style="text-align: left;">Current theory</th>
+<th style="text-align: left;">Mediators</th>
+<th style="text-align: left;">Relative strength</th>
+<th style="text-align: left;">Long-distance behavior (Force/Field)</th>
+<th style="text-align: left;">Range(m)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Strong</td>
+<td style="text-align: left;">Quantum chromodynamics(QCD)</td>
+<td style="text-align: left;">gluons</td>
+<td style="text-align: left;"><span class="math inline">\(10^{38}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sim r\)</span> (color confinement)</td>
+<td style="text-align: left;"><span class="math inline">\(10^{-15}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Electromagnetic</td>
+<td style="text-align: left;">Quantum electrodynamics(QED)</td>
+<td style="text-align: left;">photons</td>
+<td style="text-align: left;"><span class="math inline">\(10^{36}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{1}{r^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\infty\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Weak</td>
+<td style="text-align: left;">Electroweak theory(EWT)</td>
+<td style="text-align: left;">W and Z bosons</td>
+<td style="text-align: left;"><span class="math inline">\(10^{33}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{1}{r}e^{-m_{W,Z}r}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(10^{-18}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gravitation</td>
+<td style="text-align: left;">General relativity(GR)</td>
+<td style="text-align: left;">gravitons(hypothetical)</td>
+<td style="text-align: left;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{1}{r^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\infty\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hooke’s Law
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\begin{aligned}
+F_x = -k\Delta x = -k(x - x_{eq}).
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Law of Universal Gravitation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Newton’s Law of Universal Gravitation describes the gravitational force between two objects with masses. The force exerted by mass <span class="math inline">\(m_1\)</span> on mass <span class="math inline">\(m_2\)</span> due to gravity is described by: <span class="math display">\[
+\begin{aligned}
+\vec{F}_{1,2}^G = -G\frac{m_1 m_2}{r_{1,2}^3}\vec{r}_{1,2}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Gravitational Force Near the Surface of the Earth
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Close to Earth’s surface, the gravitational attraction between an object and Earth manifests as a downward force whose magnitude is expressed as: <span class="math display">\[
+\begin{aligned}
+|F_{\text{earth, object}}^G| = mg,
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(m\)</span> denotes the mass of the object, and <span class="math inline">\(g\)</span> represents the acceleration due to Earth’s gravity.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Electric Charge and Coulomb‘s Law
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Coulomb’s Law quantifies the electric force between two charged objects. For objects 1 and 2, the force on object 2 due to object 1 is given by: <span class="math display">\[
+\begin{aligned}
+\vec{F}_{1,2}^E &amp;= k_e \frac{q_1 q_2}{r_{1,2}^3} \vec{r}_{1,2}.
+\end{aligned}
+\]</span> where <span class="math inline">\(q_1\)</span> and <span class="math inline">\(q_2\)</span> are the charges, <span class="math inline">\(\vec{r}_{1,2}\)</span> is the displacement vector pointing from object 1 to object 2, and <span class="math inline">\(k_e = 8.9875517923(14) \times 10^9 \mathrm{~N \cdot m^2 \cdot C^{-2}}\)</span> is Coulomb’s constant.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Contact Forces and Frictional Forces
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\begin{aligned}
+f_k &amp;= \mu_k N,
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+0 \le f_s &amp;\le (f_s)_{\max} = \mu_s N.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="newtons-laws" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="newtons-laws"><span class="header-section-number">2.2</span> Newton’s Laws</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Newton’s First Law
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An object remains in a state of rest or in uniform motion in a straight line unless it is compelled to change that state by forces acted upon it.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Definition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A reference frame in which the first law is valid is called an inertial or Galilean system.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Momentum and Newton’s Second Law
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The change of motion is proportional to the motive force impressed and is made in the direction of the right line in which that force is applied.</p>
+<p>Namely, we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{F} &amp;= \frac{d\vec{p}}{dt} = m \frac{d\vec{v}}{dt} = m\vec{a}
+\end{aligned}
+\]</span></p>
+<p>where we assume that the mass <span class="math inline">\(m\)</span> does not change.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Newton’s Third Law
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To every action, there is always opposed an equal reaction: or, the mutual action of two bodies upon each other are always equal in magnitude and directed to contrary direction on the right line connecting the two bodies.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="non-inertial-frames-and-effective-forces" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="non-inertial-frames-and-effective-forces"><span class="header-section-number">2.3</span> Non-Inertial Frames and Effective Forces</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Translational Non-inertial Reference Frame
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Consider a non-inertial reference frame <span class="math inline">\(S'\)</span> that translates relative to an inertial frame <span class="math inline">\(S\)</span> with an acceleration <span class="math inline">\(\vec{a}_0\)</span>. The transformation of acceleration between these frames is given by</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{a} = \vec{a}' + \vec{a}_0.
+\end{aligned}
+\]</span></p>
+<p>Applying Newton’s Second Law in the inertial frame <span class="math inline">\(S\)</span>, we obtain</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{F} = m\vec{a} = m(\vec{a}' + \vec{a}_0).
+\end{aligned}
+\]</span></p>
+<p>Rearranging this equation, we can express the equation of motion in the non-inertial frame <span class="math inline">\(S'\)</span> as</p>
+<p><span class="math display">\[
+\begin{aligned}
+m\vec{a}' = \vec{F} + \vec{F}_a,
+\end{aligned}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{F}_a = -m\vec{a}_0
+\end{aligned}
+\]</span></p>
+<p>is the effective force, or fictitious force, in the non-inertial frame <span class="math inline">\(S'\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Rotational Non-inertial Reference Frame
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Coordinate transformations:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+r = r', \quad \dot{r} = \dot{r}', \quad \ddot{r} = \ddot{r}', \\
+\theta = \theta' + \omega t, \quad \dot{\theta} = \dot{\theta}' + \omega, \quad \ddot{\theta} = \ddot{\theta}'.
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Unit vector transformations:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{r} = \hat{r}', \\
+\hat{\theta} = \hat{\theta}'.
+\end{aligned}
+\]</span></p>
+<p>In the inertial frame <span class="math inline">\(S\)</span>, the position vector is <span class="math inline">\(\vec{r} = r \hat{r}\)</span>. Taking the time derivative in the inertial frame:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{v} = \frac{d\vec{r}}{dt} = \dot{r} \hat{r} + r \dot{\hat{r}}.
+\end{aligned}
+\]</span></p>
+<p>Using the relation for the derivative of a unit vector in polar coordinates, <span class="math inline">\(\dot{\hat{r}} = \dot{\theta} \hat{\theta}\)</span>. Substituting <span class="math inline">\(\dot{\theta} = \dot{\theta}' + \omega\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{v} &amp;= \dot{r} \hat{r} + r(\dot{\theta}' + \omega) \hat{\theta} = (\dot{r} \hat{r} + r \dot{\theta}' \hat{\theta}) + r \omega \hat{\theta}.
+\end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\(\vec{v}' = \dot{r}' \hat{r}' + r' \dot{\theta}' \hat{\theta}'\)</span> and <span class="math inline">\(\vec{\omega} \times \vec{r} =  r \omega \hat{\theta}\)</span>, we obtain:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{v} = \vec{v}' + \vec{\omega} \times \vec{r}.
+\end{aligned}
+\]</span></p>
+<p>Then <span class="math display">\[
+\begin{aligned}
+\vec{a}_r &amp;= (\ddot{r} - r\dot{\theta}^2)\hat{r} = [\ddot{r}' - r'(\dot{\theta}' + \omega)^2]\hat{r}' = \vec{a}'_{r'} - 2\vec{v}'_{\theta'} \times \vec{\omega} - \omega^2\vec{r}', \\
+\vec{a}_\theta &amp;= (r\ddot{\theta} + 2\dot{r}\dot{\theta})\hat{\theta} = [r'\ddot{\theta}' + 2\dot{r}'(\dot{\theta}' + \omega)]\hat{\theta}' = \vec{a}'_{\theta'} - 2\vec{v}'_{r'} \times \vec{\omega}.
+\end{aligned}
+\]</span></p>
+<p>Combining the last two equations, we obtain:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m(\vec{a}'_{r'} + \vec{a}'_{\theta'}) &amp;= m(\vec{a}_r + \vec{a}_\theta) + m\omega^2\vec{r}' + 2m(\vec{v}'_{r'} + \vec{v}'_{\theta'}) \times \vec{\omega}, \\
+\vec{F}_{\text{eff}} &amp;= \vec{F}_{\text{real}} + \vec{F}_{\text{c}} + \vec{F}_{\text{cor}}.
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\vec{F}_{\text{c}}\)</span> and <span class="math inline">\(\vec{F}_{\text{cor}}\)</span> are the centrifugal force and Coriolis force, respectively:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{F}_{\text{c}} &amp;= m\omega^2\vec{r}', \\
+\vec{F}_{\text{cor}} &amp;= 2m(\vec{v}'_{r'} + \vec{v}'_{\theta'}) \times \vec{\omega} = 2m\vec{v}' \times \vec{\omega}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
 
 
 </section>

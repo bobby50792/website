@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
@@ -324,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/calculus/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -333,7 +362,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/single-variable/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/calculus/single-variable/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single Variable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -342,37 +371,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Real Numbers and Limits of Sequences</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuity of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Derivatives and Differentials of Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Indefinite Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Definite Integral</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/single-variable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/single-variable/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ordinary Differential Equations</span></a>
   </div>
 </li>
@@ -380,7 +409,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/calculus/multivariable/0.qmd" class="sidebar-item-text sidebar-link">
+            <a href="../../../../docs/notes/calculus/multivariable/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multivariable Calculus</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -389,61 +418,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/1.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Limits and Continuity of Multivariate Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Differential of Multivariable Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/3.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implicit Function and Inverse Mapping Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/4.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrals with Parameters and Improper Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple Integrals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integration of Functions on Curves and Surfaces</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/7.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculus of Vector Fields</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/8.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/9.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Series of Functions and Power Series</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../docs/notes/calculus/multivariable/10.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../../docs/notes/calculus/multivariable/10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Fourier Series</span></a>
   </div>
 </li>
@@ -453,13 +482,72 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math for CS and AI</span></a>
+            <a href="../../../../docs/notes/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vector Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Transformations and Matrices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Elementary Matrix Operations and Systems of Linear Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Determinants</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagonalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inner Product Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Canonical Forms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../docs/notes/linear-algebra/exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../docs/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math for CS and AI</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
@@ -508,20 +596,20 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mechanics and Thermal Physics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mechanics and Thermal Physics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
@@ -618,11 +706,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Electricity and Magnetism</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link">
@@ -685,11 +773,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -732,11 +820,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Applied Probability</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link">
@@ -755,11 +843,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/machine-learning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/machine-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -778,11 +866,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/advanced-computer-graphics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Computer Graphics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/advanced-computer-graphics/1.html" class="sidebar-item-text sidebar-link">
@@ -807,11 +895,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../../docs/notes/artificial-intelligence/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Artificial Intelligence</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../docs/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
@@ -844,7 +932,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello"><span class="header-section-number">5.1</span> Hello</a></li>
+  <li><a href="#angular-momentum-for-a-point-particle" id="toc-angular-momentum-for-a-point-particle" class="nav-link active" data-scroll-target="#angular-momentum-for-a-point-particle"><span class="header-section-number">5.1</span> Angular Momentum for a Point Particle</a></li>
+  <li><a href="#conservation-of-angular-momentum" id="toc-conservation-of-angular-momentum" class="nav-link" data-scroll-target="#conservation-of-angular-momentum"><span class="header-section-number">5.2</span> Conservation of Angular Momentum</a>
+  <ul class="collapse">
+  <li><a href="#theorem-of-angular-momentum-for-a-particle" id="toc-theorem-of-angular-momentum-for-a-particle" class="nav-link" data-scroll-target="#theorem-of-angular-momentum-for-a-particle"><span class="header-section-number">5.2.1</span> Theorem of Angular Momentum for a Particle</a></li>
+  </ul></li>
+  <li><a href="#system-of-particles" id="toc-system-of-particles" class="nav-link" data-scroll-target="#system-of-particles"><span class="header-section-number">5.3</span> System of Particles</a>
+  <ul class="collapse">
+  <li><a href="#theorem-of-angular-momentum" id="toc-theorem-of-angular-momentum" class="nav-link" data-scroll-target="#theorem-of-angular-momentum"><span class="header-section-number">5.3.1</span> Theorem of Angular Momentum</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -871,10 +967,166 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hello" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="hello"><span class="header-section-number">5.1</span> Hello</h2>
+<section id="angular-momentum-for-a-point-particle" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="angular-momentum-for-a-point-particle"><span class="header-section-number">5.1</span> Angular Momentum for a Point Particle</h2>
+<p>Define the angular momentum <span class="math inline">\(\vec{L}_S\)</span> about the point <span class="math inline">\(S\)</span> as the cross product of the vector from <span class="math inline">\(S\)</span> to the point particle, <span class="math inline">\(\vec{r}_S\)</span>, and the momentum of the particle, <span class="math inline">\(\vec{p}\)</span>, <span class="math display">\[
+\begin{aligned}
+\vec{L}_S = \vec{r}_S \times \vec{p}.
+\end{aligned}
+\]</span></p>
+<p>Now, let us check out the relation between angular momentum and angular velocity. For simplicity, choose the fixed point to be the origin and the plane spanned by <span class="math inline">\(\vec{r}\)</span> and <span class="math inline">\(\vec{v}\)</span> for the polar coordinate system,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{L} &amp;= \vec{r} \times \vec{p} \\
+&amp;= m \vec{r} \times \vec{v} \\
+&amp;= m r^2 \dot{\theta} \hat{r} \times \hat{\theta} \\
+&amp;= m r^2 \dot{\theta} \hat{k} \\
+&amp;= m r^2 \vec{\omega},
+\end{aligned}
+\]</span></p>
+<p>where we use the fact that in the polar coordinate system,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{v} &amp;= \vec{v}_r + \vec{v}_\theta \\
+&amp;= \dot{r} \hat{r} + r \dot{\theta} \hat{\theta}.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="conservation-of-angular-momentum" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="conservation-of-angular-momentum"><span class="header-section-number">5.2</span> Conservation of Angular Momentum</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Torque
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S}{\mathrm{d}t} = \frac{\mathrm{d}}{\mathrm{d}t}(\vec{r}_S \times \vec{p}) = \left( \frac{\mathrm{d}\vec{r}_S}{\mathrm{d}t} \times \vec{p} \right) + \left( \vec{r}_S \times \frac{\mathrm{d}\vec{p}}{\mathrm{d}t} \right).
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\mathrm{d}\vec{r}_S}{\mathrm{d}t} \times \vec{p} = \vec{v} \times m\vec{v} = 0.
+\end{aligned}
+\]</span></p>
+<p>The rate of angular momentum change about the point <span class="math inline">\(S\)</span> is then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S}{\mathrm{d}t} = \vec{r}_S \times \frac{\mathrm{d}\vec{p}}{\mathrm{d}t} = \vec{r}_S \times \vec{F} = \vec{M}_S.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+<section id="theorem-of-angular-momentum-for-a-particle" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="theorem-of-angular-momentum-for-a-particle"><span class="header-section-number">5.2.1</span> Theorem of Angular Momentum for a Particle</h3>
+<p>The change in angular momentum is caused by the torque,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{J}_S = \int_{t_1}^{t_2} \vec{M}_S \mathrm{d}t = \vec{L}_{S,t_2} - \vec{L}_{S,t_1},
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\vec{J}_S\)</span> is defined as the angular impulse about a point <span class="math inline">\(S\)</span>.</p>
+<div id="thm-phys-5-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.1 (Conservation of Angular Momentum about a Point)</strong></span> If the torque about point <span class="math inline">\(S\)</span> is zero, <span class="math display">\[
+\begin{aligned}
+\vec{M}_S = \frac{\mathrm{d}\vec{L}_S}{\mathrm{d}t} = 0,
+\end{aligned}
+\]</span></p>
+<p>then <span class="math inline">\(\vec{L}_S = \text{const}\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="system-of-particles" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="system-of-particles"><span class="header-section-number">5.3</span> System of Particles</h2>
+<section id="theorem-of-angular-momentum" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="theorem-of-angular-momentum"><span class="header-section-number">5.3.1</span> Theorem of Angular Momentum</h3>
+<p>The angular momentum <span class="math inline">\(\vec{L}_{S,j}\)</span> of the <span class="math inline">\(j^{th}\)</span> particle is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{L}_{S,j} = \vec{r}_{S,j} \times \vec{p}_j.
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{L}_S^{sys} = \sum_{j=1}^{N} \vec{L}_{S,j} = \sum_{j=1}^{N} \vec{r}_{S,j} \times \vec{p}_j.
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S^{sys}}{\mathrm{d}t} = \frac{\mathrm{d}}{\mathrm{d}t} \sum_{j=1}^{N} \vec{L}_{S,j} = \sum_{j=1}^{N} \left( \frac{\mathrm{d}\vec{r}_{S,j}}{\mathrm{d}t} \times \vec{p}_j + \vec{r}_{S,j} \times \frac{\mathrm{d}\vec{p}_j}{\mathrm{d}t} \right).
+\end{aligned}
+\]</span></p>
+<p>we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\mathrm{d}\vec{L}_S^{sys}}{\mathrm{d}t} &amp;= \sum_{j=1}^{N} \left( \vec{r}_{S,j} \times \frac{\mathrm{d}\vec{p}_j}{\mathrm{d}t} \right) \\
+&amp;= \sum_{j=1}^{N} (\vec{r}_{S,j} \times \vec{F}_j) \\
+&amp;= \sum_{j=1}^{N} (\vec{r}_{S,j} \times (\vec{F}_j^{ext} + \vec{F}_j^{int})) \\
+&amp;= \vec{M}_S^{ext} + \vec{M}_S^{int} = \vec{M}_S^{ext}.
+\end{aligned}
+\]</span></p>
+<div id="thm-phys-5-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.2</strong></span> Angular Momentum of a System of Particles about Different Points A and B satisfies <span class="math display">\[
+\begin{aligned}
+\vec{L}_A = \vec{L}_B + \vec{r}_{A,B} \times \vec{p}_{sys}.
+\end{aligned}
+\]</span></p>
+</div>
+<div id="thm-phys-5-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.3 (Conservation Law of Angular Momentum)</strong></span> For a system of particles, when the net external torque equals zero, the angular momentum of the system becomes constant, <span class="math display">\[
+\begin{aligned}
+\vec{M}_S^{ext} = 0 \Rightarrow \vec{L}_S^{sys} = \text{const}.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Center of Mass Reference Frame
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\begin{aligned}
+\vec{M}' = \frac{\mathrm{d}\vec{L}'}{\mathrm{d}t} = \sum_{i} \vec{r}'_i \times \vec{f}_i
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{L}' = \sum_{i} m_i \vec{r}'_i \times \vec{v}'_i.
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\vec{M}'_{inertial} = \sum_{i} \vec{r}'_i \times (-m_i\vec{a}_c) = \sum_{i} -m_i\vec{r}'_i \times \vec{a}_c = 0 \times \vec{a}_c = 0.
+\end{aligned}
+\]</span></p>
+<p>Here <span class="math inline">\((-m_i\vec{a}_c)\)</span> is the inertial force. The inertial torque equals 0 since the overall effect of inertial force acts on the center of mass.</p>
+<p>The angular momentum of the system in an inertial reference frame is: <span class="math display">\[
+\begin{aligned}
+\vec{L} = \sum_{i} m_i \vec{r}_i \times \vec{v}_i = \sum_{i} m_i (\vec{r}'_i + \vec{r}_c) \times (\vec{v}'_i + \vec{v}_c) = \sum_{i} m_i \vec{r}'_i \times \vec{v}'_i + \sum_{i} m_i \vec{r}_c \times \vec{v}_c = \vec{L}' + \vec{r}_c \times \vec{p}_c,
+\end{aligned}
+\]</span></p>
+<p>since <span class="math inline">\(\sum_i m_i \vec{r}'_i = 0\)</span> and <span class="math inline">\(\sum_i m_i \vec{v}'_i = 0\)</span>.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
