@@ -3,6 +3,8 @@ project:
   output-dir: _site
 
 highlight-style: a11y
+number-sections: true
+number-depth: 6
 
 website:
   title: "Bobby"
