@@ -12,18 +12,6 @@
     ]
   },
   {
-    "objectID": "docs/notes/calculus/single-variable/index.html#chapters",
-    "href": "docs/notes/calculus/single-variable/index.html#chapters",
-    "title": "Single Variable Calculus",
-    "section": "1 Chapters",
-    "text": "1 Chapters\n\nReal Numbers and Limits of Sequences\nContinuity of Functions\nDerivatives and Differentials of Functions\nIndefinite Integrals\nDefinite Integral\nOrdinary Differential Equations",
-    "crumbs": [
-      "Notes",
-      "Calculus",
-      "Single Variable Calculus"
-    ]
-  },
-  {
     "objectID": "docs/notes/calculus/single-variable/1.html",
     "href": "docs/notes/calculus/single-variable/1.html",
     "title": "Real Numbers and Limits of Sequences",
@@ -633,17 +621,6 @@
     ]
   },
   {
-    "objectID": "docs/notes/math-for-cs-and-ai/index.html#chapters",
-    "href": "docs/notes/math-for-cs-and-ai/index.html#chapters",
-    "title": "Math for CS and AI",
-    "section": "1 Chapters",
-    "text": "1 Chapters\n\nDiscrete Probability\nSampling and Concentration\nGenerating Functions\nContinuous Probability\nCentral Limit Theorem\nOptimization",
-    "crumbs": [
-      "Notes",
-      "Math for CS and AI"
-    ]
-  },
-  {
     "objectID": "docs/notes/math-for-cs-and-ai/1.html",
     "href": "docs/notes/math-for-cs-and-ai/1.html",
     "title": "Discrete Probability",
@@ -829,17 +806,6 @@
     "title": "Linear Algebra",
     "section": "",
     "text": "Definitions, theorems, and exercises from the first-year linear algebra course.",
-    "crumbs": [
-      "Notes",
-      "Linear Algebra"
-    ]
-  },
-  {
-    "objectID": "docs/notes/linear-algebra/index.html#chapters",
-    "href": "docs/notes/linear-algebra/index.html#chapters",
-    "title": "Linear Algebra",
-    "section": "1 Chapters",
-    "text": "1 Chapters\n\nVector Spaces\nLinear Transformations and Matrices\nElementary Matrix Operations and Systems of Linear Equations\nDeterminants\nDiagonalization\nInner Product Spaces\nCanonical Forms\nExercises",
     "crumbs": [
       "Notes",
       "Linear Algebra"
@@ -1067,18 +1033,6 @@
     "title": "Mechanics and Thermal Physics",
     "section": "",
     "text": "本界面梳理了力学与热学相关知识, 希望对你能有所启发。",
-    "crumbs": [
-      "Notes",
-      "General Physics",
-      "Mechanics and Thermal Physics"
-    ]
-  },
-  {
-    "objectID": "docs/notes/general-physics/mechanics-and-thermal-physics/index.html#chapters",
-    "href": "docs/notes/general-physics/mechanics-and-thermal-physics/index.html#chapters",
-    "title": "Mechanics and Thermal Physics",
-    "section": "1 Chapters",
-    "text": "1 Chapters\n\nKinematics\nNewton’s Laws\nMomentum\nEnergy and Work\nAngular Momentum\nCollision Theory\nRigid Body",
     "crumbs": [
       "Notes",
       "General Physics",
@@ -3270,18 +3224,6 @@
     "title": "Multivariable Calculus",
     "section": "",
     "text": "本界面梳理了多元微积分相关知识, 希望对你能有所启发。",
-    "crumbs": [
-      "Notes",
-      "Calculus",
-      "Multivariable Calculus"
-    ]
-  },
-  {
-    "objectID": "docs/notes/calculus/multivariable/index.html#chapters",
-    "href": "docs/notes/calculus/multivariable/index.html#chapters",
-    "title": "Multivariable Calculus",
-    "section": "1 Chapters",
-    "text": "1 Chapters\n\nLimits and Continuity of Multivariate Functions\nDifferential of Multivariable Functions\nImplicit Function and Inverse Mapping Theorem\nIntegrals with Parameters and Improper Integrals\nMultiple Integrals\nIntegration of Functions on Curves and Surfaces\nCalculus of Vector Fields\nSeries\nSeries of Functions and Power Series\nFourier Series",
     "crumbs": [
       "Notes",
       "Calculus",
