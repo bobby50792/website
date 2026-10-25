@@ -8,89 +8,136 @@ crossref:
   chapters: true
 ---
 
-1. Consider a system of linear questions
-    $$
-    (a_1 + b)x_1 + a_2 x_2 + a_3 x_3 + \cdots + a_n x_n = 0
-    $$
+:::: {.exercise-set}
 
-    $$
-    a_1 x_1 + (a_2 + b)x_2 + a_3 x_3 + \cdots + a_n x_n = 0
-    $$
+## Linear Systems and Rank
 
-    $$
-    a_1 x_1 + a_2 x_2 + (a_3 + b)x_3 + \cdots + a_n x_n = 0
-    $$
+::: {#exr-la-structured-system name="A Structured Homogeneous System"}
 
-    $$
-    \vdots
-    $$
+Consider the homogeneous linear system
 
-    $$
-    a_1 x_1 + a_2 x_2 + a_3 x_3 + \cdots + (a_n + b)x_n = 0
-    $$
+$$
+\sum_{j=1}^{n} a_jx_j+bx_i=0,
+\qquad i=1,\ldots,n,
+$$
 
-    where $\sum_{i=1}^n a_i \ne 0$. Determine the relationship between $a_1, a_2, \cdots, a_n$ and $b$ such that
+where $\sum_{i=1}^n a_i\ne0$. Determine the conditions on $a_1,\ldots,a_n$ and $b$ under which:
 
-    a. This linear system has only a zero solution.
+a. The system has only the zero solution.
+b. The system has nonzero solutions. In this case, determine its solution set.
 
-    b. This system has nonzero solutions. In this case, determine a solution set.
+:::
 
-2. Prove
-    $$
-    \operatorname{rank}(L_A) + \operatorname{rank}(L_B) - n \;\le\; \operatorname{rank}(L_{AB}) \;\le\; \min\{\operatorname{rank}(L_A), \operatorname{rank}(L_B)\},
-    $$
+::: {#exr-la-product-rank name="Rank of a Matrix Product"}
 
-    where $A$ and $B$ are $n \times n$ matrices.
+Let $A$ and $B$ be $n\times n$ matrices. Prove both bounds:
 
-3. Prove
-    $$
-    \operatorname{rank}(L_{A+B}) \;\le\; \operatorname{rank}(L_A) + \operatorname{rank}(L_B)
-    $$
-    where $A$ and $B$ are $n \times m$ matrices.
+$$
+\begin{aligned}
+\operatorname{rank}(L_{AB})
+&\ge \operatorname{rank}(L_A)+\operatorname{rank}(L_B)-n,\\
+\operatorname{rank}(L_{AB})
+&\le \min\{\operatorname{rank}(L_A),\operatorname{rank}(L_B)\}.
+\end{aligned}
+$$
 
-4. Let $A, B \in M_{n \times n}(\mathbb{R})$. Suppose $AB = BA = 0$ and $\operatorname{rank}(A^2) = \operatorname{rank}(A)$. Prove that
+:::
 
-    $$
-    \operatorname{rank}(A + B) = \operatorname{rank}(A) + \operatorname{rank}(B)
-    $$
+::: {#exr-la-sum-rank name="Rank of a Matrix Sum"}
 
-5. Let $A, B, C, D$ be $n \times n$ matrices such that they commute pairwise under matrix multiplication, and $AC + BD = I_n$. Prove that:
+Let $A$ and $B$ be $n\times m$ matrices. Prove
 
-    $$
-    \operatorname{rank}(AB) = \operatorname{rank}(A) + \operatorname{rank}(B) - n.
-    $$
+$$
+\operatorname{rank}(L_{A+B})
+\le \operatorname{rank}(L_A)+\operatorname{rank}(L_B).
+$$
 
-6. $A$ is an $n \times n$ real matrix, $AA^t = k^2 I_n$, $k \in \mathbb{R}$. Prove:
+:::
 
-    $$
-    \operatorname{rank}(k I_n - A) = \operatorname{rank}\big((k I_n - A)^2\big).
-    $$
+::: {#exr-la-annihilation name="Rank Under Mutual Annihilation"}
 
-7. Suppose $A$ is an $n \times n$ matrix with rank $r$ ($1 \le r \le \frac{n}{2}$), and $A^2 = 0$.  Prove that there exists an invertible matrix $P$ such that
-    $$
-    A
-    =
-    P
-    \begin{pmatrix}
-    0 & I_r & 0 \\
-    0 & 0 & 0 \\
-    0 & 0 & 0
-    \end{pmatrix}
-    P^{-1}
-    $$
+Let $A,B\in M_{n\times n}(\mathbb R)$. Suppose $AB=BA=0$ and $\operatorname{rank}(A^2)=\operatorname{rank}(A)$. Prove
 
-    where $I_r$ is the $r \times r$ identity matrix, and $0$ are zero matrices.
+$$
+\operatorname{rank}(A+B)=\operatorname{rank}(A)+\operatorname{rank}(B).
+$$
 
-8. If $A^2 = I_n$, Prove $A$ is diagonalizable (here $A$ is a real square matrix).
+:::
 
-9. Let $V$ be a finite-dimensional real inner product space, and let $U$ and $T$ be self-adjoint linear operators on $V$ such that $UT = TU$.
+::: {#exr-la-commuting-rank name="Commuting Matrices"}
 
-    Prove that there exists an orthonormal basis of $V$ consisting of vectors that are eigenvectors of both $U$ and $T$.
+Let $A,B,C,D$ be pairwise commuting $n\times n$ matrices satisfying $AC+BD=I_n$. Prove
 
-10. Let $A$ and $B$ be $n \times n$ complex matrices satisfying the condition $AB = A + B.$
+$$
+\operatorname{rank}(AB)=\operatorname{rank}(A)+\operatorname{rank}(B)-n.
+$$
 
-    Prove that $A$ and $B$ are simultaneously triangularizable (there exists a basis under which both $A$ and $B$ are upper triangular matrices).
+:::
 
-11. Let $A$ be an $n \times n$ matrix satisfying the polynomial equation $\sum_{i=0}^{m} b_i A^i = 0$, where the coefficients satisfy the condition $|b_m| > \sum_{i=0}^{m-1} |b_i|.$
+::: {#exr-la-transpose name="A Matrix and Its Transpose"}
 
-    Prove that the equation $2X - XA^2 = AX$ has only the trivial solution $X = 0$.
+Let $A$ be an $n\times n$ real matrix satisfying $AA^t=k^2I_n$, where $k\in\mathbb R$. Prove
+
+$$
+\operatorname{rank}(kI_n-A)=\operatorname{rank}\big((kI_n-A)^2\big).
+$$
+
+:::
+
+::: {#exr-la-square-zero name="A Square-Zero Matrix"}
+
+Let $A$ be an $n\times n$ matrix with rank $r$, where $1\le r\le n/2$, and suppose $A^2=0$. Prove that an invertible matrix $P$ exists such that
+
+$$
+A=P
+\begin{pmatrix}
+0&I_r&0\\
+0&0&0\\
+0&0&0
+\end{pmatrix}
+P^{-1},
+$$
+
+where $I_r$ is the $r\times r$ identity matrix and each $0$ denotes a zero matrix of the appropriate size.
+
+:::
+
+## Eigenvalues and Canonical Forms
+
+::: {#exr-la-involution name="An Involution"}
+
+Let $A$ be a real square matrix satisfying $A^2=I_n$. Prove that $A$ is diagonalizable.
+
+:::
+
+::: {#exr-la-self-adjoint name="Commuting Self-Adjoint Operators"}
+
+Let $V$ be a finite-dimensional real inner product space, and let $U$ and $T$ be self-adjoint linear operators on $V$ satisfying $UT=TU$.
+
+Prove that $V$ has an orthonormal basis consisting of common eigenvectors of $U$ and $T$.
+
+:::
+
+::: {#exr-la-triangularization name="Simultaneous Triangularization"}
+
+Let $A$ and $B$ be $n\times n$ complex matrices satisfying $AB=A+B$.
+
+Prove that $A$ and $B$ are simultaneously triangularizable: there is a basis in which both matrices are upper triangular.
+
+:::
+
+::: {#exr-la-polynomial name="A Polynomial Constraint"}
+
+Let $A$ be an $n\times n$ matrix satisfying
+
+$$
+\sum_{i=0}^{m}b_iA^i=0,
+\qquad
+|b_m|>\sum_{i=0}^{m-1}|b_i|.
+$$
+
+Prove that the equation $2X-XA^2=AX$ has only the trivial solution $X=0$.
+
+:::
+
+::::
