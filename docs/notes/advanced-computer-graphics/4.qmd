@@ -59,3 +59,5 @@ Compute the three edge functions at the starting pixel, then update them as trav
 For example, subdivide a $4\times4$ block into $2\times2$ blocks, then individual pixels. Incremental edge-function updates can be used within the remaining blocks.
 
 ## Antialiasing
+
+**Aliasing:** Sampling a continuous signal at discrete intervals can produce artifacts. In rasterization, aliasing appears as jagged edges on diagonal lines.
