@@ -1075,6 +1075,34 @@ L(y,y^*) = \sum_i \left\| \log y_i - \log y_i^* + \alpha(y,y^*) \right\|^2
 <li>Step 3: Evaluate the predictor</li>
 <li>Use the predictor!</li>
 </ul>
+<p><strong>Learning to Predict Volumetric 3D:</strong></p>
+<ul>
+<li>2D Encoder: Image to latent code.</li>
+<li>3D Decoder: Latent code to <span class="math inline">\(D^3\)</span> volume.</li>
+<li>Loss: Compare the predicted 3D volume with the ground-truth 3D volume.</li>
+<li>Training data: Renderings of CAD models on random backgrounds (helps transfer to real images)</li>
+</ul>
+<p><strong>Implicit Volumetric Representation:</strong></p>
+<ul>
+<li>Instead of explicitly predicting a 3D voxel grid, learn a continuous occupancy function.</li>
+<li>Given a latent code <span class="math inline">\(c\)</span> and an arbitrary 3D query point <span class="math inline">\(p = (x,y,z)\)</span>, predict the probability that the point lies inside the object.</li>
+</ul>
+<p><strong>Learning to Predict Point Clouds:</strong></p>
+<p>Latent vector to a fixed size point cloud</p>
+<p><span class="math display">\[
+d_{CD}(S_1, S_2) =
+\sum_{x \in S_1} \min_{y \in S_2} \|x-y\|_2^2
++
+\sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2
+\]</span></p>
+<p><strong>Learning to Predict Parametric Point Clouds:</strong></p>
+<p>Latent vector and planar point generated 3D point</p>
+<p><strong>Learning to Predict Meshes &amp; Learning to Deform Meshes:</strong></p>
+<p><strong>The advantages of using meshes:</strong></p>
+<ul>
+<li><p>Smoothness objectives respect connectivity (Laplacian Smoothness and Normal Consistency)</p></li>
+<li><p>Can sample varying number of points</p></li>
+</ul>
 
 
 </section>
