@@ -1,7 +1,7 @@
 ---
 title: "Math for CS and AI"
 output-file: index.html
-home-order: 2
+home-order: 3
 home-symbol: "P"
 home-description: "Probability, concentration, generating functions, and optimization."
 page-layout: article

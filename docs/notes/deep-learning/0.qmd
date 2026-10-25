@@ -1,7 +1,7 @@
 ---
 title: "Deep Learning"
 output-file: index.html
-home-order: 4
+home-order: 5
 home-symbol: "∇"
 home-description: "Supervised learning, generative models, and sequence modeling."
 page-layout: article

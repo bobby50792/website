@@ -3,7 +3,7 @@ title: "Linear Algebra"
 output-file: index.html
 page-layout: article
 search: true
-home-order: 1.5
+home-order: 2
 home-symbol: "L"
 home-description: "Vector spaces, linear maps, determinants, spectral theory, and canonical forms."
 ---
