@@ -1477,6 +1477,34 @@
     ]
   },
   {
+    "objectID": "docs/blog/posts/2026-10-25-tower-defense/index.html",
+    "href": "docs/blog/posts/2026-10-25-tower-defense/index.html",
+    "title": "Tower Defense：我的 Unity 塔防游戏",
+    "section": "",
+    "text": "这是我之前用 Unity 做的一个塔防小游戏。选择建筑、收集资源，再用箭塔应对不断到来的敌人。现在把它搬进了博客，可以直接在浏览器里试玩。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-10-25-tower-defense/index.html#怎么玩",
+    "href": "docs/blog/posts/2026-10-25-tower-defense/index.html#怎么玩",
+    "title": "Tower Defense：我的 Unity 塔防游戏",
+    "section": "1 怎么玩",
+    "text": "1 怎么玩\n\n\n\n操作\n用途\n\n\n\n\n左键点击\n选择建筑；建造完成后选择并放置到地图上\n\n\n按住右键拖动\n移动视角\n\n\n滚轮\n缩放地图\n\n\n游戏内设置\n调整音乐、音效，或返回主菜单\n\n\n\n建筑需要消耗金币、木材或石材。伐木场、采石场和炼金场提供资源，箭塔负责防守。建造需要一点时间，也要留意建筑的放置位置。\n敌人会一波接着一波出现。资源有限，先发展还是先防守，由你决定。\n网页版保留了原来的单机玩法，关闭了调试用的账号登录和成绩上传。游戏在你的浏览器中运行；点击“结束试玩”可以关闭画面和声音，再次开始会开启新的一局。"
+  },
+  {
+    "objectID": "docs/blog/index.html",
+    "href": "docs/blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "LATEST\n\n\n\nIdeas in progress, useful discoveries, and occasional notes from things I build."
+  },
+  {
+    "objectID": "docs/blog/index.html#recent-writing",
+    "href": "docs/blog/index.html#recent-writing",
+    "title": "Blog",
+    "section": "",
+    "text": "Ideas in progress, useful discoveries, and occasional notes from things I build."
+  },
+  {
     "objectID": "docs/blog/posts/2026-05-29/index.html",
     "href": "docs/blog/posts/2026-05-29/index.html",
     "title": "提示词工程中的语用学",
@@ -1552,20 +1580,6 @@
     "title": "提示词工程中的语用学",
     "section": "10 Reference",
     "text": "10 Reference\n\nhttps://acnll7zntynp.feishu.cn/wiki/QPiOw9B8NiZRslkcz8UcYzmtnlh/\nhttps://www.bilibili.com/video/BV1kvXzBjEZA/\nhttps://www.bilibili.com/video/BV1ES4y1T7S6/\nhttps://www.youtube.com/watch?v=8z5-IlHYZCY/\nhttps://www.bilibili.com/video/BV1cp4FzQEsu/"
-  },
-  {
-    "objectID": "docs/blog/index.html",
-    "href": "docs/blog/index.html",
-    "title": "Blog",
-    "section": "",
-    "text": "LATEST\n\n\n\nIdeas in progress, useful discoveries, and occasional notes from things I build."
-  },
-  {
-    "objectID": "docs/blog/index.html#recent-writing",
-    "href": "docs/blog/index.html#recent-writing",
-    "title": "Blog",
-    "section": "",
-    "text": "Ideas in progress, useful discoveries, and occasional notes from things I build."
   },
   {
     "objectID": "docs/blog/posts/2026-09-13/index.html",
