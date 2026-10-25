@@ -953,66 +953,89 @@ window.Quarto = {
 </header>
 
 
-<ol type="1">
-<li><p>Consider a system of linear questions <span class="math display">\[
-(a_1 + b)x_1 + a_2 x_2 + a_3 x_3 + \cdots + a_n x_n = 0
-\]</span></p>
+<div class="exercise-set">
+<div id="exr-la-structured-system" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.1 (A Structured Homogeneous System)</strong></span> Consider the homogeneous linear system</p>
 <p><span class="math display">\[
-a_1 x_1 + (a_2 + b)x_2 + a_3 x_3 + \cdots + a_n x_n = 0
+\sum_{j=1}^{n} a_jx_j+bx_i=0,
+\qquad i=1,\ldots,n,
 \]</span></p>
-<p><span class="math display">\[
-a_1 x_1 + a_2 x_2 + (a_3 + b)x_3 + \cdots + a_n x_n = 0
-\]</span></p>
-<p><span class="math display">\[
-\vdots
-\]</span></p>
-<p><span class="math display">\[
-a_1 x_1 + a_2 x_2 + a_3 x_3 + \cdots + (a_n + b)x_n = 0
-\]</span></p>
-<p>where <span class="math inline">\(\sum_{i=1}^n a_i \ne 0\)</span>. Determine the relationship between <span class="math inline">\(a_1, a_2, \cdots, a_n\)</span> and <span class="math inline">\(b\)</span> such that</p>
+<p>where <span class="math inline">\(\sum_{i=1}^n a_i\ne0\)</span>. Determine the conditions on <span class="math inline">\(a_1,\ldots,a_n\)</span> and <span class="math inline">\(b\)</span> under which:</p>
 <ol type="a">
-<li><p>This linear system has only a zero solution.</p></li>
-<li><p>This system has nonzero solutions. In this case, determine a solution set.</p></li>
-</ol></li>
-<li><p>Prove <span class="math display">\[
-\operatorname{rank}(L_A) + \operatorname{rank}(L_B) - n \;\le\; \operatorname{rank}(L_{AB}) \;\le\; \min\{\operatorname{rank}(L_A), \operatorname{rank}(L_B)\},
-\]</span></p>
-<p>where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <span class="math inline">\(n \times n\)</span> matrices.</p></li>
-<li><p>Prove <span class="math display">\[
-\operatorname{rank}(L_{A+B}) \;\le\; \operatorname{rank}(L_A) + \operatorname{rank}(L_B)
-\]</span> where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <span class="math inline">\(n \times m\)</span> matrices.</p></li>
-<li><p>Let <span class="math inline">\(A, B \in M_{n \times n}(\mathbb{R})\)</span>. Suppose <span class="math inline">\(AB = BA = 0\)</span> and <span class="math inline">\(\operatorname{rank}(A^2) = \operatorname{rank}(A)\)</span>. Prove that</p>
-<p><span class="math display">\[
-\operatorname{rank}(A + B) = \operatorname{rank}(A) + \operatorname{rank}(B)
-\]</span></p></li>
-<li><p>Let <span class="math inline">\(A, B, C, D\)</span> be <span class="math inline">\(n \times n\)</span> matrices such that they commute pairwise under matrix multiplication, and <span class="math inline">\(AC + BD = I_n\)</span>. Prove that:</p>
-<p><span class="math display">\[
-\operatorname{rank}(AB) = \operatorname{rank}(A) + \operatorname{rank}(B) - n.
-\]</span></p></li>
-<li><p><span class="math inline">\(A\)</span> is an <span class="math inline">\(n \times n\)</span> real matrix, <span class="math inline">\(AA^t = k^2 I_n\)</span>, <span class="math inline">\(k \in \mathbb{R}\)</span>. Prove:</p>
-<p><span class="math display">\[
-\operatorname{rank}(k I_n - A) = \operatorname{rank}\big((k I_n - A)^2\big).
-\]</span></p></li>
-<li><p>Suppose <span class="math inline">\(A\)</span> is an <span class="math inline">\(n \times n\)</span> matrix with rank <span class="math inline">\(r\)</span> (<span class="math inline">\(1 \le r \le \frac{n}{2}\)</span>), and <span class="math inline">\(A^2 = 0\)</span>. Prove that there exists an invertible matrix <span class="math inline">\(P\)</span> such that <span class="math display">\[
-A
-=
-P
-\begin{pmatrix}
-0 &amp; I_r &amp; 0 \\
-0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0
-\end{pmatrix}
-P^{-1}
-\]</span></p>
-<p>where <span class="math inline">\(I_r\)</span> is the <span class="math inline">\(r \times r\)</span> identity matrix, and <span class="math inline">\(0\)</span> are zero matrices.</p></li>
-<li><p>If <span class="math inline">\(A^2 = I_n\)</span>, Prove <span class="math inline">\(A\)</span> is diagonalizable (here <span class="math inline">\(A\)</span> is a real square matrix).</p></li>
-<li><p>Let <span class="math inline">\(V\)</span> be a finite-dimensional real inner product space, and let <span class="math inline">\(U\)</span> and <span class="math inline">\(T\)</span> be self-adjoint linear operators on <span class="math inline">\(V\)</span> such that <span class="math inline">\(UT = TU\)</span>.</p>
-<p>Prove that there exists an orthonormal basis of <span class="math inline">\(V\)</span> consisting of vectors that are eigenvectors of both <span class="math inline">\(U\)</span> and <span class="math inline">\(T\)</span>.</p></li>
-<li><p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be <span class="math inline">\(n \times n\)</span> complex matrices satisfying the condition <span class="math inline">\(AB = A + B.\)</span></p>
-<p>Prove that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are simultaneously triangularizable (there exists a basis under which both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are upper triangular matrices).</p></li>
-<li><p>Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(n \times n\)</span> matrix satisfying the polynomial equation <span class="math inline">\(\sum_{i=0}^{m} b_i A^i = 0\)</span>, where the coefficients satisfy the condition <span class="math inline">\(|b_m| &gt; \sum_{i=0}^{m-1} |b_i|.\)</span></p>
-<p>Prove that the equation <span class="math inline">\(2X - XA^2 = AX\)</span> has only the trivial solution <span class="math inline">\(X = 0\)</span>.</p></li>
+<li>The system has only the zero solution.</li>
+<li>The system has nonzero solutions. In this case, determine its solution set.</li>
 </ol>
+</div>
+<div id="exr-la-product-rank" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.2 (Rank of a Matrix Product)</strong></span> Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be <span class="math inline">\(n\times n\)</span> matrices. Prove both bounds:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{rank}(L_{AB})
+&amp;\ge \operatorname{rank}(L_A)+\operatorname{rank}(L_B)-n,\\
+\operatorname{rank}(L_{AB})
+&amp;\le \min\{\operatorname{rank}(L_A),\operatorname{rank}(L_B)\}.
+\end{aligned}
+\]</span></p>
+</div>
+<div id="exr-la-sum-rank" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.3 (Rank of a Matrix Sum)</strong></span> Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be <span class="math inline">\(n\times m\)</span> matrices. Prove</p>
+<p><span class="math display">\[
+\operatorname{rank}(L_{A+B})
+\le \operatorname{rank}(L_A)+\operatorname{rank}(L_B).
+\]</span></p>
+</div>
+<div id="exr-la-annihilation" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.4 (Rank Under Mutual Annihilation)</strong></span> Let <span class="math inline">\(A,B\in M_{n\times n}(\mathbb R)\)</span>. Suppose <span class="math inline">\(AB=BA=0\)</span> and <span class="math inline">\(\operatorname{rank}(A^2)=\operatorname{rank}(A)\)</span>. Prove</p>
+<p><span class="math display">\[
+\operatorname{rank}(A+B)=\operatorname{rank}(A)+\operatorname{rank}(B).
+\]</span></p>
+</div>
+<div id="exr-la-commuting-rank" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.5 (Commuting Matrices)</strong></span> Let <span class="math inline">\(A,B,C,D\)</span> be pairwise commuting <span class="math inline">\(n\times n\)</span> matrices satisfying <span class="math inline">\(AC+BD=I_n\)</span>. Prove</p>
+<p><span class="math display">\[
+\operatorname{rank}(AB)=\operatorname{rank}(A)+\operatorname{rank}(B)-n.
+\]</span></p>
+</div>
+<div id="exr-la-transpose" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.6 (A Matrix and Its Transpose)</strong></span> Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(n\times n\)</span> real matrix satisfying <span class="math inline">\(AA^t=k^2I_n\)</span>, where <span class="math inline">\(k\in\mathbb R\)</span>. Prove</p>
+<p><span class="math display">\[
+\operatorname{rank}(kI_n-A)=\operatorname{rank}\big((kI_n-A)^2\big).
+\]</span></p>
+</div>
+<div id="exr-la-square-zero" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.7 (A Square-Zero Matrix)</strong></span> Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(n\times n\)</span> matrix with rank <span class="math inline">\(r\)</span>, where <span class="math inline">\(1\le r\le n/2\)</span>, and suppose <span class="math inline">\(A^2=0\)</span>. Prove that an invertible matrix <span class="math inline">\(P\)</span> exists such that</p>
+<p><span class="math display">\[
+A=P
+\begin{pmatrix}
+0&amp;I_r&amp;0\\
+0&amp;0&amp;0\\
+0&amp;0&amp;0
+\end{pmatrix}
+P^{-1},
+\]</span></p>
+<p>where <span class="math inline">\(I_r\)</span> is the <span class="math inline">\(r\times r\)</span> identity matrix and each <span class="math inline">\(0\)</span> denotes a zero matrix of the appropriate size.</p>
+</div>
+<div id="exr-la-involution" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.8 (An Involution)</strong></span> Let <span class="math inline">\(A\)</span> be a real square matrix satisfying <span class="math inline">\(A^2=I_n\)</span>. Prove that <span class="math inline">\(A\)</span> is diagonalizable.</p>
+</div>
+<div id="exr-la-self-adjoint" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.9 (Commuting Self-Adjoint Operators)</strong></span> Let <span class="math inline">\(V\)</span> be a finite-dimensional real inner product space, and let <span class="math inline">\(U\)</span> and <span class="math inline">\(T\)</span> be self-adjoint linear operators on <span class="math inline">\(V\)</span> satisfying <span class="math inline">\(UT=TU\)</span>.</p>
+<p>Prove that <span class="math inline">\(V\)</span> has an orthonormal basis consisting of common eigenvectors of <span class="math inline">\(U\)</span> and <span class="math inline">\(T\)</span>.</p>
+</div>
+<div id="exr-la-triangularization" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.10 (Simultaneous Triangularization)</strong></span> Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be <span class="math inline">\(n\times n\)</span> complex matrices satisfying <span class="math inline">\(AB=A+B\)</span>.</p>
+<p>Prove that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are simultaneously triangularizable: there is a basis in which both matrices are upper triangular.</p>
+</div>
+<div id="exr-la-polynomial" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8.11 (A Polynomial Constraint)</strong></span> Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(n\times n\)</span> matrix satisfying</p>
+<p><span class="math display">\[
+\sum_{i=0}^{m}b_iA^i=0,
+\qquad
+|b_m|&gt;\sum_{i=0}^{m-1}|b_i|.
+\]</span></p>
+<p>Prove that the equation <span class="math inline">\(2X-XA^2=AX\)</span> has only the trivial solution <span class="math inline">\(X=0\)</span>.</p>
+</div>
+</div>
 
 
 
