@@ -211,6 +211,8 @@ website:
                   href: docs/notes/advanced-computer-graphics/2.qmd
                 - text: "Learning Geometry"
                   href: docs/notes/advanced-computer-graphics/3.qmd
+                - text: "Rasterization"
+                  href: docs/notes/advanced-computer-graphics/4.qmd
             - section: "Artificial Intelligence"
               href: docs/notes/artificial-intelligence/0.qmd
               contents:

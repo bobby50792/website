@@ -1,0 +1,9 @@
+---
+title: "Rasterization"
+page-layout: article
+search: true
+number-offset: [4]
+
+crossref:
+  chapters: true
+---
