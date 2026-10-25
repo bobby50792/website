@@ -1,13 +1,5 @@
 [
   {
-    "listing": "/docs/blog/index.html",
-    "items": [
-      "/docs/blog/posts/2026-10-25/index.html",
-      "/docs/blog/posts/2026-09-13/index.html",
-      "/docs/blog/posts/2026-05-29/index.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/docs/notes/artificial-intelligence/index.html",
@@ -19,6 +11,14 @@
       "/docs/notes/math-for-cs-and-ai/index.html",
       "/docs/notes/linear-algebra/index.html",
       "/docs/notes/calculus/index.html",
+      "/docs/blog/posts/2026-10-25/index.html",
+      "/docs/blog/posts/2026-09-13/index.html",
+      "/docs/blog/posts/2026-05-29/index.html"
+    ]
+  },
+  {
+    "listing": "/docs/blog/index.html",
+    "items": [
       "/docs/blog/posts/2026-10-25/index.html",
       "/docs/blog/posts/2026-09-13/index.html",
       "/docs/blog/posts/2026-05-29/index.html"
