@@ -12,13 +12,19 @@ crossref:
 
 An image is a **2D array of pixel colors**. Display hardware converts these values into visible light.
 
-**Cathode Ray Tube (CRT):** An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen. Beam intensity controls brightness. Applications include oscilloscopes and traditional televisions.
+**Cathode Ray Tube (CRT):**
+
+- An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen.
+- Beam intensity controls brightness.
+- Applications include oscilloscopes and traditional televisions.
 
 **Raster Scan:** The beam sweeps across the screen line by line while its intensity is modulated. **Interlaced scanning** alternates odd and even lines in successive fields.
 
 **Frame Buffer:** Memory storing the color of each pixel. For analog CRT displays, **DACs (Digital-to-Analog Converters)** convert digital RGB values into analog signals.
 
 **Flat-Panel Displays:**
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Flat-panel display technologies"}
 
 | Technology | Principle |
 |---|---|
@@ -27,18 +33,23 @@ An image is a **2D array of pixel colors**. Display hardware converts these valu
 | **LED array** | Individually controlled LEDs form an image. |
 | **E-Ink** | Electric fields move charged black and white particles to change the visible color. |
 
+:::
+
 ## Rasterizing a triangle
 
-**Triangles: Fundamental Shape Primitives:**
+**Triangles as Fundamental Shape Primitives:**
 
 - Guaranteed to be planar
 - Well-defined interior
-- Well-defined method for interpolating values at
-vertices over triangle
+- Well-defined method for interpolating vertex values over the triangle
 
-**Rasterization = Sampling A 2D Indicator Function:** Sample If Each Pixel Center Is Inside Triangle.
+**Rasterization as Sampling:** Sample a 2D indicator function by testing whether each pixel center lies inside the triangle.
 
-**Incremental Triangle Traversal:** Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel. For each triangle edge:
+**Incremental Triangle Traversal:**
+
+Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel. For each triangle edge:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Incremental edge-function updates"}
 
 $$
 \begin{aligned}
@@ -47,6 +58,8 @@ E(x+1,y) &= E(x,y) + A, \\
 E(x,y+1) &= E(x,y) + B.
 \end{aligned}
 $$
+
+:::
 
 Compute the three edge functions at the starting pixel, then update them as traversal proceeds. Their signs determine coverage, using a consistent vertex winding and boundary rule.
 
@@ -60,4 +73,119 @@ For example, subdivide a $4\times4$ block into $2\times2$ blocks, then individua
 
 ## Antialiasing
 
-**Aliasing:** Sampling a continuous signal at discrete intervals can produce artifacts. In rasterization, aliasing appears as jagged edges on diagonal lines.
+**Sampling Artifacts in Computer Graphics:**
+
+Artifacts caused by sampling are called **aliasing**:
+
+- **Jaggies:** Sampling in space.
+- **Moiré patterns:** Undersampling images.
+- **Wagon-wheel effect:** Sampling in time.
+
+Aliasing occurs when a signal changes too quickly (high frequency) relative to its sampling rate.
+
+**Antialiased Sampling:**
+
+Original signal → **Pre-filter** → Sample
+
+- Remove frequencies above the Nyquist limit before sampling.
+- Along antialiased triangle edges, pixel values take intermediate values.
+
+**Fourier Transform: Spatial and Frequency Domains:**
+
+- **Spatial domain:** $f(x)$.
+- **Frequency domain:** $F(\omega)$.
+
+The Fourier transform decomposes a signal into frequencies.
+
+**Forward transform** — spatial domain → frequency domain:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Fourier transform formula"}
+
+$$
+F(\omega) = \int_{-\infty}^{\infty} f(x)e^{-2\pi i\omega x}\,dx.
+$$
+
+:::
+
+**Inverse transform** — frequency domain → spatial domain:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Inverse Fourier transform formula"}
+
+$$
+f(x) = \int_{-\infty}^{\infty} F(\omega)e^{2\pi i\omega x}\,d\omega.
+$$
+
+:::
+
+**Sampling and Frequency Replicas:** Sampling repeats the frequency content.
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Frequency replicas after sampling"}
+
+$$
+S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
+$$
+
+:::
+
+**Reducing Aliasing Error:**
+
+1. **Increase the sampling rate:** Increase the distance between replicas in the frequency domain.
+2. **Apply antialiasing:** Narrow the frequency content before repeating it.
+
+**Filtering:** Remove selected frequency components using either approach:
+
+1. **Spatial domain:** Convolve the signal with a filter kernel.
+2. **Frequency domain:**
+   - Apply the Fourier transform.
+   - Multiply by the Fourier transform of the convolution kernel.
+   - Apply the inverse Fourier transform.
+
+**Antialiasing by Computing Average Pixel Values:**
+
+For a triangle indicator function $f(x,y) = \text{inside}(\text{triangle},x,y)$, the average over a pixel gives the fraction of its area covered by the triangle.
+
+**Supersample Antialiasing:**
+
+Approximate a one-pixel box filter by:
+
+1. Sampling multiple locations within each pixel.
+2. Averaging the sample values.
+
+**Antialiasing Methods at a Glance:**
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Comparison of antialiasing methods"}
+
+| Method | Core idea | Characteristics |
+|---|---|---|
+| **SSAA** | Multiple samples per pixel, all fully shaded | Best quality, highest cost |
+| **MSAA** | Multiple coverage/depth samples, shade once | Only improves geometric edges, high memory cost |
+| **FXAA** | Post-process edge blurring | Fastest, blurry result |
+| **TAA** | Accumulate jittered samples across frames | Cheap and effective, may ghost |
+| **DLSS** | Neural-network reconstruction of high resolution | Improves both performance and quality |
+
+:::
+
+## Z-Buffering
+
+**Idea:** Store the minimum depth value for each sample (pixel).
+
+- **Frame buffer:** Stores color values.
+- **Depth buffer (z-buffer):** Stores depth values in an additional buffer.
+
+**Z-Buffer Algorithm (Pseudocode):**
+
+```{.text code-overflow="scroll"}
+// Initialization
+for each sample (x, y):
+    zbuffer[x][y]     = +infinity   // farthest depth
+    framebuffer[x][y] = background_color
+
+// Rasterization
+for each triangle T:
+    for each sample (x, y) covered by T:
+        z = interpolate_depth(T, x, y)
+        if z < zbuffer[x][y]:       // closer than the current one
+            zbuffer[x][y]     = z
+            framebuffer[x][y] = shade(T, x, y)
+        // else: discard the fragment
+```
