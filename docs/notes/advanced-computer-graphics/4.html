@@ -941,6 +941,7 @@ window.Quarto = {
   <li><a href="#display" id="toc-display" class="nav-link active" data-scroll-target="#display"><span class="header-section-number">4.1</span> Display</a></li>
   <li><a href="#rasterizing-a-triangle" id="toc-rasterizing-a-triangle" class="nav-link" data-scroll-target="#rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a triangle</a></li>
   <li><a href="#antialiasing" id="toc-antialiasing" class="nav-link" data-scroll-target="#antialiasing"><span class="header-section-number">4.3</span> Antialiasing</a></li>
+  <li><a href="#z-buffering" id="toc-z-buffering" class="nav-link" data-scroll-target="#z-buffering"><span class="header-section-number">4.4</span> Z-Buffering</a></li>
   </ul>
 </nav>
     </div>
@@ -970,10 +971,16 @@ window.Quarto = {
 <section id="display" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="display"><span class="header-section-number">4.1</span> Display</h2>
 <p>An image is a <strong>2D array of pixel colors</strong>. Display hardware converts these values into visible light.</p>
-<p><strong>Cathode Ray Tube (CRT):</strong> An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen. Beam intensity controls brightness. Applications include oscilloscopes and traditional televisions.</p>
+<p><strong>Cathode Ray Tube (CRT):</strong></p>
+<ul>
+<li>An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen.</li>
+<li>Beam intensity controls brightness.</li>
+<li>Applications include oscilloscopes and traditional televisions.</li>
+</ul>
 <p><strong>Raster Scan:</strong> The beam sweeps across the screen line by line while its intensity is modulated. <strong>Interlaced scanning</strong> alternates odd and even lines in successive fields.</p>
 <p><strong>Frame Buffer:</strong> Memory storing the color of each pixel. For analog CRT displays, <strong>DACs (Digital-to-Analog Converters)</strong> convert digital RGB values into analog signals.</p>
 <p><strong>Flat-Panel Displays:</strong></p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Flat-panel display technologies">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1004,17 +1011,20 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="rasterizing-a-triangle" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a triangle</h2>
-<p><strong>Triangles: Fundamental Shape Primitives:</strong></p>
+<p><strong>Triangles as Fundamental Shape Primitives:</strong></p>
 <ul>
 <li>Guaranteed to be planar</li>
 <li>Well-defined interior</li>
-<li>Well-defined method for interpolating values at vertices over triangle</li>
+<li>Well-defined method for interpolating vertex values over the triangle</li>
 </ul>
-<p><strong>Rasterization = Sampling A 2D Indicator Function:</strong> Sample If Each Pixel Center Is Inside Triangle.</p>
-<p><strong>Incremental Triangle Traversal:</strong> Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel. For each triangle edge:</p>
+<p><strong>Rasterization as Sampling:</strong> Sample a 2D indicator function by testing whether each pixel center lies inside the triangle.</p>
+<p><strong>Incremental Triangle Traversal:</strong></p>
+<p>Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel. For each triangle edge:</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Incremental edge-function updates">
 <p><span class="math display">\[
 \begin{aligned}
 E(x,y) &amp;= Ax + By + C, \\
@@ -1022,6 +1032,7 @@ E(x+1,y) &amp;= E(x,y) + A, \\
 E(x,y+1) &amp;= E(x,y) + B.
 \end{aligned}
 \]</span></p>
+</div>
 <p>Compute the three edge functions at the starting pixel, then update them as traversal proceeds. Their signs determine coverage, using a consistent vertex winding and boundary rule.</p>
 <p><strong>Hierarchical Rasterization:</strong> Test blocks of pixels before testing individual samples.</p>
 <ul>
@@ -1033,7 +1044,133 @@ E(x,y+1) &amp;= E(x,y) + B.
 </section>
 <section id="antialiasing" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="antialiasing"><span class="header-section-number">4.3</span> Antialiasing</h2>
-<p><strong>Aliasing:</strong> Sampling a continuous signal at discrete intervals can produce artifacts. In rasterization, aliasing appears as jagged edges on diagonal lines.</p>
+<p><strong>Sampling Artifacts in Computer Graphics:</strong></p>
+<p>Artifacts caused by sampling are called <strong>aliasing</strong>:</p>
+<ul>
+<li><strong>Jaggies:</strong> Sampling in space.</li>
+<li><strong>Moiré patterns:</strong> Undersampling images.</li>
+<li><strong>Wagon-wheel effect:</strong> Sampling in time.</li>
+</ul>
+<p>Aliasing occurs when a signal changes too quickly (high frequency) relative to its sampling rate.</p>
+<p><strong>Antialiased Sampling:</strong></p>
+<p>Original signal → <strong>Pre-filter</strong> → Sample</p>
+<ul>
+<li>Remove frequencies above the Nyquist limit before sampling.</li>
+<li>Along antialiased triangle edges, pixel values take intermediate values.</li>
+</ul>
+<p><strong>Fourier Transform: Spatial and Frequency Domains:</strong></p>
+<ul>
+<li><strong>Spatial domain:</strong> <span class="math inline">\(f(x)\)</span>.</li>
+<li><strong>Frequency domain:</strong> <span class="math inline">\(F(\omega)\)</span>.</li>
+</ul>
+<p>The Fourier transform decomposes a signal into frequencies.</p>
+<p><strong>Forward transform</strong> — spatial domain → frequency domain:</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Fourier transform formula">
+<p><span class="math display">\[
+F(\omega) = \int_{-\infty}^{\infty} f(x)e^{-2\pi i\omega x}\,dx.
+\]</span></p>
+</div>
+<p><strong>Inverse transform</strong> — frequency domain → spatial domain:</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Inverse Fourier transform formula">
+<p><span class="math display">\[
+f(x) = \int_{-\infty}^{\infty} F(\omega)e^{2\pi i\omega x}\,d\omega.
+\]</span></p>
+</div>
+<p><strong>Sampling and Frequency Replicas:</strong> Sampling repeats the frequency content.</p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Frequency replicas after sampling">
+<p><span class="math display">\[
+S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
+\]</span></p>
+</div>
+<p><strong>Reducing Aliasing Error:</strong></p>
+<ol type="1">
+<li><strong>Increase the sampling rate:</strong> Increase the distance between replicas in the frequency domain.</li>
+<li><strong>Apply antialiasing:</strong> Narrow the frequency content before repeating it.</li>
+</ol>
+<p><strong>Filtering:</strong> Remove selected frequency components using either approach:</p>
+<ol type="1">
+<li><strong>Spatial domain:</strong> Convolve the signal with a filter kernel.</li>
+<li><strong>Frequency domain:</strong>
+<ul>
+<li>Apply the Fourier transform.</li>
+<li>Multiply by the Fourier transform of the convolution kernel.</li>
+<li>Apply the inverse Fourier transform.</li>
+</ul></li>
+</ol>
+<p><strong>Antialiasing by Computing Average Pixel Values:</strong></p>
+<p>For a triangle indicator function <span class="math inline">\(f(x,y) = \text{inside}(\text{triangle},x,y)\)</span>, the average over a pixel gives the fraction of its area covered by the triangle.</p>
+<p><strong>Supersample Antialiasing:</strong></p>
+<p>Approximate a one-pixel box filter by:</p>
+<ol type="1">
+<li>Sampling multiple locations within each pixel.</li>
+<li>Averaging the sample values.</li>
+</ol>
+<p><strong>Antialiasing Methods at a Glance:</strong></p>
+<div class="overflow-auto" tabindex="0" role="region" aria-label="Comparison of antialiasing methods">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Core idea</th>
+<th>Characteristics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>SSAA</strong></td>
+<td>Multiple samples per pixel, all fully shaded</td>
+<td>Best quality, highest cost</td>
+</tr>
+<tr class="even">
+<td><strong>MSAA</strong></td>
+<td>Multiple coverage/depth samples, shade once</td>
+<td>Only improves geometric edges, high memory cost</td>
+</tr>
+<tr class="odd">
+<td><strong>FXAA</strong></td>
+<td>Post-process edge blurring</td>
+<td>Fastest, blurry result</td>
+</tr>
+<tr class="even">
+<td><strong>TAA</strong></td>
+<td>Accumulate jittered samples across frames</td>
+<td>Cheap and effective, may ghost</td>
+</tr>
+<tr class="odd">
+<td><strong>DLSS</strong></td>
+<td>Neural-network reconstruction of high resolution</td>
+<td>Improves both performance and quality</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="z-buffering" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="z-buffering"><span class="header-section-number">4.4</span> Z-Buffering</h2>
+<p><strong>Idea:</strong> Store the minimum depth value for each sample (pixel).</p>
+<ul>
+<li><strong>Frame buffer:</strong> Stores color values.</li>
+<li><strong>Depth buffer (z-buffer):</strong> Stores depth values in an additional buffer.</li>
+</ul>
+<p><strong>Z-Buffer Algorithm (Pseudocode):</strong></p>
+<pre class="text" data-code-overflow="scroll"><code>// Initialization
+for each sample (x, y):
+    zbuffer[x][y]     = +infinity   // farthest depth
+    framebuffer[x][y] = background_color
+
+// Rasterization
+for each triangle T:
+    for each sample (x, y) covered by T:
+        z = interpolate_depth(T, x, y)
+        if z &lt; zbuffer[x][y]:       // closer than the current one
+            zbuffer[x][y]     = z
+            framebuffer[x][y] = shade(T, x, y)
+        // else: discard the fragment</code></pre>
 
 
 </section>
