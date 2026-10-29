@@ -1,0 +1,30 @@
+---
+title: "Probabilistic Inference"
+page-layout: article
+search: true
+number-offset: [4]
+
+crossref:
+  chapters: true
+---
+
+## Bayesian nets: exact inference
+
+### Inference by Enumeration
+
+**Inference by Enumeration:** join up the whole joint distribution before you sum out the hidden variables
+
+
+### Variable Elimination
+
+
+**Variable Elimination:**
+- interleave joining and marginalizing
+- Still NP-hard, but usually much faster than inference by enumeration
+
+
+
+## Bayesian nets: approximate inference
+
+
+## Probability reasoning over time

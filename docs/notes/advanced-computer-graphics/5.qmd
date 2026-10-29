@@ -1,0 +1,269 @@
+---
+title: "Shading"
+page-layout: article
+search: true
+number-offset: [5]
+
+crossref:
+  chapters: true
+---
+
+## Shading
+
+**Shading is Local:** Compute light reflected toward camera
+at a specific shading point.
+
+**Diffuse Reflection:** Light is scattered uniformly in all directions.
+
+- In general, light per unit area is proportional to
+$$
+\cos\theta = \mathbf{l}\cdot\mathbf{n}
+$$
+
+
+**Lambertian (Diffuse) Shading:**
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Lambertian diffuse shading formula"}
+
+$$
+L_d = k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l}).
+$$
+
+:::
+
+- $L_d$: Diffusely reflected light at the shading point.
+- $k_d$: Diffuse reflection coefficient (surface color).
+- $I$: Point-light intensity.
+- $r$: Distance from the shading point to the light source.
+- $\mathbf{n}$: Unit surface normal at the shading point.
+- $\mathbf{l}$: Unit direction from the shading point toward the light source.
+
+**Specular Term (Blinn–Phong):** Intensity depends on view direction.
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Blinn-Phong specular shading formulas"}
+
+$$
+\begin{aligned}
+\mathbf{h} &= \frac{\mathbf{v}+\mathbf{l}}{\|\mathbf{v}+\mathbf{l}\|}, \\
+L_s &= k_s\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{h})^p.
+\end{aligned}
+$$
+
+:::
+
+- $\mathbf{v}$: Unit direction toward the camera; $\mathbf{h}$: Halfway vector between $\mathbf{v}$ and $\mathbf{l}$.
+- $L_s$: Specularly reflected light; $k_s$: Specular reflection coefficient.
+- $p$: Shininess exponent; larger values produce narrower highlights.
+
+
+**Ambient Term:**
+
+$$
+L_a = k_a I_a.
+$$
+
+- $L_a$: Reflected ambient light.
+- $k_a$: Ambient reflection coefficient; $I_a$: Ambient light intensity.
+
+**Blinn–Phong Reflection Model:** Ambient + diffuse + specular.
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Blinn-Phong reflection model formula"}
+
+$$
+\begin{aligned}
+L &= L_a + L_d + L_s \\
+  &= k_a I_a + k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l}) \\
+  &\quad + k_s\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{h})^p.
+\end{aligned}
+$$
+
+:::
+
+**Shading Frequencies:**
+
+- Flat shading (Face): One color per polygon. Not good for
+smooth surfaces
+
+- Gouraud shading (Vertex): Interpolate vertex colors across polygon.
+
+- Phong Shading (Pixel): Interpolate normals across polygon and compute color per pixel. More expensive but better results.
+
+**Per-Vertex Normals:** Use the underlying geometry when available (e.g., radial normals for a sphere). Otherwise, average adjacent unit face normals $\mathbf{N}_i$ and normalize:
+
+$$
+\mathbf{n}_v = \frac{\sum_i\mathbf{N}_i}{\left\|\sum_i\mathbf{N}_i\right\|}.
+$$
+
+**Per-Pixel Normals:** Barycentrically interpolate the triangle's vertex normals, then normalize before shading:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Interpolated per-pixel normal formula"}
+
+$$
+\begin{aligned}
+\tilde{\mathbf{n}} &= \alpha\mathbf{n}_1 + \beta\mathbf{n}_2 + \gamma\mathbf{n}_3, \\
+\mathbf{n} &= \frac{\tilde{\mathbf{n}}}{\|\tilde{\mathbf{n}}\|}.
+\end{aligned}
+$$
+
+:::
+
+Here $\alpha,\beta,\gamma$ are barycentric weights with $\alpha+\beta+\gamma=1$.
+
+## Graphics pipeline
+
+**Real-Time Rendering Pipeline:** Convert 3D vertices into a pixel image.
+
+1. Vertex processing: Transform and project 3D vertices.
+2. Triangle processing: Assemble vertices into triangles and clip them to the view volume.
+3. Rasterization: Determine covered samples and generate fragments with interpolated attributes.
+4. Fragment processing: Compute fragment colors using shading and textures.
+5. Framebuffer operations: Apply depth/stencil tests and blending, then write the final image for display.
+
+Data flow: Vertices → triangles → fragments → shaded fragments → pixels.
+
+## Texturing
+
+### Texture mapping
+
+**UV Unwrapping by Optimization:** Assign 2D $(u,v)$ coordinates to mesh vertices to flatten the surface with minimal distortion.
+
+- Preserve surface distances and/or triangle angles as closely as possible.
+- Cuts (seams) are usually required to unfold the surface into UV charts.
+
+### Barycentric coordinates
+
+For a point $P$ inside a nondegenerate triangle $ABC$, write $P=\alpha A+\beta B+\gamma C$.
+
+**Area Interpretation:** Let $A_A,A_B,A_C$ be the areas of the opposite subtriangles $PBC,PCA,PAB$, respectively.
+
+$$
+\begin{aligned}
+\alpha &= \frac{A_A}{A_A+A_B+A_C}, \\
+\beta &= \frac{A_B}{A_A+A_B+A_C}, \\
+\gamma &= \frac{A_C}{A_A+A_B+A_C}.
+\end{aligned}
+$$
+
+The weights are nonnegative and satisfy $\alpha+\beta+\gamma=1$.
+
+**Attribute Interpolation:** Linearly interpolate vertex values using the same weights:
+
+$$
+V = \alpha V_A + \beta V_B + \gamma V_C.
+$$
+
+The values can be positions, UV coordinates, colors, normals, depth, or material attributes.
+
+**Perspective Projection:** Barycentric coordinates are generally not preserved; attributes such as UV coordinates require perspective-correct interpolation.
+
+### Texture queries
+
+**Texture Magnification - Easy Case:** Bilinear, Bicubic interpolation of texels.
+
+
+**Texture Minification - Hard Case:**
+
+- Screen Pixel Footprint in Texture
+
+**Mipmap Level Selection:** Each level halves the texture width and height. Estimate the footprint size from neighboring screen samples:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Mipmap level calculation"}
+
+$$
+\begin{aligned}
+L_x &= \sqrt{\left(\frac{\partial u}{\partial x}\right)^2
+            +\left(\frac{\partial v}{\partial x}\right)^2}, \\
+L_y &= \sqrt{\left(\frac{\partial u}{\partial y}\right)^2
+            +\left(\frac{\partial v}{\partial y}\right)^2}, \\
+L &= \max(L_x,L_y), \\
+D &= \log_2 L.
+\end{aligned}
+$$
+
+:::
+
+- Use base-level texels for $(u,v)$ and screen pixels for $(x,y)$; scale normalized UVs by texture width and height first.
+
+- Clamp $D$ to the available levels, and blend adjacent levels when $D$ is fractional (trilinear filtering).
+
+- Limitation: Overblur
+
+**Anisotropic Filtering:**
+
+- Ripmaps and summed-area tables: Support filtering over axis-aligned rectangular regions.
+- Limitation: Diagonal footprints are poorly matched and may cause overblurring.
+
+
+EWA filtering (Elliptical Weighted Average):
+
+- Use multiple texture lookups and compute a weighted average.
+- A mipmap hierarchy helps reduce sampling cost.
+- Approximate tilted or irregular footprints with elliptical filters.
+
+### Applications of textures
+
+In modern GPUs,texture = memory + range query (filtering)
+
+**Environment Mapping:**
+
+- Use a texture to represent the surrounding environment for reflections.
+
+- Prone to distortion (top and bottom parts)
+
+**Cube Map:**
+
+- A vector maps to cube point along that direction.
+The cube is textured with 6 square textures, one for each face.
+
+- Much less distortion
+
+
+**Bump Mapping:**
+
+- Perturb surface normal per pixel (for shading computations only)
+
+- "Height shift" per texel defined by a texture
+
+**Normal Perturbation (Local Coordinates):**
+
+- In 2D, estimate the slope $s \approx c[h(p+1)-h(p)]$. The tangent is $(1,s)$, so the unit normal is $\mathbf{n}=\operatorname{normalize}(-s,1)$.
+- In 3D, estimate slopes in both texture directions:
+
+$$
+\begin{aligned}
+d_u &\approx c_1[h(u+\Delta u,v)-h(u,v)], \\
+d_v &\approx c_2[h(u,v+\Delta v)-h(u,v)], \\
+\mathbf{n}_{\text{local}} &= \operatorname{normalize}(-d_u,-d_v,1).
+\end{aligned}
+$$
+
+The normal is perpendicular to both tangents $(1,0,d_u)$ and $(0,1,d_v)$. Steps $\Delta u,\Delta v$ span one texel; the coefficients include spacing conversion and bump strength. Transform the local normal into the lighting coordinate system before shading.
+
+
+**Displacement mapping:** Actually moves the vertices
+
+
+
+## Shadow mapping
+
+**Shadow mapping algorithm:** A camera-visible point is unshadowed if it is also visible from the light.
+
+Limitations:
+
+- Hard shadows (point lights only)
+- Quality depends on shadow-map resolution; finite sampling can cause aliasing.
+- Involves equality comparison of floating point depth
+values means issues of scale, bias, tolerance
+- Rasterization cannot handle
+global effect well
+
+## Ray tracing
+
+**Why Ray Tracing?** Model visibility, reflections, and refractions by tracing rays. Many ray-scene intersections make high-quality rendering expensive·
+
+**Tracing from the Camera:**
+
+- Primary ray: Trace from the camera through a pixel to the nearest surface.
+- Shadow ray: Trace from the hit point toward a light to test visibility for direct lighting.
+- Reflected ray: Trace along the reflection direction to gather reflected light.
+- Refracted ray: Trace through transparent material along the refraction direction to gather transmitted light.

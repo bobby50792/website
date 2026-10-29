@@ -213,6 +213,8 @@ website:
                   href: docs/notes/advanced-computer-graphics/3.qmd
                 - text: "Rasterization"
                   href: docs/notes/advanced-computer-graphics/4.qmd
+                - text: "Shading"
+                  href: docs/notes/advanced-computer-graphics/5.qmd
             - section: "Artificial Intelligence"
               href: docs/notes/artificial-intelligence/0.qmd
               contents:
@@ -222,6 +224,8 @@ website:
                   href: docs/notes/artificial-intelligence/2.qmd
                 - text: "Probabilistic Models"
                   href: docs/notes/artificial-intelligence/3.qmd
+                - text: "Probabilistic Inference"
+                  href: docs/notes/artificial-intelligence/4.qmd
 
 format:
   html:
