@@ -169,3 +169,102 @@ $$
 **convolution** of $F$ and $G$ and is denoted by $(F*G)(z)$.
 
 Here $dG(y)$ denotes integration with respect to the distribution measure of $Y$.
+
+## Conditional Expectation
+
+::: {.callout-tip title="Definition of Conditional Expectation" collapse="true"}
+
+Given a probability space $(\Omega,\mathcal F_0,P)$, a sub-$\sigma$-field
+$\mathcal F\subseteq\mathcal F_0$, and an $\mathcal F_0$-measurable random
+variable $X$ with $E|X|<\infty$, the conditional expectation of $X$ given
+$\mathcal F$, denoted $E(X\mid\mathcal F)$, is any random variable $Y$ satisfying:
+
+i) $Y$ is $\mathcal F$-measurable.
+
+ii) For all $A\in\mathcal F$,
+
+    $$
+    \int_A X\,dP=\int_A Y\,dP.
+    $$
+
+Any $Y$ satisfying (i) and (ii) is called a version of $E(X\mid\mathcal F)$.
+
+:::
+
+::: {.callout-note title="Example: Conditioning on a Random Variable" collapse="true"}
+
+Let $E|X|<\infty$ and $\mathcal F=\sigma(Z)$. Then
+
+$$
+Y=E[X\mid\mathcal F]=E[X\mid Z]=g(Z)\quad\text{a.s.}
+$$
+
+Here $Y$ is an $\mathcal F$-measurable **random variable**, and $g$ is measurable. Pointwise,
+
+$$
+Y(\omega)=g(Z(\omega))\quad\text{for almost every }\omega.
+$$
+
+Thus, $Y$ depends only on $Z$; observing $Z=z$ determines its value $g(z)$.
+
+:::
+
+::: {.callout-note title="Conditional Expectation as Optimal Prediction" collapse="true"}
+
+If $E[X^2]<\infty$, $Y=E[X\mid Z]$ is the best predictor of $X$ based on $Z$ under squared loss:
+
+$$
+E[(X-Y)^2]=\min_{h\text{ measurable}}E[(X-h(Z))^2].
+$$
+
+In regression, $Z$ contains the input features and $X$ is the target; training with squared loss approximates $E[X\mid Z]$ within the chosen model class.
+
+:::
+
+### Regular Conditional Probabilities
+
+::: {.callout-tip title="Definition of Regular Conditional Distribution" collapse="true"}
+
+Let $(\Omega,\mathcal F,P)$ be a probability space,
+$X:(\Omega,\mathcal F)\to(S,\mathcal S)$ a measurable map, and
+$\mathcal G\subseteq\mathcal F$ a sub-$\sigma$-field. A map
+$\mu:\Omega\times\mathcal S\to[0,1]$ is a regular conditional distribution
+for $X$ given $\mathcal G$ if:
+
+i) For each $A\in\mathcal S$, $\omega\mapsto\mu(\omega,A)$ is a version of
+   $P(X\in A\mid\mathcal G)$.
+
+ii) For almost every $\omega$, $A\mapsto\mu(\omega,A)$ is a probability
+    measure on $(S,\mathcal S)$.
+
+When $S=\Omega$ and $X$ is the identity map, $\mu$ is called a regular
+conditional probability.
+
+:::
+
+::: {.callout-note title="Example: Conditional Distribution from a Joint Density" collapse="true"}
+
+Suppose $X,Y$ have a joint density $f(x,y)>0$. For Borel $A\subseteq\mathbb R$, define
+
+$$
+\mu(y,A)=\frac{\displaystyle\int_A f(x,y)\,dx}
+{\displaystyle\int_{\mathbb R}f(x,y)\,dx}.
+$$
+
+Where the denominator is not finite and positive, choose any fixed probability distribution instead.
+
+Then $(\omega,A)\mapsto\mu(Y(\omega),A)$ is a **regular conditional distribution** of $X$ given $\sigma(Y)$: $\mu(y,\cdot)$ gives the distribution of $X$ after observing $Y=y$.
+
+:::
+
+## Laws of Large Numbers
+
+
+### Weak Laws of Large Numbers
+
+
+### Borel-Cantelli Lemmas
+
+### Khinchin–Kolmogorov Theorem
+
+### Khinchin–Kolmogorov Theorem

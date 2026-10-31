@@ -2,29 +2,212 @@
 title: "Probabilistic Inference"
 page-layout: article
 search: true
+toc-depth: 3
 number-offset: [4]
 
 crossref:
   chapters: true
 ---
 
-## Bayesian nets: exact inference
+## Bayesian Nets: Exact Inference
 
 ### Inference by Enumeration
 
-**Inference by Enumeration:** join up the whole joint distribution before you sum out the hidden variables
-
+Join up the whole joint distribution before you sum out the hidden variables.
 
 ### Variable Elimination
 
+- Interleave joining and marginalizing.
+- Still NP-hard, but usually much faster than inference by enumeration.
+- A polytree is a directed graph with no undirected cycles. For poly-trees you can always find an ordering that is efficient.
 
-**Variable Elimination:**
-- interleave joining and marginalizing
-- Still NP-hard, but usually much faster than inference by enumeration
+## Bayesian Nets: Approximate Inference
 
+### Prior Sampling
 
+- Ignore evidence. Sample from the joint probability.
+- Do inference by counting the right samples.
 
-## Bayesian nets: approximate inference
+### Rejection Sampling
 
+```text
+RejectionSample(network, evidence):
+    x = {}
+    for X_i in topological_order(network):
+        x[X_i] ~ P(X_i | sampled values of Parents(X_i))
+        if X_i in evidence and x[X_i] != evidence[X_i]:
+            return REJECT
+    return x
+```
 
-## Probability reasoning over time
+- Repeat and estimate conditional probabilities using only accepted samples.
+- Hopelessly expensive if $P(e)$ is small.
+
+### Likelihood Weighting
+
+Fix evidence values and weight each sample by the product of their conditional probabilities.
+
+```text
+LikelihoodWeighting(X, evidence, network, N):
+    W = {v: 0 for v in domain(X)}
+    for j = 1 to N:
+        x, w = WeightedSample(network, evidence)
+        W[x[X]] += w
+    return normalize(W)
+
+WeightedSample(network, evidence):
+    x, w = {}, 1
+    for X_i in topological_order(network):
+        parents = assigned values of Parents(X_i) in x
+        if X_i in evidence:
+            x[X_i] = evidence[X_i]
+            w *= P(X_i = x[X_i] | parents)
+        else:
+            x[X_i] ~ P(X_i | parents)
+    return x, w
+```
+
+- Normalize the weighted counts to estimate $P(X\mid e)$.
+- Degradation in performance as the number of evidence variables increases.
+
+### Gibbs Sampling
+
+Keep a complete assignment (the network state), fix evidence, and repeatedly resample one non-evidence variable at a time.
+
+```text
+GibbsSampling(X, evidence, network, N):
+    counts = {v: 0 for v in domain(X)}
+    Z = non-evidence variables in network
+    x = copy(evidence)
+    initialize x[Z] to a valid random assignment
+    for j = 1 to N:
+        for Z_i in Z:
+            x[Z_i] ~ P(Z_i | current values of MB(Z_i) in x)
+            counts[x[X]] += 1
+    return normalize(counts)
+```
+
+- Markov blanket: Parents, children, and the children's other parents.
+- Rationale: Updates use both parent and child information, allowing evidence to influence upstream and downstream variables through repeated updates.
+- Monte Carlo uses random samples for estimation; MCMC generates correlated samples through a Markov chain.
+- Gibbs sampling is an MCMC method. Each conditional update is a special Metropolis–Hastings step with acceptance probability 1.
+
+## Probability Reasoning over Time
+
+### Markov Models
+
+- State: The value of $X_t$ at time $t$.
+- Parameters: Initial distribution $P(X_1)$ and transition probabilities $P(X_t\mid X_{t-1})$.
+- First-order Markov property: Past and future are conditionally independent given the present:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="First-order Markov property"}
+
+$$
+P(X_t\mid X_1,\ldots,X_{t-1})=P(X_t\mid X_{t-1}).
+$$
+
+:::
+
+#### Stationary Distribution
+
+A distribution $P_\infty$ unchanged by a transition. If the chain converges, its limiting distribution is stationary:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Stationary distribution equation"}
+
+$$
+P_\infty(x')=\sum_x P(x'\mid x)P_\infty(x).
+$$
+
+:::
+
+### Hidden Markov Models
+
+- Hidden states $X_t$ form a Markov chain with transition model $P(X_t\mid X_{t-1})$.
+- At each time step, observe an output $E_t$ generated according to $P(E_t\mid X_t)$; the states are not directly observed.
+
+#### Filtering / State Estimation
+
+- Track the belief state: the current state distribution conditioned on observations so far:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Filtering belief state"}
+
+$$
+B_t(x)=P(X_t=x\mid e_1,\ldots,e_t).
+$$
+
+:::
+
+- Initialize from a prior distribution, often uniform; update by predicting as time advances and conditioning on new observations.
+- Kalman filtering was developed in the 1960s and used for Apollo trajectory estimation.
+
+#### Forward Algorithm
+
+- Every time step, we start with current $P(X\mid \text{evidence})$.
+- We update for time:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Time prediction update"}
+
+$$
+P(x_t\mid e_{1:t-1})=\sum_{x_{t-1}}P(x_{t-1}\mid e_{1:t-1})\cdot P(x_t\mid x_{t-1}).
+$$
+
+:::
+
+- We update for evidence:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Evidence update"}
+
+$$
+P(x_t\mid e_{1:t})\propto_X P(x_t\mid e_{1:t-1})\cdot P(e_t\mid x_t).
+$$
+
+:::
+
+- The forward algorithm does both at once (and doesn't normalize).
+- Problem: space is $|X|$ and time is $|X|^2$ per time step.
+
+#### Particle Filtering
+
+Approximate $P(X_t\mid e_{1:t})$ with $N$ particles (sampled states), initialized from the prior. At each time step:
+
+1. Predict: Sample $x_t^{(i)}\sim P(X_t\mid x_{t-1}^{(i)})$.
+2. Weight: Set $w_i=P(e_t\mid x_t^{(i)})$ and normalize the weights.
+3. Resample: Draw $N$ particles with replacement in proportion to their weights.
+
+After resampling, estimate state probabilities by particle frequencies. More particles generally improve accuracy but increase computation.
+
+### Dynamic Bayes Nets (DBNs)
+
+- We want to track multiple variables over time, using multiple sources of evidence.
+- Repeat a fixed Bayes net structure at each time.
+- Variables from time $t$ can condition on those from $t-1$.
+
+### Most Likely Explanation
+
+State trellis: Graph of states and transitions over time.
+
+#### Forward Algorithm (Sum)
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Forward algorithm recurrence"}
+
+$$
+\begin{aligned}
+f_t[x_t] &= P(x_t,e_{1:t}) \\
+&= P(e_t\mid x_t)\sum_{x_{t-1}}P(x_t\mid x_{t-1})f_{t-1}[x_{t-1}].
+\end{aligned}
+$$
+
+:::
+
+#### Viterbi Algorithm (Max)
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Viterbi algorithm recurrence"}
+
+$$
+\begin{aligned}
+m_t[x_t] &= \max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\
+&= P(e_t\mid x_t)\max_{x_{t-1}}P(x_t\mid x_{t-1})m_{t-1}[x_{t-1}].
+\end{aligned}
+$$
+
+:::

@@ -1,0 +1,243 @@
+---
+title: "Supervised Learning"
+page-layout: article
+search: true
+number-offset: [3]
+
+crossref:
+  chapters: true
+---
+
+## Linear regression
+
+- Inputs $x_i\in\mathbb R^d$; targets $y_i\in\mathbb R$.
+- Model: $f_{w,b}(x)=w^\top x+b$. Absorb $b$ into $w$ by appending a constant 1 to $x$.
+- Squared loss:
+
+$$
+L(f,x_i,y_i)=\frac12\bigl(f(x_i)-y_i\bigr)^2.
+$$
+
+- Exact minimizer, when $X^\top X$ is invertible:
+
+$$
+w^*=(X^\top X)^{-1}X^\top y.
+$$
+
+- Requires matrix inversion; alternatively, use gradient descent.
+
+### Perceptron
+
+- A simple neural network with prediction $f(x)=\operatorname{sign}(w^\top x)$.
+- The hard sign output cannot be optimized directly with ordinary gradient descent.
+- Let $P$ and $N$ be the positive and negative training examples:
+
+```text
+initialize w randomly
+repeat until all examples are classified correctly:
+    pick a random x from P union N
+    if x in P and dot(w, x) < 0:
+        w = w + x
+    elif x in N and dot(w, x) >= 0:
+        w = w - x
+```
+
+- Adding $x$ increases $w^\top x$; subtracting $x$ decreases it.
+- Learns only linear decision boundaries; does not converge on non-linearly separable data.
+
+#### Convergence
+
+::: {#thm-perceptron-convergence name="Perceptron Mistake Bound"}
+
+Use labels $y_i\in\{-1,+1\}$ and initialize $w_0=0$. Suppose there exist
+$w^*$ with $\|w^*\|=1$ and $\gamma>0$ such that, for every $i$,
+
+$$
+y_i\langle w^*,x_i\rangle\ge\gamma,
+\qquad \|x_i\|\le R.
+$$
+
+Then the perceptron makes at most $R^2/\gamma^2$ mistakes.
+
+:::
+
+- $\gamma$ is a lower bound on the distance to the separating hyperplane; $R$ bounds the input norms.
+- Proof sketch: Each mistake increases $\langle w,w^*\rangle$ by at least $\gamma$, while $\|w\|^2$ increases by at most $R^2$. After $M$ mistakes:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Perceptron mistake bound proof"}
+
+$$
+M\gamma\le\langle w_M,w^*\rangle\le\|w_M\|\le R\sqrt M
+\quad\Longrightarrow\quad M\le\frac{R^2}{\gamma^2}.
+$$
+
+:::
+
+## Logistic regression
+
+- Make the output a probability using the sigmoid function:
+
+$$
+g(z)=\frac{1}{1+e^{-z}}\in[0,1].
+$$
+
+### Entropy and Cross-Entropy
+
+Let $y$ be the true probability distribution and $p$ the predicted distribution.
+
+- Entropy measures uncertainty and the ideal expected encoding length for $y$:
+
+$$
+H(y)=-\sum_i y_i\log y_i.
+$$
+
+- Cross-entropy is the expected encoding length when using $p$ to encode outcomes from $y$:
+
+$$
+XE(y,p)=-\sum_i y_i\log p_i\ge H(y).
+$$
+
+### KL Divergence
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(y\|p)&=XE(y,p)-H(y) \\
+&=\sum_i y_i\log\frac{y_i}{p_i}\ge0.
+\end{aligned}
+$$
+
+- Equality holds exactly when $y_i=p_i$ for all $i$.
+- For fixed $y$, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.
+- KL divergence and cross-entropy are asymmetric.
+
+**Representation learning:**
+
+- Deep learning is also called representation learning because it learns features automatically.
+
+- The learned features are commonly passed to a final linear regression/classification layer.
+
+## Ridge regression
+
+- Restrict the set of solutions by bounding the weight norm, helping reduce overfitting:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Constrained least squares"}
+
+$$
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
+\quad\text{subject to}\quad\|w\|_2^2\le c.
+$$
+
+:::
+
+- Use an appropriate penalty $\lambda\ge0$ to obtain an unconstrained formulation:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Ridge regression objective"}
+
+$$
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
++\frac{\lambda}{2}\|w\|_2^2.
+$$
+
+:::
+
+- This is $\ell_2$ regularization, called ridge regression.
+- $\lambda=0$ gives no penalty; increasing $\lambda$ shrinks the optimal weight norm. As $\lambda\to\infty$, $w\to0$.
+
+- Part1: $\widehat{w_{t+1}} = w_t - \frac{\eta}{N}\sum_i (w_t^T x_i - y_i)\,x_i$
+
+- Part2: $w_{t+1} = \widehat{w_{t+1}} * (1 - \eta\lambda)$
+
+## LASSO regression
+
+- The sparsity constraint $\|w\|_0\le c$ counts nonzero weights and is hard to optimize. Replace it with the convex $\ell_1$ constraint:
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="LASSO regression objective"}
+
+$$
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+ \lambda\|w\|_1.
+$$
+
+:::
+
+- This relaxation encourages sparse weights (feature selection).
+
+- Part1: $\widehat{w_{t+1}} = w_t - \frac{\eta}{N}\sum_i (w_t^T x_i - y_i)\,x_i$
+  - Same as linear regression
+- Part2: for every coordinate $i$
+  - If $\widehat{w_{t+1}}_i > \eta\lambda$, $w_{t+1} = \widehat{w_{t+1}}_i - \eta\lambda$
+  - If $\widehat{w_{t+1}}_i < -\eta\lambda$, $w_{t+1} = \widehat{w_{t+1}}_i + \eta\lambda$
+  - If $\widehat{w_{t+1}}_i \in [-\eta\lambda, \eta\lambda]$, $w_{t+1} = 0$
+  - Essentially: <span style="color:red">pulling to 0</span>
+
+## Compressed sensing
+
+### Sparsity assumption
+
+- $k$-sparse: $\|x\|_0\le k\ll n$; only a few entries are nonzero.
+- With suitable $A$, sparsity enables recovery from $m\ll n$ measurements $y=Ax$.
+
+### Restricted isometry property (RIP)
+
+$W\in\mathbb R^{n\times d} \, (n < d)$ is $(\epsilon,s)$-RIP if, for every $s$-sparse $x\in\mathbb R^d$,
+
+::: {.overflow-auto tabindex="0" role="region" aria-label="Restricted isometry property"}
+
+$$
+(1-\epsilon)\|x\|_2^2\le\|Wx\|_2^2\le(1+\epsilon)\|x\|_2^2.
+$$
+
+:::
+
+- Thus, $W$ approximately preserves the lengths of sparse vectors.
+
+- Without sparsity condition, this is impossible.
+
+::: {#thm-rip-sparse-recovery name="Sparse Recovery via RIP"}
+
+Let $W$ be $(\epsilon,2s)$-RIP with $0\le\epsilon<1$. If $\|x\|_0\le s$ and $y=Wx$, then
+
+$$
+\widetilde x\in\arg\min_{v:\,Wv=y}\|v\|_0
+\quad\Longrightarrow\quad\widetilde x=x.
+$$
+
+:::
+
+- Thus, $x$ is the unique $s$-sparse solution to $Wv=y$.
+- Proof: $h=\widetilde x-x$ is $2s$-sparse and $Wh=0$. RIP gives $(1-\epsilon)\|h\|_2^2\le0$, hence $h=0$.
+
+\
+
+::: {#thm-rip-l1-recovery name="Exact Recovery via l1 Minimization"}
+
+Let $W$ be $(\epsilon,2s)$-RIP with $0\le\epsilon<\frac{1}{1+\sqrt2}$. If $\|x\|_0\le s$ and $y=Wx$, then
+
+$$
+\arg\min_{v:\,Wv=y}\|v\|_0
+=\arg\min_{v:\,Wv=y}\|v\|_1
+=\{x\}.
+$$
+
+:::
+
+- Thus, convex $\ell_1$ minimization recovers the same unique solution as $\ell_0$ minimization.
+
+\
+
+::: {#thm-rip-approximate-recovery name="Recovery of Approximately Sparse Signals"}
+
+Let $W$ be $(\epsilon,2s)$-RIP with $0\le\epsilon<\frac{1}{1+\sqrt2}$. For arbitrary $x$, let $x_s$ retain its $s$ largest entries in magnitude (zero elsewhere). With $y=Wx$, reconstruct
+
+$$
+x^*\in\arg\min_{v:\,Wv=y}\|v\|_1.
+$$
+
+Then, with $\rho=\frac{\sqrt2\epsilon}{1-\epsilon}<1$,
+
+$$
+\|x^*-x\|_2\le\frac{2(1+\rho)}{(1-\rho)\sqrt s}\|x-x_s\|_1.
+$$
+
+:::
+
+- Recovery error is controlled by the non-sparse tail; $x=x_s$ gives exact recovery.

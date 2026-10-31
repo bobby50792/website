@@ -202,6 +202,8 @@ website:
                   href: docs/notes/machine-learning/1.qmd
                 - text: "Generalization"
                   href: docs/notes/machine-learning/2.qmd
+                - text: "Supervised Learning"
+                  href: docs/notes/machine-learning/3.qmd
             - section: "Advanced Computer Graphics"
               href: docs/notes/advanced-computer-graphics/0.qmd
               contents:
