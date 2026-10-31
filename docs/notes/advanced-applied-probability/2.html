@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.10.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,9 +45,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-3437602f61f36c0ccf5eea54bde2a4ec.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-049b3820691919fdd3a57ec88b4da792.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-778b0e8b5083ab6391a0efe25b46868d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-042ccbaef66037d67884134f3afafe29.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-778b0e8b5083ab6391a0efe25b46868d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-8ffcd0d0528a14b586caf8f18a8c9e6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -860,6 +860,12 @@ window.Quarto = {
  <span class="menu-text">Generalization</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../docs/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -957,6 +963,17 @@ window.Quarto = {
   <li><a href="#joint-distributions" id="toc-joint-distributions" class="nav-link" data-scroll-target="#joint-distributions"><span class="header-section-number">2.1.3</span> Joint Distributions</a></li>
   <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations"><span class="header-section-number">2.1.4</span> Expectations</a></li>
   <li><a href="#sums-and-convolution" id="toc-sums-and-convolution" class="nav-link" data-scroll-target="#sums-and-convolution"><span class="header-section-number">2.1.5</span> Sums and Convolution</a></li>
+  </ul></li>
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">2.2</span> Conditional Expectation</a>
+  <ul class="collapse">
+  <li><a href="#regular-conditional-probabilities" id="toc-regular-conditional-probabilities" class="nav-link" data-scroll-target="#regular-conditional-probabilities"><span class="header-section-number">2.2.1</span> Regular Conditional Probabilities</a></li>
+  </ul></li>
+  <li><a href="#laws-of-large-numbers" id="toc-laws-of-large-numbers" class="nav-link" data-scroll-target="#laws-of-large-numbers"><span class="header-section-number">2.3</span> Laws of Large Numbers</a>
+  <ul class="collapse">
+  <li><a href="#weak-laws-of-large-numbers" id="toc-weak-laws-of-large-numbers" class="nav-link" data-scroll-target="#weak-laws-of-large-numbers"><span class="header-section-number">2.3.1</span> Weak Laws of Large Numbers</a></li>
+  <li><a href="#borel-cantelli-lemmas" id="toc-borel-cantelli-lemmas" class="nav-link" data-scroll-target="#borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</a></li>
+  <li><a href="#khinchinkolmogorov-theorem" id="toc-khinchinkolmogorov-theorem" class="nav-link" data-scroll-target="#khinchinkolmogorov-theorem"><span class="header-section-number">2.3.3</span> Khinchin–Kolmogorov Theorem</a></li>
+  <li><a href="#khinchinkolmogorov-theorem-1" id="toc-khinchinkolmogorov-theorem-1" class="nav-link" data-scroll-target="#khinchinkolmogorov-theorem-1"><span class="header-section-number">2.3.4</span> Khinchin–Kolmogorov Theorem</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1115,6 +1132,138 @@ P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y).
 </div>
 <p><strong>Convolution:</strong> The integral on the right-hand side is called the <strong>convolution</strong> of <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> and is denoted by <span class="math inline">\((F*G)(z)\)</span>.</p>
 <p>Here <span class="math inline">\(dG(y)\)</span> denotes integration with respect to the distribution measure of <span class="math inline">\(Y\)</span>.</p>
+</section>
+</section>
+<section id="conditional-expectation" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">2.2</span> Conditional Expectation</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Definition of Conditional Expectation">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Definition of Conditional Expectation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Given a probability space <span class="math inline">\((\Omega,\mathcal F_0,P)\)</span>, a sub-<span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal F\subseteq\mathcal F_0\)</span>, and an <span class="math inline">\(\mathcal F_0\)</span>-measurable random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(E|X|&lt;\infty\)</span>, the conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal F\)</span>, denoted <span class="math inline">\(E(X\mid\mathcal F)\)</span>, is any random variable <span class="math inline">\(Y\)</span> satisfying:</p>
+<ol type="i">
+<li><p><span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable.</p></li>
+<li><p>For all <span class="math inline">\(A\in\mathcal F\)</span>,</p>
+<p><span class="math display">\[
+\int_A X\,dP=\int_A Y\,dP.
+\]</span></p></li>
+</ol>
+<p>Any <span class="math inline">\(Y\)</span> satisfying (i) and (ii) is called a version of <span class="math inline">\(E(X\mid\mathcal F)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Example: Conditioning on a Random Variable">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example: Conditioning on a Random Variable
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(E|X|&lt;\infty\)</span> and <span class="math inline">\(\mathcal F=\sigma(Z)\)</span>. Then</p>
+<p><span class="math display">\[
+Y=E[X\mid\mathcal F]=E[X\mid Z]=g(Z)\quad\text{a.s.}
+\]</span></p>
+<p>Here <span class="math inline">\(Y\)</span> is an <span class="math inline">\(\mathcal F\)</span>-measurable <strong>random variable</strong>, and <span class="math inline">\(g\)</span> is measurable. Pointwise,</p>
+<p><span class="math display">\[
+Y(\omega)=g(Z(\omega))\quad\text{for almost every }\omega.
+\]</span></p>
+<p>Thus, <span class="math inline">\(Y\)</span> depends only on <span class="math inline">\(Z\)</span>; observing <span class="math inline">\(Z=z\)</span> determines its value <span class="math inline">\(g(z)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Conditional Expectation as Optimal Prediction">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Conditional Expectation as Optimal Prediction
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(E[X^2]&lt;\infty\)</span>, <span class="math inline">\(Y=E[X\mid Z]\)</span> is the best predictor of <span class="math inline">\(X\)</span> based on <span class="math inline">\(Z\)</span> under squared loss:</p>
+<p><span class="math display">\[
+E[(X-Y)^2]=\min_{h\text{ measurable}}E[(X-h(Z))^2].
+\]</span></p>
+<p>In regression, <span class="math inline">\(Z\)</span> contains the input features and <span class="math inline">\(X\)</span> is the target; training with squared loss approximates <span class="math inline">\(E[X\mid Z]\)</span> within the chosen model class.</p>
+</div>
+</div>
+</div>
+<section id="regular-conditional-probabilities" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="regular-conditional-probabilities"><span class="header-section-number">2.2.1</span> Regular Conditional Probabilities</h3>
+<div class="callout callout-style-default callout-tip callout-titled" title="Definition of Regular Conditional Distribution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Definition of Regular Conditional Distribution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\((\Omega,\mathcal F,P)\)</span> be a probability space, <span class="math inline">\(X:(\Omega,\mathcal F)\to(S,\mathcal S)\)</span> a measurable map, and <span class="math inline">\(\mathcal G\subseteq\mathcal F\)</span> a sub-<span class="math inline">\(\sigma\)</span>-field. A map <span class="math inline">\(\mu:\Omega\times\mathcal S\to[0,1]\)</span> is a regular conditional distribution for <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal G\)</span> if:</p>
+<ol type="i">
+<li><p>For each <span class="math inline">\(A\in\mathcal S\)</span>, <span class="math inline">\(\omega\mapsto\mu(\omega,A)\)</span> is a version of <span class="math inline">\(P(X\in A\mid\mathcal G)\)</span>.</p></li>
+<li><p>For almost every <span class="math inline">\(\omega\)</span>, <span class="math inline">\(A\mapsto\mu(\omega,A)\)</span> is a probability measure on <span class="math inline">\((S,\mathcal S)\)</span>.</p></li>
+</ol>
+<p>When <span class="math inline">\(S=\Omega\)</span> and <span class="math inline">\(X\)</span> is the identity map, <span class="math inline">\(\mu\)</span> is called a regular conditional probability.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Example: Conditional Distribution from a Joint Density">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example: Conditional Distribution from a Joint Density
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(X,Y\)</span> have a joint density <span class="math inline">\(f(x,y)&gt;0\)</span>. For Borel <span class="math inline">\(A\subseteq\mathbb R\)</span>, define</p>
+<p><span class="math display">\[
+\mu(y,A)=\frac{\displaystyle\int_A f(x,y)\,dx}
+{\displaystyle\int_{\mathbb R}f(x,y)\,dx}.
+\]</span></p>
+<p>Where the denominator is not finite and positive, choose any fixed probability distribution instead.</p>
+<p>Then <span class="math inline">\((\omega,A)\mapsto\mu(Y(\omega),A)\)</span> is a <strong>regular conditional distribution</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(\sigma(Y)\)</span>: <span class="math inline">\(\mu(y,\cdot)\)</span> gives the distribution of <span class="math inline">\(X\)</span> after observing <span class="math inline">\(Y=y\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="laws-of-large-numbers" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="laws-of-large-numbers"><span class="header-section-number">2.3</span> Laws of Large Numbers</h2>
+<section id="weak-laws-of-large-numbers" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="weak-laws-of-large-numbers"><span class="header-section-number">2.3.1</span> Weak Laws of Large Numbers</h3>
+</section>
+<section id="borel-cantelli-lemmas" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</h3>
+</section>
+<section id="khinchinkolmogorov-theorem" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="khinchinkolmogorov-theorem"><span class="header-section-number">2.3.3</span> Khinchin–Kolmogorov Theorem</h3>
+</section>
+<section id="khinchinkolmogorov-theorem-1" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="khinchinkolmogorov-theorem-1"><span class="header-section-number">2.3.4</span> Khinchin–Kolmogorov Theorem</h3>
 
 
 </section>

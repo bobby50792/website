@@ -837,6 +837,30 @@
     ]
   },
   {
+    "objectID": "docs/notes/advanced-applied-probability/2.html#conditional-expectation",
+    "href": "docs/notes/advanced-applied-probability/2.html#conditional-expectation",
+    "title": "Laws of Large Numbers",
+    "section": "2.2 Conditional Expectation",
+    "text": "2.2 Conditional Expectation\n\n\n\n\n\n\nTipDefinition of Conditional Expectation\n\n\n\n\n\nGiven a probability space \\((\\Omega,\\mathcal F_0,P)\\), a sub-\\(\\sigma\\)-field \\(\\mathcal F\\subseteq\\mathcal F_0\\), and an \\(\\mathcal F_0\\)-measurable random variable \\(X\\) with \\(E|X|&lt;\\infty\\), the conditional expectation of \\(X\\) given \\(\\mathcal F\\), denoted \\(E(X\\mid\\mathcal F)\\), is any random variable \\(Y\\) satisfying:\n\n\\(Y\\) is \\(\\mathcal F\\)-measurable.\nFor all \\(A\\in\\mathcal F\\),\n\\[\n\\int_A X\\,dP=\\int_A Y\\,dP.\n\\]\n\nAny \\(Y\\) satisfying (i) and (ii) is called a version of \\(E(X\\mid\\mathcal F)\\).\n\n\n\n\n\n\n\n\n\nNoteExample: Conditioning on a Random Variable\n\n\n\n\n\nLet \\(E|X|&lt;\\infty\\) and \\(\\mathcal F=\\sigma(Z)\\). Then\n\\[\nY=E[X\\mid\\mathcal F]=E[X\\mid Z]=g(Z)\\quad\\text{a.s.}\n\\]\nHere \\(Y\\) is an \\(\\mathcal F\\)-measurable random variable, and \\(g\\) is measurable. Pointwise,\n\\[\nY(\\omega)=g(Z(\\omega))\\quad\\text{for almost every }\\omega.\n\\]\nThus, \\(Y\\) depends only on \\(Z\\); observing \\(Z=z\\) determines its value \\(g(z)\\).\n\n\n\n\n\n\n\n\n\nNoteConditional Expectation as Optimal Prediction\n\n\n\n\n\nIf \\(E[X^2]&lt;\\infty\\), \\(Y=E[X\\mid Z]\\) is the best predictor of \\(X\\) based on \\(Z\\) under squared loss:\n\\[\nE[(X-Y)^2]=\\min_{h\\text{ measurable}}E[(X-h(Z))^2].\n\\]\nIn regression, \\(Z\\) contains the input features and \\(X\\) is the target; training with squared loss approximates \\(E[X\\mid Z]\\) within the chosen model class.\n\n\n\n\n2.2.1 Regular Conditional Probabilities\n\n\n\n\n\n\nTipDefinition of Regular Conditional Distribution\n\n\n\n\n\nLet \\((\\Omega,\\mathcal F,P)\\) be a probability space, \\(X:(\\Omega,\\mathcal F)\\to(S,\\mathcal S)\\) a measurable map, and \\(\\mathcal G\\subseteq\\mathcal F\\) a sub-\\(\\sigma\\)-field. A map \\(\\mu:\\Omega\\times\\mathcal S\\to[0,1]\\) is a regular conditional distribution for \\(X\\) given \\(\\mathcal G\\) if:\n\nFor each \\(A\\in\\mathcal S\\), \\(\\omega\\mapsto\\mu(\\omega,A)\\) is a version of \\(P(X\\in A\\mid\\mathcal G)\\).\nFor almost every \\(\\omega\\), \\(A\\mapsto\\mu(\\omega,A)\\) is a probability measure on \\((S,\\mathcal S)\\).\n\nWhen \\(S=\\Omega\\) and \\(X\\) is the identity map, \\(\\mu\\) is called a regular conditional probability.\n\n\n\n\n\n\n\n\n\nNoteExample: Conditional Distribution from a Joint Density\n\n\n\n\n\nSuppose \\(X,Y\\) have a joint density \\(f(x,y)&gt;0\\). For Borel \\(A\\subseteq\\mathbb R\\), define\n\\[\n\\mu(y,A)=\\frac{\\displaystyle\\int_A f(x,y)\\,dx}\n{\\displaystyle\\int_{\\mathbb R}f(x,y)\\,dx}.\n\\]\nWhere the denominator is not finite and positive, choose any fixed probability distribution instead.\nThen \\((\\omega,A)\\mapsto\\mu(Y(\\omega),A)\\) is a regular conditional distribution of \\(X\\) given \\(\\sigma(Y)\\): \\(\\mu(y,\\cdot)\\) gives the distribution of \\(X\\) after observing \\(Y=y\\).",
+    "crumbs": [
+      "Notes",
+      "Advanced Applied Probability",
+      "Laws of Large Numbers"
+    ]
+  },
+  {
+    "objectID": "docs/notes/advanced-applied-probability/2.html#laws-of-large-numbers",
+    "href": "docs/notes/advanced-applied-probability/2.html#laws-of-large-numbers",
+    "title": "Laws of Large Numbers",
+    "section": "2.3 Laws of Large Numbers",
+    "text": "2.3 Laws of Large Numbers\n\n2.3.1 Weak Laws of Large Numbers\n\n\n2.3.2 Borel-Cantelli Lemmas\n\n\n2.3.3 Khinchin–Kolmogorov Theorem\n\n\n2.3.4 Khinchin–Kolmogorov Theorem",
+    "crumbs": [
+      "Notes",
+      "Advanced Applied Probability",
+      "Laws of Large Numbers"
+    ]
+  },
+  {
     "objectID": "docs/notes/general-physics/mechanics-and-thermal-physics/index.html",
     "href": "docs/notes/general-physics/mechanics-and-thermal-physics/index.html",
     "title": "Mechanics and Thermal Physics",
@@ -1599,136 +1623,221 @@
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/1.html",
-    "href": "docs/notes/artificial-intelligence/1.html",
-    "title": "Search",
+    "objectID": "docs/notes/machine-learning/2.html",
+    "href": "docs/notes/machine-learning/2.html",
+    "title": "Generalization",
     "section": "",
-    "text": "A search problem consists of:\n\n\\(S\\): a state space\n\\(s_{\\mathrm{start}}\\): start state\n\\(\\operatorname{Actions}(s)\\): possible actions\n\\(\\operatorname{Succ}(s,a)\\): successor\n\\(\\operatorname{Cost}(s,a)\\): action cost\n\\(\\operatorname{IsEnd}(s)\\): a goal test\n\nA solution is a sequence of actions (a plan) which transforms the start state to a goal state.\n\n\n\n\nCan only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by \\(g(x)\\) = work done so far.\n\n\n\nCan know whether one non-goal is more promising than another.\nSearch Heuristics: A function that estimates how close a state is to a goal.\nGreedy Search: Fringe: nodes ordered by \\(h(x)\\) = heuristic evaluation of cost from \\(x\\) to goal.\nA* Search: Fringe: nodes ordered by \\(f(x) = g(x) + h(x)\\). Stop only when a goal is expanded.\nAdmissible Heuristics: A heuristic \\(h\\) is admissible (optimistic) if:\n\\[\n0 \\le h(n) \\le h^*(n)\n\\]\nwhere \\(h^*(n)\\) is the true cost to a nearest goal.\nComing up with admissible heuristics is most of what’s involved in using A* in practice.\nGraph Search: Never expand a state twice.\nConsistent Heuristics: A heuristic is consistent if for every node \\(n\\) and its successor \\(n'\\):\n\\[\nh(n) \\le \\operatorname{cost}(n \\text{ to } n') + h(n')\n\\]\nA* graph search is optimal.\nConsistency implies admissibility.\nUCS (Uniform Cost Search) is a special case (\\(h = 0\\)).\nCreate Heuristics: Often, heuristics are solutions to relaxed problems, where new actions are available.\n\n\n\nA relaxation \\(P^j\\) of a search problem \\(P\\) has costs that satisfy:\n\\[\n\\operatorname{Cost}^j(s,a) \\le \\operatorname{Cost}(s,a).\n\\]\nGiven a relaxed search problem \\(P^j\\), define the relaxed heuristic\n\\[\nh(s) = \\operatorname{FutureCost}^j(s),\n\\]\nthe minimum cost from \\(s\\) to an end state using \\(\\operatorname{Cost}^j(s,a)\\).\n\nSuppose \\(h(s) = \\operatorname{FutureCost}^j(s)\\) for some relaxed problem \\(P^j\\). Then \\(h(s)\\) is a consistent heuristic.\nSuppose \\(h_1(s)\\) and \\(h_2(s)\\) are consistent. Then \\(h(s) = \\max\\{h_1(s), h_2(s)\\}\\) is consistent.\n\n\n\n\nCell Decomposition: Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles. If no path found, subdivide the mixed cells.\nThe Optimal Path: Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.\nVisibility Graph: Connect mutually visible obstacle vertices and the start and goal positions.\nWeighted A*: expands states in the order of \\(f = g + \\varepsilon h\\) values, \\(\\varepsilon &gt; 1\\) = bias towards states that are closer to goal.\nWeighted A* Search:\n\nTrades off optimality for speed.\n\\(\\varepsilon\\)-suboptimal:\n\\[\n\\operatorname{cost}(\\text{solution})\n\\le \\varepsilon \\cdot \\operatorname{cost}(\\text{optimal solution})\n\\]\nIn many domains, it has been shown to be orders of magnitude faster than A*.\nResearch focuses on developing a heuristic function that has shallow local minima.",
+    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).",
     "crumbs": [
       "Notes",
-      "Artificial Intelligence",
-      "Search"
+      "Machine Learning",
+      "Generalization"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/1.html#single-agent-search",
-    "href": "docs/notes/artificial-intelligence/1.html#single-agent-search",
-    "title": "Search",
+    "objectID": "docs/notes/machine-learning/2.html#no-free-lunch-theorem",
+    "href": "docs/notes/machine-learning/2.html#no-free-lunch-theorem",
+    "title": "Generalization",
     "section": "",
-    "text": "A search problem consists of:\n\n\\(S\\): a state space\n\\(s_{\\mathrm{start}}\\): start state\n\\(\\operatorname{Actions}(s)\\): possible actions\n\\(\\operatorname{Succ}(s,a)\\): successor\n\\(\\operatorname{Cost}(s,a)\\): action cost\n\\(\\operatorname{IsEnd}(s)\\): a goal test\n\nA solution is a sequence of actions (a plan) which transforms the start state to a goal state.\n\n\n\n\nCan only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by \\(g(x)\\) = work done so far.\n\n\n\nCan know whether one non-goal is more promising than another.\nSearch Heuristics: A function that estimates how close a state is to a goal.\nGreedy Search: Fringe: nodes ordered by \\(h(x)\\) = heuristic evaluation of cost from \\(x\\) to goal.\nA* Search: Fringe: nodes ordered by \\(f(x) = g(x) + h(x)\\). Stop only when a goal is expanded.\nAdmissible Heuristics: A heuristic \\(h\\) is admissible (optimistic) if:\n\\[\n0 \\le h(n) \\le h^*(n)\n\\]\nwhere \\(h^*(n)\\) is the true cost to a nearest goal.\nComing up with admissible heuristics is most of what’s involved in using A* in practice.\nGraph Search: Never expand a state twice.\nConsistent Heuristics: A heuristic is consistent if for every node \\(n\\) and its successor \\(n'\\):\n\\[\nh(n) \\le \\operatorname{cost}(n \\text{ to } n') + h(n')\n\\]\nA* graph search is optimal.\nConsistency implies admissibility.\nUCS (Uniform Cost Search) is a special case (\\(h = 0\\)).\nCreate Heuristics: Often, heuristics are solutions to relaxed problems, where new actions are available.\n\n\n\nA relaxation \\(P^j\\) of a search problem \\(P\\) has costs that satisfy:\n\\[\n\\operatorname{Cost}^j(s,a) \\le \\operatorname{Cost}(s,a).\n\\]\nGiven a relaxed search problem \\(P^j\\), define the relaxed heuristic\n\\[\nh(s) = \\operatorname{FutureCost}^j(s),\n\\]\nthe minimum cost from \\(s\\) to an end state using \\(\\operatorname{Cost}^j(s,a)\\).\n\nSuppose \\(h(s) = \\operatorname{FutureCost}^j(s)\\) for some relaxed problem \\(P^j\\). Then \\(h(s)\\) is a consistent heuristic.\nSuppose \\(h_1(s)\\) and \\(h_2(s)\\) are consistent. Then \\(h(s) = \\max\\{h_1(s), h_2(s)\\}\\) is consistent.\n\n\n\n\nCell Decomposition: Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles. If no path found, subdivide the mixed cells.\nThe Optimal Path: Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.\nVisibility Graph: Connect mutually visible obstacle vertices and the start and goal positions.\nWeighted A*: expands states in the order of \\(f = g + \\varepsilon h\\) values, \\(\\varepsilon &gt; 1\\) = bias towards states that are closer to goal.\nWeighted A* Search:\n\nTrades off optimality for speed.\n\\(\\varepsilon\\)-suboptimal:\n\\[\n\\operatorname{cost}(\\text{solution})\n\\le \\varepsilon \\cdot \\operatorname{cost}(\\text{optimal solution})\n\\]\nIn many domains, it has been shown to be orders of magnitude faster than A*.\nResearch focuses on developing a heuristic function that has shallow local minima.",
+    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).",
     "crumbs": [
       "Notes",
-      "Artificial Intelligence",
-      "Search"
+      "Machine Learning",
+      "Generalization"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/1.html#adversarial-problems",
-    "href": "docs/notes/artificial-intelligence/1.html#adversarial-problems",
-    "title": "Search",
-    "section": "1.2 Adversarial Problems",
-    "text": "1.2 Adversarial Problems\nDeterministic Games: Many possible formalizations, one is:\n\nStates: \\(S\\) (start at \\(s_0\\))\nPlayers: \\(P = \\{1, \\ldots, N\\}\\) (usually take turns)\nActions: \\(A\\) (may depend on player / state)\nTransition Function: \\(S \\times A \\to S\\)\nTerminal Test: \\(S \\to \\{t, f\\}\\)\nTerminal Utilities: \\(S \\times P \\to \\mathbb{R}\\)\n\nA solution for a player is a policy: \\(S \\to A\\)\nZero-Sum Games vs. General-Sum Games\n\n1.2.1 Minimax Search\nDeterministic, zero-sum games: e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.\nComplexity: Time: \\(O(b^m)\\), Space: \\(O(b^m)\\), is completely infeasible.\n\n\n1.2.2 Alpha-Beta Search\n#include &lt;algorithm&gt;\n#include &lt;limits&gt;\n\nconstexpr double INF = std::numeric_limits&lt;double&gt;::infinity();\n\ndouble min_value(const State& state, double alpha, double beta);\n\ndouble max_value(const State& state, double alpha, double beta) {\n    if (is_terminal(state)) return utility(state);\n\n    double v = -INF;\n    for (const auto& successor : successors(state)) {\n        v = std::max(v, min_value(successor, alpha, beta));\n        if (v &gt;= beta) return v;\n        alpha = std::max(alpha, v);\n    }\n    return v;\n}\n\ndouble min_value(const State& state, double alpha, double beta) {\n    if (is_terminal(state)) return utility(state);\n\n    double v = INF;\n    for (const auto& successor : successors(state)) {\n        v = std::min(v, max_value(successor, alpha, beta));\n        if (v &lt;= alpha) return v;\n        beta = std::min(beta, v);\n    }\n    return v;\n}\nWith perfect ordering:\n\nTime complexity drops to \\(O(b^{m/2})\\).\nDoubles solvable depth!\n\n\n\n1.2.3 Heuristic Minimax\nDepth-limited search: Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.\nIn practice: typically weighted linear sum of features:\n\\[\n\\operatorname{Eval}(s) = w_1 f_1(s) + w_2 f_2(s) + \\cdots + w_n f_n(s)\n\\]\ne.g.\n\\[\nf_1(s) = (\\text{num white queens} - \\text{num black queens}),\n\\]\netc.\n\n\n1.2.4 Game Theory\nNormal Form Game: Approximate games as single shot, Represent only actions and utilities.\nPure vs Mixed Strategies: deterministic (\\(p = 1\\)) selection of actions vs. randomization over actions.\n\\[\nu(\\text{action}) = \\sum_{\\text{world}} p(\\text{world}) \\cdot u(\\text{action}, \\text{world})\n\\]\n\\[\nu(s) = \\sum_{a \\in s} p(a) \\cdot \\sum_{\\text{world}} p(\\text{world}) \\cdot u(a, \\text{world})\n\\]\nBest Response: Given the strategies of all other players \\(s_{-i}\\), a best response for player \\(i\\) is:\n\\[\n\\operatorname{BR}_i(s_{-i}) = \\arg\\max_{s_i} u_i(s_i, s_{-i})\n\\]\nNash Equilibrium: Nash Equilibria are strategy profiles \\(\\vec{s}\\) where none of the participants benefit from unilaterally changing their decision.\n\\[\n\\forall i \\quad u_i(\\vec{s}) \\geq u_i(\\operatorname{neighbor}(\\vec{s}))\n\\]\nNash Equilibria always exist: If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.\nIndifference Principle: In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.\nvon Neumann Minimax Theorem: For every finite two-player zero-sum game:\n\\[\n\\max_{\\sigma_1}\\min_{\\sigma_2} u(\\sigma_1,\\sigma_2)\n=\n\\min_{\\sigma_2}\\max_{\\sigma_1} u(\\sigma_1,\\sigma_2)\n\\]\nThere exists a value \\(v\\) such that:\n\\[\nv = \\max_{\\sigma_1}\\min_{\\sigma_2} u\n= \\min_{\\sigma_2}\\max_{\\sigma_1} u\n\\]\nThe equilibrium strategies guarantee this value.\n\\[\nu(\\sigma_1,\\sigma_2^*) \\le v \\le u(\\sigma_1^*,\\sigma_2)\n\\]\nTwo-player zero-sum Nash equilibrium = Minimax solution\nGame Types:\n\nPerfect-information, zero-sum: Minimax or Alpha–Beta\nGeneral-sum games: Nash Equilibrium\nLarge game trees: Heuristic Search or Monte Carlo Tree Search\n\n\n\n1.2.5 Monte Carlo Tree Search\nCombination of Simulation and Bandit-Based Method\nTwo Fundamental Concepts:\n\nThe true value of any action can be approximated by running several random simulations.\nThese values can be efficiently used to adjust the policy (strategy) towards a best-first strategy.\n\nMCTS Algorithm:\n\nSelection: Start at the root node and select children using the tree policy. Stop when an expandable node is reached.\nExpansion: Add one or more child nodes to the tree.\nSimulation: Run a simulation from the newly added node. The default policy (or rollout policy) determines how the simulation is run.\nBackpropagation: Update values based on the outcome.\n\nPolicies: Tree policy, Default policy, Decision policy (selecting the best child).\nUpper Confidence Bound on Trees (UCT): Formulated node selection as Multi-Arm Bandit problem.\nUCT Node Selection (UCB1): UCB1 applied for each child selection.\n\\[\nUCT = \\overline{X}_j + 2C_p \\sqrt{\\frac{2\\ln n}{n_j}}\n\\]\n\n\\(\\overline{X}_j\\): mean reward of selecting this position\n\\(n\\): number of times current(parent) node has been visited\n\\(n_j\\): number of times child \\(j\\) has been visited\n\\(C_p\\): some constant \\(&gt; 0\\)\n\nAdvantages and Disadvantages of MCTS:\n\nAdvantages:\n\nProved MCTS converges to minimax solution\nDomain-independent\nAnytime algorithm\nAchieving better with a large branch factor\n\nDisadvantages:\n\nBasic version converges very slowly\nLeading to small-probability failures\n\n\n\n\n1.2.6 Principle of Maximum Expected Utility\nA rational agent should choose the action that maximizes its expected utility, given its knowledge.\nUtilities: Utilities are functions from outcomes (states of the world) to real numbers that describe an agent’s preferences. We hard-wire utilities and let behaviors emerge.\nThe Axioms of Rationality:\n\nOrderability\n\\[\n(A \\succ B) \\lor (B \\succ A) \\lor (A \\sim B)\n\\]\nTransitivity\n\\[\n(A \\succ B) \\land (B \\succ C) \\Rightarrow (A \\succ C)\n\\]\nContinuity\n\\[\nA \\succ B \\succ C\n\\Rightarrow\n\\exists p \\; [p, A;\\ 1-p, C] \\sim B\n\\]\nSubstitutability\n\\[\nA \\sim B\n\\Rightarrow\n[p, A;\\ 1-p, C] \\sim [p, B;\\ 1-p, C]\n\\]\nMonotonicity\n\\[\nA \\succ B\n\\Rightarrow\n\\left(\np \\ge q\n\\iff\n[p, A;\\ 1-p, B] \\succeq [q, A;\\ 1-q, B]\n\\right)\n\\]\n\nRational preferences imply behavior describable as maximization of expected utility.",
+    "objectID": "docs/notes/machine-learning/2.html#finite-hypothesis-classes",
+    "href": "docs/notes/machine-learning/2.html#finite-hypothesis-classes",
+    "title": "Generalization",
+    "section": "2.2 Finite Hypothesis Classes",
+    "text": "2.2 Finite Hypothesis Classes\nHypothesis class (\\(H\\)): The class of functions can be finite or infinite.\nEmpirical Risk Minimization (ERM): Pick the hypothesis with the smallest training loss.\n\\[\n\\mathrm{ERM}_H(S)\\in\\arg\\min_{h\\in H}L_S(h).\n\\]\nRealizability assumption: There exists \\(h^*\\in H\\) such that \\(L_{D,f}(h^*)=0\\). Therefore, for every training set \\(S\\), we have \\(L_S(h^*)=0\\).\n\nTheorem 2.2 (ERM for Finite Hypothesis Classes) Let \\(H\\) be a finite hypothesis class. Let \\(\\delta\\in(0,1)\\) and \\(\\epsilon&gt;0\\), and let \\(m\\) be an integer that satisfies\n\\[\nm\\ge\\frac{\\log(|H|/\\delta)}{\\epsilon}.\n\\]\nThen, for any labeling function \\(f\\) and any distribution \\(D\\) for which the realizability assumption holds (that is, for some \\(h\\in H\\), \\(L_{D,f}(h)=0\\)), with probability at least \\(1-\\delta\\) over the choice of an i.i.d. sample \\(S\\) of size \\(m\\), every ERM hypothesis \\(h_S\\) satisfies\n\\[\nL_{D,f}(h_S)\\le\\epsilon.\n\\]",
     "crumbs": [
       "Notes",
-      "Artificial Intelligence",
-      "Search"
+      "Machine Learning",
+      "Generalization"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/3.html",
-    "href": "docs/notes/artificial-intelligence/3.html",
-    "title": "Probabilistic Models",
+    "objectID": "docs/notes/machine-learning/2.html#pac-learning",
+    "href": "docs/notes/machine-learning/2.html#pac-learning",
+    "title": "Generalization",
+    "section": "2.3 PAC Learning",
+    "text": "2.3 PAC Learning\n\n2.3.1 Realizable PAC Learning\nPAC learning: A hypothesis class \\(H\\) is PAC learnable if there exist a function \\(m_H:(0,1)^2\\to\\mathbb N\\) and a learning algorithm with the following property:\nFor every \\(\\epsilon,\\delta\\in(0,1)\\), every distribution \\(D\\) over \\(X\\), and every labeling function \\(f:X\\to\\{0,1\\}\\), if the realizability assumption holds with respect to \\(H,D,f\\), then, when running the learning algorithm on\n\\[\nm\\ge m_H(\\epsilon,\\delta)\n\\]\ni.i.d. examples generated by \\(D\\) and labeled by \\(f\\), the algorithm returns a hypothesis \\(h\\) such that, with probability at least \\(1-\\delta\\) over the choice of the examples,\n\\[\nL_{D,f}(h)\\le\\epsilon.\n\\]\n\n\n2.3.2 Agnostic PAC Learning\nAgnostic PAC learnable: A hypothesis class \\(H\\) is agnostic PAC learnable if there exist a function \\(m_H:(0,1)^2\\to\\mathbb N\\) and a learning algorithm with the following property:\nFor every \\(\\epsilon,\\delta\\in(0,1)\\) and every distribution \\(D\\) over \\(X\\times Y\\), when running the learning algorithm on \\(m\\ge m_H(\\epsilon,\\delta)\\) i.i.d. examples generated by \\(D\\), the algorithm returns a hypothesis \\(h\\) such that, with probability at least \\(1-\\delta\\) over the choice of the \\(m\\) training examples,\n\\[\nL_D(h)\\le\\min_{h'\\in H}L_D(h')+\\epsilon.\n\\]\n\n\n2.3.3 Error Decomposition\n\\[\nL_D(h_S)=\\epsilon_{\\mathrm{app}}+\\epsilon_{\\mathrm{est}}.\n\\]\n\\[\n\\begin{aligned}\n\\epsilon_{\\mathrm{app}}\n&=\\min_{h\\in H}L_D(h),\\\\\n\\epsilon_{\\mathrm{est}}\n&=L_D(h_S)-\\epsilon_{\\mathrm{app}}.\n\\end{aligned}\n\\]\nBayes decomposition:\n\\[\n\\epsilon_{\\mathrm{app}}\n=L_D(\\mathrm{BO})+\\min_{h\\in H}L_D(h)-L_D(\\mathrm{BO}).\n\\]\n\n\n2.3.4 Infinite Hypothesis Classes\nThreshold functions: Let \\(H\\) be the class of threshold functions (\\(h_a(x) = \\mathbf{1}_{\\{x&lt;a\\}}\\)). Then \\(H\\) is PAC learnable using the ERM rule, with sample complexity\n\\[\nm_H(\\epsilon,\\delta)\n\\le\n\\frac{\\left\\lceil\\log(2/\\delta)\\right\\rceil}{\\epsilon}.\n\\]",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Generalization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/2.html#vc-dimension",
+    "href": "docs/notes/machine-learning/2.html#vc-dimension",
+    "title": "Generalization",
+    "section": "2.4 VC Dimension",
+    "text": "2.4 VC Dimension\n\n2.4.1 Restriction and Shattering\nRestriction of \\(H\\) to \\(C\\): Let \\(H\\) be a class of functions from \\(X\\) to \\(\\{0,1\\}\\), and let \\(C=\\{c_1,\\ldots,c_m\\}\\subset X\\). The restriction of \\(H\\) to \\(C\\) is the set of functions from \\(C\\) to \\(\\{0,1\\}\\) that can be derived from \\(H\\). That is,\n\\[\nH_C=\\left\\{\\bigl(h(c_1),\\ldots,h(c_m)\\bigr):h\\in H\\right\\}.\n\\]\nHere we represent each function from \\(C\\) to \\(\\{0,1\\}\\) as a vector in \\(\\{0,1\\}^{|C|}\\).\nShattering: A hypothesis class \\(H\\) shatters a finite set \\(C\\subset X\\) if the restriction of \\(H\\) to \\(C\\) is the set of all functions from \\(C\\) to \\(\\{0,1\\}\\). That is,\n\\[\n|H_C|=2^{|C|}.\n\\]\n\nTheorem 2.3 (Sample Lower Bound from Shattering) Let \\(H\\) be a hypothesis class of functions from \\(X\\) to \\(\\{0,1\\}\\). Let \\(m\\) be a training set size. Assume that there exists a set \\(C\\subset X\\) of size \\(2m\\) that is shattered by \\(H\\). Then, for any learning algorithm \\(A\\), there exist a distribution \\(D\\) over \\(X\\times\\{0,1\\}\\) and a predictor \\(h\\in H\\) such that \\(L_D(h)=0\\), but with probability at least \\(\\frac17\\) over the choice of \\(S\\sim D^m\\), we have\n\\[\nL_D(A(S))\\ge\\frac18.\n\\]\n\n\n\n2.4.2 VC Dimension and Learnability\nVC-dimension: The VC dimension of a hypothesis class \\(H\\), denoted \\(\\mathrm{VCdim}(H)\\), is the maximal size of a set \\(C\\subset X\\) that can be shattered by \\(H\\). If \\(H\\) can shatter sets of arbitrarily large size, we say that \\(H\\) has infinite VC dimension.\n\nTheorem 2.4 (Infinite VC Dimension) Let \\(H\\) be a class of infinite VC dimension. Then \\(H\\) is not PAC learnable.\n\n\n\n2.4.3 Sample Complexity\n\nTheorem 2.5 (Fundamental Theorem of Statistical Learning — Quantitative Version) Let \\(H\\) be a hypothesis class of functions from a domain \\(X\\) to \\(\\{0,1\\}\\), and let the loss function be the \\(0\\)–\\(1\\) loss. Assume that \\(\\mathrm{VCdim}(H)=d&lt;\\infty\\). Then there are absolute constants \\(C_1,C_2\\) such that:\n\n\\(H\\) is agnostic PAC learnable with sample complexity\n\\[\nC_1\\frac{d+\\log(1/\\delta)}{\\epsilon^2}\n\\le m_H(\\epsilon,\\delta)\n\\le C_2\\frac{d+\\log(1/\\delta)}{\\epsilon^2}.\n\\]\n\\(H\\) is PAC learnable with sample complexity\n\\[\nC_1\\frac{d+\\log(1/\\delta)}{\\epsilon}\n\\le m_H(\\epsilon,\\delta)\n\\le C_2\\frac{d\\log(1/\\epsilon)+\\log(1/\\delta)}{\\epsilon}.\n\\]\n\n\n\n\n\n\n\n\nNoteHow do these learning guarantees get around the No-Free-Lunch barrier?\n\n\n\n\n\nThese assumptions limit the tasks covered or the benchmark promised, making learning guarantees possible without providing a universal learner. Real-world tasks share patterns and structure. The key is to find a balance between model complexity and population loss.",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Generalization"
+    ]
+  },
+  {
+    "objectID": "docs/notes/artificial-intelligence/index.html",
+    "href": "docs/notes/artificial-intelligence/index.html",
+    "title": "Artificial Intelligence",
     "section": "",
-    "text": "Random Variables: A random variable is some aspect of the world about which we (may) have uncertainty.\nProbability Distribution: A probability distribution over a random variable associates a probability with each value.\nJoint Distributions: A joint distribution over a set of random variables: specifies a real number for each assignment.\nMarginal Distributions: Marginalization (summing out): Combine collapsed rows by adding.\n\n\n\nConditional Probabilities: Conditional distributions are probability distributions over some variables given fixed values of others.\nBayes’ Rule: Bayes’ rule allows us to compute conditional probabilities in terms of other conditional probabilities.",
+    "text": "本界面梳理了人工智能相关知识, 希望对你能有所启发。",
     "crumbs": [
       "Notes",
-      "Artificial Intelligence",
-      "Probabilistic Models"
+      "Artificial Intelligence"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/3.html#basics-on-probability",
-    "href": "docs/notes/artificial-intelligence/3.html#basics-on-probability",
-    "title": "Probabilistic Models",
+    "objectID": "docs/notes/artificial-intelligence/2.html",
+    "href": "docs/notes/artificial-intelligence/2.html",
+    "title": "Logic",
     "section": "",
-    "text": "Random Variables: A random variable is some aspect of the world about which we (may) have uncertainty.\nProbability Distribution: A probability distribution over a random variable associates a probability with each value.\nJoint Distributions: A joint distribution over a set of random variables: specifies a real number for each assignment.\nMarginal Distributions: Marginalization (summing out): Combine collapsed rows by adding.\n\n\n\nConditional Probabilities: Conditional distributions are probability distributions over some variables given fixed values of others.\nBayes’ Rule: Bayes’ rule allows us to compute conditional probabilities in terms of other conditional probabilities.",
+    "text": "Representation (Syntax): defines a set of valid formulas.\nSemantics: for each formula, specify a set of models (assignments / configurations of the world).\nInference rule: a rule that allows us to derive new formulas from existing ones.",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Probabilistic Models"
+      "Logic"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/3.html#bayesian-nets-representation",
-    "href": "docs/notes/artificial-intelligence/3.html#bayesian-nets-representation",
-    "title": "Probabilistic Models",
-    "section": "3.2 Bayesian Nets: Representation",
-    "text": "3.2 Bayesian Nets: Representation\nBayes’ nets: a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)\n\nMore properly called graphical models\nLocal interactions chain together to give global, indirect interactions\n\n\n3.2.1 Graphical model notation\n\nNodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)\nArcs: interactions: Formally: encode conditional independence\n\n\n\n3.2.2 Bayes’ net semantics\n\nA set of nodes, one per random variable \\(X\\)\nA directed, acyclic graph\nA conditional distribution for each node: a collection of distributions over \\(X\\), one for each combination of parents’ values\n\\[\nP(X \\mid a_1 \\ldots a_n)\n\\]\n\nCPT (conditional probability table): description of a noisy causal process.\n\n\n3.2.3 Assumptions\nAssumptions we are required to make to define the Bayes net when given the graph:\n\\[\nP(x_i \\mid x_1,\\ldots,x_{i-1})\n=\nP(x_i \\mid \\operatorname{parents}(X_i)).\n\\]\n\n\n3.2.4 D-Separation\nIf all paths between \\(A\\) and \\(B\\) are blocked given observed variables \\(Z\\), then \\(A \\perp\\!\\!\\!\\perp B \\mid Z\\).\n\nChain / fork: observing the middle node blocks the path.\nCollider (\\(A \\to M \\leftarrow B\\)): blocks the path unless \\(M\\) or a descendant is observed.\nOne blocked segment blocks a path; any active path means independence is not guaranteed.",
+    "objectID": "docs/notes/artificial-intelligence/2.html#representation",
+    "href": "docs/notes/artificial-intelligence/2.html#representation",
+    "title": "Logic",
+    "section": "2.1 Representation",
+    "text": "2.1 Representation\nFormal languages: syntax and model\n\n2.1.1 Propositional logic\nSyntax:\n\nPropositional symbols (atomic formulas): \\(A, B, C\\)\nLogical connectives: \\(\\neg, \\land, \\lor, \\to, \\leftrightarrow\\)\nBuild up formulas recursively—if \\(f\\) and \\(g\\) are formulas, so are the following:\n\nNegation: \\(\\neg f\\)\nConjunction: \\(f \\land g\\)\nDisjunction: \\(f \\lor g\\)\nImplication: \\(f \\to g\\)\nBiconditional: \\(f \\leftrightarrow g\\)\n\n\nModel:\nA model \\(w\\) in propositional logic is an assignment of truth values to propositional symbols.\nInterpretation function:\nLet \\(f\\) be a formula and \\(w\\) be a model. An interpretation function \\(\\mathcal{I}(f,w)\\) returns:\n\ntrue (1) (say that \\(w\\) satisfies \\(f\\))\nfalse (0) (say that \\(w\\) does not satisfy \\(f\\))\n\nBase case: For a propositional symbol \\(p\\) (e.g., \\(A, B, C\\)):\n\\[\n\\mathcal{I}(p,w) = w(p)\n\\]\nRecursive case\nLet \\(\\mathcal{M}(f)\\) be the set of models \\(w\\) for which \\(\\mathcal{I}(f,w) = 1\\).\nKnowledge base:\nA knowledge base \\(\\mathrm{KB}\\) is a set of formulas representing their conjunction / intersection:\n\\[\n\\mathcal{M}(\\mathrm{KB}) = \\bigcap_{f \\in \\mathrm{KB}} \\mathcal{M}(f).\n\\]\n\n\n2.1.2 First-order logic\nSyntax:\n\nTerms denote objects: constant symbols \\(c\\), variables \\(x\\), and function applications \\(f(t_1,\\ldots,t_n)\\), where each \\(t_i\\) is a term.\nFormulas are built from:\n\nAtomic formulas: \\(P(t_1,\\ldots,t_n)\\); also \\(t_1=t_2\\) in logic with equality.\nConnectives applied to formulas: \\(\\neg,\\land,\\lor,\\to,\\leftrightarrow\\).\nQuantifiers applied to formulas: \\(\\forall x\\,\\varphi\\), \\(\\exists x\\,\\varphi\\).\n\n\nModels:\n\nA model \\(w\\) specifies a nonempty domain \\(D\\) and interprets:\n\nConstant symbols as objects: \\(w(c)\\in D\\).\nFunction symbols as functions: \\(w(f):D^n\\to D\\).\nPredicate symbols as sets of tuples: \\(w(P)\\subseteq D^n\\), equivalently functions \\(D^n\\to\\{0,1\\}\\).\n\nA separate variable assignment \\(s:\\mathrm{Var}\\to D\\) gives variables their values: \\(s(x)\\in D\\).\n\nFor example, if \\(w(\\mathrm{alice})=o_1\\), \\(w(\\mathrm{arithmetic})=o_3\\), and \\((o_1,o_3)\\in w(\\mathrm{Knows})\\), then \\(\\mathrm{Knows}(\\mathrm{alice},\\mathrm{arithmetic})\\) is true.",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Probabilistic Models"
+      "Logic"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/3.html#bayesian-nets-inference",
-    "href": "docs/notes/artificial-intelligence/3.html#bayesian-nets-inference",
-    "title": "Probabilistic Models",
-    "section": "3.3 Bayesian Nets: Inference",
-    "text": "3.3 Bayesian Nets: Inference\nInference: Calculating some useful quantity from a joint probability distribution.\n\n3.3.1 Inference by enumeration\n\nJoin all factors.\nEliminate all hidden variables.\nNormalize the result.",
+    "objectID": "docs/notes/artificial-intelligence/2.html#inference",
+    "href": "docs/notes/artificial-intelligence/2.html#inference",
+    "title": "Logic",
+    "section": "2.2 Inference",
+    "text": "2.2 Inference\n\n2.2.1 Entailment and satisfiability\nEntailment: \\(\\mathrm{KB}\\) entails \\(f\\) (written \\(\\mathrm{KB} \\models f\\)) iff \\(\\mathcal{M}(\\mathrm{KB}) \\subseteq \\mathcal{M}(f)\\).\nContradiction: \\(\\mathrm{KB}\\) contradicts \\(f\\) iff \\(\\mathcal{M}(\\mathrm{KB}) \\cap \\mathcal{M}(f) = \\emptyset\\).\nContingency:\n\\[\n\\emptyset \\subsetneq \\mathcal{M}(\\mathrm{KB}) \\cap \\mathcal{M}(f) \\subsetneq \\mathcal{M}(\\mathrm{KB})\n\\]\nSatisfiability: A knowledge base \\(\\mathrm{KB}\\) is satisfiable if \\(\\mathcal{M}(\\mathrm{KB}) \\neq \\emptyset\\).\n\n\n2.2.2 SAT and model-checking\nModel checking:\n\nInput: knowledge base \\(\\mathrm{KB}\\)\nOutput: exists satisfying model (\\(\\mathcal{M}(\\mathrm{KB}) \\neq \\emptyset\\))?\n\nPopular algorithms:\n\nDPLL (backtracking + propagation + pruning)\nWalkSat (randomized local search over complete assignments)\n\n\n\n2.2.3 Inference rules\nModus ponens inference rule:\nFor any propositional symbols \\(p\\) and \\(q\\):\n\\[\n\\frac{p,\\quad p \\to q}{q}\n\\]\nGeneral inference rule:\nIf \\(f_1, \\ldots, f_k, g\\) are formulas, then the following is an inference rule:\n\\[\n\\frac{f_1,\\quad \\ldots,\\quad f_k}{g}\n\\]\nAlgorithm: forward inference:\nInput: set of inference rules \\(\\mathrm{Rules}\\).\nRepeat until no changes to \\(\\mathrm{KB}\\):\n\nChoose set of formulas \\(f_1, \\ldots, f_k \\in \\mathrm{KB}\\).\nIf matching rule \\(\\frac{f_1,\\quad \\cdots,\\quad f_k}{g}\\) exists, add \\(g\\) to \\(\\mathrm{KB}\\).\n\nDerivation:\n\\(\\mathrm{KB}\\) derives/proves \\(f\\) (\\(\\mathrm{KB} \\vdash f\\)) iff \\(f\\) eventually gets added to \\(\\mathrm{KB}\\).\n\n\n2.2.4 Horn clauses and modus ponens\nPropositional logic:\nDefinite clause: A definite clause has the following form:\n\\[\n(p_1 \\land \\cdots \\land p_k) \\to q\n\\]\nwhere \\(p_1, \\ldots, p_k, q\\) are propositional symbols.\nHorn clause: A Horn clause is either:\n\na definite clause \\((p_1 \\land \\cdots \\land p_k \\to q)\\)\na goal clause \\((p_1 \\land \\cdots \\land p_k \\to \\mathrm{false})\\)\n\nModus ponens:\n\\[\n\\frac{p_1,\\quad \\cdots,\\quad p_k,\\quad (p_1 \\land \\cdots \\land p_k) \\to q}{q}\n\\]\nFirst-order logic:\nDefinite clause: A definite clause has the following form:\n\\[\n\\forall x_1 \\cdots \\forall x_n \\bigl((a_1 \\land \\cdots \\land a_k) \\to b\\bigr)\n\\]\nfor variables \\(x_1, \\ldots, x_n\\) and atomic formulas \\(a_1, \\ldots, a_k, b\\) (which contain those variables).\nModus ponens:\n\\[\n\\frac{a_1,\\ldots,a_k \\qquad \\forall x_1\\cdots\\forall x_n\\bigl((a_1\\land\\cdots\\land a_k)\\to b\\bigr)}{b}\n\\]\nSubstitution:\nA substitution \\(\\theta\\) is a mapping from variables to terms.\n\\(\\operatorname{Subst}[\\theta, f]\\) returns the result of performing substitution \\(\\theta\\) on \\(f\\).\nUnification:\nUnification takes two formulas \\(f\\) and \\(g\\) and returns a substitution \\(\\theta\\) which is the most general unifier:\n\\[\n\\operatorname{Unify}[f,g] = \\theta\n\\quad \\text{such that} \\quad\n\\operatorname{Subst}[\\theta,f] = \\operatorname{Subst}[\\theta,g]\n\\]\nor “fail” if no such \\(\\theta\\) exists.\n\n\n2.2.5 Complexity\nTheorem: completeness:\nModus ponens is complete for first-order logic with only Horn clauses.\nTheorem: semi-decidability:\nFirst-order logic (even restricted to only Horn clauses) is semi-decidable.\n\nIf \\(\\mathrm{KB} \\models f\\), forward inference on complete inference rules will prove \\(f\\) in finite time.\nIf \\(\\mathrm{KB} \\not\\models f\\), no algorithm can show this in finite time.\n\n\n\n2.2.6 Resolution\nPropositional resolution rule:\n\\[\n\\frac{f_1 \\lor \\cdots \\lor f_n \\lor p,\\quad \\neg p \\lor g_1 \\lor \\cdots \\lor g_m}\n{f_1 \\lor \\cdots \\lor f_n \\lor g_1 \\lor \\cdots \\lor g_m}\n\\]\nConjunctive normal form (CNF):\nA CNF formula is a conjunction of clauses.\nProposition: conversion to CNF:\nEvery formula \\(f\\) in propositional logic can be converted into an equivalent CNF formula \\(f'\\):\n\\[\n\\mathcal{M}(f) = \\mathcal{M}(f')\n\\]\nFirst-order conversion to CNF:\n\nAll variable have universal quantifiers by default\nIntroduce Skolem functions (e.g., \\(Y(x)\\)) to represent existentially quantified variables.\n\nFirst-order resolution rule:\n\\[\n\\frac{\nf_1 \\lor \\cdots \\lor f_n \\lor p,\\qquad\n\\neg q \\lor g_1 \\lor \\cdots \\lor g_m\n}{\n\\operatorname{Subst}[\\theta,\\,\nf_1 \\lor \\cdots \\lor f_n \\lor g_1 \\lor \\cdots \\lor g_m]\n}\n\\]\nwhere \\(\\theta = \\operatorname{Unify}[p,q]\\).",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Probabilistic Models"
+      "Logic"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/4.html",
-    "href": "docs/notes/artificial-intelligence/4.html",
-    "title": "Probabilistic Inference",
+    "objectID": "docs/notes/artificial-intelligence/2.html#semantics",
+    "href": "docs/notes/artificial-intelligence/2.html#semantics",
+    "title": "Logic",
+    "section": "2.3 Semantics",
+    "text": "2.3 Semantics\n\n2.3.1 Desiderata for inference rules\nSemantics:\nInterpretation defines entailed/true formulas: \\(\\mathrm{KB} \\models f\\).\n\\[\n\\mathcal{M}(\\mathrm{KB}) \\subseteq \\mathcal{M}(f)\n\\]\nSyntax:\nInference rules derive formulas: \\(\\mathrm{KB} \\vdash f\\)\n\n\n2.3.2 Soundness\nA set of inference rules \\(\\mathrm{Rules}\\) is sound if:\n\\[\n\\{f : \\mathrm{KB} \\vdash f\\}\n\\subseteq\n\\{f : \\mathrm{KB} \\models f\\}.\n\\]\n\n\n2.3.3 Completeness\nA set of inference rules \\(\\mathrm{Rules}\\) is complete if:\n\\[\n\\{f : \\mathrm{KB} \\vdash f\\} \\supseteq \\{f : \\mathrm{KB} \\models f\\}\n\\]\n\n\n2.3.4 Fixing completeness\n\nOption 1: Restrict the allowed set of formulas\npropositional logic \\(\\to\\) propositional logic with only Horn clauses\nOption 2: Use more powerful inference rules\nModus ponens \\(\\to\\) resolution\n\n\n\n2.3.5 Theorem: Modus ponens on Horn clauses\nModus ponens is complete with respect to Horn clauses:\n\nSuppose \\(\\mathrm{KB}\\) contains only Horn clauses and \\(p\\) is an entailed propositional symbol.\nThen applying modus ponens will derive \\(p\\).",
+    "crumbs": [
+      "Notes",
+      "Artificial Intelligence",
+      "Logic"
+    ]
+  },
+  {
+    "objectID": "docs/blog/index.html",
+    "href": "docs/blog/index.html",
+    "title": "Blog",
     "section": "",
-    "text": "Inference by Enumeration: join up the whole joint distribution before you sum out the hidden variables\n\n\n\nVariable Elimination: - interleave joining and marginalizing - Still NP-hard, but usually much faster than inference by enumeration",
-    "crumbs": [
-      "Notes",
-      "Artificial Intelligence",
-      "Probabilistic Inference"
-    ]
+    "text": "LATEST\n\n\n\nIdeas in progress, useful discoveries, and occasional notes from things I build."
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/4.html#bayesian-nets-exact-inference",
-    "href": "docs/notes/artificial-intelligence/4.html#bayesian-nets-exact-inference",
-    "title": "Probabilistic Inference",
+    "objectID": "docs/blog/index.html#recent-writing",
+    "href": "docs/blog/index.html#recent-writing",
+    "title": "Blog",
     "section": "",
-    "text": "Inference by Enumeration: join up the whole joint distribution before you sum out the hidden variables\n\n\n\nVariable Elimination: - interleave joining and marginalizing - Still NP-hard, but usually much faster than inference by enumeration",
-    "crumbs": [
-      "Notes",
-      "Artificial Intelligence",
-      "Probabilistic Inference"
-    ]
+    "text": "Ideas in progress, useful discoveries, and occasional notes from things I build."
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/4.html#bayesian-nets-approximate-inference",
-    "href": "docs/notes/artificial-intelligence/4.html#bayesian-nets-approximate-inference",
-    "title": "Probabilistic Inference",
-    "section": "4.2 Bayesian nets: approximate inference",
-    "text": "4.2 Bayesian nets: approximate inference",
-    "crumbs": [
-      "Notes",
-      "Artificial Intelligence",
-      "Probabilistic Inference"
-    ]
+    "objectID": "docs/blog/posts/2026-09-13/index.html",
+    "href": "docs/blog/posts/2026-09-13/index.html",
+    "title": "乐理基础",
+    "section": "",
+    "text": "本文以十二平均律和大小调调性音乐为基础。复习顺序如下；前一项是后一项的计算或分析基础。"
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/4.html#probability-reasoning-over-time",
-    "href": "docs/notes/artificial-intelligence/4.html#probability-reasoning-over-time",
-    "title": "Probabilistic Inference",
-    "section": "4.3 Probability reasoning over time",
-    "text": "4.3 Probability reasoning over time",
-    "crumbs": [
-      "Notes",
-      "Artificial Intelligence",
-      "Probabilistic Inference"
-    ]
+    "objectID": "docs/blog/posts/2026-09-13/index.html#节奏与时值",
+    "href": "docs/blog/posts/2026-09-13/index.html#节奏与时值",
+    "title": "乐理基础",
+    "section": "1 节奏与时值",
+    "text": "1 节奏与时值\n\n1.1 拍、速度与拍号\n拍是组织节奏的周期性单位；节奏是起音、持续、休止与重音在时间中的安排。拍的层级强弱不要求每拍都实际奏出强弱变化。\nBPM 表示每分钟多少个指定单位。必须同时知道速度标记采用什么单位：\n\n四分音符 = 120：每分钟 120 个四分音符。\n附点四分音符 = 60：每分钟 60 个附点四分音符。\n\n若速度为每分钟 \\(B\\) 个单位，则每单位时长为 \\(60/B\\) 秒。速度可能改变；自由节奏段落也可能没有固定 BPM。\n拍号 \\(x/y\\) 表示一小节含 \\(x\\) 个 \\(y\\) 分音符单位。分母单位与实际感受到的大拍可能不同。\n\n\n\n拍号\n小节容量\n常见大拍组织\n每大拍内部\n\n\n\n\n2/4\n2 个四分音符\n2 拍\n二等分\n\n\n3/4\n3 个四分音符\n3 拍\n二等分\n\n\n4/4\n4 个四分音符\n4 拍\n二等分\n\n\n6/8\n6 个八分音符\n2 个附点四分音符大拍\n三等分\n\n\n9/8\n9 个八分音符\n3 个附点四分音符大拍\n三等分\n\n\n12/8\n12 个八分音符\n4 个附点四分音符大拍\n三等分\n\n\n\n3/4 与 6/8 的小节总时值相同，但分组不同：\n3/4： [1 &] [2 &] [3 &]      2 + 2 + 2\n6/8： [1 la li] [2 la li]    3 + 3\n\n\n1.2 音符、附点、延音线与休止\n\n\n\n音符\n全音符的比例\n以四分音符为一拍时\n\n\n\n\n全音符\n1\n4 拍\n\n\n二分音符\n1/2\n2 拍\n\n\n四分音符\n1/4\n1 拍\n\n\n八分音符\n1/8\n1/2 拍\n\n\n十六分音符\n1/16\n1/4 拍\n\n\n三十二分音符\n1/32\n1/8 拍\n\n\n\n音符名称是比例，不是秒数。全音符也不恒等于一小节：它等于一个 4/4 小节，却超过一个 3/4 小节的容量。“一分音符”通常应称全音符；比全音符更长的标准时值有二全音符，不称“0.5 分音符”。\n\n附点增加原时值的一半：附点四分音符 = 四分 + 八分 = 1.5 个四分音符。\n双附点增加原时值的 \\(1/2+1/4\\)，总长为原来的 \\(7/4\\)。\n延音线（tie）连接同音高音符，只起音一次，时值相加，可跨小节。\n连音线（slur）标示连贯奏法或分句，不把多个音合成一个起音。\n休止符占用时间而不发声。整小节休止常用全休止符表示，即使拍号不是 4/4。\n\n普通完整小节内，各时值之和必须等于小节容量；弱起小节可以不满。\n\n\n1.3 时长计算\n设一个速度单位占全音符的比例为 \\(u\\)，目标音符占比为 \\(v\\)，速度为 \\(B\\)：\n\\[\nt_{\\text{音符}}=\\frac{v}{u}\\frac{60}{B},\n\\qquad\nt_{\\text{小节}}=\\frac{x/y}{u}\\frac{60}{B}.\n\\]\n若以四分音符计速，\\(u=1/4\\)；一个普通 \\(n\\) 分音符的时长为：\n\\[\nt_n=\\frac{4}{n}\\frac{60}{B}.\n\\]\n例：4/4、四分音符 = 120。八分音符长 \\(0.25\\) 秒，附点四分音符长 \\(0.75\\) 秒，一小节长 \\(2\\) 秒。\n例：6/8、附点四分音符 = 60。每大拍长 \\(1\\) 秒，每个八分音符长 \\(1/3\\) 秒，一小节长 \\(2\\) 秒。若改为八分音符 = 60，同一小节就长 \\(6\\) 秒。\n\n\n1.4 细分、三连音与切分\n以四分音符为一拍：\n\n\n\n组织\n一拍内的分割\n每个单位占拍数\n\n\n\n\n直八分\n2 等份\n1/2\n\n\n十六分\n4 等份\n1/4\n\n\n八分三连音\n通常容纳 2 个八分的位置改为 3 个\n1/3\n\n\n\n三连音是 3:2 的时值替代，不限定只能占一拍。例如三个四分三连音合计占两个普通四分音符的时值。\n摇摆八分把一对八分处理为长短不等，常用约 2:1 作入门示范；实际比例随速度与风格变化，不能固定等同于三连音。\n\n\n\n术语\n判断依据\n\n\n\n\n正拍\n起音落在所选拍点上\n\n\n反拍 offbeat\n起音落在拍间位置，如“1 和”中的“和”\n\n\nBackbeat\n4/4 中突出第 2、4 拍，常由军鼓承担\n\n\n切分 syncopation\n弱位置被强调，或起音后跨过强位置而不重新起音\n\n\n\n音符密度、BPM、音游流速分别描述起音数量、时间单位速度和画面移动速度，不能互相替代。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#音名与读谱",
+    "href": "docs/blog/posts/2026-09-13/index.html#音名与读谱",
+    "title": "乐理基础",
+    "section": "2 音名与读谱",
+    "text": "2 音名与读谱\n\n2.1 键盘与音高\n白键循环为 C–D–E–F–G–A–B。C 位于两枚黑键组紧邻左侧。E–F、B–C 是半音，其余相邻白键间是全音；包括黑键在内，任意相邻琴键相差半音。\n八度包含 12 个半音，频率比为 2:1。十二平均律中，相差 \\(n\\) 个半音的频率比为 \\(2^{n/12}\\)。以 A4 = 440 Hz 为参照：\n\\[\nf=440\\times2^{n/12}.\n\\]\n音名 C 没有指定八度；科学音高记法 C4 表示中央 C，C5 比 C4 高一个八度。\n\n\n2.2 五线谱的定位顺序\n五线谱的线与间交替表示连续字母音名，超出谱表使用加线。从下往上：\n\n\n\n谱号\n五条线\n四个间\n定位点\n\n\n\n\n高音谱号 G 谱号\nE4 G4 B4 D5 F5\nF4 A4 C5 E5\n第二线是 G4\n\n\n低音谱号 F 谱号\nG2 B2 D3 F3 A3\nA2 C3 E3 G3\n第四线是 F3\n\n\n\n读一个音按以下顺序：\n\n谱号与位置确定字母、八度。\n调号确定默认升降。\n当前有效的临时记号覆盖默认值。\n音符形状、附点与延音线确定时值。\n\n\n\n2.3 升降记号与作用范围\n\n\n\n记号\n含义\n\n\n\n\n♯\n比该自然音高半音\n\n\n♭\n比该自然音低半音\n\n\n♮\n恢复该字母的自然音\n\n\n重升、重降\n比自然音高或低两个半音\n\n\n\n还原号不是“退回调号”：G 大调中的 F♮ 要弹 F，自然音取代调号中的 F♯。\n临时记号通常作用于同一小节、同一谱表内同字母且同八度的后续音；小节线后恢复调号默认值。跨小节延音线连接的音保持原音高，但不使下一小节所有同名音自动沿用这个临时记号。调号则作用于相应字母的所有八度。\n十二平均律中 C♯ 与 D♭同音高，称等音异名。拼写仍影响音程和和弦分析。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#音程",
+    "href": "docs/blog/posts/2026-09-13/index.html#音程",
+    "title": "乐理基础",
+    "section": "3 音程",
+    "text": "3 音程\n\n3.1 先算度数，再算性质\n音程有两个信息：字母跨度决定度数，半音距离决定性质。\n\n连起点计数字母：C–D–E 是三度，C–D–E–F 是四度。\n数实际半音，确定大、小、纯、增、减。\n\n\n\n\n度数\n常见性质与半音数\n从 C 向上的例子\n\n\n\n\n一度\n纯 0\nC\n\n\n二度\n小 1、大 2\nD♭、D\n\n\n三度\n小 3、大 4\nE♭、E\n\n\n四度\n纯 5\nF\n\n\n五度\n纯 7\nG\n\n\n六度\n小 8、大 9\nA♭、A\n\n\n七度\n小 10、大 11\nB♭、B\n\n\n八度\n纯 12\n高八度 C\n\n\n\n一、四、五、八度以“纯”为基准；二、三、六、七度有“大、小”。纯音程增加半音为增，减少半音为减；大音程减半音为小，小音程再减半音为减，大音程增半音为增。\nC–F♯ 是增四度，C–G♭ 是减五度。 两者均为 6 半音，不能只数琴键而忽略字母。\n\n\n3.2 音程转位\n把低音移高一个八度，或高音移低一个八度，得到音程转位：\n\n度数相加为 9，如三度 ↔︎ 六度。\n大 ↔︎ 小，增 ↔︎ 减，纯 ↔︎ 纯。\n原音程与转位音程的半音数相加为 12。\n\n例：C–E 是大三度，E–高 C 是小六度。前后发声称旋律音程，同时发声称和声音程。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#音阶调号与调性",
+    "href": "docs/blog/posts/2026-09-13/index.html#音阶调号与调性",
+    "title": "乐理基础",
+    "section": "4 音阶、调号与调性",
+    "text": "4 音阶、调号与调性\n\n4.1 大调与小调结构\n\n\n\n音阶\n相邻距离\n相对主音的半音位置\n\n\n\n\n大调\n全 全 半 全 全 全 半\n0 2 4 5 7 9 11 12\n\n\n自然小调\n全 半 全 全 半 全 全\n0 2 3 5 7 8 10 12\n\n\n和声小调\n自然小调升高第 7 级\n0 2 3 5 7 8 11 12\n\n\n\n构造七声音阶时，每个字母依次使用一次，再补升降记号：\n\nC 大调：C D E F G A B C。\nG 大调：G A B C D E F♯ G。\nE 自然小调：E F♯ G A B C D E。\nE 和声小调：E F♯ G A B C D♯ E。\n\nE 和声小调中的 C–D♯ 是增二度。D♯ 到 E 只有半音，形成导音的上行解决倾向。传统旋律小调上行升高第 6、7 级，下行常用自然小调；使用时需结合风格。\n\n\n4.2 级数、关系调与同主音调\n音阶级数以主音为 1，顺次编号。上方五度是第 5 级，不是“第 5 个半音”。\n\n\n\n关系\n例子\n保持不变\n\n\n\n\n关系大小调\nG 大调 / E 自然小调\n调号与自然音集\n\n\n同主音大小调\nG 大调 / G 小调\n主音 G\n\n\n移调\nC 大调旋律整体移到 G 大调\n对应级数、节奏及音程结构\n\n\n\n关系小调主音位于大调第 6 级，比大调主音低小三度。关系大调主音位于自然小调第 3 级。\n调性由主音、和声与乐句组织共同确立。仅凭调号不能区分关系大小调，仅凭最后一个旋律音也不能保证判断正确。\n\n\n4.3 调号速查\n\n\n\n个数\n升号大调\n新增升号\n降号大调\n新增降号\n\n\n\n\n0\nC\n—\nC\n—\n\n\n1\nG\nF♯\nF\nB♭\n\n\n2\nD\nC♯\nB♭\nE♭\n\n\n3\nA\nG♯\nE♭\nA♭\n\n\n4\nE\nD♯\nA♭\nD♭\n\n\n5\nB\nA♯\nD♭\nG♭\n\n\n6\nF♯\nE♯\nG♭\nC♭\n\n\n7\nC♯\nB♯\nC♭\nF♭\n\n\n\n升号顺序 F C G D A E B；降号顺序 B E A D G C F。每行包含此前所有记号。小调使用其关系大调的调号，小调中的导音升高常写成临时记号。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#和弦构造与转位",
+    "href": "docs/blog/posts/2026-09-13/index.html#和弦构造与转位",
+    "title": "乐理基础",
+    "section": "5 和弦构造与转位",
+    "text": "5 和弦构造与转位\n\n5.1 三和弦\n以下公式中的 1、3、5 等以根音同主音大调音阶为参照；半音集合均相对根音。\n\n\n\n类型\n级数公式\n半音集合\nC 根音例子\n\n\n\n\n大三和弦\n1–3–5\n0, 4, 7\nC E G\n\n\n小三和弦\n1–♭3–5\n0, 3, 7\nC E♭ G\n\n\n减三和弦\n1–♭3–♭5\n0, 3, 6\nC E♭ G♭\n\n\n增三和弦\n1–3–♯5\n0, 4, 8\nC E G♯\n\n\n\n和弦名 C、Cm、Cdim、Caug 分别对应以上四类。琶音是将和弦音先后奏出，不改变和弦的音高材料。\n\n\n5.2 七和弦\n\n\n\n类型\n级数公式\n半音集合\nC 根音例子\n\n\n\n\n大七 Cmaj7\n1–3–5–7\n0, 4, 7, 11\nC E G B\n\n\n属七型 C7\n1–3–5–♭7\n0, 4, 7, 10\nC E G B♭\n\n\n小七 Cm7\n1–♭3–5–♭7\n0, 3, 7, 10\nC E♭ G B♭\n\n\n半减七 Cø7 / Cm7♭5\n1–♭3–♭5–♭7\n0, 3, 6, 10\nC E♭ G♭ B♭\n\n\n减七 C°7\n1–♭3–♭5–𝄫7\n0, 3, 6, 9\nC E♭ G♭ B𝄫\n\n\n\nC7 的 7 默认小七度，Cmaj7 才是大七度。“属七型”描述结构；是否执行属功能，要看调性与进行。\n\n\n5.3 根音、最低音与转位\n根音是和弦构造基准，最低音是当前实际最低的音。三和弦由哪个成员在最低处决定转位：\n\n\n\n排列\nC 和弦示例\n常用低音数字\n\n\n\n\n原位：根音在最低处\nC E G\n5/3，常省略\n\n\n第一转位：三音在最低处\nE G C\n6/3，简写 6\n\n\n第二转位：五音在最低处\nG C E\n6/4\n\n\n\n七和弦还可让七音在最低处形成第三转位；原位到第三转位的数字为 7、6/5、4/3、4/2。\n斜线后指定最低音：C/E 是 C 和弦第一转位，Em/B 是 Em 第二转位。斜线低音也可能不是和弦音，因此斜线记法不必然等于转位。上方声部换排列、扩大间距，只要最低和弦成员不变，转位就不变。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#功能和声",
+    "href": "docs/blog/posts/2026-09-13/index.html#功能和声",
+    "title": "乐理基础",
+    "section": "6 功能和声",
+    "text": "6 功能和声\n\n6.1 大调调内和弦\n在大调每一级上叠置三度，得到固定的三和弦性质序列：\n大、小、小、大、大、小、减。\n\n\n\n级数\nC 大调\nG 大调\n入门功能归类\n\n\n\n\nI\nC\nG\n主功能 T\n\n\nii\nDm\nAm\n下属／前属功能 PD\n\n\niii\nEm\nBm\n随上下文判断\n\n\nIV\nF\nC\n下属／前属功能 PD\n\n\nV\nG\nD\n属功能 D\n\n\nvi\nAm\nEm\n常作主功能替代\n\n\nvii°\nBdim\nF♯dim\n属功能 D\n\n\n\n罗马数字大小写区分大、小和弦，° 表示减三和弦。功能分析是调性语境中的归纳，同一个和弦不在所有作品里承担相同作用。\n基础路线是 T → PD → D → T。G–Em–Am–D–G 对应 I–vi–ii–V–I。\n\n\n6.2 属和弦与解决\nC 大调的 G7 = G–B–D–F。B 是导音，倾向上行到 C；和弦七音 F 倾向下行到 E。B–F 的三全音由此解决到 C–E。\nG 大调同理：D7 = D–F♯–A–C，常以 F♯→G、C→B 解决。\n小调为了构成大三和弦 V 或 V7，常升高自然小调第 7 级：E 小调的 B7 = B–D♯–F♯–A，D♯→E。\n\n\n6.3 终止式与和声节奏\n终止式发生在乐句结尾。仅在中途出现一个 V–I，不必然构成终止。\n\n\n\n类型\n基础形式\nC 大调例子\n\n\n\n\n正格终止\nV–I，V 可带七音\nG7–C\n\n\n半终止\n乐句停在 V\nDm–G\n\n\n变格终止\nIV–I\nF–C\n\n\n欺骗终止\nV 转向预期 I 之外，常为 vi\nG–Am\n\n\n\n完全正格终止的常见判定：V 和 I 均原位，最终高声部落在主音。未满足这些条件的正格终止通常归为不完全正格终止。\n和声节奏是和弦更换速率。4/4 中每小节换一次与每两拍换一次不同，但两者可使用相同 BPM。\n\n\n6.4 次属和弦与短暂主音化\n次属和弦临时执行某个调内目标和弦的属功能。记号 V7/ii 意为“ii 的属七和弦”，这里的斜线与 C/E 的低音斜线含义不同。\n\n\n\nG 大调目标\n目标根音\n对应次属七和弦\n变化音的解决\n\n\n\n\nii = Am\nA\nE7，V7/ii\nG♯→A\n\n\nV = D\nD\nA7，V7/V\nC♯→D\n\n\nvi = Em\nE\nB7，V7/vi\nD♯→E\n\n\n\n构造方法：目标根音上方纯五度找属根音，再建立属七型和弦。E7–Am 暂时强调 Am，并不自动意味着整首作品转入 A 小调；持续建立新的调性中心才涉及转调。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#旋律低音与编曲",
+    "href": "docs/blog/posts/2026-09-13/index.html#旋律低音与编曲",
+    "title": "乐理基础",
+    "section": "7 旋律、低音与编曲",
+    "text": "7 旋律、低音与编曲\n\n7.1 和弦音与非和弦音\n先明确当前和弦及换和弦时刻，再判断旋律音身份。\n\n\n\n\n\n\n\n\n类型\n典型运动\n例子与条件\n\n\n\n\n和弦音\n属于当前和弦\nC 和弦中的 C、E、G\n\n\n经过音\n两端音之间级进填充\nC 和弦上 C–D–E，D 连接 C 与 E\n\n\n邻音\n离开一个音，再级进回到它\nC–D–C\n\n\n预现音\n下一和弦的音提前出现\nG→C 前先奏 C，并保持到 C 和弦\n\n\n挂留音\n旧和弦音保留到新和弦形成不协和，再下行级进解决\nF 和弦的 F 保持到 C 和弦，再 F→E，构成 4–3 挂留\n\n\n\n入门写作可先让长音、强拍和乐句目标落在和弦音，再用级进填充。非和弦音也可落强拍，例如挂留；“强拍必须是和弦音”不是普遍规则。\n\n\n7.2 动机与乐句\n动机是可辨认的短节奏或音高材料。乐句具有较完整的进行与结束感，长度不必固定四小节。动机可通过重复、模进和变奏发展：\n\n\n\n操作\n原动机 G–B–A 的处理\n\n\n\n\n重复\nG–B–A\n\n\n变奏：改结尾\nG–B–G\n\n\n调内上行模进\nA–C–B\n\n\n\nG–B–A 的半音步幅为 +4、−2，A–C–B 为 +3、−1。这是保持音阶位置关系的调内模进，不是保持所有半音距离的严格移调。\nA–A′–B–A′ 描述重复与对比关系；字母可以标记动机、乐句或段落，必须先说明分析层级。\n\n\n7.3 低音、声部连接与织体\n低音可使用根音、转位和弦音、经过音或持续音。转位提供选择，实际是否平滑取决于低音线与其他声部的运动。\n例：G–Em–C–D–G 配低音 G–G–G–F♯–G，完整写法为：\nG → Em/G → C/G → D/F♯ → G。\n前面保持共同低音 G，最后 F♯→G 半音上行。连接上方声部时，可保留共同音并让其余音就近移动；若写传统四部和声，还需检查平行五、八度等规则。\n\n\n\n声部\n主要任务\n改动时检查\n\n\n\n\n旋律\n提供主要动机与乐句\n音域、目标音、呼吸与结束\n\n\n和弦伴奏\n呈现和声\n音区是否遮盖旋律，换和弦是否清楚\n\n\n低音\n提供和声底部与线性运动\n最低音与和弦身份、连接距离\n\n\n鼓\n呈现拍点、细分和重音\n底鼓、军鼓、踩镲是否相互配合\n\n\n\n织体包括声部数量、相互关系与活动密度；力度指响度。增加声部是加厚织体，逐渐变响才是渐强。二者可同时发生，但不是同一参数。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#分析与听写流程",
+    "href": "docs/blog/posts/2026-09-13/index.html#分析与听写流程",
+    "title": "乐理基础",
+    "section": "8 分析与听写流程",
+    "text": "8 分析与听写流程\n\n8.1 分析一段音乐\n\n标出拍号、速度单位、弱起及节奏分组。\n结合调号、低音、导音解决和乐句终止判断调性。\n在每个换和弦点列出和弦音，确定根音、性质和转位。\n用罗马数字标出功能，检查次属和弦的目标。\n标出旋律的和弦音、非和弦音及解决。\n按重复、变化、对比分出动机与乐句。\n比较段落的织体、力度、音区与和声节奏。\n\n\n\n8.2 听写一条旋律\n\n建立拍点，确定起音数、休止和分组。\n先写节奏，再记录上行、下行、同音与跳进。\n用已知主音或参照音定位首音、末音和长音。\n把短组块转成级数，再按调性转换音名。\n重听核对每小节时值、临时记号及终止位置。\n\n以 G 为参照：G→A 是大二度，G→B 是大三度，G→D 是纯五度。先固定音色与八度练关系，再扩大音域和音串长度。\n大、小和弦听辨可先做同根比较：C–E–G 与 C–E♭–G 只有三音不同。熟悉差异后再换根音、排列与音色。“明亮／暗淡”只能辅助描述，不能代替音程结构判断。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-09-13/index.html#综合例题与自检",
+    "href": "docs/blog/posts/2026-09-13/index.html#综合例题与自检",
+    "title": "乐理基础",
+    "section": "9 综合例题与自检",
+    "text": "9 综合例题与自检\n\n9.1 和声与低音综合分析\n分析 G 大调进行：\nG → E7/G♯ → Am → D/F♯ → G。\n\n\n\n和弦\n和弦音\n功能\n最低音\n\n\n\n\nG\nG B D\nI\nG\n\n\nE7/G♯\nE G♯ B D\nV6/5/ii\nG♯\n\n\nAm\nA C E\nii\nA\n\n\nD/F♯\nD F♯ A\nV6\nF♯\n\n\nG\nG B D\nI\nG\n\n\n\nE7 的根音是 E，最低音是 G♯，属于第一转位。低音线 G–G♯–A–F♯–G 包含 G→G♯→A 的半音推进，以及 F♯→G 的导音解决。E7 中的七音 D 可下行到 Am 中的 C。\n末尾 D/F♯→G 是 V6→I；若位于乐句结尾，可形成不完全正格终止，不能仅因旋律落 G 就称完全正格终止。\n\n\n9.2 闭卷检查\n\n4/4、四分音符 = 96，八分音符与一小节分别多长？\n6/8、附点四分音符 = 72，一小节多长？\n附点八分音符加十六分音符，共几个四分音符拍？\nC–E♭、C–D♯、C–G♭ 分别是什么音程？\nG 大调与 E 自然小调共享什么，又区别在哪里？\n写出 D7 与 Dmaj7 的和弦音。\nEm/B 的根音、低音与转位分别是什么？\nG 大调的 E7 为什么可以接 Am？\nG–B–A → A–C–B 是严格移调吗？\n加入鼓和低音，是否必然改变 BPM 或构成渐强？\n\n\n\n\n\n\n\nNote答案\n\n\n\n\n\n\n八分音符 \\(0.3125\\) 秒；一小节 \\(2.5\\) 秒。\n两个大拍，共 \\(2\\times60/72=5/3\\) 秒。\n一拍：\\(3/4+1/4=1\\)。\n小三度、增二度、减五度。\n共享调号与自然音集；主音和调性组织不同。\nD7：D F♯ A C；Dmaj7：D F♯ A C♯。\n根音 E，低音 B，第二转位。\nE7 是 Am 的属七和弦；G♯ 倾向到 A，D 倾向到 C。\n不是；是调内模进，部分半音距离发生变化。\n不必然。声部增加改变织体；BPM 和力度需分别判断。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-10-25/index.html",
+    "href": "docs/blog/posts/2026-10-25/index.html",
+    "title": "Tower Defense：Unity 塔防游戏",
+    "section": "",
+    "text": "这是我之前用 Unity 做的一个塔防小游戏。选择建筑、收集资源，再用箭塔应对不断到来的敌人。现在把它搬进了博客，可以直接在浏览器里试玩。"
+  },
+  {
+    "objectID": "docs/blog/posts/2026-10-25/index.html#怎么玩",
+    "href": "docs/blog/posts/2026-10-25/index.html#怎么玩",
+    "title": "Tower Defense：Unity 塔防游戏",
+    "section": "1 怎么玩",
+    "text": "1 怎么玩\n\n\n\n操作\n用途\n\n\n\n\n左键点击\n选择建筑；建造完成后选择并放置到地图上\n\n\n按住右键拖动\n移动视角\n\n\n滚轮\n缩放地图\n\n\n游戏内设置\n调整音乐、音效，或返回主菜单\n\n\n\n建筑需要消耗金币、木材或石材。伐木场、采石场和炼金场提供资源，箭塔负责防守。建造需要一点时间，也要留意建筑的放置位置。\n敌人会一波接着一波出现。资源有限，先发展还是先防守，由你决定。\n网页版保留了原来的单机玩法，关闭了调试用的账号登录和成绩上传。游戏在你的浏览器中运行；点击“结束试玩”可以关闭画面和声音，再次开始会开启新的一局。"
   },
   {
     "objectID": "docs/blog/posts/2026-05-29/index.html",
@@ -1808,220 +1917,207 @@
     "text": "10 Reference\n\nhttps://acnll7zntynp.feishu.cn/wiki/QPiOw9B8NiZRslkcz8UcYzmtnlh/\nhttps://www.bilibili.com/video/BV1kvXzBjEZA/\nhttps://www.bilibili.com/video/BV1ES4y1T7S6/\nhttps://www.youtube.com/watch?v=8z5-IlHYZCY/\nhttps://www.bilibili.com/video/BV1cp4FzQEsu/"
   },
   {
-    "objectID": "docs/blog/posts/2026-10-25/index.html",
-    "href": "docs/blog/posts/2026-10-25/index.html",
-    "title": "Tower Defense：Unity 塔防游戏",
+    "objectID": "docs/notes/artificial-intelligence/4.html",
+    "href": "docs/notes/artificial-intelligence/4.html",
+    "title": "Probabilistic Inference",
     "section": "",
-    "text": "这是我之前用 Unity 做的一个塔防小游戏。选择建筑、收集资源，再用箭塔应对不断到来的敌人。现在把它搬进了博客，可以直接在浏览器里试玩。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-10-25/index.html#怎么玩",
-    "href": "docs/blog/posts/2026-10-25/index.html#怎么玩",
-    "title": "Tower Defense：Unity 塔防游戏",
-    "section": "1 怎么玩",
-    "text": "1 怎么玩\n\n\n\n操作\n用途\n\n\n\n\n左键点击\n选择建筑；建造完成后选择并放置到地图上\n\n\n按住右键拖动\n移动视角\n\n\n滚轮\n缩放地图\n\n\n游戏内设置\n调整音乐、音效，或返回主菜单\n\n\n\n建筑需要消耗金币、木材或石材。伐木场、采石场和炼金场提供资源，箭塔负责防守。建造需要一点时间，也要留意建筑的放置位置。\n敌人会一波接着一波出现。资源有限，先发展还是先防守，由你决定。\n网页版保留了原来的单机玩法，关闭了调试用的账号登录和成绩上传。游戏在你的浏览器中运行；点击“结束试玩”可以关闭画面和声音，再次开始会开启新的一局。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html",
-    "href": "docs/blog/posts/2026-09-13/index.html",
-    "title": "乐理基础",
-    "section": "",
-    "text": "本文以十二平均律和大小调调性音乐为基础。复习顺序如下；前一项是后一项的计算或分析基础。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#节奏与时值",
-    "href": "docs/blog/posts/2026-09-13/index.html#节奏与时值",
-    "title": "乐理基础",
-    "section": "1 节奏与时值",
-    "text": "1 节奏与时值\n\n1.1 拍、速度与拍号\n拍是组织节奏的周期性单位；节奏是起音、持续、休止与重音在时间中的安排。拍的层级强弱不要求每拍都实际奏出强弱变化。\nBPM 表示每分钟多少个指定单位。必须同时知道速度标记采用什么单位：\n\n四分音符 = 120：每分钟 120 个四分音符。\n附点四分音符 = 60：每分钟 60 个附点四分音符。\n\n若速度为每分钟 \\(B\\) 个单位，则每单位时长为 \\(60/B\\) 秒。速度可能改变；自由节奏段落也可能没有固定 BPM。\n拍号 \\(x/y\\) 表示一小节含 \\(x\\) 个 \\(y\\) 分音符单位。分母单位与实际感受到的大拍可能不同。\n\n\n\n拍号\n小节容量\n常见大拍组织\n每大拍内部\n\n\n\n\n2/4\n2 个四分音符\n2 拍\n二等分\n\n\n3/4\n3 个四分音符\n3 拍\n二等分\n\n\n4/4\n4 个四分音符\n4 拍\n二等分\n\n\n6/8\n6 个八分音符\n2 个附点四分音符大拍\n三等分\n\n\n9/8\n9 个八分音符\n3 个附点四分音符大拍\n三等分\n\n\n12/8\n12 个八分音符\n4 个附点四分音符大拍\n三等分\n\n\n\n3/4 与 6/8 的小节总时值相同，但分组不同：\n3/4： [1 &] [2 &] [3 &]      2 + 2 + 2\n6/8： [1 la li] [2 la li]    3 + 3\n\n\n1.2 音符、附点、延音线与休止\n\n\n\n音符\n全音符的比例\n以四分音符为一拍时\n\n\n\n\n全音符\n1\n4 拍\n\n\n二分音符\n1/2\n2 拍\n\n\n四分音符\n1/4\n1 拍\n\n\n八分音符\n1/8\n1/2 拍\n\n\n十六分音符\n1/16\n1/4 拍\n\n\n三十二分音符\n1/32\n1/8 拍\n\n\n\n音符名称是比例，不是秒数。全音符也不恒等于一小节：它等于一个 4/4 小节，却超过一个 3/4 小节的容量。“一分音符”通常应称全音符；比全音符更长的标准时值有二全音符，不称“0.5 分音符”。\n\n附点增加原时值的一半：附点四分音符 = 四分 + 八分 = 1.5 个四分音符。\n双附点增加原时值的 \\(1/2+1/4\\)，总长为原来的 \\(7/4\\)。\n延音线（tie）连接同音高音符，只起音一次，时值相加，可跨小节。\n连音线（slur）标示连贯奏法或分句，不把多个音合成一个起音。\n休止符占用时间而不发声。整小节休止常用全休止符表示，即使拍号不是 4/4。\n\n普通完整小节内，各时值之和必须等于小节容量；弱起小节可以不满。\n\n\n1.3 时长计算\n设一个速度单位占全音符的比例为 \\(u\\)，目标音符占比为 \\(v\\)，速度为 \\(B\\)：\n\\[\nt_{\\text{音符}}=\\frac{v}{u}\\frac{60}{B},\n\\qquad\nt_{\\text{小节}}=\\frac{x/y}{u}\\frac{60}{B}.\n\\]\n若以四分音符计速，\\(u=1/4\\)；一个普通 \\(n\\) 分音符的时长为：\n\\[\nt_n=\\frac{4}{n}\\frac{60}{B}.\n\\]\n例：4/4、四分音符 = 120。八分音符长 \\(0.25\\) 秒，附点四分音符长 \\(0.75\\) 秒，一小节长 \\(2\\) 秒。\n例：6/8、附点四分音符 = 60。每大拍长 \\(1\\) 秒，每个八分音符长 \\(1/3\\) 秒，一小节长 \\(2\\) 秒。若改为八分音符 = 60，同一小节就长 \\(6\\) 秒。\n\n\n1.4 细分、三连音与切分\n以四分音符为一拍：\n\n\n\n组织\n一拍内的分割\n每个单位占拍数\n\n\n\n\n直八分\n2 等份\n1/2\n\n\n十六分\n4 等份\n1/4\n\n\n八分三连音\n通常容纳 2 个八分的位置改为 3 个\n1/3\n\n\n\n三连音是 3:2 的时值替代，不限定只能占一拍。例如三个四分三连音合计占两个普通四分音符的时值。\n摇摆八分把一对八分处理为长短不等，常用约 2:1 作入门示范；实际比例随速度与风格变化，不能固定等同于三连音。\n\n\n\n术语\n判断依据\n\n\n\n\n正拍\n起音落在所选拍点上\n\n\n反拍 offbeat\n起音落在拍间位置，如“1 和”中的“和”\n\n\nBackbeat\n4/4 中突出第 2、4 拍，常由军鼓承担\n\n\n切分 syncopation\n弱位置被强调，或起音后跨过强位置而不重新起音\n\n\n\n音符密度、BPM、音游流速分别描述起音数量、时间单位速度和画面移动速度，不能互相替代。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#音名与读谱",
-    "href": "docs/blog/posts/2026-09-13/index.html#音名与读谱",
-    "title": "乐理基础",
-    "section": "2 音名与读谱",
-    "text": "2 音名与读谱\n\n2.1 键盘与音高\n白键循环为 C–D–E–F–G–A–B。C 位于两枚黑键组紧邻左侧。E–F、B–C 是半音，其余相邻白键间是全音；包括黑键在内，任意相邻琴键相差半音。\n八度包含 12 个半音，频率比为 2:1。十二平均律中，相差 \\(n\\) 个半音的频率比为 \\(2^{n/12}\\)。以 A4 = 440 Hz 为参照：\n\\[\nf=440\\times2^{n/12}.\n\\]\n音名 C 没有指定八度；科学音高记法 C4 表示中央 C，C5 比 C4 高一个八度。\n\n\n2.2 五线谱的定位顺序\n五线谱的线与间交替表示连续字母音名，超出谱表使用加线。从下往上：\n\n\n\n谱号\n五条线\n四个间\n定位点\n\n\n\n\n高音谱号 G 谱号\nE4 G4 B4 D5 F5\nF4 A4 C5 E5\n第二线是 G4\n\n\n低音谱号 F 谱号\nG2 B2 D3 F3 A3\nA2 C3 E3 G3\n第四线是 F3\n\n\n\n读一个音按以下顺序：\n\n谱号与位置确定字母、八度。\n调号确定默认升降。\n当前有效的临时记号覆盖默认值。\n音符形状、附点与延音线确定时值。\n\n\n\n2.3 升降记号与作用范围\n\n\n\n记号\n含义\n\n\n\n\n♯\n比该自然音高半音\n\n\n♭\n比该自然音低半音\n\n\n♮\n恢复该字母的自然音\n\n\n重升、重降\n比自然音高或低两个半音\n\n\n\n还原号不是“退回调号”：G 大调中的 F♮ 要弹 F，自然音取代调号中的 F♯。\n临时记号通常作用于同一小节、同一谱表内同字母且同八度的后续音；小节线后恢复调号默认值。跨小节延音线连接的音保持原音高，但不使下一小节所有同名音自动沿用这个临时记号。调号则作用于相应字母的所有八度。\n十二平均律中 C♯ 与 D♭同音高，称等音异名。拼写仍影响音程和和弦分析。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#音程",
-    "href": "docs/blog/posts/2026-09-13/index.html#音程",
-    "title": "乐理基础",
-    "section": "3 音程",
-    "text": "3 音程\n\n3.1 先算度数，再算性质\n音程有两个信息：字母跨度决定度数，半音距离决定性质。\n\n连起点计数字母：C–D–E 是三度，C–D–E–F 是四度。\n数实际半音，确定大、小、纯、增、减。\n\n\n\n\n度数\n常见性质与半音数\n从 C 向上的例子\n\n\n\n\n一度\n纯 0\nC\n\n\n二度\n小 1、大 2\nD♭、D\n\n\n三度\n小 3、大 4\nE♭、E\n\n\n四度\n纯 5\nF\n\n\n五度\n纯 7\nG\n\n\n六度\n小 8、大 9\nA♭、A\n\n\n七度\n小 10、大 11\nB♭、B\n\n\n八度\n纯 12\n高八度 C\n\n\n\n一、四、五、八度以“纯”为基准；二、三、六、七度有“大、小”。纯音程增加半音为增，减少半音为减；大音程减半音为小，小音程再减半音为减，大音程增半音为增。\nC–F♯ 是增四度，C–G♭ 是减五度。 两者均为 6 半音，不能只数琴键而忽略字母。\n\n\n3.2 音程转位\n把低音移高一个八度，或高音移低一个八度，得到音程转位：\n\n度数相加为 9，如三度 ↔︎ 六度。\n大 ↔︎ 小，增 ↔︎ 减，纯 ↔︎ 纯。\n原音程与转位音程的半音数相加为 12。\n\n例：C–E 是大三度，E–高 C 是小六度。前后发声称旋律音程，同时发声称和声音程。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#音阶调号与调性",
-    "href": "docs/blog/posts/2026-09-13/index.html#音阶调号与调性",
-    "title": "乐理基础",
-    "section": "4 音阶、调号与调性",
-    "text": "4 音阶、调号与调性\n\n4.1 大调与小调结构\n\n\n\n音阶\n相邻距离\n相对主音的半音位置\n\n\n\n\n大调\n全 全 半 全 全 全 半\n0 2 4 5 7 9 11 12\n\n\n自然小调\n全 半 全 全 半 全 全\n0 2 3 5 7 8 10 12\n\n\n和声小调\n自然小调升高第 7 级\n0 2 3 5 7 8 11 12\n\n\n\n构造七声音阶时，每个字母依次使用一次，再补升降记号：\n\nC 大调：C D E F G A B C。\nG 大调：G A B C D E F♯ G。\nE 自然小调：E F♯ G A B C D E。\nE 和声小调：E F♯ G A B C D♯ E。\n\nE 和声小调中的 C–D♯ 是增二度。D♯ 到 E 只有半音，形成导音的上行解决倾向。传统旋律小调上行升高第 6、7 级，下行常用自然小调；使用时需结合风格。\n\n\n4.2 级数、关系调与同主音调\n音阶级数以主音为 1，顺次编号。上方五度是第 5 级，不是“第 5 个半音”。\n\n\n\n关系\n例子\n保持不变\n\n\n\n\n关系大小调\nG 大调 / E 自然小调\n调号与自然音集\n\n\n同主音大小调\nG 大调 / G 小调\n主音 G\n\n\n移调\nC 大调旋律整体移到 G 大调\n对应级数、节奏及音程结构\n\n\n\n关系小调主音位于大调第 6 级，比大调主音低小三度。关系大调主音位于自然小调第 3 级。\n调性由主音、和声与乐句组织共同确立。仅凭调号不能区分关系大小调，仅凭最后一个旋律音也不能保证判断正确。\n\n\n4.3 调号速查\n\n\n\n个数\n升号大调\n新增升号\n降号大调\n新增降号\n\n\n\n\n0\nC\n—\nC\n—\n\n\n1\nG\nF♯\nF\nB♭\n\n\n2\nD\nC♯\nB♭\nE♭\n\n\n3\nA\nG♯\nE♭\nA♭\n\n\n4\nE\nD♯\nA♭\nD♭\n\n\n5\nB\nA♯\nD♭\nG♭\n\n\n6\nF♯\nE♯\nG♭\nC♭\n\n\n7\nC♯\nB♯\nC♭\nF♭\n\n\n\n升号顺序 F C G D A E B；降号顺序 B E A D G C F。每行包含此前所有记号。小调使用其关系大调的调号，小调中的导音升高常写成临时记号。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#和弦构造与转位",
-    "href": "docs/blog/posts/2026-09-13/index.html#和弦构造与转位",
-    "title": "乐理基础",
-    "section": "5 和弦构造与转位",
-    "text": "5 和弦构造与转位\n\n5.1 三和弦\n以下公式中的 1、3、5 等以根音同主音大调音阶为参照；半音集合均相对根音。\n\n\n\n类型\n级数公式\n半音集合\nC 根音例子\n\n\n\n\n大三和弦\n1–3–5\n0, 4, 7\nC E G\n\n\n小三和弦\n1–♭3–5\n0, 3, 7\nC E♭ G\n\n\n减三和弦\n1–♭3–♭5\n0, 3, 6\nC E♭ G♭\n\n\n增三和弦\n1–3–♯5\n0, 4, 8\nC E G♯\n\n\n\n和弦名 C、Cm、Cdim、Caug 分别对应以上四类。琶音是将和弦音先后奏出，不改变和弦的音高材料。\n\n\n5.2 七和弦\n\n\n\n类型\n级数公式\n半音集合\nC 根音例子\n\n\n\n\n大七 Cmaj7\n1–3–5–7\n0, 4, 7, 11\nC E G B\n\n\n属七型 C7\n1–3–5–♭7\n0, 4, 7, 10\nC E G B♭\n\n\n小七 Cm7\n1–♭3–5–♭7\n0, 3, 7, 10\nC E♭ G B♭\n\n\n半减七 Cø7 / Cm7♭5\n1–♭3–♭5–♭7\n0, 3, 6, 10\nC E♭ G♭ B♭\n\n\n减七 C°7\n1–♭3–♭5–𝄫7\n0, 3, 6, 9\nC E♭ G♭ B𝄫\n\n\n\nC7 的 7 默认小七度，Cmaj7 才是大七度。“属七型”描述结构；是否执行属功能，要看调性与进行。\n\n\n5.3 根音、最低音与转位\n根音是和弦构造基准，最低音是当前实际最低的音。三和弦由哪个成员在最低处决定转位：\n\n\n\n排列\nC 和弦示例\n常用低音数字\n\n\n\n\n原位：根音在最低处\nC E G\n5/3，常省略\n\n\n第一转位：三音在最低处\nE G C\n6/3，简写 6\n\n\n第二转位：五音在最低处\nG C E\n6/4\n\n\n\n七和弦还可让七音在最低处形成第三转位；原位到第三转位的数字为 7、6/5、4/3、4/2。\n斜线后指定最低音：C/E 是 C 和弦第一转位，Em/B 是 Em 第二转位。斜线低音也可能不是和弦音，因此斜线记法不必然等于转位。上方声部换排列、扩大间距，只要最低和弦成员不变，转位就不变。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#功能和声",
-    "href": "docs/blog/posts/2026-09-13/index.html#功能和声",
-    "title": "乐理基础",
-    "section": "6 功能和声",
-    "text": "6 功能和声\n\n6.1 大调调内和弦\n在大调每一级上叠置三度，得到固定的三和弦性质序列：\n大、小、小、大、大、小、减。\n\n\n\n级数\nC 大调\nG 大调\n入门功能归类\n\n\n\n\nI\nC\nG\n主功能 T\n\n\nii\nDm\nAm\n下属／前属功能 PD\n\n\niii\nEm\nBm\n随上下文判断\n\n\nIV\nF\nC\n下属／前属功能 PD\n\n\nV\nG\nD\n属功能 D\n\n\nvi\nAm\nEm\n常作主功能替代\n\n\nvii°\nBdim\nF♯dim\n属功能 D\n\n\n\n罗马数字大小写区分大、小和弦，° 表示减三和弦。功能分析是调性语境中的归纳，同一个和弦不在所有作品里承担相同作用。\n基础路线是 T → PD → D → T。G–Em–Am–D–G 对应 I–vi–ii–V–I。\n\n\n6.2 属和弦与解决\nC 大调的 G7 = G–B–D–F。B 是导音，倾向上行到 C；和弦七音 F 倾向下行到 E。B–F 的三全音由此解决到 C–E。\nG 大调同理：D7 = D–F♯–A–C，常以 F♯→G、C→B 解决。\n小调为了构成大三和弦 V 或 V7，常升高自然小调第 7 级：E 小调的 B7 = B–D♯–F♯–A，D♯→E。\n\n\n6.3 终止式与和声节奏\n终止式发生在乐句结尾。仅在中途出现一个 V–I，不必然构成终止。\n\n\n\n类型\n基础形式\nC 大调例子\n\n\n\n\n正格终止\nV–I，V 可带七音\nG7–C\n\n\n半终止\n乐句停在 V\nDm–G\n\n\n变格终止\nIV–I\nF–C\n\n\n欺骗终止\nV 转向预期 I 之外，常为 vi\nG–Am\n\n\n\n完全正格终止的常见判定：V 和 I 均原位，最终高声部落在主音。未满足这些条件的正格终止通常归为不完全正格终止。\n和声节奏是和弦更换速率。4/4 中每小节换一次与每两拍换一次不同，但两者可使用相同 BPM。\n\n\n6.4 次属和弦与短暂主音化\n次属和弦临时执行某个调内目标和弦的属功能。记号 V7/ii 意为“ii 的属七和弦”，这里的斜线与 C/E 的低音斜线含义不同。\n\n\n\nG 大调目标\n目标根音\n对应次属七和弦\n变化音的解决\n\n\n\n\nii = Am\nA\nE7，V7/ii\nG♯→A\n\n\nV = D\nD\nA7，V7/V\nC♯→D\n\n\nvi = Em\nE\nB7，V7/vi\nD♯→E\n\n\n\n构造方法：目标根音上方纯五度找属根音，再建立属七型和弦。E7–Am 暂时强调 Am，并不自动意味着整首作品转入 A 小调；持续建立新的调性中心才涉及转调。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#旋律低音与编曲",
-    "href": "docs/blog/posts/2026-09-13/index.html#旋律低音与编曲",
-    "title": "乐理基础",
-    "section": "7 旋律、低音与编曲",
-    "text": "7 旋律、低音与编曲\n\n7.1 和弦音与非和弦音\n先明确当前和弦及换和弦时刻，再判断旋律音身份。\n\n\n\n\n\n\n\n\n类型\n典型运动\n例子与条件\n\n\n\n\n和弦音\n属于当前和弦\nC 和弦中的 C、E、G\n\n\n经过音\n两端音之间级进填充\nC 和弦上 C–D–E，D 连接 C 与 E\n\n\n邻音\n离开一个音，再级进回到它\nC–D–C\n\n\n预现音\n下一和弦的音提前出现\nG→C 前先奏 C，并保持到 C 和弦\n\n\n挂留音\n旧和弦音保留到新和弦形成不协和，再下行级进解决\nF 和弦的 F 保持到 C 和弦，再 F→E，构成 4–3 挂留\n\n\n\n入门写作可先让长音、强拍和乐句目标落在和弦音，再用级进填充。非和弦音也可落强拍，例如挂留；“强拍必须是和弦音”不是普遍规则。\n\n\n7.2 动机与乐句\n动机是可辨认的短节奏或音高材料。乐句具有较完整的进行与结束感，长度不必固定四小节。动机可通过重复、模进和变奏发展：\n\n\n\n操作\n原动机 G–B–A 的处理\n\n\n\n\n重复\nG–B–A\n\n\n变奏：改结尾\nG–B–G\n\n\n调内上行模进\nA–C–B\n\n\n\nG–B–A 的半音步幅为 +4、−2，A–C–B 为 +3、−1。这是保持音阶位置关系的调内模进，不是保持所有半音距离的严格移调。\nA–A′–B–A′ 描述重复与对比关系；字母可以标记动机、乐句或段落，必须先说明分析层级。\n\n\n7.3 低音、声部连接与织体\n低音可使用根音、转位和弦音、经过音或持续音。转位提供选择，实际是否平滑取决于低音线与其他声部的运动。\n例：G–Em–C–D–G 配低音 G–G–G–F♯–G，完整写法为：\nG → Em/G → C/G → D/F♯ → G。\n前面保持共同低音 G，最后 F♯→G 半音上行。连接上方声部时，可保留共同音并让其余音就近移动；若写传统四部和声，还需检查平行五、八度等规则。\n\n\n\n声部\n主要任务\n改动时检查\n\n\n\n\n旋律\n提供主要动机与乐句\n音域、目标音、呼吸与结束\n\n\n和弦伴奏\n呈现和声\n音区是否遮盖旋律，换和弦是否清楚\n\n\n低音\n提供和声底部与线性运动\n最低音与和弦身份、连接距离\n\n\n鼓\n呈现拍点、细分和重音\n底鼓、军鼓、踩镲是否相互配合\n\n\n\n织体包括声部数量、相互关系与活动密度；力度指响度。增加声部是加厚织体，逐渐变响才是渐强。二者可同时发生，但不是同一参数。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#分析与听写流程",
-    "href": "docs/blog/posts/2026-09-13/index.html#分析与听写流程",
-    "title": "乐理基础",
-    "section": "8 分析与听写流程",
-    "text": "8 分析与听写流程\n\n8.1 分析一段音乐\n\n标出拍号、速度单位、弱起及节奏分组。\n结合调号、低音、导音解决和乐句终止判断调性。\n在每个换和弦点列出和弦音，确定根音、性质和转位。\n用罗马数字标出功能，检查次属和弦的目标。\n标出旋律的和弦音、非和弦音及解决。\n按重复、变化、对比分出动机与乐句。\n比较段落的织体、力度、音区与和声节奏。\n\n\n\n8.2 听写一条旋律\n\n建立拍点，确定起音数、休止和分组。\n先写节奏，再记录上行、下行、同音与跳进。\n用已知主音或参照音定位首音、末音和长音。\n把短组块转成级数，再按调性转换音名。\n重听核对每小节时值、临时记号及终止位置。\n\n以 G 为参照：G→A 是大二度，G→B 是大三度，G→D 是纯五度。先固定音色与八度练关系，再扩大音域和音串长度。\n大、小和弦听辨可先做同根比较：C–E–G 与 C–E♭–G 只有三音不同。熟悉差异后再换根音、排列与音色。“明亮／暗淡”只能辅助描述，不能代替音程结构判断。"
-  },
-  {
-    "objectID": "docs/blog/posts/2026-09-13/index.html#综合例题与自检",
-    "href": "docs/blog/posts/2026-09-13/index.html#综合例题与自检",
-    "title": "乐理基础",
-    "section": "9 综合例题与自检",
-    "text": "9 综合例题与自检\n\n9.1 和声与低音综合分析\n分析 G 大调进行：\nG → E7/G♯ → Am → D/F♯ → G。\n\n\n\n和弦\n和弦音\n功能\n最低音\n\n\n\n\nG\nG B D\nI\nG\n\n\nE7/G♯\nE G♯ B D\nV6/5/ii\nG♯\n\n\nAm\nA C E\nii\nA\n\n\nD/F♯\nD F♯ A\nV6\nF♯\n\n\nG\nG B D\nI\nG\n\n\n\nE7 的根音是 E，最低音是 G♯，属于第一转位。低音线 G–G♯–A–F♯–G 包含 G→G♯→A 的半音推进，以及 F♯→G 的导音解决。E7 中的七音 D 可下行到 Am 中的 C。\n末尾 D/F♯→G 是 V6→I；若位于乐句结尾，可形成不完全正格终止，不能仅因旋律落 G 就称完全正格终止。\n\n\n9.2 闭卷检查\n\n4/4、四分音符 = 96，八分音符与一小节分别多长？\n6/8、附点四分音符 = 72，一小节多长？\n附点八分音符加十六分音符，共几个四分音符拍？\nC–E♭、C–D♯、C–G♭ 分别是什么音程？\nG 大调与 E 自然小调共享什么，又区别在哪里？\n写出 D7 与 Dmaj7 的和弦音。\nEm/B 的根音、低音与转位分别是什么？\nG 大调的 E7 为什么可以接 Am？\nG–B–A → A–C–B 是严格移调吗？\n加入鼓和低音，是否必然改变 BPM 或构成渐强？\n\n\n\n\n\n\n\nNote答案\n\n\n\n\n\n\n八分音符 \\(0.3125\\) 秒；一小节 \\(2.5\\) 秒。\n两个大拍，共 \\(2\\times60/72=5/3\\) 秒。\n一拍：\\(3/4+1/4=1\\)。\n小三度、增二度、减五度。\n共享调号与自然音集；主音和调性组织不同。\nD7：D F♯ A C；Dmaj7：D F♯ A C♯。\n根音 E，低音 B，第二转位。\nE7 是 Am 的属七和弦；G♯ 倾向到 A，D 倾向到 C。\n不是；是调内模进，部分半音距离发生变化。\n不必然。声部增加改变织体；BPM 和力度需分别判断。"
-  },
-  {
-    "objectID": "docs/blog/index.html",
-    "href": "docs/blog/index.html",
-    "title": "Blog",
-    "section": "",
-    "text": "LATEST\n\n\n\nIdeas in progress, useful discoveries, and occasional notes from things I build."
-  },
-  {
-    "objectID": "docs/blog/index.html#recent-writing",
-    "href": "docs/blog/index.html#recent-writing",
-    "title": "Blog",
-    "section": "",
-    "text": "Ideas in progress, useful discoveries, and occasional notes from things I build."
-  },
-  {
-    "objectID": "docs/notes/artificial-intelligence/2.html",
-    "href": "docs/notes/artificial-intelligence/2.html",
-    "title": "Logic",
-    "section": "",
-    "text": "Representation (Syntax): defines a set of valid formulas.\nSemantics: for each formula, specify a set of models (assignments / configurations of the world).\nInference rule: a rule that allows us to derive new formulas from existing ones.",
+    "text": "Join up the whole joint distribution before you sum out the hidden variables.\n\n\n\n\nInterleave joining and marginalizing.\nStill NP-hard, but usually much faster than inference by enumeration.\nA polytree is a directed graph with no undirected cycles. For poly-trees you can always find an ordering that is efficient.",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Logic"
+      "Probabilistic Inference"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/2.html#representation",
-    "href": "docs/notes/artificial-intelligence/2.html#representation",
-    "title": "Logic",
-    "section": "2.1 Representation",
-    "text": "2.1 Representation\nFormal languages: syntax and model\n\n2.1.1 Propositional logic\nSyntax:\n\nPropositional symbols (atomic formulas): \\(A, B, C\\)\nLogical connectives: \\(\\neg, \\land, \\lor, \\to, \\leftrightarrow\\)\nBuild up formulas recursively—if \\(f\\) and \\(g\\) are formulas, so are the following:\n\nNegation: \\(\\neg f\\)\nConjunction: \\(f \\land g\\)\nDisjunction: \\(f \\lor g\\)\nImplication: \\(f \\to g\\)\nBiconditional: \\(f \\leftrightarrow g\\)\n\n\nModel:\nA model \\(w\\) in propositional logic is an assignment of truth values to propositional symbols.\nInterpretation function:\nLet \\(f\\) be a formula and \\(w\\) be a model. An interpretation function \\(\\mathcal{I}(f,w)\\) returns:\n\ntrue (1) (say that \\(w\\) satisfies \\(f\\))\nfalse (0) (say that \\(w\\) does not satisfy \\(f\\))\n\nBase case: For a propositional symbol \\(p\\) (e.g., \\(A, B, C\\)):\n\\[\n\\mathcal{I}(p,w) = w(p)\n\\]\nRecursive case\nLet \\(\\mathcal{M}(f)\\) be the set of models \\(w\\) for which \\(\\mathcal{I}(f,w) = 1\\).\nKnowledge base:\nA knowledge base \\(\\mathrm{KB}\\) is a set of formulas representing their conjunction / intersection:\n\\[\n\\mathcal{M}(\\mathrm{KB}) = \\bigcap_{f \\in \\mathrm{KB}} \\mathcal{M}(f).\n\\]\n\n\n2.1.2 First-order logic\nSyntax:\n\nTerms denote objects: constant symbols \\(c\\), variables \\(x\\), and function applications \\(f(t_1,\\ldots,t_n)\\), where each \\(t_i\\) is a term.\nFormulas are built from:\n\nAtomic formulas: \\(P(t_1,\\ldots,t_n)\\); also \\(t_1=t_2\\) in logic with equality.\nConnectives applied to formulas: \\(\\neg,\\land,\\lor,\\to,\\leftrightarrow\\).\nQuantifiers applied to formulas: \\(\\forall x\\,\\varphi\\), \\(\\exists x\\,\\varphi\\).\n\n\nModels:\n\nA model \\(w\\) specifies a nonempty domain \\(D\\) and interprets:\n\nConstant symbols as objects: \\(w(c)\\in D\\).\nFunction symbols as functions: \\(w(f):D^n\\to D\\).\nPredicate symbols as sets of tuples: \\(w(P)\\subseteq D^n\\), equivalently functions \\(D^n\\to\\{0,1\\}\\).\n\nA separate variable assignment \\(s:\\mathrm{Var}\\to D\\) gives variables their values: \\(s(x)\\in D\\).\n\nFor example, if \\(w(\\mathrm{alice})=o_1\\), \\(w(\\mathrm{arithmetic})=o_3\\), and \\((o_1,o_3)\\in w(\\mathrm{Knows})\\), then \\(\\mathrm{Knows}(\\mathrm{alice},\\mathrm{arithmetic})\\) is true.",
+    "objectID": "docs/notes/artificial-intelligence/4.html#bayesian-nets-exact-inference",
+    "href": "docs/notes/artificial-intelligence/4.html#bayesian-nets-exact-inference",
+    "title": "Probabilistic Inference",
+    "section": "",
+    "text": "Join up the whole joint distribution before you sum out the hidden variables.\n\n\n\n\nInterleave joining and marginalizing.\nStill NP-hard, but usually much faster than inference by enumeration.\nA polytree is a directed graph with no undirected cycles. For poly-trees you can always find an ordering that is efficient.",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Logic"
+      "Probabilistic Inference"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/2.html#inference",
-    "href": "docs/notes/artificial-intelligence/2.html#inference",
-    "title": "Logic",
-    "section": "2.2 Inference",
-    "text": "2.2 Inference\n\n2.2.1 Entailment and satisfiability\nEntailment: \\(\\mathrm{KB}\\) entails \\(f\\) (written \\(\\mathrm{KB} \\models f\\)) iff \\(\\mathcal{M}(\\mathrm{KB}) \\subseteq \\mathcal{M}(f)\\).\nContradiction: \\(\\mathrm{KB}\\) contradicts \\(f\\) iff \\(\\mathcal{M}(\\mathrm{KB}) \\cap \\mathcal{M}(f) = \\emptyset\\).\nContingency:\n\\[\n\\emptyset \\subsetneq \\mathcal{M}(\\mathrm{KB}) \\cap \\mathcal{M}(f) \\subsetneq \\mathcal{M}(\\mathrm{KB})\n\\]\nSatisfiability: A knowledge base \\(\\mathrm{KB}\\) is satisfiable if \\(\\mathcal{M}(\\mathrm{KB}) \\neq \\emptyset\\).\n\n\n2.2.2 SAT and model-checking\nModel checking:\n\nInput: knowledge base \\(\\mathrm{KB}\\)\nOutput: exists satisfying model (\\(\\mathcal{M}(\\mathrm{KB}) \\neq \\emptyset\\))?\n\nPopular algorithms:\n\nDPLL (backtracking + propagation + pruning)\nWalkSat (randomized local search over complete assignments)\n\n\n\n2.2.3 Inference rules\nModus ponens inference rule:\nFor any propositional symbols \\(p\\) and \\(q\\):\n\\[\n\\frac{p,\\quad p \\to q}{q}\n\\]\nGeneral inference rule:\nIf \\(f_1, \\ldots, f_k, g\\) are formulas, then the following is an inference rule:\n\\[\n\\frac{f_1,\\quad \\ldots,\\quad f_k}{g}\n\\]\nAlgorithm: forward inference:\nInput: set of inference rules \\(\\mathrm{Rules}\\).\nRepeat until no changes to \\(\\mathrm{KB}\\):\n\nChoose set of formulas \\(f_1, \\ldots, f_k \\in \\mathrm{KB}\\).\nIf matching rule \\(\\frac{f_1,\\quad \\cdots,\\quad f_k}{g}\\) exists, add \\(g\\) to \\(\\mathrm{KB}\\).\n\nDerivation:\n\\(\\mathrm{KB}\\) derives/proves \\(f\\) (\\(\\mathrm{KB} \\vdash f\\)) iff \\(f\\) eventually gets added to \\(\\mathrm{KB}\\).\n\n\n2.2.4 Horn clauses and modus ponens\nPropositional logic:\nDefinite clause: A definite clause has the following form:\n\\[\n(p_1 \\land \\cdots \\land p_k) \\to q\n\\]\nwhere \\(p_1, \\ldots, p_k, q\\) are propositional symbols.\nHorn clause: A Horn clause is either:\n\na definite clause \\((p_1 \\land \\cdots \\land p_k \\to q)\\)\na goal clause \\((p_1 \\land \\cdots \\land p_k \\to \\mathrm{false})\\)\n\nModus ponens:\n\\[\n\\frac{p_1,\\quad \\cdots,\\quad p_k,\\quad (p_1 \\land \\cdots \\land p_k) \\to q}{q}\n\\]\nFirst-order logic:\nDefinite clause: A definite clause has the following form:\n\\[\n\\forall x_1 \\cdots \\forall x_n \\bigl((a_1 \\land \\cdots \\land a_k) \\to b\\bigr)\n\\]\nfor variables \\(x_1, \\ldots, x_n\\) and atomic formulas \\(a_1, \\ldots, a_k, b\\) (which contain those variables).\nModus ponens:\n\\[\n\\frac{a_1,\\ldots,a_k \\qquad \\forall x_1\\cdots\\forall x_n\\bigl((a_1\\land\\cdots\\land a_k)\\to b\\bigr)}{b}\n\\]\nSubstitution:\nA substitution \\(\\theta\\) is a mapping from variables to terms.\n\\(\\operatorname{Subst}[\\theta, f]\\) returns the result of performing substitution \\(\\theta\\) on \\(f\\).\nUnification:\nUnification takes two formulas \\(f\\) and \\(g\\) and returns a substitution \\(\\theta\\) which is the most general unifier:\n\\[\n\\operatorname{Unify}[f,g] = \\theta\n\\quad \\text{such that} \\quad\n\\operatorname{Subst}[\\theta,f] = \\operatorname{Subst}[\\theta,g]\n\\]\nor “fail” if no such \\(\\theta\\) exists.\n\n\n2.2.5 Complexity\nTheorem: completeness:\nModus ponens is complete for first-order logic with only Horn clauses.\nTheorem: semi-decidability:\nFirst-order logic (even restricted to only Horn clauses) is semi-decidable.\n\nIf \\(\\mathrm{KB} \\models f\\), forward inference on complete inference rules will prove \\(f\\) in finite time.\nIf \\(\\mathrm{KB} \\not\\models f\\), no algorithm can show this in finite time.\n\n\n\n2.2.6 Resolution\nPropositional resolution rule:\n\\[\n\\frac{f_1 \\lor \\cdots \\lor f_n \\lor p,\\quad \\neg p \\lor g_1 \\lor \\cdots \\lor g_m}\n{f_1 \\lor \\cdots \\lor f_n \\lor g_1 \\lor \\cdots \\lor g_m}\n\\]\nConjunctive normal form (CNF):\nA CNF formula is a conjunction of clauses.\nProposition: conversion to CNF:\nEvery formula \\(f\\) in propositional logic can be converted into an equivalent CNF formula \\(f'\\):\n\\[\n\\mathcal{M}(f) = \\mathcal{M}(f')\n\\]\nFirst-order conversion to CNF:\n\nAll variable have universal quantifiers by default\nIntroduce Skolem functions (e.g., \\(Y(x)\\)) to represent existentially quantified variables.\n\nFirst-order resolution rule:\n\\[\n\\frac{\nf_1 \\lor \\cdots \\lor f_n \\lor p,\\qquad\n\\neg q \\lor g_1 \\lor \\cdots \\lor g_m\n}{\n\\operatorname{Subst}[\\theta,\\,\nf_1 \\lor \\cdots \\lor f_n \\lor g_1 \\lor \\cdots \\lor g_m]\n}\n\\]\nwhere \\(\\theta = \\operatorname{Unify}[p,q]\\).",
+    "objectID": "docs/notes/artificial-intelligence/4.html#bayesian-nets-approximate-inference",
+    "href": "docs/notes/artificial-intelligence/4.html#bayesian-nets-approximate-inference",
+    "title": "Probabilistic Inference",
+    "section": "4.2 Bayesian Nets: Approximate Inference",
+    "text": "4.2 Bayesian Nets: Approximate Inference\n\n4.2.1 Prior Sampling\n\nIgnore evidence. Sample from the joint probability.\nDo inference by counting the right samples.\n\n\n\n4.2.2 Rejection Sampling\nRejectionSample(network, evidence):\n    x = {}\n    for X_i in topological_order(network):\n        x[X_i] ~ P(X_i | sampled values of Parents(X_i))\n        if X_i in evidence and x[X_i] != evidence[X_i]:\n            return REJECT\n    return x\n\nRepeat and estimate conditional probabilities using only accepted samples.\nHopelessly expensive if \\(P(e)\\) is small.\n\n\n\n4.2.3 Likelihood Weighting\nFix evidence values and weight each sample by the product of their conditional probabilities.\nLikelihoodWeighting(X, evidence, network, N):\n    W = {v: 0 for v in domain(X)}\n    for j = 1 to N:\n        x, w = WeightedSample(network, evidence)\n        W[x[X]] += w\n    return normalize(W)\n\nWeightedSample(network, evidence):\n    x, w = {}, 1\n    for X_i in topological_order(network):\n        parents = assigned values of Parents(X_i) in x\n        if X_i in evidence:\n            x[X_i] = evidence[X_i]\n            w *= P(X_i = x[X_i] | parents)\n        else:\n            x[X_i] ~ P(X_i | parents)\n    return x, w\n\nNormalize the weighted counts to estimate \\(P(X\\mid e)\\).\nDegradation in performance as the number of evidence variables increases.\n\n\n\n4.2.4 Gibbs Sampling\nKeep a complete assignment (the network state), fix evidence, and repeatedly resample one non-evidence variable at a time.\nGibbsSampling(X, evidence, network, N):\n    counts = {v: 0 for v in domain(X)}\n    Z = non-evidence variables in network\n    x = copy(evidence)\n    initialize x[Z] to a valid random assignment\n    for j = 1 to N:\n        for Z_i in Z:\n            x[Z_i] ~ P(Z_i | current values of MB(Z_i) in x)\n            counts[x[X]] += 1\n    return normalize(counts)\n\nMarkov blanket: Parents, children, and the children’s other parents.\nRationale: Updates use both parent and child information, allowing evidence to influence upstream and downstream variables through repeated updates.\nMonte Carlo uses random samples for estimation; MCMC generates correlated samples through a Markov chain.\nGibbs sampling is an MCMC method. Each conditional update is a special Metropolis–Hastings step with acceptance probability 1.",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Logic"
+      "Probabilistic Inference"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/2.html#semantics",
-    "href": "docs/notes/artificial-intelligence/2.html#semantics",
-    "title": "Logic",
-    "section": "2.3 Semantics",
-    "text": "2.3 Semantics\n\n2.3.1 Desiderata for inference rules\nSemantics:\nInterpretation defines entailed/true formulas: \\(\\mathrm{KB} \\models f\\).\n\\[\n\\mathcal{M}(\\mathrm{KB}) \\subseteq \\mathcal{M}(f)\n\\]\nSyntax:\nInference rules derive formulas: \\(\\mathrm{KB} \\vdash f\\)\n\n\n2.3.2 Soundness\nA set of inference rules \\(\\mathrm{Rules}\\) is sound if:\n\\[\n\\{f : \\mathrm{KB} \\vdash f\\}\n\\subseteq\n\\{f : \\mathrm{KB} \\models f\\}.\n\\]\n\n\n2.3.3 Completeness\nA set of inference rules \\(\\mathrm{Rules}\\) is complete if:\n\\[\n\\{f : \\mathrm{KB} \\vdash f\\} \\supseteq \\{f : \\mathrm{KB} \\models f\\}\n\\]\n\n\n2.3.4 Fixing completeness\n\nOption 1: Restrict the allowed set of formulas\npropositional logic \\(\\to\\) propositional logic with only Horn clauses\nOption 2: Use more powerful inference rules\nModus ponens \\(\\to\\) resolution\n\n\n\n2.3.5 Theorem: Modus ponens on Horn clauses\nModus ponens is complete with respect to Horn clauses:\n\nSuppose \\(\\mathrm{KB}\\) contains only Horn clauses and \\(p\\) is an entailed propositional symbol.\nThen applying modus ponens will derive \\(p\\).",
+    "objectID": "docs/notes/artificial-intelligence/4.html#probability-reasoning-over-time",
+    "href": "docs/notes/artificial-intelligence/4.html#probability-reasoning-over-time",
+    "title": "Probabilistic Inference",
+    "section": "4.3 Probability Reasoning over Time",
+    "text": "4.3 Probability Reasoning over Time\n\n4.3.1 Markov Models\n\nState: The value of \\(X_t\\) at time \\(t\\).\nParameters: Initial distribution \\(P(X_1)\\) and transition probabilities \\(P(X_t\\mid X_{t-1})\\).\nFirst-order Markov property: Past and future are conditionally independent given the present:\n\n\n\\[\nP(X_t\\mid X_1,\\ldots,X_{t-1})=P(X_t\\mid X_{t-1}).\n\\]\n\n\n4.3.1.1 Stationary Distribution\nA distribution \\(P_\\infty\\) unchanged by a transition. If the chain converges, its limiting distribution is stationary:\n\n\\[\nP_\\infty(x')=\\sum_x P(x'\\mid x)P_\\infty(x).\n\\]\n\n\n\n\n4.3.2 Hidden Markov Models\n\nHidden states \\(X_t\\) form a Markov chain with transition model \\(P(X_t\\mid X_{t-1})\\).\nAt each time step, observe an output \\(E_t\\) generated according to \\(P(E_t\\mid X_t)\\); the states are not directly observed.\n\n\n4.3.2.1 Filtering / State Estimation\n\nTrack the belief state: the current state distribution conditioned on observations so far:\n\n\n\\[\nB_t(x)=P(X_t=x\\mid e_1,\\ldots,e_t).\n\\]\n\n\nInitialize from a prior distribution, often uniform; update by predicting as time advances and conditioning on new observations.\nKalman filtering was developed in the 1960s and used for Apollo trajectory estimation.\n\n\n\n4.3.2.2 Forward Algorithm\n\nEvery time step, we start with current \\(P(X\\mid \\text{evidence})\\).\nWe update for time:\n\n\n\\[\nP(x_t\\mid e_{1:t-1})=\\sum_{x_{t-1}}P(x_{t-1}\\mid e_{1:t-1})\\cdot P(x_t\\mid x_{t-1}).\n\\]\n\n\nWe update for evidence:\n\n\n\\[\nP(x_t\\mid e_{1:t})\\propto_X P(x_t\\mid e_{1:t-1})\\cdot P(e_t\\mid x_t).\n\\]\n\n\nThe forward algorithm does both at once (and doesn’t normalize).\nProblem: space is \\(|X|\\) and time is \\(|X|^2\\) per time step.\n\n\n\n4.3.2.3 Particle Filtering\nApproximate \\(P(X_t\\mid e_{1:t})\\) with \\(N\\) particles (sampled states), initialized from the prior. At each time step:\n\nPredict: Sample \\(x_t^{(i)}\\sim P(X_t\\mid x_{t-1}^{(i)})\\).\nWeight: Set \\(w_i=P(e_t\\mid x_t^{(i)})\\) and normalize the weights.\nResample: Draw \\(N\\) particles with replacement in proportion to their weights.\n\nAfter resampling, estimate state probabilities by particle frequencies. More particles generally improve accuracy but increase computation.\n\n\n\n4.3.3 Dynamic Bayes Nets (DBNs)\n\nWe want to track multiple variables over time, using multiple sources of evidence.\nRepeat a fixed Bayes net structure at each time.\nVariables from time \\(t\\) can condition on those from \\(t-1\\).\n\n\n\n4.3.4 Most Likely Explanation\nState trellis: Graph of states and transitions over time.\n\n4.3.4.1 Forward Algorithm (Sum)\n\n\\[\n\\begin{aligned}\nf_t[x_t] &= P(x_t,e_{1:t}) \\\\\n&= P(e_t\\mid x_t)\\sum_{x_{t-1}}P(x_t\\mid x_{t-1})f_{t-1}[x_{t-1}].\n\\end{aligned}\n\\]\n\n\n\n4.3.4.2 Viterbi Algorithm (Max)\n\n\\[\n\\begin{aligned}\nm_t[x_t] &= \\max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\\\\n&= P(e_t\\mid x_t)\\max_{x_{t-1}}P(x_t\\mid x_{t-1})m_{t-1}[x_{t-1}].\n\\end{aligned}\n\\]",
     "crumbs": [
       "Notes",
       "Artificial Intelligence",
-      "Logic"
+      "Probabilistic Inference"
     ]
   },
   {
-    "objectID": "docs/notes/artificial-intelligence/index.html",
-    "href": "docs/notes/artificial-intelligence/index.html",
-    "title": "Artificial Intelligence",
+    "objectID": "docs/notes/artificial-intelligence/3.html",
+    "href": "docs/notes/artificial-intelligence/3.html",
+    "title": "Probabilistic Models",
     "section": "",
-    "text": "本界面梳理了人工智能相关知识, 希望对你能有所启发。",
+    "text": "Random Variables: A random variable is some aspect of the world about which we (may) have uncertainty.\nProbability Distribution: A probability distribution over a random variable associates a probability with each value.\nJoint Distributions: A joint distribution over a set of random variables: specifies a real number for each assignment.\nMarginal Distributions: Marginalization (summing out): Combine collapsed rows by adding.\n\n\n\nConditional Probabilities: Conditional distributions are probability distributions over some variables given fixed values of others.\nBayes’ Rule: Bayes’ rule allows us to compute conditional probabilities in terms of other conditional probabilities.",
     "crumbs": [
       "Notes",
-      "Artificial Intelligence"
+      "Artificial Intelligence",
+      "Probabilistic Models"
     ]
   },
   {
-    "objectID": "docs/notes/machine-learning/2.html",
-    "href": "docs/notes/machine-learning/2.html",
-    "title": "Generalization",
+    "objectID": "docs/notes/artificial-intelligence/3.html#basics-on-probability",
+    "href": "docs/notes/artificial-intelligence/3.html#basics-on-probability",
+    "title": "Probabilistic Models",
     "section": "",
-    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).",
+    "text": "Random Variables: A random variable is some aspect of the world about which we (may) have uncertainty.\nProbability Distribution: A probability distribution over a random variable associates a probability with each value.\nJoint Distributions: A joint distribution over a set of random variables: specifies a real number for each assignment.\nMarginal Distributions: Marginalization (summing out): Combine collapsed rows by adding.\n\n\n\nConditional Probabilities: Conditional distributions are probability distributions over some variables given fixed values of others.\nBayes’ Rule: Bayes’ rule allows us to compute conditional probabilities in terms of other conditional probabilities.",
     "crumbs": [
       "Notes",
-      "Machine Learning",
-      "Generalization"
+      "Artificial Intelligence",
+      "Probabilistic Models"
     ]
   },
   {
-    "objectID": "docs/notes/machine-learning/2.html#no-free-lunch-theorem",
-    "href": "docs/notes/machine-learning/2.html#no-free-lunch-theorem",
-    "title": "Generalization",
+    "objectID": "docs/notes/artificial-intelligence/3.html#bayesian-nets-representation",
+    "href": "docs/notes/artificial-intelligence/3.html#bayesian-nets-representation",
+    "title": "Probabilistic Models",
+    "section": "3.2 Bayesian Nets: Representation",
+    "text": "3.2 Bayesian Nets: Representation\nBayes’ nets: a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)\n\nMore properly called graphical models\nLocal interactions chain together to give global, indirect interactions\n\n\n3.2.1 Graphical model notation\n\nNodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)\nArcs: interactions: Formally: encode conditional independence\n\n\n\n3.2.2 Bayes’ net semantics\n\nA set of nodes, one per random variable \\(X\\)\nA directed, acyclic graph\nA conditional distribution for each node: a collection of distributions over \\(X\\), one for each combination of parents’ values\n\\[\nP(X \\mid a_1 \\ldots a_n)\n\\]\n\nCPT (conditional probability table): description of a noisy causal process.\n\n\n3.2.3 Assumptions\nAssumptions we are required to make to define the Bayes net when given the graph:\n\\[\nP(x_i \\mid x_1,\\ldots,x_{i-1})\n=\nP(x_i \\mid \\operatorname{parents}(X_i)).\n\\]\n\n\n3.2.4 D-Separation\nIf all paths between \\(A\\) and \\(B\\) are blocked given observed variables \\(Z\\), then \\(A \\perp\\!\\!\\!\\perp B \\mid Z\\).\n\nChain / fork: observing the middle node blocks the path.\nCollider (\\(A \\to M \\leftarrow B\\)): blocks the path unless \\(M\\) or a descendant is observed.\nOne blocked segment blocks a path; any active path means independence is not guaranteed.",
+    "crumbs": [
+      "Notes",
+      "Artificial Intelligence",
+      "Probabilistic Models"
+    ]
+  },
+  {
+    "objectID": "docs/notes/artificial-intelligence/3.html#bayesian-nets-inference",
+    "href": "docs/notes/artificial-intelligence/3.html#bayesian-nets-inference",
+    "title": "Probabilistic Models",
+    "section": "3.3 Bayesian Nets: Inference",
+    "text": "3.3 Bayesian Nets: Inference\nInference: Calculating some useful quantity from a joint probability distribution.\n\n3.3.1 Inference by enumeration\n\nJoin all factors.\nEliminate all hidden variables.\nNormalize the result.",
+    "crumbs": [
+      "Notes",
+      "Artificial Intelligence",
+      "Probabilistic Models"
+    ]
+  },
+  {
+    "objectID": "docs/notes/artificial-intelligence/1.html",
+    "href": "docs/notes/artificial-intelligence/1.html",
+    "title": "Search",
     "section": "",
-    "text": "Theorem 2.1 (No Free Lunch) Let \\(A\\) be any learning algorithm for the task of binary classification with respect to the \\(0\\)–\\(1\\) loss over a domain \\(X\\). Let \\(m\\) be any number smaller than \\(|X|/2\\), representing a training set size. Then, there exists a distribution \\(D\\) over \\(X \\times \\{0,1\\}\\) such that:\n\nThere exists a function \\(f : X \\to \\{0,1\\}\\) with \\(L_D(f) = 0\\).\nWith probability of at least \\(\\frac{1}{7}\\) over the choice of \\(S \\sim D^m\\), we have\n\\[\nL_D(A(S)) \\ge \\frac{1}{8}\n\\]\n(that is, the training algorithm fails).",
+    "text": "A search problem consists of:\n\n\\(S\\): a state space\n\\(s_{\\mathrm{start}}\\): start state\n\\(\\operatorname{Actions}(s)\\): possible actions\n\\(\\operatorname{Succ}(s,a)\\): successor\n\\(\\operatorname{Cost}(s,a)\\): action cost\n\\(\\operatorname{IsEnd}(s)\\): a goal test\n\nA solution is a sequence of actions (a plan) which transforms the start state to a goal state.\n\n\n\n\nCan only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by \\(g(x)\\) = work done so far.\n\n\n\nCan know whether one non-goal is more promising than another.\nSearch Heuristics: A function that estimates how close a state is to a goal.\nGreedy Search: Fringe: nodes ordered by \\(h(x)\\) = heuristic evaluation of cost from \\(x\\) to goal.\nA* Search: Fringe: nodes ordered by \\(f(x) = g(x) + h(x)\\). Stop only when a goal is expanded.\nAdmissible Heuristics: A heuristic \\(h\\) is admissible (optimistic) if:\n\\[\n0 \\le h(n) \\le h^*(n)\n\\]\nwhere \\(h^*(n)\\) is the true cost to a nearest goal.\nComing up with admissible heuristics is most of what’s involved in using A* in practice.\nGraph Search: Never expand a state twice.\nConsistent Heuristics: A heuristic is consistent if for every node \\(n\\) and its successor \\(n'\\):\n\\[\nh(n) \\le \\operatorname{cost}(n \\text{ to } n') + h(n')\n\\]\nA* graph search is optimal.\nConsistency implies admissibility.\nUCS (Uniform Cost Search) is a special case (\\(h = 0\\)).\nCreate Heuristics: Often, heuristics are solutions to relaxed problems, where new actions are available.\n\n\n\nA relaxation \\(P^j\\) of a search problem \\(P\\) has costs that satisfy:\n\\[\n\\operatorname{Cost}^j(s,a) \\le \\operatorname{Cost}(s,a).\n\\]\nGiven a relaxed search problem \\(P^j\\), define the relaxed heuristic\n\\[\nh(s) = \\operatorname{FutureCost}^j(s),\n\\]\nthe minimum cost from \\(s\\) to an end state using \\(\\operatorname{Cost}^j(s,a)\\).\n\nSuppose \\(h(s) = \\operatorname{FutureCost}^j(s)\\) for some relaxed problem \\(P^j\\). Then \\(h(s)\\) is a consistent heuristic.\nSuppose \\(h_1(s)\\) and \\(h_2(s)\\) are consistent. Then \\(h(s) = \\max\\{h_1(s), h_2(s)\\}\\) is consistent.\n\n\n\n\nCell Decomposition: Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles. If no path found, subdivide the mixed cells.\nThe Optimal Path: Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.\nVisibility Graph: Connect mutually visible obstacle vertices and the start and goal positions.\nWeighted A*: expands states in the order of \\(f = g + \\varepsilon h\\) values, \\(\\varepsilon &gt; 1\\) = bias towards states that are closer to goal.\nWeighted A* Search:\n\nTrades off optimality for speed.\n\\(\\varepsilon\\)-suboptimal:\n\\[\n\\operatorname{cost}(\\text{solution})\n\\le \\varepsilon \\cdot \\operatorname{cost}(\\text{optimal solution})\n\\]\nIn many domains, it has been shown to be orders of magnitude faster than A*.\nResearch focuses on developing a heuristic function that has shallow local minima.",
     "crumbs": [
       "Notes",
-      "Machine Learning",
-      "Generalization"
+      "Artificial Intelligence",
+      "Search"
     ]
   },
   {
-    "objectID": "docs/notes/machine-learning/2.html#finite-hypothesis-classes",
-    "href": "docs/notes/machine-learning/2.html#finite-hypothesis-classes",
-    "title": "Generalization",
-    "section": "2.2 Finite Hypothesis Classes",
-    "text": "2.2 Finite Hypothesis Classes\nHypothesis class (\\(H\\)): The class of functions can be finite or infinite.\nEmpirical Risk Minimization (ERM): Pick the hypothesis with the smallest training loss.\n\\[\n\\mathrm{ERM}_H(S)\\in\\arg\\min_{h\\in H}L_S(h).\n\\]\nRealizability assumption: There exists \\(h^*\\in H\\) such that \\(L_{D,f}(h^*)=0\\). Therefore, for every training set \\(S\\), we have \\(L_S(h^*)=0\\).\n\nTheorem 2.2 (ERM for Finite Hypothesis Classes) Let \\(H\\) be a finite hypothesis class. Let \\(\\delta\\in(0,1)\\) and \\(\\epsilon&gt;0\\), and let \\(m\\) be an integer that satisfies\n\\[\nm\\ge\\frac{\\log(|H|/\\delta)}{\\epsilon}.\n\\]\nThen, for any labeling function \\(f\\) and any distribution \\(D\\) for which the realizability assumption holds (that is, for some \\(h\\in H\\), \\(L_{D,f}(h)=0\\)), with probability at least \\(1-\\delta\\) over the choice of an i.i.d. sample \\(S\\) of size \\(m\\), every ERM hypothesis \\(h_S\\) satisfies\n\\[\nL_{D,f}(h_S)\\le\\epsilon.\n\\]",
+    "objectID": "docs/notes/artificial-intelligence/1.html#single-agent-search",
+    "href": "docs/notes/artificial-intelligence/1.html#single-agent-search",
+    "title": "Search",
+    "section": "",
+    "text": "A search problem consists of:\n\n\\(S\\): a state space\n\\(s_{\\mathrm{start}}\\): start state\n\\(\\operatorname{Actions}(s)\\): possible actions\n\\(\\operatorname{Succ}(s,a)\\): successor\n\\(\\operatorname{Cost}(s,a)\\): action cost\n\\(\\operatorname{IsEnd}(s)\\): a goal test\n\nA solution is a sequence of actions (a plan) which transforms the start state to a goal state.\n\n\n\n\nCan only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by \\(g(x)\\) = work done so far.\n\n\n\nCan know whether one non-goal is more promising than another.\nSearch Heuristics: A function that estimates how close a state is to a goal.\nGreedy Search: Fringe: nodes ordered by \\(h(x)\\) = heuristic evaluation of cost from \\(x\\) to goal.\nA* Search: Fringe: nodes ordered by \\(f(x) = g(x) + h(x)\\). Stop only when a goal is expanded.\nAdmissible Heuristics: A heuristic \\(h\\) is admissible (optimistic) if:\n\\[\n0 \\le h(n) \\le h^*(n)\n\\]\nwhere \\(h^*(n)\\) is the true cost to a nearest goal.\nComing up with admissible heuristics is most of what’s involved in using A* in practice.\nGraph Search: Never expand a state twice.\nConsistent Heuristics: A heuristic is consistent if for every node \\(n\\) and its successor \\(n'\\):\n\\[\nh(n) \\le \\operatorname{cost}(n \\text{ to } n') + h(n')\n\\]\nA* graph search is optimal.\nConsistency implies admissibility.\nUCS (Uniform Cost Search) is a special case (\\(h = 0\\)).\nCreate Heuristics: Often, heuristics are solutions to relaxed problems, where new actions are available.\n\n\n\nA relaxation \\(P^j\\) of a search problem \\(P\\) has costs that satisfy:\n\\[\n\\operatorname{Cost}^j(s,a) \\le \\operatorname{Cost}(s,a).\n\\]\nGiven a relaxed search problem \\(P^j\\), define the relaxed heuristic\n\\[\nh(s) = \\operatorname{FutureCost}^j(s),\n\\]\nthe minimum cost from \\(s\\) to an end state using \\(\\operatorname{Cost}^j(s,a)\\).\n\nSuppose \\(h(s) = \\operatorname{FutureCost}^j(s)\\) for some relaxed problem \\(P^j\\). Then \\(h(s)\\) is a consistent heuristic.\nSuppose \\(h_1(s)\\) and \\(h_2(s)\\) are consistent. Then \\(h(s) = \\max\\{h_1(s), h_2(s)\\}\\) is consistent.\n\n\n\n\nCell Decomposition: Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles. If no path found, subdivide the mixed cells.\nThe Optimal Path: Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.\nVisibility Graph: Connect mutually visible obstacle vertices and the start and goal positions.\nWeighted A*: expands states in the order of \\(f = g + \\varepsilon h\\) values, \\(\\varepsilon &gt; 1\\) = bias towards states that are closer to goal.\nWeighted A* Search:\n\nTrades off optimality for speed.\n\\(\\varepsilon\\)-suboptimal:\n\\[\n\\operatorname{cost}(\\text{solution})\n\\le \\varepsilon \\cdot \\operatorname{cost}(\\text{optimal solution})\n\\]\nIn many domains, it has been shown to be orders of magnitude faster than A*.\nResearch focuses on developing a heuristic function that has shallow local minima.",
     "crumbs": [
       "Notes",
-      "Machine Learning",
-      "Generalization"
+      "Artificial Intelligence",
+      "Search"
     ]
   },
   {
-    "objectID": "docs/notes/machine-learning/2.html#pac-learning",
-    "href": "docs/notes/machine-learning/2.html#pac-learning",
-    "title": "Generalization",
-    "section": "2.3 PAC Learning",
-    "text": "2.3 PAC Learning\n\n2.3.1 Realizable PAC Learning\nPAC learning: A hypothesis class \\(H\\) is PAC learnable if there exist a function \\(m_H:(0,1)^2\\to\\mathbb N\\) and a learning algorithm with the following property:\nFor every \\(\\epsilon,\\delta\\in(0,1)\\), every distribution \\(D\\) over \\(X\\), and every labeling function \\(f:X\\to\\{0,1\\}\\), if the realizability assumption holds with respect to \\(H,D,f\\), then, when running the learning algorithm on\n\\[\nm\\ge m_H(\\epsilon,\\delta)\n\\]\ni.i.d. examples generated by \\(D\\) and labeled by \\(f\\), the algorithm returns a hypothesis \\(h\\) such that, with probability at least \\(1-\\delta\\) over the choice of the examples,\n\\[\nL_{D,f}(h)\\le\\epsilon.\n\\]\n\n\n2.3.2 Agnostic PAC Learning\nAgnostic PAC learnable: A hypothesis class \\(H\\) is agnostic PAC learnable if there exist a function \\(m_H:(0,1)^2\\to\\mathbb N\\) and a learning algorithm with the following property:\nFor every \\(\\epsilon,\\delta\\in(0,1)\\) and every distribution \\(D\\) over \\(X\\times Y\\), when running the learning algorithm on \\(m\\ge m_H(\\epsilon,\\delta)\\) i.i.d. examples generated by \\(D\\), the algorithm returns a hypothesis \\(h\\) such that, with probability at least \\(1-\\delta\\) over the choice of the \\(m\\) training examples,\n\\[\nL_D(h)\\le\\min_{h'\\in H}L_D(h')+\\epsilon.\n\\]\n\n\n2.3.3 Error Decomposition\n\\[\nL_D(h_S)=\\epsilon_{\\mathrm{app}}+\\epsilon_{\\mathrm{est}}.\n\\]\n\\[\n\\begin{aligned}\n\\epsilon_{\\mathrm{app}}\n&=\\min_{h\\in H}L_D(h),\\\\\n\\epsilon_{\\mathrm{est}}\n&=L_D(h_S)-\\epsilon_{\\mathrm{app}}.\n\\end{aligned}\n\\]\nBayes decomposition:\n\\[\n\\epsilon_{\\mathrm{app}}\n=L_D(\\mathrm{BO})+\\min_{h\\in H}L_D(h)-L_D(\\mathrm{BO}).\n\\]\n\n\n2.3.4 Infinite Hypothesis Classes\nThreshold functions: Let \\(H\\) be the class of threshold functions (\\(h_a(x) = \\mathbf{1}_{\\{x&lt;a\\}}\\)). Then \\(H\\) is PAC learnable using the ERM rule, with sample complexity\n\\[\nm_H(\\epsilon,\\delta)\n\\le\n\\frac{\\left\\lceil\\log(2/\\delta)\\right\\rceil}{\\epsilon}.\n\\]",
+    "objectID": "docs/notes/artificial-intelligence/1.html#adversarial-problems",
+    "href": "docs/notes/artificial-intelligence/1.html#adversarial-problems",
+    "title": "Search",
+    "section": "1.2 Adversarial Problems",
+    "text": "1.2 Adversarial Problems\nDeterministic Games: Many possible formalizations, one is:\n\nStates: \\(S\\) (start at \\(s_0\\))\nPlayers: \\(P = \\{1, \\ldots, N\\}\\) (usually take turns)\nActions: \\(A\\) (may depend on player / state)\nTransition Function: \\(S \\times A \\to S\\)\nTerminal Test: \\(S \\to \\{t, f\\}\\)\nTerminal Utilities: \\(S \\times P \\to \\mathbb{R}\\)\n\nA solution for a player is a policy: \\(S \\to A\\)\nZero-Sum Games vs. General-Sum Games\n\n1.2.1 Minimax Search\nDeterministic, zero-sum games: e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.\nComplexity: Time: \\(O(b^m)\\), Space: \\(O(b^m)\\), is completely infeasible.\n\n\n1.2.2 Alpha-Beta Search\n#include &lt;algorithm&gt;\n#include &lt;limits&gt;\n\nconstexpr double INF = std::numeric_limits&lt;double&gt;::infinity();\n\ndouble min_value(const State& state, double alpha, double beta);\n\ndouble max_value(const State& state, double alpha, double beta) {\n    if (is_terminal(state)) return utility(state);\n\n    double v = -INF;\n    for (const auto& successor : successors(state)) {\n        v = std::max(v, min_value(successor, alpha, beta));\n        if (v &gt;= beta) return v;\n        alpha = std::max(alpha, v);\n    }\n    return v;\n}\n\ndouble min_value(const State& state, double alpha, double beta) {\n    if (is_terminal(state)) return utility(state);\n\n    double v = INF;\n    for (const auto& successor : successors(state)) {\n        v = std::min(v, max_value(successor, alpha, beta));\n        if (v &lt;= alpha) return v;\n        beta = std::min(beta, v);\n    }\n    return v;\n}\nWith perfect ordering:\n\nTime complexity drops to \\(O(b^{m/2})\\).\nDoubles solvable depth!\n\n\n\n1.2.3 Heuristic Minimax\nDepth-limited search: Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.\nIn practice: typically weighted linear sum of features:\n\\[\n\\operatorname{Eval}(s) = w_1 f_1(s) + w_2 f_2(s) + \\cdots + w_n f_n(s)\n\\]\ne.g.\n\\[\nf_1(s) = (\\text{num white queens} - \\text{num black queens}),\n\\]\netc.\n\n\n1.2.4 Game Theory\nNormal Form Game: Approximate games as single shot, Represent only actions and utilities.\nPure vs Mixed Strategies: deterministic (\\(p = 1\\)) selection of actions vs. randomization over actions.\n\\[\nu(\\text{action}) = \\sum_{\\text{world}} p(\\text{world}) \\cdot u(\\text{action}, \\text{world})\n\\]\n\\[\nu(s) = \\sum_{a \\in s} p(a) \\cdot \\sum_{\\text{world}} p(\\text{world}) \\cdot u(a, \\text{world})\n\\]\nBest Response: Given the strategies of all other players \\(s_{-i}\\), a best response for player \\(i\\) is:\n\\[\n\\operatorname{BR}_i(s_{-i}) = \\arg\\max_{s_i} u_i(s_i, s_{-i})\n\\]\nNash Equilibrium: Nash Equilibria are strategy profiles \\(\\vec{s}\\) where none of the participants benefit from unilaterally changing their decision.\n\\[\n\\forall i \\quad u_i(\\vec{s}) \\geq u_i(\\operatorname{neighbor}(\\vec{s}))\n\\]\nNash Equilibria always exist: If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.\nIndifference Principle: In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.\nvon Neumann Minimax Theorem: For every finite two-player zero-sum game:\n\\[\n\\max_{\\sigma_1}\\min_{\\sigma_2} u(\\sigma_1,\\sigma_2)\n=\n\\min_{\\sigma_2}\\max_{\\sigma_1} u(\\sigma_1,\\sigma_2)\n\\]\nThere exists a value \\(v\\) such that:\n\\[\nv = \\max_{\\sigma_1}\\min_{\\sigma_2} u\n= \\min_{\\sigma_2}\\max_{\\sigma_1} u\n\\]\nThe equilibrium strategies guarantee this value.\n\\[\nu(\\sigma_1,\\sigma_2^*) \\le v \\le u(\\sigma_1^*,\\sigma_2)\n\\]\nTwo-player zero-sum Nash equilibrium = Minimax solution\nGame Types:\n\nPerfect-information, zero-sum: Minimax or Alpha–Beta\nGeneral-sum games: Nash Equilibrium\nLarge game trees: Heuristic Search or Monte Carlo Tree Search\n\n\n\n1.2.5 Monte Carlo Tree Search\nCombination of Simulation and Bandit-Based Method\nTwo Fundamental Concepts:\n\nThe true value of any action can be approximated by running several random simulations.\nThese values can be efficiently used to adjust the policy (strategy) towards a best-first strategy.\n\nMCTS Algorithm:\n\nSelection: Start at the root node and select children using the tree policy. Stop when an expandable node is reached.\nExpansion: Add one or more child nodes to the tree.\nSimulation: Run a simulation from the newly added node. The default policy (or rollout policy) determines how the simulation is run.\nBackpropagation: Update values based on the outcome.\n\nPolicies: Tree policy, Default policy, Decision policy (selecting the best child).\nUpper Confidence Bound on Trees (UCT): Formulated node selection as Multi-Arm Bandit problem.\nUCT Node Selection (UCB1): UCB1 applied for each child selection.\n\\[\nUCT = \\overline{X}_j + 2C_p \\sqrt{\\frac{2\\ln n}{n_j}}\n\\]\n\n\\(\\overline{X}_j\\): mean reward of selecting this position\n\\(n\\): number of times current(parent) node has been visited\n\\(n_j\\): number of times child \\(j\\) has been visited\n\\(C_p\\): some constant \\(&gt; 0\\)\n\nAdvantages and Disadvantages of MCTS:\n\nAdvantages:\n\nProved MCTS converges to minimax solution\nDomain-independent\nAnytime algorithm\nAchieving better with a large branch factor\n\nDisadvantages:\n\nBasic version converges very slowly\nLeading to small-probability failures\n\n\n\n\n1.2.6 Principle of Maximum Expected Utility\nA rational agent should choose the action that maximizes its expected utility, given its knowledge.\nUtilities: Utilities are functions from outcomes (states of the world) to real numbers that describe an agent’s preferences. We hard-wire utilities and let behaviors emerge.\nThe Axioms of Rationality:\n\nOrderability\n\\[\n(A \\succ B) \\lor (B \\succ A) \\lor (A \\sim B)\n\\]\nTransitivity\n\\[\n(A \\succ B) \\land (B \\succ C) \\Rightarrow (A \\succ C)\n\\]\nContinuity\n\\[\nA \\succ B \\succ C\n\\Rightarrow\n\\exists p \\; [p, A;\\ 1-p, C] \\sim B\n\\]\nSubstitutability\n\\[\nA \\sim B\n\\Rightarrow\n[p, A;\\ 1-p, C] \\sim [p, B;\\ 1-p, C]\n\\]\nMonotonicity\n\\[\nA \\succ B\n\\Rightarrow\n\\left(\np \\ge q\n\\iff\n[p, A;\\ 1-p, B] \\succeq [q, A;\\ 1-q, B]\n\\right)\n\\]\n\nRational preferences imply behavior describable as maximization of expected utility.",
     "crumbs": [
       "Notes",
-      "Machine Learning",
-      "Generalization"
+      "Artificial Intelligence",
+      "Search"
     ]
   },
   {
-    "objectID": "docs/notes/machine-learning/2.html#vc-dimension",
-    "href": "docs/notes/machine-learning/2.html#vc-dimension",
-    "title": "Generalization",
-    "section": "2.4 VC Dimension",
-    "text": "2.4 VC Dimension\n\n2.4.1 Restriction and Shattering\nRestriction of \\(H\\) to \\(C\\): Let \\(H\\) be a class of functions from \\(X\\) to \\(\\{0,1\\}\\), and let \\(C=\\{c_1,\\ldots,c_m\\}\\subset X\\). The restriction of \\(H\\) to \\(C\\) is the set of functions from \\(C\\) to \\(\\{0,1\\}\\) that can be derived from \\(H\\). That is,\n\\[\nH_C=\\left\\{\\bigl(h(c_1),\\ldots,h(c_m)\\bigr):h\\in H\\right\\}.\n\\]\nHere we represent each function from \\(C\\) to \\(\\{0,1\\}\\) as a vector in \\(\\{0,1\\}^{|C|}\\).\nShattering: A hypothesis class \\(H\\) shatters a finite set \\(C\\subset X\\) if the restriction of \\(H\\) to \\(C\\) is the set of all functions from \\(C\\) to \\(\\{0,1\\}\\). That is,\n\\[\n|H_C|=2^{|C|}.\n\\]\n\nTheorem 2.3 (Sample Lower Bound from Shattering) Let \\(H\\) be a hypothesis class of functions from \\(X\\) to \\(\\{0,1\\}\\). Let \\(m\\) be a training set size. Assume that there exists a set \\(C\\subset X\\) of size \\(2m\\) that is shattered by \\(H\\). Then, for any learning algorithm \\(A\\), there exist a distribution \\(D\\) over \\(X\\times\\{0,1\\}\\) and a predictor \\(h\\in H\\) such that \\(L_D(h)=0\\), but with probability at least \\(\\frac17\\) over the choice of \\(S\\sim D^m\\), we have\n\\[\nL_D(A(S))\\ge\\frac18.\n\\]\n\n\n\n2.4.2 VC Dimension and Learnability\nVC-dimension: The VC dimension of a hypothesis class \\(H\\), denoted \\(\\mathrm{VCdim}(H)\\), is the maximal size of a set \\(C\\subset X\\) that can be shattered by \\(H\\). If \\(H\\) can shatter sets of arbitrarily large size, we say that \\(H\\) has infinite VC dimension.\n\nTheorem 2.4 (Infinite VC Dimension) Let \\(H\\) be a class of infinite VC dimension. Then \\(H\\) is not PAC learnable.\n\n\n\n2.4.3 Sample Complexity\n\nTheorem 2.5 (Fundamental Theorem of Statistical Learning — Quantitative Version) Let \\(H\\) be a hypothesis class of functions from a domain \\(X\\) to \\(\\{0,1\\}\\), and let the loss function be the \\(0\\)–\\(1\\) loss. Assume that \\(\\mathrm{VCdim}(H)=d&lt;\\infty\\). Then there are absolute constants \\(C_1,C_2\\) such that:\n\n\\(H\\) is agnostic PAC learnable with sample complexity\n\\[\nC_1\\frac{d+\\log(1/\\delta)}{\\epsilon^2}\n\\le m_H(\\epsilon,\\delta)\n\\le C_2\\frac{d+\\log(1/\\delta)}{\\epsilon^2}.\n\\]\n\\(H\\) is PAC learnable with sample complexity\n\\[\nC_1\\frac{d+\\log(1/\\delta)}{\\epsilon}\n\\le m_H(\\epsilon,\\delta)\n\\le C_2\\frac{d\\log(1/\\epsilon)+\\log(1/\\delta)}{\\epsilon}.\n\\]\n\n\n\n\n\n\n\n\nNoteHow do these learning guarantees get around the No-Free-Lunch barrier?\n\n\n\n\n\nThese assumptions limit the tasks covered or the benchmark promised, making learning guarantees possible without providing a universal learner. Real-world tasks share patterns and structure. The key is to find a balance between model complexity and population loss.",
+    "objectID": "docs/notes/machine-learning/3.html",
+    "href": "docs/notes/machine-learning/3.html",
+    "title": "Supervised Learning",
+    "section": "",
+    "text": "Inputs \\(x_i\\in\\mathbb R^d\\); targets \\(y_i\\in\\mathbb R\\).\nModel: \\(f_{w,b}(x)=w^\\top x+b\\). Absorb \\(b\\) into \\(w\\) by appending a constant 1 to \\(x\\).\nSquared loss:\n\n\\[\nL(f,x_i,y_i)=\\frac12\\bigl(f(x_i)-y_i\\bigr)^2.\n\\]\n\nExact minimizer, when \\(X^\\top X\\) is invertible:\n\n\\[\nw^*=(X^\\top X)^{-1}X^\\top y.\n\\]\n\nRequires matrix inversion; alternatively, use gradient descent.\n\n\n\n\nA simple neural network with prediction \\(f(x)=\\operatorname{sign}(w^\\top x)\\).\nThe hard sign output cannot be optimized directly with ordinary gradient descent.\nLet \\(P\\) and \\(N\\) be the positive and negative training examples:\n\ninitialize w randomly\nrepeat until all examples are classified correctly:\n    pick a random x from P union N\n    if x in P and dot(w, x) &lt; 0:\n        w = w + x\n    elif x in N and dot(w, x) &gt;= 0:\n        w = w - x\n\nAdding \\(x\\) increases \\(w^\\top x\\); subtracting \\(x\\) decreases it.\nLearns only linear decision boundaries; does not converge on non-linearly separable data.\n\n\n\n\nTheorem 3.1 (Perceptron Mistake Bound) Use labels \\(y_i\\in\\{-1,+1\\}\\) and initialize \\(w_0=0\\). Suppose there exist \\(w^*\\) with \\(\\|w^*\\|=1\\) and \\(\\gamma&gt;0\\) such that, for every \\(i\\),\n\\[\ny_i\\langle w^*,x_i\\rangle\\ge\\gamma,\n\\qquad \\|x_i\\|\\le R.\n\\]\nThen the perceptron makes at most \\(R^2/\\gamma^2\\) mistakes.\n\n\n\\(\\gamma\\) is a lower bound on the distance to the separating hyperplane; \\(R\\) bounds the input norms.\nProof sketch: Each mistake increases \\(\\langle w,w^*\\rangle\\) by at least \\(\\gamma\\), while \\(\\|w\\|^2\\) increases by at most \\(R^2\\). After \\(M\\) mistakes:\n\n\n\\[\nM\\gamma\\le\\langle w_M,w^*\\rangle\\le\\|w_M\\|\\le R\\sqrt M\n\\quad\\Longrightarrow\\quad M\\le\\frac{R^2}{\\gamma^2}.\n\\]",
     "crumbs": [
       "Notes",
       "Machine Learning",
-      "Generalization"
+      "Supervised Learning"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/3.html#linear-regression",
+    "href": "docs/notes/machine-learning/3.html#linear-regression",
+    "title": "Supervised Learning",
+    "section": "",
+    "text": "Inputs \\(x_i\\in\\mathbb R^d\\); targets \\(y_i\\in\\mathbb R\\).\nModel: \\(f_{w,b}(x)=w^\\top x+b\\). Absorb \\(b\\) into \\(w\\) by appending a constant 1 to \\(x\\).\nSquared loss:\n\n\\[\nL(f,x_i,y_i)=\\frac12\\bigl(f(x_i)-y_i\\bigr)^2.\n\\]\n\nExact minimizer, when \\(X^\\top X\\) is invertible:\n\n\\[\nw^*=(X^\\top X)^{-1}X^\\top y.\n\\]\n\nRequires matrix inversion; alternatively, use gradient descent.\n\n\n\n\nA simple neural network with prediction \\(f(x)=\\operatorname{sign}(w^\\top x)\\).\nThe hard sign output cannot be optimized directly with ordinary gradient descent.\nLet \\(P\\) and \\(N\\) be the positive and negative training examples:\n\ninitialize w randomly\nrepeat until all examples are classified correctly:\n    pick a random x from P union N\n    if x in P and dot(w, x) &lt; 0:\n        w = w + x\n    elif x in N and dot(w, x) &gt;= 0:\n        w = w - x\n\nAdding \\(x\\) increases \\(w^\\top x\\); subtracting \\(x\\) decreases it.\nLearns only linear decision boundaries; does not converge on non-linearly separable data.\n\n\n\n\nTheorem 3.1 (Perceptron Mistake Bound) Use labels \\(y_i\\in\\{-1,+1\\}\\) and initialize \\(w_0=0\\). Suppose there exist \\(w^*\\) with \\(\\|w^*\\|=1\\) and \\(\\gamma&gt;0\\) such that, for every \\(i\\),\n\\[\ny_i\\langle w^*,x_i\\rangle\\ge\\gamma,\n\\qquad \\|x_i\\|\\le R.\n\\]\nThen the perceptron makes at most \\(R^2/\\gamma^2\\) mistakes.\n\n\n\\(\\gamma\\) is a lower bound on the distance to the separating hyperplane; \\(R\\) bounds the input norms.\nProof sketch: Each mistake increases \\(\\langle w,w^*\\rangle\\) by at least \\(\\gamma\\), while \\(\\|w\\|^2\\) increases by at most \\(R^2\\). After \\(M\\) mistakes:\n\n\n\\[\nM\\gamma\\le\\langle w_M,w^*\\rangle\\le\\|w_M\\|\\le R\\sqrt M\n\\quad\\Longrightarrow\\quad M\\le\\frac{R^2}{\\gamma^2}.\n\\]",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Supervised Learning"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/3.html#logistic-regression",
+    "href": "docs/notes/machine-learning/3.html#logistic-regression",
+    "title": "Supervised Learning",
+    "section": "3.2 Logistic regression",
+    "text": "3.2 Logistic regression\n\nMake the output a probability using the sigmoid function:\n\n\\[\ng(z)=\\frac{1}{1+e^{-z}}\\in[0,1].\n\\]\n\n3.2.1 Entropy and Cross-Entropy\nLet \\(y\\) be the true probability distribution and \\(p\\) the predicted distribution.\n\nEntropy measures uncertainty and the ideal expected encoding length for \\(y\\):\n\n\\[\nH(y)=-\\sum_i y_i\\log y_i.\n\\]\n\nCross-entropy is the expected encoding length when using \\(p\\) to encode outcomes from \\(y\\):\n\n\\[\nXE(y,p)=-\\sum_i y_i\\log p_i\\ge H(y).\n\\]\n\n\n3.2.2 KL Divergence\n\\[\n\\begin{aligned}\nD_{\\mathrm{KL}}(y\\|p)&=XE(y,p)-H(y) \\\\\n&=\\sum_i y_i\\log\\frac{y_i}{p_i}\\ge0.\n\\end{aligned}\n\\]\n\nEquality holds exactly when \\(y_i=p_i\\) for all \\(i\\).\nFor fixed \\(y\\), minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.\nKL divergence and cross-entropy are asymmetric.\n\nRepresentation learning:\n\nDeep learning is also called representation learning because it learns features automatically.\nThe learned features are commonly passed to a final linear regression/classification layer.",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Supervised Learning"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/3.html#ridge-regression",
+    "href": "docs/notes/machine-learning/3.html#ridge-regression",
+    "title": "Supervised Learning",
+    "section": "3.3 Ridge regression",
+    "text": "3.3 Ridge regression\n\nRestrict the set of solutions by bounding the weight norm, helping reduce overfitting:\n\n\n\\[\n\\min_w\\frac{1}{2N}\\sum_i(w^\\top x_i-y_i)^2\n\\quad\\text{subject to}\\quad\\|w\\|_2^2\\le c.\n\\]\n\n\nUse an appropriate penalty \\(\\lambda\\ge0\\) to obtain an unconstrained formulation:\n\n\n\\[\n\\min_w\\frac{1}{2N}\\sum_i(w^\\top x_i-y_i)^2\n+\\frac{\\lambda}{2}\\|w\\|_2^2.\n\\]\n\n\nThis is \\(\\ell_2\\) regularization, called ridge regression.\n\\(\\lambda=0\\) gives no penalty; increasing \\(\\lambda\\) shrinks the optimal weight norm. As \\(\\lambda\\to\\infty\\), \\(w\\to0\\).\nPart1: \\(\\widehat{w_{t+1}} = w_t - \\frac{\\eta}{N}\\sum_i (w_t^T x_i - y_i)\\,x_i\\)\nPart2: \\(w_{t+1} = \\widehat{w_{t+1}} * (1 - \\eta\\lambda)\\)",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Supervised Learning"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/3.html#lasso-regression",
+    "href": "docs/notes/machine-learning/3.html#lasso-regression",
+    "title": "Supervised Learning",
+    "section": "3.4 LASSO regression",
+    "text": "3.4 LASSO regression\n\nThe sparsity constraint \\(\\|w\\|_0\\le c\\) counts nonzero weights and is hard to optimize. Replace it with the convex \\(\\ell_1\\) constraint:\n\n\n\\[\n\\min_w\\frac{1}{2N}\\sum_i(w^\\top x_i-y_i)^2+ \\lambda\\|w\\|_1.\n\\]\n\n\nThis relaxation encourages sparse weights (feature selection).\nPart1: \\(\\widehat{w_{t+1}} = w_t - \\frac{\\eta}{N}\\sum_i (w_t^T x_i - y_i)\\,x_i\\)\n\nSame as linear regression\n\nPart2: for every coordinate \\(i\\)\n\nIf \\(\\widehat{w_{t+1}}_i &gt; \\eta\\lambda\\), \\(w_{t+1} = \\widehat{w_{t+1}}_i - \\eta\\lambda\\)\nIf \\(\\widehat{w_{t+1}}_i &lt; -\\eta\\lambda\\), \\(w_{t+1} = \\widehat{w_{t+1}}_i + \\eta\\lambda\\)\nIf \\(\\widehat{w_{t+1}}_i \\in [-\\eta\\lambda, \\eta\\lambda]\\), \\(w_{t+1} = 0\\)\nEssentially: pulling to 0",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Supervised Learning"
+    ]
+  },
+  {
+    "objectID": "docs/notes/machine-learning/3.html#compressed-sensing",
+    "href": "docs/notes/machine-learning/3.html#compressed-sensing",
+    "title": "Supervised Learning",
+    "section": "3.5 Compressed sensing",
+    "text": "3.5 Compressed sensing\n\n3.5.1 Sparsity assumption\n\n\\(k\\)-sparse: \\(\\|x\\|_0\\le k\\ll n\\); only a few entries are nonzero.\nWith suitable \\(A\\), sparsity enables recovery from \\(m\\ll n\\) measurements \\(y=Ax\\).\n\n\n\n3.5.2 Restricted isometry property (RIP)\n\\(W\\in\\mathbb R^{n\\times d} \\, (n &lt; d)\\) is \\((\\epsilon,s)\\)-RIP if, for every \\(s\\)-sparse \\(x\\in\\mathbb R^d\\),\n\n\\[\n(1-\\epsilon)\\|x\\|_2^2\\le\\|Wx\\|_2^2\\le(1+\\epsilon)\\|x\\|_2^2.\n\\]\n\n\nThus, \\(W\\) approximately preserves the lengths of sparse vectors.\nWithout sparsity condition, this is impossible.\n\n\nTheorem 3.2 (Sparse Recovery via RIP) Let \\(W\\) be \\((\\epsilon,2s)\\)-RIP with \\(0\\le\\epsilon&lt;1\\). If \\(\\|x\\|_0\\le s\\) and \\(y=Wx\\), then\n\\[\n\\widetilde x\\in\\arg\\min_{v:\\,Wv=y}\\|v\\|_0\n\\quad\\Longrightarrow\\quad\\widetilde x=x.\n\\]\n\n\nThus, \\(x\\) is the unique \\(s\\)-sparse solution to \\(Wv=y\\).\nProof: \\(h=\\widetilde x-x\\) is \\(2s\\)-sparse and \\(Wh=0\\). RIP gives \\((1-\\epsilon)\\|h\\|_2^2\\le0\\), hence \\(h=0\\).\n\n\n\n\nTheorem 3.3 (Exact Recovery via l1 Minimization) Let \\(W\\) be \\((\\epsilon,2s)\\)-RIP with \\(0\\le\\epsilon&lt;\\frac{1}{1+\\sqrt2}\\). If \\(\\|x\\|_0\\le s\\) and \\(y=Wx\\), then\n\\[\n\\arg\\min_{v:\\,Wv=y}\\|v\\|_0\n=\\arg\\min_{v:\\,Wv=y}\\|v\\|_1\n=\\{x\\}.\n\\]\n\n\nThus, convex \\(\\ell_1\\) minimization recovers the same unique solution as \\(\\ell_0\\) minimization.\n\n\n\n\nTheorem 3.4 (Recovery of Approximately Sparse Signals) Let \\(W\\) be \\((\\epsilon,2s)\\)-RIP with \\(0\\le\\epsilon&lt;\\frac{1}{1+\\sqrt2}\\). For arbitrary \\(x\\), let \\(x_s\\) retain its \\(s\\) largest entries in magnitude (zero elsewhere). With \\(y=Wx\\), reconstruct\n\\[\nx^*\\in\\arg\\min_{v:\\,Wv=y}\\|v\\|_1.\n\\]\nThen, with \\(\\rho=\\frac{\\sqrt2\\epsilon}{1-\\epsilon}&lt;1\\),\n\\[\n\\|x^*-x\\|_2\\le\\frac{2(1+\\rho)}{(1-\\rho)\\sqrt s}\\|x-x_s\\|_1.\n\\]\n\n\nRecovery error is controlled by the non-sparse tail; \\(x=x_s\\) gives exact recovery.",
+    "crumbs": [
+      "Notes",
+      "Machine Learning",
+      "Supervised Learning"
     ]
   },
   {
