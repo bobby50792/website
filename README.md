@@ -7,16 +7,19 @@ Visit the site at [bobby50792.com](https://bobby50792.com).
 ## What is here
 
 - **Notes** — Long-form, topic-based reference material across the subjects I explore. Current collections include calculus, physics, mathematics for computer science and AI, and deep learning.
-- **Blog** — Essays, observations, project logs, and reflections on ideas, tools, technology, creative work, and the evolution of this site.
+- **Explore** — Essays, guides, experiments, and projects covering tools, technology, music, and creative work.
 - **Homepage** — A custom Quarto landing page designed to make the growing collection easier to explore.
 
 ## Project structure
 
 ```text
 .
-├── docs/
+├── content/
 │   ├── notes/          # Structured learning notes
-│   └── blog/           # Blog index, posts, and media
+│   ├── explore/        # Explore index and styles
+│   │   └── entries/    # Essays, guides, experiments, and media
+│   ├── projects/       # Selected work, linked to existing entries
+│   └── about/          # Introduction and profile links
 ├── index.qmd           # Homepage content
 ├── index.css           # Homepage-specific styles
 ├── styles.css          # Shared site styles

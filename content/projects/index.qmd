@@ -1,0 +1,6 @@
+---
+title: "Projects"
+title-block-banner: true
+toc: false
+search: true
+---

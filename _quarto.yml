@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: _site
   resources:
-    - docs/blog/posts/2026-10-25/game/**
+    - content/explore/entries/2026-10-25/game/**
 
 highlight-style: a11y
 number-sections: true
@@ -22,9 +22,9 @@ website:
     collapse-below: lg
     left:
       - text: "Notes"
-        href: docs/notes/0.qmd
-      - text: "Blog"
-        href: docs/blog/index.qmd
+        href: content/notes/0.qmd
+      - text: "Explore"
+        href: content/explore/index.qmd
     right:
       - icon: github
         href: https://github.com/bobby50792/website
@@ -35,199 +35,199 @@ website:
       collapse-level: 1
       contents:
         - section: "Notes"
-          href: docs/notes/0.qmd
+          href: content/notes/0.qmd
           contents:
             - section: "Calculus"
-              href: docs/notes/calculus/0.qmd
+              href: content/notes/calculus/0.qmd
               contents: 
                 - section: "Single Variable Calculus"
-                  href: docs/notes/calculus/single-variable/0.qmd
+                  href: content/notes/calculus/single-variable/0.qmd
                   contents:
                     - text: "Real Numbers and Limits of Sequences"
-                      href: docs/notes/calculus/single-variable/1.qmd
+                      href: content/notes/calculus/single-variable/1.qmd
                     - text: "Continuity of Functions"
-                      href: docs/notes/calculus/single-variable/2.qmd
+                      href: content/notes/calculus/single-variable/2.qmd
                     - text: "Derivatives and Differentials of Functions"
-                      href: docs/notes/calculus/single-variable/3.qmd
+                      href: content/notes/calculus/single-variable/3.qmd
                     - text: "Indefinite Integrals"
-                      href: docs/notes/calculus/single-variable/4.qmd
+                      href: content/notes/calculus/single-variable/4.qmd
                     - text: "Definite Integral"
-                      href: docs/notes/calculus/single-variable/5.qmd
+                      href: content/notes/calculus/single-variable/5.qmd
                     - text: "Ordinary Differential Equations"
-                      href: docs/notes/calculus/single-variable/6.qmd
+                      href: content/notes/calculus/single-variable/6.qmd
                 - section: "Multivariable Calculus"
-                  href: docs/notes/calculus/multivariable/0.qmd
+                  href: content/notes/calculus/multivariable/0.qmd
                   contents:
                     - text: "Limits and Continuity of Multivariate Functions"
-                      href: docs/notes/calculus/multivariable/1.qmd
+                      href: content/notes/calculus/multivariable/1.qmd
                     - text: "Differential of Multivariable Functions"
-                      href: docs/notes/calculus/multivariable/2.qmd
+                      href: content/notes/calculus/multivariable/2.qmd
                     - text: "Implicit Function and Inverse Mapping Theorem"
-                      href: docs/notes/calculus/multivariable/3.qmd
+                      href: content/notes/calculus/multivariable/3.qmd
                     - text: "Integrals with Parameters and Improper Integrals"
-                      href: docs/notes/calculus/multivariable/4.qmd
+                      href: content/notes/calculus/multivariable/4.qmd
                     - text: "Multiple Integrals"
-                      href: docs/notes/calculus/multivariable/5.qmd
+                      href: content/notes/calculus/multivariable/5.qmd
                     - text: "Integration of Functions on Curves and Surfaces"
-                      href: docs/notes/calculus/multivariable/6.qmd
+                      href: content/notes/calculus/multivariable/6.qmd
                     - text: "Calculus of Vector Fields"
-                      href: docs/notes/calculus/multivariable/7.qmd
+                      href: content/notes/calculus/multivariable/7.qmd
                     - text: "Series"
-                      href: docs/notes/calculus/multivariable/8.qmd
+                      href: content/notes/calculus/multivariable/8.qmd
                     - text: "Series of Functions and Power Series"
-                      href: docs/notes/calculus/multivariable/9.qmd
+                      href: content/notes/calculus/multivariable/9.qmd
                     - text: "Fourier Series"
-                      href: docs/notes/calculus/multivariable/10.qmd
+                      href: content/notes/calculus/multivariable/10.qmd
 
             - section: "Linear Algebra"
-              href: docs/notes/linear-algebra/0.qmd
+              href: content/notes/linear-algebra/0.qmd
               contents:
                 - text: "Vector Spaces"
-                  href: docs/notes/linear-algebra/1.qmd
+                  href: content/notes/linear-algebra/1.qmd
                 - text: "Linear Transformations and Matrices"
-                  href: docs/notes/linear-algebra/2.qmd
+                  href: content/notes/linear-algebra/2.qmd
                 - text: "Elementary Matrix Operations and Systems of Linear Equations"
-                  href: docs/notes/linear-algebra/3.qmd
+                  href: content/notes/linear-algebra/3.qmd
                 - text: "Determinants"
-                  href: docs/notes/linear-algebra/4.qmd
+                  href: content/notes/linear-algebra/4.qmd
                 - text: "Diagonalization"
-                  href: docs/notes/linear-algebra/5.qmd
+                  href: content/notes/linear-algebra/5.qmd
                 - text: "Inner Product Spaces"
-                  href: docs/notes/linear-algebra/6.qmd
+                  href: content/notes/linear-algebra/6.qmd
                 - text: "Canonical Forms"
-                  href: docs/notes/linear-algebra/7.qmd
+                  href: content/notes/linear-algebra/7.qmd
                 - text: "Exercises"
-                  href: docs/notes/linear-algebra/exercises.qmd
+                  href: content/notes/linear-algebra/exercises.qmd
 
             - section: "Math for CS and AI"
-              href: docs/notes/math-for-cs-and-ai/0.qmd
+              href: content/notes/math-for-cs-and-ai/0.qmd
               contents: 
                 - text: "Discrete Probability"
-                  href: docs/notes/math-for-cs-and-ai/1.qmd
+                  href: content/notes/math-for-cs-and-ai/1.qmd
                 - text: "Sampling and Concentration"
-                  href: docs/notes/math-for-cs-and-ai/2.qmd
+                  href: content/notes/math-for-cs-and-ai/2.qmd
                 - text: "Generating Functions"
-                  href: docs/notes/math-for-cs-and-ai/3.qmd
+                  href: content/notes/math-for-cs-and-ai/3.qmd
                 - text: "Continuous Probability"
-                  href: docs/notes/math-for-cs-and-ai/4.qmd
+                  href: content/notes/math-for-cs-and-ai/4.qmd
                 - text: "Central Limit Theorem"
-                  href: docs/notes/math-for-cs-and-ai/5.qmd
+                  href: content/notes/math-for-cs-and-ai/5.qmd
                 - text: "Optimization"
-                  href: docs/notes/math-for-cs-and-ai/6.qmd
+                  href: content/notes/math-for-cs-and-ai/6.qmd
                 - text: "Continuous Approximations"
-                  href: docs/notes/math-for-cs-and-ai/7.qmd
+                  href: content/notes/math-for-cs-and-ai/7.qmd
             - section: "General Physics"
-              href: docs/notes/general-physics/0.qmd
+              href: content/notes/general-physics/0.qmd
               contents: 
                 - section: "Mechanics and Thermal Physics"
-                  href: docs/notes/general-physics/mechanics-and-thermal-physics/0.qmd
+                  href: content/notes/general-physics/mechanics-and-thermal-physics/0.qmd
                   contents: 
                   - text: "Kinematics"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/1.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/1.qmd
                   - text: "Newton's Laws"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/2.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/2.qmd
                   - text: "Momentum"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/3.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/3.qmd
                   - text: "Energy and Work"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/4.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/4.qmd
                   - text: "Angular Momentum"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/5.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/5.qmd
                   - text: "Collision Theory"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/6.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/6.qmd
                   - text: "Rigid Body" 
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/7.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/7.qmd
                   - text: "Oscillation"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/8.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/8.qmd
                   - text: "Waves"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/9.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/9.qmd
                   - text: "Lagrangian and Hamiltonian Mechanics"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/10.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/10.qmd
                   - text: "Special Relativity"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/11.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/11.qmd
                   - text: "Temperature, Heat, and the First Law of Thermodynamics"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/12.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/12.qmd
                   - text: "Kinetic Theory of Gases"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/13.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/13.qmd
                   - text: "Second Law of Thermodynamics"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/14.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/14.qmd
                   - text: "Statistical Mechanics"
-                    href: docs/notes/general-physics/mechanics-and-thermal-physics/15.qmd
+                    href: content/notes/general-physics/mechanics-and-thermal-physics/15.qmd
                 - section: "Electricity and Magnetism"
-                  href: docs/notes/general-physics/electricity-and-magnetism/0.qmd
+                  href: content/notes/general-physics/electricity-and-magnetism/0.qmd
                   contents:
                     - text: "Scalar and Vector Fields"
-                      href: docs/notes/general-physics/electricity-and-magnetism/1.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/1.qmd
                     - text: "Electrostatics"
-                      href: docs/notes/general-physics/electricity-and-magnetism/2.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/2.qmd
                     - text: "Magnetostatics"
-                      href: docs/notes/general-physics/electricity-and-magnetism/3.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/3.qmd
                     - text: "Laws of Induction"
-                      href: docs/notes/general-physics/electricity-and-magnetism/4.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/4.qmd
                     - text: "Maxwell Equations and Solutions"
-                      href: docs/notes/general-physics/electricity-and-magnetism/5.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/5.qmd
                     - text: "AC Circuits"
-                      href: docs/notes/general-physics/electricity-and-magnetism/6.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/6.qmd
                     - text: "Resonators"
-                      href: docs/notes/general-physics/electricity-and-magnetism/7.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/7.qmd
                     - text: "Waveguides"
-                      href: docs/notes/general-physics/electricity-and-magnetism/8.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/8.qmd
                     - text: "Quantum Information Processing"
-                      href: docs/notes/general-physics/electricity-and-magnetism/9.qmd
+                      href: content/notes/general-physics/electricity-and-magnetism/9.qmd
             - section: "Deep Learning"
-              href: docs/notes/deep-learning/0.qmd
+              href: content/notes/deep-learning/0.qmd
               contents: 
                 - text: "Supervised Learning"
-                  href: docs/notes/deep-learning/1.qmd
+                  href: content/notes/deep-learning/1.qmd
                 - text: "Energy-Based Model"
-                  href: docs/notes/deep-learning/2.qmd
+                  href: content/notes/deep-learning/2.qmd
                 - text: "Generative Adversarial Network"
-                  href: docs/notes/deep-learning/3.qmd
+                  href: content/notes/deep-learning/3.qmd
                 - text: "Normalizing Flow & Variational Autoencoder"
-                  href: docs/notes/deep-learning/4.qmd
+                  href: content/notes/deep-learning/4.qmd
                 - text: "Diffusion Models & Flow Matching"
-                  href: docs/notes/deep-learning/5.qmd
+                  href: content/notes/deep-learning/5.qmd
                 - text: "Sequence Modeling"
-                  href: docs/notes/deep-learning/6.qmd
+                  href: content/notes/deep-learning/6.qmd
             - section: "Advanced Applied Probability"
-              href: docs/notes/advanced-applied-probability/0.qmd
+              href: content/notes/advanced-applied-probability/0.qmd
               contents:
                 - text: "Measure Theory"
-                  href: docs/notes/advanced-applied-probability/1.qmd
+                  href: content/notes/advanced-applied-probability/1.qmd
                 - text: "Laws of Large Numbers"
-                  href: docs/notes/advanced-applied-probability/2.qmd
+                  href: content/notes/advanced-applied-probability/2.qmd
             - section: "Machine Learning"
-              href: docs/notes/machine-learning/0.qmd
+              href: content/notes/machine-learning/0.qmd
               contents:
                 - text: "Optimization"
-                  href: docs/notes/machine-learning/1.qmd
+                  href: content/notes/machine-learning/1.qmd
                 - text: "Generalization"
-                  href: docs/notes/machine-learning/2.qmd
+                  href: content/notes/machine-learning/2.qmd
                 - text: "Supervised Learning"
-                  href: docs/notes/machine-learning/3.qmd
+                  href: content/notes/machine-learning/3.qmd
             - section: "Advanced Computer Graphics"
-              href: docs/notes/advanced-computer-graphics/0.qmd
+              href: content/notes/advanced-computer-graphics/0.qmd
               contents:
                 - text: "Geometry"
-                  href: docs/notes/advanced-computer-graphics/1.qmd
+                  href: content/notes/advanced-computer-graphics/1.qmd
                 - text: "Transformations"
-                  href: docs/notes/advanced-computer-graphics/2.qmd
+                  href: content/notes/advanced-computer-graphics/2.qmd
                 - text: "Learning Geometry"
-                  href: docs/notes/advanced-computer-graphics/3.qmd
+                  href: content/notes/advanced-computer-graphics/3.qmd
                 - text: "Rasterization"
-                  href: docs/notes/advanced-computer-graphics/4.qmd
+                  href: content/notes/advanced-computer-graphics/4.qmd
                 - text: "Shading"
-                  href: docs/notes/advanced-computer-graphics/5.qmd
+                  href: content/notes/advanced-computer-graphics/5.qmd
             - section: "Artificial Intelligence"
-              href: docs/notes/artificial-intelligence/0.qmd
+              href: content/notes/artificial-intelligence/0.qmd
               contents:
                 - text: "Search"
-                  href: docs/notes/artificial-intelligence/1.qmd
+                  href: content/notes/artificial-intelligence/1.qmd
                 - text: "Logic"
-                  href: docs/notes/artificial-intelligence/2.qmd
+                  href: content/notes/artificial-intelligence/2.qmd
                 - text: "Probabilistic Models"
-                  href: docs/notes/artificial-intelligence/3.qmd
+                  href: content/notes/artificial-intelligence/3.qmd
                 - text: "Probabilistic Inference"
-                  href: docs/notes/artificial-intelligence/4.qmd
+                  href: content/notes/artificial-intelligence/4.qmd
 
 format:
   html:

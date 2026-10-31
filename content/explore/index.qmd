@@ -1,0 +1,25 @@
+---
+title: "Explore"
+subtitle: "Ideas I'm exploring and things I'm building."
+page-layout: full
+title-block-banner: true
+toc: false
+search: true
+css: explore.css
+listing:
+  sort: "date desc"
+  contents: "entries/*/index.qmd"
+  sort-ui: false
+  filter-ui: false
+  categories: true
+---
+
+::: {.collection-section-header}
+
+<p class="collection-kicker">LATEST</p>
+
+## Recent additions
+
+Ideas in progress, practical guides, and things I build along the way.
+
+:::

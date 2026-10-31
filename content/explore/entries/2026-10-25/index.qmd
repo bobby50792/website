@@ -13,7 +13,7 @@ css: player.css
 toc: false
 ---
 
-这是我之前用 Unity 做的一个塔防小游戏。选择建筑、收集资源，再用箭塔应对不断到来的敌人。现在把它搬进了博客，可以直接在浏览器里试玩。
+这是我之前用 Unity 做的一个塔防小游戏。选择建筑、收集资源，再用箭塔应对不断到来的敌人。现在把它搬到了这个网站，可以直接在浏览器里试玩。
 
 ```{=html}
 <section class="game-player" aria-label="Tower Defense 在线试玩" data-game-player data-game-src="game/index.html">

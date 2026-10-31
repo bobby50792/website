@@ -10,14 +10,14 @@ editor: source
 date-format: "YYYY.MM.DD"
 listing:
   - id: current-topics-list
-    contents: "docs/notes/*/0.qmd"
+    contents: "content/notes/*/0.qmd"
     template: topic-listing.ejs
     sort: "home-order desc"
     max-items: 4
     sort-ui: false
     filter-ui: false
   - id: recent-writing-list
-    contents: "docs/blog/posts/*/index.qmd"
+    contents: "content/explore/entries/*/index.qmd"
     template: recent-listing.ejs
     sort: "date desc"
     max-items: 2
@@ -37,8 +37,8 @@ listing:
 Notes, projects, and things I am learning along the way.
 
 <div class="hero-actions">
-  <a class="home-button home-button-primary" href="docs/notes/0.qmd">Browse notes <span aria-hidden="true">→</span></a>
-  <a class="home-button home-button-secondary" href="docs/blog/index.qmd">Read the blog</a>
+  <a class="home-button home-button-primary" href="content/notes/0.qmd">Browse notes <span aria-hidden="true">→</span></a>
+  <a class="home-button home-button-secondary" href="content/explore/index.qmd">Explore the collection</a>
 </div>
 
 :::
@@ -66,13 +66,13 @@ Notes, projects, and things I am learning along the way.
 ::: {.recent-section}
 ::: {.recent-copy}
 
-<p class="section-kicker">RECENT WRITING</p>
+<p class="section-kicker">EXPLORE</p>
 
-## Recent writing
+## Recent additions
 
-The blog follows ideas beyond formal notes—from early questions and useful tools to projects, creative work, and lessons learned along the way.
+A growing collection of essays, guides, experiments, and projects.
 
-[Browse the blog <span aria-hidden="true">→</span>](docs/blog/index.qmd){.text-link}
+[Explore the collection <span aria-hidden="true">→</span>](content/explore/index.qmd){.text-link}
 
 :::
 
