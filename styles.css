@@ -1,5 +1,5 @@
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap");
 
 /* Hide section numbers in headings and the page table of contents. */
 .header-section-number {
@@ -47,320 +47,6 @@ body.quarto-dark #quarto-header {
   max-height: 36px;
 }
 
-
-.platform-table td {
-  vertical-align: middle;
-}
-
-.platform-table td > div.sourceCode {
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
-}
-
-
-.document-example {
-  opacity: 0.9;
-  padding: 6px; 
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.document-example div {
-  padding: 5px;
-}
-
-
-.document-example .citation {
-  color: blue;
-}
-
-.trademark {
-  font-size: 0.6rem;
-  display: inline-block;
-  margin-left: -3px;
-}
-
-.search-attribution {
-  margin-top: 20px;
-  padding-bottom: 20px;
-  height: 40px;
-}
-
-.download-button {
-  margin-top: 1em;
-}
-
-.download-table {
-  margin-bottom: 2em;  
-}
-
-.download-table p {
-  margin-bottom: 0;
-}
-
-.download-table .checksum {
-  color: var(--bs-primary);
-  font-size: .775em;
-  cursor: pointer;
-  padding-top: 4px;
-}
-
-.download-button {
-  display:flex;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-
-.download-button .secondary {
-  font-size: .775em;
-  margin-bottom: 0;
-}
-
-.download-button .container {
-  display: flex;
-  padding-left: 10px;
-  padding-right: 40px;
-}
-
-.download-button .icon-container {
-  fill: white;
-  width: 30px;
-  margin-right: 15px;
-}
-
-iframe.reveal-demo {
-  width: 100%;
-  height: 350px;
-  outline: none;
-}
-
-
-.slide-deck {
-  border: 3px solid #dee2e6;
-  width: 100%;
-  height: 475px;
-}
-
-@media only screen and (max-width: 600px) {
- .slide-deck {
-    height: 400px;
-  }
-}
-
-
-@media (max-width: 575px) {
-
-.link-cards .card {
-  margin-bottom: 20px;
-  margin-right: 35px;
-}
-
-}
-
-@media (min-width: 576px) { 
-.link-cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.link-cards .card {
-  width: 190px;
-  margin: 0 20px 12px 0;
-}
-
-
-}
-
-
-.link-cards .card {
-  border: none;
-  padding: 0;
-}
-
-.link-cards .card-title h4 {
-  margin-top: 0;
-}
-
-.link-cards .card-title p {
-  margin-bottom: 0;
-}
-
-.link-cards .card-subtitle {
-  margin-bottom: 0.7rem;
-}
-
-.link-cards .card-body {
-  padding: 0.5rem;
-  padding-left: 0.1rem;
-}
-
-.link-cards .card-body ul {
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style-type: none;
-}
-
-.link-cards .card-body ul a {
-  text-decoration: none;
-}
-
-.link-cards .card-body ul li {
-  padding-bottom: 0.2rem;
-}
-
-
-.card .source-code {
-  margin-top: 3px;
-}
-
-.carousel.card {
-  font-size: 16px;
-  padding-top: 2em;
-}
-
-.carousel.card a {
-  text-decoration: none;
-}
-
-.carousel img {
-  width: 70%;
-  margin-bottom: 110px;
-}
-
-.carousel .carousel-control-prev-icon, 
-.carousel .carousel-control-next-icon {
-  margin-bottom: 110px;
-}
-
-
-.gallery-category {
-  column-gap: 10px;
-}
-
-.btn-action-primary {
-  color: white;
-  background-color: #447099;
-}
-
-.btn-action-primary:hover {
-  background-color: #305775;
-  color: white;
-}
-
-.btn-action {
-  min-width: 165px;
-  border-radius: 30px;
-  border: none;
-}
-
-.panel-tabset[data-group="tools-tabset"] .choose-your-tool {
-  max-width: 90px;
-  margin-right: 25px;
-  margin-top: 30px;
-  font-weight: 300;
-  font-size: 1.3rem;
-  text-align: left;
-  vertical-align: center;
-}
-
-.panel-tabset[data-group="tools-tabset"] .tab-content {
-  border: none;
-  padding-left: 5px;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs {
-  border-bottom: none;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link {
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 10px;
-  color: inherit;
-  width: 102px;
-  font-size: 0.8em;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link, 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link.active, 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-item.show .nav-link {
-  border: 1px solid  rgb(222, 226, 230);
-  border-radius: 10px;
-}
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link:hover {
-   border-color: rgb(80,146,221);
-   border-width: 1px;
-} 
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link.active, 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-item.show .nav-link {
-  border-color: rgb(80,146,221);
-  border-width: 2px;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link img {
-  width: 65px;
-  height: 65px;
-  display: block;
-  margin-bottom: 2px;
-}
-
-/*
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link {
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 10px;
-  color: inherit;
-  width: 102px;
-  font-size: 0.8em;
-}
- 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link img {
-  width: 45px;
-  height: 45px;
-  margin-left: 10px;
-  display: block;
-  margin-bottom: 2px;
-}
-*/
-
-
-.download-text {
-  font-size: 1.1em;
-  font-weight: 500;  
-}
-
-.preview-image-grid {
-  gap: .75em;
-}
-
-.preview-image-grid p {
-  margin-bottom: 0;
-}
-
-.preview-image-label {
-  text-align: center;
-  font-size: .75em;
-  font-weight: 600;
-}
-
-.illustration {
-  border: 1px solid #dee2e6;
-}
-
-span.color-box-container {
-  display: inline-flex;
-  align-items: center; /* Align vertically */
-}
-
-span.color-box {
-  display: inline-block;
-  width: 1em; /* Width of the color box */
-  height: 1em; /* Height of the color box */
-  margin-right: 0.2em; /* Space between box and text */
-  border: 1px solid #000; /* Border color */
-}
 
 /* Use native list markers, including in Safari. */
 @counter-style parenthesized-roman {
@@ -458,5 +144,942 @@ span.color-box {
 
   #quarto-document-content .exercise .math.display {
     overflow: visible;
+  }
+}
+
+/* Notes fixes. */
+.notes-studio .math.display {
+  display: block;
+  max-inline-size: 100%;
+  padding-block: .15rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.notes-studio #quarto-document-content pre,
+.notes-studio #quarto-document-content pre code {
+  font-variant-ligatures: none;
+}
+
+/* Notes studio: an annotated-textbook layout, enabled for all notes in content/notes/_metadata.yml. */
+body.notes-studio {
+  --studio-serif: "Source Serif 4", "Songti SC", "Noto Serif SC", Georgia, serif;
+  /* Songti barely changes when bold, so bold Chinese uses a sans face, as Chinese typesetting usually does. */
+  --studio-serif-bold: "Source Serif 4", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", Georgia, sans-serif;
+  --studio-sans: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", -apple-system, sans-serif;
+  --studio-ink: #1f2933;
+  --studio-muted: #5b6670;
+  --studio-line: #dfe4e9;
+  --studio-fill: #f4f6f8;
+  --studio-accent: #2f6690;
+  --studio-def-bg: #f3f8fc;
+  --studio-def-line: #cfe0ec;
+  --studio-def-ink: #245a82;
+  --studio-thm-bg: #fdf8ee;
+  --studio-thm-line: #eedfbf;
+  --studio-thm-ink: #87590a;
+}
+
+body.notes-studio.quarto-dark {
+  --studio-ink: #e8eaec;
+  --studio-muted: #a3adb6;
+  --studio-line: #363c43;
+  --studio-fill: #1e2125;
+  --studio-accent: #8fbde6;
+  --studio-def-bg: #17212a;
+  --studio-def-line: #2a3b49;
+  --studio-def-ink: #8fbde6;
+  --studio-thm-bg: #231e14;
+  --studio-thm-line: #463a21;
+  --studio-thm-ink: #e2b866;
+}
+
+.notes-studio #quarto-document-content {
+  color: var(--studio-ink);
+  font-family: var(--studio-serif);
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+/* Page title */
+.notes-studio #title-block-header {
+  margin-block-end: 2rem;
+}
+
+.notes-studio #quarto-document-content h1.title {
+  margin-block: .5rem 0;
+  font-family: var(--studio-serif-bold);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.notes-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 1040;
+  height: 2px;
+  background: var(--studio-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.notes-studio #quarto-document-content :is(strong, b) {
+  font-family: var(--studio-serif-bold);
+}
+
+.notes-studio #quarto-document-content :is(.notes-table, .notes-link-list, h4, h5, h6) :is(strong, b) {
+  font-family: inherit;
+}
+
+/* Headings */
+.notes-studio #quarto-document-content h2,
+.notes-studio #quarto-document-content h3,
+.notes-studio #quarto-document-content h4,
+.notes-studio #quarto-document-content h5 {
+  scroll-margin-block-start: 5rem;
+}
+
+.notes-studio #quarto-document-content h2 {
+  margin-block: 3.5rem 1rem;
+  padding: 0;
+  border: 0;
+  font-family: var(--studio-serif-bold);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.notes-studio #quarto-document-content h2 .header-section-number {
+  display: inline;
+  margin-inline-end: .55em;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .62em;
+  font-weight: 500;
+  vertical-align: .12em;
+}
+
+.notes-studio #quarto-document-content h3 {
+  margin-block: 2.6rem .8rem;
+  padding-block-end: .35rem;
+  border-block-end: 1px solid var(--studio-line);
+  font-family: var(--studio-serif-bold);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.notes-studio #quarto-document-content h4 {
+  margin-block: 1.75rem .35rem;
+  color: var(--studio-ink);
+  font-family: var(--studio-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.notes-studio #quarto-document-content h5 {
+  margin-block: 1.1rem .2rem;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.notes-studio #quarto-document-content h3 + section.level4 > h4 {
+  margin-block-start: .6rem;
+}
+
+.notes-studio #quarto-document-content h4 + section.level5 > h5 {
+  margin-block-start: .35rem;
+}
+
+.notes-studio #quarto-document-content h2 + section.level3 > h3 {
+  margin-block-start: 1.25rem;
+}
+
+/* A long block can carry its own subheadings; they stay smaller than its title. */
+.notes-studio #quarto-document-content .theorem :is(h2, h3) {
+  margin-block: 1.1rem .35rem;
+  padding: 0;
+  border: 0;
+  font-family: var(--studio-sans);
+  font-size: 1.06rem;
+  font-weight: 700;
+}
+
+.notes-studio #quarto-document-content .theorem :is(h4, h5) {
+  margin-block: 1rem .25rem;
+  font-size: 1.06rem;
+}
+
+.notes-studio #quarto-document-content .theorem > section:first-of-type > :is(h2, h3, h4):first-child {
+  margin-block-start: .5rem;
+}
+
+/* Quarto puts .theorem on every theorem-like block. */
+.notes-studio #quarto-document-content .theorem {
+  margin-block: 1.4rem;
+  padding: 1rem 1.25rem 1.1rem;
+  border: 1px solid var(--studio-thm-line);
+  border-radius: 10px;
+  background: var(--studio-thm-bg);
+  scroll-margin-block-start: 5rem;
+}
+
+.notes-studio #quarto-document-content .theorem.definition {
+  border-color: var(--studio-def-line);
+  background: var(--studio-def-bg);
+}
+
+.notes-studio #quarto-document-content .theorem > :last-child {
+  margin-block-end: 0;
+}
+
+.notes-studio .theorem:target {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 2px;
+}
+
+.notes-studio .theorem-title {
+  display: block;
+  margin-block-end: .45rem;
+}
+
+.notes-studio .theorem-title::after {
+  content: none;
+}
+
+.notes-studio .notes-kind {
+  display: block;
+  color: var(--studio-thm-ink);
+  font-family: var(--studio-sans);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.notes-studio .notes-kind[data-type="definition"] {
+  color: var(--studio-def-ink);
+}
+
+.notes-studio .notes-name {
+  display: block;
+  margin-block-start: .1rem;
+  font-size: 1.12em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.notes-studio .notes-title-only .theorem-title {
+  display: block;
+}
+
+.notes-studio .notes-title-only {
+  margin-block-end: .5rem;
+}
+
+.notes-studio .math.display mjx-container[display="true"] {
+  margin-block: .2rem;
+  padding-block: .35rem;
+  line-height: 1.2;
+}
+
+.notes-studio #quarto-document-content p:has(> .math.display:only-child) {
+  margin-block: .25rem .6rem;
+}
+
+.notes-studio #quarto-document-content p:has(+ p > .math.display:only-child) {
+  margin-block-end: .35rem;
+}
+
+.notes-studio .quarto-page-breadcrumbs {
+  font-family: var(--studio-sans);
+  font-size: .85rem;
+}
+
+.notes-studio li > p {
+  margin-block: .3rem;
+}
+
+/* Side notes: reasons, examples, and remarks that belong to the content above. */
+.notes-studio #quarto-document-content .callout.callout-style-default {
+  margin-block: .35rem;
+  margin-inline-start: 1.25rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.notes-studio #quarto-document-content .theorem + .callout.callout-style-default {
+  margin-block-start: -.7rem;
+}
+
+.notes-studio #quarto-document-content .callout + :not(.callout) {
+  margin-block-start: 1.4rem;
+}
+
+.notes-studio .callout.callout-style-default > .callout-header {
+  gap: .4rem;
+  padding: .3rem 0;
+  border-radius: 0;
+  background: none;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .86rem;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.notes-studio .callout.callout-style-default > .callout-header:hover {
+  color: var(--studio-accent);
+}
+
+.notes-studio .callout .callout-icon-container {
+  display: none;
+}
+
+.notes-studio .callout .callout-btn-toggle {
+  order: -1;
+  align-self: flex-start;
+  float: none;
+  padding: 0;
+  transform: scale(.8);
+}
+
+.notes-studio .notes-tag {
+  margin-inline-end: .5rem;
+  color: var(--studio-accent);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.notes-studio .callout.callout-style-default .callout-body {
+  margin-block: .15rem .6rem;
+  margin-inline-start: .4rem;
+  padding: 0 0 0 1rem;
+  border-inline-start: 2px solid var(--studio-line);
+  color: var(--studio-ink);
+  font-size: .94em;
+}
+
+.notes-studio .callout.callout-style-default .callout-body > :first-child {
+  margin-block-start: 0;
+  padding-block-start: 0;
+}
+
+.notes-studio .callout.callout-style-default .callout-body > :last-child {
+  margin-block-end: 0;
+}
+
+/* Algorithms and code */
+.notes-studio #quarto-document-content div.sourceCode {
+  margin-block: 1rem 1.25rem;
+  border: 0;
+  background: none;
+}
+
+.notes-studio #quarto-document-content pre {
+  margin: 0;
+  padding: .9rem 1.1rem;
+  border: 1px solid var(--studio-line);
+  border-radius: 10px;
+  background: var(--studio-fill);
+  font-size: .78rem;
+  line-height: 1.65;
+}
+
+/* Keep code on one line so indentation stays meaningful; wide code scrolls. */
+.notes-studio #quarto-document-content pre {
+  overflow-x: auto;
+}
+
+.notes-studio #quarto-document-content pre code {
+  display: block;
+  inline-size: max-content;
+  min-inline-size: 100%;
+  background: none;
+  color: var(--studio-ink);
+  white-space: pre;
+}
+
+.notes-studio #quarto-document-content pre code > span {
+  color: inherit;
+}
+
+.notes-studio #quarto-document-content pre code > span.notes-code-head {
+  font-weight: 600;
+}
+
+.notes-studio #quarto-document-content pre code span.kw,
+.notes-studio #quarto-document-content pre code span.cf {
+  color: var(--studio-accent);
+  font-weight: 500;
+}
+
+.notes-studio #quarto-document-content pre code span.op,
+.notes-studio #quarto-document-content pre code span.dv {
+  color: var(--studio-muted);
+}
+
+.notes-studio #quarto-document-content pre code span.fu,
+.notes-studio #quarto-document-content pre code span.bu,
+.notes-studio #quarto-document-content pre code span.va,
+.notes-studio #quarto-document-content pre code span.ex {
+  color: inherit;
+}
+
+.notes-studio #quarto-document-content pre code span.dt,
+.notes-studio #quarto-document-content pre code span.im,
+.notes-studio #quarto-document-content pre code span.pp,
+.notes-studio #quarto-document-content pre code span.at {
+  color: var(--studio-accent);
+}
+
+.notes-studio #quarto-document-content pre code span.st,
+.notes-studio #quarto-document-content pre code span.co {
+  color: var(--studio-muted);
+}
+
+.notes-studio .code-copy-button {
+  top: .4rem;
+  right: .4rem;
+}
+
+@media (hover: hover) {
+  .notes-studio .code-copy-button {
+    opacity: 0;
+    transition: opacity .15s ease;
+  }
+
+  .notes-studio .code-copy-outer-scaffold:hover .code-copy-button,
+  .notes-studio .code-copy-button:focus-visible {
+    opacity: 1;
+  }
+}
+
+/* Supplementary Notes */
+.notes-studio section.supplementary-notes {
+  margin-block-start: 4rem;
+  padding: 1.5rem 1.75rem 1.6rem;
+  border-radius: 14px;
+  background: var(--studio-fill);
+}
+
+.notes-studio #quarto-document-content section.supplementary-notes > h2 {
+  margin-block: 0 1rem;
+  font-size: 1.45rem;
+}
+
+.notes-studio #quarto-document-content section.supplementary-notes > h2 .header-section-number {
+  display: none;
+}
+
+.notes-studio #quarto-document-content section.supplementary-notes h3 {
+  font-family: var(--studio-sans);
+  margin-block: 0 .6rem;
+  padding: 0;
+  border: 0;
+  color: var(--studio-muted);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.notes-studio .supplementary-notes section + section {
+  margin-block-start: 1.75rem;
+}
+
+.notes-studio .supplementary-notes section > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notes-studio .supplementary-notes section > ul > li {
+  padding-block: .55rem;
+  border-block-start: 1px solid var(--studio-line);
+}
+
+.notes-studio .supplementary-notes section > ul > li > a {
+  font-family: var(--studio-sans);
+  font-size: .9em;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Links */
+.notes-studio #quarto-document-content :is(p, li, td) a:not(.supplementary-notes a, .breadcrumb a) {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+}
+
+.notes-studio #quarto-document-content :is(p, li, td) a:not(.supplementary-notes a, .breadcrumb a):hover {
+  text-decoration-color: currentColor;
+}
+
+.notes-studio #quarto-document-content ul.notes-link-list {
+  margin-block: .35rem 1.3rem;
+  padding: 0;
+  font-family: var(--studio-sans);
+  font-size: .86rem;
+  line-height: 1.45;
+  list-style: none;
+}
+
+.notes-studio #quarto-document-content .notes-link-list > li {
+  margin: 0;
+  padding-block: .22rem;
+  color: var(--studio-muted);
+}
+
+.notes-studio #quarto-document-content .notes-link-list > li > a:first-child {
+  color: var(--studio-ink);
+  font-weight: 500;
+  text-decoration-line: none;
+}
+
+.notes-studio #quarto-document-content .notes-link-list > li > a:first-child::after {
+  content: "\2197";
+  margin-inline-start: .3em;
+  color: var(--studio-muted);
+  font-size: .85em;
+  font-weight: 400;
+}
+
+.notes-studio #quarto-document-content .notes-link-list > li > a:first-child:hover,
+.notes-studio #quarto-document-content .notes-link-list > li > a:first-child:hover::after {
+  color: var(--studio-accent);
+}
+
+.notes-studio .notes-link-name::after {
+  content: "\00b7";
+  margin-inline: .4em;
+  color: var(--studio-muted);
+  font-weight: 400;
+}
+
+.notes-studio .notes-link-description {
+  color: var(--studio-muted);
+  font-weight: 400;
+}
+
+@media (hover: none) {
+  .notes-studio #quarto-document-content .notes-link-list > li {
+    padding-block: .5rem;
+  }
+}
+
+/* Sidebar: courses read first, chapters recede, and the current page stands out. */
+.notes-studio #quarto-sidebar .sidebar-item-text {
+  line-height: 1.35;
+}
+
+.notes-studio #quarto-sidebar .sidebar-item-section > .sidebar-item-container > .sidebar-item-text {
+  color: var(--studio-ink);
+  font-size: .86rem;
+  font-weight: 500;
+}
+
+.notes-studio #quarto-sidebar .depth1 .depth1 > .sidebar-item-section > .sidebar-item-container > .sidebar-item-text,
+.notes-studio #quarto-sidebar .depth2 > .sidebar-item-section > .sidebar-item-container > .sidebar-item-text {
+  color: var(--studio-muted);
+  font-size: .8rem;
+}
+
+.notes-studio #quarto-sidebar .menu-text {
+  display: inline-block;
+}
+
+.notes-studio #quarto-sidebar .sidebar-item:not(.sidebar-item-section) .sidebar-item-text {
+  color: var(--studio-muted);
+  font-size: .78rem;
+  font-weight: 400;
+}
+
+.notes-studio #quarto-sidebar .sidebar-item .sidebar-item-text:hover {
+  color: var(--studio-accent);
+}
+
+.notes-studio #quarto-sidebar .sidebar-item .sidebar-item-text.active {
+  color: var(--studio-accent);
+  font-weight: 600;
+}
+
+.notes-studio #quarto-sidebar .sidebar-item:not(.sidebar-item-section) .sidebar-item-text.active {
+  margin-inline-start: -.55rem;
+  padding-inline-start: .45rem;
+  border-inline-start: 2px solid var(--studio-accent);
+}
+
+/* Page contents: a small label, sections above their subsections, and a clear current position. */
+.notes-studio #toc-title {
+  margin-block-end: .5rem;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.notes-studio #TOC a.nav-link {
+  padding-block: .2rem;
+  padding-inline-start: .7rem;
+  border-inline-start-color: var(--studio-line);
+  color: var(--studio-ink);
+  font-size: .8rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.notes-studio #TOC ul ul a.nav-link {
+  padding-inline-start: 1.3rem;
+  color: var(--studio-muted);
+  font-size: .76rem;
+  font-weight: 400;
+}
+
+.notes-studio #TOC a.nav-link:hover {
+  color: var(--studio-accent);
+}
+
+.notes-studio #TOC a.nav-link.active,
+.notes-studio #TOC ul ul a.nav-link.active {
+  border-inline-start-color: var(--studio-accent);
+  box-shadow: inset 1px 0 0 var(--studio-accent);
+  color: var(--studio-accent);
+  font-weight: 600;
+}
+
+/* Tables */
+.notes-studio .notes-table {
+  margin-block: 1rem 1.4rem;
+  overflow-x: auto;
+  border: 1px solid var(--studio-line);
+  border-radius: 10px;
+}
+
+.notes-studio #quarto-document-content .notes-table table {
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--studio-ink);
+  font-family: var(--studio-sans);
+  font-size: .84rem;
+  line-height: 1.5;
+}
+
+/* Quarto gives long pipe tables equal columns; let the content decide instead. */
+.notes-studio .notes-table col {
+  width: auto !important;
+}
+
+.notes-studio #quarto-document-content .notes-table :is(thead, tbody, tr) {
+  border: 0;
+}
+
+.notes-studio #quarto-document-content .notes-table :is(th, td) {
+  padding: .6rem .95rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  vertical-align: top;
+}
+
+.notes-studio #quarto-document-content .notes-table thead th {
+  border-block-end: 1px solid var(--studio-line);
+  background: var(--studio-fill);
+  color: var(--studio-muted);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.notes-studio #quarto-document-content .notes-table tbody tr:not(:last-child) td {
+  border-block-end: 1px solid var(--studio-line);
+}
+
+.notes-studio #quarto-document-content .notes-table tbody td:first-child {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.notes-studio #quarto-document-content .notes-table tbody td:first-child strong {
+  font-weight: inherit;
+}
+
+/* Review and find */
+.notes-review-tools {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  margin-block-end: 1.1rem;
+  padding-block-end: .9rem;
+  border-block-end: 1px solid var(--studio-line);
+  font-family: var(--studio-sans);
+}
+
+#quarto-document-content > .notes-review-tools {
+  margin-block-end: 1.5rem;
+}
+
+.notes-review-field {
+  position: relative;
+  display: block;
+  margin: 0;
+}
+
+/* Magnifier, drawn with a mask so it follows the theme color. */
+.notes-review-field::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: .55rem;
+  inline-size: .8rem;
+  block-size: .8rem;
+  background: var(--studio-muted);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M11.74 10.34a6.5 6.5 0 1 0-1.4 1.4l3.85 3.85a1 1 0 0 0 1.4-1.4zM6.5 11a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.notes-review-search {
+  inline-size: 100%;
+  min-block-size: 1.9rem;
+  padding: .2rem .5rem .2rem 1.75rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--studio-fill);
+  color: var(--studio-ink);
+  font-size: .76rem;
+}
+
+.notes-review-search::placeholder {
+  color: var(--studio-muted);
+  opacity: 1;
+}
+
+.notes-review-search:focus {
+  border-color: var(--studio-accent);
+  background: var(--bs-body-bg);
+  outline: 0;
+}
+
+.notes-review-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 100%;
+  min-block-size: 1.9rem;
+  padding: 0 .1rem;
+  border: 0;
+  background: none;
+  color: var(--studio-ink);
+  font-size: .78rem;
+}
+
+.notes-review-toggle:hover {
+  color: var(--studio-accent);
+}
+
+.notes-switch {
+  position: relative;
+  flex: none;
+  inline-size: 1.7rem;
+  block-size: .95rem;
+  border-radius: 999px;
+  background: var(--studio-line);
+}
+
+.notes-switch::after {
+  content: "";
+  position: absolute;
+  inset-block-start: .125rem;
+  inset-inline-start: .125rem;
+  inline-size: .7rem;
+  block-size: .7rem;
+  border-radius: 50%;
+  background: var(--bs-body-bg);
+}
+
+.notes-review-toggle[aria-checked="true"] .notes-switch {
+  background: var(--studio-accent);
+}
+
+.notes-review-toggle[aria-checked="true"] .notes-switch::after {
+  transform: translateX(.75rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .notes-switch,
+  .notes-switch::after {
+    transition: background-color .15s ease, transform .15s ease;
+  }
+}
+
+.notes-review-toggle:focus-visible,
+.notes-review .theorem-title:focus-visible {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 2px;
+}
+
+.notes-review-status {
+  margin: 0;
+  padding-inline-start: .1rem;
+  color: var(--studio-muted);
+  font-size: .72rem;
+}
+
+.notes-review-status:empty {
+  display: none;
+}
+
+@media (hover: none) {
+  .notes-review-search,
+  .notes-review-toggle {
+    min-block-size: 2.75rem;
+    font-size: 1rem;
+  }
+
+  .notes-review #quarto-document-content :is(h4, h5, h6).notes-topic-head {
+    margin-block: .2rem;
+    padding-block: .5rem;
+  }
+}
+
+/* Review and search keep only headings, blocks, and topics; review also hides their text.
+   Sections inside a block or side note belong to it, so they stay out of these rules. */
+.notes-review #quarto-document-content > p,
+.notes-review #quarto-document-content > ul,
+.notes-review #quarto-document-content > ol,
+.notes-search #quarto-document-content > p,
+.notes-search #quarto-document-content > ul,
+.notes-search #quarto-document-content > ol,
+.notes-review #quarto-document-content section:not(.theorem section, .callout section) > :not(h2, h3, h4, h5, h6, section, .theorem, .notes-topic-body, .notes-block-extra),
+.notes-search #quarto-document-content section:not(.theorem section, .callout section) > :not(h2, h3, h4, h5, h6, section, .theorem, .notes-topic-body, .notes-block-extra),
+.notes-review #quarto-document-content section:not(.theorem section, .callout section, .notes-topic:not(.notes-filtered)):not(:has(.theorem:not(.notes-filtered), .notes-topic:not(.notes-filtered))),
+.notes-search #quarto-document-content section:not(.theorem section, .callout section, .notes-topic:not(.notes-filtered)):not(:has(.theorem:not(.notes-filtered), .notes-topic:not(.notes-filtered))),
+.notes-studio #quarto-document-content .theorem.notes-filtered,
+.notes-studio #quarto-document-content .notes-topic.notes-filtered > .notes-topic-body,
+.notes-review .notes-topic:not(.is-revealed) > .notes-topic-body,
+.notes-review .theorem:not(.is-revealed) .notes-block-lead,
+.notes-review .theorem:not(.is-revealed) > :not(:first-child) {
+  display: none;
+}
+
+.notes-search #quarto-document-content .callout + :not(.callout) {
+  margin-block-start: 1.4rem;
+}
+
+.notes-review #quarto-document-content .theorem {
+  margin-block: .5rem;
+  padding-block: .6rem;
+  cursor: pointer;
+}
+
+.notes-review #quarto-document-content .theorem:not(.is-revealed) > :first-child {
+  margin-block-end: 0;
+}
+
+.notes-review #quarto-document-content .callout + :not(.callout) {
+  margin-block-start: .5rem;
+}
+
+.notes-review .theorem.is-revealed {
+  cursor: auto;
+}
+
+.notes-review .theorem-title {
+  position: relative;
+  margin-block-end: 0;
+  padding-inline-end: 1.5rem;
+}
+
+.notes-review .theorem.is-revealed .theorem-title {
+  margin-block-end: .45rem;
+  cursor: pointer;
+}
+
+.notes-review #quarto-document-content .notes-topic-head {
+  position: relative;
+  padding-inline-end: 2.75rem;
+  cursor: pointer;
+}
+
+.notes-review #quarto-document-content :is(h4, h5, h6).notes-topic-head {
+  margin-block: .7rem .35rem;
+}
+
+.notes-review .notes-topic-head:focus-visible {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 2px;
+}
+
+.notes-review .notes-topic-head::before,
+.notes-review .theorem-title::before {
+  content: "Show";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .72rem;
+  font-weight: 500;
+}
+
+.notes-review .notes-topic.is-revealed > .notes-topic-head::before,
+.notes-review .theorem.is-revealed .theorem-title::before {
+  content: "Hide";
+}
+
+.notes-review #quarto-document-content h2 {
+  margin-block: 2rem .5rem;
+}
+
+.notes-review #quarto-document-content h3 {
+  margin-block: 1.1rem .35rem;
+}
+
+@media (max-width: 575.98px) {
+  .notes-studio .code-copy-button {
+    display: none;
+  }
+
+  .notes-studio #quarto-document-content h1.title {
+    font-size: 2.05rem;
+  }
+
+  .notes-studio #quarto-document-content h2 {
+    font-size: 1.7rem;
+  }
+
+  .notes-studio #quarto-document-content h3 {
+    font-size: 1.32rem;
+  }
+
+  .notes-studio #quarto-document-content .theorem {
+    padding: .85rem 1rem .95rem;
+  }
+
+  .notes-studio section.supplementary-notes {
+    padding: 1.15rem 1.1rem;
+  }
+
+  /* The tools follow the title here, not the margin sidebar. */
+  #quarto-document-content > .notes-review-tools {
+    margin-block-start: 1.25rem;
   }
 }
