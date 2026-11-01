@@ -10,9 +10,7 @@ crossref:
 
 ## Linear Transformations
 
-::: {.callout-tip collapse="true"}
-
-## Linear Transformation
+::: {#def-la-2-1 name="Linear Transformation"}
 
 Let $V$ and $W$ be vector spaces over a field $F$.  A function $T : V \to W$ is called a **linear transformation** from $V$ to $W$ if,  for all $x, y \in V$ and $c \in F$, the following conditions hold:
 $$
@@ -31,9 +29,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Identity Transformation
+::: {#def-la-2-2 name="Identity Transformation"}
 
 The identity transformation $I_V : V \to V$ is defined by
 $$
@@ -44,9 +40,7 @@ We often write $I$ instead of $I_V$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Zero Transformation
+::: {#def-la-2-3 name="Zero Transformation"}
 
 The zero transformation $T_0 : V \to W$ is defined by
 $$
@@ -57,9 +51,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Null Space (Kernel)
+::: {#def-la-2-4 name="Null Space (Kernel)"}
 
 Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear. We define the **null space** (or **kernel**) of $T$, denoted $N(T)$, to be the set of all vectors $x \in V$ such that $T(x) = 0$. That is,
 
@@ -69,9 +61,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Range (Image)
+::: {#def-la-2-5 name="Range (Image)"}
 
 We define the **range** (or **image**) of $T$, denoted $R(T)$, to be the subset of $W$ consisting of all images $T(x)$ of vectors $x \in V$. That is,
 
@@ -87,9 +77,7 @@ Let $V$ and $W$ be vector spaces and $T : V \to W$ be linear.  Then $N(T)$ and $
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-la-2-6 name="Nullity and Rank"}
 
 Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear. If $N(T)$ and $R(T)$ are finite-dimensional, then we define the **nullity** of $T$, denoted $\operatorname{nullity}(T)$, and the **rank** of $T$, denoted $\operatorname{rank}(T)$, to be the dimensions of $N(T)$ and $R(T)$, respectively.
 
@@ -146,25 +134,19 @@ Let $V$ and $W$ be vector spaces, and suppose that $V$ has a finite basis  $\{v_
 
 ## The Matrix Representation of a Linear Transformation
 
-::: {.callout-tip collapse="true"}
-
-## Ordered Basis
+::: {#def-la-2-7 name="Ordered Basis"}
 
 Let $V$ be a finite-dimensional vector space. An **ordered basis** for $V$ is a basis for $V$ endowed with a specific order; that is, an ordered basis for $V$ is a finite sequence of linearly independent vectors in $V$ that generates $V$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Standard Ordered Basis
+::: {#def-la-2-8 name="Standard Ordered Basis"}
 
 For the vector space $\mathsf{F}^n$, we call $\{e_1, e_2, \dots, e_n\}$ the **standard ordered basis** for $\mathsf{F}^n$. Similarly, for the vector space $\mathsf{P}_n(F)$, we call $\{1, x, \dots, x^n\}$ the **standard ordered basis** for $\mathsf{P}_n(F)$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Coordinate Vector
+::: {#def-la-2-9 name="Coordinate Vector"}
 
 Let $\beta = \{u_1, u_2, \dots, u_n\}$ be an ordered basis for a finite-dimensional vector space $V$.  For $x \in V$, let $a_1, a_2, \dots, a_n$ be the unique scalars such that
 $$
@@ -184,9 +166,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## The Matrix Representation
+::: {#def-la-2-10 name="The Matrix Representation"}
 
 Suppose that $V$ and $W$ are finite-dimensional vector spaces with ordered bases  $\beta = \{v_1, v_2, \dots, v_n\}$ and $\gamma = \{w_1, w_2, \dots, w_m\}$, respectively.  Let $T : V \to W$ be linear. Then for each $j$, $1 \le j \le n$, there exist unique scalars  $a_{ij} \in F$, $1 \le i \le m$, such that
 $$
@@ -206,9 +186,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Sum and Scalar Multiple of Linear Transformation
+::: {#def-la-2-11 name="Sum and Scalar Multiple of Linear Transformation"}
 
 Let $T, U : V \to W$ be arbitrary functions, where $V$ and $W$ are vector spaces over $F$,  and let $a \in F$.  We **define** $T + U : V \to W$ by
 $$
@@ -249,9 +227,7 @@ Let $V$, $W$, and $Z$ be vector spaces over the same field $F$,  and let $T : V 
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Matrix Multiplication
+::: {#def-la-2-12 name="Matrix Multiplication"}
 
 Let $T : V \to W$ and $U : W \to Z$ be linear transformations, and let  $A = [U]_{\beta}^{\gamma}$ and $B = [T]_{\alpha}^{\beta}$, where  $\alpha = \{v_1, v_2, \dots, v_n\}$,  $\beta = \{w_1, w_2, \dots, w_m\}$, and  $\gamma = \{z_1, z_2, \dots, z_p\}$  are ordered bases for $V$, $W$, and $Z$, respectively.
 
@@ -288,9 +264,7 @@ This computation motivates the following definition of **matrix multiplication**
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Identity Matrix
+::: {#def-la-2-13 name="Identity Matrix"}
 
 We define the **Kronecker delta** $\delta_{ij}$ by $\delta_{ij} = 1$ if $i = j$ and  $\delta_{ij} = 0$ if $i \ne j$.  The $n \times n$ **identity matrix** $I_n$ is defined by $(I_n)_{ij} = \delta_{ij}$.
 
@@ -337,9 +311,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Left-Multiplication Transformation
+::: {#def-la-2-14 name="Left-Multiplication Transformation"}
 
 Let $A$ be an $m \times n$ matrix with entries from a field $F$.  We denote by $L_A$ the mapping $L_A : F^n \to F^m$ defined by  $L_A(x) = Ax$ for each column vector $x \in F^n$.  We call $L_A$ a **left-multiplication transformation**.
 
@@ -365,9 +337,7 @@ $\text{(f)}\quad$If $m = n$, then $L_{I_n} = I_{F^n}$.
 
 ## Invertibility and Isomorphisms
 
-::: {.callout-tip collapse="true"}
-
-## Invertible
+::: {#def-la-2-15 name="Invertible"}
 
 Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear.  A function $U : W \to V$ is said to be an **inverse** of $T$ if  $TU = I_W$ and $UT = I_V$.  If $T$ has an inverse, then $T$ is said to be **invertible**.
 
@@ -387,9 +357,7 @@ Let $T$ be an invertible linear transformation from $V$ to $W$.  Then $V$ is fin
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-la-2-16 name="Invertible Matrix"}
 
 Let $A$ be an $n \times n$ matrix.  Then $A$ is **invertible** if there exists an $n \times n$ matrix $B$ such that  $AB = BA = I$. If $A$ is invertible, then the matrix $B$ such that $AB = BA = I$ is unique.
 
@@ -401,9 +369,7 @@ Let $V$ and $W$ be finite-dimensional vector spaces with ordered bases  $\beta$ 
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Isomorphism
+::: {#def-la-2-17 name="Isomorphism"}
 
 Let $V$ and $W$ be vector spaces.  We say that $V$ is **isomorphic** to $W$ if there exists a linear transformation  $T : V \to W$ that is invertible.  Such a linear transformation is called an **isomorphism** from $V$ onto $W$.
 
@@ -423,9 +389,7 @@ Let $V$ and $W$ be finite-dimensional vector spaces of dimensions $n$ and $m$, r
 
 ## The Change of Coordinate Matrix
 
-::: {.callout-tip collapse="true"}
-
-## Change of Coordinate Matrix
+::: {#def-la-2-18 name="Change of Coordinate Matrix"}
 
 Let $\beta$ and $\beta'$ be two ordered bases for a finite-dimensional vector space $V$, and let $Q = [I_V]_{\beta'}^{\beta}$. Then
 
@@ -446,9 +410,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Similar
+::: {#def-la-2-19 name="Similar"}
 
 Let $A$ and $B$ be matrices in $M_{n \times n}(F)$.  We say that $B$ is **similar** to $A$ if there exists an invertible matrix $Q$  such that
 $$
@@ -459,9 +421,7 @@ $$
 
 ## Dual Spaces
 
-::: {.callout-tip collapse="true"}
-
-## Dual Space
+::: {#def-la-2-20 name="Dual Space"}
 
 For a vector space $V$ over $F$, we define the **dual space** of $V$ to be the vector space $\mathcal{L}(V, F)$, denoted by $V^{*}$.
 
@@ -469,9 +429,7 @@ For a vector space $V$ over $F$, we define the **dual space** of $V$ to be the v
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Dual Basis
+::: {#def-la-2-21 name="Dual Basis"}
 
 Suppose that $V$ is a finite-dimensional vector space with the ordered basis  $\beta = \{x_1, x_2, \dots, x_n\}$.  we call the ordered basis  $\beta^{*} = \{f_1, f_2, \dots, f_n\}$ of $V^{*}$ that satisfies  $f_i(x_j) = \delta_{ij}$ ($1 \le i, j \le n$)  the **dual basis** of $\beta$.
 
@@ -486,9 +444,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Transpose
+::: {#def-la-2-22 name="Transpose"}
 
 Let $V$ and $W$ be finite-dimensional vector spaces over $F$ with ordered bases $\beta$ and $\gamma$, respectively.  For any linear transformation $T : V \to W$, the mapping  $T^{t} : W^{*} \to V^{*}$ defined by  $T^{t}(g) = gT$ for all $g \in W^{*}$  is a linear transformation with the property that
 
@@ -500,17 +456,13 @@ The linear transformation $T^t$ is called the **transpose** of $T$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Double Dual Space
+::: {#def-la-2-23 name="Double Dual Space"}
 
 We define the **double dual** $V^{**}$ of $V$ to be the dual of $V^{*}$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-la-2-24 name="Evaluation Functional"}
 
 For a vector $x \in V$, we define $\widehat{x} : V^{*} \to F$ by  $\widehat{x}(f) = f(x)$ for every $f \in V^{*}$.  It is easy to verify that $\widehat{x}$ is a linear functional on $V^{*}$,  so $\widehat{x} \in V^{**}$.
 
@@ -533,3 +485,14 @@ Let $V$ be a finite-dimensional vector space, and define  $\psi : V \to V^{**}$ 
 Let $V$ be a finite-dimensional vector space with dual space $V^{*}$.  Then every ordered basis for $V^{*}$ is the dual basis for some basis for $V$.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-la-2-3: $\operatorname{nullity}(T) + \operatorname{rank}(T) = \dim(V)$.
+- @thm-la-2-4: $T$ is one-to-one exactly when $N(T) = \{0\}$.
+- @thm-la-2-6: A linear transformation is determined by its values on a basis.
+- @thm-la-2-10: Coordinates turn applying $T$ into matrix multiplication.
+- @thm-la-2-15: Finite-dimensional spaces over the same field are isomorphic exactly when their dimensions agree.
+- @thm-la-2-17: Changing the basis of an operator gives a similar matrix: $[T]_{\beta'} = Q^{-1} [T]_{\beta} Q$.

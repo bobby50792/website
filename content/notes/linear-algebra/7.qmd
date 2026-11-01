@@ -34,9 +34,7 @@ $$
 
 for some eigenvalue $\lambda$ of $\mathsf{T}$. Such a matrix $A_i$ is called a **Jordan block** corresponding to $\lambda$, and the matrix $[\mathsf{T}]_\beta$ is called a **Jordan canonical form** of $\mathsf{T}$. We also say that the ordered basis $\beta$ is a **Jordan canonical basis** for $\mathsf{T}$. Observe that each Jordan block $A_i$ is “almost” a diagonal matrix—in fact, $[\mathsf{T}]_\beta$ is a diagonal matrix if and only if each $A_i$ is of the form $(\lambda)$.
 
-::: {.callout-tip collapse="true"}
-
-## Generalized Eigenvector
+::: {#def-la-7-1 name="Generalized Eigenvector"}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\lambda$ be a scalar. A nonzero vector $x$ in $\mathsf{V}$ is called a **generalized eigenvector of $\mathsf{T}$ corresponding to $\lambda$** if
 $$
@@ -48,9 +46,7 @@ Notice that if $x$ is a generalized eigenvector of $\mathsf{T}$ corresponding to
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Generalized Eigenspace
+::: {#def-la-7-2 name="Generalized Eigenspace"}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\lambda$ be an eigenvalue of $\mathsf{T}$. The **generalized eigenspace of $\mathsf{T}$ corresponding to** $\lambda$, denoted $\mathsf{K}_\lambda$, is the subset of $\mathsf{V}$ defined by
 $$
@@ -63,7 +59,7 @@ Note that $\mathsf{K}_\lambda$ consists of the zero vector and all generalized e
 
 ## Generalized Eigenspace Properties
 
-::: {#thm-la-7-generalized-1}
+::: {#thm-la-7-1}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\lambda$ be an eigenvalue of $\mathsf{T}$. Then:
 
@@ -73,7 +69,7 @@ Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\
 
 :::
 
-::: {#thm-la-7-generalized-2}
+::: {#thm-la-7-2}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ such that the characteristic polynomial of $\mathsf{T}$ splits. Suppose that $\lambda$ is an eigenvalue of $\mathsf{T}$ with multiplicity $m$. Then:
 
@@ -83,7 +79,7 @@ Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mat
 
 :::
 
-::: {#thm-la-7-generalized-3}
+::: {#thm-la-7-3}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ such that the characteristic polynomial of $\mathsf{T}$ splits, and let $\lambda_1, \lambda_2, \dots, \lambda_k$ be the distinct eigenvalues of $\mathsf{T}$. Then, for every $x \in \mathsf{V}$, there exist vectors $v_i \in \mathsf{K}_{\lambda_i}$, $1 \le i \le k$, such that
 $$
@@ -92,7 +88,7 @@ $$
 
 :::
 
-::: {#thm-la-7-generalized-4}
+::: {#thm-la-7-4}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ such that the characteristic polynomial of $\mathsf{T}$ splits, and let $\lambda_1, \lambda_2, \dots, \lambda_k$ be the distinct eigenvalues of $\mathsf{T}$ with corresponding multiplicities $m_1, m_2, \dots, m_k$. For $1 \le i \le k$, let $\beta_i$ be an ordered basis for $\mathsf{K}_{\lambda_i}$. Then the following statements are true.
 
@@ -104,9 +100,7 @@ Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mat
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Cycles of Generalized Eigenvectors
+::: {#def-la-7-3 name="Cycles of Generalized Eigenvectors"}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $x$ be a generalized eigenvector of $\mathsf{T}$ corresponding to the eigenvalue $\lambda$. Suppose that $p$ is the smallest positive integer for which $(\mathsf{T} - \lambda\mathsf{I})^p(x) = 0$. Then the ordered set
 $$
@@ -116,7 +110,7 @@ is called a **cycle of generalized eigenvectors** of $\mathsf{T}$ corresponding 
 
 :::
 
-::: {#thm-la-7-1}
+::: {#thm-la-7-5}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ whose characteristic polynomial splits, and suppose that $\beta$ is a basis for $\mathsf{V}$ such that $\beta$ is a disjoint union of cycles of generalized eigenvectors of $\mathsf{T}$. Then the following statements are true.
 (a) For each cycle $\gamma$ of generalized eigenvectors contained in $\beta$, $\mathsf{W} = \operatorname{span}(\gamma)$ is $\mathsf{T}$-invariant, and $[\mathsf{T}_{\mathsf{W}}]_\gamma$ is a Jordan block.
@@ -124,13 +118,13 @@ Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mat
 
 :::
 
-::: {#thm-la-7-2}
+::: {#thm-la-7-6}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\lambda$ be an eigenvalue of $\mathsf{T}$. Suppose that $\gamma_1, \gamma_2, \dots, \gamma_q$ are cycles of generalized eigenvectors of $\mathsf{T}$ corresponding to $\lambda$ such that the initial vectors of the $\gamma_i$'s are distinct and form a linearly independent set. Then the $\gamma_i$'s are disjoint, and their union $\gamma = \bigcup_{i=1}^q \gamma_i$ is linearly independent.
 
 :::
 
-::: {#thm-la-7-existence name="Existence and Uniqueness of Jordan Form"}
+::: {#thm-la-7-7 name="Existence and Uniqueness of Jordan Form"}
 
 If the characteristic polynomial of a linear operator on a finite-dimensional vector space splits over the base field, then a Jordan canonical basis exists. Its Jordan blocks are unique up to their order.
 
@@ -139,3 +133,11 @@ In particular, every complex square matrix is similar to a Jordan matrix. For an
 :::
 
 Reference: [MIT 18.700: Jordan Normal Form Notes](https://ocw.mit.edu/courses/18-034-honors-differential-equations-spring-2004/51c72a6989c6a79228158a69f7750c5a_normal.pdf).
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-la-7-2: $\dim(\mathsf{K}_\lambda) \le m$ and $\mathsf{K}_\lambda = \mathsf{N}((\mathsf{T} - \lambda\mathsf{I})^m)$.
+- @thm-la-7-4: Bases of the generalized eigenspaces combine into a basis of $\mathsf{V}$, with $\dim(\mathsf{K}_{\lambda_i}) = m_i$.
+- @thm-la-7-7: If the characteristic polynomial splits, a Jordan canonical basis exists and its blocks are unique up to order.

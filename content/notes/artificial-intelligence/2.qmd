@@ -1,5 +1,7 @@
 ---
 title: "Logic"
+body-classes: notes-studio
+include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [2]
@@ -18,7 +20,7 @@ Formal languages: syntax and model
 
 ### Propositional logic
 
-**Syntax:**
+#### Syntax
 
 - Propositional symbols (atomic formulas): $A, B, C$
 - Logical connectives: $\neg, \land, \lor, \to, \leftrightarrow$
@@ -29,28 +31,30 @@ Formal languages: syntax and model
   - Implication: $f \to g$
   - Biconditional: $f \leftrightarrow g$
 
-**Model:**
+#### Model
 
 A model $w$ in propositional logic is an assignment of truth values to propositional symbols.
 
-**Interpretation function:**
+#### Interpretation function
 
 Let $f$ be a formula and $w$ be a model. An interpretation function $\mathcal{I}(f,w)$ returns:
 
 - true (1) (say that $w$ satisfies $f$)
 - false (0) (say that $w$ does not satisfy $f$)
 
-**Base case:** For a propositional symbol $p$ (e.g., $A, B, C$):
+#### Base case
+
+For a propositional symbol $p$ (e.g., $A, B, C$):
 
 $$
 \mathcal{I}(p,w) = w(p)
 $$
 
-**Recursive case**
+#### Recursive case
 
 Let $\mathcal{M}(f)$ be the set of **models** $w$ for which $\mathcal{I}(f,w) = 1$.
 
-**Knowledge base:**
+#### Knowledge base
 
 A knowledge base $\mathrm{KB}$ is a set of formulas representing their conjunction / intersection:
 
@@ -60,7 +64,7 @@ $$
 
 ### First-order logic
 
-**Syntax:**
+#### Syntax
 
 - Terms denote objects: constant symbols $c$, variables $x$, and function applications $f(t_1,\ldots,t_n)$, where each $t_i$ is a term.
 - Formulas are built from:
@@ -68,7 +72,7 @@ $$
   - Connectives applied to formulas: $\neg,\land,\lor,\to,\leftrightarrow$.
   - Quantifiers applied to formulas: $\forall x\,\varphi$, $\exists x\,\varphi$.
 
-**Models:**
+#### Models
 
 - A model $w$ specifies a nonempty domain $D$ and interprets:
   - Constant symbols as objects: $w(c)\in D$.
@@ -82,33 +86,39 @@ For example, if $w(\mathrm{alice})=o_1$, $w(\mathrm{arithmetic})=o_3$, and $(o_1
 
 ### Entailment and satisfiability
 
-**Entailment:** $\mathrm{KB}$ entails $f$ (written $\mathrm{KB} \models f$) iff $\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)$.
+#### Entailment
 
-**Contradiction:** $\mathrm{KB}$ contradicts $f$ iff $\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset$.
+$\mathrm{KB}$ entails $f$ (written $\mathrm{KB} \models f$) iff $\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)$.
 
-**Contingency:**
+#### Contradiction
+
+$\mathrm{KB}$ contradicts $f$ iff $\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset$.
+
+#### Contingency
 
 $$
 \emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})
 $$
 
-**Satisfiability:** A knowledge base $\mathrm{KB}$ is satisfiable if $\mathcal{M}(\mathrm{KB}) \neq \emptyset$.
+#### Satisfiability
+
+A knowledge base $\mathrm{KB}$ is satisfiable if $\mathcal{M}(\mathrm{KB}) \neq \emptyset$.
 
 ### SAT and model-checking
 
-**Model checking:**
+#### Model checking
 
 - **Input:** knowledge base $\mathrm{KB}$
 - **Output:** exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
 
-**Popular algorithms:**
+#### Popular algorithms
 
 - DPLL (backtracking + propagation + pruning)
 - WalkSat (randomized local search over complete assignments)
 
 ### Inference rules
 
-**Modus ponens inference rule:**
+#### Modus ponens inference rule
 
 For any propositional symbols $p$ and $q$:
 
@@ -116,7 +126,7 @@ $$
 \frac{p,\quad p \to q}{q}
 $$
 
-**General inference rule:**
+#### General inference rule
 
 If $f_1, \ldots, f_k, g$ are formulas, then the following is an inference rule:
 
@@ -124,7 +134,7 @@ $$
 \frac{f_1,\quad \ldots,\quad f_k}{g}
 $$
 
-**Algorithm: forward inference:**
+#### Algorithm: forward inference
 
 Input: set of inference rules $\mathrm{Rules}$.
 
@@ -133,15 +143,17 @@ Repeat until no changes to $\mathrm{KB}$:
 1. Choose set of formulas $f_1, \ldots, f_k \in \mathrm{KB}$.
 2. If matching rule $\frac{f_1,\quad \cdots,\quad f_k}{g}$ exists, add $g$ to $\mathrm{KB}$.
 
-**Derivation:**
+#### Derivation
 
 $\mathrm{KB}$ derives/proves $f$ ($\mathrm{KB} \vdash f$) iff $f$ eventually gets added to $\mathrm{KB}$.
 
 ### Horn clauses and modus ponens
 
-**Propositional logic:**
+#### Propositional logic
 
-**Definite clause:** A definite clause has the following form:
+##### Definite clause
+
+A definite clause has the following form:
 
 $$
 (p_1 \land \cdots \land p_k) \to q
@@ -149,20 +161,24 @@ $$
 
 where $p_1, \ldots, p_k, q$ are propositional symbols.
 
-**Horn clause:** A Horn clause is either:
+##### Horn clause
+
+A Horn clause is either:
 
 - a definite clause $(p_1 \land \cdots \land p_k \to q)$
 - a goal clause $(p_1 \land \cdots \land p_k \to \mathrm{false})$
 
-**Modus ponens:**
+##### Modus ponens
 
 $$
 \frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
 $$
 
-**First-order logic:**
+#### First-order logic
 
-**Definite clause:** A definite clause has the following form:
+##### Definite clause
+
+A definite clause has the following form:
 
 $$
 \forall x_1 \cdots \forall x_n \bigl((a_1 \land \cdots \land a_k) \to b\bigr)
@@ -170,19 +186,19 @@ $$
 
 for variables $x_1, \ldots, x_n$ and atomic formulas $a_1, \ldots, a_k, b$ (which contain those variables).
 
-**Modus ponens:**
+##### Modus ponens
 
 $$
 \frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
 $$
 
-**Substitution:**
+##### Substitution
 
 A substitution $\theta$ is a mapping from variables to terms.
 
 $\operatorname{Subst}[\theta, f]$ returns the result of performing substitution $\theta$ on $f$.
 
-**Unification:**
+##### Unification
 
 Unification takes two formulas $f$ and $g$ and returns a substitution $\theta$ which is the most general unifier:
 
@@ -196,31 +212,35 @@ or "fail" if no such $\theta$ exists.
 
 ### Complexity
 
-**Theorem: completeness:**
+::: {#thm-ai-2-1 name="Completeness of Modus Ponens"}
 
 Modus ponens is complete for first-order logic with only Horn clauses.
 
-**Theorem: semi-decidability:**
+:::
+
+::: {#thm-ai-2-2 name="Semi-Decidability"}
 
 First-order logic (even restricted to only Horn clauses) is **semi-decidable**.
 
 - If $\mathrm{KB} \models f$, forward inference on complete inference rules will prove $f$ in finite time.
 - If $\mathrm{KB} \not\models f$, no algorithm can show this in finite time.
 
+:::
+
 ### Resolution
 
-**Propositional resolution rule:**
+#### Propositional resolution rule
 
 $$
 \frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
 {f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
 $$
 
-**Conjunctive normal form (CNF):**
+#### Conjunctive normal form (CNF)
 
 A CNF formula is a conjunction of clauses.
 
-**Proposition: conversion to CNF:**
+::: {#prp-ai-2-1 name="Conversion to CNF"}
 
 Every formula $f$ in propositional logic can be converted into an equivalent CNF formula $f'$:
 
@@ -228,12 +248,14 @@ $$
 \mathcal{M}(f) = \mathcal{M}(f')
 $$
 
-**First-order conversion to CNF:**
+:::
+
+#### First-order conversion to CNF
 
 - All variable have universal quantifiers by default
 - Introduce Skolem functions (e.g., $Y(x)$) to represent existentially quantified variables.
 
-**First-order resolution rule:**
+#### First-order resolution rule
 
 $$
 \frac{
@@ -251,7 +273,7 @@ where $\theta = \operatorname{Unify}[p,q]$.
 
 ### Desiderata for inference rules
 
-**Semantics:**
+#### Semantics
 
 Interpretation defines **entailed/true** formulas: $\mathrm{KB} \models f$.
 
@@ -259,11 +281,11 @@ $$
 \mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)
 $$
 
-**Syntax:**
+#### Syntax
 
 Inference rules **derive** formulas: $\mathrm{KB} \vdash f$
 
-### Soundness
+::: {#def-ai-2-1 name="Soundness"}
 
 A set of inference rules $\mathrm{Rules}$ is **sound** if:
 
@@ -273,13 +295,17 @@ $$
 \{f : \mathrm{KB} \models f\}.
 $$
 
-### Completeness
+:::
+
+::: {#def-ai-2-2 name="Completeness"}
 
 A set of inference rules $\mathrm{Rules}$ is **complete** if:
 
 $$
 \{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}
 $$
+
+:::
 
 ### Fixing completeness
 
@@ -291,9 +317,20 @@ $$
 
    Modus ponens $\to$ resolution
 
-### Theorem: Modus ponens on Horn clauses
+::: {#thm-ai-2-3 name="Modus Ponens on Horn Clauses"}
 
 Modus ponens is **complete** with respect to Horn clauses:
 
 - Suppose $\mathrm{KB}$ contains only Horn clauses and $p$ is an entailed propositional symbol.
 - Then applying modus ponens will derive $p$.
+
+:::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-ai-2-1 and @def-ai-2-2: Soundness means everything derived is entailed; completeness means everything entailed is derived.
+- @thm-ai-2-1: Modus ponens is complete for first-order logic with only Horn clauses.
+- @thm-ai-2-2: First-order logic is semi-decidable, even when restricted to Horn clauses.
+- @prp-ai-2-1: Every propositional formula can be converted into an equivalent CNF formula.

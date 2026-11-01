@@ -1,5 +1,7 @@
 ---
 title: "Search"
+body-classes: notes-studio
+include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [1]
@@ -31,13 +33,21 @@ Can only generate successors and distinguish goals from non-goals. Fringe: nodes
 
 Can know whether one non-goal is more promising than another.
 
-**Search Heuristics:** A function that estimates how close a state is to a goal.
+#### Search Heuristics
 
-**Greedy Search:** Fringe: nodes ordered by $h(x)$ = heuristic evaluation of cost from $x$ to goal.
+A function that estimates how close a state is to a goal.
 
-**A\* Search:** Fringe: nodes ordered by $f(x) = g(x) + h(x)$. Stop only when a goal is expanded.
+#### Greedy Search
 
-**Admissible Heuristics:** A heuristic $h$ is admissible (optimistic) if:
+Fringe: nodes ordered by $h(x)$ = heuristic evaluation of cost from $x$ to goal.
+
+#### A\* Search
+
+Fringe: nodes ordered by $f(x) = g(x) + h(x)$. Stop only when a goal is expanded.
+
+::: {#def-ai-1-1 name="Admissible Heuristic"}
+
+A heuristic $h$ is admissible (optimistic) if:
 
 $$
 0 \le h(n) \le h^*(n)
@@ -45,15 +55,23 @@ $$
 
 where $h^*(n)$ is the true cost to a nearest goal.
 
+:::
+
 Coming up with admissible heuristics is most of what's involved in using A\* in practice.
 
-**Graph Search:** Never expand a state twice.
+#### Graph Search
 
-**Consistent Heuristics:** A heuristic is consistent if for every node $n$ and its successor $n'$:
+Never expand a state twice.
+
+::: {#def-ai-1-2 name="Consistent Heuristic"}
+
+A heuristic is consistent if for every node $n$ and its successor $n'$:
 
 $$
 h(n) \le \operatorname{cost}(n \text{ to } n') + h(n')
 $$
+
+:::
 
 A\* graph search is optimal.
 
@@ -61,7 +79,9 @@ Consistency implies admissibility.
 
 UCS (Uniform Cost Search) is a special case ($h = 0$).
 
-**Create Heuristics:** Often, heuristics are solutions to relaxed problems, where new actions are available.
+#### Create Heuristics
+
+Often, heuristics are solutions to relaxed problems, where new actions are available.
 
 ### General Framework of Relaxed Problems
 
@@ -86,16 +106,24 @@ the minimum cost from $s$ to an end state using $\operatorname{Cost}^j(s,a)$.
 
 ### Application in Robotics: Motion Planning
 
-**Cell Decomposition:** Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles.
+#### Cell Decomposition
+
+Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles.
 If no path found, subdivide the mixed cells.
 
-**The Optimal Path:** Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.
+#### The Optimal Path
 
-**Visibility Graph:** Connect mutually visible obstacle vertices and the start and goal positions.
+Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.
 
-**Weighted A\*:** expands states in the order of $f = g + \varepsilon h$ values, $\varepsilon > 1$ = bias towards states that are closer to goal.
+#### Visibility Graph
 
-**Weighted A\* Search:**
+Connect mutually visible obstacle vertices and the start and goal positions.
+
+#### Weighted A\*
+
+expands states in the order of $f = g + \varepsilon h$ values, $\varepsilon > 1$ = bias towards states that are closer to goal.
+
+#### Weighted A\* Search
 
 - Trades off optimality for speed.
 - $\varepsilon$-suboptimal:
@@ -110,7 +138,9 @@ If no path found, subdivide the mixed cells.
 
 ## Adversarial Problems
 
-**Deterministic Games:** Many possible formalizations, one is:
+### Deterministic Games
+
+Many possible formalizations, one is:
 
 - States: $S$ (start at $s_0$)
 - Players: $P = \{1, \ldots, N\}$ (usually take turns)
@@ -125,9 +155,13 @@ Zero-Sum Games vs. General-Sum Games
 
 ### Minimax Search
 
-**Deterministic, zero-sum games:** e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.
+#### Deterministic, zero-sum games
 
-**Complexity:** Time: $O(b^m)$, Space: $O(b^m)$, is completely infeasible.
+e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.
+
+#### Complexity
+
+Time: $O(b^m)$, Space: $O(b^m)$, is completely infeasible.
 
 ### Alpha-Beta Search
 
@@ -164,14 +198,16 @@ double min_value(const State& state, double alpha, double beta) {
 }
 ```
 
-**With perfect ordering:**
+#### With perfect ordering
 
 - Time complexity drops to $O(b^{m/2})$.
 - Doubles solvable depth!
 
 ### Heuristic Minimax
 
-**Depth-limited search:** Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.
+#### Depth-limited search
+
+Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.
 
 In practice: typically weighted linear sum of features:
 
@@ -189,10 +225,14 @@ etc.
 
 ### Game Theory
 
-**Normal Form Game:** Approximate games as single shot,
+#### Normal Form Game
+
+Approximate games as single shot,
 Represent only actions and utilities.
 
-**Pure vs Mixed Strategies:** deterministic ($p = 1$) selection of actions vs. randomization over actions.
+#### Pure vs Mixed Strategies
+
+deterministic ($p = 1$) selection of actions vs. randomization over actions.
 
 $$
 u(\text{action}) = \sum_{\text{world}} p(\text{world}) \cdot u(\text{action}, \text{world})
@@ -202,23 +242,37 @@ $$
 u(s) = \sum_{a \in s} p(a) \cdot \sum_{\text{world}} p(\text{world}) \cdot u(a, \text{world})
 $$
 
-**Best Response:** Given the strategies of all other players $s_{-i}$, a best response for player $i$ is:
+#### Best Response
+
+Given the strategies of all other players $s_{-i}$, a best response for player $i$ is:
 
 $$
 \operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})
 $$
 
-**Nash Equilibrium:** Nash Equilibria are strategy profiles $\vec{s}$ where none of the participants benefit from unilaterally changing their decision.
+::: {#def-ai-1-3 name="Nash Equilibrium"}
+
+Nash Equilibria are strategy profiles $\vec{s}$ where none of the participants benefit from unilaterally changing their decision.
 
 $$
 \forall i \quad u_i(\vec{s}) \geq u_i(\operatorname{neighbor}(\vec{s}))
 $$
 
-**Nash Equilibria always exist:** If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.
+:::
 
-**Indifference Principle:** In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.
+::: {#thm-ai-1-1 name="Existence of Nash Equilibria"}
 
-**von Neumann Minimax Theorem:** For every finite two-player zero-sum game:
+If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.
+
+:::
+
+#### Indifference Principle
+
+In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.
+
+::: {#thm-ai-1-2 name="von Neumann Minimax Theorem"}
+
+For every finite two-player zero-sum game:
 
 $$
 \max_{\sigma_1}\min_{\sigma_2} u(\sigma_1,\sigma_2)
@@ -239,9 +293,11 @@ $$
 u(\sigma_1,\sigma_2^*) \le v \le u(\sigma_1^*,\sigma_2)
 $$
 
+:::
+
 Two-player zero-sum Nash equilibrium = Minimax solution
 
-**Game Types:**
+#### Game Types
 
 - Perfect-information, zero-sum: Minimax or Alpha–Beta
 
@@ -253,23 +309,29 @@ Two-player zero-sum Nash equilibrium = Minimax solution
 
 Combination of Simulation and Bandit-Based Method
 
-**Two Fundamental Concepts:**
+#### Two Fundamental Concepts
 
 1. The true value of any action can be approximated by running several random simulations.
 2. These values can be efficiently used to adjust the policy (strategy) towards a best-first strategy.
 
-**MCTS Algorithm:**
+#### MCTS Algorithm
 
 1. **Selection:** Start at the root node and select children using the tree policy. Stop when an expandable node is reached.
 2. **Expansion:** Add one or more child nodes to the tree.
 3. **Simulation:** Run a simulation from the newly added node. The default policy (or rollout policy) determines how the simulation is run.
 4. **Backpropagation:** Update values based on the outcome.
 
-**Policies:** Tree policy, Default policy, Decision policy (selecting the best child).
+#### Policies
 
-**Upper Confidence Bound on Trees (UCT):** Formulated node selection as Multi-Arm Bandit problem.
+Tree policy, Default policy, Decision policy (selecting the best child).
 
-**UCT Node Selection (UCB1):** UCB1 applied for each child selection.
+#### Upper Confidence Bound on Trees (UCT)
+
+Formulated node selection as Multi-Arm Bandit problem.
+
+#### UCT Node Selection (UCB1)
+
+UCB1 applied for each child selection.
 
 $$
 UCT = \overline{X}_j + 2C_p \sqrt{\frac{2\ln n}{n_j}}
@@ -280,7 +342,7 @@ $$
 - $n_j$: number of times child $j$ has been visited
 - $C_p$: some constant $> 0$
 
-**Advantages and Disadvantages of MCTS:**
+#### Advantages and Disadvantages of MCTS
 
 - Advantages:
   - Proved MCTS converges to minimax solution
@@ -296,9 +358,11 @@ $$
 
 A rational agent should choose the action that maximizes its expected utility, given its knowledge.
 
-**Utilities:** Utilities are functions from outcomes (states of the world) to real numbers that describe an agent's preferences. We hard-wire utilities and let behaviors emerge.
+#### Utilities
 
-**The Axioms of Rationality:**
+Utilities are functions from outcomes (states of the world) to real numbers that describe an agent's preferences. We hard-wire utilities and let behaviors emerge.
+
+#### The Axioms of Rationality
 
 - **Orderability**
 
@@ -342,3 +406,12 @@ A rational agent should choose the action that maximizes its expected utility, g
 
 Rational preferences imply behavior describable as maximization of expected utility.
 
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-ai-1-2: A\* graph search with a consistent heuristic is optimal, and consistency implies admissibility.
+- [Alpha-Beta Search](#alpha-beta-search): With perfect ordering, time drops to $O(b^{m/2})$.
+- @thm-ai-1-1: A game with finitely many players and actions always has a Nash equilibrium.
+- @thm-ai-1-2: In a finite two-player zero-sum game, the max-min and min-max values agree.
+- [Principle of Maximum Expected Utility](#principle-of-maximum-expected-utility): Rational preferences imply behavior describable as maximizing expected utility.

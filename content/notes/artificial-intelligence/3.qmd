@@ -1,5 +1,7 @@
 ---
 title: "Probabilistic Models"
+body-classes: notes-studio
+include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [3]
@@ -12,23 +14,37 @@ crossref:
 
 ### Random variables and distributions
 
-**Random Variables:** A random variable is some aspect of the world about which we (may) have uncertainty.
+#### Random Variables
 
-**Probability Distribution:** A probability distribution over a random variable associates a probability with each value.
+A random variable is some aspect of the world about which we (may) have uncertainty.
 
-**Joint Distributions:** A joint distribution over a set of random variables: specifies a real number for each assignment.
+#### Probability Distribution
 
-**Marginal Distributions:** Marginalization (summing out): Combine collapsed rows by adding.
+A probability distribution over a random variable associates a probability with each value.
+
+#### Joint Distributions
+
+A joint distribution over a set of random variables: specifies a real number for each assignment.
+
+#### Marginal Distributions
+
+Marginalization (summing out): Combine collapsed rows by adding.
 
 ### Conditional probability and Bayes' rule
 
-**Conditional Probabilities:** Conditional distributions are probability distributions over some variables given fixed values of others.
+#### Conditional Probabilities
 
-**Bayes' Rule:** Bayes' rule allows us to compute conditional probabilities in terms of other conditional probabilities.
+Conditional distributions are probability distributions over some variables given fixed values of others.
+
+#### Bayes' Rule
+
+Bayes' rule allows us to compute conditional probabilities in terms of other conditional probabilities.
 
 ## Bayesian Nets: Representation
 
-**Bayes' nets:** a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)
+### Bayes' nets
+
+a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)
 
 - More properly called **graphical models**
 - Local interactions chain together to give global, indirect interactions
@@ -48,7 +64,9 @@ crossref:
   P(X \mid a_1 \ldots a_n)
   $$
 
-**CPT (conditional probability table):** description of a noisy causal process.
+#### CPT (conditional probability table)
+
+description of a noisy causal process.
 
 ### Assumptions
 
@@ -70,10 +88,20 @@ If all paths between $A$ and $B$ are blocked given observed variables $Z$, then 
 
 ## Bayesian Nets: Inference
 
-**Inference:** Calculating some useful quantity from a joint probability distribution.
+### Inference
+
+Calculating some useful quantity from a joint probability distribution.
 
 ### Inference by enumeration
 
 1. **Join** all factors.
 2. **Eliminate** all hidden variables.
 3. **Normalize** the result.
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Assumptions](#assumptions): A Bayes' net assumes $P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))$.
+- [D-Separation](#d-separation): If all paths between $A$ and $B$ are blocked given $Z$, then $A \perp\!\!\!\perp B \mid Z$.
+- [Inference by enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize.

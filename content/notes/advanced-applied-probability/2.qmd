@@ -1,5 +1,7 @@
 ---
 title: "Laws of Large Numbers"
+body-classes: notes-studio
+include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [2]
@@ -12,15 +14,19 @@ crossref:
 
 ### Basic Definitions
 
-::: {.callout-tip title="Definitions of Independence" collapse="true"}
+::: {#def-aap-2-1 name="Independent Events"}
 
-**Events:** Two events $A$ and $B$ are **independent** if
+Two events $A$ and $B$ are **independent** if
 
 $$
 P(A\cap B)=P(A)P(B).
 $$
 
-**Random variables:** Let $X$ and $Y$ be random variables defined on the same
+:::
+
+::: {#def-aap-2-2 name="Independent Random Variables"}
+
+Let $X$ and $Y$ be random variables defined on the same
 probability space $(\Omega,\mathcal F,P)$:
 
 $$
@@ -35,7 +41,11 @@ $$
 
 That is, the events $A=\{X\in C\}$ and $B=\{Y\in D\}$ are independent.
 
-**$\sigma$-fields:** Let $(\Omega,\mathcal H,P)$ be a probability space, and let
+:::
+
+::: {#def-aap-2-3 name="Independent σ-Fields"}
+
+Let $(\Omega,\mathcal H,P)$ be a probability space, and let
 $\mathcal F,\mathcal G\subseteq\mathcal H$ be two sub-$\sigma$-fields. They are
 **independent** if
 
@@ -48,7 +58,7 @@ That is, every event in $\mathcal F$ is independent of every event in $\mathcal 
 
 :::
 
-::: {#thm-1 name="Independence and Generated σ-Fields"}
+::: {#thm-aap-2-1 name="Independence and Generated σ-Fields"}
 
 Let $X$ and $Y$ be random variables on the same probability space $(\Omega,\mathcal H,P)$.
 
@@ -62,11 +72,11 @@ ii) Conversely, if $\mathcal F,\mathcal G\subseteq\mathcal H$ are independent
 
 ### Independence of Finite Families
 
-::: {.callout-tip title="Independence of Finite Families" collapse="true"}
-
 Work on a common probability space $(\Omega,\mathcal H,P)$.
 
-**$\sigma$-fields:** The sub-$\sigma$-fields
+::: {#def-aap-2-4 name="Independence of Finitely Many σ-Fields"}
+
+The sub-$\sigma$-fields
 $\mathcal F_1,\ldots,\mathcal F_n\subseteq\mathcal H$ are **independent** if,
 whenever $A_i\in\mathcal F_i$ for $i=1,\ldots,n$,
 
@@ -74,7 +84,11 @@ $$
 P\left(\bigcap_{i=1}^n A_i\right)=\prod_{i=1}^n P(A_i).
 $$
 
-**Random variables:** The random variables $X_1,\ldots,X_n$ are **independent**
+:::
+
+::: {#def-aap-2-5 name="Independence of Finitely Many Random Variables"}
+
+The random variables $X_1,\ldots,X_n$ are **independent**
 if, whenever $B_i\in\mathcal R$ for $i=1,\ldots,n$,
 
 $$
@@ -82,7 +96,11 @@ P\left(\bigcap_{i=1}^n\{X_i\in B_i\}\right)
 =\prod_{i=1}^n P(X_i\in B_i).
 $$
 
-**Events:** The events $A_1,\ldots,A_n\in\mathcal H$ are **independent** if, for
+:::
+
+::: {#def-aap-2-6 name="Independence of Finitely Many Events"}
+
+The events $A_1,\ldots,A_n\in\mathcal H$ are **independent** if, for
 every nonempty subset $I\subseteq\{1,\ldots,n\}$,
 
 $$
@@ -93,7 +111,7 @@ $$
 
 ### Joint Distributions
 
-::: {#thm-2 name="Joint Distribution of Independent Random Variables"}
+::: {#thm-aap-2-2 name="Joint Distribution of Independent Random Variables"}
 
 Suppose $X_1,\ldots,X_n$ are independent random variables and $X_i$ has
 distribution $\mu_i$ for $i=1,\ldots,n$. Then $(X_1,\ldots,X_n)$ has distribution
@@ -106,7 +124,7 @@ $$
 
 ### Expectations
 
-::: {#thm-3 name="Expectations of Functions of Independent Random Variables"}
+::: {#thm-aap-2-3 name="Expectations of Functions of Independent Random Variables"}
 
 Suppose $X$ and $Y$ are independent and have distributions $\mu$ and $\nu$.
 Let $h:\mathbb R^2\to\mathbb R$ be measurable. If either
@@ -136,7 +154,7 @@ $$
 
 :::
 
-::: {#thm-4 name="Expectation of a Product of Independent Random Variables"}
+::: {#thm-aap-2-4 name="Expectation of a Product of Independent Random Variables"}
 
 Let $X_1,\ldots,X_n$ be independent random variables. If either
 
@@ -154,7 +172,7 @@ $$
 
 ### Sums and Convolution
 
-::: {#thm-5 name="Distribution of the Sum of Independent Random Variables"}
+::: {#thm-aap-2-5 name="Distribution of the Sum of Independent Random Variables"}
 
 If $X$ and $Y$ are independent, $F(x)=P(X\le x)$, and $G(y)=P(Y\le y)$,
 then
@@ -172,7 +190,7 @@ Here $dG(y)$ denotes integration with respect to the distribution measure of $Y$
 
 ## Conditional Expectation
 
-::: {.callout-tip title="Definition of Conditional Expectation" collapse="true"}
+::: {#def-aap-2-7 name="Conditional Expectation"}
 
 Given a probability space $(\Omega,\mathcal F_0,P)$, a sub-$\sigma$-field
 $\mathcal F\subseteq\mathcal F_0$, and an $\mathcal F_0$-measurable random
@@ -223,7 +241,7 @@ In regression, $Z$ contains the input features and $X$ is the target; training w
 
 ### Regular Conditional Probabilities
 
-::: {.callout-tip title="Definition of Regular Conditional Distribution" collapse="true"}
+::: {#def-aap-2-8 name="Regular Conditional Distribution"}
 
 Let $(\Omega,\mathcal F,P)$ be a probability space,
 $X:(\Omega,\mathcal F)\to(S,\mathcal S)$ a measurable map, and
@@ -267,4 +285,12 @@ Then $(\omega,A)\mapsto\mu(Y(\omega),A)$ is a **regular conditional distribution
 
 ### Khinchin–Kolmogorov Theorem
 
-### Khinchin–Kolmogorov Theorem
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-aap-2-1: Independent random variables generate independent $\sigma$-fields, and variables measurable with respect to independent $\sigma$-fields are independent.
+- @thm-aap-2-2: Independent random variables have the product distribution $\mu_1\times\cdots\times\mu_n$ as their joint distribution.
+- @thm-aap-2-3 and @thm-aap-2-4: Under independence, $E[f(X)g(Y)]=E[f(X)]\cdot E[g(Y)]$, and expectation factors over products.
+- @thm-aap-2-5: $P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)$, the convolution of $F$ and $G$.
+- @def-aap-2-7: $E(X\mid\mathcal F)$ is an $\mathcal F$-measurable variable with the same integral as $X$ over every $A\in\mathcal F$.

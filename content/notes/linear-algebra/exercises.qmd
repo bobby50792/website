@@ -9,7 +9,7 @@ crossref:
 
 :::: {.exercise-set}
 
-::: {#exr-1}
+::: {#exr-la-1}
 
 Consider the homogeneous linear system
 
@@ -25,7 +25,7 @@ b. The system has nonzero solutions. In this case, determine its solution set.
 
 :::
 
-::: {#exr-2}
+::: {#exr-la-2}
 
 Let $A$ and $B$ be $n\times n$ matrices. Prove both bounds:
 
@@ -40,7 +40,7 @@ $$
 
 :::
 
-::: {#exr-3}
+::: {#exr-la-3}
 
 Let $A$ and $B$ be $n\times m$ matrices. Prove
 
@@ -51,7 +51,7 @@ $$
 
 :::
 
-::: {#exr-4}
+::: {#exr-la-4}
 
 Let $A,B\in M_{n\times n}(\mathbb R)$. Suppose $AB=BA=0$ and $\operatorname{rank}(A^2)=\operatorname{rank}(A)$. Prove
 
@@ -61,7 +61,7 @@ $$
 
 :::
 
-::: {#exr-5}
+::: {#exr-la-5}
 
 Let $A,B,C,D$ be pairwise commuting $n\times n$ matrices satisfying $AC+BD=I_n$. Prove
 
@@ -71,7 +71,7 @@ $$
 
 :::
 
-::: {#exr-6}
+::: {#exr-la-6}
 
 Let $A$ be an $n\times n$ real matrix satisfying $AA^t=k^2I_n$, where $k\in\mathbb R$. Prove
 
@@ -81,7 +81,7 @@ $$
 
 :::
 
-::: {#exr-7}
+::: {#exr-la-7}
 
 Let $A$ be an $n\times n$ matrix with rank $r$, where $1\le r\le n/2$, and suppose $A^2=0$. Prove that an invertible matrix $P$ exists such that
 
@@ -99,13 +99,13 @@ where $I_r$ is the $r\times r$ identity matrix and each $0$ denotes a zero matri
 
 :::
 
-::: {#exr-8}
+::: {#exr-la-8}
 
 Let $A$ be a real square matrix satisfying $A^2=I_n$. Prove that $A$ is diagonalizable.
 
 :::
 
-::: {#exr-9}
+::: {#exr-la-9}
 
 Let $V$ be a finite-dimensional real inner product space, and let $U$ and $T$ be self-adjoint linear operators on $V$ satisfying $UT=TU$.
 
@@ -113,7 +113,7 @@ Prove that $V$ has an orthonormal basis consisting of common eigenvectors of $U$
 
 :::
 
-::: {#exr-10}
+::: {#exr-la-10}
 
 Let $A$ and $B$ be $n\times n$ complex matrices satisfying $AB=A+B$.
 
@@ -121,7 +121,7 @@ Prove that $A$ and $B$ are simultaneously triangularizable: there is a basis in 
 
 :::
 
-::: {#exr-11}
+::: {#exr-la-11}
 
 Let $A$ be an $n\times n$ matrix satisfying
 

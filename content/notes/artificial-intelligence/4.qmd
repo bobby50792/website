@@ -1,5 +1,7 @@
 ---
 title: "Probabilistic Inference"
+body-classes: notes-studio
+include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 toc-depth: 3
@@ -30,7 +32,7 @@ Join up the whole joint distribution before you sum out the hidden variables.
 
 ### Rejection Sampling
 
-```text
+```python
 RejectionSample(network, evidence):
     x = {}
     for X_i in topological_order(network):
@@ -47,7 +49,7 @@ RejectionSample(network, evidence):
 
 Fix evidence values and weight each sample by the product of their conditional probabilities.
 
-```text
+```python
 LikelihoodWeighting(X, evidence, network, N):
     W = {v: 0 for v in domain(X)}
     for j = 1 to N:
@@ -74,7 +76,7 @@ WeightedSample(network, evidence):
 
 Keep a complete assignment (the network state), fix evidence, and repeatedly resample one non-evidence variable at a time.
 
-```text
+```python
 GibbsSampling(X, evidence, network, N):
     counts = {v: 0 for v in domain(X)}
     Z = non-evidence variables in network
@@ -92,7 +94,7 @@ GibbsSampling(X, evidence, network, N):
 - Monte Carlo uses random samples for estimation; MCMC generates correlated samples through a Markov chain.
 - Gibbs sampling is an MCMC method. Each conditional update is a special Metropolis–Hastings step with acceptance probability 1.
 
-## Probability Reasoning over Time
+## Probabilistic Reasoning over Time
 
 ### Markov Models
 
@@ -100,19 +102,13 @@ GibbsSampling(X, evidence, network, N):
 - Parameters: Initial distribution $P(X_1)$ and transition probabilities $P(X_t\mid X_{t-1})$.
 - First-order Markov property: Past and future are conditionally independent given the present:
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="First-order Markov property"}
-
 $$
 P(X_t\mid X_1,\ldots,X_{t-1})=P(X_t\mid X_{t-1}).
 $$
 
-:::
-
-#### Stationary Distribution
+::: {#def-ai-4-1 name="Stationary Distribution"}
 
 A distribution $P_\infty$ unchanged by a transition. If the chain converges, its limiting distribution is stationary:
-
-::: {.overflow-auto tabindex="0" role="region" aria-label="Stationary distribution equation"}
 
 $$
 P_\infty(x')=\sum_x P(x'\mid x)P_\infty(x).
@@ -129,13 +125,9 @@ $$
 
 - Track the belief state: the current state distribution conditioned on observations so far:
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Filtering belief state"}
-
 $$
 B_t(x)=P(X_t=x\mid e_1,\ldots,e_t).
 $$
-
-:::
 
 - Initialize from a prior distribution, often uniform; update by predicting as time advances and conditioning on new observations.
 - Kalman filtering was developed in the 1960s and used for Apollo trajectory estimation.
@@ -145,23 +137,15 @@ $$
 - Every time step, we start with current $P(X\mid \text{evidence})$.
 - We update for time:
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Time prediction update"}
-
 $$
 P(x_t\mid e_{1:t-1})=\sum_{x_{t-1}}P(x_{t-1}\mid e_{1:t-1})\cdot P(x_t\mid x_{t-1}).
 $$
 
-:::
-
 - We update for evidence:
-
-::: {.overflow-auto tabindex="0" role="region" aria-label="Evidence update"}
 
 $$
 P(x_t\mid e_{1:t})\propto_X P(x_t\mid e_{1:t-1})\cdot P(e_t\mid x_t).
 $$
-
-:::
 
 - The forward algorithm does both at once (and doesn't normalize).
 - Problem: space is $|X|$ and time is $|X|^2$ per time step.
@@ -188,8 +172,6 @@ State trellis: Graph of states and transitions over time.
 
 #### Forward Algorithm (Sum)
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Forward algorithm recurrence"}
-
 $$
 \begin{aligned}
 f_t[x_t] &= P(x_t,e_{1:t}) \\
@@ -197,11 +179,7 @@ f_t[x_t] &= P(x_t,e_{1:t}) \\
 \end{aligned}
 $$
 
-:::
-
 #### Viterbi Algorithm (Max)
-
-::: {.overflow-auto tabindex="0" role="region" aria-label="Viterbi algorithm recurrence"}
 
 $$
 \begin{aligned}
@@ -210,4 +188,11 @@ m_t[x_t] &= \max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\
 \end{aligned}
 $$
 
-:::
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Variable Elimination](#variable-elimination): Interleaving joins and marginalization is still NP-hard, but usually much faster than enumeration.
+- [Gibbs Sampling](#gibbs-sampling): Each conditional update is a Metropolis–Hastings step with acceptance probability 1.
+- [Forward Algorithm](#forward-algorithm): Each time step costs $|X|^2$ time and $|X|$ space.
+- [Viterbi Algorithm](#viterbi-algorithm-max): Replacing the forward algorithm's sum with a max finds the most likely explanation.

@@ -10,9 +10,7 @@ crossref:
 
 ## Determinants of Order 2
 
-::: {.callout-tip collapse="true"}
-
-## Determinant of Order 2
+::: {#def-la-4-1 name="Determinant of Order 2"}
 
 If
 $$
@@ -69,9 +67,7 @@ $$
 
 ## Determinants of Order n
 
-::: {.callout-tip collapse="true"}
-
-## Determinant of Order n
+::: {#def-la-4-2 name="Determinant of Order n"}
 
 For this definition, it is convenient to introduce the following notation:  Given $A \in M_{n\times n}(F)$, for $n \ge 2$, denote the $(n-1)\times(n-1)$ matrix obtained from $A$ by deleting row $i$ and column $j$ by $\tilde{A}_{ij}$.
 
@@ -231,3 +227,13 @@ $$
 where $M_{ji}$ is the determinant of $A$ deleting the $j$-th row and $i$-th column.  Pay attention to the subscript inverse.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-la-4-3: The determinant can be expanded along any row.
+- @thm-la-4-4 and @thm-la-4-5: Swapping two rows flips the sign, and adding a multiple of one row to another changes nothing.
+- @thm-la-4-7: $\det(AB) = \det(A)\det(B)$.
+- @thm-la-4-8: $\det(A^t) = \det(A)$.
+- @thm-la-4-9: If $\det(A) \ne 0$, Cramer's rule gives the unique solution of $Ax = b$.

@@ -1,0 +1,208 @@
+<script>
+(function () {
+  // Review mode shows only headings and block titles; search narrows the blocks.
+  function setupReview(content) {
+    const blocks = [...content.querySelectorAll(".theorem")];
+    if (blocks.length < 3) return;
+
+    // A block's text shares a paragraph with its title, so wrap it to hide it separately.
+    blocks.forEach((block) => {
+      const title = block.querySelector(".theorem-title");
+      if (!title) return;
+      const lead = document.createElement("span");
+      lead.className = "notes-block-lead";
+      while (title.nextSibling) lead.append(title.nextSibling);
+      title.after(lead);
+    });
+
+    const tools = document.createElement("div");
+    tools.className = "notes-review-tools";
+    tools.innerHTML = `
+      <label class="notes-review-field">
+        <input type="search" class="notes-review-search" placeholder="Find a definition or theorem"
+          aria-label="Find a definition or theorem">
+      </label>
+      <p class="notes-review-status" aria-live="polite"></p>
+      <button type="button" class="notes-review-toggle" role="switch" aria-checked="false">
+        <span>Review mode</span>
+        <span class="notes-switch" aria-hidden="true"></span>
+      </button>`;
+    const toggle = tools.querySelector("button");
+    const search = tools.querySelector("input");
+    const status = tools.querySelector("p");
+
+    const margin = document.getElementById("quarto-margin-sidebar");
+    const header = content.querySelector("#title-block-header");
+    const place = () => {
+      const inMargin = margin && getComputedStyle(margin).display !== "none" && margin.offsetWidth > 0;
+      if (inMargin) margin.prepend(tools);
+      else if (header) header.after(tools);
+    };
+    place();
+    window.addEventListener("resize", place);
+
+    const searchText = new Map();
+    const textOf = (block) => {
+      if (!searchText.has(block)) {
+        const copy = block.cloneNode(true);
+        copy.querySelectorAll("mjx-container").forEach((el) => el.remove());
+        searchText.set(block, copy.textContent.toLowerCase());
+      }
+      return searchText.get(block);
+    };
+
+    const titles = blocks.map((block) => block.querySelector(".theorem-title")).filter(Boolean);
+    const setRevealed = (block, on) => {
+      block.classList.toggle("is-revealed", on);
+      const title = block.querySelector(".theorem-title");
+      if (title && document.body.classList.contains("notes-review")) {
+        title.setAttribute("aria-expanded", String(on));
+      }
+    };
+
+    const setReview = (on) => {
+      document.body.classList.toggle("notes-review", on);
+      toggle.setAttribute("aria-checked", String(on));
+      blocks.forEach((block) => block.classList.remove("is-revealed"));
+      titles.forEach((title) => {
+        if (on) {
+          title.setAttribute("role", "button");
+          title.setAttribute("tabindex", "0");
+          title.setAttribute("aria-expanded", "false");
+        } else {
+          title.removeAttribute("role");
+          title.removeAttribute("tabindex");
+          title.removeAttribute("aria-expanded");
+        }
+      });
+    };
+
+    // Searching shows matching blocks in full, and clearing it returns to the reading position.
+    let readingPosition = null;
+    const applySearch = () => {
+      const query = search.value.trim().toLowerCase();
+      const wasSearching = document.body.classList.contains("notes-search");
+      document.body.classList.toggle("notes-search", Boolean(query));
+      if (query && !wasSearching) {
+        readingPosition = window.scrollY;
+        content.scrollIntoView();
+      }
+      if (!query && wasSearching && readingPosition !== null) {
+        const position = readingPosition;
+        readingPosition = null;
+        requestAnimationFrame(() => window.scrollTo(0, position));
+      }
+      let shown = 0;
+      blocks.forEach((block) => {
+        const match = !query || textOf(block).includes(query);
+        block.classList.toggle("notes-filtered", !match);
+        if (match) shown += 1;
+      });
+      status.textContent = query
+        ? shown ? `${shown} of ${blocks.length} match` : "No matches"
+        : "";
+    };
+
+    toggle.addEventListener("click", () => {
+      const on = !document.body.classList.contains("notes-review");
+      setReview(on);
+      if (on) content.scrollIntoView();
+    });
+
+    search.addEventListener("input", applySearch);
+
+    search.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        search.value = "";
+        applySearch();
+      }
+    });
+
+    blocks.forEach((block) => {
+      block.addEventListener("click", (event) => {
+        if (!document.body.classList.contains("notes-review") || event.target.closest("a")) return;
+        const onTitle = event.target.closest(".theorem-title");
+        if (onTitle) setRevealed(block, !block.classList.contains("is-revealed"));
+        else if (!block.classList.contains("is-revealed")) setRevealed(block, true);
+      });
+    });
+
+    titles.forEach((title) => {
+      title.addEventListener("keydown", (event) => {
+        if (document.body.classList.contains("notes-review") && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          const block = title.closest(".theorem");
+          setRevealed(block, !block.classList.contains("is-revealed"));
+        }
+      });
+    });
+  }
+
+  const content = document.getElementById("quarto-document-content");
+  if (!content) return;
+
+  // Separate a block's type and number from its name so each can be styled.
+  content.querySelectorAll(".theorem-title strong").forEach((label) => {
+    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+    if (!match) return;
+    label.textContent = "";
+    const kind = document.createElement("span");
+    kind.className = "notes-kind";
+    kind.textContent = match[1];
+    // Hover previews copy only the block's contents, so the type travels with the label.
+    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+    label.append(kind);
+    if (match[2]) {
+      const name = document.createElement("span");
+      name.className = "notes-name";
+      name.textContent = match[2];
+      label.append(name);
+    }
+  });
+
+  // Tag each side note by what it adds: a reason, an example, or a remark.
+  content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
+    const text = [...title.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!text) return;
+    let type = "Note";
+    if (/^\s*Why\b/.test(text.textContent)) type = "Reason";
+    if (/^\s*Example\b/.test(text.textContent)) {
+      type = "Example";
+      text.textContent = text.textContent.replace(/^\s*Example:?\s*/, "");
+    }
+    const tag = document.createElement("span");
+    tag.className = "notes-tag";
+    tag.textContent = type;
+    title.insertBefore(tag, text);
+    title.closest(".callout").dataset.noteType = type.toLowerCase();
+  });
+
+  setupReview(content);
+
+  // Mark each pseudocode function signature.
+  content.querySelectorAll("pre code > span").forEach((line) => {
+    if (/^\S.*\):\s*$/.test(line.textContent)) line.classList.add("notes-code-head");
+  });
+
+  // Reading progress along the top of the window.
+  const bar = document.createElement("div");
+  bar.className = "notes-progress";
+  bar.setAttribute("aria-hidden", "true");
+  document.body.append(bar);
+  let pending = false;
+  const update = () => {
+    pending = false;
+    const range = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${range > 0 ? window.scrollY / range : 0})`;
+  };
+  const schedule = () => {
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(update);
+    }
+  };
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  update();
+})();
+</script>

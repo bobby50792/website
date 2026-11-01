@@ -10,9 +10,7 @@ crossref:
 
 ## Elementary Matrix Operations and Elementary Matrices
 
-::: {.callout-tip collapse="true"}
-
-## Elementary Matrix Operation
+::: {#def-la-3-1 name="Elementary Matrix Operation"}
 
 Let $A$ be an $m \times n$ matrix.  Any one of the following three operations on the rows [columns] of $A$  is called an **elementary row [column] operation**:
 
@@ -40,9 +38,7 @@ Elementary matrices are invertible, and the inverse of an elementary matrix  is 
 
 ## The Rank of a Matrix and Matrix Inverses
 
-::: {.callout-tip collapse="true"}
-
-## Rank
+::: {#def-la-3-2 name="Rank"}
 
 If $A \in M_{m \times n}(F)$, we define the **rank** of $A$, denoted $\operatorname{rank}(A)$,  to be the rank of the linear transformation $L_{A} : F^{n} \to F^{m}$.
 
@@ -131,15 +127,9 @@ $\text{(d)}\quad\operatorname{rank}(AB) \le \operatorname{rank}(B)$.
 
 :::
 
-::: {.callout-tip collapse="true"}
+### The Inverse of a Matrix
 
-## The Inverse of a Matrix
-
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-la-3-3 name="Augmented Matrix"}
 
 Let $A$ and $B$ be $m \times n$ and $m \times p$ matrices, respectively.  By the **augmented matrix** $(A \mid B)$, we mean the $m \times (n + p)$ matrix $(A\ B)$,  that is, the matrix whose first $n$ columns are the columns of $A$,  and whose last $p$ columns are the columns of $B$.
 
@@ -152,9 +142,7 @@ $$
 
 ## Systems of Linear Equations
 
-::: {.callout-tip collapse="true"}
-
-## System of Linear Equations
+::: {#def-la-3-4 name="System of Linear Equations"}
 
 $$
 \begin{aligned}
@@ -261,15 +249,9 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
+### Gaussian Elimination
 
-## Gaussian Elimination
-
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-la-3-5 name="Reduced Row Echelon Form"}
 
 A matrix is said to be in **reduced row echelon form** if the following three conditions are satisfied:
 
@@ -299,9 +281,7 @@ then $\{u_1, u_2, \ldots, u_{\,n-r}\}$ is a basis for the solution set of the co
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## LU Decomposition
+### LU Decomposition
 
 Let $A$ be an $m \times n$ matrix.  Suppose that $A$ admits an LU decomposition of the form
 
@@ -334,4 +314,11 @@ $$
 
 Then the solution process consists of the following two steps.
 
-:::
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-la-3-5 and @thm-la-3-8: Rank equals the maximum number of independent columns, and also of independent rows.
+- @thm-la-3-7: Invertible $B$ and $C$ reduce a rank-$r$ matrix to the form $D = BAC$.
+- @thm-la-3-11: A solution set is one particular solution plus the homogeneous solution set.
+- @thm-la-3-13: $Ax = b$ is consistent exactly when $\mathrm{rank}(A) = \mathrm{rank}(A|b)$.
