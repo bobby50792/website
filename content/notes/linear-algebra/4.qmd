@@ -99,7 +99,7 @@ is called the **cofactor** of the entry of $A$ in row $i$, column $j$.
 
 :::
 
-::: {#thm-la-4-1}
+::: {#thm-la-4-1 name="Multilinearity in Rows"}
 
 The determinant of an $n \times n$ matrix is a linear function of each row when the remaining rows are held fixed.  That is, for $1 \le r \le n$, we have
 $$
@@ -143,7 +143,7 @@ whenever $k$ is a scalar and $u$, $v$, and each $a_i$ are row vectors in $F^n$.
 
 ## Properties of Determinants
 
-::: {#thm-la-4-2}
+::: {#thm-la-4-2 name="Zero Row"}
 
 If $A \in M_{n \times n}(F)$ has a row consisting entirely of zeros,  then
 $$
@@ -152,7 +152,7 @@ $$
 
 :::
 
-::: {#thm-la-4-3}
+::: {#thm-la-4-3 name="Cofactor Expansion Along Any Row"}
 
 The determinant of a square matrix can be evaluated by cofactor expansion along any row. That is, if $A \in M_{n \times n}(F)$, then for any integer  $i$ ($1 \le i \le n$),
 $$
@@ -161,7 +161,7 @@ $$
 
 :::
 
-::: {#thm-la-4-4}
+::: {#thm-la-4-4 name="Row Interchange"}
 
 If $A \in M_{n \times n}(F)$ and $B$ is a matrix obtained from $A$ by interchanging any two rows of $A$, then
 $$
@@ -170,7 +170,7 @@ $$
 
 :::
 
-::: {#thm-la-4-5}
+::: {#thm-la-4-5 name="Adding a Row Multiple"}
 
 Let $A \in M_{n \times n}(F)$, and let $B$ be a matrix obtained by  adding a multiple of one row of $A$ to another row of $A$.  Then
 $$
@@ -179,7 +179,7 @@ $$
 
 :::
 
-::: {#thm-la-4-6}
+::: {#thm-la-4-6 name="Determinant of a Rank-Deficient Matrix"}
 
 If $A \in M_{n \times n}(F)$ has rank less than $n$,  then
 $$
@@ -188,7 +188,7 @@ $$
 
 :::
 
-::: {#thm-la-4-7}
+::: {#thm-la-4-7 name="Determinant of a Product"}
 
 For any $A, B \in M_{n \times n}(F)$, we have
 $$
@@ -197,7 +197,7 @@ $$
 
 :::
 
-::: {#thm-la-4-8}
+::: {#thm-la-4-8 name="Determinant of the Transpose"}
 
 For any $A \in M_{n \times n}(F)$, we have
 $$
@@ -217,7 +217,7 @@ where $M_k$ is the $n \times n$ matrix obtained from $A$ by replacing column $k$
 
 :::
 
-::: {#thm-la-4-10}
+::: {#thm-la-4-10 name="Cofactor Formula for the Inverse"}
 
 For invertible $A$, its inverse $A^{-1}$ may be described as
 $$

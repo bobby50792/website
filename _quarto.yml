@@ -40,14 +40,14 @@ website:
             - section: "Calculus"
               href: content/notes/calculus/0.qmd
               contents: 
-                - section: "Single Variable Calculus"
+                - section: "Single Variable"
                   href: content/notes/calculus/single-variable/0.qmd
                   contents:
-                    - text: "Real Numbers and Limits of Sequences"
+                    - text: "Real Numbers & Sequences"
                       href: content/notes/calculus/single-variable/1.qmd
                     - text: "Continuity of Functions"
                       href: content/notes/calculus/single-variable/2.qmd
-                    - text: "Derivatives and Differentials of Functions"
+                    - text: "Derivatives & Differentials"
                       href: content/notes/calculus/single-variable/3.qmd
                     - text: "Indefinite Integrals"
                       href: content/notes/calculus/single-variable/4.qmd
@@ -55,26 +55,26 @@ website:
                       href: content/notes/calculus/single-variable/5.qmd
                     - text: "Ordinary Differential Equations"
                       href: content/notes/calculus/single-variable/6.qmd
-                - section: "Multivariable Calculus"
+                - section: "Multivariable"
                   href: content/notes/calculus/multivariable/0.qmd
                   contents:
-                    - text: "Limits and Continuity of Multivariate Functions"
+                    - text: "Limits & Continuity"
                       href: content/notes/calculus/multivariable/1.qmd
-                    - text: "Differential of Multivariable Functions"
+                    - text: "Differentials"
                       href: content/notes/calculus/multivariable/2.qmd
-                    - text: "Implicit Function and Inverse Mapping Theorem"
+                    - text: "Implicit & Inverse Mappings"
                       href: content/notes/calculus/multivariable/3.qmd
-                    - text: "Integrals with Parameters and Improper Integrals"
+                    - text: "Parameter & Improper Integrals"
                       href: content/notes/calculus/multivariable/4.qmd
                     - text: "Multiple Integrals"
                       href: content/notes/calculus/multivariable/5.qmd
-                    - text: "Integration of Functions on Curves and Surfaces"
+                    - text: "Curve & Surface Integrals"
                       href: content/notes/calculus/multivariable/6.qmd
                     - text: "Calculus of Vector Fields"
                       href: content/notes/calculus/multivariable/7.qmd
                     - text: "Series"
                       href: content/notes/calculus/multivariable/8.qmd
-                    - text: "Series of Functions and Power Series"
+                    - text: "Function & Power Series"
                       href: content/notes/calculus/multivariable/9.qmd
                     - text: "Fourier Series"
                       href: content/notes/calculus/multivariable/10.qmd
@@ -84,9 +84,9 @@ website:
               contents:
                 - text: "Vector Spaces"
                   href: content/notes/linear-algebra/1.qmd
-                - text: "Linear Transformations and Matrices"
+                - text: "Linear Maps & Matrices"
                   href: content/notes/linear-algebra/2.qmd
-                - text: "Elementary Matrix Operations and Systems of Linear Equations"
+                - text: "Matrix Operations & Systems"
                   href: content/notes/linear-algebra/3.qmd
                 - text: "Determinants"
                   href: content/notes/linear-algebra/4.qmd
@@ -119,7 +119,7 @@ website:
             - section: "General Physics"
               href: content/notes/general-physics/0.qmd
               contents: 
-                - section: "Mechanics and Thermal Physics"
+                - section: "Mechanics & Thermal"
                   href: content/notes/general-physics/mechanics-and-thermal-physics/0.qmd
                   contents: 
                   - text: "Kinematics"
@@ -140,19 +140,19 @@ website:
                     href: content/notes/general-physics/mechanics-and-thermal-physics/8.qmd
                   - text: "Waves"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/9.qmd
-                  - text: "Lagrangian and Hamiltonian Mechanics"
+                  - text: "Lagrangian & Hamiltonian"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/10.qmd
                   - text: "Special Relativity"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/11.qmd
-                  - text: "Temperature, Heat, and the First Law of Thermodynamics"
+                  - text: "Heat & the First Law"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/12.qmd
-                  - text: "Kinetic Theory of Gases"
+                  - text: "Kinetic Theory"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/13.qmd
-                  - text: "Second Law of Thermodynamics"
+                  - text: "Second Law"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/14.qmd
                   - text: "Statistical Mechanics"
                     href: content/notes/general-physics/mechanics-and-thermal-physics/15.qmd
-                - section: "Electricity and Magnetism"
+                - section: "Electromagnetism"
                   href: content/notes/general-physics/electricity-and-magnetism/0.qmd
                   contents:
                     - text: "Scalar and Vector Fields"
@@ -163,7 +163,7 @@ website:
                       href: content/notes/general-physics/electricity-and-magnetism/3.qmd
                     - text: "Laws of Induction"
                       href: content/notes/general-physics/electricity-and-magnetism/4.qmd
-                    - text: "Maxwell Equations and Solutions"
+                    - text: "Maxwell Equations"
                       href: content/notes/general-physics/electricity-and-magnetism/5.qmd
                     - text: "AC Circuits"
                       href: content/notes/general-physics/electricity-and-magnetism/6.qmd
@@ -171,7 +171,7 @@ website:
                       href: content/notes/general-physics/electricity-and-magnetism/7.qmd
                     - text: "Waveguides"
                       href: content/notes/general-physics/electricity-and-magnetism/8.qmd
-                    - text: "Quantum Information Processing"
+                    - text: "Quantum Information"
                       href: content/notes/general-physics/electricity-and-magnetism/9.qmd
             - section: "Deep Learning"
               href: content/notes/deep-learning/0.qmd
@@ -180,15 +180,15 @@ website:
                   href: content/notes/deep-learning/1.qmd
                 - text: "Energy-Based Model"
                   href: content/notes/deep-learning/2.qmd
-                - text: "Generative Adversarial Network"
+                - text: "GANs"
                   href: content/notes/deep-learning/3.qmd
-                - text: "Normalizing Flow & Variational Autoencoder"
+                - text: "Flows & VAEs"
                   href: content/notes/deep-learning/4.qmd
-                - text: "Diffusion Models & Flow Matching"
+                - text: "Diffusion & Flow Matching"
                   href: content/notes/deep-learning/5.qmd
                 - text: "Sequence Modeling"
                   href: content/notes/deep-learning/6.qmd
-            - section: "Advanced Applied Probability"
+            - section: "Applied Probability"
               href: content/notes/advanced-applied-probability/0.qmd
               contents:
                 - text: "Measure Theory"
@@ -204,7 +204,7 @@ website:
                   href: content/notes/machine-learning/2.qmd
                 - text: "Supervised Learning"
                   href: content/notes/machine-learning/3.qmd
-            - section: "Advanced Computer Graphics"
+            - section: "Computer Graphics"
               href: content/notes/advanced-computer-graphics/0.qmd
               contents:
                 - text: "Geometry"

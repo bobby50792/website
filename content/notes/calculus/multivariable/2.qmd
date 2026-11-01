@@ -10,9 +10,7 @@ crossref:
 
 ## Derivatives, Differentials, and Directional Derivatives
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-cm-2-1 name="Interior Point"}
 
 We call $\mathbf{x}_0$ an **interior point** of a set $E \subseteq \mathbb{R}^m$ (we also say $E$ is a **neighborhood** of $\mathbf{x}_0$ in $\mathbb{R}^m$) if there exists a positive number $\delta_{\mathbf{x}_0} > 0$ such that
 $$
@@ -27,9 +25,7 @@ We call $E$ an **open set** if $E = \text{int} E$. This implies that every point
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Differential
+::: {#def-cm-2-2 name="Differential"}
 
 Let $\mathbf{x}_0$ be an interior point of a set $E \subseteq \mathbb{R}^m$. We say that $f: E \to \mathbb{R}^n$ is **differentiable** at $\mathbf{x}_0$ if there exists a **linear mapping** $A: \mathbb{R}^m \to \mathbb{R}^n$ such that:
 $$
@@ -54,15 +50,13 @@ $$
 
 :::
 
-::: {#thm-calc2-2-1}
+::: {#thm-calc2-2-1 name="Differentiable Implies Continuous"}
 
 If $f$ is differentiable at $\mathbf{x}_0$, then $f$ is continuous at $\mathbf{x}_0$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Directional Derivative
+::: {#def-cm-2-3 name="Directional Derivative"}
 
 Let $f: E \to \mathbb{R}^n$, $\mathbf{x}_0 \in E$, and a vector $\mathbf{v} \in \mathbb{R}^m$ satisfy the following: there exists $\delta > 0$ such that for any $0 \le t < \delta$, we have $\mathbf{x}_0 + t\mathbf{v} \in E$.
 
@@ -81,7 +75,7 @@ $$
 
 :::
 
-::: {#thm-calc2-2-2}
+::: {#thm-calc2-2-2 name="Directional Derivatives from the Differential"}
 
 If $f$ is differentiable at $\mathbf{x}_0$, then $f$ has a derivative at $\mathbf{x}_0$ along every vector $\mathbf{v}$, and:
 $$
@@ -94,7 +88,7 @@ Furthermore, in this case, the derivative $\frac{\partial f}{\partial \mathbf{v}
 
 :::
 
-::: {#thm-calc2-2-3}
+::: {#thm-calc2-2-3 name="Differentiability of Bilinear Mappings"}
 
 1. Any **bilinear mapping** $B: \mathbb{R}^m \times \mathbb{R}^n \to \mathbb{R}^p$ is differentiable. For any point $(\mathbf{x}_0, \mathbf{y}_0)$ and increment $(\mathbf{u}, \mathbf{v})$, the differential is:
 
@@ -122,7 +116,7 @@ $$
 
 :::
 
-::: {#thm-calc2-2-4}
+::: {#thm-calc2-2-4 name="Differential of Matrix Inversion"}
 
 Let $A_0 \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^n)$ be an invertible matrix, and define the open set $U$ as:
 $$
@@ -160,9 +154,7 @@ $$
 
 ## Coordinate Systems and Partial Derivatives
 
-::: {.callout-tip collapse="true"}
-
-## Partial Derivative
+::: {#def-cm-2-4 name="Partial Derivative"}
 
 Let $(x^1, x^2, \dots, x^m)$ be the coordinates of a point in $E$. Suppose that at an interior point $\mathbf{x}_0 = (a^1, \dots, a^m)$ of $E$, the $m$-variable function $f: E \to \mathbb{R}$ has the following limit:
 $$
@@ -175,7 +167,7 @@ Then the value of this limit is denoted by $\frac{\partial f}{\partial x^k}(\mat
 
 :::
 
-::: {#thm-calc2-2-6}
+::: {#thm-calc2-2-6 name="Differential in Partial Derivatives"}
 
 Let the $m$-variable function $f$ be differentiable at $\mathbf{x}_0$. Then for any $\mathbf{v} = (\xi^1, \dots, \xi^m)^T \in \mathbb{R}^m$,
 $$
@@ -202,9 +194,7 @@ is the differential of the coordinate function $x^i : \mathbb{R}^m \to \mathbb{R
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Jacobian Matrix
+::: {#def-cm-2-5 name="Jacobian Matrix"}
 
 If the $m$-variable mapping $F: E \to \mathbb{R}^n$,
 $$
@@ -244,7 +234,7 @@ The determinant of $JF(\mathbf{x}_0)$, $\det JF(\mathbf{x}_0)$, is called the **
 
 :::
 
-::: {#thm-calc2-2-7}
+::: {#thm-calc2-2-7 name="Chain Rule for Jacobians"}
 
 Let $G$ be differentiable at $\mathbf{x}_0$, and $F$ be differentiable at $\mathbf{y}_0 = G(\mathbf{x}_0)$, then
 $$
@@ -261,7 +251,7 @@ $$
 
 :::
 
-::: {#thm-calc2-2-8}
+::: {#thm-calc2-2-8 name="Continuous Partials Imply Differentiable"}
 
 If all first-order partial derivatives $\frac{\partial f}{\partial x^1}(\mathbf{x}), \dots, \frac{\partial f}{\partial x^m}(\mathbf{x})$ are **continuous**, then $f$ is differentiable. (It is not a necessary condition.)
 
@@ -269,7 +259,7 @@ If all first-order partial derivatives $\frac{\partial f}{\partial x^1}(\mathbf{
 
 ## Gradient and Directional Derivative
 
-::: {#thm-calc2-2-9}
+::: {#thm-calc2-2-9 name="Riesz Representation of Linear Functions"}
 
 Let $\langle \cdot, \cdot \rangle$ be an inner product on $\mathbb{R}^m$. Then for any linear function $L: \mathbb{R}^m \to \mathbb{R}$ on $\mathbb{R}^m$, there exists a unique vector $\nabla L \in \mathbb{R}^m$ such that
 $$
@@ -282,9 +272,7 @@ Consequently, $\nabla L$ is orthogonal to $\operatorname{Ker} L$, and $\|\nabla 
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Gradient Vector
+::: {#def-cm-2-6 name="Gradient Vector"}
 
 Let $E$ be a subset of an inner product space, and the function $f : E \to \mathbb{R}$ be differentiable at $\mathbf{x}_0$. Denote the gradient vector of $df(\mathbf{x}_0)$ as $\operatorname{grad} f(\mathbf{x}_0)$ or $\nabla f(\mathbf{x}_0)$, called the **gradient vector** of $f$ at $\mathbf{x}_0$. Thus,
 $$
@@ -295,7 +283,7 @@ $$
 
 :::
 
-::: {#thm-calc2-2-10}
+::: {#thm-calc2-2-10 name="Directional Derivative via the Gradient"}
 
 Let $f$ be differentiable at $\mathbf{x}_0$. Then for any vector $\mathbf{v} \in \mathbb{R}^m$,
 $$
@@ -314,7 +302,7 @@ where equality holds if and only if $\mathbf{v}$ is in the direction of the grad
 
 :::
 
-::: {#thm-calc2-2-11}
+::: {#thm-calc2-2-11 name="Differential as a Row Vector"}
 
 In any coordinate system $(x^1, \dots, x^m)$, the differential of a differentiable function $f$ is a row vector:
 $$
@@ -339,9 +327,7 @@ $$
 
 ## Higher-Order Partial Derivatives and Taylor Expansion
 
-::: {.callout-tip collapse="true"}
-
-## Higher-Order Partial Derivative
+::: {#def-cm-2-7 name="Higher-Order Partial Derivative"}
 
 For $i_1, \dots, i_k \in \{1, 2, \dots, m\}$, denote
 
@@ -363,7 +349,7 @@ For a multivariate mapping $F(x^1, \dots, x^m) = (f^1(x^1, \dots, x^m), \dots, f
 
 :::
 
-::: {#thm-calc2-2-12}
+::: {#thm-calc2-2-12 name="Closure Properties of Smooth Functions"}
 
 (1) If functions $f, g$ are both $\mathscr{C}^k$, then $f + g, fg$ are also $\mathscr{C}^k$.
 
@@ -373,7 +359,7 @@ For a multivariate mapping $F(x^1, \dots, x^m) = (f^1(x^1, \dots, x^m), \dots, f
 
 :::
 
-::: {#thm-calc2-2-13}
+::: {#thm-calc2-2-13 name="Symmetry of Mixed Partials"}
 
 For any $\mathscr{C}^k$ function $f$, for any $i_1, \dots, i_k \in \{1, 2, \dots, m\}$ and any permutation $\pi$ of $1, 2, \dots, k$,
 $$
@@ -384,9 +370,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Higher-Order Differentials
+::: {#def-cm-2-8 name="Higher-Order Differentials"}
 
 The first-order differential $\mathrm{d}f(\mathbf{x})$ of a function $f$ at $\mathbf{x}$ is a linear function with respect to a vector $\mathbf{v}$:
 
@@ -406,9 +390,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Hessian Matrix
+::: {#def-cm-2-9 name="Hessian Matrix"}
 
 where the coefficient matrix
 
@@ -438,9 +420,7 @@ When $f \in \mathscr{C}^k$, $\mathrm{d}^k f(\mathbf{x})$ is a symmetric $k$-mult
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Taylor Expansion
+::: {#def-cm-2-10 name="Taylor Expansion"}
 
 For a $\mathscr{C}^k$ function $f$, consider $g(t) = f(\mathbf{x}_0 + t\mathbf{v})$. Then $g$ is $\mathscr{C}^k$,
 
@@ -484,7 +464,7 @@ $$
 
 :::
 
-::: {#thm-calc2-2-14}
+::: {#thm-calc2-2-14 name="Characterizing the Taylor Polynomial"}
 
 Let $f$ be $k$ times continuously differentiable in a neighborhood of $\mathbf{x}_0$. Then a polynomial $P$ of degree at most $k$ satisfies
 $$
@@ -507,9 +487,7 @@ where $\mathbf{v} = (\xi^1, \dots, \xi^n)^T$.
 
 ## Extrema and Convexity of Multivariate Functions
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-cm-2-11 name="Local Extrema"}
 
 $\mathbf{x}_0$ is called a local minimum (local maximum) point of $f: E \to \mathbb{R}$, if there exists a neighborhood $U$ of $\mathbf{x}_0$ such that for any $\mathbf{x} \in E \cap U$, $f(\mathbf{x}) \ge f(\mathbf{x}_0)$ ($f(\mathbf{x}) \le f(\mathbf{x}_0)$).
 
@@ -519,7 +497,7 @@ $\mathbf{x}_0$ is called a non-degenerate critical point of a $\mathscr{C}^2$ fu
 
 :::
 
-::: {#thm-calc2-2-15}
+::: {#thm-calc2-2-15 name="First-Order Condition for Extrema"}
 
 1. If $f$ is differentiable at an extremum point $\mathbf{x}_0$, then $\mathrm{d}f(\mathbf{x}_0) = 0$, i.e., $\mathbf{x}_0$ is a critical point of $f$.
 2. If $f$ is twice continuously differentiable at a local minimum point $\mathbf{x}_0$, then $H_f(\mathbf{x}_0)$ is positive semi-definite.
@@ -528,7 +506,7 @@ $\mathbf{x}_0$ is called a non-degenerate critical point of a $\mathscr{C}^2$ fu
 
 :::
 
-::: {#thm-calc2-2-16}
+::: {#thm-calc2-2-16 name="Second-Order Condition for Extrema"}
 
 Let $f$ be twice continuously differentiable at a critical point $\mathbf{x}_0$. Then:
 
@@ -538,9 +516,7 @@ Let $f$ be twice continuously differentiable at a critical point $\mathbf{x}_0$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Convex Function
+::: {#def-cm-2-12 name="Convex Function"}
 
 A set $C \subseteq \mathbb{R}^m$ is called a convex set if for any $\mathbf{x}, \mathbf{y} \in C$ and any $0 \leq t \leq 1$, $(1 - t)\mathbf{x} + t\mathbf{y} \in C$.
 
@@ -574,16 +550,26 @@ $$
 
 :::
 
-::: {#thm-calc2-2-18}
+::: {#thm-calc2-2-18 name="Local Minimum of a Strictly Convex Function"}
 
 If $\mathbf{x}_0$ is a local minimum of a strictly convex function $f$, then $\mathbf{x}_0$ is the global minimum of $f$, and it is the unique global minimum. If $\mathbf{x}_0$ is a local maximum of a strictly concave function $f$, then $\mathbf{x}_0$ is the global maximum of $f$, and it is the unique global maximum.
 
 :::
 
-::: {#thm-calc2-2-19}
+::: {#thm-calc2-2-19 name="Hessian Test for Convexity"}
 
 A $\mathcal{C}^2$ function $f$ is a convex/concave function if and only if the Hessian matrix of $f$ is positive semi-definite/negative semi-definite at all points.
 
 If the Hessian matrix of $f$ is positive definite/negative definite at all points, then $f$ is a strictly convex/strictly concave function.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-calc2-2-1: Differentiability implies continuity.
+- @thm-calc2-2-7: The Jacobian of a composition is the product of the Jacobians.
+- @thm-calc2-2-8: Continuous first-order partial derivatives imply differentiability.
+- @thm-calc2-2-13: Mixed partial derivatives of a $\mathscr{C}^k$ function do not depend on the order.
+- @thm-calc2-2-16: The definiteness of the Hessian classifies a critical point.

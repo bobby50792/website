@@ -28,7 +28,7 @@ $$
 
 where $F$ is any antiderivative of $f$ on $I$, and $C$ is an arbitrary constant.
 
-**Examples**
+#### Examples
 
 1.
 
@@ -82,7 +82,7 @@ $$
 
 ## The Computation of Indefinite Integrals
 
-::: {#thm-calc1-4-1}
+::: {#thm-calc1-4-1 name="Linearity of Antiderivatives"}
 
 If $F$ and $G$ are antiderivatives of $f$ and $g$ on an interval $I$,  then $\lambda F + \mu G$ is an antiderivative of $\lambda f + \mu g$ on $I$.  Consequently,
 $$
@@ -93,7 +93,7 @@ $$
 
 :::
 
-::: {#thm-calc1-4-2}
+::: {#thm-calc1-4-2 name="Substitution Rule"}
 
 If $F$ and $G$ are antiderivatives of $f$ and $g$, respectively,  then
 $$
@@ -103,7 +103,7 @@ $$
 
 :::
 
-::: {#thm-calc1-4-3}
+::: {#thm-calc1-4-3 name="Integration by Parts"}
 
 If $F$ and $G$ are antiderivatives of $f$ and $g$ on an interval $I$, then
 $$
@@ -113,7 +113,7 @@ $$
 
 :::
 
-**Examples**
+#### Examples
 
 1. Compute
     $$
@@ -458,3 +458,10 @@ R\!\left(
 \right)
 \, d\!\left(\frac{1+t^{2}}{1-t^{2}}\right).
 $$
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-calc1-4-2: Substitution turns $\int f(G(x))g(x)\,dx$ into $F(G(x))+C$.
+- @thm-calc1-4-3: $\int Fg\,dx=FG-\int Gf\,dx$.

@@ -1,14 +1,61 @@
 <script>
 (function () {
-  // Review mode shows only headings and block titles; search narrows the blocks.
+  // Review mode shows only headings and block titles; search narrows them.
   function setupReview(content) {
     const blocks = [...content.querySelectorAll(".theorem")];
-    if (blocks.length < 3) return;
+
+    // A heading with text of its own is a topic: the text up to the next block or subsection.
+    const topics = [];
+    content.querySelectorAll("section").forEach((section) => {
+      // Key Results only repeat blocks above; the other supplementary parts are original content.
+      if (section.closest(".theorem, .callout, #key-results")) return;
+      const head = section.firstElementChild;
+      if (!head || !/^H[2-6]$/.test(head.tagName)) return;
+      const body = [];
+      for (let el = head.nextElementSibling; el && !el.matches("section, .theorem"); el = el.nextElementSibling) {
+        body.push(el);
+      }
+      if (!body.length) return;
+      section.classList.add("notes-topic");
+      head.classList.add("notes-topic-head");
+      body.forEach((el) => el.classList.add("notes-topic-body"));
+      topics.push(section);
+    });
+
+    const items = [...blocks, ...topics];
+    if (items.length < 3) return;
+
+    // Side notes and text after a block belong to it, up to the next block or subsection.
+    const extras = new Map();
+    blocks.forEach((block) => {
+      const list = [];
+      for (let el = block.nextElementSibling; el && !el.matches("section, .theorem"); el = el.nextElementSibling) {
+        list.push(el);
+      }
+      extras.set(block, list);
+    });
+    const syncExtras = () => {
+      const review = document.body.classList.contains("notes-review");
+      const searching = document.body.classList.contains("notes-search");
+      extras.forEach((list, block) => {
+        const open = !block.classList.contains("notes-filtered")
+          && (review ? block.classList.contains("is-revealed") : searching);
+        list.forEach((el) => el.classList.toggle("notes-block-extra", open));
+      });
+    };
 
     // A block's text shares a paragraph with its title, so wrap it to hide it separately.
     blocks.forEach((block) => {
       const title = block.querySelector(".theorem-title");
       if (!title) return;
+      // A block that opens with a list or equation has no text beside its title.
+      let rest = title.nextSibling;
+      while (rest && !rest.textContent.trim()) rest = rest.nextSibling;
+      if (!rest) {
+        while (title.nextSibling) title.nextSibling.remove();
+        title.parentElement.classList.add("notes-title-only");
+        return;
+      }
       const lead = document.createElement("span");
       lead.className = "notes-block-lead";
       while (title.nextSibling) lead.append(title.nextSibling);
@@ -19,8 +66,8 @@
     tools.className = "notes-review-tools";
     tools.innerHTML = `
       <label class="notes-review-field">
-        <input type="search" class="notes-review-search" placeholder="Find a definition or theorem"
-          aria-label="Find a definition or theorem">
+        <input type="search" class="notes-review-search" placeholder="Search this page"
+          aria-label="Search this page">
       </label>
       <p class="notes-review-status" aria-live="polite"></p>
       <button type="button" class="notes-review-toggle" role="switch" aria-checked="false">
@@ -42,28 +89,36 @@
     window.addEventListener("resize", place);
 
     const searchText = new Map();
-    const textOf = (block) => {
-      if (!searchText.has(block)) {
-        const copy = block.cloneNode(true);
-        copy.querySelectorAll("mjx-container").forEach((el) => el.remove());
-        searchText.set(block, copy.textContent.toLowerCase());
+    const textOf = (item) => {
+      if (!searchText.has(item)) {
+        const parts = item.matches(".theorem")
+          ? [item, ...extras.get(item)]
+          : [...item.children].filter((el) => el.matches(".notes-topic-head, .notes-topic-body"));
+        const text = parts.map((part) => {
+          const copy = part.cloneNode(true);
+          copy.querySelectorAll("mjx-container, .header-section-number").forEach((el) => el.remove());
+          return copy.textContent;
+        });
+        searchText.set(item, text.join(" ").toLowerCase());
       }
-      return searchText.get(block);
+      return searchText.get(item);
     };
 
-    const titles = blocks.map((block) => block.querySelector(".theorem-title")).filter(Boolean);
-    const setRevealed = (block, on) => {
-      block.classList.toggle("is-revealed", on);
-      const title = block.querySelector(".theorem-title");
+    const titleOf = (item) => (item.matches(".theorem") ? item.querySelector(".theorem-title") : item.firstElementChild);
+    const titles = items.map(titleOf).filter(Boolean);
+    const setRevealed = (item, on) => {
+      item.classList.toggle("is-revealed", on);
+      const title = titleOf(item);
       if (title && document.body.classList.contains("notes-review")) {
         title.setAttribute("aria-expanded", String(on));
       }
+      syncExtras();
     };
 
     const setReview = (on) => {
       document.body.classList.toggle("notes-review", on);
       toggle.setAttribute("aria-checked", String(on));
-      blocks.forEach((block) => block.classList.remove("is-revealed"));
+      items.forEach((item) => item.classList.remove("is-revealed"));
       titles.forEach((title) => {
         if (on) {
           title.setAttribute("role", "button");
@@ -75,9 +130,10 @@
           title.removeAttribute("aria-expanded");
         }
       });
+      syncExtras();
     };
 
-    // Searching shows matching blocks in full, and clearing it returns to the reading position.
+    // Searching shows matching items in full, and clearing it returns to the reading position.
     let readingPosition = null;
     const applySearch = () => {
       const query = search.value.trim().toLowerCase();
@@ -93,13 +149,14 @@
         requestAnimationFrame(() => window.scrollTo(0, position));
       }
       let shown = 0;
-      blocks.forEach((block) => {
-        const match = !query || textOf(block).includes(query);
-        block.classList.toggle("notes-filtered", !match);
+      items.forEach((item) => {
+        const match = !query || textOf(item).includes(query);
+        item.classList.toggle("notes-filtered", !match);
         if (match) shown += 1;
       });
+      syncExtras();
       status.textContent = query
-        ? shown ? `${shown} of ${blocks.length} match` : "No matches"
+        ? shown ? `${shown} of ${items.length} match` : "No matches"
         : "";
     };
 
@@ -127,12 +184,20 @@
       });
     });
 
-    titles.forEach((title) => {
+    topics.forEach((topic) => {
+      titleOf(topic).addEventListener("click", (event) => {
+        if (!document.body.classList.contains("notes-review") || event.target.closest("a")) return;
+        setRevealed(topic, !topic.classList.contains("is-revealed"));
+      });
+    });
+
+    items.forEach((item) => {
+      const title = titleOf(item);
+      if (!title) return;
       title.addEventListener("keydown", (event) => {
         if (document.body.classList.contains("notes-review") && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
-          const block = title.closest(".theorem");
-          setRevealed(block, !block.classList.contains("is-revealed"));
+          setRevealed(item, !item.classList.contains("is-revealed"));
         }
       });
     });
@@ -177,11 +242,55 @@
     title.closest(".callout").dataset.noteType = type.toLowerCase();
   });
 
+  // The frame sits on a wrapper so a wide table scrolls inside it.
+  content.querySelectorAll("table").forEach((table) => {
+    const frame = document.createElement("div");
+    frame.className = "notes-table";
+    table.before(frame);
+    frame.append(table);
+  });
+
+  // A list with nothing but links reads as a reference list, with each title split at its colon.
+  content.querySelectorAll("section ul").forEach((list) => {
+    if (list.closest(".theorem, .callout, .supplementary-notes")) return;
+    const rows = [...list.children];
+    const onlyLinks = rows.length > 1 && rows.every((row) => {
+      const copy = row.cloneNode(true);
+      const hasLink = copy.querySelector("a");
+      copy.querySelectorAll("a").forEach((link) => link.remove());
+      return hasLink && /^[\s()[\],;:.]*$/.test(copy.textContent);
+    });
+    if (!onlyLinks) return;
+    list.classList.add("notes-link-list");
+    rows.forEach((row) => {
+      const link = row.querySelector("a");
+      const parts = link.textContent.match(/^(.{2,40}?):\s+(.+)$/);
+      if (!parts || link.children.length) return;
+      link.textContent = "";
+      const name = document.createElement("span");
+      name.className = "notes-link-name";
+      name.textContent = parts[1];
+      const description = document.createElement("span");
+      description.className = "notes-link-description";
+      description.textContent = parts[2];
+      link.append(name, description);
+    });
+  });
+
   setupReview(content);
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {
-    if (/^\S.*\):\s*$/.test(line.textContent)) line.classList.add("notes-code-head");
+    if (/^(?!(?:for|if|while)\b)\S.*\):\s*$/.test(line.textContent)) line.classList.add("notes-code-head");
+  });
+
+  // Opening a section in the sidebar closes its siblings, so the list stays short.
+  document.getElementById("quarto-sidebar")?.addEventListener("show.bs.collapse", (event) => {
+    const item = event.target.parentElement;
+    [...item.parentElement.children].forEach((sibling) => {
+      const section = sibling === item ? null : sibling.querySelector(":scope > .collapse.show");
+      if (section) bootstrap.Collapse.getOrCreateInstance(section, { toggle: false }).hide();
+    });
   });
 
   // Reading progress along the top of the window.

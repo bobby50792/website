@@ -11,8 +11,7 @@ crossref:
 
 ## Normalizing Flow
 
-::: {.callout-tip collapse="true"}
-## Normalizing Flows Formulation
+::: {#def-dl-4-1 name="Normalizing Flows Formulation"}
 
 * Generative Models
     * Generator: transform a simple distribution to the data distribution
@@ -32,8 +31,7 @@ crossref:
       $$\log p(z_K) = \log \pi(z_0) - \sum_{k=1}^K \log \left| \det\left(\frac{\partial f_{\theta^k}}{\partial z_k}\right) \right|$$
 :::
 
-::: {.callout-tip collapse="true"}
-## Coupling Layers Formulation
+::: {#def-dl-4-2 name="Coupling Layers Formulation"}
 
 * Coupling Layers
     * $f(x) = \begin{bmatrix} x^A \\ \hat{f}(x^B \mid \theta(x^A)) \end{bmatrix}$
@@ -51,9 +49,7 @@ crossref:
           $$\hat{f}(x \mid s, t) = s \odot x + t$$
 :::
 
-
-::: {.callout-tip collapse="true"}
-## Glow (Kingma & Dhariwal, NeurIPS 2018) Formulation
+::: {#def-dl-4-3 name="Glow (Kingma & Dhariwal, NeurIPS 2018) Formulation"}
 
 * Glow
     * Input $h: c \times h \times w$, $W: c \times c$, Output: $c \times h \times w$
@@ -69,8 +65,7 @@ crossref:
     * complexity: $\mathcal{O}(c)$
 :::
 
-::: {.callout-tip collapse="true"}
-## Continuous-time Normalizing Flows & Neural ODE Formulation
+::: {#def-dl-4-4 name="Continuous-time Normalizing Flows & Neural ODE Formulation"}
 
 * Continuous-time Normalizing Flows
     * Neural ODE
@@ -91,8 +86,7 @@ crossref:
 
 ## Variational Autoencoders
 
-::: {.callout-tip collapse="true"}
-## Gaussian Mixture Model
+::: {#def-dl-4-5 name="Gaussian Mixture Model"}
 
 * Gaussian Mixture Model
     * $z$: latent variable
@@ -122,6 +116,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## EM Algorithm (Variational Inference) Formulation
 
 * Expectation Maximization (EM) Algorithm (Variational Inference)
@@ -133,6 +128,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Evidence Lower Bound (ELBO) Formulation
 
 * Jensen's Inequality
@@ -155,6 +151,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Evidence Lower Bound
 
 * EM Algorithm: Alternately Maximize ELBO
@@ -184,8 +181,7 @@ crossref:
 
 :::
 
-::: {.callout-tip collapse="true"}
-## VAEs
+::: {#def-dl-4-6 name="VAEs"}
 
 * Parametrize
   $$
@@ -274,9 +270,10 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Hierarchical PixelVAE
 
-**Hierarchical latent space decomposition**
+#### Hierarchical latent space decomposition
 
 * Ordinary VAE uses one latent variable:
   $$
@@ -359,9 +356,10 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## NVAE
 
-**Hierarchical Architecture**
+#### Hierarchical Architecture
 
 * Hierarchical latent variables:
   $$
@@ -457,3 +455,11 @@ crossref:
   $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-dl-4-1: A normalizing flow transforms a simple distribution into the data distribution.
+- @def-dl-4-2: Coupling layers keep the transformation easy to invert and the Jacobian easy to compute.
+- @def-dl-4-6: A VAE parametrizes $q_x(z)$ and $p_\psi(x\mid z)$ with Gaussians.

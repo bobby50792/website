@@ -1,7 +1,5 @@
 ---
 title: "Logic"
-body-classes: notes-studio
-include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [2]
@@ -10,9 +8,9 @@ crossref:
   chapters: true
 ---
 
-- **Representation (Syntax):** defines a set of valid formulas.
-- **Semantics:** for each formula, specify a set of models (assignments / configurations of the world).
-- **Inference rule:** a rule that allows us to derive new formulas from existing ones.
+- Representation (Syntax): defines a set of valid formulas.
+- Semantics: for each formula, specify a set of models (assignments / configurations of the world).
+- Inference rule: a rule that allows us to derive new formulas from existing ones.
 
 ## Representation
 
@@ -108,8 +106,8 @@ A knowledge base $\mathrm{KB}$ is satisfiable if $\mathcal{M}(\mathrm{KB}) \neq 
 
 #### Model checking
 
-- **Input:** knowledge base $\mathrm{KB}$
-- **Output:** exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
+- Input: knowledge base $\mathrm{KB}$
+- Output: exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
 
 #### Popular algorithms
 
@@ -309,11 +307,11 @@ $$
 
 ### Fixing completeness
 
-1. **Option 1: Restrict the allowed set of formulas**
+1. Option 1: Restrict the allowed set of formulas
 
    propositional logic $\to$ propositional logic with only Horn clauses
 
-2. **Option 2: Use more powerful inference rules**
+2. Option 2: Use more powerful inference rules
 
    Modus ponens $\to$ resolution
 

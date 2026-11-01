@@ -47,9 +47,7 @@ has a $\mathscr{C}^k$ inverse mapping.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-cm-3-1 name="Diffeomorphism"}
 
 A mapping $f: U \to V$ is called a $\mathscr{C}^k$ **diffeomorphism** if $f$ is a $\mathscr{C}^k$ mapping and there exists a $\mathscr{C}^k$ inverse mapping $g: V \to U$, such that
 $$
@@ -60,7 +58,7 @@ $$
 
 :::
 
-::: {#thm-calc2-3-3}
+::: {#thm-calc2-3-3 name="Regularity of the Inverse Mapping"}
 
 Let $U \subseteq \mathbb{R}^n$ be an open set, and let $f: U \to \mathbb{R}^n$ be a $\mathscr{C}^k$ mapping. Then
 $$
@@ -81,9 +79,7 @@ $$
 
 ## Surfaces, Tangent Planes and Normal Vectors
 
-::: {.callout-tip collapse="true"}
-
-## Surface
+::: {#def-cm-3-2 name="Surface"}
 
 Let $1 \leq m \leq n-1$. We say that $\Sigma \subset \mathbb{R}^n$ is an $m$-dimensional $\mathscr{C}^k$ **surface**, if for any $\mathbf{x}_0 \in \Sigma$, $\Sigma$ is the graph of an $m$-variable $\mathscr{C}^k$ mapping in a neighborhood of $\mathbf{x}_0$. That is, there exists a neighborhood $U$ of $\mathbf{x}_0$, a permutation $\sigma(1), \sigma(2), \dots, \sigma(n)$ of $1, 2, \dots, n$, and a $\mathscr{C}^k$ mapping $g$ such that for any $\mathbf{x} = (x^1, x^2, \dots, x^n) \in U$,
 $$
@@ -98,7 +94,7 @@ When $m = 1$, $\Sigma$ is a $\mathscr{C}^k$ **curve**.
 
 :::
 
-::: {#thm-calc2-3-4}
+::: {#thm-calc2-3-4 name="Surfaces from Regular Values"}
 
 1. If $a$ is a regular value of a $\mathscr{C}^k$ mapping $F: U \to \mathbb{R}^n$ (where $U \subseteq \mathbb{R}^m$ is a region), meaning that for any $\mathbf{x} \in U$ satisfying $F(\mathbf{x}) = a$, $\mathrm{d}F(\mathbf{x})$ has full row rank, then the level set of $F$
 
@@ -122,9 +118,7 @@ is an $m$-dimensional $\mathscr{C}^k$ surface in $\mathbb{R}^n$. $f$ is called a
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Tangent Space
+::: {#def-cm-3-3 name="Tangent Space"}
 
 Let $\Sigma$ be a $\mathscr{C}^k$ surface in $\mathbb{R}^n$, and $\mathbf{x}_0 \in \Sigma$. Let $\gamma: (a, b) \to \mathbb{R}^n$ be a $\mathscr{C}^1$ curve on $\Sigma$ passing through $\mathbf{x}_0$, meaning that for any $t \in (a, b)$, $\gamma(t) \in \Sigma$, and $\gamma(t_0) = \mathbf{x}_0$. In this case, $\gamma'(t_0) \in \mathbb{R}^n$ is called a **tangent vector** of $\Sigma$ at $\mathbf{x}_0$. Let $T_{\mathbf{x}_0}\Sigma$ denote the set consisting of all tangent vectors of $\Sigma$ at $\mathbf{x}_0$, which is called the **tangent space** of $\Sigma$ at $\mathbf{x}_0$.
 
@@ -155,7 +149,7 @@ $$
 
 :::
 
-::: {#thm-calc2-3-5}
+::: {#thm-calc2-3-5 name="Tangent Space of a Surface"}
 
 Let $\Sigma \subseteq \mathbb{R}^n$ be an $m$-dimensional $\mathscr{C}^k$ surface. Then for any $\mathbf{x}_0 \in \Sigma$, the tangent space $T_{\mathbf{x}_0}\Sigma$ is an $m$-dimensional linear subspace of $\mathbb{R}^n$, and
 
@@ -222,11 +216,11 @@ $$
 
 The first equation corresponds to the necessary condition for a constrained extremum point, while the subsequent equations are precisely the constraints themselves. In this way, the constrained extremum problem is transformed into an unconstrained extremum problem for the augmented function $F$. This method is called the **"Lagrange Multiplier Method,"** where $\lambda$ is called the **Lagrange Multiplier**.
 
-::: {#thm-calc2-3-6}
+::: {#thm-calc2-3-6 name="Lagrange Multipliers"}
 
 Let $f$ be a $\mathscr{C}^r$ function, and let $g: \mathbb{R}^m \to \mathbb{R}^n$ ($m > n$) be a $\mathscr{C}^r$ mapping. Suppose $\mathbf{x}^*$ satisfies $g(\mathbf{x}^*) = 0$ and the Jacobian matrix $Jg(\mathbf{x}^*)$ has full rank (i.e., $n = \text{rank } \mathrm{d}g(\mathbf{x}^*)$). Then:
 
-1.  **(Fermat's Lemma, Necessary Condition for Constrained Extremum)**: If $f$ attains a (constrained) extremum at $\mathbf{x}^*$ under the constraint $g(\mathbf{x}) = 0$, then the gradient $\nabla f(\mathbf{x}^*)$ is orthogonal to the tangent space of the surface $\Sigma : g(\mathbf{x}) = 0$ at $\mathbf{x}^*$. In this case, there exists a unique set of real numbers $\lambda_1^*, \dots, \lambda_n^*$ such that:
+1.  (Fermat's Lemma, Necessary Condition for Constrained Extremum): If $f$ attains a (constrained) extremum at $\mathbf{x}^*$ under the constraint $g(\mathbf{x}) = 0$, then the gradient $\nabla f(\mathbf{x}^*)$ is orthogonal to the tangent space of the surface $\Sigma : g(\mathbf{x}) = 0$ at $\mathbf{x}^*$. In this case, there exists a unique set of real numbers $\lambda_1^*, \dots, \lambda_n^*$ such that:
 
 $$
 \begin{aligned}
@@ -234,8 +228,16 @@ $$
 \end{aligned}
 $$
 
-2.  **(Sufficient Condition for Constrained Extremum)**: If the Hessian matrix of $f(\mathbf{x}) - \lambda_1^* g_1(\mathbf{x}) - \dots - \lambda_n^* g_n(\mathbf{x})$ with respect to $\mathbf{x}$ is positive definite (or negative definite) when restricted to the tangent space $T_{\mathbf{x}^*} \Sigma$, then $\mathbf{x}^*$ is a constrained local minimum point (or respectively, a constrained local maximum point) of $f$ restricted to $\Sigma$.
+2.  (Sufficient Condition for Constrained Extremum): If the Hessian matrix of $f(\mathbf{x}) - \lambda_1^* g_1(\mathbf{x}) - \dots - \lambda_n^* g_n(\mathbf{x})$ with respect to $\mathbf{x}$ is positive definite (or negative definite) when restricted to the tangent space $T_{\mathbf{x}^*} \Sigma$, then $\mathbf{x}^*$ is a constrained local minimum point (or respectively, a constrained local maximum point) of $f$ restricted to $\Sigma$.
 
-3.  **(Saddle Point)**: If the Hessian matrix of $f(\mathbf{x}) - \lambda_1^* g_1(\mathbf{x}) - \dots - \lambda_n^* g_n(\mathbf{x})$ with respect to $\mathbf{x}$, when restricted to the tangent space $T_{\mathbf{x}^*} \Sigma$, has both positive and negative eigenvalues, then $\mathbf{x}^*$ is not a constrained extremum point of $f$ restricted to $\Sigma$.
+3.  (Saddle Point): If the Hessian matrix of $f(\mathbf{x}) - \lambda_1^* g_1(\mathbf{x}) - \dots - \lambda_n^* g_n(\mathbf{x})$ with respect to $\mathbf{x}$, when restricted to the tangent space $T_{\mathbf{x}^*} \Sigma$, has both positive and negative eigenvalues, then $\mathbf{x}^*$ is not a constrained extremum point of $f$ restricted to $\Sigma$.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-calc2-3-2: A $\mathscr{C}^k$ mapping with an invertible differential at a point is locally invertible.
+- @thm-calc2-3-5: An $m$-dimensional surface has a tangent space at each point.
+- @thm-calc2-3-6: Constrained extrema can be found with Lagrange multipliers.

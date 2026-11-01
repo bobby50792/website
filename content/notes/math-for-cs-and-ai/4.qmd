@@ -13,8 +13,7 @@ crossref:
 
 ### Discrete Probability Spaces Beyond the Finite Case  
 
-::: {.callout-tip collapse="true"}
-## Countable and uncountable sets
+::: {#def-mc-4-1 name="Countable and uncountable sets"}
 
 A set $\Omega$ is countable if it is finite, or if there exists a sequence $(a_n)_{n \ge 0}$ such that
 
@@ -28,8 +27,7 @@ A set that is not countable is uncountable.
 
 :::
 
-::: {.callout-note collapse="true"}
-## Properties about countable and uncountable sets
+::: {#prp-mc-4-1 name="Properties about countable and uncountable sets"}
 - (Tuples are countable). For every fixed integer $k \ge 1$, the set of all $k$-tuples of natural numbers,
 
 $$
@@ -43,8 +41,7 @@ is countable.
 - Real numbers are uncountable.
 :::
 
-::: {.callout-tip collapse="true"}
-## Discrete probability space
+::: {#def-mc-4-2 name="Discrete probability space"}
 
 A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
 
@@ -53,9 +50,7 @@ A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Event
+::: {#def-mc-4-3 name="Event"}
 An event $A$ is a subset of $\Omega$ ($A \subseteq \Omega$), and its probability is defined as
 
 $$
@@ -64,8 +59,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-## Expectation
+::: {#def-mc-4-4 name="Expectation"}
 
 Let $X$ be a random variable on a discrete probability space $(\Omega, p)$. The expectation of $X$ is defined as
 
@@ -80,8 +74,7 @@ provided the two sums are not both $+\infty$. If both sums are finite, then $\ma
 
 ### Continuous Probability Space
 
-::: {.callout-tip collapse="true"}
-## Probability density function
+::: {#def-mc-4-5 name="Probability density function"}
 
 A function $f : \mathbb{R}^d \to [0, \infty)$ is called a probability density function (PDF) on $\mathbb{R}^d$ if
 
@@ -92,8 +85,7 @@ $$
 
 ### Probability Distributions
 
-::: {.callout-tip collapse="true"}
-## Discrete random variables
+::: {#def-mc-4-6 name="Discrete random variables"}
 
 A random variable $X$ is discrete if it takes countably many values $\{x_1, x_2, \dots\}$. We define the probability mass function (PMF) of $X$ as
 
@@ -103,8 +95,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-## Continuous random variables
+::: {#def-mc-4-7 name="Continuous random variables"}
 
 A random variable $X$ is continuous if there exists a function $f_X : \mathbb{R} \to [0, +\infty)$ such that
 
@@ -121,8 +112,7 @@ $$
 The function $f_X$ is called the probability density function (PDF) of $X$.
 :::
 
-::: {.callout-tip collapse="true"}
-## Probability distribution
+::: {#def-mc-4-8 name="Probability distribution"}
 
 The probability distribution, or law, of $X$ is defined as a function $P_X$ that maps sets to probabilities:
 
@@ -133,7 +123,7 @@ $$
 In general, a probability distribution refers to any function $\mathcal{D}$ that maps sets to probabilities, and we write $X \sim \mathcal{D}$ if $P_X = \mathcal{D}$. A probability distribution $\mathcal{D}$ is discrete if $X \sim \mathcal{D}$ for some discrete random variable $X$, and continuous if $X \sim \mathcal{D}$ for some continuous random variable $X$.
 :::
 
-::: {#thm-1}
+::: {#thm-1 name="Equivalent Conditions for Equal Distributions"}
 
 Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$ and $Y$. Then the following conditions are equivalent to $P_X = P_Y$:
 
@@ -143,7 +133,7 @@ Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$
 4. For every $a \in \mathbb{R}$, $P_X((-\infty, a]) = P_Y((-\infty, a])$.
 :::
 
-::: {#thm-2}
+::: {#thm-2 name="MGF Determines the Distribution"}
 
 Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$ and $Y$. Suppose that the MGFs of $X$ and $Y$, denoted as $M_X$ and $M_Y$, are defined on some open interval $(-\epsilon, \epsilon)$. Then $P_X = P_Y$ if and only if $M_X(t) = M_Y(t)$ for all $t \in (-\epsilon, \epsilon)$.
 :::
@@ -152,8 +142,7 @@ Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$
 
 ### The Standard Gaussian Distributions
 
-::: {.callout-tip collapse="true"}
-## Standard Gaussian distribution
+::: {#def-mc-4-9 name="Standard Gaussian distribution"}
 
 The standard Gaussian distribution is the continuous probability distribution with PDF
 
@@ -166,8 +155,7 @@ We denote the standard Gaussian distribution by $\mathcal{N}(0, 1)$.
 
 ### General Gaussian Distributions
 
-::: {.callout-tip collapse="true"}
-## General Gaussian distribution
+::: {#def-mc-4-10 name="General Gaussian distribution"}
 
 Let $\mu \in \mathbb{R}$ and $\sigma \ge 0$. The Gaussian distribution with mean $\mu$ and variance $\sigma^2$ is defined as the distribution of random variable
 
@@ -178,7 +166,7 @@ $$
 where $Z \sim \mathcal{N}(0, 1)$. We denote this distribution by $\mathcal{N}(\mu, \sigma^2)$.
 :::
 
-::: {#thm-3}
+::: {#thm-3 name="Affine Transformations of a Density"}
 
 Let $X$ be a continuous random variable with PDF $f_X(x)$. Let $\alpha \in \mathbb{R} \setminus \{0\}$ and $\beta \in \mathbb{R}$ be constants. Then:
 
@@ -198,7 +186,7 @@ is a PDF of $X$.
 
 ### Moment Generating Functions
 
-::: {#thm-4}
+::: {#thm-4 name="MGF of a Gaussian"}
 
 If $X \sim \mathcal{N}(\mu, \sigma^2)$ is a Gaussian random variable with mean $\mu$ and variance $\sigma^2$, then
 
@@ -210,7 +198,7 @@ $$
 
 ### Sum of Independent Gaussians
 
-::: {#thm-5}
+::: {#thm-5 name="Sum of Two Independent Gaussians"}
 
 Let $X_1$ and $X_2$ be independent Gaussian random variables. Suppose
 
@@ -226,7 +214,7 @@ $$
 
 :::
 
-::: {#thm-6}
+::: {#thm-6 name="Linear Combination of Independent Gaussians"}
 
 Let $X_1, \dots, X_n$ be independent Gaussian random variables with
 
@@ -242,10 +230,9 @@ $$
 
 :::
 
-
 ### Gaussian Tail Bounds
 
-::: {#thm-7}     
+::: {#thm-7 name="Gaussian Tail of the Sample Average"}     
 
 Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. Gaussian random variables $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. Then for every $\epsilon \ge 0$, as $n \to \infty$,
 
@@ -269,7 +256,7 @@ $$
 
 :::
 
-::: {#thm-8}
+::: {#thm-8 name="Chernoff Bound for Gaussian Averages"}
 
 Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. Gaussian random variables $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. Then, for every $\epsilon \ge 0$,
 
@@ -281,8 +268,7 @@ $$
 
 ### Gaussian Vectors
 
-::: {.callout-tip collapse="true"}
-## Random vector
+::: {#def-mc-4-11 name="Random vector"}
 
 A random vector in $\mathbb{R}^d$ is a vector
 
@@ -299,8 +285,7 @@ $$
 When referring to the distribution of a single coordinate $X_i$, we use the term marginal distribution of $X_i$ to emphasize that we are considering the probability distribution of this coordinate alone.
 :::
 
-::: {.callout-tip collapse="true"}
-## Mean vector
+::: {#def-mc-4-12 name="Mean vector"}
 
 The mean of a random vector $\boldsymbol{x} = (X_1, \dots, X_d)$ is the vector
 
@@ -310,8 +295,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-## Covariance matrix
+::: {#def-mc-4-13 name="Covariance matrix"}
 
 The covariance matrix of a random vector $\boldsymbol{x} = (X_1, \dots, X_d)$ is the matrix
 
@@ -328,8 +312,7 @@ $$
 where $\text{Cov}(X, Y) := \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]$ is defined as the covariance between $X$ and $Y$.
 :::
 
-::: {.callout-tip collapse="true"}
-## Standard Gaussian vector
+::: {#def-mc-4-14 name="Standard Gaussian vector"}
 
 A random vector $\boldsymbol{x} = (X_1, \dots, X_d) \in \mathbb{R}^d$ is called a standard Gaussian vector if $X_1, \dots, X_d$ are independent and
 
@@ -340,8 +323,7 @@ $$
 The distribution of this random vector is denoted by $\mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$.
 :::
 
-::: {.callout-tip collapse="true"}
-## Gaussian vector
+::: {#def-mc-4-15 name="Gaussian vector"}
 
 A random vector $\boldsymbol{x} \in \mathbb{R}^d$ is called a Gaussian vector if there exists a vector $\boldsymbol{\mu} \in \mathbb{R}^d$, a matrix $\boldsymbol{A} \in \mathbb{R}^{d \times r}$, and a $r$-dimensional standard Gaussian vector $\boldsymbol{z} \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$ such that
 
@@ -352,12 +334,12 @@ $$
 The distribution of this random vector is denoted by $\mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$, where $\boldsymbol{\Sigma} = \boldsymbol{A}\boldsymbol{A}^\top$.
 :::
 
-::: {#thm-9}
+::: {#thm-9 name="MGF Determines a Random Vector"}
 
 Let $P_{\boldsymbol{x}}$ and $P_{\boldsymbol{y}}$ be the probability distributions of two random vectors $\boldsymbol{x}$ and $\boldsymbol{y}$. Suppose that the MGFs of $\boldsymbol{x}$ and $\boldsymbol{y}$, denoted as $M_{\boldsymbol{x}}$ and $M_{\boldsymbol{y}}$, are defined on some open neighborhood of the origin. Then $P_{\boldsymbol{x}} = P_{\boldsymbol{y}}$ if and only if $M_{\boldsymbol{x}}(\boldsymbol{t}) = M_{\boldsymbol{y}}(\boldsymbol{t})$ for all $\boldsymbol{t}$ in this neighborhood.
 :::
 
-::: {#thm-10}
+::: {#thm-10 name="MGF and CGF of a Gaussian Vector"}
 
 Let $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$. Then the MGF and CGF of $\boldsymbol{x}$ are given by
 
@@ -367,7 +349,7 @@ $$
 
 :::
 
-::: {#thm-11}
+::: {#thm-11 name="PDF of a Gaussian Vector"}
 
 Let $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ with $\det(\boldsymbol{\Sigma}) > 0$. Then
 
@@ -378,7 +360,7 @@ $$
 is a PDF of $\boldsymbol{x}$.
 :::
 
-::: {#thm-12}
+::: {#thm-12 name="Linear Transformations of Gaussian Vectors"}
 
 Let $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$. Then for any fixed matrix $\boldsymbol{S} \in \mathbb{R}^{r \times d}$,
 
@@ -388,7 +370,7 @@ $$
 
 :::
 
-::: {#thm-13}
+::: {#thm-13 name="Sum of Independent Gaussian Vectors"}
 
 Let $\boldsymbol{x}_1$ and $\boldsymbol{x}_2$ be independent Gaussian vectors in $\mathbb{R}^d$. Suppose
 
@@ -404,14 +386,11 @@ $$
 
 :::
 
-
 ## The Strange Geometry of High Dimensions
 
 ### High-dimensional Gaussians, Spheres, and Ball
 
-::: {.callout-tip collapse="true"}
-
-## Three fundamental distributions
+::: {#def-mc-4-16 name="Three fundamental distributions"}
 
 1. Gaussian distribution $\mathcal{G} = \mathcal{N}(\boldsymbol{0}, \boldsymbol{I}/d)$:
    
@@ -427,14 +406,14 @@ $$
 
 :::
 
-::: {#thm-14}
+::: {#thm-14 name="Volume Concentrates Near the Surface"}
 Let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
 $$
 \Pr[1 - \epsilon < \|\boldsymbol{x}\|_2 \le 1] \ge 1 - e^{-\epsilon d}. 
 $$
 :::
 
-::: {#thm-15}
+::: {#thm-15 name="Gaussian Norm Concentration"}
 Let $\boldsymbol{x} \sim \mathcal{G}$. Then, for every $\epsilon \in (0, 1)$,
 $$
 \Pr[|\|\boldsymbol{x}\|_2^2 - 1| \ge \epsilon] \le 2e^{-d\epsilon^2/8}.
@@ -453,7 +432,7 @@ $$
 
 \ 
 
-::: {#thm-16}
+::: {#thm-16 name="Volume Concentrates Near the Equator"}
 Let $d \ge 3$. Fix a unit vector $\boldsymbol{u} \in \mathbb{R}^d$, and let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
 
 $$
@@ -461,9 +440,7 @@ $$
 $$
 :::
 
-::: {.callout-note collapse="true"}
-
-## Corollary
+::: {#cor-mc-4-1 name="Consequences of Equatorial Concentration"}
 
 1. Let $d \ge 3$. Fix a unit vector $\boldsymbol{u} \in \mathbb{R}^d$, and let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
 $$
@@ -484,7 +461,7 @@ $$
 
 ### Random Projection
 
-::: {#thm-17}
+::: {#thm-17 name="Random Projection of a Vector"}
 
 Let $\boldsymbol{A} \in \mathbb{R}^{k \times d}$ be a Gaussian random matrix, where every entry of $\boldsymbol{A}$ is sampled independently from $\mathcal{N}(0,1/k)$. For every fixed vector $\boldsymbol{x} \in \mathbb{R}^d$,
 
@@ -501,7 +478,7 @@ $$
 
 \
 
-::: {#thm-18}
+::: {#thm-18 name="Johnson–Lindenstrauss Lemma"}
 Let $\boldsymbol{x}_1, \dots, \boldsymbol{x}_n \in \mathbb{R}^d$ be $n$ points in $\mathbb{R}^d$, where $n \ge 2$. For every $\epsilon \in (0, 1)$ and any integer $k$ with
 $$
 k \ge \frac{16 \log n}{\epsilon^2}, 
@@ -515,9 +492,7 @@ $$
 
 ## Probability Distances
 
-::: {.callout-tip collapse="true"}
-## Notation for probability and expectation under specific distributions
-
+::: {#def-mc-4-17 name="Notation for probability and expectation under specific distributions"}
 
 * For a probability event $A$, we may write $P(A)$ as
   
@@ -537,9 +512,7 @@ $$
 
 ### Total Variation Distance
 
-::: {.callout-tip collapse="true"}
-
-## Total variation distance
+::: {#def-mc-4-18 name="Total variation distance"}
 
 The total variation distance between $P$ and $Q$ is
 
@@ -548,7 +521,7 @@ d_{\mathrm{TV}}(P, Q) := \sup_{A \subseteq \mathbb{R}^d} |P(A) - Q(A)|.
 $$
 :::
 
-::: {#thm-19}
+::: {#thm-19 name="Total Variation via PMFs"}
 
 If $P$ and $Q$ are discrete probability distributions with PMFs $p : \mathcal{X} \to [0, 1]$ and $q : \mathcal{X} \to [0, 1]$, where $\mathcal{X}$ is a finite set of values, then
 
@@ -557,7 +530,7 @@ d_{\mathrm{TV}}(P, Q) = \frac{1}{2} \sum_{x \in \mathcal{X}} |p(x) - q(x)|.
 $$
 :::
 
-::: {#thm-20}
+::: {#thm-20 name="Total Variation via PDFs"}
 
 If $P$ and $Q$ are continuous probability distributions with PDFs $f$ and $g$ on $\mathbb{R}^d$, then
 
@@ -566,7 +539,7 @@ d_{\mathrm{TV}}(P, Q) = \frac{1}{2} \int_{\mathbb{R}^d} |f(\boldsymbol{x}) - g(\
 $$
 :::
 
-::: {#thm-21}
+::: {#thm-21 name="Total Variation via Test Functions"}
 
 Let $\ell < u$. For any two probability distributions $P$ and $Q$ on $\mathbb{R}^d$,
 
@@ -579,8 +552,7 @@ where $\mathcal{F}_{\ell,u}$ denotes the family of all functions $\phi : \mathbb
 
 ### Wasserstein Distance
 
-::: {.callout-tip collapse="true"}
-## Lipschitz function
+::: {#def-mc-4-19 name="Lipschitz function"}
 
 For $L \geq 0$, a function $\phi : \mathbb{R}^d \to \mathbb{R}$ is $L$-Lipschitz if for all $\boldsymbol{x}, \boldsymbol{y} \in \mathbb{R}^d$,
 
@@ -591,8 +563,7 @@ $$
 In particular, $\phi$ is 1-Lipschitz if it is $L$-Lipschitz with $L = 1$.
 :::
 
-::: {.callout-tip collapse="true"}
-## Wasserstein-1 distance
+::: {#def-mc-4-20 name="Wasserstein-1 distance"}
 
 The Wasserstein-1 distance between $P$ and $Q$ is
 
@@ -609,7 +580,17 @@ $$
 
 :::
 
-## Appendix
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-2: Matching MGFs determine a distribution.
+- @thm-5: A sum of independent Gaussians is Gaussian.
+- @thm-12: Linear maps of Gaussian vectors are Gaussian vectors.
+- @thm-14: In high dimensions, the volume of a ball concentrates near its surface.
+- @thm-18: Johnson–Lindenstrauss projects $n$ points to low dimension while preserving distances.
+
+### Extensions
 
 ::: {#thm-22}
 ## Asymptotic expansion of the Gaussian tail probability

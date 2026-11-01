@@ -12,29 +12,21 @@ crossref:
 ## Classification
 
 ### Logistic Regression
-::: {.callout-tip collapse="true"} 
-
-## Logistic Regression
+::: {#def-dl-1-1 name="Logistic Regression"}
 
 * $P(y = 1) = f(x; \theta) = \sigma(w^T x + b)$
 * Logistic function (sigmoid function): $\sigma(x) = \frac{1}{1 + e^{-x}}$
 * $err(f(x; \theta), y) = \begin{cases} -\log \sigma(w^T x + b) & y = 1 \\ -\log(1 - \sigma(w^T x + b)) & y = 0 \end{cases}$
 :::
 
-::: {.callout-tip collapse="true"}
-
-## The Gradient Descent Algorithm
+#### The Gradient Descent Algorithm
 
 * Choose $X^0$
 * $X^{k+1} = X^k - \eta^k \nabla_X f(X^k)^T$
 * Convergence: $|f(X^{k+1}) - f(X^k)| < \epsilon$
 
-:::
-
 ### Single-Layer Perceptron
-::: {.callout-tip collapse="true"}
-
-## Single-Layer Perceptron
+::: {#def-dl-1-2 name="Single-Layer Perceptron"}
 * Gradient Descent
     * Initialize $w^0$; $w^{k+1} = w^k - \eta^k \nabla_w L(w)$ until convergence
 * Compute the Gradient
@@ -50,8 +42,7 @@ crossref:
 
 ### Multi-Class Classification
 
-::: {.callout-tip collapse="true"}
-## Multi-Class Classification
+::: {#def-dl-1-3 name="Multi-Class Classification"}
 
 * A multi-class perceptron
     * $C$ classes, $z = Wx$,
@@ -66,21 +57,8 @@ crossref:
 
 ### Multi-Layer Perception 
 
-::: {.callout-tip collapse="true"}
-## Multi-Class Classification
-
-* A multi-class perceptron
-    * $C$ classes, $z = Wx$,
-    * $f(x; W) = \text{softmax}(z), \quad f_c(x; W) = \frac{e^{z_c}}{\sum_{j=1}^C e^{z_j}}$
-* Learning
-    * Given $X = \{(x^i, y^i)\}$, Loss function $L(W) = \frac{1}{N} \sum_i \text{err}(f(x^i; W), y^i)$
-* The error function
-    * The probability of a class $c$ given input $x^i$ is $P(y = c | x^i) = f_c(x^i; W)$
-    * Maximize the log probability of desired class $y^i$
-    * $\text{err}(f(x^i; W), y^i) = -\log f_{y^i}(x^i; W)$
-:::
-
 ::: {.callout-note collapse="true"}
+
 ## Backpropagation
 
 * Run forward pass to save all the values and then compute gradients in the reverse order
@@ -105,29 +83,35 @@ crossref:
 
 ## Convolutional Neural Network
 
-::: {.callout-tip collapse="true"}
-## Convolutional Neural Network
+::: {#def-dl-1-5 name="Convolutional Neural Network"}
 
-* **Input Stage**
+* Input Stage
     * Raw Image Data: $Y^{(0)} = \text{Image}$ with dimensions $H \times W \times D_0$
-* **Feature Extraction Loop (Hidden Layers)**
+* Feature Extraction Loop (Hidden Layers)
     * For layer $l = 1$ to $L$:
-        * **Convolution Layer (Distributed Scanning)**: 
+        * Convolution Layer (Distributed Scanning): 
           $$z(l, j, x, y) = \sum_{i=1}^{D_{l-1}} \sum_{x'=1}^{K_l} \sum_{y'=1}^{K_l} w(l, i, j, x', y') \cdot Y(l-1, i, x+x'-1, y+y'-1)$$
-        * **Activation Function**: $Y(l, j, x, y) = \text{activation}(z(l, j, x, y))$
-        * **Max-Pooling Layer (Spatial Downsampling)**: Spatially reduces feature maps to capture invariant features.
-* **Classification Stage (Final MLP)**
+        * Activation Function: $Y(l, j, x, y) = \text{activation}(z(l, j, x, y))$
+        * Max-Pooling Layer (Spatial Downsampling): Spatially reduces feature maps to capture invariant features.
+* Classification Stage (Final MLP)
     * Flatten the final feature map into a 1D vector.
-    * Output Layer: $Y = \text{softmax}\left( Y(L, :, 1, 1) \dots Y(L, :, W_{\text{final}}, H_{\text{final}}) \right)$
+    * Output Layer:
+
+      $$
+      Y = \text{softmax}\left( Y(L, :, 1, 1) \dots Y(L, :, W_{\text{final}}, H_{\text{final}}) \right)
+      $$
+
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Distributed Scanning
 
 An elegant alternative to the traditional sliding window. Instead of cropping images into separate chunks for MLP processing, it applies a local convolutional kernel uniformly across the entire input tensor. This approach inherently shares weights across different spatial locations and dramatically accelerates grid-like computation.
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Output Map Dimension
 
 The spatial size of a feature map after a convolution operation. Without padding, the map shrinks according to the structural step-size of the scan, defined by the formula: 
@@ -136,14 +120,14 @@ where $N$ is input size, $M$ is filter size, and $S$ is stride.
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Padding
-
-
 
 The technique of symmetric zero-boundary expansion applied to the edges of input maps before scanning. It resolves the problem of spatial dimensionality shrinking over deep networks, preventing valuable edge information from fading away as the layer depth $L$ grows arbitrarily large.
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Max-Pooling Layer
 
 A downsampling operation that extracts the maximum value within localized spatial grids (e.g., $2 \times 2$). It reduces the data footprint to stabilize memory constraints while granting the network local translation invariance against distortions or positional shifts.
@@ -151,8 +135,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 
 ### Convex Optimization
 
-::: {.callout-tip collapse="true"}
-## Lipschitz continuous
+::: {#def-dl-1-6 name="Lipschitz continuous"}
 
 * A function $g(x)$ is Lipschitz continuous: $|g(x) - g(y)| \le L|x - y|$
 
@@ -163,8 +146,7 @@ A downsampling operation that extracts the maximum value within localized spatia
         * $\nabla^2 f(x) \le LI$
 :::
 
-::: {.callout-note collapse="true"}
-## Descent Lemma
+::: {#lem-dl-1-1 name="Descent Lemma"}
 
 * $f(y) \le f(x) + \nabla f(x)^T(y - x) + \frac{L}{2}|x - y|^2$
 
@@ -175,6 +157,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Convergence Rate with constant learning rate $\eta = \frac{1}{L}$
 
 * Convergence Rate with constant learning rate $\eta = \frac{1}{L}$
@@ -187,6 +170,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Strongly Convex Functions
 
  * Strongly convexity (for some $\mu > 0$)
@@ -198,6 +182,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Second-order optimization
 
 * Second-order optimization
@@ -209,6 +194,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Accelerated Methods
 
 * Gradient Descent with Momentum (Polyak's Heavy-ball Method)
@@ -218,8 +204,7 @@ A downsampling operation that extracts the maximum value within localized spatia
     * $X^{k+1} = X^k - \eta \nabla f\left(X^k + \beta(X^k - X^{k-1})\right) + \beta(X^k - X^{k-1})$
 :::
 
-::: {.callout-tip collapse="true"}
-## Stochastic Gradient Descent
+::: {#def-dl-1-7 name="Stochastic Gradient Descent"}
 
 * Stochastic Gradient Descent (SGD)
     * Given training data $\mathcal{X} = \{(x^i, y^i)\}$
@@ -228,6 +213,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Convergence of SGD
 
 * Convergence Condition
@@ -240,6 +226,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Mini-batch Gradient Descent
 
 * Mini-batches!
@@ -253,24 +240,21 @@ A downsampling operation that extracts the maximum value within localized spatia
 
 ### Advanced Neural Network Training Regimes & Tricks
 
-::: {.callout-tip collapse="true"}
-## Regularization & Anti-Overfitting
+#### Regularization & Anti-Overfitting
 
 * Overfitting!
     * Neural networks are universal functions
     * Overfitted responses facilitated by large weights $\rightarrow$ Weight Decay (L2-norm)
 * Dropout
-    * **Training**: for each input, at each iteration, randomly "turn off" each neuron with a probability $1 - \alpha$
+    * Training: for each input, at each iteration, randomly "turn off" each neuron with a probability $1 - \alpha$
         * In practice, we change a neuron to 0 by sampling a Bernoulli variable with prob. $1 - \alpha$
         * Random "turn-off" prevent overfitting to particular neurons or weights
         * **Gradient only propagated from non-zero neurons**
 * Early Stopping
     * Continue training may lead to training data overfitting
     * Track performance on a held-out validation set
-:::
 
-::: {.callout-tip collapse="true"}
-## Data Preparation & Augmentation
+#### Data Preparation & Augmentation
 
 * Data Preparation and Augmentation
     * Subtract the mean activity over the training set from each pixel
@@ -278,10 +262,8 @@ A downsampling operation that extracts the maximum value within localized spatia
     * At test time, average the predictions on the 10 patches (ensemble)
     * Change the intensity of RGB channels, add PCA components
       $$[I_R, I_G, I_B] += \alpha[P_R, P_G, P_B][\lambda_R, \lambda_G, \lambda_B]^T, \quad \alpha \sim N(0, 0.1)$$
-:::
 
-::: {.callout-tip collapse="true"}
-## Network Initialization & Stable Design
+#### Network Initialization & Stable Design
 
 * Initialization
     * Zero initialization makes all neurons learn the same pattern $\rightarrow$ random init
@@ -293,15 +275,13 @@ A downsampling operation that extracts the maximum value within localized spatia
     * The loss can occasionally lead to a steep decent
     * This can result in immediate instability
     * If $\nabla\theta_i > 5$, then set $\nabla\theta_i$ to 5. (you can also scale the norm of $|\nabla\theta|$)
-:::
 
-::: {.callout-tip collapse="true"}
-## Normalization Techniques
+#### Normalization Techniques
 
 * The problem of covariance shift
     * Assumption: mini-batches share a similar data distribution
     * Reality: each minibatch may have a different distribution
-    * **Solution**: make each batch same mean and standard deviation for training
+    * Solution: make each batch same mean and standard deviation for training
 * Batch Normalization
     * BatchNorm Layer
         * $u_i$ : scaled activations with zero-mean and unit std dev
@@ -313,12 +293,10 @@ A downsampling operation that extracts the maximum value within localized spatia
 * Group cream
     * GroupNorm
         * Batch-independent, improve BatchNorm for small batch size
-:::
 
 ### Residual Network
 
-::: {.callout-tip collapse="true"}
-## Residual Connection
+::: {#def-dl-1-8 name="Residual Connection"}
 
 * Residual Connection
     * $z = \sigma\left(f(x) + x\right)$
@@ -329,16 +307,24 @@ A downsampling operation that extracts the maximum value within localized spatia
     * Solution: fit the residual function $H(x) = f(x) - x$
 :::
 
-### Appendix
+## Supplementary Notes {.supplementary-notes}
 
+### Key Results
 
-::: {#thm-1}
+- @lem-dl-1-1: A smooth function has a convex quadratic upper bound, which gradient descent minimizes.
+- @def-dl-1-6: Lipschitz continuity bounds how fast the gradient changes.
+- @def-dl-1-7: SGD replaces the full gradient with one from a sampled data point.
+- @def-dl-1-8: A residual connection computes $z=\sigma(f(x)+x)$.
+
+### Extensions
+
+::: {#thm-1 name="Strong Convexity Inequality"}
 
 Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable, $\mu$-strongly-convex function. Then for any $x, y \in \mathbb{R}^d$:
 $$\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \mu\|x - y\|^2$$
 :::
 
-::: {#thm-2}
+::: {#thm-2 name="Co-coercivity of Smooth Convex Functions"}
 
 Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable, $L$-smooth convex function. Then for any $x, y \in \mathbb{R}^d$:
 $$\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \frac{1}{L}\|\nabla f(x) - \nabla f(y)\|^2$$

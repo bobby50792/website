@@ -41,9 +41,7 @@ $$
 
 ## Conservation of Angular Momentum
 
-::: {.callout-tip collapse="true"}
-
-## Torque
+::: {#def-pm-5-1 name="Torque"}
 
 $$
 \begin{aligned}
@@ -127,7 +125,7 @@ $$
 \end{aligned}
 $$
 
-::: {#thm-phys-5-2}
+::: {#thm-phys-5-2 name="Angular Momentum About Different Points"}
 
 Angular Momentum of a System of Particles about Different Points A and B satisfies
 $$
@@ -149,9 +147,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Center of Mass Reference Frame
+::: {#def-pm-5-2 name="Center of Mass Reference Frame"}
 
 $$
 \begin{aligned}
@@ -183,3 +179,12 @@ $$
 since $\sum_i m_i \vec{r}'_i = 0$ and $\sum_i m_i \vec{v}'_i = 0$.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-pm-5-1: Torque is the rate of change of angular momentum.
+- @thm-phys-5-1: Zero torque about $S$ conserves the angular momentum about $S$.
+- @thm-phys-5-2: Angular momenta about different points differ by a term in $\vec{r}_{A,B}$.
+- @thm-phys-5-3: Zero net external torque keeps a system's angular momentum constant.

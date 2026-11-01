@@ -64,14 +64,10 @@ Then the perceptron makes at most $R^2/\gamma^2$ mistakes.
 - $\gamma$ is a lower bound on the distance to the separating hyperplane; $R$ bounds the input norms.
 - Proof sketch: Each mistake increases $\langle w,w^*\rangle$ by at least $\gamma$, while $\|w\|^2$ increases by at most $R^2$. After $M$ mistakes:
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Perceptron mistake bound proof"}
-
 $$
 M\gamma\le\langle w_M,w^*\rangle\le\|w_M\|\le R\sqrt M
 \quad\Longrightarrow\quad M\le\frac{R^2}{\gamma^2}.
 $$
-
-:::
 
 ## Logistic regression
 
@@ -110,7 +106,7 @@ $$
 - For fixed $y$, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.
 - KL divergence and cross-entropy are asymmetric.
 
-**Representation learning:**
+#### Representation learning
 
 - Deep learning is also called representation learning because it learns features automatically.
 
@@ -120,25 +116,17 @@ $$
 
 - Restrict the set of solutions by bounding the weight norm, helping reduce overfitting:
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Constrained least squares"}
-
 $$
 \min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
 \quad\text{subject to}\quad\|w\|_2^2\le c.
 $$
 
-:::
-
 - Use an appropriate penalty $\lambda\ge0$ to obtain an unconstrained formulation:
-
-::: {.overflow-auto tabindex="0" role="region" aria-label="Ridge regression objective"}
 
 $$
 \min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
 +\frac{\lambda}{2}\|w\|_2^2.
 $$
-
-:::
 
 - This is $\ell_2$ regularization, called ridge regression.
 - $\lambda=0$ gives no penalty; increasing $\lambda$ shrinks the optimal weight norm. As $\lambda\to\infty$, $w\to0$.
@@ -151,13 +139,9 @@ $$
 
 - The sparsity constraint $\|w\|_0\le c$ counts nonzero weights and is hard to optimize. Replace it with the convex $\ell_1$ constraint:
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="LASSO regression objective"}
-
 $$
 \min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+ \lambda\|w\|_1.
 $$
-
-:::
 
 - This relaxation encourages sparse weights (feature selection).
 
@@ -180,13 +164,9 @@ $$
 
 $W\in\mathbb R^{n\times d} \, (n < d)$ is $(\epsilon,s)$-RIP if, for every $s$-sparse $x\in\mathbb R^d$,
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Restricted isometry property"}
-
 $$
 (1-\epsilon)\|x\|_2^2\le\|Wx\|_2^2\le(1+\epsilon)\|x\|_2^2.
 $$
-
-:::
 
 - Thus, $W$ approximately preserves the lengths of sparse vectors.
 
@@ -241,3 +221,11 @@ $$
 :::
 
 - Recovery error is controlled by the non-sparse tail; $x=x_s$ gives exact recovery.
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-perceptron-convergence: The margin $\gamma$ bounds the number of perceptron mistakes.
+- @thm-rip-sparse-recovery: RIP makes sparse recovery possible from $y=Wx$.
+- @thm-rip-l1-recovery: With a small enough RIP constant, $\ell_1$ minimization recovers $x$ exactly.

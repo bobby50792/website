@@ -19,8 +19,7 @@ Assume smooth fields throughout.
 
 ## Flux and Circulation
 
-::: {.callout-tip collapse="true"}
-## Surface and Line Integrals
+::: {#def-pe-1-1 name="Surface and Line Integrals"}
 
 Flux measures flow through an oriented surface:
 
@@ -38,8 +37,7 @@ $$
 
 ## Exterior Derivative
 
-::: {.callout-tip collapse="true"}
-## Differential Forms and Definition
+::: {#def-pe-1-2 name="Differential Forms and Definition"}
 
 A **differential $k$-form** on an open subset of $\mathbb R^m$ has the form
 
@@ -62,8 +60,7 @@ We have $\mathrm d(\mathrm d\omega)=0$.
 
 ## Gradient, Divergence, and Curl
 
-::: {.callout-tip collapse="true"}
-## Definitions and Interpretation
+::: {#def-pe-1-3 name="Definitions and Interpretation"}
 
 $$
 \begin{aligned}
@@ -143,14 +140,11 @@ $$
 =\int_{\Omega}(\nabla\cdot\mathbf F)\,\mathrm dV.
 $$
 
-
 :::
-
 
 ## Identities and the Laplacian
 
-::: {.callout-note collapse="true"}
-## Key Identities
+::: {#prp-pe-1-1 name="Key Identities"}
 
 $$
 \nabla\times\nabla f=\mathbf0,
@@ -176,3 +170,13 @@ $$
 
 In Cartesian coordinates, $\nabla^2\mathbf F=(\Delta F_x,\Delta F_y,\Delta F_z)$.
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-1: Stokes' theorem relates a form on a manifold to its boundary.
+- @cor-1: Green's theorem is the case $m=2,k=2$.
+- @cor-2: The classical Stokes theorem is the case $m=3,k=2$.
+- @cor-3: Gauss's theorem is the case $m=3,k=3$.
+- @prp-pe-1-1: $\nabla\times\nabla f=\mathbf0$ and $\nabla\cdot(\nabla\times\mathbf F)=0$.

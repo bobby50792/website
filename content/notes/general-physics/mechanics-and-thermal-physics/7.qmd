@@ -10,9 +10,7 @@ crossref:
 
 ## Rigid-Body Kinematics
 
-::: {.callout-tip collapse="true"}
-
-## Rigid Body
+::: {#def-pm-7-1 name="Rigid Body"}
 
 A **rigid body** is an idealized system whose interparticle distances remain constant. Its motion combines translation of the center of mass with rotation about the center of mass.
 
@@ -45,9 +43,7 @@ Here $r_\perp$ is the perpendicular distance to the axis, $v_t$ and $a_t$ are si
 
 ## Moment of Inertia
 
-::: {.callout-tip collapse="true"}
-
-## Moment of Inertia About an Axis
+::: {#def-pm-7-2 name="Moment of Inertia About an Axis"}
 
 The moment of inertia measures the distribution of mass relative to a specified axis:
 
@@ -83,9 +79,7 @@ For uniform bodies:
 
 ## Rotational Dynamics
 
-::: {.callout-tip collapse="true"}
-
-## Torque
+::: {#def-pm-7-3 name="Torque"}
 
 The torque of a force about a point $O$ is
 
@@ -133,9 +127,7 @@ $$
 
 ## Rolling Without Slipping
 
-::: {.callout-tip collapse="true"}
-
-## Pure Rolling
+::: {#def-pm-7-4 name="Pure Rolling"}
 
 For a circular body rolling without slipping on a stationary surface, its contact point is instantaneously at rest relative to the surface. Along a straight surface, the speed and tangential acceleration satisfy
 
@@ -147,7 +139,9 @@ Static friction enforces this constraint when needed. Its magnitude must satisfy
 
 :::
 
-**Example: rolling down an incline.** For an axisymmetric body rolling freely down a fixed incline of angle $\beta$, with sufficient static friction and negligible rolling resistance,
+#### Example: rolling down an incline
+
+For an axisymmetric body rolling freely down a fixed incline of angle $\beta$, with sufficient static friction and negligible rolling resistance,
 
 $$
 Ma=Mg\sin\beta-f_s,\qquad
@@ -162,7 +156,16 @@ $$
 
 A uniform solid cylinder therefore has $a=\frac23g\sin\beta$.
 
-## References
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-pm-7-2: The moment of inertia is $I=\sum_i m_ir_{\perp,i}^2$.
+- @thm-phys-7-parallel-axis: The parallel-axis theorem shifts $I$ from an axis through the center of mass.
+- @thm-phys-7-rotation: For fixed-axis rotation, $\sum\tau_z^{\mathrm{ext}}=I\alpha$.
+- @def-pm-7-4: In pure rolling, the contact point is instantaneously at rest.
+
+### References
 
 - OpenStax, *University Physics Volume 1*: [Rotational Variables](https://openstax.org/books/university-physics-volume-1/pages/10-1-rotational-variables), [Moment of Inertia and Rotational Kinetic Energy](https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy).
 - [Calculating Moments of Inertia](https://openstax.org/books/university-physics-volume-1/pages/10-5-calculating-moments-of-inertia), [Work and Power for Rotational Motion](https://openstax.org/books/university-physics-volume-1/pages/10-8-work-and-power-for-rotational-motion).

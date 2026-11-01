@@ -21,8 +21,7 @@ $$
 $$
 :::
 
-::: {.callout-note collapse="true"}
-## Corollary
+::: {#cor-mc-2-1 name="Markov's Inequality"}
 
 1. If $X$ is a non-negative random variable, then for every $\alpha > 0$,
 
@@ -71,8 +70,7 @@ Reference: [MIT 6.854: Universal and Perfect Hashing](https://courses.csail.mit.
 
 ## Chebyshev's Inequality
 
-::: {.callout-tip collapse="true"}
-## Variance
+::: {#def-mc-2-1 name="Variance"}
 
 The variance of a random variable $X$ is defined as
 
@@ -81,8 +79,7 @@ $$
 $$
 :::
 
-::: {.callout-note collapse="true"}
-## Proposition
+::: {#prp-mc-2-1 name="Variance Formula"}
 
 For any random variable $X$,
 
@@ -101,8 +98,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Standard deviation
+::: {#def-mc-2-2 name="Standard deviation"}
 
 The standard deviation of a random variable $X$ is defined as
 
@@ -111,8 +107,7 @@ $$
 $$
 :::
 
-::: {.callout-note collapse="true"}
-## Corollary
+::: {#cor-mc-2-2 name="Chebyshev in Standard Deviations"}
 
 For any random variable $X$ and any $\alpha > 0$,
 
@@ -121,7 +116,7 @@ $$
 $$
 :::
 
-::: {#thm-3}
+::: {#thm-3 name="Variance Under Scaling"}
 
 For any random variable $X$ and any constant $c \in \mathbb{R}$,
 
@@ -130,7 +125,7 @@ $$
 $$
 :::
 
-::: {#thm-4}
+::: {#thm-4 name="Variance of Independent Sums"}
 
 If $X$ and $Y$ are independent random variables, then
 
@@ -139,8 +134,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Covariance
+::: {#def-mc-2-3 name="Covariance"}
 
 Let $X$ and $Y$ be two random variables. The variance of the sum of $X$ and $Y$ is given by
 
@@ -155,7 +149,7 @@ $$
 $$
 :::
 
-::: {#thm-5}
+::: {#thm-5 name="Chebyshev for Sample Averages"}
 
 Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$, each with mean $\mu$ and variance $\sigma^2$. Then for every $\epsilon > 0$,
 
@@ -166,8 +160,7 @@ $$
 
 ## Chernoff Bounds
 
-::: {.callout-tip collapse="true"}
-## Moment generating function
+::: {#def-mc-2-4 name="Moment generating function"}
 
 The moment generating function (MGF) of a random variable $X$ is defined as
 
@@ -176,8 +169,7 @@ M_X(t) := \mathbb{E}[e^{tX}].
 $$
 :::
 
-::: {.callout-note collapse="true"}
-## Properties of the MGF
+::: {#prp-mc-2-2 name="Properties of the MGF"}
 
 Let $X$ be a random variable. Then its MGF $M(t)$ satisfies the following properties:
 
@@ -205,8 +197,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Rate function
+::: {#def-mc-2-5 name="Rate function"}
 
 The rate function of a random variable $X$ is defined as
 
@@ -276,7 +267,7 @@ $$
 
 ## Hoeffding's Inequality for Bounded Variable
 
-::: {#thm-12}
+::: {#thm-12 name="Hoeffding's Lemma"}
 
 Let $X$ be a random variable taking values in $[l, u]$ for some $l \leq u$. Then for all $t \in \mathbb{R}$,
 
@@ -287,7 +278,7 @@ $$
 
 \
 
-::: {#thm-13}
+::: {#thm-13 name="Rate Function of Bounded Variables"}
 
 Let $X$ be a random variable taking values in $[l, u]$ for some $l \leq u$. Then for all $\epsilon \in \mathbb{R}$,
 
@@ -334,7 +325,7 @@ $$
 
 \
 
-::: {#thm-16}
+::: {#thm-16 name="Hoeffding for Sums"}
 
 Let $X := \sum_{i=1}^n \Delta_i$ be the sum of $n$ independent random variables $\Delta_1, \dots, \Delta_n$ taking values in intervals $[\tilde{\ell}_1, \tilde{u}_1], \dots, [\tilde{\ell}_n, \tilde{u}_n]$, respectively. Let $L^2$ be the sum of the squared interval lengths:
 
@@ -352,8 +343,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Martingale
+::: {#def-mc-2-6 name="Martingale"}
 
 Let $Z_0, Z_1, \dots, Z_n$ be random variables. We say that $(Z_i)_{i=0}^n$ is a martingale if for every $i \in [n]$,
 
@@ -362,7 +352,7 @@ $$
 $$
 :::
 
-::: {#thm-17}
+::: {#thm-17 name="Hoeffding's Lemma for Martingales"}
 
 Let $(Z_i)_{i=0}^n$ be a martingale. Assume that for each $i \in [n]$, the increment $\Delta_i := Z_i - Z_{i-1}$ always lies in an interval $[\tilde{\ell}_i, \tilde{u}_i]$ for some $\tilde{\ell}_i, \tilde{u}_i \in \mathbb{R}$. Let $L^2$ be the sum of the squared interval lengths:
 
@@ -398,8 +388,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Martingale
+::: {#def-mc-2-7 name="Martingale with Respect to a Sequence"}
 
 Let $(X_i)_{i=0}^n$ be a sequence of random variables, and let $(Z_i)_{i=0}^n$ be another sequence of random variables such that each $Z_i$ is a deterministic function of $X_0, \dots, X_i$. We say that $(Z_i)_{i=0}^n$ is a martingale with respect to the information revealed by $(X_i)_{i=0}^n$ if for every $i \in [n]$,
 
@@ -427,8 +416,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Doob martingale
+::: {#def-mc-2-8 name="Doob martingale"}
 
 Let $X_1, \dots, X_n$ be independent random variables, and let $f : \mathbb{R}^n \to \mathbb{R}$ be a function. The Doob martingale associated with $f$ and $X_1, \dots, X_n$ is the sequence $(Z_i)_{i=0}^n$ defined by
 
@@ -437,7 +425,7 @@ Z_i := \mathbb{E}[f(X_1, \dots, X_n) \mid X_1, \dots, X_i].
 $$
 :::
 
-::: {#thm-20}
+::: {#thm-20 name="Doob Martingale Property"}
 
 The Doob martingale $(Z_i)_{i=0}^n$ is a martingale with respect to the information revealed by $(X_i)_{i=1}^n$. That is, for all $i \in [n]$,
 
@@ -445,7 +433,6 @@ $$
 \mathbb{E}[Z_i \mid X_{<i}] = Z_{i-1}.
 $$
 :::
-
 
 ::: {#thm-21}
 ## McDiarmid's inequality
@@ -466,7 +453,18 @@ $$
 $$
 :::
 
-## Appendix
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-1: Markov's inequality bounds a non-negative variable by its mean.
+- @thm-2: Chebyshev's inequality bounds deviation by the variance.
+- @thm-11: Cramér's theorem gives the large-deviation rate of sample averages.
+- @thm-15: Hoeffding's inequality bounds averages of independent bounded variables.
+- @thm-21: McDiarmid's inequality covers functions of independent variables.
+
+### Extensions
+
 ::: {#thm-22}
 ## Paley–Zygmund inequality and anti-concentration
 

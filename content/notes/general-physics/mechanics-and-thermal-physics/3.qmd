@@ -47,7 +47,7 @@ $$
 
 ## System of Particles and Conservation of Momentum
 
- ### Conservation of Momentum
+### Conservation of Momentum
 
 For a system of particles, when the net external force equals to zero ($\vec{F}^{ext} = 0$), the momentum of the system becomes a constant
 
@@ -61,9 +61,9 @@ The law works in inertial reference frame.
 
 ## Applications of Momentum in Aerospace Engineering
 
-::: {.callout-tip collapse="true"}
+::: {.callout-note collapse="true"}
 
-## Rocket Dynamics
+## Example: Rocket Dynamics
 
 * rocket velocity, $\vec{v}(t) = v\vec{i}$,
 
@@ -86,9 +86,9 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-note collapse="true"}
 
-## Gravity-free Space
+## Example: Gravity-free Space
 
 $$
 \begin{aligned}
@@ -104,9 +104,9 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-note collapse="true"}
 
-## Constant Gravitational Field
+## Example: Constant Gravitational Field
 
 $$
 \begin{aligned}
@@ -118,9 +118,7 @@ $$
 
 ## Center of Mass
 
-::: {.callout-tip collapse="true"}
-
-## Center of Mass
+::: {#def-pm-3-1 name="Center of Mass"}
 
 For a system of $N$ particles labeled by indices $i = 1, 2, 3, \cdots, N$, choose a coordinate system where the position of the $i^{\text{th}}$ particle as $\vec{r}_i$. The mass of the system is given by the sum
 $$
@@ -147,9 +145,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Translational Motion of the Center of Mass
+::: {#def-pm-3-2 name="Translational Motion of the Center of Mass"}
 
 * Velocity of the center of mass
 
@@ -185,9 +181,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Center-of-mass Reference Frame
+::: {#def-pm-3-3 name="Center-of-mass Reference Frame"}
 
 In the COM reference frame, the aggregate position and velocity of the system's COM are effectively nullified, which is mathematically represented as follows:
 
@@ -210,7 +204,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-note collapse="true"}
 
 ## Two-body Problem
 
@@ -275,3 +269,11 @@ $$
 where $\vec{f}$ is the force that Particle 2 acts on Particle 1. Using this equation, the two-body problem in center-of-mass reference frame can be solved using single-body problem methods.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-pm-3-1: The center of mass is the mass-weighted average position.
+- @def-pm-3-2: External forces determine the translational motion of the center of mass.
+- @def-pm-3-3: In the COM frame, the position and velocity of the center of mass vanish.

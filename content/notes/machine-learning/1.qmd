@@ -9,7 +9,8 @@ crossref:
 
 ---
 
-**Optimization = Gradient Descent:**
+#### Optimization = Gradient Descent
+
 (almost) just one algorithm
 
 ## Gradient Descent
@@ -189,7 +190,7 @@ $$
 
   iterations to converge to an $\epsilon$-optimal solution.
 
-**Step 1:**
+#### Step 1
 
 $$
 f(w_{i+1})
@@ -200,7 +201,9 @@ f(w_i)
 \|\nabla f(w_i)\|^2.
 $$
 
-**Step 2:** By convexity, we have
+#### Step 2
+
+By convexity, we have
 
 $$
 f(w_i)
@@ -275,7 +278,7 @@ $$
 \frac{\sum_{i=1}^{t} w_i}{t}.
 $$
 
-**Step 1:**
+#### Step 1
 
 $$
 \mathbb E\left[f(w_{i+1})\right]
@@ -288,7 +291,9 @@ f(w_i)
 \frac{\eta}{2}\sigma^2.
 $$
 
-**Step 2:** By convexity
+#### Step 2
+
+By convexity
 
 $$
 \mathbb E\left[f(\bar w_t)\right]
@@ -316,7 +321,7 @@ $$
 
 then the two error terms are bounded by $\epsilon$.
 
-**Notice that**
+Notice that
 
 $$
 \eta \le \frac{1}{L},
@@ -381,13 +386,13 @@ For $s=1,2,\ldots$
      \right)
      $$
 
-- **Option I:**
+- Option I:
 
   $$
   \widetilde{w}_s=w_m
   $$
 
-- **Option II:**
+- Option II:
 
   $$
   \widetilde{w}_s=w_t
@@ -458,7 +463,7 @@ $$
 
 ## Mirror Descent
 
-### Bregman divergence:
+### Bregman Divergence
 
 - Given any **1-strongly convex function** $w$ as the distance generating function, we can define distance between $x$ and $y$.
 
@@ -565,7 +570,7 @@ $$
 
 ## Matrix Completion
 
-**Matrix completion problem:**
+#### Matrix Completion Problem
 
 - $n \times m$ matrix $A$
 - Score is in $\{1,2,3,4,5\}$
@@ -573,7 +578,7 @@ $$
 - Some are unknown (?)
 - Want to recommend movies to users
 
-**Assumptions:**
+#### Assumptions
 
 - $A$ is low rank
 - Known entries are uniformly distributed
@@ -591,9 +596,12 @@ $$
   1 \le u \le \frac{\min\{n,m\}}{r}.
   $$
 
-**Minimizing the nuclear norm:** the sum of singular values (SDP Problem).
+#### Minimizing the Nuclear Norm
 
-**Alternating least square minimization:** 
+The sum of singular values (SDP Problem).
+
+#### Alternating Least Square Minimization
+
 We solve the following problem:
 
 $$
@@ -622,7 +630,9 @@ $$
 
 ## Nonconvex Optimization
 
-**Important property:** No-spurious-local-min (all the local min are equally good).
+#### Important Property
+
+No-spurious-local-min (all the local min are equally good).
 
 - For stationary points, $\nabla L(w)=0$:
   - If $\nabla^2L(w)\succ0$, it’s a local minimum.
@@ -634,14 +644,27 @@ $$
 
 - We call a function **strict saddle** if it does not contain any flat saddle points.
 
-**Theorem:** If $L$ is **smooth, bounded and strict saddle** (actually a more general version applies to points with small gradients rather than zero gradients), and the **Hessian is smooth**, and if **SGD noise has non-negligible variance in every direction with constant probability**, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.
+#### Theorem
 
-## Appendix
+If $L$ is **smooth, bounded and strict saddle** (actually a more general version applies to points with small gradients rather than zero gradients), and the **Hessian is smooth**, and if **SGD noise has non-negligible variance in every direction with constant probability**, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.
 
-- If $f$ is $L$-smooth and convex, then 
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Important Property](#important-property): No spurious local minima means all local minima are equally good.
+- [Comparison of SGD, SAG, SAGA, and SVRG](#comparison-of-sgd-sag-saga-and-svrg): The variance-reduced methods are compared side by side.
+
+### Extensions
+
+#### Co-coercivity of Smooth Convex Functions
+
+If $f$ is $L$-smooth and convex, then
+
 $$
 f(y) \ge f(x) + \langle \nabla f(x), y-x\rangle + \frac{1}{2L} \|\nabla f(x)-\nabla f(y)\|^2.
 $$
+
 which implies
 
 $$
@@ -649,32 +672,41 @@ $$
 \ge \frac{1}{L} \|\nabla f(x)-\nabla f(y)\|^2.
 $$
 
-\
+#### Hölder's Inequality
 
-- We have the Hölder's inequality:
-$$\langle x, y \rangle \le \|x\|_{p} \cdot \|y\|_{q}$$
-    where $\frac{1}{p} + \frac{1}{q} = 1$.
-When $p = q = 2$, this becomes the Cauchy-Schwarz inequality.
+Hölder's inequality states:
 
-\
+$$
+\langle x, y \rangle \le \|x\|_{p} \cdot \|y\|_{q}
+$$
 
-- For a finite probality function $p(x)$, we define
+where $\frac{1}{p} + \frac{1}{q} = 1$. When $p = q = 2$, this becomes the Cauchy-Schwarz inequality.
+
+#### Negative Entropy and KL Divergence
+
+For a finite probability function $p(x)$, we define
+
 $$
 w(p) = \sum_x p(x) \log p(x) .
 $$
+
 Then $w(p)$ is 1-strongly convex with respect to $\|\cdot\|_1$. The Bregman divergence is the KL divergence:
+
 $$
 V_p(q) = \sum_x p(x) \log \frac{p(x)}
 {q(x)} = D_{\mathrm{KL}}(p \| q) \ge \frac{1}{2}\|p-q\|_1^2.
 $$
 
-\ 
+#### Euclidean Projection
 
-- Let $C \subseteq \mathbb{R}^n$ be a nonempty closed convex set. The Euclidean projection onto $C$ is defined as
+Let $C \subseteq \mathbb{R}^n$ be a nonempty closed convex set. The Euclidean projection onto $C$ is defined as
+
 $$
 \Pi_C(x) = \arg\min_{y \in C} \|x-y\|_2.
 $$
+
 For any $x,y \in \mathbb{R}^n$,
+
 $$
 \|\Pi_C(x)-\Pi_C(y)\|_2 \leq \|x-y\|_2.
 $$

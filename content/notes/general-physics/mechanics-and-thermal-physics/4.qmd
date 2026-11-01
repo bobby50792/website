@@ -11,9 +11,7 @@ crossref:
 
 ## Energy and Work
 
-::: {.callout-tip collapse="true"}
-
-## Work Done By Constant and Non-constant Force
+::: {#def-pm-4-1 name="Work Done By Constant and Non-constant Force"}
 
 The physical concept of work can be mathematically described by the scalar product between the force and the displacement vectors,
 
@@ -35,9 +33,7 @@ where $\mathrm{d}\vec{r}$ has the same direction of $\vec{v}$. Note that we use 
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Power Applied by a Force
+::: {#def-pm-4-2 name="Power Applied by a Force"}
 
 $$
 \begin{aligned}
@@ -84,9 +80,7 @@ $$
 \end{aligned}
 $$
 
-::: {.callout-tip collapse="true"}
-
-## Kinetic Energy in the COM Reference Frame
+::: {#prp-pm-4-1 name="Kinetic Energy in the COM Reference Frame"}
 
 For a system of particles, the total kinetic energy is the sum of the individual kinetic energies of all particles:
 
@@ -112,9 +106,7 @@ $$
 
 ## Potential Energy
 
-::: {.callout-tip collapse="true"}
-
-## Conservative Forces and Changes in Potential Energies of a System
+::: {#def-pm-4-3 name="Conservative Forces and Changes in Potential Energies of a System"}
 
 Whenever the work done by a force in moving an object from an initial point to a final point is independent of the path, the force is called a conservative force. In other words, the work done by a conservative force $\vec{F}(\vec{r})$ in going around a closed path $L$ is zero:
 
@@ -160,9 +152,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Potential Energy Raised by Gravitational Force
+::: {#def-pm-4-4 name="Potential Energy Raised by Gravitational Force"}
 
 $$
 \begin{aligned}
@@ -183,9 +173,7 @@ $$
 
 ## Conservation of Mechanical Energy
 
-::: {.callout-tip collapse="true"}
-
-## The Principle of Conservation of Mechanical Energy
+::: {#prp-pm-4-2 name="The Principle of Conservation of Mechanical Energy"}
 
 The principle of conservation of mechanical energy states that in an isolated system that is only subject to conservative forces, the mechanical energy is constant,
 
@@ -197,9 +185,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Change of Mechanical Energy for Closed System with Internal Non-Conservative Forces
+::: {#prp-pm-4-3 name="Change of Mechanical Energy for Closed System with Internal Non-Conservative Forces"}
 
 $$
 \begin{aligned}
@@ -209,9 +195,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Change of Mechanical Energy for a Non-Closed System
+::: {#prp-pm-4-4 name="Change of Mechanical Energy for a Non-Closed System"}
 
 $$
 \Delta E_{sys} = W_{ext} + Q.
@@ -220,3 +204,12 @@ $$
 This is also called the first law of thermodynamics.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-pm-4-1: Work is the scalar product of force and displacement.
+- @def-pm-4-3: A force is conservative when its work does not depend on the path.
+- @prp-pm-4-2: Mechanical energy is conserved in an isolated system with only conservative forces.
+- @prp-pm-4-4: $\Delta E_{sys}=W_{ext}+Q$, the first law of thermodynamics.

@@ -1,7 +1,5 @@
 ---
 title: "Probabilistic Models"
-body-classes: notes-studio
-include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [3]
@@ -51,8 +49,8 @@ a technique for describing complex joint distributions (models) using simple, lo
 
 ### Graphical model notation
 
-- **Nodes:** variables (with domains): can be assigned (observed) or unassigned (unobserved)
-- **Arcs:** interactions: Formally: encode conditional independence
+- Nodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)
+- Arcs: interactions: Formally: encode conditional independence
 
 ### Bayes' net semantics
 
@@ -82,8 +80,8 @@ $$
 
 If all paths between $A$ and $B$ are blocked given observed variables $Z$, then $A \perp\!\!\!\perp B \mid Z$.
 
-- **Chain / fork:** observing the middle node blocks the path.
-- **Collider** ($A \to M \leftarrow B$): blocks the path unless $M$ or a descendant is observed.
+- Chain / fork: observing the middle node blocks the path.
+- Collider ($A \to M \leftarrow B$): blocks the path unless $M$ or a descendant is observed.
 - One blocked segment blocks a path; any active path means independence is not guaranteed.
 
 ## Bayesian Nets: Inference

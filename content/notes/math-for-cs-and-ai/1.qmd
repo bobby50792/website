@@ -11,8 +11,7 @@ crossref:
 
 ## Asymptotic Notations
 
-::: {.callout-tip collapse="true"}
-## Big-$\mathcal{O}$ notation
+::: {#def-mc-1-1 name="Big-$\mathcal{O}$ notation"}
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$ be functions defined on $\mathbb{N}$. We write $f(n) = \mathcal{O}(g(n))$ if there exist constants $C > 0$ and $N \in \mathbb{N}$ such that
 $$
@@ -28,8 +27,7 @@ $$
 $$
 :::
 
-::: {.callout-note collapse="true"}
-## Big-$\mathcal{O}$ notation properties
+::: {#prp-mc-1-1 name="Big-$\mathcal{O}$ notation properties"}
 
 Let $f, g : \mathbb{N} \to \mathbb{R}$ and $c \in \mathbb{R}$. If $f(n), g(n) \ge 0$ for all $n$, then
 \begin{align*}
@@ -53,8 +51,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## $\Omega, \Theta, \sim, o, \omega$ notations
+::: {#def-mc-1-2 name="$\Omega, \Theta, \sim, o, \omega$ notations"}
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently large $n$.
 
@@ -66,7 +63,7 @@ Let $f,g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently lar
 
 :::
 
-::: {#thm-2}
+::: {#thm-2 name="Summing Big-O Bounds"}
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$ with $g(n) > 0$ for all $n \ge 1$. If
 $$
@@ -85,7 +82,7 @@ $$
 
 \
 
-::: {#thm-3}
+::: {#thm-3 name="Summing Uniform Big-O Bounds"}
 
 Let $f,g : \mathbb{N}^2 \to \mathbb{R}$ with $g(m,n) > 0$ for all $m,n \ge 1$. If for some function $U(m) \ge 1$, we have
 $$
@@ -101,8 +98,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Big-$\mathcal{O}$ notation for multivariate functions
+::: {#def-mc-1-3 name="Big-$\mathcal{O}$ notation for multivariate functions"}
 
 Let $f,g : \mathbb{N}^d \to \mathbb{R}$ be functions defined on $\mathbb{N}^d$. We write
 $$
@@ -118,9 +114,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Big-$\mathcal{O}$ notation over a domain
+::: {#def-mc-1-4 name="Big-$\mathcal{O}$ notation over a domain"}
 
 Let $f,g : D \to \mathbb{R}$ be functions defined on a domain $D$. We say that $f(n) = \mathcal{O}(g(n))$ for all $n \in D$ if there exists a constant $C > 0$ such that
 $$
@@ -129,9 +123,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Big-$\mathcal{O}$ notation for $x \to 0$
+::: {#def-mc-1-5 name="Big-$\mathcal{O}$ notation for $x \to 0$"}
 
 Let $f,g : \mathbb{R} \to \mathbb{R}$ be functions defined on $\mathbb{R}$. We say that $f(x) = \mathcal{O}(g(x))$ as $x \to 0$ if there exist constants $C > 0$ and $\delta > 0$ such that
 $$
@@ -142,9 +134,7 @@ $$
 
 ## Probability Spaces and Event
 
-
-::: {.callout-tip collapse="true"}
-## Discrete probability space
+::: {#def-mc-1-6 name="Discrete probability space"}
 
 A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
 
@@ -152,9 +142,7 @@ A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of
 * A function $p : \Omega \to [0, 1]$, called the probability mass function, which assigns probabilities to outcomes and satisfies $\sum_{\omega \in \Omega} p(\omega) = 1$.
 :::
 
-
-::: {.callout-tip collapse="true"}
-## Event
+::: {#def-mc-1-7 name="Event"}
 
 An event $A$ is a subset of $\Omega$ ($A \subseteq \Omega$), and its probability is defined as
 $$
@@ -165,7 +153,6 @@ $$
 :::
 
 ## Uniform Probability Means Counting
-
 
 ::: {#thm-math1-counting-1 name="Addition Principle"}
 
@@ -224,10 +211,10 @@ k^* = n/e + \mathcal{O}(1).
 \end{align*}
 $$
 
-
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## The Locker Puzzle
 
 [Problem Description](https://zh.wikipedia.org/wiki/百囚問題)
@@ -259,8 +246,7 @@ $$
 
 ## Intersection and Union of Events
 
-::: {.callout-tip collapse="true"}
-## Intersection and union of event
+::: {#def-mc-1-8 name="Intersection and union of event"}
 
 For events $A, B \subseteq \Omega$:
 
@@ -271,8 +257,7 @@ For events $A, B \subseteq \Omega$:
 As events are subsets of the sample space $\Omega$, the operations $\cap$ and $\cup$ are the same as set operations.
 :::
 
-::: {.callout-note collapse="true"}
-## Properties of probability measures
+::: {#prp-mc-1-2 name="Properties of probability measures"}
 
 1. For any events $A, B \subseteq \Omega$,
 $$
@@ -281,14 +266,12 @@ $$
 \end{align*}
 $$
 
-
 2. For ans two events $A, B \subseteq \Omega$,
 $$
 \begin{align*}
 \Pr [A \cup B] \leq \Pr[A] + \Pr[B].
 \end{align*}
 $$
-
 
 3. For any sequence of events $A_1, \dots, A_m \subseteq \Omega$ with $m \geq 2$,
 $$
@@ -335,7 +318,6 @@ $$
 $$
 :::
 
-
 ::: {.callout-note collapse="true"}
 
 ## Ramsey Numbers
@@ -365,8 +347,7 @@ $$
 
 ## Conditional Probability and Independence
 
-::: {.callout-tip collapse="true"}
-## Conditional probability
+::: {#def-mc-1-9 name="Conditional probability"}
 
 Let $A, B$ be events with $\Pr[B] > 0$. The conditional probability of $A$ given $B$ is defined as:
 
@@ -377,8 +358,7 @@ $$
 We leave $\Pr[A \mid B]$ undefined if $\Pr[B] = 0$.
 :::
 
-::: {.callout-tip collapse="true"}
-## Independence
+::: {#def-mc-1-10 name="Independence"}
 
 Two events $A, B$ are said to be independent if
 
@@ -393,8 +373,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Mutual independence
+::: {#def-mc-1-11 name="Mutual independence"}
 
 Events $A_1, \dots, A_m$ are mutually independent if for every non-empty subset $I \subseteq [m]$,
 
@@ -403,7 +382,7 @@ $$
 $$
 :::
 
-::: {#thm-math1-chain-1}
+::: {#thm-math1-chain-1 name="Chain Rule for Conditional Probability"}
 
 For $m \geq 2$, let $A_1, \ldots, A_m$ be events with all relevant conditional probabilities well-defined. Then
 $$
@@ -414,7 +393,7 @@ $$
 
 :::
 
-::: {#thm-4}
+::: {#thm-4 name="Law of Total Probability"}
 
 Let $B_1, \dots, B_m$ be mutually exclusive events that satisfy $\bigcup_{i=1}^m B_i = \Omega$ and $\Pr[B_i] > 0$ for all $i \in [m]$. Then for any event $A$,
 
@@ -426,8 +405,7 @@ $$
 
 ## Random Variables
 
-::: {.callout-tip collapse="true"}
-## Random variable
+::: {#def-mc-1-12 name="Random variable"}
 
 Let $\mathcal{P} = (\Omega, p)$ be a discrete probability space. A random variable is a function
 
@@ -436,9 +414,7 @@ X : \Omega \to \mathbb{R}.
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Probability Distribution
+::: {#def-mc-1-13 name="Probability Distribution"}
 
 A random variable defined on a probability space induces a probability distribution on the real numbers. Here, the probability distribution of $X$ is defined as a function that assigns a probability to each subset of possible values of $X$. That is, for any subset $A \subseteq \mathbb{R}$,
 $$
@@ -449,8 +425,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-## Indicator function
+::: {#def-mc-1-14 name="Indicator function"}
 
 The indicator function of a condition $C$ is:
 
@@ -471,8 +446,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Probability mass function
+::: {#def-mc-1-15 name="Probability mass function"}
 
 For a random variable $X$, its probability mass function $p_X : \mathbb{R} \to [0, 1]$ is defined as
 
@@ -481,8 +455,7 @@ p_X(x) := \Pr[X = x], \quad \forall x \in \mathbb{R}.
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Expectation
+::: {#def-mc-1-16 name="Expectation"}
 
 Let $X$ be a random variable on a discrete probability space $(\Omega, p)$. The expectation, expected value or mean of $X$ is defined as
 
@@ -501,7 +474,7 @@ $$
 $$
 :::
 
-::: {#thm-6}
+::: {#thm-6 name="Tail Sum Formula"}
 
 If $X$ is a random variable that takes values in non-negative integers, then
 
@@ -510,8 +483,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Conditional expectation given an event
+::: {#def-mc-1-17 name="Conditional expectation given an event"}
 
 Let $X$ be a random variable and $B$ be an event with $\Pr[B] > 0$. The conditional expectation of $X$ given $B$ is defined as
 
@@ -520,8 +492,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Conditional expectation given a random variable
+::: {#def-mc-1-18 name="Conditional expectation given a random variable"}
 
 Let $X$ and $Y$ be random variables. The conditional expectation of $X$ given $Y$ is defined as the following random variable:
 
@@ -530,7 +501,7 @@ $$
 $$
 :::
 
-::: {#thm-7}
+::: {#thm-7 name="Law of Total Expectation"}
 
 Let $X$ be a random variable and $B_1, \dots, B_m$ be mutually exclusive events that satisfy $\bigcup_{i=1}^m B_i = \Omega$ and $\Pr[B_i] > 0$ for all $i \in [m]$. Then
 
@@ -539,7 +510,7 @@ $$
 $$
 :::
 
-::: {#thm-8}
+::: {#thm-8 name="Tower Property"}
 
 Let $X$ and $Y$ be random variables. Then
 
@@ -548,8 +519,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Independence of random variables
+::: {#def-mc-1-19 name="Independence of random variables"}
 
 We say that random variables $X$ and $Y$ are independent if for all sets $A, B \subseteq \mathbb{R}$,
 
@@ -558,7 +528,7 @@ $$
 $$
 :::
 
-::: {#thm-9}
+::: {#thm-9 name="Expectation of a Product"}
 
 If $X, Y$ are independent random variables, then
 
@@ -567,8 +537,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Mutual independence of random variables
+::: {#def-mc-1-20 name="Mutual independence of random variables"}
 
 We say that random variables $X_1, \dots, X_n$ are mutually independent if for all sets $A_1, \dots, A_n \subseteq \mathbb{R}$,
 
@@ -577,7 +546,7 @@ $$
 $$
 :::
 
-::: {#thm-10}
+::: {#thm-10 name="Expectation of Independent Products"}
 
 If $X_1, \dots, X_n$ are mutually independent random variables, then
 
@@ -586,8 +555,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Independent and identically distributed random variables
+::: {#def-mc-1-21 name="Independent and identically distributed random variables"}
 
 We say that random variables $X_1, \dots, X_n$ are independent and identically distributed, abbreviated i.i.d., if
 
@@ -597,9 +565,7 @@ We say that random variables $X_1, \dots, X_n$ are independent and identically d
 
 ## Data Deduplication via Hashing
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-mc-1-22 name="Jaccard Similarity"}
 
 Let $S(D)$ be the set of 5-grams of document $D$. Define **Jaccard similarity** between two documents $D_1$ and $D_2$ as
 $$
@@ -616,9 +582,7 @@ Assume each document has a nonempty set of 5-grams. Fix a threshold $\tau \in (0
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## MinHash
+::: {#def-mc-1-23 name="MinHash"}
 
 First, we collect all 5-grams appearing in the $n$ documents in the corpus, and denote this set by $\mathcal{G}$. Next, we sample a random permutation on $\mathcal{G}$, and construct a hash function $h$ by mapping each 5-gram to its rank in the permutation. Finally, for each document $D$, the MinHash value of $D$ is defined as
 $$
@@ -629,7 +593,7 @@ $$
 
 :::
 
-::: {#thm-math1-minhash-1}
+::: {#thm-math1-minhash-1 name="MinHash Collision Probability"}
 
 For any two documents $D, D'$ in the corpus,
 $$
@@ -640,9 +604,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## MinHash Signature
+::: {#def-mc-1-24 name="MinHash Signature"}
 
 Split $br$ independent MinHash functions into $b$ bands of $r$ rows. For each document $D$, define
 $$
@@ -664,7 +626,7 @@ We write $H(D) \sim H(D')$ when the two signatures collide.
 
 :::
 
-::: {#thm-math1-minhash-2}
+::: {#thm-math1-minhash-2 name="Banding Collision Probability"}
 
 For any two documents $D, D'$ in the corpus,
 $$
@@ -673,13 +635,15 @@ $$
 \end{aligned}
 $$
 
-Choosing an integer $b$ close to $\tau^{-r}$ gives the approximation $\begin{aligned} P_{r,b}(s) \approx 1 - \exp(-bs^r) \approx 1 - \exp(-(s/\tau)^r). \end{aligned}$
+Choosing an integer $b$ close to $\tau^{-r}$ gives the approximation
+
+$$
+P_{r,b}(s) \approx 1 - \exp(-bs^r) \approx 1 - \exp(-(s/\tau)^r).
+$$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## The Banding Method
+::: {#def-mc-1-25 name="The Banding Method"}
 
 The following algorithm clusters documents with colliding MinHash signatures into the same group.
 
@@ -695,7 +659,17 @@ The following algorithm clusters documents with colliding MinHash signatures int
 
 :::
 
-## Appendix
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-4: The law of total probability sums over mutually exclusive events.
+- @thm-5: Expectation is linear for any random variables.
+- @thm-8: $\mathbb{E}[X]=\mathbb{E}[\mathbb{E}[X\mid Y]]$.
+- @thm-math1-minhash-1: The MinHash collision probability equals the Jaccard similarity.
+- @thm-math1-minhash-2: Banding turns similarity into a collision probability $1-(1-J^r)^b$.
+
+### Extensions
 
 ::: {#thm-11}
 ## Nested conditional expectations

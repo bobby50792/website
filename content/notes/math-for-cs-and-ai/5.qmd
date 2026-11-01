@@ -13,8 +13,7 @@ crossref:
 
 ### Convergence in Distribution
 
-::: {.callout-tip collapse="true"}
-## Continuity set
+::: {#def-mc-5-1 name="Continuity set"}
 
 Let $\mathcal{D}$ be a probability distribution on $\mathbb{R}^d$. The *boundary* of a set $A \subseteq \mathbb{R}^d$, denoted by $\partial A$, is the set of points $\boldsymbol{x} \in \mathbb{R}^d$ such that every open set $U$ containing $\boldsymbol{x}$ intersects both $A$ and its complement $\bar{A}$, i.e., $U \cap A \neq \varnothing$ and $U \cap \bar{A} \neq \varnothing$. A set $A \subseteq \mathbb{R}^d$ is called a $\mathcal{D}$-continuity set if
 
@@ -23,8 +22,7 @@ $$
 $$
 :::
 
-::: {.callout-tip collapse="true"}
-## Convergence in distribution
+::: {#def-mc-5-2 name="Convergence in distribution"}
 
 Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}^d$. We say that $\mathcal{D}_n$ converges in distribution to a probability distribution $\mathcal{D}$ if
 
@@ -39,7 +37,7 @@ $$
 $$
 :::
 
-::: {#thm-1}
+::: {#thm-1 name="CDF Criterion"}
 
 Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}$ with CDFs $F_{\mathcal{D}_n}$ and $F_{\mathcal{D}}$. Then
 
@@ -56,7 +54,7 @@ $$
 whenever $F_{\mathcal{D}}$ is continuous at $x$. Such $x$ is also called a continuity point of $F_{\mathcal{D}}$.
 :::
 
-::: {#thm-2}
+::: {#thm-2 name="Test-Function Criterion"}
 
 Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}^d$. Then
 
@@ -73,7 +71,7 @@ $$
 for every bounded continuous function $\phi : \mathbb{R}^d \to \mathbb{R}$.
 :::
 
-::: {#thm-3}
+::: {#thm-3 name="Convergence of PMFs"}
 
 Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of discrete probability distributions on $\mathcal{X}$ and $\mathcal{D}$ be another discrete probability distribution on $\mathcal{X}$. Let $p_n$ and $p$ be the PMFs of $\mathcal{D}_n$ and $\mathcal{D}$, respectively. Then
 
@@ -90,7 +88,7 @@ $$
 for all $x \in \mathcal{X}$.
 :::
 
-::: {#thm-4}
+::: {#thm-4 name="Convergence of PDFs"}
 
 Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of continuous probability distributions on $\mathbb{R}^d$ and $\mathcal{D}$ be another continuous probability distribution on $\mathbb{R}^d$. Let $f_n$ and $f$ be the PDFs of $\mathcal{D}_n$ and $\mathcal{D}$, respectively. Then if
 
@@ -107,7 +105,7 @@ $$
 
 ### The Law of Large Numbers
 
-::: {#thm-5}
+::: {#thm-5 name="MGF Convergence"}
 
 Let $(X_n)_{n \geq 1}$ be a sequence of random variables and let $X$ be a random variable. Suppose that the MGFs $M_{X_n}$ and $M_X$ are all defined on some common open interval $(-\epsilon, \epsilon)$. If
 
@@ -146,7 +144,7 @@ $$
 
 ### The Central Limit Theorem
 
-::: {#thm-7}
+::: {#thm-7 name="Central Limit Theorem"}
 
 Let $X_1, X_2, \dots$ be i.i.d. random variables with
 
@@ -161,7 +159,7 @@ $$
 $$
 :::
 
-::: {#thm-8}
+::: {#thm-8 name="Multivariate Central Limit Theorem"}
 
 Let $\boldsymbol{x}_1, \boldsymbol{x}_2, \dots$ be i.i.d. random vectors in $\mathbb{R}^d$ with
 
@@ -176,7 +174,7 @@ $$
 $$
 :::
 
-::: {#thm-9}
+::: {#thm-9 name="Confidence Intervals from the CLT"}
 
 Let $X_1, \dots, X_n$ be i.i.d. random variables with
 
@@ -193,7 +191,16 @@ $$
 where $\bar{\Phi}(x) := \int_x^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-u^2/2} \, \mathrm{d}u$ is the tail probability of the standard Gaussian distribution.
 :::
 
-## Appendix
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-1: Convergence in distribution means CDF convergence at continuity points.
+- @thm-5: Pointwise MGF convergence near $0$ implies convergence in distribution.
+- @thm-6: The weak law sends sample averages to $\mu$.
+- @thm-7: The central limit theorem gives a Gaussian limit for normalized sums.
+
+### Extensions
 
 ::: {#thm-10}
 ## Wick's theorem

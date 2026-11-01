@@ -10,15 +10,19 @@ crossref:
 
 ## Basic Concepts of Differential Equations
 
-**Differential Equation (System)**: An equation (or system of equations) containing unknown functions and their derivatives.
+#### Differential Equation (System)
 
-**Order of a Differential Equation (System)**: The order of the highest-order derivative of the unknown functions involved in the equation.
+An equation (or system of equations) containing unknown functions and their derivatives.
 
-**Ordinary Differential Equation (ODE)**: A differential equation (or system) where all unknown functions are functions of a single independent variable.
+#### Order of a Differential Equation (System)
 
-::: {.callout-tip collapse="true"}
+The order of the highest-order derivative of the unknown functions involved in the equation.
 
-## General Form of an $n$-th Order ODE (Implicit Form)
+#### Ordinary Differential Equation (ODE)
+
+A differential equation (or system) where all unknown functions are functions of a single independent variable.
+
+::: {#def-cs-6-1 name="General Form of an $n$-th Order ODE (Implicit Form)"}
 
 $$
 F(x, \mathbf{y}, \mathbf{y}', \dots, \mathbf{y}^{(n)}) = 0
@@ -28,9 +32,7 @@ Where $\mathbf{y}(x) = (y_1(x), \dots, y_m(x))$ is a (set of) unknown function(s
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Explicit Form of a Differential Equation
+::: {#def-cs-6-2 name="Explicit Form of a Differential Equation"}
 
 $$
 \mathbf{y}^{(n)} = f(x, \mathbf{y}, \mathbf{y}', \dots, \mathbf{y}^{(n-1)})
@@ -46,9 +48,7 @@ $$
 F(x, \mathbf{y}(x), \mathbf{y}'(x), \dots, \mathbf{y}^{(n)}(x)) = 0, \quad \forall x
 $$
 
-::: {.callout-tip collapse="true"}
-
-## Initial Value Problem (Cauchy Problem)
+::: {#def-cs-6-3 name="Initial Value Problem (Cauchy Problem)"}
 
 An **Initial Value Problem** (also known as a **Cauchy Problem**) consists of a differential equation along with a set of initial conditions at a specific point $x_0$:
 
@@ -135,7 +135,7 @@ a_2 x + b_2 y + c_2 = 0
 $$
 has a solution $(x_0, y_0)$. This point serves as a **center of symmetry** of the direction field.
 
-**Translation of Variables:**
+#### Translation of Variables
 
 Introduce the change of variables
 $$
@@ -182,7 +182,7 @@ f\!\left(
 $$
 where $\alpha$ and $\beta$ are constants.
 
-**Change of Variables:**
+#### Change of Variables
 
 Introduce the new variable
 $$
@@ -210,9 +210,7 @@ If $f(x) = 0$, the equation is called a **homogeneous linear equation**.
 
 If $f(x) \neq 0$, the equation is called a **nonhomogeneous linear equation**.
 
-::: {.callout-tip collapse="true"}
-
-## Homogeneous Linear Equation
+::: {#def-cs-6-4 name="Homogeneous Linear Equation"}
 
 The homogeneous equation
 $$
@@ -245,9 +243,7 @@ where $C$ is an arbitrary constant.  This family of solutions includes the parti
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Nonhomogeneous Linear Differential Equations
+::: {#def-cs-6-5 name="Nonhomogeneous Linear Differential Equations"}
 
 $$
 y' = a(x)\,y + f(x).
@@ -314,9 +310,7 @@ $$
 
 ## Reduction of Higher-Order Differential Equations to First-Order Systems
 
-::: {.callout-tip collapse="true"}
-
-## An $n$-th Order Differential Equation
+::: {#def-cs-6-6 name="An $n$-th Order Differential Equation"}
 
 $$
 F\!\left(x, y, y', y^{(2)}, \dots, y^{(n)}\right) = 0.
@@ -366,9 +360,7 @@ $$
 $$
 where $A$ is a constant matrix.
 
-::: {.callout-tip collapse="true"}
-
-## Change of Variables
+#### Change of Variables
 
 Let
 $$
@@ -387,13 +379,9 @@ $$
 \mathbf{u}' = \left(P^{-1}AP\right)\mathbf{u}.
 $$
 
-:::
-
 ## Order Reduction of Higher-Order Differential Equations
 
-::: {.callout-tip collapse="true"}
-
-## Differential Equations Not Explicitly Involving $y$
+#### Differential Equations Not Explicitly Involving $y$
 
 Consider an $n$-th order differential equation of the form
 $$
@@ -415,11 +403,7 @@ $$
 
 The order of the differential equation is thus reduced by $k$.
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Differential Equations Not Explicitly Involving $x$
+#### Differential Equations Not Explicitly Involving $x$
 
 Consider an $n$-th order differential equation of the form
 $$
@@ -456,11 +440,7 @@ u\,\dfrac{du}{dy},\,
 \end{cases}
 $$
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Factorizable Linear Differential Equations
+#### Factorizable Linear Differential Equations
 
 Consider the second-order linear differential equation
 $$
@@ -509,11 +489,7 @@ y' - y = u.
 \end{cases}
 $$
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Factorizable Differential Equations (Euler Type)
+#### Factorizable Differential Equations (Euler Type)
 
 Consider the Euler-type differential equation
 $$
@@ -564,8 +540,6 @@ x u' - 2u = f(x), \\
 x y' - y = u.
 \end{cases}
 $$
-
-:::
 
 ## High-Order Linear Differential Equation and First-Order Linear System
 
@@ -623,18 +597,16 @@ That is, the high-order linear differential equation is equivalent to a first-or
 
 ## Superposition Principle for Linear Differential Systems
 
-::: {.callout-tip collapse="true"}
-
-## Homogeneous vs. Nonhomogeneous Systems
+::: {#def-cs-6-7 name="Homogeneous vs. Nonhomogeneous Systems"}
 
 Let $A(x)$ be a matrix-valued function.
 
-- **Homogeneous linear system**
+- Homogeneous linear system
 $$
 \mathbf{y}' = A(x)\mathbf{y}
 $$
 
-- **Nonhomogeneous linear system**
+- Nonhomogeneous linear system
 $$
 \mathbf{y}' = A(x)\mathbf{y} + \mathbf{f}(x)
 $$
@@ -645,9 +617,7 @@ Here $\mathbf{y}(x)$ is a vector-valued function and   $\mathbf{f}(x)$ is the no
 
 ## Method of Variation of Constants (for Linear Systems)
 
-::: {.callout-tip collapse="true"}
-
-## Homogeneous Linear System
+::: {#def-cs-6-8 name="Homogeneous Linear System"}
 
 Consider the homogeneous linear system
 $$
@@ -667,9 +637,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Nonhomogeneous Linear System
+::: {#def-cs-6-9 name="Nonhomogeneous Linear System"}
 
 Now consider the nonhomogeneous system
 $$
@@ -719,7 +687,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-note collapse="true"}
 
 ## Interpretation
 
@@ -741,7 +709,9 @@ $$
 \mathbf{y}_1(x) = \mathbf{y}_2(x), \qquad \forall x.
 $$
 
-**Liouville’s Theorem.**  Let $\mathbf{y}_1,\dots,\mathbf{y}_n$ be $n$ solutions of the homogeneous linear system
+#### Liouville’s Theorem
+
+Let $\mathbf{y}_1,\dots,\mathbf{y}_n$ be $n$ solutions of the homogeneous linear system
 $$
 \mathbf{y}' = A(x)\mathbf{y}.
 $$
@@ -758,8 +728,15 @@ $$
 
 :::
 
-::: {#cor-calc1-6-1}
+::: {#cor-calc1-6-1 name="Wronskian Criterion"}
 
 For any $x$, the functions $\mathbf{y}_1(x),\dots,\mathbf{y}_n(x)$ are linearly independent  **if and only if** there exists a point $x_0$ such that $\mathbf{y}_1(x_0),\dots,\mathbf{y}_n(x_0)$ are linearly independent.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-cs-6-3: An initial value problem pairs an ODE with conditions at one point.
+- @cor-calc1-6-1: Linear independence of solutions can be tested at a single point $x_0$.

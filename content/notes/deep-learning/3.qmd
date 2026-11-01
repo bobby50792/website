@@ -13,8 +13,7 @@ crossref:
 
 ### Implicit Generative Model
 
-::: {.callout-tip collapse="true"}
-## Implicit Generative Model Basics
+::: {#def-dl-3-1 name="Implicit Generative Model Basics"}
 
 * Goal: a sampler $g(\cdot)$ to generate images
 * A simple generator $g(z; \theta)$
@@ -27,8 +26,7 @@ crossref:
         * $D$ does not involve likelihood
 :::
 
-::: {.callout-tip collapse="true"}
-## Adversarial Distance Metric & Binary Classification
+::: {#def-dl-3-2 name="Adversarial Distance Metric & Binary Classification"}
 
 * Choose a distance measure $D$
     * Goal: choose a **differentiable** $D(x; \phi)$ for $g(z; \theta)$
@@ -47,8 +45,7 @@ crossref:
 
 ### GAN: The Minimax Game
 
-::: {.callout-tip collapse="true"}
-## Generative Adversarial Networks
+::: {#def-dl-3-3 name="Generative Adversarial Networks"}
 
 * Generator $G(z; \theta)$ ($z \sim p(z) = \mathcal{N}(0, I)$)
     * generate realistic images
@@ -66,6 +63,7 @@ crossref:
 ### Optimal Discriminator
 
 ::: {.callout-note collapse="true"}
+
 ## Finding the Optimal Discriminator $D^*$
 
 * GAN Objective
@@ -81,6 +79,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Global Minimum and JS Divergence Reduction
 
 * GAN Objective
@@ -95,8 +94,7 @@ crossref:
 
 ### GAN Mechanics: Forward vs. Reverse KL and JSD Behavior
 
-::: {.callout-tip collapse="true"}
-## Kullback–Leibler Divergence
+::: {#def-dl-3-4 name="Kullback–Leibler Divergence"}
 
 * $KL(p \mid\mid q) = \mathbb{E}_{x \sim p}[\log (p(x) / q(x))]$
 * Asymmetric measure
@@ -104,10 +102,14 @@ crossref:
     * $KL(q \mid\mid p)$ reverse KL (exclusive)
 :::
 
-::: {.callout-tip collapse="true"}
-## Jensen–Shannon Divergence (JSD)
+::: {#def-dl-3-5 name="Jensen–Shannon Divergence (JSD)"}
 
-* $JSD(p \mid\mid q) = \frac{1}{2}\left(KL\left(p \mid\mid \frac{1}{2}(p + q)\right) + KL\left(q \mid\mid \frac{1}{2}(p + q)\right)\right)$
+* Definition:
+
+  $$
+  JSD(p \mid\mid q) = \frac{1}{2}\left(KL\left(p \mid\mid \frac{1}{2}(p + q)\right) + KL\left(q \mid\mid \frac{1}{2}(p + q)\right)\right)
+  $$
+
 * Properties
     * Symmetric: $JSD(p \mid\mid q) = JSD(q \mid\mid p)$
     * $JSD(p \mid\mid q) \ge 0$ and $JSD(p \mid\mid q) = 0 \iff p = q$
@@ -116,8 +118,7 @@ crossref:
 
 ### Evaluation of GANs
 
-::: {.callout-tip collapse="true"}
-## Evaluation of GAN
+#### Evaluation of GAN
 
 * Inception Score
   $$IS = \exp\left(\mathbb{E}_{x \sim G}\left[KL(f(y \mid x) \mid\mid p_f(y))\right]\right)$$
@@ -130,13 +131,11 @@ crossref:
     * Compute Wasserstein distance between two Gaussians (more on this later)
     * $$FID = \|\mu_p - \mu_G\|^2 + \text{trace}\left(\Sigma_p + \Sigma_G - 2(\Sigma_p\Sigma_G)^{1/2}\right)$$
     * Lower the better
-:::
 
 ## GAN Techniques
 
 ### Deep Convolutional GAN
-::: {.callout-tip collapse="true"}
-## GAN Techniques Formulation
+#### GAN Techniques Formulation
 
 * GAN Techniques
 * Deep Convolutional GAN (DCGAN, Radford et al, ICLR2016)
@@ -147,11 +146,9 @@ crossref:
         * Avoid ReLU activation in discriminator
         * Small learning rate and momentum
     * DCGAN can learn interesting features and patterns
-:::
 
 ### Improved Training Techniques for GAN
-::: {.callout-tip collapse="true"}
-## Improved Training Techniques for GAN
+#### Improved Training Techniques for GAN
 
 * Improved Training Techniques for GAN (Salimans et al, NIPS 2016)
     * The paper primarily about GAN tricks
@@ -162,11 +159,9 @@ crossref:
         * Historical averaging
         * One-sided label smoothing
         * Virtual batch normalization
-:::
 
 ### Wasserstein GAN
-::: {.callout-tip collapse="true"}
-## Wasserstein GAN (WGAN)
+::: {#def-dl-3-6 name="Wasserstein GAN (WGAN)"}
 
 * Wasserstein GAN
 * WGAN (Arjovsky et al, ICML 2017)
@@ -182,8 +177,7 @@ crossref:
 :::
 
 ### Improved Training of Wasserstein GANs
-::: {.callout-tip collapse="true"}
-## WGAN-GP (Gulrajani et al., NIPS 2017) Formulation
+::: {#def-dl-3-7 name="WGAN-GP (Gulrajani et al., NIPS 2017) Formulation"}
 
 * Wasserstein GAN
 * Improved Training of Wasserstein GANs (Gulrajani et al, NIPS2017)
@@ -204,8 +198,7 @@ crossref:
 
 ### BigGAN
 
-::: {.callout-tip collapse="true"}
-## BigGAN (Brock et al., ICLR 2019) Formulation
+::: {#def-dl-3-8 name="BigGAN (Brock et al., ICLR 2019) Formulation"}
 
 * GAN Techniques
 * BigGAN (DeepMind, ICLR2019)
@@ -222,3 +215,11 @@ crossref:
             * Ignore samples when $D$ make a correct output with high confidence ($z$ is too high)
             * Adaptive hinge loss margin $t$ to include sufficient training data
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-dl-3-3: A GAN trains a generator $G$ against a discriminator $D$.
+- @def-dl-3-5: The Jensen–Shannon divergence is a symmetric measure built from two KL terms.
+- @def-dl-3-6: WGAN replaces the original objective with a Wasserstein objective.

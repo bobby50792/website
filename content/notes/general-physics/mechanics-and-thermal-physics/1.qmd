@@ -11,37 +11,21 @@ crossref:
 
 ## Basic Concepts
 
-::: {.callout-tip collapse="true"}
-
-## Coordinate System
+#### Coordinate System
 
 A coordinate system is a mathematical scheme that assigns one or more numbers (coordinates) to uniquely specify the position of a point in space, such as in one-, two-, or three-dimensional Euclidean Space.
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Reference Frame
+#### Reference Frame
 
 A reference frame consists of a coordinate system together with a set of physical reference points and measuring devices (such as clocks and rulers) that fix the origin, orientation, and scale of the coordinates. It provides the standard for measuring space and time.
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Relativity of Motion
+#### Relativity of Motion
 
 The description of motion depends on the choice of reference frame. Different observers using different reference frames may assign different positions, velocities, and accelerations to the same object. This fact is known as the relativity of motion.
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Point Particle
+#### Point Particle
 
 A point particle is an idealized object that has no spatial extension. It is treated as having zero size and occupying no volume.
-
-:::
 
 ## Vector Description of Motion
 
@@ -71,9 +55,7 @@ $$
 
 ## Circular Two-Dimensional Motion
 
-::: {.callout-tip collapse="true"}
-
-## Polar Coordinates
+::: {#def-pm-1-1 name="Polar Coordinates"}
 
 * Unit-vector transformations:
 $$
@@ -104,9 +86,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Circular Motion
+::: {#def-pm-1-2 name="Circular Motion"}
 
 $$
 \begin{aligned}
@@ -121,3 +101,10 @@ $$
 $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-pm-1-1: Polar unit vectors rotate with the particle, so they change along the motion.
+- @def-pm-1-2: In circular motion, $\vec{v}=\vec{\omega}\times\vec{r}$.

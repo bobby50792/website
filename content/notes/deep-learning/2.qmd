@@ -11,8 +11,7 @@ crossref:
 
 ## Hopfield Network
 
-::: {.callout-tip collapse="true"}
-## Hopfield Network
+::: {#def-dl-2-1 name="Hopfield Network"}
 
 * Problem Formulation
     * Desired patterns $P = \{y^p\}$
@@ -25,8 +24,7 @@ crossref:
       $$W \leftarrow W + \eta \left( \sum_{y \in P} yy^T - \sum_{y' \notin P} y'y'^T \right)$$
 :::
 
-::: {.callout-tip collapse="true"}
-## Hopfield Network: SGD Optimization
+::: {#def-dl-2-2 name="Hopfield Network: SGD Optimization"}
 
 * SGD update rule for $W$
   $$W \leftarrow W - \eta\left(\mathbb{E}_{y \in P}[yy^T] - \mathbb{E}_{y'}[y'y'^T]\right)$$
@@ -43,8 +41,7 @@ crossref:
 
 ### Stochastic Hopfield Network
 
-::: {.callout-tip collapse="true"}
-## Stochastic Hopfield Network
+::: {#def-dl-2-3 name="Stochastic Hopfield Network"}
 
 * Let's model our Hopfield network as a thermodynamic system
     * $T = k = 1$ for simplicity
@@ -58,6 +55,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Stochastic Hopfield Network: Gibbs Sampling Derivation
 
 * Let's consider the "flip" operation
@@ -74,6 +72,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Stochastic Hopfield Network: The Whole Update Rule & Evolution
 
 * The whole update rule
@@ -88,8 +87,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ### Boltzmann Machine Formulation
-::: {.callout-tip collapse="true"}
-## Boltzmann Machine Formulation
+::: {#def-dl-2-4 name="Boltzmann Machine Formulation"}
 
 * A generative Model (simplified)
     * Energy function:
@@ -106,6 +104,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Boltzmann Machine: Training
 
 * Goal
@@ -126,6 +125,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Boltzmann Machine: Overall Training Algorithm
 
 * Overall Training
@@ -137,8 +137,7 @@ $$\text{This is also called Gibbs sampling}$$
 
 ### Boltzmann Machine with Hidden Neurons
 
-::: {.callout-tip collapse="true"}
-## Mathematical Formulation with Hidden Variables
+::: {#def-dl-2-5 name="Mathematical Formulation with Hidden Variables"}
 
 * Maximum log-likelihood learning
   $$P(v) = \sum_{h} P(v, h) = \sum_{h} \frac{\exp(y^TWy)}{\sum_{y'} \exp(y'^TWy')}$$
@@ -149,6 +148,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Gradient Derivation
 
 * Maximum log-likelihood learning
@@ -156,7 +156,8 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
-## Overall Training Algorithm 
+
+## Overall Training Algorithm
 
 * Overall Training
     * Initialize $W$
@@ -171,8 +172,7 @@ $$\text{This is also called Gibbs sampling}$$
 
 ### Restricted Boltzmann Machine
 
-::: {.callout-tip collapse="true"}
-## Restricted Boltzmann Machine Layer Rules
+::: {#def-dl-2-6 name="Restricted Boltzmann Machine Layer Rules"}
 
 * Computation Rules: same as Boltzmann machine
     * Hidden neurons $h_i$
@@ -183,6 +183,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Theoretical MLE Gradient & Alternating MCMC
 
 * Maximum Likelihood Estimate
@@ -192,6 +193,7 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## Practical Contrastive Divergence Optimization
 
 * Maximum Likelihood Estimate (Empirical Approximation)
@@ -201,8 +203,7 @@ $$\text{This is also called Gibbs sampling}$$
 
 ### General Energy-Based Models
 
-::: {.callout-tip collapse="true"}
-## Energy-Based Model
+::: {#def-dl-2-7 name="Energy-Based Model"}
 
 * Goal of generative model
     * A probability distribution of "patterns" $P(x)$
@@ -219,15 +220,12 @@ $$\text{This is also called Gibbs sampling}$$
 
 ### Sampling from Probability Distributions
 
-::: {.callout-tip collapse="true"}
-## Inverse Transform Sampling
+#### Inverse Transform Sampling
 
 * Solution: uniform sampling, find the category with cumulative density
     * *The mapping from CDF to value is called Inverse distribution function (quantile function)*
-:::
 
-::: {.callout-tip collapse="true"}
-## Importance Sampling
+::: {#def-dl-2-8 name="Importance Sampling"}
 
 * Idea: weighted samples
     * sample from "easy" distribution $q(x)$ (e.g., uniform)
@@ -240,8 +238,7 @@ $$\text{This is also called Gibbs sampling}$$
 
 ### Markov Chain Monte-Carlo
 
-::: {.callout-tip collapse="true"}
-## Markov Chain Basics & Stationary Distribution
+::: {#def-dl-2-9 name="Markov Chain Basics & Stationary Distribution"}
 
 * Markov Chain
     * A state space $S$, a transition probability $P(s_j \mid s_i) = T_{ij}$
@@ -254,14 +251,14 @@ $$\text{This is also called Gibbs sampling}$$
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## The Condition for Stationarity: Detailed Balance
 
   * Detailed Balance (sufficient condition)
       $$\pi(s)T(s \rightarrow s') = \pi(s')T(s' \rightarrow s)$$
 :::
 
-::: {.callout-tip collapse="true"}
-## Metropolis-Hastings Algorithm Formulation
+::: {#def-dl-2-10 name="Metropolis-Hastings Algorithm Formulation"}
 
 * Construct a valid Markov Chain $T(s' \rightarrow s)$ for distribution $p(s)$
     * Detailed balance: $p(s)T(s \rightarrow s') = p(s')T(s' \rightarrow s)$
@@ -274,8 +271,7 @@ $$\text{This is also called Gibbs sampling}$$
     * O.w., stays at $s$ (**reject**)
 :::
 
-::: {.callout-tip collapse="true"}
-## Gibbs Sampling Formulation
+::: {#def-dl-2-11 name="Gibbs Sampling Formulation"}
 
 * Gibbs sampling
     * $s = (s_0, s_1, \dots, s_N)$, we construct a coordinate-wise $q(s_i \rightarrow s'_i)$
@@ -285,3 +281,12 @@ $$\text{This is also called Gibbs sampling}$$
 * Gibbs sampling always get accepted!
     * Acceptance ratio is always 1, $\alpha(s_i \rightarrow s'_i) = 1$
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-dl-2-1: A Hopfield network stores patterns as low-energy states of $E(y)=-\frac{1}{2}y^TWy$.
+- @def-dl-2-4: A Boltzmann machine turns the energy into a Gibbs distribution.
+- @def-dl-2-10: Metropolis-Hastings builds a Markov chain for $p(s)$ through detailed balance.
+- @def-dl-2-11: Gibbs sampling updates one coordinate at a time.

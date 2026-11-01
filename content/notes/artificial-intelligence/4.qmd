@@ -1,7 +1,5 @@
 ---
 title: "Probabilistic Inference"
-body-classes: notes-studio
-include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 toc-depth: 3

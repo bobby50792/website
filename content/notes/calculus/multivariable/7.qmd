@@ -10,9 +10,7 @@ crossref:
 
 ## Line Integrals of Vector Fields
 
-::: {.callout-tip collapse="true"}
-
-## Line Integral of Vector Fields
+::: {#def-cm-7-1 name="Line Integral of Vector Fields"}
 The integral of a vector field $\mathbf{F}: \mathbb{R}^m \to \mathbb{R}^m$ along a piecewise $\mathscr{C}^1$ continuous path $\mathbf{x}: [a, b] \to \mathbb{R}^m$ is defined as
 
 $$
@@ -21,8 +19,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-## Differential 1-form
+::: {#def-cm-7-2 name="Differential 1-form"}
 
 In a Cartesian coordinate system, let $\mathbf{F} = (F_1, \dots, F_m)^T$ and $\mathbf{x} = (x_1, \dots, x_m)^T$, then
 
@@ -41,8 +38,7 @@ a differential 1-form.
 
 ## Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields
 
-::: {.callout-tip collapse="true"}
-## Total Differentials, Potential Fields, Conservative Fields, and Irrotational Vector Fields
+::: {#def-cm-7-3 name="Exact Differential"}
 A differential 1-form $\omega$ is called an exact differential (or total differential) if there exists a $\mathscr{C}^1$ function $f$ such that $\omega = \mathrm{d}f$. In this case, $f$ is called a primitive function of $\omega$.
 
 A vector field $\mathbf{F}$ is called a potential field if there exists a $\mathscr{C}^1$ function $f$ such that $\mathbf{F} = \nabla f$. In this case, $f$ is called a potential function of $\mathbf{F}$.
@@ -50,7 +46,7 @@ A vector field $\mathbf{F}$ is called a potential field if there exists a $\math
 A vector field $\mathbf{F}$ is called a conservative field if, for any path $\gamma$, the value of the integral $\int_{\gamma} \langle \mathbf{F}, \mathbf{T} \rangle \mathrm{d}l$ depends only on the starting and ending points of $\gamma$, and is independent of $\gamma$.
 :::
 
-::: {#thm-1}
+::: {#thm-1 name="Fundamental Theorem for Line Integrals"}
 For any $\mathscr{C}^1$ function $f: U \to \mathbb{R}$ and any $\mathscr{C}^1$ path $\gamma \subset U$,
 
 $$
@@ -62,11 +58,11 @@ where $A$ and $B$ are the starting and ending points of the path $\gamma$ respec
 If $\gamma$ is a closed curve, then $\int_{\gamma} \mathrm{d}f = \int_{\gamma} \langle \nabla f, \mathbf{T} \rangle \mathrm{d}l = 0$.
 :::
 
-::: {#thm-2}
+::: {#thm-2 name="Conservative Fields Are Potential Fields"}
 Every continuous conservative field in an open region (i.e., a path-connected open set) is a potential field.
 :::
 
-::: {#thm-3}
+::: {#thm-3 name="Symmetry Condition for Potential Fields"}
 If a $\mathscr{C}^1$ vector field $\mathbf{F}: U \to \mathbf{R}^m$ is a potential field, then
 $$
 \frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i}, \quad 1 \le i < j \le m.
@@ -77,9 +73,7 @@ A vector field satisfying the latter condition is called an irrotational vector 
 
 ## Curl and Divergence of Plane Vector Fields, Green's Formula
 
-::: {.callout-tip collapse="true"}
-
-## Curl and Divergence of Plane Vector Fields
+::: {#def-cm-7-4 name="Curl and Divergence of Plane Vector Fields"}
 For a plane $\mathscr{C}^1$ vector field
 $$\mathbf{F}(x, y) = \begin{pmatrix} X(x, y) \\ Y(x, y) \end{pmatrix},$$
 
@@ -93,7 +87,7 @@ which are called the curl and divergence of $\mathbf{F}$, respectively.
 A vector field with zero curl is called an irrotational vector field, and a vector field with zero divergence is called a source-free (or solenoidal) vector field.
 :::
 
-::: {#thm-4}
+::: {#thm-4 name="Green's Theorem"}
 Suppose the boundary of a bounded closed planar region $\Omega$ is a piecewise $\mathscr{C}^1$ curve, and let
 
 $$
@@ -121,9 +115,7 @@ where $\partial\Omega$ is the boundary of the region $\Omega$, and its orientati
 
 ## The Concept of Surface Integrals of the Second Kind
 
-::: {.callout-tip collapse="true"}
-
-## Surface Integrals of the Second Kind
+::: {#def-cm-7-5 name="Surface Integrals of the Second Kind"}
 Let $(\Sigma, \mathbf{n})$ be an oriented surface. For a continuous vector field $\mathbf{F}: \Sigma \to \mathbf{R}^3$, the integral
 $$
 \int_{\Sigma} \langle \mathbf{F}, \mathbf{n} \rangle d\sigma
@@ -132,7 +124,7 @@ $$
 is called the integral of the vector field $\mathbf{F}$ along the normal vector field $\mathbf{n}$ of the surface $\Sigma$, also known as the flux of the vector field $\mathbf{F}$ across the oriented surface $\Sigma$.
 :::
 
-::: {#thm-5}
+::: {#thm-5 name="Second-Kind Surface Integrals in Coordinates"}
 For a $\mathscr{C}^1$ regular parametric surface $\Sigma$:
 
 $$
@@ -171,9 +163,7 @@ $$
 where $\mathrm{d}\sigma$ is the $m$-dimensional (undirected) volume element of the surface $\Sigma$.
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Wedge Product of Linear Functions and Differential 2-Forms
+::: {#def-cm-7-6 name="Wedge Product of Linear Functions and Differential 2-Forms"}
 
 For two linear functions $L_1, L_2$ and two vectors $\mathbf{u}, \mathbf{v}$, we denote:
 
@@ -189,10 +179,9 @@ $$
 
 which is called a differential 2-form (or second-order differential form).
 
-
 :::
 
-::: {#thm-6}
+::: {#thm-6 name="Second-Kind Surface Integrals in Parameters"}
 
 Let $\Sigma$ be an oriented $\mathscr{C}^1$ regular parametric surface in $\mathbb{R}^3$, with parametric equation $\mathbf{x} = \mathbf{x}(u_1, u_2)$, where $(u_1, u_2) \in D \subseteq \mathbb{R}^2$. Assume that the direction of the normal vector induced by the parametrization, $\frac{\partial \mathbf{x}}{\partial u_1} \times \frac{\partial \mathbf{x}}{\partial u_2}$, is consistent with the given normal vector field $\mathbf{n}$ of the surface.
 
@@ -216,9 +205,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Exterior Derivative
+::: {#def-cm-7-7 name="Exterior Derivative"}
 
 For a differentiable function (0-form) $f$, the exterior derivative of $f$ is defined as the first-order differential $\mathrm{d}f$.
 
@@ -232,9 +219,7 @@ $$
 
 ## Curl and Divergence of Spatial Vector Fields, Gauss's Theorem and Stokes's Theorem
 
-::: {.callout-tip collapse="true"}
-
-## Curl and Divergence
+::: {#def-cm-7-8 name="Curl and Divergence"}
 
 For a vector field $\mathbf{F} = (X, Y, Z)^T$ in $\mathbb{R}^3$ (under Cartesian coordinates), we denote:
 
@@ -272,8 +257,7 @@ $$
 
 :::
 
-::: {.callout-note collapse="true"}
-## Generalized Gauss's Theorem
+::: {#thm-cm-7-1 name="Generalized Gauss's Theorem"}
 
 Let $\Omega \subset \mathbb{R}^{m+1}$ be a bounded closed region, and the boundary $\partial \Omega$ of $\Omega$ be a piecewise $\mathscr{C}^1$ $m$-dimensional surface, oriented outwards from $\Omega$. Then:
 
@@ -324,3 +308,13 @@ $$
 $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-1: The line integral of $\mathrm{d}f$ depends only on the endpoints of the path.
+- @thm-2: A continuous conservative field in an open region is a potential field.
+- @thm-4: Green's theorem relates a planar region to its boundary.
+- @thm-7: Gauss's theorem relates a closed region to its boundary surface.
+- @thm-8: Stokes's theorem relates an oriented surface to its boundary curve.

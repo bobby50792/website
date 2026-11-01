@@ -71,7 +71,7 @@ $$
 
 :::
 
-::: {#thm-la-2-1}
+::: {#thm-la-2-1 name="Null Space and Range Are Subspaces"}
 
 Let $V$ and $W$ be vector spaces and $T : V \to W$ be linear.  Then $N(T)$ and $R(T)$ are subspaces of $V$ and $W$, respectively.
 
@@ -83,7 +83,7 @@ Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear. If $N(T)$ and
 
 :::
 
-::: {#thm-la-2-2}
+::: {#thm-la-2-2 name="Range Spanned by Images of a Basis"}
 
 Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear.  If $\beta = \{v_1, v_2, \ldots, v_n\}$ is a basis for $V$, then
 $$
@@ -102,13 +102,13 @@ $$
 
 :::
 
-::: {#thm-la-2-4}
+::: {#thm-la-2-4 name="One-to-One Criterion"}
 
 Let $V$ and $W$ be vector spaces, and let $T: V \to W$ be linear. Then $T$ is one-to-one **if and only if** $N(T) = \{0\}$.
 
 :::
 
-::: {#thm-la-2-5}
+::: {#thm-la-2-5 name="Equivalent Conditions in Equal Dimension"}
 
 Let $V$ and $W$ be vector spaces of equal finite dimension,  and let $T: V \to W$ be linear. Then the following are equivalent:
 
@@ -120,13 +120,13 @@ $\text{(c)}\quad \operatorname{rank}(T) = \dim(V)$.
 
 :::
 
-::: {#thm-la-2-6}
+::: {#thm-la-2-6 name="Linear Map Determined by a Basis"}
 
 Let $V$ and $W$ be vector spaces over $F$, and suppose that  $\{v_1, v_2, \ldots, v_n\}$ is a basis for $V$.  For $w_1, w_2, \ldots, w_n$ in $W$, there exists exactly one linear transformation  $T: V \to W$ such that $T(v_i) = w_i$ for $i = 1, 2, \ldots, n$.
 
 :::
 
-::: {#cor-la-2-1}
+::: {#cor-la-2-1 name="Agreement on a Basis"}
 
 Let $V$ and $W$ be vector spaces, and suppose that $V$ has a finite basis  $\{v_1, v_2, \ldots, v_n\}$.  If $U, T : V \to W$ are linear and $U(v_i) = T(v_i)$ for  $i = 1, 2, \ldots, n$, then $U = T$.
 
@@ -203,7 +203,7 @@ $$
 
 :::
 
-::: {#thm-la-2-7}
+::: {#thm-la-2-7 name="Matrix of a Linear Combination"}
 
 Let $V$ and $W$ be finite-dimensional vector spaces with ordered bases $\beta$ and $\gamma$, respectively,  and let $T, U : V \to W$ be linear transformations. Then
 $$
@@ -221,7 +221,7 @@ $$
 
 ## Composition of Linear Transformations and Matrix Multiplication
 
-::: {#thm-la-2-8}
+::: {#thm-la-2-8 name="Composition of Linear Maps"}
 
 Let $V$, $W$, and $Z$ be vector spaces over the same field $F$,  and let $T : V \to W$ and $U : W \to Z$ be linear.  Then $UT : V \to Z$ is linear.
 
@@ -287,7 +287,7 @@ We define the **Kronecker delta** $\delta_{ij}$ by $\delta_{ij} = 1$ if $i = j$ 
 
 :::
 
-::: {#thm-la-2-9}
+::: {#thm-la-2-9 name="Matrix Multiplication Laws"}
 
 Let $A$ be an $m \times n$ matrix, $B$ and $C$ be $n \times p$ matrices, and $D$ and $E$ be $q \times m$ matrices. Then
 
@@ -301,7 +301,7 @@ $\text{(d)}\quad$If $V$ is an $n$-dimensional vector space with an ordered basis
 
 :::
 
-::: {#thm-la-2-10}
+::: {#thm-la-2-10 name="Coordinates of an Image"}
 
 Let $V$ and $W$ be finite-dimensional vector spaces having ordered bases  $\beta$ and $\gamma$, respectively, and let $T : V \to W$ be linear.  Then, for each $u \in V$, we have
 $$
@@ -317,7 +317,7 @@ Let $A$ be an $m \times n$ matrix with entries from a field $F$.  We denote by $
 
 :::
 
-::: {#thm-la-2-11}
+::: {#thm-la-2-11 name="Left-Multiplication Transformation"}
 
 Let $A$ be an $m \times n$ matrix with entries from $F$.  Then the left-multiplication transformation $L_A : F^n \to F^m$ is linear.  Furthermore, if $B$ is any other $m \times n$ matrix (with entries from $F$)  and $\beta$ and $\gamma$ are the standard ordered bases for $F^n$ and $F^m$, respectively,  then we have the following properties.
 
@@ -345,13 +345,13 @@ Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear.  A function $
 
 :::
 
-::: {#thm-la-2-12}
+::: {#thm-la-2-12 name="Inverse of a Linear Map Is Linear"}
 
 Let $V$ and $W$ be vector spaces, and let $T : V \to W$ be linear and invertible.  Then $T^{-1} : W \to V$ is linear.
 
 :::
 
-::: {#thm-la-2-13}
+::: {#thm-la-2-13 name="Invertibility and Finite Dimension"}
 
 Let $T$ be an invertible linear transformation from $V$ to $W$.  Then $V$ is finite-dimensional if and only if $W$ is finite-dimensional.  In this case,  $\dim(V) = \dim(W)$.
 
@@ -363,7 +363,7 @@ Let $A$ be an $n \times n$ matrix.  Then $A$ is **invertible** if there exists a
 
 :::
 
-::: {#thm-la-2-14}
+::: {#thm-la-2-14 name="Invertibility and Matrices"}
 
 Let $V$ and $W$ be finite-dimensional vector spaces with ordered bases  $\beta$ and $\gamma$, respectively.  Let $T : V \to W$ be linear.  Then $T$ is invertible if and only if $[T]_{\beta}^{\gamma}$ is invertible.  Furthermore,$[T^{-1}]_{\gamma}^{\beta} = ([T]_{\beta}^{\gamma})^{-1}$.
 
@@ -375,13 +375,13 @@ Let $V$ and $W$ be vector spaces.  We say that $V$ is **isomorphic** to $W$ if t
 
 :::
 
-::: {#thm-la-2-15}
+::: {#thm-la-2-15 name="Isomorphism and Dimension"}
 
 Let $V$ and $W$ be finite-dimensional vector spaces (over the same field).  Then $V$ is isomorphic to $W$ if and only if $\dim(V) = \dim(W)$.
 
 :::
 
-::: {#thm-la-2-16}
+::: {#thm-la-2-16 name="Dimension of the Space of Linear Maps"}
 
 Let $V$ and $W$ be finite-dimensional vector spaces of dimensions $n$ and $m$, respectively. Then $\mathcal{L}(V, W)$ is finite-dimensional of dimension $mn$.
 
@@ -401,7 +401,7 @@ The matrix $Q = [I_V]_{\beta'}^{\beta}$ is called a **change of coordinate matri
 
 :::
 
-::: {#thm-la-2-17}
+::: {#thm-la-2-17 name="Change of Basis for an Operator"}
 
 Let $T$ be a linear operator on a finite-dimensional vector space $V$,  and let $\beta$ and $\beta'$ be ordered bases for $V$.  Suppose that $Q$ is the change of coordinate matrix that changes $\beta'$-coordinates into $\beta$-coordinates.  Then
 $$
@@ -435,7 +435,7 @@ Suppose that $V$ is a finite-dimensional vector space with the ordered basis  $\
 
 :::
 
-::: {#thm-la-2-18}
+::: {#thm-la-2-18 name="Expansion in the Dual Basis"}
 
 For any $f \in V^{*}$, we have
 $$
@@ -468,19 +468,19 @@ For a vector $x \in V$, we define $\widehat{x} : V^{*} \to F$ by  $\widehat{x}(f
 
 :::
 
-::: {#lem-la-2-1}
+::: {#lem-la-2-1 name="Double Dual Separates Vectors"}
 
 Let $V$ be a finite-dimensional vector space, and let $x \in V$.  If $\widehat{x}(f) = 0$ for all $f \in V^{*}$, then $x = 0$.
 
 :::
 
-::: {#thm-la-2-19}
+::: {#thm-la-2-19 name="Isomorphism with the Double Dual"}
 
 Let $V$ be a finite-dimensional vector space, and define  $\psi : V \to V^{**}$ by $\psi(x) = \widehat{x}$.  Then $\psi$ is an isomorphism.
 
 :::
 
-::: {#thm-la-2-20}
+::: {#thm-la-2-20 name="Every Basis of the Dual Is a Dual Basis"}
 
 Let $V$ be a finite-dimensional vector space with dual space $V^{*}$.  Then every ordered basis for $V^{*}$ is the dual basis for some basis for $V$.
 

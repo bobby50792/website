@@ -10,15 +10,9 @@ crossref:
 
 ## The Concept of Multiple Integrals
 
-::: {.callout-tip collapse="true"}
+#### Riemann Integral
 
-## Riemann Integral
-
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Integral on a Rectangular Region
+::: {#def-cm-5-1 name="Integral on a Rectangular Region"}
 
 A subset of $\mathbb{R}^m$ of the form
 $$
@@ -66,9 +60,7 @@ and call it the **Riemann integral** of $f$ on $R$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Darboux Integral
+::: {#def-cm-5-2 name="Darboux Integral"}
 
 Let $f: R \to \mathbb{R}$ be a bounded function on a rectangle $R$, and $\mathcal{P} = \{R_k\}_{k=1}^p$ be a partition of $R$. Let
 $$
@@ -105,7 +97,7 @@ and is called the **Darboux integral** of $f$ on $R$.
 
 :::
 
-::: {#thm-calc2-5-1}
+::: {#thm-calc2-5-1 name="Characterizations of Riemann Integrability"}
 
 The following conclusions are equivalent:
 
@@ -123,18 +115,18 @@ If $f$ is Riemann (Darboux) integrable on $R$, then the Riemann integral of $f$ 
 
 :::
 
-::: {#thm-calc2-5-2}
+::: {#thm-calc2-5-2 name="Properties of the Riemann Integral"}
 
 Let $R \subset \mathbb{R}^m$ be an $m$-dimensional rectangle. Let $\mathscr{R}(R)$ be the set of all Riemann integrable functions on $R$, and $\mathscr{C}(R)$ be the set of all continuous functions on $R$. Then:
 
-1. **(Linearity)** $\mathscr{R}(R)$ is a linear space, and $\mathscr{C}(R)$ is a linear subspace of $\mathscr{R}(R)$. Furthermore, for any $f, g \in \mathscr{R}(R)$ and any $\alpha, \beta \in \mathbb{R}$:
+1. (Linearity) $\mathscr{R}(R)$ is a linear space, and $\mathscr{C}(R)$ is a linear subspace of $\mathscr{R}(R)$. Furthermore, for any $f, g \in \mathscr{R}(R)$ and any $\alpha, \beta \in \mathbb{R}$:
 $$
 \begin{aligned}
 \int_R (\alpha f(x) + \beta g(x)) d\mu = \alpha \int_R f(x) d\mu + \beta \int_R g(x) d\mu;
 \end{aligned}
 $$
 
-2. **(Monotonicity)** If $f, g \in \mathscr{R}(R)$ satisfy $f(x) \le g(x)$ for all $x \in R$, then:
+2. (Monotonicity) If $f, g \in \mathscr{R}(R)$ satisfy $f(x) \le g(x)$ for all $x \in R$, then:
 $$
 \begin{aligned}
 \int_R f(x) d\mu \le \int_R g(x) d\mu;
@@ -156,14 +148,14 @@ $$
 \end{aligned}
 $$
 
-4. **(Cauchy-Schwarz Inequality)** For any $f, g \in \mathscr{R}(R)$, it follows that $fg \in \mathscr{R}(R)$, and:
+4. (Cauchy-Schwarz Inequality) For any $f, g \in \mathscr{R}(R)$, it follows that $fg \in \mathscr{R}(R)$, and:
 $$
 \begin{aligned}
 \left| \int_R f(x)g(x) d\mu \right| \le \sqrt{\int_R |f(x)|^2 d\mu \cdot \int_R |g(x)|^2 d\mu};
 \end{aligned}
 $$
 
-5. **(Mean Value Theorem for Integrals)** If $f \in \mathscr{C}(R)$, $g \in \mathscr{R}(R)$, and $g(x) \ge 0$ for all $x \in R$, then there exists $\eta \in R$ such that:
+5. (Mean Value Theorem for Integrals) If $f \in \mathscr{C}(R)$, $g \in \mathscr{R}(R)$, and $g(x) \ge 0$ for all $x \in R$, then there exists $\eta \in R$ such that:
 
 $$
 \begin{aligned}
@@ -175,9 +167,7 @@ $$
 
 ## Jordan Measurable Sets and Riemann Integrals
 
-::: {.callout-tip collapse="true"}
-
-## Riemann Integrable
+::: {#def-cm-5-3 name="Riemann Integrable"}
 
 Let $D \subset \mathbb{R}^m$ be a non-empty bounded subset. For a function $f : D \to \mathbb{R}$, we choose a rectangle $R \subset \mathbb{R}^m$ that covers $D$ (i.e., $D \subseteq R$), and define
 $$
@@ -194,9 +184,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Jordan Measurable Set
+::: {#def-cm-5-4 name="Jordan Measurable Set"}
 
 A set $D \subset \mathbb{R}^m$ is called a **Jordan measurable set** if the boundary set $\partial D$ of $D$ is a set of volume zero.
 
@@ -210,7 +198,7 @@ which is called the **$m$-dimensional volume** of $D$.
 
 :::
 
-::: {#thm-calc2-5-3}
+::: {#thm-calc2-5-3 name="Regions Between Graphs Are Jordan Measurable"}
 
 Let $D_1 \subset \mathbb{R}^m$ be a bounded closed Jordan measurable set, and $a, b : D_1 \to \mathbb{R}$ be continuous functions. Then
 $$
@@ -222,7 +210,7 @@ is a bounded closed Jordan measurable set in $\mathbb{R}^{m+1}$.
 
 :::
 
-::: {#thm-calc2-5-4}
+::: {#thm-calc2-5-4 name="Integrability on Jordan Measurable Sets"}
 
 Let $D \subset \mathbb{R}^m$ be a bounded Jordan measurable set. Then:
 
@@ -232,7 +220,7 @@ Let $D \subset \mathbb{R}^m$ be a bounded Jordan measurable set. Then:
 
 :::
 
-::: {#thm-calc2-5-5}
+::: {#thm-calc2-5-5 name="Additivity over Regions"}
 
 If the function $f$ is Riemann integrable on the bounded Jordan measurable sets $D_1$ and $D_2$, and $D_1 \cap D_2 \subseteq \partial D_1 \cup \partial D_2$, then $f$ is also Riemann integrable on $D_1 \cup D_2$, and
 $$
@@ -245,7 +233,7 @@ $$
 
 ## Calculation of Multiple Integrals
 
-::: {#thm-calc2-5-6}
+::: {#thm-calc2-5-6 name="Iterated Integrals on a Rectangle"}
 
 If $f : [a, b] \times [\alpha, \beta] \to \mathbb{R}$ is a continuous function, then
 $$
@@ -256,7 +244,7 @@ $$
 
 :::
 
-::: {#thm-calc2-5-7}
+::: {#thm-calc2-5-7 name="Fubini's Theorem"}
 
 Let $R_1, R_2$ be rectangles in $\mathbb{R}^m$ and $\mathbb{R}^n$, respectively. Let $f : R_1 \times R_2 \to \mathbb{R}$ be a Riemann integrable function. Then for any $y \in R_2$, the Darboux upper integral and Darboux lower integral of $f(x, y)$ with respect to $x$:
 $$
@@ -273,7 +261,7 @@ $$
 
 :::
 
-::: {#thm-calc2-5-8}
+::: {#thm-calc2-5-8 name="Fubini on Jordan Measurable Sets"}
 
 If $D \subset \mathbb{R}^{m+n}$ is a bounded closed Jordan measurable set, then:
 $$
@@ -302,7 +290,7 @@ $$
 
 ## Calculation of Multiple Integrals: Change of Variables Formula
 
-::: {#thm-calc2-5-9}
+::: {#thm-calc2-5-9 name="Change of Variables"}
 
 Let $\tilde{\Omega} \subset \mathbb{R}^m$ be a bounded closed Jordan measurable set, and $\varphi : \tilde{\Omega} \to \Omega = \varphi(\tilde{\Omega}) \subseteq \mathbb{R}^m$ be a $\mathscr{C}^1$ diffeomorphism. Then for any $f \in \mathscr{R}(\Omega)$,
 $$
@@ -319,7 +307,7 @@ $$
 
 :::
 
-::: {#thm-calc2-5-10}
+::: {#thm-calc2-5-10 name="Multivariate Gaussian Integral"}
 
 Let $\Sigma$ be an $m \times m$ symmetric positive-definite matrix, and let $\mu \in \mathbb{R}^m$. The integral of the multivariate Gaussian density function over the entire space $\mathbb{R}^m$ is equal to 1:
 $$
@@ -329,3 +317,12 @@ $$
 $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-calc2-5-1: Riemann integrability on a rectangle is equivalent to bounded Darboux integrability.
+- @thm-calc2-5-7: Fubini's theorem computes a multiple integral as an iterated integral.
+- @thm-calc2-5-9: Change of variables rewrites a multiple integral on another region.
+- @thm-calc2-5-10: The multivariate Gaussian integral has a closed form in terms of $\Sigma$.

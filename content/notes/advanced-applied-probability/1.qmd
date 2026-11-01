@@ -1,7 +1,5 @@
 ---
 title: "Measure Theory"
-body-classes: notes-studio
-include-after-body: ../_notes-ui.html
 page-layout: article
 search: true
 number-offset: [1]
@@ -103,15 +101,15 @@ so $\mu(A_n)$ does not converge to $\mu(\varnothing)=0$.
 
 Let $(X,\mathcal A,\mu)$ be a measure space. The following classes are not mutually exclusive.
 
-1. **Finite measure.** A measure $\mu$ is finite if $\mu(X)<\infty$.
+1. Finite measure. A measure $\mu$ is finite if $\mu(X)<\infty$.
 
    For example, Lebesgue measure on $[0,2]$ is finite, with total mass $2$.
 
-2. **Probability measure.** A measure $\mu$ is a probability measure if $\mu(X)=1$.
+2. Probability measure. A measure $\mu$ is a probability measure if $\mu(X)=1$.
 
    Thus, every probability measure is a finite measure. For example, Lebesgue measure on $[0,1]$ is a probability measure.
 
-3. **$\sigma$-finite measure.** A measure $\mu$ is $\sigma$-finite if there exist
+3. $\sigma$-finite measure. A measure $\mu$ is $\sigma$-finite if there exist
    measurable sets $E_1,E_2,\ldots$ such that
 
    $$
@@ -130,7 +128,7 @@ Let $(X,\mathcal A,\mu)$ be a measure space. The following classes are not mutua
    \end{gathered}
    $$
 
-4. **Infinite measure.** A measure $\mu$ is infinite if $\mu(X)=\infty$.
+4. Infinite measure. A measure $\mu$ is infinite if $\mu(X)=\infty$.
 
    An infinite measure may or may not be $\sigma$-finite. Counting measure on $\mathbb N$ is $\sigma$-finite, whereas counting measure on $\mathbb R$ is not.
 
@@ -577,26 +575,34 @@ vi) **Triangle inequality.**
 
 The notation for an integral depends on the underlying measure:
 
-**Lebesgue measure.** For $\lambda$ on $(\mathbb{R}^d, \mathcal{R}^d)$,
+#### Lebesgue measure
+
+For $\lambda$ on $(\mathbb{R}^d, \mathcal{R}^d)$,
 
 $$
 \int f(x) \, dx = \int f \, d\lambda.
 $$
 
-**Lebesgue measure on an interval.** For $E = [a,b] \subset \mathbb{R}$,
+#### Lebesgue measure on an interval
+
+For $E = [a,b] \subset \mathbb{R}$,
 
 $$
 \int_a^b f(x) \, dx = \int_E f \, d\lambda.
 $$
 
-**Stieltjes measure.** For $\mu$ on $(\mathbb{R}, \mathcal{R})$, with
+#### Stieltjes measure
+
+For $\mu$ on $(\mathbb{R}, \mathcal{R})$, with
 $\mu((a,b]) = G(b) - G(a)$ for $a < b$,
 
 $$
 \int f(x) \, dG(x) = \int f \, d\mu.
 $$
 
-**Counting measure.** For a countable set $\Omega$, with $\mathcal{F}$
+#### Counting measure
+
+For a countable set $\Omega$, with $\mathcal{F}$
 containing all subsets,
 
 $$
@@ -641,7 +647,9 @@ $$
 
 Let $X$ be a real-valued random variable with distribution $\mu_X(A)=P(X\in A)$ for Borel sets $A$, and let $\lambda$ denote Lebesgue measure on $\mathbb R$.
 
-**Probability density function (PDF):** If $\mu_X\ll\lambda$, the Radon–Nikodym derivative
+#### Probability density function (PDF)
+
+If $\mu_X\ll\lambda$, the Radon–Nikodym derivative
 
 $$
 f_X=\frac{d\mu_X}{d\lambda}
@@ -723,13 +731,17 @@ $$
 Let $(X,\mathcal A,\mu)$ be a measure space, and let
 $f_n,f:X\to\mathbb R$ be measurable functions.
 
-**Convergence in measure.** We say that $f_n$ converges to $f$ in measure if, for every $\epsilon>0$,
+#### Convergence in measure
+
+We say that $f_n$ converges to $f$ in measure if, for every $\epsilon>0$,
 $$
 \mu\bigl(\{x\in X:|f_n(x)-f(x)|>\epsilon\}\bigr)\to0
 $$
 as $n\to\infty$.
 
-**Almost-everywhere convergence.** We say that $f_n$ converges to $f$ almost everywhere if there exists a measurable set $Z\subseteq X$ with $\mu(Z)=0$ such that
+#### Almost-everywhere convergence
+
+We say that $f_n$ converges to $f$ almost everywhere if there exists a measurable set $Z\subseteq X$ with $\mu(Z)=0$ such that
 $$
 \lim_{n\to\infty}f_n(x)=f(x)
 $$
@@ -738,13 +750,17 @@ $$
 f_n\xrightarrow{\mathrm{a.e.}}f.
 $$
 
-**Uniform convergence.** We say that $f_n$ converges to $f$ uniformly on $X$ if, for every $\epsilon>0$, there exists an integer $N\ge1$ such that
+#### Uniform convergence
+
+We say that $f_n$ converges to $f$ uniformly on $X$ if, for every $\epsilon>0$, there exists an integer $N\ge1$ such that
 $$
 |f_n(x)-f(x)|<\epsilon
 $$
 for every $n\ge N$ and every $x\in X$. The integer $N$ may depend on $\epsilon$, but not on $x$.
 
-**Almost-uniform convergence.** We say that $f_n$ converges to $f$ almost uniformly on $X$ if, for every $\delta>0$, there exists a measurable set $D_\delta\subseteq X$ such that
+#### Almost-uniform convergence
+
+We say that $f_n$ converges to $f$ almost uniformly on $X$ if, for every $\delta>0$, there exists a measurable set $D_\delta\subseteq X$ such that
 $$
 \mu(D_\delta)<\delta
 $$
@@ -851,9 +867,9 @@ $$
 EX=\int X\,dP,
 $$
 
-if the integral exists. This is the case if $X$ is integrable, i.e., if $EX<\infty$.
+if the integral exists. This is the case if $X$ is integrable, i.e., if $E|X|<\infty$.
 
-When $X \ge 0$, which always makes sense, but may be $\infty$.
+When $X \ge 0$, $EX$ always makes sense, but may be $\infty$.
 
 :::
 
@@ -861,7 +877,12 @@ When $X \ge 0$, which always makes sense, but may be $\infty$.
 
 Let $X$ be a random element of $(S,\mathcal S)$ with distribution $\mu$, i.e., $\mu(A)=P(X\in A)$. If $f$ is a measurable function from $(S,\mathcal S)$ to $(\mathbb R,\mathcal R)$ such that $f\ge0$ or $E|f(X)|<\infty$, then
 $$
-Ef(X)=\int_S f(y)\,\mu(dy) = \int_S f(y) f_X(y)\,dy.
+Ef(X)=\int_S f(y)\,\mu(dy).
+$$
+
+If, in addition, $S=\mathbb R$ and $\mu$ has a density $f_X$ with respect to Lebesgue measure, then
+$$
+Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
 $$
 
 :::

@@ -26,9 +26,7 @@ There are four fundamental forces.
 | Weak            | Electroweak theory(EWT)      | W and Z bosons          | $10^{33}$         | $\frac{1}{r}e^{-m_{W,Z}r}$           | $10^{-18}$ |
 | Gravitation     | General relativity(GR)       | gravitons(hypothetical) | $1$               | $\frac{1}{r^2}$                      | $\infty$   |
 
-::: {.callout-tip collapse="true"}
-
-## Hooke’s Law
+::: {#def-pm-2-1 name="Hooke’s Law"}
 
 $$
 \begin{aligned}
@@ -38,9 +36,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Law of Universal Gravitation
+::: {#def-pm-2-2 name="Law of Universal Gravitation"}
 
 Newton's Law of Universal Gravitation describes the gravitational force between two objects with masses. The force exerted by mass $m_1$ on mass $m_2$ due to gravity is described by:
 $$
@@ -51,9 +47,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Gravitational Force Near the Surface of the Earth
+::: {#def-pm-2-3 name="Gravitational Force Near the Surface of the Earth"}
 
 Close to Earth's surface, the gravitational attraction between an object and Earth manifests as a downward force whose magnitude is expressed as:
 $$
@@ -66,9 +60,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Electric Charge and Coulomb‘s Law
+::: {#def-pm-2-4 name="Electric Charge and Coulomb’s Law"}
 
 Coulomb's Law quantifies the electric force between two charged objects. For objects 1 and 2, the force on object 2 due to object 1 is given by:
 $$
@@ -80,9 +72,7 @@ where $q_1$ and $q_2$ are the charges, $\vec{r}_{1,2}$ is the displacement vecto
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Contact Forces and Frictional Forces
+::: {#def-pm-2-5 name="Contact Forces and Frictional Forces"}
 
 $$
 \begin{aligned}
@@ -100,25 +90,15 @@ $$
 
 ## Newton’s Laws
 
-::: {.callout-tip collapse="true"}
-
-## Newton’s First Law
+#### Newton’s First Law
 
 An object remains in a state of rest or in uniform motion in a straight line unless it is compelled to change that state by forces acted upon it.
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Definition
+#### Definition
 
 A reference frame in which the first law is valid is called an inertial or Galilean system.
 
-:::
-
-::: {.callout-tip collapse="true"}
-
-## Momentum and Newton’s Second Law
+::: {#def-pm-2-6 name="Momentum and Newton’s Second Law"}
 
 The change of motion is proportional to the motive force impressed and is made in the direction of the right line in which that force is applied.
 
@@ -134,19 +114,13 @@ where we assume that the mass $m$ does not change.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Newton’s Third Law
+#### Newton’s Third Law
 
 To every action, there is always opposed an equal reaction: or, the mutual action of two bodies upon each other are always equal in magnitude and directed to contrary direction on the right line connecting the two bodies.
 
-:::
-
 ## Non-Inertial Frames and Effective Forces
 
-::: {.callout-tip collapse="true"}
-
-## Translational Non-inertial Reference Frame
+::: {#def-pm-2-7 name="Translational Non-inertial Reference Frame"}
 
 Consider a non-inertial reference frame $S'$ that translates relative to an inertial frame $S$ with an acceleration $\vec{a}_0$. The transformation of acceleration between these frames is given by
 
@@ -184,9 +158,7 @@ is the effective force, or fictitious force, in the non-inertial frame $S'$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Rotational Non-inertial Reference Frame
+::: {#def-pm-2-8 name="Rotational Non-inertial Reference Frame"}
 
 * Coordinate transformations:
 
@@ -257,3 +229,12 @@ $$
 $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-pm-2-1: Hooke's law gives $F_x=-k\Delta x$.
+- @def-pm-2-5: Kinetic friction is $\mu_kN$, and static friction is at most $\mu_sN$.
+- @def-pm-2-6: Newton's second law relates force to the change of momentum.
+- @def-pm-2-7: A translating non-inertial frame adds a fictitious force.

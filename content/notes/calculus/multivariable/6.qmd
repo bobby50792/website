@@ -10,9 +10,7 @@ crossref:
 
 ## Line Integrals of the First Kind
 
-::: {.callout-tip collapse="true"}
-
-## Arc Length of a Curve
+::: {#def-cm-6-1 name="Arc Length of a Curve"}
 
 A **regular $\mathscr{C}^1$ parameterized curve** $\mathbf{x} : [a, b] \to \mathbb{R}^m$ is defined if it is injective and, for any $t \in [a, b]$, $\|\mathbf{x}'(t)\| > 0$. We define
 
@@ -26,9 +24,7 @@ as the **arc length** of the regular $\mathscr{C}^1$ parameterized curve $\mathb
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Integration of a Function Along a Curve
+::: {#def-cm-6-2 name="Integration of a Function Along a Curve"}
 
 Let $f : \gamma \to \mathbb{R}$ be a continuous function, and let $\mathbf{x}(t)$ be any $\mathscr{C}^1$ parameterization of the curve $\gamma$. Denote
 
@@ -42,9 +38,7 @@ which is called the **integral of $f$ along $\gamma$**. From the chain rule and 
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Arc Length in Different Coordinate Systems
+::: {#prp-cm-6-1 name="Arc Length in Different Coordinate Systems"}
 
 In the Euclidean rectangular coordinate system:
 
@@ -80,9 +74,7 @@ is called the **Metric Matrix** or the **Gram Matrix**. In particular, when $\pa
 
 ## Surface Integrals of the First Kind on 2D Surfaces
 
-::: {.callout-tip collapse="true"}
-
-## Surface Area Element
+::: {#def-cm-6-3 name="Surface Area Element"}
 
 A $\mathscr{C}^1$ regular parameterization of a 2D surface $\Sigma$ in $\mathbb{R}^m (m \ge 3)$ is a $\mathscr{C}^1$ injective mapping
 
@@ -101,9 +93,7 @@ that satisfies the condition that $\frac{\partial(x_1, x_2, \dots, x_m)}{\partia
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Area of the Surface
+::: {#def-cm-6-4 name="Area of the Surface"}
 
 Considering $\frac{\partial \mathbf{x}}{\partial u_1} \Delta u_1$ and $\frac{\partial \mathbf{x}}{\partial u_2} \Delta u_2$ as a pair of infinitesimal tangent vectors, let their angle be $\theta$. Then the area of the infinitesimal parallelogram they form is:
 
@@ -133,3 +123,11 @@ $$
 $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-cm-6-1: Arc length measures a curve.
+- @def-cm-6-2: A function can be integrated along a curve against arc length.
+- @def-cm-6-4: The area of a surface integrates its surface area element.

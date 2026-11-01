@@ -11,8 +11,7 @@ crossref:
 
 ## Diffusion Models
 
-::: {.callout-tip collapse="true"}
-## DDPM: Forward and Reverse Processes
+::: {#def-dl-5-1 name="DDPM: Forward and Reverse Processes"}
 
 ### Forward Process: Add Noise
 
@@ -120,6 +119,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## DDPM: Variational Inference (ELBO)
 
 * Variational inference identity:
@@ -237,6 +237,7 @@ crossref:
 :::
 
 ::: {.callout-note collapse="true"}
+
 ## DDPM: Training Loss and Sampling
 
 * Since
@@ -434,3 +435,9 @@ crossref:
 :::
 
 ## Score-based Diffusion Models
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-dl-5-1: DDPM fixes a forward process that adds Gaussian noise and learns a reverse process that removes it.

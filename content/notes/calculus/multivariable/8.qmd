@@ -8,9 +8,7 @@ crossref:
   chapters: true      
 ---
 
-::: {.callout-tip collapse="true"}
-
-## Series
+::: {#def-cm-8-1 name="Series"}
 
 Given a sequence $\{a_k\}_{k=1}^\infty$ in a linear space $V$, the expression $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ is called a series, and $a_n$ is called the $n$-th term of this series. For a positive integer $N$, $\sum_{k=1}^N a_k = a_1 + \cdots + a_N$ is called the $N$-th partial sum of the series, denoted as $S_N$.
 
@@ -21,9 +19,7 @@ Here, the meaning of $\lim_{N \to +\infty} S_N = S$ is: for any $\varepsilon > 0
 A series that does not converge is called a divergent series.
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Cauchy Convergence Criterion
+::: {#thm-cm-8-1 name="Cauchy Convergence Criterion"}
 
 A series $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ is said to satisfy the Cauchy property if for any $\varepsilon > 0$, there exists an $N(\varepsilon)$ such that for any positive integers $m > n > N(\varepsilon)$,
 
@@ -39,9 +35,7 @@ If a linear space $V$ is complete under the norm $\|\cdot\|$ (i.e., every Cauchy
 
 :::
 
-::: {.callout-note collapse="true"}
-
-## Corollary
+::: {#cor-cm-8-1 name="Terms of a Convergent Series"}
 If the series $\sum_{k=1}^\infty a_k$ converges, then:
 
 $$
@@ -52,9 +46,7 @@ $$
 
 ## Absolute Convergence and Comparison Tests
 
-::: {.callout-tip collapse="true"}
-
-## Absolute Convergence
+::: {#def-cm-8-2 name="Absolute Convergence"}
 
 A series $\sum_{k=1}^\infty a_k = a_1 + a_2 + \cdots$ is said to converge absolutely if the series of norms:
 
@@ -65,9 +57,7 @@ $$
 converges.
 :::
 
-::: {.callout-note collapse="true"}
-
-## Proposition
+::: {#prp-cm-8-1 name="Absolute Convergence and Comparison Tests"}
 1. An absolutely convergent series is convergent.
 
 2. Suppose $a_k = O(b_k)$ as $k \to +\infty$, that is, there exist $K_0$ and $M > 0$ such that $\|a_k\| \le M\|b_k\|$ for all $k \ge K_0$.
@@ -140,7 +130,6 @@ $$
 \rho = \lim_{k \to +\infty} k \left( \frac{\|a_k\|}{\|a_{k+1}\|} - 1 \right)
 $$
 
-
 1. If $\rho > 1$, the series $\sum_{k=1}^\infty a_k$ converges absolutely.
 
 2. If $\rho < 1$, the series of norms $\sum_{k=1}^\infty \|a_k\|$ diverges (i.e., the series does not converge absolutely).
@@ -166,3 +155,13 @@ where $\beta$ is a real constant, and $p > 1$ is a strictly positive constant (t
 2. If $\beta \le 1$, the series of norms $\sum_{k=1}^\infty \|a_k\|$ diverges.
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-1: In a complete normed space, a series converges by the Cauchy criterion.
+- @thm-2: The integral test compares a monotone series with an improper integral.
+- @thm-3: The ratio test uses successive terms.
+- @thm-4: The root test uses $\limsup\sqrt[k]{\|a_k\|}$.
+- @thm-5: Raabe's test refines the ratio test.

@@ -10,17 +10,13 @@ crossref:
 
 ## Examples of Multivariate Functions
 
-::: {.callout-tip collapse="true"}
-
-## Multivariate Function
+::: {#def-cm-1-1 name="Multivariate Function"}
 
 An $m$-variable function is a mapping $f : D \to \mathbb{R}$, where $D$ is $\mathbb{R}^m$ or a subset of it, and the function value $y$ and independent variables $x_1, x_2, \dots, x_m$ satisfy $y = f(x_1, x_2, \dots, x_m)$.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Multivariate Mapping
+::: {#def-cm-1-2 name="Multivariate Mapping"}
 
 The values of multiple variables $y_1, \dots, y_n$ are determined by a set of independent variables $x_1, \dots, x_m$:
 
@@ -48,9 +44,7 @@ $$
 
 ## Distance and Limits of Sequences in $\mathbb{R}^m$
 
-::: {.callout-tip collapse="true"}
-
-## Distance on $\mathbb{R}^m$
+::: {#def-cm-1-3 name="Distance on $\mathbb{R}^m$"}
 
 A bivariate function $d : \mathbb{R}^m \times \mathbb{R}^m \to \mathbb{R}$ is called a distance on $\mathbb{R}^m$ if it satisfies:
 
@@ -74,9 +68,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Norm on $\mathbb{R}^m$
+::: {#def-cm-1-4 name="Norm on $\mathbb{R}^m$"}
 
 A function $\|\cdot\| : \mathbb{R}^m \to \mathbb{R}$ is called a norm on $\mathbb{R}^m$ if it satisfies:
 1. For any $\mathbf{x}, \mathbf{y} \in \mathbb{R}^m$, $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|$;
@@ -85,9 +77,7 @@ A function $\|\cdot\| : \mathbb{R}^m \to \mathbb{R}$ is called a norm on $\mathb
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Matrix Norm
+::: {#def-cm-1-5 name="Matrix Norm"}
 
 Given a norm $\|\cdot\|$ in $\mathbb{R}^n$ and a square matrix $A$ of order $n$, the **matrix norm** of $A$ is defined as:
 $$
@@ -105,7 +95,7 @@ $$
 
 :::
 
-::: {#thm-calc2-1-1}
+::: {#thm-calc2-1-1 name="Matrix Norm Properties"}
 
 1. For any matrix $A$, the norm is always non-negative, and it is zero if and only if the matrix itself is the zero matrix.
 
@@ -149,9 +139,7 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Inner Product on $\mathbb{R}^m$
+::: {#def-cm-1-6 name="Inner Product on $\mathbb{R}^m$"}
 
 A bivariate function $\langle \cdot, \cdot \rangle : \mathbb{R}^m \times \mathbb{R}^m \to \mathbb{R}$ is called an inner product on $\mathbb{R}^m$ if it satisfies:
 1. For any $\mathbf{x}, \mathbf{y} \in \mathbb{R}^m$, $\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle$;
@@ -163,9 +151,7 @@ A bivariate function $\langle \cdot, \cdot \rangle : \mathbb{R}^m \times \mathbb
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Definition
+::: {#def-cm-1-7 name="p-Norm"}
 
 For any $p \ge 1$,
 $$
@@ -178,7 +164,7 @@ $$
 
 :::
 
-::: {#thm-calc2-1-2}
+::: {#thm-calc2-1-2 name="Comparing p-Norms"}
 
 1. $\|\mathbf{x}\|_\infty := \max\{|x^1|, \dots, |x^m|\}$.
 
@@ -188,15 +174,13 @@ $$
 
 :::
 
-::: {#cor-calc2-1-1}
+::: {#cor-calc2-1-1 name="Equivalence of Norms"}
 
 Any norm $\|\cdot\|$ on $\mathbb{R}^m$ is equivalent to the norm $\|\cdot\|_\infty$,
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Limits of Sequences in $\mathbb{R}^m$
+::: {#def-cm-1-8 name="Limits of Sequences in $\mathbb{R}^m$"}
 
 Let $\{\mathbf{x}_n\}_{n \ge 1}$ be a sequence in $\mathbb{R}^m$.
 1. The sequence $\{\mathbf{x}_n\}_{n \ge 1}$ is said to be bounded if there exists $M > 0$ such that for any positive integer $n$, $\|\mathbf{x}_n\| \le M$.
@@ -207,7 +191,7 @@ Let $\{\mathbf{x}_n\}_{n \ge 1}$ be a sequence in $\mathbb{R}^m$.
 
 :::
 
-::: {#thm-calc2-1-3}
+::: {#thm-calc2-1-3 name="Coordinatewise Convergence"}
 
 Let $\{\mathbf{x}_n\}$ be a sequence in $\mathbb{R}^m$, where $\mathbf{x}_n = (x_n^1, \dots, x_n^m)^T$. Then:
 
@@ -217,16 +201,14 @@ Let $\{\mathbf{x}_n\}$ be a sequence in $\mathbb{R}^m$, where $\mathbf{x}_n = (x
 
 :::
 
-::: {#thm-calc2-1-4}
+::: {#thm-calc2-1-4 name="Completeness and Convergent Subsequences"}
 
 1. A sequence in $\mathbb{R}^m$ is convergent if and only if it is a Cauchy sequence.
 2. Any bounded sequence in $\mathbb{R}^m$ has a convergent subsequence.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Closed Set
+::: {#def-cm-1-9 name="Closed Set"}
 
 A set $E \subseteq \mathbb{R}^m$ is said to be a closed set if: for any sequence $\{\mathbf{x}_n\}_{n \ge 1}$ in $E$, if the sequence has a limit $\lim\limits_{n \to +\infty} \mathbf{x}_n$, then this limit is also in $E$.
 
@@ -234,9 +216,7 @@ A set $E \subseteq \mathbb{R}^m$ is said to be a closed set if: for any sequence
 
 ## Continuity of Multivariable Functions
 
-::: {.callout-tip collapse="true"}
-
-## Continuity of Multivariable Function
+::: {#def-cm-1-10 name="Continuity of Multivariable Function"}
 
 Let $E \subseteq \mathbb{R}^m$. A mapping $f: E \to \mathbb{R}^p$ is said to be **continuous at $\mathbf{x}_0 \in E$**, if for any $\epsilon > 0$, there exists a $\delta > 0$ such that for any $\mathbf{x} \in E$, as long as
 $$
@@ -257,13 +237,13 @@ Here, $\|\cdot\|$ and $\|\cdot\|_*$ denote the norms in the domain space and the
 
 :::
 
-::: {#thm-calc2-1-5}
+::: {#thm-calc2-1-5 name="Continuity of Linear Mappings"}
 
 Any linear mapping on $\mathbb{R}^m$ is continuous.
 
 :::
 
-::: {#thm-calc2-1-6}
+::: {#thm-calc2-1-6 name="Continuity of Bilinear Mappings"}
 
 Any bilinear mapping $B: \mathbb{R}^m \times \mathbb{R}^n \to \mathbb{R}^p$, i.e., $\forall \alpha_1, \alpha_2, \beta_1, \beta_2 \in \mathbb{R}, \mathbf{x}_1, \mathbf{x}_2, \mathbf{x} \in \mathbb{R}^m, \mathbf{y}_1, \mathbf{y}_2, \mathbf{y} \in \mathbb{R}^n$
 $$
@@ -276,19 +256,19 @@ is continuous.
 
 :::
 
-::: {#cor-calc2-1-2}
+::: {#cor-calc2-1-2 name="Continuity of Multilinear Mappings"}
 
 Any multilinear mapping is a continuous mapping.
 
 :::
 
-::: {#thm-calc2-1-7}
+::: {#thm-calc2-1-7 name="Continuity of Basic Operations"}
 
 Vector addition, scalar multiplication, and the inner product in $\mathbb{R}^m$, as well as real number multiplication, are all continuous mappings.
 
 :::
 
-::: {#thm-calc2-1-8}
+::: {#thm-calc2-1-8 name="Continuity of Compositions"}
 
 Let $E \subseteq \mathbb{R}^m$, $F \subseteq \mathbb{R}^p$, and $f: E \to \mathbb{R}^p$ be continuous at $\mathbf{x}_0 \in E$. If $g: F \to \mathbb{R}^q$ is continuous at $\mathbf{y}_0 = f(\mathbf{x}_0) \in F$, then the composite mapping
 $$
@@ -300,13 +280,13 @@ is continuous at $\mathbf{x}_0$.
 
 :::
 
-::: {#thm-calc2-1-9}
+::: {#thm-calc2-1-9 name="Continuity of the Determinant"}
 
 The determinant is a continuous function of the matrix; therefore, small perturbations of an invertible matrix remain invertible.
 
 :::
 
-::: {#thm-calc2-1-10}
+::: {#thm-calc2-1-10 name="Continuous Images of Bounded Closed Sets"}
 
 Let $E \subseteq \mathbb{R}^m$ and $f: E \to \mathbb{R}^p$ be a continuous mapping. Then:
 
@@ -316,7 +296,7 @@ Let $E \subseteq \mathbb{R}^m$ and $f: E \to \mathbb{R}^p$ be a continuous mappi
 
 :::
 
-::: {#thm-calc2-1-11}
+::: {#thm-calc2-1-11 name="Spectral Theorem for Symmetric Matrices"}
 
 Let $\langle \cdot, \cdot \rangle$ be an inner product on $\mathbb{R}^n$, and let $A$ be a symmetric matrix of order $n$, i.e.,
 $$
@@ -333,7 +313,7 @@ $$
 
 :::
 
-::: {#thm-calc2-1-12}
+::: {#thm-calc2-1-12 name="Uniform Continuity on Bounded Closed Sets"}
 
 Let $E \subseteq \mathbb{R}^m$ and $f: E \to \mathbb{R}^p$ be a continuous mapping. For any bounded closed subset $K$ of $E$, $f$ is uniformly continuous on $K$.
 
@@ -353,9 +333,7 @@ Here, $\|\cdot\|$ and $\|\cdot\|_*$ denote the norms in the domain space and the
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Path
+::: {#def-cm-1-11 name="Path"}
 
 A set $E \subseteq \mathbb{R}^m$ is called a **path-connected set** if, for any $\mathbf{x}, \mathbf{y} \in E$, there exists a continuous mapping $f : [0, 1] \to \mathbb{R}^m$ such that
 $$
@@ -369,9 +347,7 @@ Such a continuous mapping $f$ is called a **path** from $\mathbf{x}$ to $\mathbf
 
 ## Limits of Multivariable Functions
 
-::: {.callout-tip collapse="true"}
-
-## Limits of Multivariable Function
+::: {#def-cm-1-12 name="Limits of Multivariable Function"}
 
 Let $E \subseteq \mathbb{R}^m$. A point $\mathbf{x}_0 \in \mathbb{R}^m$ is called a **cluster point** (or accumulation point) of $E$ if, for any $\epsilon > 0$, there exists $\mathbf{x} \in E$ such that
 $$
@@ -399,7 +375,7 @@ Here, $d_2$ is the distance in the codomain space of $f$.
 
 :::
 
-::: {#thm-calc2-1-13}
+::: {#thm-calc2-1-13 name="Limits of Compositions"}
 
 Let $E$ be the domain of the composite function $g \circ f$, with $\lim\limits_{E \ni \mathbf{x} \to \mathbf{x}_0} f(\mathbf{x}) = \mathbf{y}_0$ and $\lim\limits_{\mathbf{y} \to \mathbf{y}_0} g(\mathbf{y}) = A$. Define
 $$
@@ -415,3 +391,13 @@ $$
 $$
 
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @cor-calc2-1-1: Every norm on $\mathbb{R}^m$ is equivalent to $\|\cdot\|_\infty$.
+- @thm-calc2-1-4: A sequence in $\mathbb{R}^m$ converges exactly when it is Cauchy, and bounded sequences have convergent subsequences.
+- @thm-calc2-1-10: Continuous mappings send bounded closed sets to bounded closed sets, so real-valued ones attain extrema there.
+- @thm-calc2-1-11: A symmetric matrix has $n$ orthonormal eigenvectors.
+- @thm-calc2-1-12: A continuous mapping is uniformly continuous on a bounded closed set.

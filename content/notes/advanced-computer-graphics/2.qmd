@@ -11,13 +11,17 @@ crossref:
 
 ## Transformations and Homogeneous Coordinates
 
-**Transformations:** Translation (not linear), rotation, reflection, scaling, and shear.
+#### Transformations
+
+Translation (not linear), rotation, reflection, scaling, and shear.
 
 We could leverage matrix multiplication without translation.
 
-**Homogeneous Coordinates:** Use 4×4 matrices to represent translation and linear transformations together in 3D.
+#### Homogeneous Coordinates
 
-**Scale:**
+Use 4×4 matrices to represent translation and linear transformations together in 3D.
+
+::: {#def-acg-2-1 name="Scale Matrix"}
 
 $$
 S_s =
@@ -29,7 +33,9 @@ S_x & 0 & 0 & 0 \\
 \end{bmatrix}
 $$
 
-**Shear:**
+:::
+
+::: {#def-acg-2-2 name="Shear Matrix"}
 
 $$
 H_{x,d} =
@@ -41,7 +47,9 @@ H_{x,d} =
 \end{bmatrix}
 $$
 
-**Translation:**
+:::
+
+::: {#def-acg-2-3 name="Translation Matrix"}
 
 $$
 T_b =
@@ -53,26 +61,48 @@ T_b =
 \end{bmatrix}
 $$
 
+:::
+
 ## Rotation
 
-**Topology:** Structural properties of a manifold.
+#### Topology of a Manifold
+
+Structural properties of a manifold.
+
+::: {#def-acg-2-4 name="Topological Equivalence"}
 
 Two surfaces $M$ and $N$ are topologically equivalent if
 there is a differentiable bijection between $M$ and $N$.
 
-**Orientation:** Space frame and body frame.
+:::
 
-**The Set of Rotations:** The special orthogonal group is
+#### Orientation
+
+Space frame and body frame.
+
+::: {#def-acg-2-5 name="Special Orthogonal Group"}
+
+The special orthogonal group is
 
 $$
 SO(n) = \{R \in \mathbb{R}^{n\times n} : \det(R)=1,\ RR^T=I\}.
 $$
 
+:::
+
+::: {.callout-note collapse="true"}
+
+## Why Rotations Are Hard to Parameterize
+
 The topology of $SO(2)$ and $SO(3)$ is different from $(-1,1)^n$, so parameterizing rotations in networks is tricky.
+
+:::
 
 ## 3D Rotation Representations
 
 ### Euler Angles
+
+::: {#def-acg-2-6 name="Euler Angles"}
 
 $$
 R_x(\alpha)
@@ -110,11 +140,19 @@ $$
 R = R_z(\gamma)R_y(\beta)R_x(\alpha).
 $$
 
+:::
+
+::: {.callout-note collapse="true"}
+
+## Why Euler Angles Are Not Unique
+
 Euler Angle is not unique for some rotations (gimbal lock).
+
+:::
 
 ### Axis-Angle
 
-**Euler's Rotation Theorem:**
+::: {#thm-acg-2-1 name="Euler's Rotation Theorem"}
 
 - Any rotation in $SO(3)$ is equivalent to rotation about a fixed axis $\omega \in \mathbb{R}^3$ through a positive angle $\theta$.
 
@@ -124,7 +162,9 @@ Euler Angle is not unique for some rotations (gimbal lock).
 
 - $R \in SO(3) := \operatorname{Rot}(\hat{\omega}, \theta)$.
 
-**Skew-Symmetric Matrix:**
+:::
+
+::: {#def-acg-2-7 name="Skew-Symmetric Matrix"}
 
 - $A$ is skew-symmetric if
 
@@ -157,17 +197,15 @@ Euler Angle is not unique for some rotations (gimbal lock).
   a \times b = [a]b.
   $$
 
-**Rodrigues Formula:**
+:::
 
-- Can prove that
+::: {#thm-acg-2-2 name="Rodrigues Formula"}
 
-    $$
-    [\hat{\omega}]^3 = -[\hat{\omega}].
-    $$
-
-Then, use Taylor expansion of $\sin$ and $\cos$:
+A rotation about the unit axis $\hat{\omega}$ through the angle $\theta$ is
 
 $$
+\operatorname{Rot}(\hat{\omega},\theta)
+=
 e^{[\hat{\omega}]\theta}
 =
 I
@@ -177,7 +215,23 @@ I
 [\hat{\omega}]^2(1-\cos\theta).
 $$
 
-**Recover Axis-Angle from Rotation Matrix:**
+:::
+
+::: {.callout-note collapse="true"}
+
+## Why Rodrigues Has This Form
+
+Can prove that
+
+$$
+[\hat{\omega}]^3 = -[\hat{\omega}].
+$$
+
+Then, use Taylor expansion of $\sin$ and $\cos$ to collect the powers of $[\hat{\omega}]$ in $e^{[\hat{\omega}]\theta}$.
+
+:::
+
+::: {#prp-acg-2-1 name="Recover Axis-Angle from Rotation Matrix"}
 
 - For $0 < \theta < \pi$,
 
@@ -191,9 +245,11 @@ $$
 - When $\theta=0$, $R=I$. There is no actual rotation, so the rotation axis $\hat{\omega}$ can be arbitrary.
 - When $\theta=\pi$, $(\hat{\omega},\pi)$ and $(-\hat{\omega},\pi)$ represent the same rotation.
 
+:::
+
 ### Quaternion
 
-**Mathematical Definition:**
+::: {#def-acg-2-8 name="Quaternion"}
 
 Quaternion is a more generalized complex number:
 
@@ -219,7 +275,9 @@ $$
   \end{aligned}
   $$
 
-**Properties of General Quaternions:**
+:::
+
+::: {#prp-acg-2-2 name="Properties of General Quaternions"}
 
 - In vector form, the product of two quaternions:
 
@@ -244,7 +302,9 @@ $$
   \end{aligned}
   $$
 
-**Unit Quaternion as Rotation:**
+:::
+
+::: {#prp-acg-2-3 name="Unit Quaternion as Rotation"}
 
 - Rotate a vector $\vec{x}$ by quaternion $q$:
 
@@ -260,37 +320,39 @@ $$
      x' = qxq^{-1}
      $$
 
-- Compose rotations by quaternion:
+- Composing rotations is as simple as multiplying quaternions. First rotating by $q_1$ and then by $q_2$ gives
 
-  - First rotate by $q_1$ and then by $q_2$:
+  $$
+  q_{\text{total}} = q_2q_1.
+  $$
 
-    $$
-    q_2(q_1xq_1^*)q_2^*
-    $$
+:::
 
-  - Since
+::: {.callout-note collapse="true"}
 
-    $$
-    q_2(q_1xq_1^*)q_2^*
-    =
-    (q_2q_1)x(q_1^*q_2^*),
-    $$
+## Why Composition Is Multiplication
 
-    and
+First rotate by $q_1$ and then by $q_2$:
 
-    $$
-    (q_2q_1)^*
-    =
-    q_1^*q_2^*,
-    $$
+$$
+q_2(q_1xq_1^*)q_2^*
+=
+(q_2q_1)x(q_1^*q_2^*).
+$$
 
-    we conclude that composing rotations is as simple as multiplying quaternions:
+Since
 
-    $$
-    q_{\text{total}} = q_2q_1.
-    $$
+$$
+(q_2q_1)^*
+=
+q_1^*q_2^*,
+$$
 
-**Conversion between Quaternions and Axis-Angle:**
+this is a rotation by the single unit quaternion $q_2q_1$.
+
+:::
+
+::: {#prp-acg-2-4 name="Conversion between Quaternions and Axis-Angle"}
 
 - Given the rotation axis $\hat{\omega}$ and rotation angle $\theta$,
 
@@ -327,11 +389,17 @@ $$
   \end{cases}
   $$
 
-**Learning Perspective:**
+:::
+
+::: {.callout-note collapse="true"}
+
+## Learning Perspective
 
 Each rotation corresponds to two quaternions. Networks need to normalize quaternions to unit length, which may cause large or small gradients in practice.
 
-**Summary of Rotation Representations:**
+:::
+
+#### Summary of Rotation Representations
 
 | Representation | Inverse? | Composing? |
 |---|---|---|
@@ -374,7 +442,7 @@ $$
 - 3D to 2D
 - Orthographic Projection vs. Perspective Projection
 
-**Orthographic Projection:**
+::: {#def-acg-2-9 name="Orthographic Projection"}
 
 - Camera located at origin, looking at -Z, up at Y
 - Drop Z coordinate
@@ -398,7 +466,9 @@ M_{\text{ortho}} =
 \end{bmatrix}
 $$
 
-**Perspective Projection:**
+:::
+
+::: {#def-acg-2-10 name="Perspective Projection"}
 
 - Most common in Computer Graphics
 - Further objects are smaller
@@ -431,6 +501,8 @@ $$
 - Aspect ratio = width / height
 - Field of view (FOV) = angle of the camera lens = $2\arctan(\frac{h}{2n})$ where $h$ is the height of the near plane and $n$ is the distance from the camera to the near plane.
 
+:::
+
 ### Viewport Transformation
 
 - After MVP (Model-View-Projection) transformation $\rightarrow$ normalized device coordinate (NDC).
@@ -444,3 +516,15 @@ $$
   $\rightarrow$ another affine transformation.
 
 - Usually set $s_x,s_y$ to $0$, treat $w_s,h_s$ as the screen width and height, and set $f_s,n_s$ to $-1,1$ so that the $z$ coordinates are untouched.
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-acg-2-3: Homogeneous coordinates let a single $4\times4$ matrix express translation together with linear transformations.
+- @def-acg-2-5: $SO(n)$ is the set of rotations, the matrices with $\det(R)=1$ and $RR^T=I$.
+- @thm-acg-2-1: Any rotation in $SO(3)$ is a rotation about a fixed axis through a positive angle.
+- @thm-acg-2-2: $e^{[\hat{\omega}]\theta}=I+[\hat{\omega}]\sin\theta+[\hat{\omega}]^2(1-\cos\theta)$.
+- @prp-acg-2-3: A unit quaternion rotates by $x'=qxq^{-1}$, and rotations compose as $q_{\text{total}}=q_2q_1$.
+- @prp-acg-2-4: $q=[\cos(\theta/2),\sin(\theta/2)\hat{\omega}]$.
+- @def-acg-2-10: Squish the frustum into a cuboid, then apply the orthographic projection.

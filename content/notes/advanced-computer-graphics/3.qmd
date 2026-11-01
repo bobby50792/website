@@ -16,7 +16,7 @@ crossref:
 | [ImageNet](https://www.image-net.org/){.text-nowrap} | Images organized by semantic category |
 | [ShapeNet](https://huggingface.co/ShapeNet){.text-nowrap} | Richly annotated 3D shapes |
 
-**Other 3D Object and Scene Datasets:**
+#### Other 3D Object and Scene Datasets
 
 - [A Large Dataset of Object Scans](http://redwood-data.org/3dscan/) ([paper](https://arxiv.org/abs/1602.02481))
 - [Thingi10K: A Dataset of 10,000 3D-Printing Models](https://ten-thousand-models.appspot.com/)
@@ -26,19 +26,19 @@ crossref:
 - [ScanNet++](https://scannetpp.mlsg.cit.tum.de/scannetpp/)
 - [SceneNet](https://github.com/ankurhanda/SceneNetv1.0)
 
-**Driving Datasets:**
+#### Driving Datasets
 
 - [Waymo Open Dataset](https://waymo.com/open/)
 - [SemanticKITTI](https://www.semantic-kitti.org/)
 
-**4D Datasets:**
+#### 4D Datasets
 
 - [HOI4D: A 4D Egocentric Dataset for Category-Level Human-Object Interaction](https://hoi4d.github.io/)
 - [BEHAVE: Dataset and Method for Tracking Human Object Interactions](https://virtualhumans.mpi-inf.mpg.de/behave/)
 - [EgoBody: Human Body Shape and Motion of Interacting People from Head-Mounted Devices](https://sanweiliti.github.io/egobody/egobody.html)
 - [ARCTIC: A Dataset for Dexterous Bimanual Hand-Object Manipulation](https://arctic.is.tue.mpg.de/)
 
-**Virtual Environments:**
+#### Virtual Environments
 
 - [ThreeDWorld (TDW)](https://github.com/threedworld-mit/tdw)
 - [AI2-THOR](https://ai2thor.allenai.org/)
@@ -52,86 +52,104 @@ crossref:
 - [iGibson](https://svl.stanford.edu/igibson/)
 - [SAPIEN: A SimulAted Part-Based Interactive ENvironment](https://sapien.ucsd.edu/)
 
-**AI + Geometry:** Let $S$ denote a shape and $c$ a label or condition.
+#### AI + Geometry
 
-- **Shape analysis — $P(c \mid S)$:**
+Let $S$ denote a shape and $c$ a label or condition.
+
+- Shape analysis — $P(c \mid S)$:
 
   - Learning shape descriptors
   - Shape classification, segmentation, view estimation, etc.
 
-- **Shape synthesis — $P(S)$ or $P(S \mid c)$:**
+- Shape synthesis — $P(S)$ or $P(S \mid c)$:
 
   - Learning (conditional) shape priors
   - Shape generation, completion, and reconstruction
 
 ## Data-Driven Shape Analysis
 
-**Multi-View Representations:**
+#### Multi-View Representations
 
 - Projection is required.
 - $\mathrm{CNN}_1$: a ConvNet extracting image features
 - $\mathrm{CNN}_2$: a second ConvNet producing shape descriptors
 
-**3D CNN on Volumetric Data:**
+#### 3D CNN on Volumetric Data
 
-- **Voxelization:** Information loss.
-- **Learn to project:** Exploit the sparsity of 3D shapes and store sparse surface signals.
-- **Sparse convolution:** Output feature $\mathrel{+}=$ input feature $\times$ kernel.
+- Voxelization: Information loss.
+- Learn to project: Exploit the sparsity of 3D shapes and store sparse surface signals.
+- Sparse convolution: Output feature $\mathrel{+}=$ input feature $\times$ kernel.
 
-**Octree:** Recursively partition space. Each internal node has exactly eight children; hash tables store the octree structure.
+#### Octree
 
-**PointNet:** The first learning tool for point clouds.
+Recursively partition space. Each internal node has exactly eight children; hash tables store the octree structure.
+
+#### PointNet
+
+The first learning tool for point clouds.
 
 - End-to-end learning for irregular point data
 - Unified framework for various tasks
 - Unordered input: construct symmetric functions using neural networks
 
-**Limitations of PointNet:**
+::: {.callout-note collapse="true"}
+
+## Limitations of PointNet
 
 - No local context for each point
 - Global features depend on absolute coordinates, making it hard to generalize to unseen scene configurations
 
-**PointNet++:** Recursively apply PointNet to local regions.
+:::
+
+#### PointNet++
+
+Recursively apply PointNet to local regions.
 
 - Hierarchical feature learning
 - Local translation invariance
 
-**Monte Carlo Convolution:** A method for performing convolution on point clouds using Monte Carlo sampling.
+#### Monte Carlo Convolution
+
+A method for performing convolution on point clouds using Monte Carlo sampling.
 
 ## Data-Driven Shape Synthesis
 
-**Single-View Conditioned 3D Modeling:** A canonical problem.
+#### Single-View Conditioned 3D Modeling
 
-**Model-Based Fitting (the first vision thesis):**
+A canonical problem.
+
+#### Model-Based Fitting (the first vision thesis)
 
 - Fit predefined 3D models to image features.
 - Limited by the expressiveness of simple geometric models.
 
-**Data-Driven Modeling (a modern view):**
+#### Data-Driven Modeling (a modern view)
 
 - Learn image-to-3D mappings from large datasets using neural networks.
 - Reduce explicit geometric reasoning, though it remains helpful.
 
-**2D to 2.5D — Depth Prediction:**
+#### 2D to 2.5D — Depth Prediction
 
 Input image $\to$ convolutional network $\to$ predicted depth.
 
 Compare predicted depth $y$ with ground-truth depth $y^*$:
 
-**Squared error:**
+::: {#def-acg-3-1 name="Squared Depth Loss"}
 
 $$
 L(y, y^*) = \sum_i \|y_i - y_i^*\|^2.
 $$
 
-**Log-space loss:** With $\alpha = \alpha(y, y^*)$,
+:::
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Log-space loss formula"}
+::: {#def-acg-3-2 name="Log-Space Depth Loss"}
+
+With $\alpha = \alpha(y, y^*)$,
+
 $$
 L(y, y^*) = \sum_i
 \left\|\log y_i - \log y_i^* + \alpha\right\|^2,
 $$
-:::
 
 where
 
@@ -140,35 +158,42 @@ $$
 \sum_i \left(\log y_i^* - \log y_i\right).
 $$
 
-**Image-Based 3D Object Modeling:** Object-centric, supervised 3D learning.
+:::
+
+#### Image-Based 3D Object Modeling
+
+Object-centric, supervised 3D learning.
 
 Input image $\to$ CNN $\to$ predicted 3D; compare with ground-truth 3D.
 
-**Learning Workflow:**
+#### Learning Workflow
 
 0. Decide on the model and objectives.
-1. **Collect training data:** lots of [image, 3D] pairs — not easy to obtain.
+1. Collect training data: lots of [image, 3D] pairs — not easy to obtain.
 2. Learn a predictor.
 3. Evaluate the predictor.
 4. Use the predictor.
 
-**Learning to Predict Volumetric 3D:**
+#### Learning to Predict Volumetric 3D
 
-- **2D encoder:** Image $\to$ latent code.
-- **3D decoder:** Latent code $\to$ $D^3$ volume.
-- **Loss:** Compare the predicted and ground-truth 3D volumes.
-- **Training data:** Renderings of CAD models on random backgrounds, helping transfer to real images.
+- 2D encoder: Image $\to$ latent code.
+- 3D decoder: Latent code $\to$ $D^3$ volume.
+- Loss: Compare the predicted and ground-truth 3D volumes.
+- Training data: Renderings of CAD models on random backgrounds, helping transfer to real images.
 
-**Implicit Volumetric Representation:**
+#### Implicit Volumetric Representation
 
 - Instead of explicitly predicting a 3D voxel grid, learn a continuous occupancy function.
 - Given a latent code $c$ and an arbitrary 3D query point $p = (x,y,z)$, predict the probability that the point lies inside the object.
 
-**Learning to Predict Point Clouds:**
+#### Learning to Predict Point Clouds
 
-Latent vector $\to$ fixed-size point cloud. Compare two point sets with the **Chamfer distance**:
+Latent vector $\to$ fixed-size point cloud. Compare two point sets with the Chamfer distance.
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Chamfer distance formula"}
+::: {#def-acg-3-3 name="Chamfer Distance"}
+
+The **Chamfer distance** between two point sets $S_1$ and $S_2$ is
+
 $$
 \begin{aligned}
 d_{\mathrm{CD}}(S_1, S_2)
@@ -176,15 +201,24 @@ d_{\mathrm{CD}}(S_1, S_2)
 &\quad + \sum_{y \in S_2} \min_{x \in S_1} \|x-y\|_2^2.
 \end{aligned}
 $$
+
 :::
 
-**Learning to Predict Parametric Point Clouds:**
+#### Learning to Predict Parametric Point Clouds
 
 Latent vector + planar point $\to$ generated 3D point.
 
-**Learning to Predict and Deform Meshes:**
+#### Learning to Predict and Deform Meshes
 
 Advantages of using meshes:
 
 - Smoothness objectives respect connectivity: Laplacian smoothness and normal consistency.
 - Can sample a varying number of points.
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-acg-3-2: The offset $\alpha$ removes a global scale from the comparison between predicted and ground-truth depth.
+- [Implicit Volumetric Representation](#implicit-volumetric-representation): Instead of a voxel grid, learn a continuous occupancy function of a latent code and a query point.
+- @def-acg-3-3: Each point is matched to its nearest neighbor in the other set, so the loss compares unordered point sets.

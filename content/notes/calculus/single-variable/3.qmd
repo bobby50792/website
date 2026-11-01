@@ -10,9 +10,7 @@ crossref:
 
 ## Definition and Calculation of Derivatives
 
-::: {.callout-tip collapse="true"}
-
-## Differential
+::: {#def-cs-3-1 name="Differential"}
 
 A point $x_0$ is called an **interior point** of $I$,  if there exists $\delta > 0$ such that
 $$
@@ -29,9 +27,7 @@ In this case, $L$ is called the **differential** of $f$ at $x_0$,  denoted by $d
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Derivative
+::: {#def-cs-3-2 name="Derivative"}
 
 For a one-variable function, the differential $df(x_0)$ is a **linear function**,  that is, a proportional function whose proportionality constant is denoted by $f'(x_0)$.  This $f'(x_0)$ is called the **derivative** of $f$ at $x_0$.
 
@@ -52,20 +48,20 @@ $$
 
 If this limit exists, we say that $f$ is **differentiable** at $x_0$.
 
-- **Traditional notation:** Let $\Delta x = h$, $\Delta y = f(x_0 + \Delta x) - f(x_0)$, then
+- Traditional notation: Let $\Delta x = h$, $\Delta y = f(x_0 + \Delta x) - f(x_0)$, then
 
 $$
 f'(x_0) = \lim_{h \to 0} \frac{\Delta y}{\Delta x}
 = \left. \frac{dy}{dx} \right|_{x_0}.
 $$
 
-- **Lagrange notation:** $f'(x_0).$
+- Lagrange notation: $f'(x_0).$
 
-- **Leibniz notation:** $\displaystyle \frac{dy}{dx}.$
+- Leibniz notation: $\displaystyle \frac{dy}{dx}.$
 
 :::
 
-::: {#thm-calc1-3-1}
+::: {#thm-calc1-3-1 name="Sum and Product Rules"}
 
 Let $f, g$ be differentiable at $x_0$.  Then $f \pm g$ and $fg$ are differentiable at $x_0$, and
 $$
@@ -84,7 +80,7 @@ $$
 
 :::
 
-::: {#thm-calc1-3-2}
+::: {#thm-calc1-3-2 name="Chain Rule"}
 
 Suppose $f$ is differentiable at $x_0$, and $g$ is differentiable at $y_0 = f(x_0)$.  Then the composite function $g \circ f$ is differentiable at $x_0$, and
 $$
@@ -99,7 +95,7 @@ $$
 
 :::
 
-::: {#thm-calc1-3-3}
+::: {#thm-calc1-3-3 name="Derivative of an Inverse"}
 
 Suppose $f$ has a continuous inverse function.  If $f$ is differentiable at $x_0$ and $f'(x_0) \neq 0$,  then $f^{-1}$ is differentiable at $y_0 = f(x_0)$, and
 $$
@@ -114,7 +110,7 @@ $$
 
 :::
 
-**Examples**
+#### Examples
 
 1. $d(x^n)=n x^{n-1}dx\qquad(n\in\mathbb{R})$.
 
@@ -159,7 +155,7 @@ $$
 f \in \mathcal{C}^\infty(I) \quad \text{means } f \text{ has derivatives of all orders on } I.
 $$
 
-::: {#thm-calc1-3-4}
+::: {#thm-calc1-3-4 name="Leibniz Rule"}
 
 Let $f, g$ have $n$-th derivatives at $x_0$.  Then $\lambda f + \mu g$ and $fg$ also have $n$-th derivatives at $x_0$, and we have:
 $$
@@ -172,19 +168,19 @@ $$
 
 :::
 
-::: {#thm-calc1-3-5}
+::: {#thm-calc1-3-5 name="Higher Derivatives of Compositions"}
 
 If $f$ is $n$-times differentiable at $x_0$, and $g$ is $n$-times differentiable at $y_0 = f(x_0)$,  then the composite function $g \circ f$ is $n$-times differentiable at $x_0$.
 
 :::
 
-::: {#thm-calc1-3-6}
+::: {#thm-calc1-3-6 name="Higher Derivatives of Quotients"}
 
 Let $f, g$ be $n$-times differentiable at $x_0$, and suppose $g(x_0) \neq 0$.  Then $\dfrac{f}{g}$ is $n$-times differentiable at $x_0$.
 
 :::
 
-::: {#thm-calc1-3-7}
+::: {#thm-calc1-3-7 name="Curvature Formula"}
 
 The **curvature** is the reciprocal of the radius of curvature:
 $$
@@ -201,9 +197,7 @@ $$
 
 ## Differential Mean Value Theorems
 
-::: {.callout-tip collapse="true"}
-
-## Local Extremum
+::: {#def-cs-3-3 name="Local Extremum"}
 
 A point $x_0 \in I$ is called a **local maximum** of $f$ if there exists a neighborhood $V$ of $x_0$ such that
 $$
@@ -214,9 +208,7 @@ The definition of a local minimum is similar.
 
 :::
 
-::: {.callout-tip collapse="true"}
-
-## Critical Point
+::: {#def-cs-3-4 name="Critical Point"}
 
 A point $x_0$ is called a **critical point** of $f$ if
 
@@ -226,7 +218,7 @@ $$
 
 :::
 
-::: {#thm-calc1-3-8}
+::: {#thm-calc1-3-8 name="Fermat's Lemma"}
 
 If $f$ is differentiable at a local extremum $x_0$,  then $x_0$ is a critical point of $f$.
 
@@ -241,7 +233,7 @@ $$
 
 :::
 
-::: {#cor-calc1-3-1}
+::: {#cor-calc1-3-1 name="Generalized Rolle's Theorem"}
 
 Suppose $f$ is differentiable on the open interval $(a,b)$,  and
 $$
@@ -298,7 +290,7 @@ $$
 
 :::
 
-::: {#cor-calc1-3-2}
+::: {#cor-calc1-3-2 name="Nonvanishing Derivative Implies Strict Monotonicity"}
 
 If $f$ is differentiable on an interval $I$, and
 $$
@@ -311,13 +303,9 @@ then $f$ is strictly monotonic on $I$.
 
 ## Using Derivatives to Analyze Functions
 
-::: {.callout-tip collapse="true"}
+#### Monotonicity of Function
 
-## Monotonicity of Function
-
-:::
-
-::: {#thm-calc1-3-13}
+::: {#thm-calc1-3-13 name="Derivative Test for Monotonicity"}
 
 Suppose $f$ is continuous on an interval $I$ and differentiable in the interior of $I$. Then:
 
@@ -347,13 +335,9 @@ $$
 
 :::
 
-::: {.callout-tip collapse="true"}
+#### Strict Local Extremum
 
-## Strict Local Extremum
-
-:::
-
-::: {#thm-calc1-3-14}
+::: {#thm-calc1-3-14 name="Second Derivative Test"}
 
 Assume $f$ is differentiable at $x_0$ and
 $$
@@ -365,7 +349,7 @@ $$
 
 :::
 
-::: {#thm-calc1-3-15}
+::: {#thm-calc1-3-15 name="Even-Order Extremum Test"}
 
 Assume $f$ is $2n$-times differentiable at $x_0$, where $n$ is a positive integer, and
 $$
@@ -377,7 +361,7 @@ $$
 
 :::
 
-::: {#thm-calc1-3-16}
+::: {#thm-calc1-3-16 name="Odd-Order Extremum Test"}
 
 Assume $f$ is $(2n+1)$-times differentiable at $x_0$, where $n$ is a positive integer, and
 $$
@@ -391,9 +375,7 @@ $$
 
 ## Convexity of Functions
 
-::: {.callout-tip collapse="true"}
-
-## Convex Function
+::: {#def-cs-3-5 name="Convex Function"}
 
 A function $f$ is called **convex** on an interval $I$ if for all $x_1, x_2 \in I$ and all $t$ with $0 < t < 1$, we have
 
@@ -405,7 +387,7 @@ If equality occurs **only when** $x_1 = x_2$, then $f$ is called **strictly conv
 
 :::
 
-::: {#thm-calc1-3-17}
+::: {#thm-calc1-3-17 name="Jensen's Inequality"}
 
 Let $f$ be a convex function on the interval $I$. Then for any $x_1, x_2, \cdots, x_n \in I$, and $\lambda_1, \lambda_2, \cdots, \lambda_n > 0$, with $\lambda_1 + \lambda_2 + \cdots + \lambda_n = 1$, we have
 $$
@@ -420,7 +402,7 @@ $$
 
 :::
 
-::: {#thm-calc1-3-18}
+::: {#thm-calc1-3-18 name="Three-Chord Criterion for Convexity"}
 
 The function $f$ is a convex function on the interval $I$ if and only if for any $(x_1, x_2) \subset I$ and any $x \in (x_1, x_2)$, we have
 $$
@@ -429,19 +411,19 @@ $$
 
 :::
 
-::: {#cor-calc1-3-3}
+::: {#cor-calc1-3-3 name="Continuity of Convex Functions"}
 
 Let $f: I \to \mathbb{R}$ be a convex function. If $x_0$ is an interior point of $I$ (i.e., $x_0 \in \text{int}(I)$), then $f$ is continuous at $x_0$.
 
 :::
 
-::: {#cor-calc1-3-4}
+::: {#cor-calc1-3-4 name="One-Sided Derivatives of Convex Functions"}
 
 Let $f$ be convex on an open interval $(a, b)$. For every $x \in (a, b)$, both the left-hand derivative $f'_-(x)$ and the right-hand derivative $f'_+(x)$ exist and are finite.
 
 :::
 
-::: {#thm-calc1-3-19}
+::: {#thm-calc1-3-19 name="Derivative Test for Convexity"}
 
 Let $f$ be continuous on $[a, b]$ and differentiable on $(a, b)$, then a necessary and sufficient condition for $f$ to be a convex function (strictly convex function) on $[a, b]$ is that $f'$ is increasing (strictly increasing) on $(a, b)$.
 
@@ -486,9 +468,7 @@ $$
 
 ## The Taylor Formula and Its Analytical Applications
 
-::: {.callout-tip collapse="true"}
-
-## Definition of the $n$-th Order Taylor Polynomial
+::: {#def-cs-3-6 name="Definition of the $n$-th Order Taylor Polynomial"}
 
 Assume that $f$ has $n$ derivatives at $x_0$.  The $n$-th order Taylor polynomial of $f$ at $x_0$ is defined by
 
@@ -527,7 +507,7 @@ f(x)
 + \frac{f^{(n+1)}(\xi)}{(n+1)!}\,(x-x_0)^{\,n+1}.
 $$
 
-**Examples**
+#### Examples
 
 1.
 
@@ -584,3 +564,12 @@ $$
     + \cdots + (-1)^{n}\frac{x^{2n+1}}{2n+1}
     + o(x^{2n + 2}),\qquad x\to 0,
     $$
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @thm-calc1-3-2: The derivative of a composition is the product of the derivatives.
+- @thm-calc1-3-8: If $f$ is differentiable at a local extremum, that point is a critical point.
+- @thm-calc1-3-14: At a critical point, $f''>0$ gives a strict local minimum and $f''<0$ a strict local maximum.
+- @thm-calc1-3-17: Jensen's inequality extends convexity to weighted averages of $n$ points.

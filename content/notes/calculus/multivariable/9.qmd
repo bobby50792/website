@@ -1,5 +1,5 @@
 ---
-title: " Series of Functions and Power Series"
+title: "Series of Functions and Power Series"
 page-layout: article
 search: true
 number-offset: [9]
@@ -10,9 +10,7 @@ crossref:
 
 ## Uniform Convergence and Properties of Limit Functions
 
-::: {.callout-tip collapse="true"}
-
-## Uniform and Pointwise Convergence
+::: {#def-cm-9-1 name="Uniform and Pointwise Convergence"}
 
 Let $I \subseteq \mathbb{R}^m$, for a function $f : I \to \mathbb{R}$, we denote:
 
@@ -32,3 +30,9 @@ If for any $\mathbf{x} \in I$, we have $\lim_{n \to +\infty} f_n(\mathbf{x}) = f
 
 A sequence of functions $f_n$ is said to converge non-uniformly to $f$ on $I$ if $f_n$ converges pointwise to $f$ on $I$, but does not converge uniformly to $f$.
 :::
+
+## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- @def-cm-9-1: Uniform and pointwise convergence are the two modes of convergence for function sequences.

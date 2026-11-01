@@ -59,7 +59,7 @@ Note that $\mathsf{K}_\lambda$ consists of the zero vector and all generalized e
 
 ## Generalized Eigenspace Properties
 
-::: {#thm-la-7-1}
+::: {#thm-la-7-1 name="Generalized Eigenspace Properties"}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\lambda$ be an eigenvalue of $\mathsf{T}$. Then:
 
@@ -69,7 +69,7 @@ Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\
 
 :::
 
-::: {#thm-la-7-2}
+::: {#thm-la-7-2 name="Generalized Eigenspace Dimension"}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ such that the characteristic polynomial of $\mathsf{T}$ splits. Suppose that $\lambda$ is an eigenvalue of $\mathsf{T}$ with multiplicity $m$. Then:
 
@@ -79,7 +79,7 @@ Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mat
 
 :::
 
-::: {#thm-la-7-3}
+::: {#thm-la-7-3 name="Decomposition into Generalized Eigenvectors"}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ such that the characteristic polynomial of $\mathsf{T}$ splits, and let $\lambda_1, \lambda_2, \dots, \lambda_k$ be the distinct eigenvalues of $\mathsf{T}$. Then, for every $x \in \mathsf{V}$, there exist vectors $v_i \in \mathsf{K}_{\lambda_i}$, $1 \le i \le k$, such that
 $$
@@ -88,7 +88,7 @@ $$
 
 :::
 
-::: {#thm-la-7-4}
+::: {#thm-la-7-4 name="Basis from Generalized Eigenspaces"}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ such that the characteristic polynomial of $\mathsf{T}$ splits, and let $\lambda_1, \lambda_2, \dots, \lambda_k$ be the distinct eigenvalues of $\mathsf{T}$ with corresponding multiplicities $m_1, m_2, \dots, m_k$. For $1 \le i \le k$, let $\beta_i$ be an ordered basis for $\mathsf{K}_{\lambda_i}$. Then the following statements are true.
 
@@ -110,7 +110,7 @@ is called a **cycle of generalized eigenvectors** of $\mathsf{T}$ corresponding 
 
 :::
 
-::: {#thm-la-7-5}
+::: {#thm-la-7-5 name="Jordan Bases from Cycles"}
 
 Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mathsf{V}$ whose characteristic polynomial splits, and suppose that $\beta$ is a basis for $\mathsf{V}$ such that $\beta$ is a disjoint union of cycles of generalized eigenvectors of $\mathsf{T}$. Then the following statements are true.
 (a) For each cycle $\gamma$ of generalized eigenvectors contained in $\beta$, $\mathsf{W} = \operatorname{span}(\gamma)$ is $\mathsf{T}$-invariant, and $[\mathsf{T}_{\mathsf{W}}]_\gamma$ is a Jordan block.
@@ -118,7 +118,7 @@ Let $\mathsf{T}$ be a linear operator on a finite-dimensional vector space $\mat
 
 :::
 
-::: {#thm-la-7-6}
+::: {#thm-la-7-6 name="Independence of Cycles"}
 
 Let $\mathsf{T}$ be a linear operator on a vector space $\mathsf{V}$, and let $\lambda$ be an eigenvalue of $\mathsf{T}$. Suppose that $\gamma_1, \gamma_2, \dots, \gamma_q$ are cycles of generalized eigenvectors of $\mathsf{T}$ corresponding to $\lambda$ such that the initial vectors of the $\gamma_i$'s are distinct and form a linearly independent set. Then the $\gamma_i$'s are disjoint, and their union $\gamma = \bigcup_{i=1}^q \gamma_i$ is linearly independent.
 
