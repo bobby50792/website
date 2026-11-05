@@ -13,7 +13,7 @@ crossref:
 
 ::: {#thm-1}
 
-## Markov's inequality
+## Markov's Inequality
 If $X$ is a non-negative random variable, i.e., $\Pr[X \geq 0] = 1$, then for every $a > 0$,
 
 $$
@@ -89,7 +89,7 @@ $$
 :::
 
 ::: {#thm-2}
-## Chebyshev's inequality
+## Chebyshev's Inequality
 
 For any random variable $X$ and any $\epsilon > 0$,
 
@@ -98,7 +98,7 @@ $$
 $$
 :::
 
-::: {#def-mc-2-2 name="Standard deviation"}
+::: {#def-mc-2-2 name="Standard Deviation"}
 
 The standard deviation of a random variable $X$ is defined as
 
@@ -160,7 +160,7 @@ $$
 
 ## Chernoff Bounds
 
-::: {#def-mc-2-4 name="Moment generating function"}
+::: {#def-mc-2-4 name="Moment Generating Function"}
 
 The moment generating function (MGF) of a random variable $X$ is defined as
 
@@ -178,7 +178,7 @@ Let $X$ be a random variable. Then its MGF $M(t)$ satisfies the following proper
 :::
 
 ::: {#thm-6}
-## Generic Chernoff bound (upper tail)
+## Generic Chernoff Bound (Upper Tail)
 
 Let $X$ be a random variable with mean $\mu$ and MGF $M(t)$. Then for any $a \geq \mu$,
 
@@ -188,7 +188,7 @@ $$
 :::
 
 ::: {#thm-7}
-## Generic Chernoff bound (lower tail)
+## Generic Chernoff Bound (Lower Tail)
 
 Let $X$ be a random variable with mean $\mu$ and MGF $M(t)$. Then for any $a \leq \mu$,
 
@@ -197,7 +197,7 @@ $$
 $$
 :::
 
-::: {#def-mc-2-5 name="Rate function"}
+::: {#def-mc-2-5 name="Rate Function"}
 
 The rate function of a random variable $X$ is defined as
 
@@ -209,7 +209,7 @@ with the convention that $I_X(a) = +\infty$ if the supremum is unbounded.
 :::
 
 ::: {#thm-8}
-## Generic Chernoff bound in terms of the rate function
+## Generic Chernoff Bound in Terms of the Rate Function
 
 Let $X$ be a random variable with mean $\mu$ and rate function $I(a)$. Then
 
@@ -224,7 +224,7 @@ $$
 \
 
 ::: {#thm-9}
-## Properties of the rate function
+## Properties of the Rate Function
 
 Let $X$ be a random variable with mean $\mu$ and rate function $I(a)$. Let $l$ and $u$ be the minimum and maximum values that $X$ can take, and assume $l < u$. Then
 
@@ -238,7 +238,7 @@ Let $X$ be a random variable with mean $\mu$ and rate function $I(a)$. Let $l$ a
 \
 
 ::: {#thm-10}
-## Generic Chernoff bound for sample averages
+## Generic Chernoff Bound for Sample Averages
 
 Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$, each with mean $\mu$ and rate function $I(a)$. Then
 
@@ -253,7 +253,7 @@ $$
 \
 
 ::: {#thm-11}
-## Cramér's theorem
+## Cramér's Theorem
 
 Let $\mathcal{D}$ be a probability distribution with mean $\mu$ and rate function $I(a)$. Let $X^{(n)} := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$, drawn from $\mathcal{D}$. Then as $n \to \infty$,
 
@@ -290,7 +290,7 @@ $$
 \
 
 ::: {#thm-14}
-## Hoeffding's inequality, i.i.d. case
+## Hoeffding's Inequality, i.i.d. Case
 
 Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ i.i.d. random variables $X_1, \dots, X_n$ taking values in $[l, u]$ for some $l \leq u$. Then for all $\epsilon \geq 0$,
 
@@ -305,7 +305,7 @@ $$
 \
 
 ::: {#thm-15}
-## Hoeffding's inequality
+## Hoeffding's Inequality
 
 Let $X := \frac{1}{n} \sum_{i=1}^n X_i$ be the sample average of $n$ independent random variables $X_1, \dots, X_n$ taking values in intervals $[\ell_1, u_1], \dots, [\ell_n, u_n]$, respectively. Let $s^2$ be the mean squared interval length:
 
@@ -370,7 +370,7 @@ $$
 \
 
 ::: {#thm-18}
-## Azuma–Hoeffding inequality
+## Azuma–Hoeffding Inequality
 
 Let $(Z_i)_{i=0}^n$ be a martingale. Assume that for each $i \in [n]$, the increment $\Delta_i := Z_i - Z_{i-1}$ always lies in an interval $[\tilde{\ell}_i, \tilde{u}_i]$ for some $\tilde{\ell}_i, \tilde{u}_i \in \mathbb{R}$. Let $L^2$ be the sum of the squared interval lengths:
 
@@ -398,7 +398,7 @@ $$
 :::
 
 ::: {#thm-19}
-## Azuma–Hoeffding inequality
+## Azuma–Hoeffding Inequality
 
 Let $(Z_i)_{i=0}^n$ be a martingale with respect to the information revealed by $(X_i)_{i=0}^n$. Assume that for each $i \in [n]$, the increment $\Delta_i := Z_i - Z_{i-1}$ always lies in an interval of length at most $c_i$ when conditioned on $X_{<i}$. That is, there exist functions $\tilde{\ell}_i, \tilde{u}_i : \mathbb{R}^i \to \mathbb{R}$ such that with probability 1,
 
@@ -416,7 +416,7 @@ $$
 $$
 :::
 
-::: {#def-mc-2-8 name="Doob martingale"}
+::: {#def-mc-2-8 name="Doob Martingale"}
 
 Let $X_1, \dots, X_n$ be independent random variables, and let $f : \mathbb{R}^n \to \mathbb{R}$ be a function. The Doob martingale associated with $f$ and $X_1, \dots, X_n$ is the sequence $(Z_i)_{i=0}^n$ defined by
 
@@ -435,7 +435,7 @@ $$
 :::
 
 ::: {#thm-21}
-## McDiarmid's inequality
+## McDiarmid's Inequality
 
 Let $X_1, \dots, X_n$ be independent random variables, and let $f : \mathbb{R}^n \to \mathbb{R}$ be a function. Assume that for each $i = 1, \dots, n$ there is a constant $c_i \geq 0$ such that whenever two inputs differ only in coordinate $i$,
 
@@ -466,7 +466,7 @@ $$
 ### Extensions
 
 ::: {#thm-22}
-## Paley–Zygmund inequality and anti-concentration
+## Paley–Zygmund Inequality and Anti-Concentration
 
 Let $X$ be a random variable.
 

@@ -19,7 +19,7 @@ $$
 
 :::
 
-::: {#def-cm-7-2 name="Differential 1-form"}
+::: {#def-cm-7-2 name="Differential 1-Form"}
 
 In a Cartesian coordinate system, let $\mathbf{F} = (F_1, \dots, F_m)^T$ and $\mathbf{x} = (x_1, \dots, x_m)^T$, then
 

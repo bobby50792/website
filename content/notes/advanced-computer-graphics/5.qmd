@@ -10,7 +10,7 @@ crossref:
 
 ## Shading
 
-#### Shading is Local
+#### Shading Is Local
 
 Compute light reflected toward camera
 at a specific shading point.

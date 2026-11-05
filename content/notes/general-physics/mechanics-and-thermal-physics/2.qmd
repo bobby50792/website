@@ -47,7 +47,7 @@ $$
 
 :::
 
-::: {#def-pm-2-3 name="Gravitational Force Near the Surface of the Earth"}
+::: {#def-pm-2-3 name="Gravitational Force near the Surface of the Earth"}
 
 Close to Earth's surface, the gravitational attraction between an object and Earth manifests as a downward force whose magnitude is expressed as:
 $$
@@ -120,7 +120,7 @@ To every action, there is always opposed an equal reaction: or, the mutual actio
 
 ## Non-Inertial Frames and Effective Forces
 
-::: {#def-pm-2-7 name="Translational Non-inertial Reference Frame"}
+::: {#def-pm-2-7 name="Translational Non-Inertial Reference Frame"}
 
 Consider a non-inertial reference frame $S'$ that translates relative to an inertial frame $S$ with an acceleration $\vec{a}_0$. The transformation of acceleration between these frames is given by
 
@@ -158,7 +158,7 @@ is the effective force, or fictitious force, in the non-inertial frame $S'$.
 
 :::
 
-::: {#def-pm-2-8 name="Rotational Non-inertial Reference Frame"}
+::: {#def-pm-2-8 name="Rotational Non-Inertial Reference Frame"}
 
 * Coordinate transformations:
 

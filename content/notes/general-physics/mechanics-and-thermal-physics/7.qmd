@@ -139,7 +139,7 @@ Static friction enforces this constraint when needed. Its magnitude must satisfy
 
 :::
 
-#### Example: rolling down an incline
+#### Example: Rolling down an Incline
 
 For an axisymmetric body rolling freely down a fixed incline of angle $\beta$, with sufficient static friction and negligible rolling resistance,
 

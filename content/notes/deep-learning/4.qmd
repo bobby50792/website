@@ -65,7 +65,7 @@ crossref:
     * complexity: $\mathcal{O}(c)$
 :::
 
-::: {#def-dl-4-4 name="Continuous-time Normalizing Flows & Neural ODE Formulation"}
+::: {#def-dl-4-4 name="Continuous-Time Normalizing Flows & Neural ODE Formulation"}
 
 * Continuous-time Normalizing Flows
     * Neural ODE
@@ -273,7 +273,7 @@ crossref:
 
 ## Hierarchical PixelVAE
 
-#### Hierarchical latent space decomposition
+#### Hierarchical Latent Space Decomposition
 
 * Ordinary VAE uses one latent variable:
   $$

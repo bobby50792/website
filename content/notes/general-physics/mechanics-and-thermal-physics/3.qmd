@@ -88,7 +88,7 @@ $$
 
 ::: {.callout-note collapse="true"}
 
-## Example: Gravity-free Space
+## Example: Gravity-Free Space
 
 $$
 \begin{aligned}
@@ -181,7 +181,7 @@ $$
 
 :::
 
-::: {#def-pm-3-3 name="Center-of-mass Reference Frame"}
+::: {#def-pm-3-3 name="Center-of-Mass Reference Frame"}
 
 In the COM reference frame, the aggregate position and velocity of the system's COM are effectively nullified, which is mathematically represented as follows:
 
@@ -206,7 +206,7 @@ $$
 
 ::: {.callout-note collapse="true"}
 
-## Two-body Problem
+## Two-Body Problem
 
 The two-body problem is better to be solved in center-of-mass reference frame. Consider two point particles with masses $m_1$ and $m_2$, and the forces on them are $\vec{F}_1$ and $\vec{F}_2$ respectively. The motion of center of mass can be easily derived with the external force
 

@@ -10,7 +10,7 @@ crossref:
 
 ## Number Systems
 
-::: {#def-cs-1-1 name="Natural number"}
+::: {#def-cs-1-1 name="Natural Number"}
 
 The Peano axioms describe the arithmetic properties of the set of natural numbers $\mathbb{N}$. The formal definition is as follows:
 
@@ -196,7 +196,7 @@ $$
 \left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}, \quad a \neq 0
 $$
 
-#### Order relation
+#### Order Relation
 
 To compare two rational numbers, let
 
@@ -226,7 +226,7 @@ $$
 
 :::
 
-::: {#def-cs-1-4 name="Real number"}
+::: {#def-cs-1-4 name="Real Number"}
 
 A **Dedekind cut** in $\mathbb{Q}$ is a partition $(A, B)$ of $\mathbb{Q}$ satisfying:
 

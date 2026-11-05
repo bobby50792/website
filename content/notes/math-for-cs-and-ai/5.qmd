@@ -13,7 +13,7 @@ crossref:
 
 ### Convergence in Distribution
 
-::: {#def-mc-5-1 name="Continuity set"}
+::: {#def-mc-5-1 name="Continuity Set"}
 
 Let $\mathcal{D}$ be a probability distribution on $\mathbb{R}^d$. The *boundary* of a set $A \subseteq \mathbb{R}^d$, denoted by $\partial A$, is the set of points $\boldsymbol{x} \in \mathbb{R}^d$ such that every open set $U$ containing $\boldsymbol{x}$ intersects both $A$ and its complement $\bar{A}$, i.e., $U \cap A \neq \varnothing$ and $U \cap \bar{A} \neq \varnothing$. A set $A \subseteq \mathbb{R}^d$ is called a $\mathcal{D}$-continuity set if
 
@@ -22,7 +22,7 @@ $$
 $$
 :::
 
-::: {#def-mc-5-2 name="Convergence in distribution"}
+::: {#def-mc-5-2 name="Convergence in Distribution"}
 
 Let $(\mathcal{D}_n)_{n \geq 1}$ be a sequence of probability distributions on $\mathbb{R}^d$. We say that $\mathcal{D}_n$ converges in distribution to a probability distribution $\mathcal{D}$ if
 
@@ -121,7 +121,7 @@ $$
 :::
 
 ::: {#thm-6}
-## Weak law of large numbers
+## Weak Law of Large Numbers
 
 Let $X_1, X_2, \dots$ be i.i.d. random variables with
 
@@ -203,7 +203,7 @@ where $\bar{\Phi}(x) := \int_x^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-u^2/2} \, \ma
 ### Extensions
 
 ::: {#thm-10}
-## Wick's theorem
+## Wick's Theorem
 
 Let $\boldsymbol{X} = (X_1, X_2, \dots, X_n)^\top \in \mathbb{R}^n$ be a zero-mean multivariate Gaussian random vector, i.e., $\boldsymbol{X} \sim \mathcal{N}(\mathbf{0}, \boldsymbol{\Sigma})$. 
 

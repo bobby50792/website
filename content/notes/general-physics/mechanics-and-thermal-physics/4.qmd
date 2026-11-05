@@ -11,7 +11,7 @@ crossref:
 
 ## Energy and Work
 
-::: {#def-pm-4-1 name="Work Done By Constant and Non-constant Force"}
+::: {#def-pm-4-1 name="Work Done by Constant and Non-Constant Force"}
 
 The physical concept of work can be mathematically described by the scalar product between the force and the displacement vectors,
 

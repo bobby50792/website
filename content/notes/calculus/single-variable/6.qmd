@@ -615,7 +615,7 @@ Here $\mathbf{y}(x)$ is a vector-valued function and   $\mathbf{f}(x)$ is the no
 
 :::
 
-## Method of Variation of Constants (for Linear Systems)
+## Method of Variation of Constants (For Linear Systems)
 
 ::: {#def-cs-6-8 name="Homogeneous Linear System"}
 

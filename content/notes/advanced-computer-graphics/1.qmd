@@ -106,30 +106,30 @@ Apply the 1D de Casteljau algorithm along $u$ on each row of control points, the
 
 ## Explicit Geometric Representations
 
-#### 3D representations
+#### 3D Representations
 
 Rasterized form vs. geometric form.
 
 ### Taxonomy
 
-#### Origin-dependent
+#### Origin-Dependent
 
 Acquired real-world object, Modeling “by hand”, Procedural modeling.
 
-#### Application-dependent
+#### Application-Dependent
 
 Needs to be stored in the computer, Creation of new shapes, Operations, Rendering, Animation.
 
-#### Multiview 3D representation
+#### Multiview 3D Representation
 
 No explicit 3D geometry, Multiview reconstruction possible (nontrivial
 though), Viewpoint matters a lot.
 
-#### Depth map
+#### Depth Map
 
 Incomplete 3D, Resolution issue, Object properties matter.
 
-#### Volumetric representation
+#### Volumetric Representation
 
 Storage and computation cost, Obvious artifacts.
 
@@ -144,7 +144,7 @@ Only points, no connectivity. A point cloud is a collection of 3D coordinates $(
 - Techniques: laser, infrared, and stereo.
 - Challenges: resolution, occlusion, noise, and registration.
 
-#### Light-weight Shape Representation
+#### Light-Weight Shape Representation
 
 Compact to store, Generally easy to build algorithms.
 

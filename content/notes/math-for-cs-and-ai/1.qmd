@@ -11,7 +11,7 @@ crossref:
 
 ## Asymptotic Notations
 
-::: {#def-mc-1-1 name="Big-$\mathcal{O}$ notation"}
+::: {#def-mc-1-1 name="Big-$\mathcal{O}$ Notation"}
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$ be functions defined on $\mathbb{N}$. We write $f(n) = \mathcal{O}(g(n))$ if there exist constants $C > 0$ and $N \in \mathbb{N}$ such that
 $$
@@ -27,7 +27,7 @@ $$
 $$
 :::
 
-::: {#prp-mc-1-1 name="Big-$\mathcal{O}$ notation properties"}
+::: {#prp-mc-1-1 name="Big-$\mathcal{O}$ Notation Properties"}
 
 Let $f, g : \mathbb{N} \to \mathbb{R}$ and $c \in \mathbb{R}$. If $f(n), g(n) \ge 0$ for all $n$, then
 \begin{align*}
@@ -42,7 +42,7 @@ c \cdot f(n) &= \mathcal{O}(f(n)) \\
 :::
 
 ::: {#thm-1}
-## Big-$\mathcal{O}$ notation defined using limsup
+## Big-$\mathcal{O}$ Notation Defined Using limsup
 Let $f, g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently large $n$. We write $f(n) = \mathcal{O}(g(n))$ if and only if
 $$
 \begin{equation*}
@@ -51,7 +51,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-2 name="$\Omega, \Theta, \sim, o, \omega$ notations"}
+::: {#def-mc-1-2 name="$\Omega, \Theta, \sim, o, \omega$ Notations"}
 
 Let $f,g : \mathbb{N} \to \mathbb{R}$, where $g(n) > 0$ for all sufficiently large $n$.
 
@@ -98,7 +98,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-3 name="Big-$\mathcal{O}$ notation for multivariate functions"}
+::: {#def-mc-1-3 name="Big-$\mathcal{O}$ Notation for Multivariate Functions"}
 
 Let $f,g : \mathbb{N}^d \to \mathbb{R}$ be functions defined on $\mathbb{N}^d$. We write
 $$
@@ -114,7 +114,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-4 name="Big-$\mathcal{O}$ notation over a domain"}
+::: {#def-mc-1-4 name="Big-$\mathcal{O}$ Notation over a Domain"}
 
 Let $f,g : D \to \mathbb{R}$ be functions defined on a domain $D$. We say that $f(n) = \mathcal{O}(g(n))$ for all $n \in D$ if there exists a constant $C > 0$ such that
 $$
@@ -123,7 +123,7 @@ $$
 
 :::
 
-::: {#def-mc-1-5 name="Big-$\mathcal{O}$ notation for $x \to 0$"}
+::: {#def-mc-1-5 name="Big-$\mathcal{O}$ Notation for $x \to 0$"}
 
 Let $f,g : \mathbb{R} \to \mathbb{R}$ be functions defined on $\mathbb{R}$. We say that $f(x) = \mathcal{O}(g(x))$ as $x \to 0$ if there exist constants $C > 0$ and $\delta > 0$ such that
 $$
@@ -134,7 +134,7 @@ $$
 
 ## Probability Spaces and Event
 
-::: {#def-mc-1-6 name="Discrete probability space"}
+::: {#def-mc-1-6 name="Discrete Probability Space"}
 
 A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
 
@@ -246,7 +246,7 @@ $$
 
 ## Intersection and Union of Events
 
-::: {#def-mc-1-8 name="Intersection and union of event"}
+::: {#def-mc-1-8 name="Intersection and Union of Event"}
 
 For events $A, B \subseteq \Omega$:
 
@@ -257,7 +257,7 @@ For events $A, B \subseteq \Omega$:
 As events are subsets of the sample space $\Omega$, the operations $\cap$ and $\cup$ are the same as set operations.
 :::
 
-::: {#prp-mc-1-2 name="Properties of probability measures"}
+::: {#prp-mc-1-2 name="Properties of Probability Measures"}
 
 1. For any events $A, B \subseteq \Omega$,
 $$
@@ -324,7 +324,7 @@ $$
 
 [Problem Description](https://en.wikipedia.org/wiki/Ramsey%27s_theorem)
 
-### Definition of Ramsey number
+### Definition of Ramsey Number
 1. For every integer $k \ge 2$, there exists an integer $N > 0$ such that every red/blue coloring of the edges of $K_N$ contains a monochromatic $K_k$. The Ramsey number $R(k)$ is the smallest integer $N$ such that every red/blue coloring of the edges of $K_N$ contains a monochromatic $K_k$.
 
 2. For any integers $r \ge 1$ and $k \ge m \ge 1$, there exists an integer $N$ such that for every coloring of the $m$-element subsets of an $N$-element set with $r$ colors, there exists a $k$-element subset whose $m$-element subsets are all assigned the same color.
@@ -347,7 +347,7 @@ $$
 
 ## Conditional Probability and Independence
 
-::: {#def-mc-1-9 name="Conditional probability"}
+::: {#def-mc-1-9 name="Conditional Probability"}
 
 Let $A, B$ be events with $\Pr[B] > 0$. The conditional probability of $A$ given $B$ is defined as:
 
@@ -373,7 +373,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-11 name="Mutual independence"}
+::: {#def-mc-1-11 name="Mutual Independence"}
 
 Events $A_1, \dots, A_m$ are mutually independent if for every non-empty subset $I \subseteq [m]$,
 
@@ -405,7 +405,7 @@ $$
 
 ## Random Variables
 
-::: {#def-mc-1-12 name="Random variable"}
+::: {#def-mc-1-12 name="Random Variable"}
 
 Let $\mathcal{P} = (\Omega, p)$ be a discrete probability space. A random variable is a function
 
@@ -425,7 +425,7 @@ $$
 
 :::
 
-::: {#def-mc-1-14 name="Indicator function"}
+::: {#def-mc-1-14 name="Indicator Function"}
 
 The indicator function of a condition $C$ is:
 
@@ -446,7 +446,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-15 name="Probability mass function"}
+::: {#def-mc-1-15 name="Probability Mass Function"}
 
 For a random variable $X$, its probability mass function $p_X : \mathbb{R} \to [0, 1]$ is defined as
 
@@ -466,7 +466,7 @@ $$
 
 ::: {#thm-5}
 
-## Linearity of expectation
+## Linearity of Expectation
 For any random variables $X_1, \dots, X_n$ and constants $c_1, \dots, c_n \in \mathbb{R}$,
 
 $$
@@ -483,7 +483,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-17 name="Conditional expectation given an event"}
+::: {#def-mc-1-17 name="Conditional Expectation Given an Event"}
 
 Let $X$ be a random variable and $B$ be an event with $\Pr[B] > 0$. The conditional expectation of $X$ given $B$ is defined as
 
@@ -492,7 +492,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-18 name="Conditional expectation given a random variable"}
+::: {#def-mc-1-18 name="Conditional Expectation Given a Random Variable"}
 
 Let $X$ and $Y$ be random variables. The conditional expectation of $X$ given $Y$ is defined as the following random variable:
 
@@ -519,7 +519,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-19 name="Independence of random variables"}
+::: {#def-mc-1-19 name="Independence of Random Variables"}
 
 We say that random variables $X$ and $Y$ are independent if for all sets $A, B \subseteq \mathbb{R}$,
 
@@ -537,7 +537,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-20 name="Mutual independence of random variables"}
+::: {#def-mc-1-20 name="Mutual Independence of Random Variables"}
 
 We say that random variables $X_1, \dots, X_n$ are mutually independent if for all sets $A_1, \dots, A_n \subseteq \mathbb{R}$,
 
@@ -555,7 +555,7 @@ $$
 $$
 :::
 
-::: {#def-mc-1-21 name="Independent and identically distributed random variables"}
+::: {#def-mc-1-21 name="Independent and Identically Distributed Random Variables"}
 
 We say that random variables $X_1, \dots, X_n$ are independent and identically distributed, abbreviated i.i.d., if
 
@@ -672,7 +672,7 @@ The following algorithm clusters documents with colliding MinHash signatures int
 ### Extensions
 
 ::: {#thm-11}
-## Nested conditional expectations
+## Nested Conditional Expectations
 
 Let $X$ and $Y$ be two random variables, and let $f : \mathbb{R} \to \mathbb{R}$ be a measurable function. Then the following simplified expressions hold for nested conditional expectations:
 

@@ -16,7 +16,7 @@ crossref:
 
 Formal languages: syntax and model
 
-### Propositional logic
+### Propositional Logic
 
 #### Syntax
 
@@ -33,14 +33,14 @@ Formal languages: syntax and model
 
 A model $w$ in propositional logic is an assignment of truth values to propositional symbols.
 
-#### Interpretation function
+#### Interpretation Function
 
 Let $f$ be a formula and $w$ be a model. An interpretation function $\mathcal{I}(f,w)$ returns:
 
 - true (1) (say that $w$ satisfies $f$)
 - false (0) (say that $w$ does not satisfy $f$)
 
-#### Base case
+#### Base Case
 
 For a propositional symbol $p$ (e.g., $A, B, C$):
 
@@ -48,11 +48,11 @@ $$
 \mathcal{I}(p,w) = w(p)
 $$
 
-#### Recursive case
+#### Recursive Case
 
 Let $\mathcal{M}(f)$ be the set of **models** $w$ for which $\mathcal{I}(f,w) = 1$.
 
-#### Knowledge base
+#### Knowledge Base
 
 A knowledge base $\mathrm{KB}$ is a set of formulas representing their conjunction / intersection:
 
@@ -60,7 +60,7 @@ $$
 \mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f).
 $$
 
-### First-order logic
+### First-Order Logic
 
 #### Syntax
 
@@ -82,7 +82,7 @@ For example, if $w(\mathrm{alice})=o_1$, $w(\mathrm{arithmetic})=o_3$, and $(o_1
 
 ## Inference
 
-### Entailment and satisfiability
+### Entailment and Satisfiability
 
 #### Entailment
 
@@ -102,21 +102,21 @@ $$
 
 A knowledge base $\mathrm{KB}$ is satisfiable if $\mathcal{M}(\mathrm{KB}) \neq \emptyset$.
 
-### SAT and model-checking
+### SAT and Model-Checking
 
-#### Model checking
+#### Model Checking
 
 - Input: knowledge base $\mathrm{KB}$
 - Output: exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
 
-#### Popular algorithms
+#### Popular Algorithms
 
 - DPLL (backtracking + propagation + pruning)
 - WalkSat (randomized local search over complete assignments)
 
-### Inference rules
+### Inference Rules
 
-#### Modus ponens inference rule
+#### Modus Ponens Inference Rule
 
 For any propositional symbols $p$ and $q$:
 
@@ -124,7 +124,7 @@ $$
 \frac{p,\quad p \to q}{q}
 $$
 
-#### General inference rule
+#### General Inference Rule
 
 If $f_1, \ldots, f_k, g$ are formulas, then the following is an inference rule:
 
@@ -132,7 +132,7 @@ $$
 \frac{f_1,\quad \ldots,\quad f_k}{g}
 $$
 
-#### Algorithm: forward inference
+#### Algorithm: Forward Inference
 
 Input: set of inference rules $\mathrm{Rules}$.
 
@@ -145,11 +145,11 @@ Repeat until no changes to $\mathrm{KB}$:
 
 $\mathrm{KB}$ derives/proves $f$ ($\mathrm{KB} \vdash f$) iff $f$ eventually gets added to $\mathrm{KB}$.
 
-### Horn clauses and modus ponens
+### Horn Clauses and Modus Ponens
 
-#### Propositional logic
+#### Propositional Logic
 
-##### Definite clause
+##### Definite Clause
 
 A definite clause has the following form:
 
@@ -159,22 +159,22 @@ $$
 
 where $p_1, \ldots, p_k, q$ are propositional symbols.
 
-##### Horn clause
+##### Horn Clause
 
 A Horn clause is either:
 
 - a definite clause $(p_1 \land \cdots \land p_k \to q)$
 - a goal clause $(p_1 \land \cdots \land p_k \to \mathrm{false})$
 
-##### Modus ponens
+##### Modus Ponens
 
 $$
 \frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
 $$
 
-#### First-order logic
+#### First-Order Logic
 
-##### Definite clause
+##### Definite Clause
 
 A definite clause has the following form:
 
@@ -184,7 +184,7 @@ $$
 
 for variables $x_1, \ldots, x_n$ and atomic formulas $a_1, \ldots, a_k, b$ (which contain those variables).
 
-##### Modus ponens
+##### Modus Ponens
 
 $$
 \frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
@@ -227,14 +227,14 @@ First-order logic (even restricted to only Horn clauses) is **semi-decidable**.
 
 ### Resolution
 
-#### Propositional resolution rule
+#### Propositional Resolution Rule
 
 $$
 \frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
 {f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
 $$
 
-#### Conjunctive normal form (CNF)
+#### Conjunctive Normal Form (CNF)
 
 A CNF formula is a conjunction of clauses.
 
@@ -248,12 +248,12 @@ $$
 
 :::
 
-#### First-order conversion to CNF
+#### First-Order Conversion to CNF
 
 - All variable have universal quantifiers by default
 - Introduce Skolem functions (e.g., $Y(x)$) to represent existentially quantified variables.
 
-#### First-order resolution rule
+#### First-Order Resolution Rule
 
 $$
 \frac{
@@ -269,7 +269,7 @@ where $\theta = \operatorname{Unify}[p,q]$.
 
 ## Semantics
 
-### Desiderata for inference rules
+### Desiderata for Inference Rules
 
 #### Semantics
 
@@ -305,7 +305,7 @@ $$
 
 :::
 
-### Fixing completeness
+### Fixing Completeness
 
 1. Option 1: Restrict the allowed set of formulas
 

@@ -349,7 +349,7 @@ If the function is smooth and strongly convex:
   T = O\left(\frac{1}{\epsilon}\right).
   $$
 
-### SVRG algorithm
+### SVRG Algorithm
 
 For $s=1,2,\ldots$
 
@@ -657,7 +657,7 @@ If $L$ is **smooth, bounded and strict saddle** (actually a more general version
 
 ### Extensions
 
-#### Co-coercivity of Smooth Convex Functions
+#### Co-Coercivity of Smooth Convex Functions
 
 If $f$ is $L$-smooth and convex, then
 

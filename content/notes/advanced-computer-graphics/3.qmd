@@ -118,12 +118,12 @@ A method for performing convolution on point clouds using Monte Carlo sampling.
 
 A canonical problem.
 
-#### Model-Based Fitting (the first vision thesis)
+#### Model-Based Fitting (The First Vision Thesis)
 
 - Fit predefined 3D models to image features.
 - Limited by the expressiveness of simple geometric models.
 
-#### Data-Driven Modeling (a modern view)
+#### Data-Driven Modeling (A Modern View)
 
 - Learn image-to-3D mappings from large datasets using neural networks.
 - Reduce explicit geometric reasoning, though it remains helpful.

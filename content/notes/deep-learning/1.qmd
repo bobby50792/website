@@ -135,7 +135,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 
 ### Convex Optimization
 
-::: {#def-dl-1-6 name="Lipschitz continuous"}
+::: {#def-dl-1-6 name="Lipschitz Continuous"}
 
 * A function $g(x)$ is Lipschitz continuous: $|g(x) - g(y)| \le L|x - y|$
 
@@ -158,7 +158,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 
 ::: {.callout-note collapse="true"}
 
-## Convergence Rate with constant learning rate $\eta = \frac{1}{L}$
+## Convergence Rate with Constant Learning Rate $\eta = \frac{1}{L}$
 
 * Convergence Rate with constant learning rate $\eta = \frac{1}{L}$
     * $X^{k+1} = X^k - \frac{1}{L}\nabla_X f(X^k)$
@@ -183,7 +183,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 
 ::: {.callout-note collapse="true"}
 
-## Second-order optimization
+## Second-Order Optimization
 
 * Second-order optimization
     * $X^{k+1} = X^k - \eta^k \nabla^2 f(X^k)^{-1}\nabla f(X^k)$
@@ -227,7 +227,7 @@ A downsampling operation that extracts the maximum value within localized spatia
 
 ::: {.callout-note collapse="true"}
 
-## Mini-batch Gradient Descent
+## Mini-Batch Gradient Descent
 
 * Mini-batches!
     * We choose a random subset of indices $I_j \subset \{1, \dots, N\}$ and $|I_j| = b$ (batch-size)
@@ -324,7 +324,7 @@ Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable, $\mu$-strongly-convex 
 $$\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \mu\|x - y\|^2$$
 :::
 
-::: {#thm-2 name="Co-coercivity of Smooth Convex Functions"}
+::: {#thm-2 name="Co-Coercivity of Smooth Convex Functions"}
 
 Let $f: \mathbb{R}^d \to \mathbb{R}$ be a differentiable, $L$-smooth convex function. Then for any $x, y \in \mathbb{R}^d$:
 $$\langle\nabla f(x) - \nabla f(y), x - y\rangle \ge \frac{1}{L}\|\nabla f(x) - \nabla f(y)\|^2$$

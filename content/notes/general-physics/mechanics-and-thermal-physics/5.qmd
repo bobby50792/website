@@ -77,7 +77,7 @@ $$
 
 where $\vec{J}_S$ is defined as the angular impulse about a point $S$.
 
-::: {#thm-phys-5-1 name="Conservation of Angular Momentum about a Point"}
+::: {#thm-phys-5-1 name="Conservation of Angular Momentum About a Point"}
 
 If the torque about point $S$ is zero,
 $$

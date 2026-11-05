@@ -13,7 +13,7 @@ crossref:
 
 ### Gradient Descent
 
-::: {#def-mc-6-1 name="Gradient descent"}
+::: {#def-mc-6-1 name="Gradient Descent"}
 
 Given a differentiable loss function $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$, an initial parameter vector $\boldsymbol{\theta}_0 \in \mathbb{R}^d$, and a learning rate $\eta > 0$ (also called a step size), gradient descent (GD) iteratively updates the parameter vector according to the following rule:
 
@@ -24,7 +24,7 @@ $$
 
 ::: {.callout-note collapse="true"}
 
-## Gradient descent for linear regression
+## Gradient Descent for Linear Regression
 The loss function can be written as
 
 $$
@@ -48,7 +48,7 @@ $$
 $$
 :::
 
-::: {#def-mc-6-2 name="Positive definite and semidefinite matrices"}
+::: {#def-mc-6-2 name="Positive Definite and Semidefinite Matrices"}
 
 A symmetric matrix $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ is positive definite, denoted by $\boldsymbol{A} \succ \mathbf{0}$, if for all $\boldsymbol{v} \in \mathbb{R}^d \setminus \{\mathbf{0}\}$,
 
@@ -65,7 +65,7 @@ $$
 If $\boldsymbol{A}$ and $\boldsymbol{B}$ are two symmetric matrices and $\boldsymbol{A} - \boldsymbol{B}$ is positive definite, then we write $\boldsymbol{A} \succ \boldsymbol{B}$. Similarly, we write $\boldsymbol{A} \succeq \boldsymbol{B}$ if $\boldsymbol{A} - \boldsymbol{B}$ is positive semidefinite.
 :::
 
-::: {#prp-mc-6-1 name="Properties of symmetric matrices"}
+::: {#prp-mc-6-1 name="Properties of Symmetric Matrices"}
 
 Let $\boldsymbol{A} \in \mathbb{R}^{d \times d}$ be a symmetric matrix, i.e., $\boldsymbol{A} = \boldsymbol{A}^\top$. Then it satisfies the following properties:
 
@@ -146,7 +146,7 @@ $$
 :::
 
 ::: {#thm-5}
-## Convergence behaviors on quadratic objectives
+## Convergence Behaviors on Quadratic Objectives
 
 Let $\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{2}\boldsymbol{\theta}^\top \boldsymbol{H}\boldsymbol{\theta} - \boldsymbol{b}^\top \boldsymbol{\theta} + C_0$ be a quadratic objective. Assume that $\boldsymbol{H}$ is symmetric and positive definite. Let $\lambda_1, \dots, \lambda_d$ be the eigenvalues of $\boldsymbol{H}$, and $\lambda_{\max}$ be the largest eigenvalue. Define $\rho(\eta)$ as
 
@@ -184,7 +184,7 @@ Then gradient descent with learning rate $\eta > 0$ exhibits the following behav
 
 ::: {.callout-note collapse="true"}
 
-## Optimal learning rate for quadratic objectives
+## Optimal Learning Rate for Quadratic Objectives
 
 Solving for $\eta$ gives
 
@@ -199,7 +199,7 @@ $$
 $$
 ::: 
 
-::: {#def-mc-6-3 name="Condition number of a matrix"}
+::: {#def-mc-6-3 name="Condition Number of a Matrix"}
 
 Let $\boldsymbol{H} \in \mathbb{R}^{d \times d}$ be a symmetric positive definite matrix. Then the *condition number* of $\boldsymbol{H}$ is defined as
 
@@ -221,7 +221,7 @@ $$
 $$
 :::
 
-::: {#def-mc-6-5 name="Hessian matrix"}
+::: {#def-mc-6-5 name="Hessian Matrix"}
 
 Let $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ be a function that is twice differentiable. Then the Hessian matrix of $\mathcal{L}(\boldsymbol{\theta})$ is defined as
 
@@ -237,7 +237,7 @@ $$
 That is, the Hessian matrix is a matrix whose $(i, j)$-th entry is the second partial derivative of $\mathcal{L}(\boldsymbol{\theta})$ with respect to the $i$-th and $j$-th variables. We denote the Hessian matrix of $\mathcal{L}(\boldsymbol{\theta})$ as $\nabla^2 \mathcal{L}(\boldsymbol{\theta})$.
 :::
 
-::: {#def-mc-6-6 name="Operator norm"}
+::: {#def-mc-6-6 name="Operator Norm"}
 
 The operator norm of a matrix $\boldsymbol{A} \in \mathbb{R}^{k \times d}$ is defined as
 
@@ -246,7 +246,7 @@ $$
 $$
 :::
 
-::: {#prp-mc-6-2 name="Properties of matrix operator norms"}
+::: {#prp-mc-6-2 name="Properties of Matrix Operator Norms"}
 
 The following statements on operator norms of matrices are true:
 
@@ -288,7 +288,7 @@ $$
 $$
 :::
 
-::: {#def-mc-6-7 name="Convex and strongly convex functions"}
+::: {#def-mc-6-7 name="Convex and Strongly Convex Functions"}
 
 A twice differentiable function $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ is convex if for all $\boldsymbol{\theta} \in \mathbb{R}^d$,
 
@@ -303,7 +303,7 @@ $$
 $$
 :::
 
-::: {#prp-mc-6-3 name="Basic consequences of strong convexity"}
+::: {#prp-mc-6-3 name="Basic Consequences of Strong Convexity"}
 
 Let $\mathcal{L} : \mathbb{R}^d \rightarrow \mathbb{R}$ be twice differentiable and $\alpha$-strongly convex. Then:
 
@@ -322,7 +322,7 @@ Let $\mathcal{L} : \mathbb{R}^d \rightarrow \mathbb{R}$ be twice differentiable 
    $$
 :::
 
-::: {#def-mc-6-8 name="Polyak–Łojasiewicz condition"}
+::: {#def-mc-6-8 name="Polyak–Łojasiewicz Condition"}
 
 Let $\mathcal{L} : \mathbb{R}^d \to \mathbb{R}$ be differentiable and have a minimizer $\boldsymbol{\theta}^*$. We say that $\mathcal{L}$ satisfies the Polyak–Łojasiewicz condition, or PL condition, with parameter $\mu > 0$ if
 
@@ -331,7 +331,7 @@ $$
 $$
 :::
 
-::: {#prp-mc-6-4 name="Strong convexity implies PL"}
+::: {#prp-mc-6-4 name="Strong Convexity Implies PL"}
 
 If $\mathcal{L}(\boldsymbol{\theta})$ is twice differentiable and $\alpha$-strongly convex, then $\mathcal{L}(\boldsymbol{\theta})$ satisfies the PL condition with parameter $\alpha$.
 :::

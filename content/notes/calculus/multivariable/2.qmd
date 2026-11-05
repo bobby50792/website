@@ -531,7 +531,7 @@ A function $f: C \to \mathbb{R}$ is called a concave function if $-f$ is a conve
 
 :::
 
-::: {#thm-calc2-2-17 name="Second-order Taylor expansion"}
+::: {#thm-calc2-2-17 name="Second-Order Taylor Expansion"}
 
 Let $f$ be twice continuously differentiable at $\mathbf{x}_0$. Then for $\mathbf{v} = (\xi^1, \dots, \xi^n)$,
 $$

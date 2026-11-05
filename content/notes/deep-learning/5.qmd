@@ -434,7 +434,7 @@ crossref:
 
 :::
 
-## Score-based Diffusion Models
+## Score-Based Diffusion Models
 
 ## Supplementary Notes {.supplementary-notes}
 

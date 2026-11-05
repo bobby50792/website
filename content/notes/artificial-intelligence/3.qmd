@@ -10,7 +10,7 @@ crossref:
 
 ## Basics on Probability
 
-### Random variables and distributions
+### Random Variables and Distributions
 
 #### Random Variables
 
@@ -28,7 +28,7 @@ A joint distribution over a set of random variables: specifies a real number for
 
 Marginalization (summing out): Combine collapsed rows by adding.
 
-### Conditional probability and Bayes' rule
+### Conditional Probability and Bayes' Rule
 
 #### Conditional Probabilities
 
@@ -40,19 +40,19 @@ Bayes' rule allows us to compute conditional probabilities in terms of other con
 
 ## Bayesian Nets: Representation
 
-### Bayes' nets
+### Bayes' Nets
 
 a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)
 
 - More properly called **graphical models**
 - Local interactions chain together to give global, indirect interactions
 
-### Graphical model notation
+### Graphical Model Notation
 
 - Nodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)
 - Arcs: interactions: Formally: encode conditional independence
 
-### Bayes' net semantics
+### Bayes' Net Semantics
 
 - A set of nodes, one per random variable $X$
 - A directed, acyclic graph
@@ -62,7 +62,7 @@ a technique for describing complex joint distributions (models) using simple, lo
   P(X \mid a_1 \ldots a_n)
   $$
 
-#### CPT (conditional probability table)
+#### CPT (Conditional Probability Table)
 
 description of a noisy causal process.
 
@@ -90,7 +90,7 @@ If all paths between $A$ and $B$ are blocked given observed variables $Z$, then 
 
 Calculating some useful quantity from a joint probability distribution.
 
-### Inference by enumeration
+### Inference by Enumeration
 
 1. **Join** all factors.
 2. **Eliminate** all hidden variables.
@@ -102,4 +102,4 @@ Calculating some useful quantity from a joint probability distribution.
 
 - [Assumptions](#assumptions): A Bayes' net assumes $P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))$.
 - [D-Separation](#d-separation): If all paths between $A$ and $B$ are blocked given $Z$, then $A \perp\!\!\!\perp B \mid Z$.
-- [Inference by enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize.
+- [Inference by Enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize.

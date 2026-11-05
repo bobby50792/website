@@ -480,9 +480,9 @@ $$
 
 :::
 
-::: {#def-cs-5-7 name="The area of a Plane Region"}
+::: {#def-cs-5-7 name="The Area of a Plane Region"}
 
-#### Area formula for a simple closed parametric curve
+#### Area Formula for a Simple Closed Parametric Curve
 
 For a curve given by $\gamma: x = x(t),\, y = y(t),\, \alpha \le t \le \beta$,  the area enclosed by $\gamma$ is
 

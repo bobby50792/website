@@ -74,7 +74,7 @@ iv) **Continuity from above.** If $A_i \downarrow A$ (i.e.,
 
 ::: {.callout-note collapse="true"}
 
-## Why is the finite-measure condition needed for continuity from above?
+## Why Is the Finite-Measure Condition Needed for Continuity from Above?
 
 The proof uses subtraction, so we must avoid the undefined expression $\infty-\infty$. Moreover, the conclusion may fail without this condition.
 
@@ -575,7 +575,7 @@ vi) **Triangle inequality.**
 
 The notation for an integral depends on the underlying measure:
 
-#### Lebesgue measure
+#### Lebesgue Measure
 
 For $\lambda$ on $(\mathbb{R}^d, \mathcal{R}^d)$,
 
@@ -583,7 +583,7 @@ $$
 \int f(x) \, dx = \int f \, d\lambda.
 $$
 
-#### Lebesgue measure on an interval
+#### Lebesgue Measure on an Interval
 
 For $E = [a,b] \subset \mathbb{R}$,
 
@@ -591,7 +591,7 @@ $$
 \int_a^b f(x) \, dx = \int_E f \, d\lambda.
 $$
 
-#### Stieltjes measure
+#### Stieltjes Measure
 
 For $\mu$ on $(\mathbb{R}, \mathcal{R})$, with
 $\mu((a,b]) = G(b) - G(a)$ for $a < b$,
@@ -600,7 +600,7 @@ $$
 \int f(x) \, dG(x) = \int f \, d\mu.
 $$
 
-#### Counting measure
+#### Counting Measure
 
 For a countable set $\Omega$, with $\mathcal{F}$
 containing all subsets,
@@ -647,7 +647,7 @@ $$
 
 Let $X$ be a real-valued random variable with distribution $\mu_X(A)=P(X\in A)$ for Borel sets $A$, and let $\lambda$ denote Lebesgue measure on $\mathbb R$.
 
-#### Probability density function (PDF)
+#### Probability Density Function (PDF)
 
 If $\mu_X\ll\lambda$, the Radon–Nikodym derivative
 
@@ -731,7 +731,7 @@ $$
 Let $(X,\mathcal A,\mu)$ be a measure space, and let
 $f_n,f:X\to\mathbb R$ be measurable functions.
 
-#### Convergence in measure
+#### Convergence in Measure
 
 We say that $f_n$ converges to $f$ in measure if, for every $\epsilon>0$,
 $$
@@ -739,7 +739,7 @@ $$
 $$
 as $n\to\infty$.
 
-#### Almost-everywhere convergence
+#### Almost-Everywhere Convergence
 
 We say that $f_n$ converges to $f$ almost everywhere if there exists a measurable set $Z\subseteq X$ with $\mu(Z)=0$ such that
 $$
@@ -750,7 +750,7 @@ $$
 f_n\xrightarrow{\mathrm{a.e.}}f.
 $$
 
-#### Uniform convergence
+#### Uniform Convergence
 
 We say that $f_n$ converges to $f$ uniformly on $X$ if, for every $\epsilon>0$, there exists an integer $N\ge1$ such that
 $$
@@ -758,7 +758,7 @@ $$
 $$
 for every $n\ge N$ and every $x\in X$. The integer $N$ may depend on $\epsilon$, but not on $x$.
 
-#### Almost-uniform convergence
+#### Almost-Uniform Convergence
 
 We say that $f_n$ converges to $f$ almost uniformly on $X$ if, for every $\delta>0$, there exists a measurable set $D_\delta\subseteq X$ such that
 $$

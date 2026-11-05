@@ -8,7 +8,7 @@ crossref:
   chapters: true
 ---
 
-## Linear regression
+## Linear Regression
 
 - Inputs $x_i\in\mathbb R^d$; targets $y_i\in\mathbb R$.
 - Model: $f_{w,b}(x)=w^\top x+b$. Absorb $b$ into $w$ by appending a constant 1 to $x$.
@@ -69,7 +69,7 @@ M\gamma\le\langle w_M,w^*\rangle\le\|w_M\|\le R\sqrt M
 \quad\Longrightarrow\quad M\le\frac{R^2}{\gamma^2}.
 $$
 
-## Logistic regression
+## Logistic Regression
 
 - Make the output a probability using the sigmoid function:
 
@@ -106,13 +106,13 @@ $$
 - For fixed $y$, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.
 - KL divergence and cross-entropy are asymmetric.
 
-#### Representation learning
+#### Representation Learning
 
 - Deep learning is also called representation learning because it learns features automatically.
 
 - The learned features are commonly passed to a final linear regression/classification layer.
 
-## Ridge regression
+## Ridge Regression
 
 - Restrict the set of solutions by bounding the weight norm, helping reduce overfitting:
 
@@ -135,7 +135,7 @@ $$
 
 - Part2: $w_{t+1} = \widehat{w_{t+1}} * (1 - \eta\lambda)$
 
-## LASSO regression
+## LASSO Regression
 
 - The sparsity constraint $\|w\|_0\le c$ counts nonzero weights and is hard to optimize. Replace it with the convex $\ell_1$ constraint:
 
@@ -153,14 +153,14 @@ $$
   - If $\widehat{w_{t+1}}_i \in [-\eta\lambda, \eta\lambda]$, $w_{t+1} = 0$
   - Essentially: <span style="color:red">pulling to 0</span>
 
-## Compressed sensing
+## Compressed Sensing
 
-### Sparsity assumption
+### Sparsity Assumption
 
 - $k$-sparse: $\|x\|_0\le k\ll n$; only a few entries are nonzero.
 - With suitable $A$, sparsity enables recovery from $m\ll n$ measurements $y=Ax$.
 
-### Restricted isometry property (RIP)
+### Restricted Isometry Property (RIP)
 
 $W\in\mathbb R^{n\times d} \, (n < d)$ is $(\epsilon,s)$-RIP if, for every $s$-sparse $x\in\mathbb R^d$,
 

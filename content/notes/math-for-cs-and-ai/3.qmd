@@ -356,7 +356,7 @@ $$
 
 :::
 
-::: {#thm-math3-sequences-2 name="Faulhaber's formula"}
+::: {#thm-math3-sequences-2 name="Faulhaber's Formula"}
 
 For all $k \ge 0$ and $n \ge 1$,
 $$
@@ -410,12 +410,12 @@ $$
 
 ::: {.callout-note collapse="true"}
 
-## Complex functions
+## Complex Functions
 
 Let $S \subseteq \mathbb{C}$ be a set of complex numbers. A complex function on $S$ is a function $f : S \to \mathbb{C}$.
 :::
 
-::: {#def-mc-3-7 name="Power series"}
+::: {#def-mc-3-7 name="Power Series"}
 
 A power series is an infinite sum of the form
 
@@ -430,7 +430,7 @@ $$
 $$
 :::
 
-::: {#def-mc-3-8 name="Limits of complex sequences"}
+::: {#def-mc-3-8 name="Limits of Complex Sequences"}
 
 We say that a sequence $(z_n)_{n \geq 0}$ of complex numbers converges to $A \in \mathbb{C}$ if for every $\epsilon > 0$ there exists $N$ such that
 
@@ -440,7 +440,7 @@ $$
 :::
 
 ::: {#thm-1}
-## Cauchy–Hadamard theorem
+## Cauchy–Hadamard Theorem
 
 Let $\sum_{n \geq 0} a_n z^n$. Define
 
@@ -457,7 +457,7 @@ This $R$ is called the radius of convergence of the power series.
 :::
 
 ::: {#thm-2}
-## Euler's formula
+## Euler's Formula
 
 For every $x \in \mathbb{R}$,
 
@@ -481,7 +481,7 @@ We say that $f$ is continuous on $S$ if it is continuous at every point of $S$.
 
 ### Holomorphic Functions
 
-::: {#def-mc-3-10 name="Open and closed sets"}
+::: {#def-mc-3-10 name="Open and Closed Sets"}
 
 Let $S \subseteq \mathbb{C}$ be a set. We say that $S$ is open if for every $z_0 \in S$, there exists some $\delta > 0$ such that for all $z \in \mathbb{C}$ with $|z - z_0| < \delta$, we have
 
@@ -503,7 +503,7 @@ $$
 exists. Further, we say that $f$ is differentiable on $S$ if it is differentiable at every point of $S$.
 :::
 
-::: {#def-mc-3-12 name="Infinite differentiability"}
+::: {#def-mc-3-12 name="Infinite Differentiability"}
 
 Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is infinitely differentiable at $z_0 \in S$ if all the higher order derivatives of $f$,
 
@@ -534,12 +534,12 @@ Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subs
 (iii) $f$ is analytic on $S$.
 :::
 
-::: {#def-mc-3-14 name="Holomorphic function"}
+::: {#def-mc-3-14 name="Holomorphic Function"}
 
 Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. We say that $f$ is holomorphic at $z_0 \in S$ if it is differentiable in an open set containing $z_0$. Further, we say that $f$ is holomorphic on $S$ if it is differentiable at every point of $S$.
 :::
 
-::: {#thm-math3-cr-1 name="Cauchy–Riemann equations"}
+::: {#thm-math3-cr-1 name="Cauchy–Riemann Equations"}
 
 Let $f$ be differentiable at $z_0 = x_0 + iy_0$, and write
 $$
@@ -589,7 +589,7 @@ $$
 such that the end point of $\gamma_i$ is the starting point of $\gamma_{i+1}$ for $i \in [n - 1]$.
 :::
 
-::: {#def-mc-3-17 name="Line integral"}
+::: {#def-mc-3-17 name="Line Integral"}
 
 Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. If $\gamma : [a, b] \to S$ is a smooth curve in $S$, then the integral of $f$ along $\gamma$ is defined by
 
@@ -604,7 +604,7 @@ $$
 $$
 :::
 
-::: {#thm-math3-reparam-1 name="Reparameterization and reversal of direction"}
+::: {#thm-math3-reparam-1 name="Reparameterization and Reversal of Direction"}
 
 Let $f : S \to \mathbb{C}$ be a complex function defined on an open set $S \subseteq \mathbb{C}$. Let $\gamma_1 : [a, b] \to S$ and $\gamma_2 : [c, d] \to S$ be two smooth curves. If there exists an increasing continuously differentiable function $\phi : [c, d] \to [a, b]$ such that $\phi(c) = a$, $\phi(d) = b$, and $\gamma_2(t) = \gamma_1(\phi(t))$ for all $t \in [c, d]$, then
 $$
@@ -626,7 +626,7 @@ $$
 :::
 
 ::: {#thm-5}
-## Cauchy–Goursat theorem
+## Cauchy–Goursat Theorem
 
 Let $f : S \to \mathbb{C}$ be a holomorphic function defined on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed contour such that the region enclosed by $\gamma$ is contained in $S$. Then the contour integral of $f$ along $\gamma$ is zero. That is,
 
@@ -642,13 +642,13 @@ $$
 Let $f : S \to \mathbb{C}$ be a complex function. We say that $z_0$ is a singular point, or a singularity of $f$ if $f$ is either not defined at $z_0$ or not holomorphic at $z_0$, but for every $\epsilon > 0$, there exists a complex number $z \in S$ such that $|z - z_0| < \epsilon$ and $f$ is holomorphic at $z$.
 :::
 
-::: {#def-mc-3-19 name="Isolated singularity"}
+::: {#def-mc-3-19 name="Isolated Singularity"}
 
 Let $f : S \to \mathbb{C}$ be a complex function. We say that $z_0$ is an isolated singularity of $f$ if $f$ is either not defined at $z_0$ or not holomorphic at $z_0$, but there exists an $\epsilon > 0$ such that $f$ is holomorphic on the punctured disk $\{z \in \mathbb{C} : 0 < |z - z_0| < \epsilon\}$.
 :::
 
 ::: {#thm-6}
-## Cauchy's integral formula
+## Cauchy's Integral Formula
 
 Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed counterclockwise contour such that the region enclosed by $\gamma$ is contained in $S$. Then for every $z$ enclosed by $\gamma$,
 
@@ -658,7 +658,7 @@ $$
 :::
 
 ::: {#thm-7}
-## Cauchy's estimate
+## Cauchy's Estimate
 
 Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $z_0 \in S$ and $r > 0$ be such that the closed disk $\overline{D}(z_0, r) \subseteq S$. If $|f(z)| \leq M$ for all $z \in \overline{D}(z_0, r)$, then for all $n \geq 0$,
 
@@ -677,7 +677,7 @@ $$
 :::
 
 ::: {#thm-9}
-## Cauchy integral formula for derivatives
+## Cauchy Integral Formula for Derivatives
 
 Let $f : S \to \mathbb{C}$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed counterclockwise contour such that the region enclosed by $\gamma$ is contained in $S$. Then for every $z$ enclosed by $\gamma$ and every integer $n \geq 0$,
 
@@ -687,12 +687,12 @@ $$
 :::
 
 ::: {#thm-10}
-## Identity theorem
+## Identity Theorem
 
 Let $S \subseteq \mathbb{C}$ be a connected open set, and let $f,g : S \rightarrow \mathbb{C}$ be holomorphic. If there exists a non-empty open set $U \subseteq S$ such that $f(z)=g(z)$ for every $z\in U$, then $f(z)=g(z)$ for every $z\in S$.
 :::
 
-::: {#def-mc-3-20 name="Removable and non-removable singularities"}
+::: {#def-mc-3-20 name="Removable and Non-Removable Singularities"}
 
 Let $f : S \to \mathbb{C}$ be a complex function with an isolated singularity at $z_0$. We say that $z_0$ is a removable singularity of $f$ if there exists a complex number $w \in \mathbb{C}$ such that assigning the value $w$ to $f(z_0)$ makes $f$ holomorphic at $z_0$. We say that $z_0$ is a non-removable singularity of $f$ if it is not removable.
 :::
@@ -716,7 +716,7 @@ is exactly $R$.
 ### Expansion Around Isolated Singularities
 
 ::: {#thm-12}
-## Laurent's theorem
+## Laurent's Theorem
 
 Let $f$ be holomorphic on a punctured disk $D_r(z_0) \setminus \{z_0\}$ for some $z_0 \in \mathbb{C}$ and some $r > 0$. Then there exists a unique sequence $(a_n)_{n \geq 0}$ and a unique sequence $(b_n)_{n \geq 1}$ such that
 
@@ -727,7 +727,7 @@ $$
 for every $z \in D_r(z_0) \setminus \{z_0\}$.
 :::
 
-::: {#def-mc-3-21 name="Classification of isolated singularities"}
+::: {#def-mc-3-21 name="Classification of Isolated Singularities"}
 Let $z_0$ be an isolated singularity of $f$ with Laurent series expansion
 
 $$
@@ -751,7 +751,7 @@ Then the coefficient $a_{-1}$ of $(z - z_0)^{-1}$ is called the residue of $f$ a
 :::
 
 ::: {#thm-13}
-## Cauchy's residue theorem
+## Cauchy's Residue Theorem
 
 Let $f$ be a holomorphic function on an open set $S \subseteq \mathbb{C}$. Let $\gamma$ be a simple closed counterclockwise contour such that the region enclosed by $\gamma$ is contained in $S$ except for $m$ isolated singularities $z_1, \dots, z_m$. Then
 
@@ -760,7 +760,7 @@ $$
 $$
 :::
 
-::: {#prp-mc-3-1 name="How to compute residues"}
+::: {#prp-mc-3-1 name="How to Compute Residues"}
 
 Let $z_0$ be an isolated singularity of $f$.
 
@@ -800,7 +800,7 @@ $$
 
 ### Probability Generating Functions
 
-::: {#def-mc-3-23 name="Probability generating function"}
+::: {#def-mc-3-23 name="Probability Generating Function"}
 
 Let $X$ be a random variable taking values in non-negative integers. Its probability generating function (PGF) is defined as
 
@@ -810,7 +810,7 @@ $$
 :::
 
 ::: {#thm-15}
-## Expectation and variance from the PGF
+## Expectation and Variance from the PGF
 
 Let $X$ be a random variable taking values in non-negative integers. Then
 
@@ -834,7 +834,7 @@ $$
 
 ### Moment Generating Functions
 
-::: {#def-mc-3-24 name="Moment generating function"}
+::: {#def-mc-3-24 name="Moment Generating Function"}
 
 The moment generating function (MGF) of a random variable $X$ is defined as
 
@@ -877,7 +877,7 @@ where $\int_{c-iT}^{c+iT}$ means integrating along the line segment from $c - iT
 :::
 
 ::: {#thm-19}
-## Inversion formula for the MGF
+## Inversion Formula for the MGF
 
 Let $X$ be a random variable with MGF $M_X(t)$. For every $x_1 < x_2$, define
 
@@ -894,7 +894,7 @@ $$
 
 ### Cumulant Generating Functions
 
-::: {#def-mc-3-25 name="Cumulant generating function"}
+::: {#def-mc-3-25 name="Cumulant Generating Function"}
 
 The cumulant generating function (CGF) of a random variable $X$ is defined as
 
@@ -931,7 +931,7 @@ $$
 
 ### Exponential Tilting
 
-::: {#def-mc-3-26 name="Exponential tilting"}
+::: {#def-mc-3-26 name="Exponential Tilting"}
 
 Let $X$ be a random variable with probability mass function $p_X(x)$. The $\lambda$-tilted distribution of $X$, denoted by $\mathcal{T}_{X,\lambda}$, is defined by the distribution corresponding to the probability mass function
 
@@ -983,7 +983,7 @@ $$
 :::
 
 ::: {#thm-23}
-## Laurent series coefficient representation and uniqueness
+## Laurent Series Coefficient Representation and Uniqueness
 
 Let $f(z)$ be a holomorphic function defined in an open annulus centered at $z_0$. If $f(z)$ can be represented as a Laurent series of the form
 

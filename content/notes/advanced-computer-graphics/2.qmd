@@ -352,7 +352,7 @@ this is a rotation by the single unit quaternion $q_2q_1$.
 
 :::
 
-::: {#prp-acg-2-4 name="Conversion between Quaternions and Axis-Angle"}
+::: {#prp-acg-2-4 name="Conversion Between Quaternions and Axis-Angle"}
 
 - Given the rotation axis $\hat{\omega}$ and rotation angle $\theta$,
 

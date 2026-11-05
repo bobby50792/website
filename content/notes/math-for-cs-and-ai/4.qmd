@@ -13,7 +13,7 @@ crossref:
 
 ### Discrete Probability Spaces Beyond the Finite Case  
 
-::: {#def-mc-4-1 name="Countable and uncountable sets"}
+::: {#def-mc-4-1 name="Countable and Uncountable Sets"}
 
 A set $\Omega$ is countable if it is finite, or if there exists a sequence $(a_n)_{n \ge 0}$ such that
 
@@ -27,7 +27,7 @@ A set that is not countable is uncountable.
 
 :::
 
-::: {#prp-mc-4-1 name="Properties about countable and uncountable sets"}
+::: {#prp-mc-4-1 name="Properties About Countable and Uncountable Sets"}
 - (Tuples are countable). For every fixed integer $k \ge 1$, the set of all $k$-tuples of natural numbers,
 
 $$
@@ -41,7 +41,7 @@ is countable.
 - Real numbers are uncountable.
 :::
 
-::: {#def-mc-4-2 name="Discrete probability space"}
+::: {#def-mc-4-2 name="Discrete Probability Space"}
 
 A discrete probability space is a pair $\mathcal{P} = (\Omega, p)$ consisting of:
 
@@ -74,7 +74,7 @@ provided the two sums are not both $+\infty$. If both sums are finite, then $\ma
 
 ### Continuous Probability Space
 
-::: {#def-mc-4-5 name="Probability density function"}
+::: {#def-mc-4-5 name="Probability Density Function"}
 
 A function $f : \mathbb{R}^d \to [0, \infty)$ is called a probability density function (PDF) on $\mathbb{R}^d$ if
 
@@ -85,7 +85,7 @@ $$
 
 ### Probability Distributions
 
-::: {#def-mc-4-6 name="Discrete random variables"}
+::: {#def-mc-4-6 name="Discrete Random Variables"}
 
 A random variable $X$ is discrete if it takes countably many values $\{x_1, x_2, \dots\}$. We define the probability mass function (PMF) of $X$ as
 
@@ -95,7 +95,7 @@ $$
 
 :::
 
-::: {#def-mc-4-7 name="Continuous random variables"}
+::: {#def-mc-4-7 name="Continuous Random Variables"}
 
 A random variable $X$ is continuous if there exists a function $f_X : \mathbb{R} \to [0, +\infty)$ such that
 
@@ -112,7 +112,7 @@ $$
 The function $f_X$ is called the probability density function (PDF) of $X$.
 :::
 
-::: {#def-mc-4-8 name="Probability distribution"}
+::: {#def-mc-4-8 name="Probability Distribution"}
 
 The probability distribution, or law, of $X$ is defined as a function $P_X$ that maps sets to probabilities:
 
@@ -142,7 +142,7 @@ Let $P_X$ and $P_Y$ be the probability distributions of two random variables $X$
 
 ### The Standard Gaussian Distributions
 
-::: {#def-mc-4-9 name="Standard Gaussian distribution"}
+::: {#def-mc-4-9 name="Standard Gaussian Distribution"}
 
 The standard Gaussian distribution is the continuous probability distribution with PDF
 
@@ -155,7 +155,7 @@ We denote the standard Gaussian distribution by $\mathcal{N}(0, 1)$.
 
 ### General Gaussian Distributions
 
-::: {#def-mc-4-10 name="General Gaussian distribution"}
+::: {#def-mc-4-10 name="General Gaussian Distribution"}
 
 Let $\mu \in \mathbb{R}$ and $\sigma \ge 0$. The Gaussian distribution with mean $\mu$ and variance $\sigma^2$ is defined as the distribution of random variable
 
@@ -268,7 +268,7 @@ $$
 
 ### Gaussian Vectors
 
-::: {#def-mc-4-11 name="Random vector"}
+::: {#def-mc-4-11 name="Random Vector"}
 
 A random vector in $\mathbb{R}^d$ is a vector
 
@@ -285,7 +285,7 @@ $$
 When referring to the distribution of a single coordinate $X_i$, we use the term marginal distribution of $X_i$ to emphasize that we are considering the probability distribution of this coordinate alone.
 :::
 
-::: {#def-mc-4-12 name="Mean vector"}
+::: {#def-mc-4-12 name="Mean Vector"}
 
 The mean of a random vector $\boldsymbol{x} = (X_1, \dots, X_d)$ is the vector
 
@@ -295,7 +295,7 @@ $$
 
 :::
 
-::: {#def-mc-4-13 name="Covariance matrix"}
+::: {#def-mc-4-13 name="Covariance Matrix"}
 
 The covariance matrix of a random vector $\boldsymbol{x} = (X_1, \dots, X_d)$ is the matrix
 
@@ -312,7 +312,7 @@ $$
 where $\text{Cov}(X, Y) := \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]$ is defined as the covariance between $X$ and $Y$.
 :::
 
-::: {#def-mc-4-14 name="Standard Gaussian vector"}
+::: {#def-mc-4-14 name="Standard Gaussian Vector"}
 
 A random vector $\boldsymbol{x} = (X_1, \dots, X_d) \in \mathbb{R}^d$ is called a standard Gaussian vector if $X_1, \dots, X_d$ are independent and
 
@@ -323,7 +323,7 @@ $$
 The distribution of this random vector is denoted by $\mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$.
 :::
 
-::: {#def-mc-4-15 name="Gaussian vector"}
+::: {#def-mc-4-15 name="Gaussian Vector"}
 
 A random vector $\boldsymbol{x} \in \mathbb{R}^d$ is called a Gaussian vector if there exists a vector $\boldsymbol{\mu} \in \mathbb{R}^d$, a matrix $\boldsymbol{A} \in \mathbb{R}^{d \times r}$, and a $r$-dimensional standard Gaussian vector $\boldsymbol{z} \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$ such that
 
@@ -388,9 +388,9 @@ $$
 
 ## The Strange Geometry of High Dimensions
 
-### High-dimensional Gaussians, Spheres, and Ball
+### High-Dimensional Gaussians, Spheres, and Ball
 
-::: {#def-mc-4-16 name="Three fundamental distributions"}
+::: {#def-mc-4-16 name="Three Fundamental Distributions"}
 
 1. Gaussian distribution $\mathcal{G} = \mathcal{N}(\boldsymbol{0}, \boldsymbol{I}/d)$:
    
@@ -406,7 +406,7 @@ $$
 
 :::
 
-::: {#thm-14 name="Volume Concentrates Near the Surface"}
+::: {#thm-14 name="Volume Concentrates near the Surface"}
 Let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
 $$
 \Pr[1 - \epsilon < \|\boldsymbol{x}\|_2 \le 1] \ge 1 - e^{-\epsilon d}. 
@@ -432,7 +432,7 @@ $$
 
 \ 
 
-::: {#thm-16 name="Volume Concentrates Near the Equator"}
+::: {#thm-16 name="Volume Concentrates near the Equator"}
 Let $d \ge 3$. Fix a unit vector $\boldsymbol{u} \in \mathbb{R}^d$, and let $\boldsymbol{x} \sim \mathcal{U}_B$. Then, for every $\epsilon \in (0, 1)$,
 
 $$
@@ -492,7 +492,7 @@ $$
 
 ## Probability Distances
 
-::: {#def-mc-4-17 name="Notation for probability and expectation under specific distributions"}
+::: {#def-mc-4-17 name="Notation for Probability and Expectation Under Specific Distributions"}
 
 * For a probability event $A$, we may write $P(A)$ as
   
@@ -512,7 +512,7 @@ $$
 
 ### Total Variation Distance
 
-::: {#def-mc-4-18 name="Total variation distance"}
+::: {#def-mc-4-18 name="Total Variation Distance"}
 
 The total variation distance between $P$ and $Q$ is
 
@@ -552,7 +552,7 @@ where $\mathcal{F}_{\ell,u}$ denotes the family of all functions $\phi : \mathbb
 
 ### Wasserstein Distance
 
-::: {#def-mc-4-19 name="Lipschitz function"}
+::: {#def-mc-4-19 name="Lipschitz Function"}
 
 For $L \geq 0$, a function $\phi : \mathbb{R}^d \to \mathbb{R}$ is $L$-Lipschitz if for all $\boldsymbol{x}, \boldsymbol{y} \in \mathbb{R}^d$,
 
@@ -563,7 +563,7 @@ $$
 In particular, $\phi$ is 1-Lipschitz if it is $L$-Lipschitz with $L = 1$.
 :::
 
-::: {#def-mc-4-20 name="Wasserstein-1 distance"}
+::: {#def-mc-4-20 name="Wasserstein-1 Distance"}
 
 The Wasserstein-1 distance between $P$ and $Q$ is
 
@@ -593,7 +593,7 @@ $$
 ### Extensions
 
 ::: {#thm-22}
-## Asymptotic expansion of the Gaussian tail probability
+## Asymptotic Expansion of the Gaussian Tail Probability
 
 Let $\bar{\Phi}(x) := \int_{x}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-u^2/2} \, \mathrm{d}u$ denote the tail probability (or complementary cumulative distribution function) of the standard Gaussian distribution $\mathcal{N}(0, 1)$. Then for any $x > 0$, $\bar{\Phi}(x)$ admits the following exact algebraic representation obtained via successive integration by parts:
 
@@ -603,7 +603,7 @@ $$
 :::
 
 ::: {#thm-23}
-## Moments of a zero-mean Gaussian distribution
+## Moments of a Zero-Mean Gaussian Distribution
 
 Let $X \sim \mathcal{N}(0, \sigma^2)$ be a centered Gaussian random variable with mean $0$ and variance $\sigma^2$. Let $M_X(t) := \mathbb{E}[e^{tX}] = e^{\sigma^2 t^2 / 2}$ denote its moment-generating function (MGF). Then for any positive integer $k \in \mathbb{Z}^+$, the $k$-th raw moment of $X$ is given by the $k$-th derivative of $M_X(t)$ evaluated at $t = 0$:
 
@@ -613,7 +613,7 @@ $$
 :::
 
 ::: {#thm-24}
-## Fourier analysis of the Gaussian distribution and inversion
+## Fourier Analysis of the Gaussian Distribution and Inversion
 
 Let $f : \mathbb{R} \to \mathbb{C}$ be a function in $L^1(\mathbb{R})$, meaning $\int_{-\infty}^{+\infty} |f(x)| \, \mathrm{d}x < +\infty$. The Fourier transform $\hat{f} = \mathcal{F}[f]$ and the inverse Fourier transform $\check{g} = \mathcal{F}^{-1}[g]$ are defined respectively as:
 
