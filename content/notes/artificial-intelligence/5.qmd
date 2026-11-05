@@ -1,0 +1,13 @@
+---
+title: "Machine Learning"
+page-layout: article
+search: true
+toc-depth: 3
+number-offset: [5]
+
+crossref:
+  chapters: true
+---
+
+## Linear Regression
+

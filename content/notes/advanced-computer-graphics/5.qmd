@@ -290,19 +290,6 @@ A camera-visible point is unshadowed if it is also visible from the light.
 
 :::
 
-## Ray Tracing
-
-#### Why Ray Tracing?
-
-Model visibility, reflections, and refractions by tracing rays. Many ray-scene intersections make high-quality rendering expensive.
-
-#### Tracing from the Camera
-
-- Primary ray: Trace from the camera through a pixel to the nearest surface.
-- Shadow ray: Trace from the hit point toward a light to test visibility for direct lighting.
-- Reflected ray: Trace along the reflection direction to gather reflected light.
-- Refracted ray: Trace through transparent material along the refraction direction to gather transmitted light.
-
 ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results

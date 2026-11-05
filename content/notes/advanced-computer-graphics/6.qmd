@@ -1,0 +1,269 @@
+---
+title: "Ray Tracing"
+page-layout: article
+search: true
+number-offset: [6]
+
+crossref:
+  chapters: true
+---
+
+## Ray Casting
+
+#### Light Rays
+
+Three ideas about light rays
+
+1. Light travels in straight lines (though this is wrong)
+2. Light rays do not collide with each other if they cross
+(though this is still wrong)
+3. Light rays travel from the light sources to the eye (the physics is invariant under path reversal)
+
+#### Ray Casting Algorithm (Pseudocode)
+
+```python
+for each pixel (x, y):
+    ray = eye_ray(x, y)                    # from the eye through the pixel
+    p = closest_intersection(ray, scene)
+    if p exists:
+        color = ambient
+        for each light L:
+            if not in_shadow(p, L):        # shadow ray from p toward L is unblocked
+                color += shade(p, L)
+        framebuffer[x][y] = color
+    else:
+        framebuffer[x][y] = background_color
+```
+
+## Whitted-Style Ray Tracing
+
+#### Recursive Ray Tracing (Pseudocode)
+
+```python
+IntersectColor(o, d):
+    p = closest_intersection(ray(o, d), scene)
+    if p does not exist:
+        return background_color
+    color = ambient
+    for each light L:
+        color += shade(p, L)               # local shading term (shadow test as above)
+    if surface at p is reflective:
+        color += k_reflect * IntersectColor(p, reflect_dir)
+    elif surface at p is refractive:
+        color += k_refract * IntersectColor(p, refract_dir)
+    return color
+```
+
+## Ray-Object Intersections
+
+::: {#def-acg-6-1 name="Ray Equation"}
+
+$$
+\mathbf{r}(t) = \mathbf{o} + t\mathbf{d}, \quad 0 \le t < \infty.
+$$
+
+- $\mathbf{r}(t)$: Point along the ray.
+- $t$: "Time" along the ray; with a unit $\mathbf{d}$, it is the distance from $\mathbf{o}$.
+- $\mathbf{o}$: Origin of the ray.
+- $\mathbf{d}$: (Normalized) direction of the ray.
+
+:::
+
+#### Ray Intersection With Sphere, Plane, and Triangle
+
+#### Ray Intersection With Planar Polygon
+
+- Test ray-plane intersection
+- Project onto the XY plane
+  - Shooting rays to the +x direction from the projected intersection point
+  - Determine inside/outside through crossing test
+
+#### Möller-Trumbore Algorithm
+
+Solve for $t$ and the barycentric coordinates of the hit point at once, without first intersecting the triangle's plane
+
+::: {.callout-note collapse="true"}
+
+## Formulas
+
+$$
+\mathbf{o} + t\mathbf{d} = (1-b_1-b_2)\mathbf{P}_0 + b_1\mathbf{P}_1 + b_2\mathbf{P}_2,
+$$
+
+$$
+\begin{bmatrix} t \\ b_1 \\ b_2 \end{bmatrix}
+= \frac{1}{\mathbf{S}_1\cdot\mathbf{E}_1}
+\begin{bmatrix}
+\mathbf{S}_2\cdot\mathbf{E}_2 \\
+\mathbf{S}_1\cdot\mathbf{S} \\
+\mathbf{S}_2\cdot\mathbf{d}
+\end{bmatrix}.
+$$
+
+- $\mathbf{P}_0,\mathbf{P}_1,\mathbf{P}_2$: Triangle vertices; $(1-b_1-b_2,\,b_1,\,b_2)$: Barycentric coordinates of the hit point.
+- $\mathbf{E}_1=\mathbf{P}_1-\mathbf{P}_0$, $\mathbf{E}_2=\mathbf{P}_2-\mathbf{P}_0$: Triangle edges; $\mathbf{S}=\mathbf{o}-\mathbf{P}_0$.
+- $\mathbf{S}_1=\mathbf{d}\times\mathbf{E}_2$, $\mathbf{S}_2=\mathbf{S}\times\mathbf{E}_1$: Cross products reused across the three unknowns.
+
+A valid hit needs $t>0$ and $b_1,\,b_2,\,1-b_1-b_2\ge 0$. If $\mathbf{S}_1\cdot\mathbf{E}_1=0$, the ray is parallel to the triangle's plane.
+
+:::
+
+
+## Accelerating Ray Tracing
+
+- Naive algorithm = #pixels ⨉ # traingles (⨉ #bounces)
+
+#### Bounding Volumes
+
+Quick way to avoid intersections: bound complex object
+with a simple volume. If it doesn't hit the volume, it doesn't hit the object
+
+#### AABB (Axis-Aligned Bounding Box) of a Transform
+
+- Tight: Transform the object itself (e.g., every mesh vertex), then take the min and max along each axis.
+- Conservative: Transform the 8 corners of the old AABB, then take their min and max. Cheaper, but the box can be larger than needed.
+
+#### Ray Intersection with Axis-Aligned Box
+
+- For the 3D box, $t_{\text{enter}} = \max\{t_{\min}\}$, $t_{\text{exit}} = \min\{t_{\max}\}$
+
+- Check if $t_{\text{enter}} < t_{\text{exit}}$ and $t_{\text{exit}}>0$ to determine if the ray hits the box. 
+
+::: {.callout-note collapse="true"}
+
+## Why Axis-Aligned?
+
+- General plane through $\mathbf{p}'$ with normal $\mathbf{N}$: 3 subtractions, 6 multiplies, 1 division.
+
+  $$
+  t = \frac{(\mathbf{p}'-\mathbf{o})\cdot\mathbf{N}}{\mathbf{d}\cdot\mathbf{N}}
+  $$
+
+- Slabs perpendicular to the $x$-axis: 1 subtraction, 1 division.
+
+  $$
+  t = \frac{\mathbf{p}'_x-\mathbf{o}_x}{\mathbf{d}_x}
+  $$
+
+:::
+
+
+### Uniform Spatial Partitions (Grids)
+
+#### Build Acceleration Grid
+
+- Find bounding box
+- Create grid
+- Store each object in overlapping cells
+
+#### Ray-Scene Intersection
+
+- Step through grid in ray traversal order
+- For each grid cell Test intersection with all objects stored at that cell
+
+- Heuristic: #cells = C * #objs (C $\approx$ 27 in 3D)
+- Teapot in a stadium problem
+
+#### Triangle-Voxel Overlap
+
+Search for a separating axis.
+
+::: {.callout-note collapse="true"}
+
+## Separating Axis Test
+
+Two convex polyhedra are disjoint if and only if they can be separated along a face normal of either one, or along the cross product of an edge from each. For a triangle and a box this gives 13 candidate axes; if none separates them, they overlap:
+
+1. Box normals $\mathbf{e}_0,\mathbf{e}_1,\mathbf{e}_2$ (3 tests): Test the box against the triangle's minimal AABB.
+2. Triangle normal $\mathbf{n}$ (1 test): Plane/box test using only the two box diagonal vertices most aligned with $\mathbf{n}$.
+3. $\mathbf{a}_{ij}=\mathbf{e}_i\times\mathbf{f}_j$, $i,j\in\{0,1,2\}$ (9 tests): Here $\mathbf{f}_0=\mathbf{v}_1-\mathbf{v}_0$, $\mathbf{f}_1=\mathbf{v}_2-\mathbf{v}_1$, $\mathbf{f}_2=\mathbf{v}_0-\mathbf{v}_2$ are the triangle edges.
+
+:::
+
+### Spatial Partitioning
+
+- An object can be contained in multiple regions
+
+#### Oct-Tree
+
+- Top-down approach: Intersect root and find intersected children recursively
+- Bottom-up approach: Find first leaf voxel intersected. Use neighbour finding to find next voxels
+
+#### BSP-Tree
+
+- General case uses arbitrary splitting planes
+- Difficult to build, traversal isn't too bad
+- Generally not used for rendering 
+
+#### KD-Tree
+
+- Split position: coordinate of split plane along axis
+- No objects are stored in internal nodes
+- Record [t_start, t_end] for each node to avoid traversing subtrees that are not intersected by the ray
+
+### Object Partitions
+
+- Bounding boxes for each set may overlap in space
+
+#### Bounding Volume Hierarchy (BVH)
+
+- Find bounding box
+- Recursively split set of objects in two subsets
+- Stop when necessary
+- Poor splitting can lead to unbalanced trees and poor performance
+
+## Basic Radiometry
+
+#### Radiant Energy
+
+$\displaystyle Q [\text{J = Joule}]$
+
+#### Radiant Flux (Power)
+
+$\displaystyle \Phi = \frac{dQ}{dt} [\text{W = Watt}] \text{ also }[ \text{lm} = \text{lumen} ]$
+
+#### Radiant Intensity
+
+The radiant (luminous) intensity is the power per unit
+solid angle emitted by a point light source.
+
+$\displaystyle I(\omega) = \frac{d\Phi}{d\omega} [\text{W/sr}] \text{ also }[ \text{cd} = \text{candela} ]$
+
+#### Irradiance
+
+The irradiance is the power per unit area incident
+on a surface point.
+
+$\displaystyle E(p) = \frac{d\Phi}{dA} [\text{W/m}^2] \text{ also }[ \text{lx} = \text{lux} ]$
+
+#### Radiance
+
+The radiance (luminance) is the power emitted,
+reflected, transmitted or received by a surface, per unit solid angle, per projected unit area.
+
+$\displaystyle L(p, \omega) = \frac{d^2\Phi}{d\omega dA \cos \theta} [\text{W/(sr m}^2)] \text{ also }[ \text{cd/m}^2 = \text{nit} ]$
+
+- $\theta$ is the angle between the surface normal and the direction $\omega$.
+
+- $\displaystyle L(p, \omega) = \frac{dI(p, \omega)}{dA \cos \theta} = \frac{dE(p)}{d\omega \cos \theta}$.
+
+- $\displaystyle dE(p) = L(p, \omega) \cos \theta \, d\omega$.
+
+- $\displaystyle E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega$, where $H^2$ is the unit hemisphere.
+
+## Light Transport
+
+#### Bidirectional Reflectance Distribution Function (BRDF)
+
+$\displaystyle f_r(\omega_i \to \omega_r) = \frac{dL_r(\omega_r)}{dE_i(\omega_i)} = \frac{dL_r(\omega_r)}{L_i(\omega_i) \cos \theta_i \, d\omega_i} [\text{1/sr}]$
+
+#### The Rendering Equation
+
+$$
+\underbrace{L_r(x, \omega_r)}_{\substack{\text{Reflected Light} \\ \text{(Output Image)} \\ \text{Unknown}}}
+= \underbrace{L_e(x, \omega_r)}_{\substack{\text{Emission} \\ \text{Known}}}
++ \int_{\Omega} \underbrace{L_r(x', -\omega_i)}_{\substack{\text{Reflected Light} \\ \text{Unknown}}}
+\, \underbrace{f(x, \omega_i, \omega_r)}_{\substack{\text{BRDF} \\ \text{Known}}}
+\, \underbrace{\cos \theta_i}_{\substack{\text{Cosine of} \\ \text{Incident Angle} \\ \text{Known}}}
+\, d\omega_i
+$$
