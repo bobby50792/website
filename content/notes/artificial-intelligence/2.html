@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,18 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-778b0e8b5083ab6391a0efe25b46868d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-042ccbaef66037d67884134f3afafe29.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-778b0e8b5083ab6391a0efe25b46868d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b3948cb1c6397878b8228e4b05748312.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-8ffcd0d0528a14b586caf8f18a8c9e6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-666ed25bb5f779c5b7bde07e6d4a7db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-8ffcd0d0528a14b586caf8f18a8c9e6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-42b4644679e9e3b57c8b2cb2e5fc0c04.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,7 +115,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed notes-studio quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating nav-fixed notes-studio quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -137,6 +138,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -166,13 +168,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -267,6 +275,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -276,6 +285,7 @@ window.Quarto = {
         return;
       const alternate = e.matches
       toggleColorMode(alternate);
+      refreshSafariScrollbar();
       localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
       toggleGiscusIfUsed(alternate, darkModeDefault);
     });
@@ -289,7 +299,7 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
@@ -297,8 +307,7 @@ window.Quarto = {
     <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -321,17 +330,18 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/2.html">Logic</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/2.html">Logic</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -339,36 +349,36 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Notes</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Notes">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/calculus/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculus</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Calculus</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: Calculus">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/calculus/single-variable/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Single Variable</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Single Variable</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: Single Variable">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/calculus/single-variable/1.html" class="sidebar-item-text sidebar-link">
@@ -410,12 +420,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/calculus/multivariable/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multivariable</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Multivariable</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Multivariable">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/calculus/multivariable/1.html" class="sidebar-item-text sidebar-link">
@@ -483,12 +493,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Algebra</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Linear Algebra</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: Linear Algebra">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/linear-algebra/1.html" class="sidebar-item-text sidebar-link">
@@ -542,12 +552,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math for CS and AI</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Math for CS and AI</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: Math for CS and AI">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
@@ -595,21 +605,21 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-7-label">General Physics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: General Physics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mechanics &amp; Thermal</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Mechanics &amp; Thermal</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section: Mechanics &amp; Thermal">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
@@ -705,12 +715,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Electromagnetism</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-9-label">Electromagnetism</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-controls="quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section: Electromagnetism">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-9" aria-labelledby="quarto-sidebar-section-9-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link">
@@ -772,12 +782,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-10-label">Deep Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-controls="quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section: Deep Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-10" aria-labelledby="quarto-sidebar-section-10-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -819,12 +829,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Applied Probability</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-11-label">Applied Probability</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-controls="quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section: Applied Probability">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" aria-labelledby="quarto-sidebar-section-11-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link">
@@ -842,12 +852,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/machine-learning/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-12-label">Machine Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-controls="quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section: Machine Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-12" aria-labelledby="quarto-sidebar-section-12-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -871,12 +881,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/advanced-computer-graphics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Computer Graphics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-13-label">Computer Graphics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-controls="quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section: Computer Graphics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-13" aria-labelledby="quarto-sidebar-section-13-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/1.html" class="sidebar-item-text sidebar-link">
@@ -907,17 +917,23 @@ window.Quarto = {
  <span class="menu-text">Shading</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/artificial-intelligence/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Artificial Intelligence</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-14-label">Artificial Intelligence</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-controls="quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section: Artificial Intelligence">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-14" aria-labelledby="quarto-sidebar-section-14-label" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
@@ -942,6 +958,12 @@ window.Quarto = {
  <span class="menu-text">Probabilistic Inference</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -952,28 +974,28 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#representation" id="toc-representation" class="nav-link active" data-scroll-target="#representation"><span class="header-section-number">2.1</span> Representation</a>
   <ul class="collapse">
-  <li><a href="#propositional-logic" id="toc-propositional-logic" class="nav-link" data-scroll-target="#propositional-logic"><span class="header-section-number">2.1.1</span> Propositional logic</a></li>
-  <li><a href="#first-order-logic" id="toc-first-order-logic" class="nav-link" data-scroll-target="#first-order-logic"><span class="header-section-number">2.1.2</span> First-order logic</a></li>
+  <li><a href="#propositional-logic" id="toc-propositional-logic" class="nav-link" data-scroll-target="#propositional-logic"><span class="header-section-number">2.1.1</span> Propositional Logic</a></li>
+  <li><a href="#first-order-logic" id="toc-first-order-logic" class="nav-link" data-scroll-target="#first-order-logic"><span class="header-section-number">2.1.2</span> First-Order Logic</a></li>
   </ul></li>
   <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">2.2</span> Inference</a>
   <ul class="collapse">
-  <li><a href="#entailment-and-satisfiability" id="toc-entailment-and-satisfiability" class="nav-link" data-scroll-target="#entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and satisfiability</a></li>
-  <li><a href="#sat-and-model-checking" id="toc-sat-and-model-checking" class="nav-link" data-scroll-target="#sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and model-checking</a></li>
-  <li><a href="#inference-rules" id="toc-inference-rules" class="nav-link" data-scroll-target="#inference-rules"><span class="header-section-number">2.2.3</span> Inference rules</a></li>
-  <li><a href="#horn-clauses-and-modus-ponens" id="toc-horn-clauses-and-modus-ponens" class="nav-link" data-scroll-target="#horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn clauses and modus ponens</a></li>
+  <li><a href="#entailment-and-satisfiability" id="toc-entailment-and-satisfiability" class="nav-link" data-scroll-target="#entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and Satisfiability</a></li>
+  <li><a href="#sat-and-model-checking" id="toc-sat-and-model-checking" class="nav-link" data-scroll-target="#sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and Model-Checking</a></li>
+  <li><a href="#inference-rules" id="toc-inference-rules" class="nav-link" data-scroll-target="#inference-rules"><span class="header-section-number">2.2.3</span> Inference Rules</a></li>
+  <li><a href="#horn-clauses-and-modus-ponens" id="toc-horn-clauses-and-modus-ponens" class="nav-link" data-scroll-target="#horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn Clauses and Modus Ponens</a></li>
   <li><a href="#complexity" id="toc-complexity" class="nav-link" data-scroll-target="#complexity"><span class="header-section-number">2.2.5</span> Complexity</a></li>
   <li><a href="#resolution" id="toc-resolution" class="nav-link" data-scroll-target="#resolution"><span class="header-section-number">2.2.6</span> Resolution</a></li>
   </ul></li>
   <li><a href="#semantics" id="toc-semantics" class="nav-link" data-scroll-target="#semantics"><span class="header-section-number">2.3</span> Semantics</a>
   <ul class="collapse">
-  <li><a href="#desiderata-for-inference-rules" id="toc-desiderata-for-inference-rules" class="nav-link" data-scroll-target="#desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for inference rules</a></li>
-  <li><a href="#fixing-completeness" id="toc-fixing-completeness" class="nav-link" data-scroll-target="#fixing-completeness"><span class="header-section-number">2.3.2</span> Fixing completeness</a></li>
+  <li><a href="#desiderata-for-inference-rules" id="toc-desiderata-for-inference-rules" class="nav-link" data-scroll-target="#desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for Inference Rules</a></li>
+  <li><a href="#fixing-completeness" id="toc-fixing-completeness" class="nav-link" data-scroll-target="#fixing-completeness"><span class="header-section-number">2.3.2</span> Fixing Completeness</a></li>
   </ul></li>
   <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">2.4</span> Supplementary Notes</a>
   <ul class="collapse">
@@ -983,10 +1005,10 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/2.html">Logic</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/2.html">Logic</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Logic</h1>
 </div>
@@ -1014,7 +1036,7 @@ window.Quarto = {
 <h2 data-number="2.1" class="anchored" data-anchor-id="representation"><span class="header-section-number">2.1</span> Representation</h2>
 <p>Formal languages: syntax and model</p>
 <section id="propositional-logic" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="propositional-logic"><span class="header-section-number">2.1.1</span> Propositional logic</h3>
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="propositional-logic"><span class="header-section-number">2.1.1</span> Propositional Logic</h3>
 <section id="syntax" class="level4" data-number="2.1.1.1">
 <h4 data-number="2.1.1.1" class="anchored" data-anchor-id="syntax"><span class="header-section-number">2.1.1.1</span> Syntax</h4>
 <ul>
@@ -1035,7 +1057,7 @@ window.Quarto = {
 <p>A model <span class="math inline">\(w\)</span> in propositional logic is an assignment of truth values to propositional symbols.</p>
 </section>
 <section id="interpretation-function" class="level4" data-number="2.1.1.3">
-<h4 data-number="2.1.1.3" class="anchored" data-anchor-id="interpretation-function"><span class="header-section-number">2.1.1.3</span> Interpretation function</h4>
+<h4 data-number="2.1.1.3" class="anchored" data-anchor-id="interpretation-function"><span class="header-section-number">2.1.1.3</span> Interpretation Function</h4>
 <p>Let <span class="math inline">\(f\)</span> be a formula and <span class="math inline">\(w\)</span> be a model. An interpretation function <span class="math inline">\(\mathcal{I}(f,w)\)</span> returns:</p>
 <ul>
 <li>true (1) (say that <span class="math inline">\(w\)</span> satisfies <span class="math inline">\(f\)</span>)</li>
@@ -1043,18 +1065,18 @@ window.Quarto = {
 </ul>
 </section>
 <section id="base-case" class="level4" data-number="2.1.1.4">
-<h4 data-number="2.1.1.4" class="anchored" data-anchor-id="base-case"><span class="header-section-number">2.1.1.4</span> Base case</h4>
+<h4 data-number="2.1.1.4" class="anchored" data-anchor-id="base-case"><span class="header-section-number">2.1.1.4</span> Base Case</h4>
 <p>For a propositional symbol <span class="math inline">\(p\)</span> (e.g., <span class="math inline">\(A, B, C\)</span>):</p>
 <p><span class="math display">\[
 \mathcal{I}(p,w) = w(p)
 \]</span></p>
 </section>
 <section id="recursive-case" class="level4" data-number="2.1.1.5">
-<h4 data-number="2.1.1.5" class="anchored" data-anchor-id="recursive-case"><span class="header-section-number">2.1.1.5</span> Recursive case</h4>
+<h4 data-number="2.1.1.5" class="anchored" data-anchor-id="recursive-case"><span class="header-section-number">2.1.1.5</span> Recursive Case</h4>
 <p>Let <span class="math inline">\(\mathcal{M}(f)\)</span> be the set of <strong>models</strong> <span class="math inline">\(w\)</span> for which <span class="math inline">\(\mathcal{I}(f,w) = 1\)</span>.</p>
 </section>
 <section id="knowledge-base" class="level4" data-number="2.1.1.6">
-<h4 data-number="2.1.1.6" class="anchored" data-anchor-id="knowledge-base"><span class="header-section-number">2.1.1.6</span> Knowledge base</h4>
+<h4 data-number="2.1.1.6" class="anchored" data-anchor-id="knowledge-base"><span class="header-section-number">2.1.1.6</span> Knowledge Base</h4>
 <p>A knowledge base <span class="math inline">\(\mathrm{KB}\)</span> is a set of formulas representing their conjunction / intersection:</p>
 <p><span class="math display">\[
 \mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f).
@@ -1062,7 +1084,7 @@ window.Quarto = {
 </section>
 </section>
 <section id="first-order-logic" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="first-order-logic"><span class="header-section-number">2.1.2</span> First-order logic</h3>
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="first-order-logic"><span class="header-section-number">2.1.2</span> First-Order Logic</h3>
 <section id="syntax-1" class="level4" data-number="2.1.2.1">
 <h4 data-number="2.1.2.1" class="anchored" data-anchor-id="syntax-1"><span class="header-section-number">2.1.2.1</span> Syntax</h4>
 <ul>
@@ -1093,7 +1115,7 @@ window.Quarto = {
 <section id="inference" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="inference"><span class="header-section-number">2.2</span> Inference</h2>
 <section id="entailment-and-satisfiability" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and satisfiability</h3>
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and Satisfiability</h3>
 <section id="entailment" class="level4" data-number="2.2.1.1">
 <h4 data-number="2.2.1.1" class="anchored" data-anchor-id="entailment"><span class="header-section-number">2.2.1.1</span> Entailment</h4>
 <p><span class="math inline">\(\mathrm{KB}\)</span> entails <span class="math inline">\(f\)</span> (written <span class="math inline">\(\mathrm{KB} \models f\)</span>) iff <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)\)</span>.</p>
@@ -1114,16 +1136,16 @@ window.Quarto = {
 </section>
 </section>
 <section id="sat-and-model-checking" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and model-checking</h3>
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and Model-Checking</h3>
 <section id="model-checking" class="level4" data-number="2.2.2.1">
-<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="model-checking"><span class="header-section-number">2.2.2.1</span> Model checking</h4>
+<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="model-checking"><span class="header-section-number">2.2.2.1</span> Model Checking</h4>
 <ul>
 <li>Input: knowledge base <span class="math inline">\(\mathrm{KB}\)</span></li>
 <li>Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \neq \emptyset\)</span>)?</li>
 </ul>
 </section>
 <section id="popular-algorithms" class="level4" data-number="2.2.2.2">
-<h4 data-number="2.2.2.2" class="anchored" data-anchor-id="popular-algorithms"><span class="header-section-number">2.2.2.2</span> Popular algorithms</h4>
+<h4 data-number="2.2.2.2" class="anchored" data-anchor-id="popular-algorithms"><span class="header-section-number">2.2.2.2</span> Popular Algorithms</h4>
 <ul>
 <li>DPLL (backtracking + propagation + pruning)</li>
 <li>WalkSat (randomized local search over complete assignments)</li>
@@ -1131,23 +1153,23 @@ window.Quarto = {
 </section>
 </section>
 <section id="inference-rules" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="inference-rules"><span class="header-section-number">2.2.3</span> Inference rules</h3>
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="inference-rules"><span class="header-section-number">2.2.3</span> Inference Rules</h3>
 <section id="modus-ponens-inference-rule" class="level4" data-number="2.2.3.1">
-<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="modus-ponens-inference-rule"><span class="header-section-number">2.2.3.1</span> Modus ponens inference rule</h4>
+<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="modus-ponens-inference-rule"><span class="header-section-number">2.2.3.1</span> Modus Ponens Inference Rule</h4>
 <p>For any propositional symbols <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>:</p>
 <p><span class="math display">\[
 \frac{p,\quad p \to q}{q}
 \]</span></p>
 </section>
 <section id="general-inference-rule" class="level4" data-number="2.2.3.2">
-<h4 data-number="2.2.3.2" class="anchored" data-anchor-id="general-inference-rule"><span class="header-section-number">2.2.3.2</span> General inference rule</h4>
+<h4 data-number="2.2.3.2" class="anchored" data-anchor-id="general-inference-rule"><span class="header-section-number">2.2.3.2</span> General Inference Rule</h4>
 <p>If <span class="math inline">\(f_1, \ldots, f_k, g\)</span> are formulas, then the following is an inference rule:</p>
 <p><span class="math display">\[
 \frac{f_1,\quad \ldots,\quad f_k}{g}
 \]</span></p>
 </section>
 <section id="algorithm-forward-inference" class="level4" data-number="2.2.3.3">
-<h4 data-number="2.2.3.3" class="anchored" data-anchor-id="algorithm-forward-inference"><span class="header-section-number">2.2.3.3</span> Algorithm: forward inference</h4>
+<h4 data-number="2.2.3.3" class="anchored" data-anchor-id="algorithm-forward-inference"><span class="header-section-number">2.2.3.3</span> Algorithm: Forward Inference</h4>
 <p>Input: set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span>.</p>
 <p>Repeat until no changes to <span class="math inline">\(\mathrm{KB}\)</span>:</p>
 <ol type="1">
@@ -1161,11 +1183,11 @@ window.Quarto = {
 </section>
 </section>
 <section id="horn-clauses-and-modus-ponens" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn clauses and modus ponens</h3>
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn Clauses and Modus Ponens</h3>
 <section id="propositional-logic-1" class="level4" data-number="2.2.4.1">
-<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="propositional-logic-1"><span class="header-section-number">2.2.4.1</span> Propositional logic</h4>
+<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="propositional-logic-1"><span class="header-section-number">2.2.4.1</span> Propositional Logic</h4>
 <section id="definite-clause" class="level5" data-number="2.2.4.1.1">
-<h5 data-number="2.2.4.1.1" class="anchored" data-anchor-id="definite-clause"><span class="header-section-number">2.2.4.1.1</span> Definite clause</h5>
+<h5 data-number="2.2.4.1.1" class="anchored" data-anchor-id="definite-clause"><span class="header-section-number">2.2.4.1.1</span> Definite Clause</h5>
 <p>A definite clause has the following form:</p>
 <p><span class="math display">\[
 (p_1 \land \cdots \land p_k) \to q
@@ -1173,7 +1195,7 @@ window.Quarto = {
 <p>where <span class="math inline">\(p_1, \ldots, p_k, q\)</span> are propositional symbols.</p>
 </section>
 <section id="horn-clause" class="level5" data-number="2.2.4.1.2">
-<h5 data-number="2.2.4.1.2" class="anchored" data-anchor-id="horn-clause"><span class="header-section-number">2.2.4.1.2</span> Horn clause</h5>
+<h5 data-number="2.2.4.1.2" class="anchored" data-anchor-id="horn-clause"><span class="header-section-number">2.2.4.1.2</span> Horn Clause</h5>
 <p>A Horn clause is either:</p>
 <ul>
 <li>a definite clause <span class="math inline">\((p_1 \land \cdots \land p_k \to q)\)</span></li>
@@ -1181,16 +1203,16 @@ window.Quarto = {
 </ul>
 </section>
 <section id="modus-ponens" class="level5" data-number="2.2.4.1.3">
-<h5 data-number="2.2.4.1.3" class="anchored" data-anchor-id="modus-ponens"><span class="header-section-number">2.2.4.1.3</span> Modus ponens</h5>
+<h5 data-number="2.2.4.1.3" class="anchored" data-anchor-id="modus-ponens"><span class="header-section-number">2.2.4.1.3</span> Modus Ponens</h5>
 <p><span class="math display">\[
 \frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
 \]</span></p>
 </section>
 </section>
 <section id="first-order-logic-1" class="level4" data-number="2.2.4.2">
-<h4 data-number="2.2.4.2" class="anchored" data-anchor-id="first-order-logic-1"><span class="header-section-number">2.2.4.2</span> First-order logic</h4>
+<h4 data-number="2.2.4.2" class="anchored" data-anchor-id="first-order-logic-1"><span class="header-section-number">2.2.4.2</span> First-Order Logic</h4>
 <section id="definite-clause-1" class="level5" data-number="2.2.4.2.1">
-<h5 data-number="2.2.4.2.1" class="anchored" data-anchor-id="definite-clause-1"><span class="header-section-number">2.2.4.2.1</span> Definite clause</h5>
+<h5 data-number="2.2.4.2.1" class="anchored" data-anchor-id="definite-clause-1"><span class="header-section-number">2.2.4.2.1</span> Definite Clause</h5>
 <p>A definite clause has the following form:</p>
 <p><span class="math display">\[
 \forall x_1 \cdots \forall x_n \bigl((a_1 \land \cdots \land a_k) \to b\bigr)
@@ -1198,7 +1220,7 @@ window.Quarto = {
 <p>for variables <span class="math inline">\(x_1, \ldots, x_n\)</span> and atomic formulas <span class="math inline">\(a_1, \ldots, a_k, b\)</span> (which contain those variables).</p>
 </section>
 <section id="modus-ponens-1" class="level5" data-number="2.2.4.2.2">
-<h5 data-number="2.2.4.2.2" class="anchored" data-anchor-id="modus-ponens-1"><span class="header-section-number">2.2.4.2.2</span> Modus ponens</h5>
+<h5 data-number="2.2.4.2.2" class="anchored" data-anchor-id="modus-ponens-1"><span class="header-section-number">2.2.4.2.2</span> Modus Ponens</h5>
 <p><span class="math display">\[
 \frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
 \]</span></p>
@@ -1236,14 +1258,14 @@ window.Quarto = {
 <section id="resolution" class="level3" data-number="2.2.6">
 <h3 data-number="2.2.6" class="anchored" data-anchor-id="resolution"><span class="header-section-number">2.2.6</span> Resolution</h3>
 <section id="propositional-resolution-rule" class="level4" data-number="2.2.6.1">
-<h4 data-number="2.2.6.1" class="anchored" data-anchor-id="propositional-resolution-rule"><span class="header-section-number">2.2.6.1</span> Propositional resolution rule</h4>
+<h4 data-number="2.2.6.1" class="anchored" data-anchor-id="propositional-resolution-rule"><span class="header-section-number">2.2.6.1</span> Propositional Resolution Rule</h4>
 <p><span class="math display">\[
 \frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
 {f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
 \]</span></p>
 </section>
 <section id="conjunctive-normal-form-cnf" class="level4" data-number="2.2.6.2">
-<h4 data-number="2.2.6.2" class="anchored" data-anchor-id="conjunctive-normal-form-cnf"><span class="header-section-number">2.2.6.2</span> Conjunctive normal form (CNF)</h4>
+<h4 data-number="2.2.6.2" class="anchored" data-anchor-id="conjunctive-normal-form-cnf"><span class="header-section-number">2.2.6.2</span> Conjunctive Normal Form (CNF)</h4>
 <p>A CNF formula is a conjunction of clauses.</p>
 <div id="prp-ai-2-1" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 2.1 (Conversion to CNF)</strong></span> Every formula <span class="math inline">\(f\)</span> in propositional logic can be converted into an equivalent CNF formula <span class="math inline">\(f'\)</span>:</p>
@@ -1253,14 +1275,14 @@ window.Quarto = {
 </div>
 </section>
 <section id="first-order-conversion-to-cnf" class="level4" data-number="2.2.6.3">
-<h4 data-number="2.2.6.3" class="anchored" data-anchor-id="first-order-conversion-to-cnf"><span class="header-section-number">2.2.6.3</span> First-order conversion to CNF</h4>
+<h4 data-number="2.2.6.3" class="anchored" data-anchor-id="first-order-conversion-to-cnf"><span class="header-section-number">2.2.6.3</span> First-Order Conversion to CNF</h4>
 <ul>
 <li>All variable have universal quantifiers by default</li>
 <li>Introduce Skolem functions (e.g., <span class="math inline">\(Y(x)\)</span>) to represent existentially quantified variables.</li>
 </ul>
 </section>
 <section id="first-order-resolution-rule" class="level4" data-number="2.2.6.4">
-<h4 data-number="2.2.6.4" class="anchored" data-anchor-id="first-order-resolution-rule"><span class="header-section-number">2.2.6.4</span> First-order resolution rule</h4>
+<h4 data-number="2.2.6.4" class="anchored" data-anchor-id="first-order-resolution-rule"><span class="header-section-number">2.2.6.4</span> First-Order Resolution Rule</h4>
 <p><span class="math display">\[
 \frac{
 f_1 \lor \cdots \lor f_n \lor p,\qquad
@@ -1277,7 +1299,7 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
 <section id="semantics" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="semantics"><span class="header-section-number">2.3</span> Semantics</h2>
 <section id="desiderata-for-inference-rules" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for inference rules</h3>
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for Inference Rules</h3>
 <section id="semantics-1" class="level4" data-number="2.3.1.1">
 <h4 data-number="2.3.1.1" class="anchored" data-anchor-id="semantics-1"><span class="header-section-number">2.3.1.1</span> Semantics</h4>
 <p>Interpretation defines <strong>entailed/true</strong> formulas: <span class="math inline">\(\mathrm{KB} \models f\)</span>.</p>
@@ -1305,7 +1327,7 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
 </section>
 </section>
 <section id="fixing-completeness" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="fixing-completeness"><span class="header-section-number">2.3.2</span> Fixing completeness</h3>
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="fixing-completeness"><span class="header-section-number">2.3.2</span> Fixing Completeness</h3>
 <ol type="1">
 <li><p>Option 1: Restrict the allowed set of formulas</p>
 <p>propositional logic <span class="math inline">\(\to\)</span> propositional logic with only Horn clauses</p></li>
@@ -1658,15 +1680,50 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1745,7 +1802,8 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1754,8 +1812,69 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1769,6 +1888,7 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1931,44 +2051,54 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -2067,7 +2197,10 @@ f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../../../content/notes/artificial-intelligence/1.html" class="pagination-link" aria-label="Search">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Search</span>

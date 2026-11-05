@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Ray Tracing – Bobby</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../content/notes/artificial-intelligence/index.html" rel="next">
+<link href="../../../content/notes/advanced-computer-graphics/5.html" rel="prev">
+<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b3948cb1c6397878b8228e4b05748312.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-42b4644679e9e3b57c8b2cb2e5fc0c04.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed notes-studio quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo light-content">
+    <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../content/notes/index.html" aria-current="page"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../content/explore/index.html"> 
+<span class="menu-text">Explore</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bobby50792/website"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/index.html">Computer Graphics</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/6.html">Ray Tracing</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Notes</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Notes">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/calculus/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Calculus</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: Calculus">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/calculus/single-variable/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Single Variable</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: Single Variable">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/single-variable/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real Numbers &amp; Sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/single-variable/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuity of Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/single-variable/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Derivatives &amp; Differentials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/single-variable/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indefinite Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/single-variable/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Definite Integral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/single-variable/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordinary Differential Equations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/calculus/multivariable/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Multivariable</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Multivariable">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Limits &amp; Continuity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Differentials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implicit &amp; Inverse Mappings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parameter &amp; Improper Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Curve &amp; Surface Integrals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculus of Vector Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function &amp; Power Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/calculus/multivariable/10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Linear Algebra</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: Linear Algebra">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vector Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Maps &amp; Matrices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matrix Operations &amp; Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Determinants</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagonalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inner Product Spaces</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Canonical Forms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/linear-algebra/exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Math for CS and AI</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: Math for CS and AI">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Discrete Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling and Concentration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generating Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Central Limit Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/math-for-cs-and-ai/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous Approximations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">General Physics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: General Physics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Mechanics &amp; Thermal</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section: Mechanics &amp; Thermal">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kinematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Newton’s Laws</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Momentum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy and Work</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Angular Momentum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collision Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rigid Body</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Oscillation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Waves</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lagrangian &amp; Hamiltonian</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Relativity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Heat &amp; the First Law</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kinetic Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Second Law</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-9-label">Electromagnetism</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-controls="quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section: Electromagnetism">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-9" aria-labelledby="quarto-sidebar-section-9-label" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scalar and Vector Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrostatics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Magnetostatics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laws of Induction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Maxwell Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AC Circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resonators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Waveguides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/general-physics/electricity-and-magnetism/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-10-label">Deep Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-controls="quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section: Deep Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-10" aria-labelledby="quarto-sidebar-section-10-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/deep-learning/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy-Based Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/deep-learning/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GANs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/deep-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Flows &amp; VAEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/deep-learning/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diffusion &amp; Flow Matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/deep-learning/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-11-label">Applied Probability</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-controls="quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section: Applied Probability">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-11" aria-labelledby="quarto-sidebar-section-11-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measure Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laws of Large Numbers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/machine-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-12-label">Machine Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-controls="quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section: Machine Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-12" aria-labelledby="quarto-sidebar-section-12-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/advanced-computer-graphics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-13-label">Computer Graphics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-controls="quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section: Computer Graphics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-13" aria-labelledby="quarto-sidebar-section-13-label" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Geometry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learning Geometry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rasterization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shading</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Ray Tracing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../content/notes/artificial-intelligence/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-14-label">Artificial Intelligence</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-controls="quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section: Artificial Intelligence">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-14" aria-labelledby="quarto-sidebar-section-14-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ray-casting" id="toc-ray-casting" class="nav-link active" data-scroll-target="#ray-casting"><span class="header-section-number">6.1</span> Ray Casting</a></li>
+  <li><a href="#whitted-style-ray-tracing" id="toc-whitted-style-ray-tracing" class="nav-link" data-scroll-target="#whitted-style-ray-tracing"><span class="header-section-number">6.2</span> Whitted-Style Ray Tracing</a></li>
+  <li><a href="#ray-object-intersections" id="toc-ray-object-intersections" class="nav-link" data-scroll-target="#ray-object-intersections"><span class="header-section-number">6.3</span> Ray-Object Intersections</a></li>
+  <li><a href="#accelerating-ray-tracing" id="toc-accelerating-ray-tracing" class="nav-link" data-scroll-target="#accelerating-ray-tracing"><span class="header-section-number">6.4</span> Accelerating Ray Tracing</a>
+  <ul class="collapse">
+  <li><a href="#uniform-spatial-partitions-grids" id="toc-uniform-spatial-partitions-grids" class="nav-link" data-scroll-target="#uniform-spatial-partitions-grids"><span class="header-section-number">6.4.1</span> Uniform Spatial Partitions (Grids)</a></li>
+  <li><a href="#spatial-partitioning" id="toc-spatial-partitioning" class="nav-link" data-scroll-target="#spatial-partitioning"><span class="header-section-number">6.4.2</span> Spatial Partitioning</a></li>
+  <li><a href="#object-partitions" id="toc-object-partitions" class="nav-link" data-scroll-target="#object-partitions"><span class="header-section-number">6.4.3</span> Object Partitions</a></li>
+  </ul></li>
+  <li><a href="#basic-radiometry" id="toc-basic-radiometry" class="nav-link" data-scroll-target="#basic-radiometry"><span class="header-section-number">6.5</span> Basic Radiometry</a></li>
+  <li><a href="#light-transport" id="toc-light-transport" class="nav-link" data-scroll-target="#light-transport"><span class="header-section-number">6.6</span> Light Transport</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/index.html">Computer Graphics</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/6.html">Ray Tracing</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Ray Tracing</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="ray-casting" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="ray-casting"><span class="header-section-number">6.1</span> Ray Casting</h2>
+<section id="light-rays" class="level4" data-number="6.1.0.1">
+<h4 data-number="6.1.0.1" class="anchored" data-anchor-id="light-rays"><span class="header-section-number">6.1.0.1</span> Light Rays</h4>
+<p>Three ideas about light rays</p>
+<ol type="1">
+<li>Light travels in straight lines (though this is wrong)</li>
+<li>Light rays do not collide with each other if they cross (though this is still wrong)</li>
+<li>Light rays travel from the light sources to the eye (the physics is invariant under path reversal)</li>
+</ol>
+</section>
+<section id="ray-casting-algorithm-pseudocode" class="level4" data-number="6.1.0.2">
+<h4 data-number="6.1.0.2" class="anchored" data-anchor-id="ray-casting-algorithm-pseudocode"><span class="header-section-number">6.1.0.2</span> Ray Casting Algorithm (Pseudocode)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each pixel (x, y):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ray <span class="op">=</span> eye_ray(x, y)                    <span class="co"># from the eye through the pixel</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> closest_intersection(ray, scene)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p exists:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> ambient</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> each light L:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> in_shadow(p, L):        <span class="co"># shadow ray from p toward L is unblocked</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                color <span class="op">+=</span> shade(p, L)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        framebuffer[x][y] <span class="op">=</span> color</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        framebuffer[x][y] <span class="op">=</span> background_color</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="whitted-style-ray-tracing" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="whitted-style-ray-tracing"><span class="header-section-number">6.2</span> Whitted-Style Ray Tracing</h2>
+<section id="recursive-ray-tracing-pseudocode" class="level4" data-number="6.2.0.1">
+<h4 data-number="6.2.0.1" class="anchored" data-anchor-id="recursive-ray-tracing-pseudocode"><span class="header-section-number">6.2.0.1</span> Recursive Ray Tracing (Pseudocode)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>IntersectColor(o, d):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> closest_intersection(ray(o, d), scene)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p does <span class="kw">not</span> exist:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> background_color</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> ambient</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each light L:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        color <span class="op">+=</span> shade(p, L)               <span class="co"># local shading term (shadow test as above)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> surface at p <span class="kw">is</span> reflective:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        color <span class="op">+=</span> k_reflect <span class="op">*</span> IntersectColor(p, reflect_dir)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> surface at p <span class="kw">is</span> refractive:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">+=</span> k_refract <span class="op">*</span> IntersectColor(p, refract_dir)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> color</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="ray-object-intersections" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="ray-object-intersections"><span class="header-section-number">6.3</span> Ray-Object Intersections</h2>
+<div id="def-acg-6-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6.1 (Ray Equation)</strong></span> <span class="math display">\[
+\mathbf{r}(t) = \mathbf{o} + t\mathbf{d}, \quad 0 \le t &lt; \infty.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{r}(t)\)</span>: Point along the ray.</li>
+<li><span class="math inline">\(t\)</span>: “Time” along the ray; with a unit <span class="math inline">\(\mathbf{d}\)</span>, it is the distance from <span class="math inline">\(\mathbf{o}\)</span>.</li>
+<li><span class="math inline">\(\mathbf{o}\)</span>: Origin of the ray.</li>
+<li><span class="math inline">\(\mathbf{d}\)</span>: (Normalized) direction of the ray.</li>
+</ul>
+</div>
+<section id="ray-intersection-with-sphere-plane-and-triangle" class="level4" data-number="6.3.0.1">
+<h4 data-number="6.3.0.1" class="anchored" data-anchor-id="ray-intersection-with-sphere-plane-and-triangle"><span class="header-section-number">6.3.0.1</span> Ray Intersection With Sphere, Plane, and Triangle</h4>
+</section>
+<section id="ray-intersection-with-planar-polygon" class="level4" data-number="6.3.0.2">
+<h4 data-number="6.3.0.2" class="anchored" data-anchor-id="ray-intersection-with-planar-polygon"><span class="header-section-number">6.3.0.2</span> Ray Intersection With Planar Polygon</h4>
+<ul>
+<li>Test ray-plane intersection</li>
+<li>Project onto the XY plane
+<ul>
+<li>Shooting rays to the +x direction from the projected intersection point</li>
+<li>Determine inside/outside through crossing test</li>
+</ul></li>
+</ul>
+</section>
+<section id="möller-trumbore-algorithm" class="level4" data-number="6.3.0.3">
+<h4 data-number="6.3.0.3" class="anchored" data-anchor-id="möller-trumbore-algorithm"><span class="header-section-number">6.3.0.3</span> Möller-Trumbore Algorithm</h4>
+<p>Solve for <span class="math inline">\(t\)</span> and the barycentric coordinates of the hit point at once, without first intersecting the triangle’s plane</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Formulas
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\mathbf{o} + t\mathbf{d} = (1-b_1-b_2)\mathbf{P}_0 + b_1\mathbf{P}_1 + b_2\mathbf{P}_2,
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix} t \\ b_1 \\ b_2 \end{bmatrix}
+= \frac{1}{\mathbf{S}_1\cdot\mathbf{E}_1}
+\begin{bmatrix}
+\mathbf{S}_2\cdot\mathbf{E}_2 \\
+\mathbf{S}_1\cdot\mathbf{S} \\
+\mathbf{S}_2\cdot\mathbf{d}
+\end{bmatrix}.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{P}_0,\mathbf{P}_1,\mathbf{P}_2\)</span>: Triangle vertices; <span class="math inline">\((1-b_1-b_2,\,b_1,\,b_2)\)</span>: Barycentric coordinates of the hit point.</li>
+<li><span class="math inline">\(\mathbf{E}_1=\mathbf{P}_1-\mathbf{P}_0\)</span>, <span class="math inline">\(\mathbf{E}_2=\mathbf{P}_2-\mathbf{P}_0\)</span>: Triangle edges; <span class="math inline">\(\mathbf{S}=\mathbf{o}-\mathbf{P}_0\)</span>.</li>
+<li><span class="math inline">\(\mathbf{S}_1=\mathbf{d}\times\mathbf{E}_2\)</span>, <span class="math inline">\(\mathbf{S}_2=\mathbf{S}\times\mathbf{E}_1\)</span>: Cross products reused across the three unknowns.</li>
+</ul>
+<p>A valid hit needs <span class="math inline">\(t&gt;0\)</span> and <span class="math inline">\(b_1,\,b_2,\,1-b_1-b_2\ge 0\)</span>. If <span class="math inline">\(\mathbf{S}_1\cdot\mathbf{E}_1=0\)</span>, the ray is parallel to the triangle’s plane.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="accelerating-ray-tracing" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="accelerating-ray-tracing"><span class="header-section-number">6.4</span> Accelerating Ray Tracing</h2>
+<ul>
+<li>Naive algorithm = #pixels ⨉ # traingles (⨉ #bounces)</li>
+</ul>
+<section id="bounding-volumes" class="level4" data-number="6.4.0.1">
+<h4 data-number="6.4.0.1" class="anchored" data-anchor-id="bounding-volumes"><span class="header-section-number">6.4.0.1</span> Bounding Volumes</h4>
+<p>Quick way to avoid intersections: bound complex object with a simple volume. If it doesn’t hit the volume, it doesn’t hit the object</p>
+</section>
+<section id="aabb-axis-aligned-bounding-box-of-a-transform" class="level4" data-number="6.4.0.2">
+<h4 data-number="6.4.0.2" class="anchored" data-anchor-id="aabb-axis-aligned-bounding-box-of-a-transform"><span class="header-section-number">6.4.0.2</span> AABB (Axis-Aligned Bounding Box) of a Transform</h4>
+<ul>
+<li>Tight: Transform the object itself (e.g., every mesh vertex), then take the min and max along each axis.</li>
+<li>Conservative: Transform the 8 corners of the old AABB, then take their min and max. Cheaper, but the box can be larger than needed.</li>
+</ul>
+</section>
+<section id="ray-intersection-with-axis-aligned-box" class="level4" data-number="6.4.0.3">
+<h4 data-number="6.4.0.3" class="anchored" data-anchor-id="ray-intersection-with-axis-aligned-box"><span class="header-section-number">6.4.0.3</span> Ray Intersection with Axis-Aligned Box</h4>
+<ul>
+<li><p>For the 3D box, <span class="math inline">\(t_{\text{enter}} = \max\{t_{\min}\}\)</span>, <span class="math inline">\(t_{\text{exit}} = \min\{t_{\max}\}\)</span></p></li>
+<li><p>Check if <span class="math inline">\(t_{\text{enter}} &lt; t_{\text{exit}}\)</span> and <span class="math inline">\(t_{\text{exit}}&gt;0\)</span> to determine if the ray hits the box.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why Axis-Aligned?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>General plane through <span class="math inline">\(\mathbf{p}'\)</span> with normal <span class="math inline">\(\mathbf{N}\)</span>: 3 subtractions, 6 multiplies, 1 division.</p>
+<p><span class="math display">\[
+t = \frac{(\mathbf{p}'-\mathbf{o})\cdot\mathbf{N}}{\mathbf{d}\cdot\mathbf{N}}
+\]</span></p></li>
+<li><p>Slabs perpendicular to the <span class="math inline">\(x\)</span>-axis: 1 subtraction, 1 division.</p>
+<p><span class="math display">\[
+t = \frac{\mathbf{p}'_x-\mathbf{o}_x}{\mathbf{d}_x}
+\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="uniform-spatial-partitions-grids" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="uniform-spatial-partitions-grids"><span class="header-section-number">6.4.1</span> Uniform Spatial Partitions (Grids)</h3>
+<section id="build-acceleration-grid" class="level4" data-number="6.4.1.1">
+<h4 data-number="6.4.1.1" class="anchored" data-anchor-id="build-acceleration-grid"><span class="header-section-number">6.4.1.1</span> Build Acceleration Grid</h4>
+<ul>
+<li>Find bounding box</li>
+<li>Create grid</li>
+<li>Store each object in overlapping cells</li>
+</ul>
+</section>
+<section id="ray-scene-intersection" class="level4" data-number="6.4.1.2">
+<h4 data-number="6.4.1.2" class="anchored" data-anchor-id="ray-scene-intersection"><span class="header-section-number">6.4.1.2</span> Ray-Scene Intersection</h4>
+<ul>
+<li><p>Step through grid in ray traversal order</p></li>
+<li><p>For each grid cell Test intersection with all objects stored at that cell</p></li>
+<li><p>Heuristic: #cells = C * #objs (C <span class="math inline">\(\approx\)</span> 27 in 3D)</p></li>
+<li><p>Teapot in a stadium problem</p></li>
+</ul>
+</section>
+<section id="triangle-voxel-overlap" class="level4" data-number="6.4.1.3">
+<h4 data-number="6.4.1.3" class="anchored" data-anchor-id="triangle-voxel-overlap"><span class="header-section-number">6.4.1.3</span> Triangle-Voxel Overlap</h4>
+<p>Search for a separating axis.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Separating Axis Test
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Two convex polyhedra are disjoint if and only if they can be separated along a face normal of either one, or along the cross product of an edge from each. For a triangle and a box this gives 13 candidate axes; if none separates them, they overlap:</p>
+<ol type="1">
+<li>Box normals <span class="math inline">\(\mathbf{e}_0,\mathbf{e}_1,\mathbf{e}_2\)</span> (3 tests): Test the box against the triangle’s minimal AABB.</li>
+<li>Triangle normal <span class="math inline">\(\mathbf{n}\)</span> (1 test): Plane/box test using only the two box diagonal vertices most aligned with <span class="math inline">\(\mathbf{n}\)</span>.</li>
+<li><span class="math inline">\(\mathbf{a}_{ij}=\mathbf{e}_i\times\mathbf{f}_j\)</span>, <span class="math inline">\(i,j\in\{0,1,2\}\)</span> (9 tests): Here <span class="math inline">\(\mathbf{f}_0=\mathbf{v}_1-\mathbf{v}_0\)</span>, <span class="math inline">\(\mathbf{f}_1=\mathbf{v}_2-\mathbf{v}_1\)</span>, <span class="math inline">\(\mathbf{f}_2=\mathbf{v}_0-\mathbf{v}_2\)</span> are the triangle edges.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="spatial-partitioning" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="spatial-partitioning"><span class="header-section-number">6.4.2</span> Spatial Partitioning</h3>
+<ul>
+<li>An object can be contained in multiple regions</li>
+</ul>
+<section id="oct-tree" class="level4" data-number="6.4.2.1">
+<h4 data-number="6.4.2.1" class="anchored" data-anchor-id="oct-tree"><span class="header-section-number">6.4.2.1</span> Oct-Tree</h4>
+<ul>
+<li>Top-down approach: Intersect root and find intersected children recursively</li>
+<li>Bottom-up approach: Find first leaf voxel intersected. Use neighbour finding to find next voxels</li>
+</ul>
+</section>
+<section id="bsp-tree" class="level4" data-number="6.4.2.2">
+<h4 data-number="6.4.2.2" class="anchored" data-anchor-id="bsp-tree"><span class="header-section-number">6.4.2.2</span> BSP-Tree</h4>
+<ul>
+<li>General case uses arbitrary splitting planes</li>
+<li>Difficult to build, traversal isn’t too bad</li>
+<li>Generally not used for rendering</li>
+</ul>
+</section>
+<section id="kd-tree" class="level4" data-number="6.4.2.3">
+<h4 data-number="6.4.2.3" class="anchored" data-anchor-id="kd-tree"><span class="header-section-number">6.4.2.3</span> KD-Tree</h4>
+<ul>
+<li>Split position: coordinate of split plane along axis</li>
+<li>No objects are stored in internal nodes</li>
+<li>Record [t_start, t_end] for each node to avoid traversing subtrees that are not intersected by the ray</li>
+</ul>
+</section>
+</section>
+<section id="object-partitions" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="object-partitions"><span class="header-section-number">6.4.3</span> Object Partitions</h3>
+<ul>
+<li>Bounding boxes for each set may overlap in space</li>
+</ul>
+<section id="bounding-volume-hierarchy-bvh" class="level4" data-number="6.4.3.1">
+<h4 data-number="6.4.3.1" class="anchored" data-anchor-id="bounding-volume-hierarchy-bvh"><span class="header-section-number">6.4.3.1</span> Bounding Volume Hierarchy (BVH)</h4>
+<ul>
+<li>Find bounding box</li>
+<li>Recursively split set of objects in two subsets</li>
+<li>Stop when necessary</li>
+<li>Poor splitting can lead to unbalanced trees and poor performance</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="basic-radiometry" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="basic-radiometry"><span class="header-section-number">6.5</span> Basic Radiometry</h2>
+<section id="radiant-energy" class="level4" data-number="6.5.0.1">
+<h4 data-number="6.5.0.1" class="anchored" data-anchor-id="radiant-energy"><span class="header-section-number">6.5.0.1</span> Radiant Energy</h4>
+<p><span class="math inline">\(\displaystyle Q [\text{J = Joule}]\)</span></p>
+</section>
+<section id="radiant-flux-power" class="level4" data-number="6.5.0.2">
+<h4 data-number="6.5.0.2" class="anchored" data-anchor-id="radiant-flux-power"><span class="header-section-number">6.5.0.2</span> Radiant Flux (Power)</h4>
+<p><span class="math inline">\(\displaystyle \Phi = \frac{dQ}{dt} [\text{W = Watt}] \text{ also }[ \text{lm} = \text{lumen} ]\)</span></p>
+</section>
+<section id="radiant-intensity" class="level4" data-number="6.5.0.3">
+<h4 data-number="6.5.0.3" class="anchored" data-anchor-id="radiant-intensity"><span class="header-section-number">6.5.0.3</span> Radiant Intensity</h4>
+<p>The radiant (luminous) intensity is the power per unit solid angle emitted by a point light source.</p>
+<p><span class="math inline">\(\displaystyle I(\omega) = \frac{d\Phi}{d\omega} [\text{W/sr}] \text{ also }[ \text{cd} = \text{candela} ]\)</span></p>
+</section>
+<section id="irradiance" class="level4" data-number="6.5.0.4">
+<h4 data-number="6.5.0.4" class="anchored" data-anchor-id="irradiance"><span class="header-section-number">6.5.0.4</span> Irradiance</h4>
+<p>The irradiance is the power per unit area incident on a surface point.</p>
+<p><span class="math inline">\(\displaystyle E(p) = \frac{d\Phi}{dA} [\text{W/m}^2] \text{ also }[ \text{lx} = \text{lux} ]\)</span></p>
+</section>
+<section id="radiance" class="level4" data-number="6.5.0.5">
+<h4 data-number="6.5.0.5" class="anchored" data-anchor-id="radiance"><span class="header-section-number">6.5.0.5</span> Radiance</h4>
+<p>The radiance (luminance) is the power emitted, reflected, transmitted or received by a surface, per unit solid angle, per projected unit area.</p>
+<p><span class="math inline">\(\displaystyle L(p, \omega) = \frac{d^2\Phi}{d\omega dA \cos \theta} [\text{W/(sr m}^2)] \text{ also }[ \text{cd/m}^2 = \text{nit} ]\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\theta\)</span> is the angle between the surface normal and the direction <span class="math inline">\(\omega\)</span>.</p></li>
+<li><p><span class="math inline">\(\displaystyle L(p, \omega) = \frac{dI(p, \omega)}{dA \cos \theta} = \frac{dE(p)}{d\omega \cos \theta}\)</span>.</p></li>
+<li><p><span class="math inline">\(\displaystyle dE(p) = L(p, \omega) \cos \theta \, d\omega\)</span>.</p></li>
+<li><p><span class="math inline">\(\displaystyle E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega\)</span>, where <span class="math inline">\(H^2\)</span> is the unit hemisphere.</p></li>
+</ul>
+</section>
+</section>
+<section id="light-transport" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="light-transport"><span class="header-section-number">6.6</span> Light Transport</h2>
+<section id="bidirectional-reflectance-distribution-function-brdf" class="level4" data-number="6.6.0.1">
+<h4 data-number="6.6.0.1" class="anchored" data-anchor-id="bidirectional-reflectance-distribution-function-brdf"><span class="header-section-number">6.6.0.1</span> Bidirectional Reflectance Distribution Function (BRDF)</h4>
+<p><span class="math inline">\(\displaystyle f_r(\omega_i \to \omega_r) = \frac{dL_r(\omega_r)}{dE_i(\omega_i)} = \frac{dL_r(\omega_r)}{L_i(\omega_i) \cos \theta_i \, d\omega_i} [\text{1/sr}]\)</span></p>
+</section>
+<section id="the-rendering-equation" class="level4" data-number="6.6.0.2">
+<h4 data-number="6.6.0.2" class="anchored" data-anchor-id="the-rendering-equation"><span class="header-section-number">6.6.0.2</span> The Rendering Equation</h4>
+<p><span class="math display">\[
+\underbrace{L_r(x, \omega_r)}_{\substack{\text{Reflected Light} \\ \text{(Output Image)} \\ \text{Unknown}}}
+= \underbrace{L_e(x, \omega_r)}_{\substack{\text{Emission} \\ \text{Known}}}
++ \int_{\Omega} \underbrace{L_r(x', -\omega_i)}_{\substack{\text{Reflected Light} \\ \text{Unknown}}}
+\, \underbrace{f(x, \omega_i, \omega_r)}_{\substack{\text{BRDF} \\ \text{Known}}}
+\, \underbrace{\cos \theta_i}_{\substack{\text{Cosine of} \\ \text{Incident Angle} \\ \text{Known}}}
+\, d\omega_i
+\]</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+(function () {
+  // Review mode shows only headings and block titles; search narrows them.
+  function setupReview(content) {
+    const blocks = [...content.querySelectorAll(".theorem")];
+
+    // A heading with text of its own is a topic: the text up to the next block or subsection.
+    const topics = [];
+    content.querySelectorAll("section").forEach((section) => {
+      // Key Results only repeat blocks above; the other supplementary parts are original content.
+      if (section.closest(".theorem, .callout, #key-results")) return;
+      const head = section.firstElementChild;
+      if (!head || !/^H[2-6]$/.test(head.tagName)) return;
+      const body = [];
+      for (let el = head.nextElementSibling; el && !el.matches("section, .theorem"); el = el.nextElementSibling) {
+        body.push(el);
+      }
+      if (!body.length) return;
+      section.classList.add("notes-topic");
+      head.classList.add("notes-topic-head");
+      body.forEach((el) => el.classList.add("notes-topic-body"));
+      topics.push(section);
+    });
+
+    const items = [...blocks, ...topics];
+    if (items.length < 3) return;
+
+    // Side notes and text after a block belong to it, up to the next block or subsection.
+    const extras = new Map();
+    blocks.forEach((block) => {
+      const list = [];
+      for (let el = block.nextElementSibling; el && !el.matches("section, .theorem"); el = el.nextElementSibling) {
+        list.push(el);
+      }
+      extras.set(block, list);
+    });
+    const syncExtras = () => {
+      const review = document.body.classList.contains("notes-review");
+      const searching = document.body.classList.contains("notes-search");
+      extras.forEach((list, block) => {
+        const open = !block.classList.contains("notes-filtered")
+          && (review ? block.classList.contains("is-revealed") : searching);
+        list.forEach((el) => el.classList.toggle("notes-block-extra", open));
+      });
+    };
+
+    // A block's text shares a paragraph with its title, so wrap it to hide it separately.
+    blocks.forEach((block) => {
+      const title = block.querySelector(".theorem-title");
+      if (!title) return;
+      // A block that opens with a list or equation has no text beside its title.
+      let rest = title.nextSibling;
+      while (rest && !rest.textContent.trim()) rest = rest.nextSibling;
+      if (!rest) {
+        while (title.nextSibling) title.nextSibling.remove();
+        title.parentElement.classList.add("notes-title-only");
+        return;
+      }
+      const lead = document.createElement("span");
+      lead.className = "notes-block-lead";
+      while (title.nextSibling) lead.append(title.nextSibling);
+      title.after(lead);
+    });
+
+    const tools = document.createElement("div");
+    tools.className = "notes-review-tools";
+    tools.innerHTML = `
+      <label class="notes-review-field">
+        <input type="search" class="notes-review-search" placeholder="Search this page"
+          aria-label="Search this page">
+      </label>
+      <p class="notes-review-status" aria-live="polite"></p>
+      <button type="button" class="notes-review-toggle" role="switch" aria-checked="false">
+        <span>Review mode</span>
+        <span class="notes-switch" aria-hidden="true"></span>
+      </button>`;
+    const toggle = tools.querySelector("button");
+    const search = tools.querySelector("input");
+    const status = tools.querySelector("p");
+
+    const margin = document.getElementById("quarto-margin-sidebar");
+    const header = content.querySelector("#title-block-header");
+    const place = () => {
+      const inMargin = margin && getComputedStyle(margin).display !== "none" && margin.offsetWidth > 0;
+      if (inMargin) margin.prepend(tools);
+      else if (header) header.after(tools);
+    };
+    place();
+    window.addEventListener("resize", place);
+
+    const searchText = new Map();
+    const textOf = (item) => {
+      if (!searchText.has(item)) {
+        const parts = item.matches(".theorem")
+          ? [item, ...extras.get(item)]
+          : [...item.children].filter((el) => el.matches(".notes-topic-head, .notes-topic-body"));
+        const text = parts.map((part) => {
+          const copy = part.cloneNode(true);
+          copy.querySelectorAll("mjx-container, .header-section-number").forEach((el) => el.remove());
+          return copy.textContent;
+        });
+        searchText.set(item, text.join(" ").toLowerCase());
+      }
+      return searchText.get(item);
+    };
+
+    const titleOf = (item) => (item.matches(".theorem") ? item.querySelector(".theorem-title") : item.firstElementChild);
+    const titles = items.map(titleOf).filter(Boolean);
+    const setRevealed = (item, on) => {
+      item.classList.toggle("is-revealed", on);
+      const title = titleOf(item);
+      if (title && document.body.classList.contains("notes-review")) {
+        title.setAttribute("aria-expanded", String(on));
+      }
+      syncExtras();
+    };
+
+    const setReview = (on) => {
+      document.body.classList.toggle("notes-review", on);
+      toggle.setAttribute("aria-checked", String(on));
+      items.forEach((item) => item.classList.remove("is-revealed"));
+      titles.forEach((title) => {
+        if (on) {
+          title.setAttribute("role", "button");
+          title.setAttribute("tabindex", "0");
+          title.setAttribute("aria-expanded", "false");
+        } else {
+          title.removeAttribute("role");
+          title.removeAttribute("tabindex");
+          title.removeAttribute("aria-expanded");
+        }
+      });
+      syncExtras();
+    };
+
+    // Searching shows matching items in full, and clearing it returns to the reading position.
+    let readingPosition = null;
+    const applySearch = () => {
+      const query = search.value.trim().toLowerCase();
+      const wasSearching = document.body.classList.contains("notes-search");
+      document.body.classList.toggle("notes-search", Boolean(query));
+      if (query && !wasSearching) {
+        readingPosition = window.scrollY;
+        content.scrollIntoView();
+      }
+      if (!query && wasSearching && readingPosition !== null) {
+        const position = readingPosition;
+        readingPosition = null;
+        requestAnimationFrame(() => window.scrollTo(0, position));
+      }
+      let shown = 0;
+      items.forEach((item) => {
+        const match = !query || textOf(item).includes(query);
+        item.classList.toggle("notes-filtered", !match);
+        if (match) shown += 1;
+      });
+      syncExtras();
+      status.textContent = query
+        ? shown ? `${shown} of ${items.length} match` : "No matches"
+        : "";
+    };
+
+    toggle.addEventListener("click", () => {
+      const on = !document.body.classList.contains("notes-review");
+      setReview(on);
+      if (on) content.scrollIntoView();
+    });
+
+    search.addEventListener("input", applySearch);
+
+    search.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        search.value = "";
+        applySearch();
+      }
+    });
+
+    blocks.forEach((block) => {
+      block.addEventListener("click", (event) => {
+        if (!document.body.classList.contains("notes-review") || event.target.closest("a")) return;
+        const onTitle = event.target.closest(".theorem-title");
+        if (onTitle) setRevealed(block, !block.classList.contains("is-revealed"));
+        else if (!block.classList.contains("is-revealed")) setRevealed(block, true);
+      });
+    });
+
+    topics.forEach((topic) => {
+      titleOf(topic).addEventListener("click", (event) => {
+        if (!document.body.classList.contains("notes-review") || event.target.closest("a")) return;
+        setRevealed(topic, !topic.classList.contains("is-revealed"));
+      });
+    });
+
+    items.forEach((item) => {
+      const title = titleOf(item);
+      if (!title) return;
+      title.addEventListener("keydown", (event) => {
+        if (document.body.classList.contains("notes-review") && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          setRevealed(item, !item.classList.contains("is-revealed"));
+        }
+      });
+    });
+  }
+
+  const content = document.getElementById("quarto-document-content");
+  if (!content) return;
+
+  // Separate a block's type and number from its name so each can be styled.
+  content.querySelectorAll(".theorem-title strong").forEach((label) => {
+    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+    if (!match) return;
+    label.textContent = "";
+    const kind = document.createElement("span");
+    kind.className = "notes-kind";
+    kind.textContent = match[1];
+    // Hover previews copy only the block's contents, so the type travels with the label.
+    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+    label.append(kind);
+    if (match[2]) {
+      const name = document.createElement("span");
+      name.className = "notes-name";
+      name.textContent = match[2];
+      label.append(name);
+    }
+  });
+
+  // Tag each side note by what it adds: a reason, an example, or a remark.
+  content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
+    const text = [...title.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!text) return;
+    let type = "Note";
+    if (/^\s*Why\b/.test(text.textContent)) type = "Reason";
+    if (/^\s*Example\b/.test(text.textContent)) {
+      type = "Example";
+      text.textContent = text.textContent.replace(/^\s*Example:?\s*/, "");
+    }
+    const tag = document.createElement("span");
+    tag.className = "notes-tag";
+    tag.textContent = type;
+    title.insertBefore(tag, text);
+    title.closest(".callout").dataset.noteType = type.toLowerCase();
+  });
+
+  // The frame sits on a wrapper so a wide table scrolls inside it.
+  content.querySelectorAll("table").forEach((table) => {
+    const frame = document.createElement("div");
+    frame.className = "notes-table";
+    table.before(frame);
+    frame.append(table);
+  });
+
+  // A list with nothing but links reads as a reference list, with each title split at its colon.
+  content.querySelectorAll("section ul").forEach((list) => {
+    if (list.closest(".theorem, .callout, .supplementary-notes")) return;
+    const rows = [...list.children];
+    const onlyLinks = rows.length > 1 && rows.every((row) => {
+      const copy = row.cloneNode(true);
+      const hasLink = copy.querySelector("a");
+      copy.querySelectorAll("a").forEach((link) => link.remove());
+      return hasLink && /^[\s()[\],;:.]*$/.test(copy.textContent);
+    });
+    if (!onlyLinks) return;
+    list.classList.add("notes-link-list");
+    rows.forEach((row) => {
+      const link = row.querySelector("a");
+      const parts = link.textContent.match(/^(.{2,40}?):\s+(.+)$/);
+      if (!parts || link.children.length) return;
+      link.textContent = "";
+      const name = document.createElement("span");
+      name.className = "notes-link-name";
+      name.textContent = parts[1];
+      const description = document.createElement("span");
+      description.className = "notes-link-description";
+      description.textContent = parts[2];
+      link.append(name, description);
+    });
+  });
+
+  setupReview(content);
+
+  // Mark each pseudocode function signature.
+  content.querySelectorAll("pre code > span").forEach((line) => {
+    if (/^(?!(?:for|if|while)\b)\S.*\):\s*$/.test(line.textContent)) line.classList.add("notes-code-head");
+  });
+
+  // Opening a section in the sidebar closes its siblings, so the list stays short.
+  document.getElementById("quarto-sidebar")?.addEventListener("show.bs.collapse", (event) => {
+    const item = event.target.parentElement;
+    [...item.parentElement.children].forEach((sibling) => {
+      const section = sibling === item ? null : sibling.querySelector(":scope > .collapse.show");
+      if (section) bootstrap.Collapse.getOrCreateInstance(section, { toggle: false }).hide();
+    });
+  });
+
+  // Reading progress along the top of the window.
+  const bar = document.createElement("div");
+  bar.className = "notes-progress";
+  bar.setAttribute("aria-hidden", "true");
+  document.body.append(bar);
+  let pending = false;
+  const update = () => {
+    pending = false;
+    const range = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${range > 0 ? window.scrollY / range : 0})`;
+  };
+  const schedule = () => {
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(update);
+    }
+  };
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  update();
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bobby50792\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../content/notes/advanced-computer-graphics/5.html" class="pagination-link" aria-label="Shading">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Shading</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../content/notes/artificial-intelligence/index.html" class="pagination-link" aria-label="Artificial Intelligence">
+        <span class="nav-page-text">Artificial Intelligence</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

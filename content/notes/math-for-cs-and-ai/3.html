@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,18 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-778b0e8b5083ab6391a0efe25b46868d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-042ccbaef66037d67884134f3afafe29.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-778b0e8b5083ab6391a0efe25b46868d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b3948cb1c6397878b8228e4b05748312.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-8ffcd0d0528a14b586caf8f18a8c9e6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-666ed25bb5f779c5b7bde07e6d4a7db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-8ffcd0d0528a14b586caf8f18a8c9e6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-42b4644679e9e3b57c8b2cb2e5fc0c04.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,7 +115,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed notes-studio quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating nav-fixed notes-studio quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -137,6 +138,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -166,13 +168,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -267,6 +275,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -276,6 +285,7 @@ window.Quarto = {
         return;
       const alternate = e.matches
       toggleColorMode(alternate);
+      refreshSafariScrollbar();
       localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
       toggleGiscusIfUsed(alternate, darkModeDefault);
     });
@@ -289,7 +299,7 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
@@ -297,8 +307,7 @@ window.Quarto = {
     <img src="../../../bobby.svg" alt="Bobby logo." class="navbar-logo dark-content">
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -321,17 +330,18 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/3.html">Generating Functions</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/3.html">Generating Functions</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -339,36 +349,36 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Notes</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Notes">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/calculus/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Calculus</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Calculus</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: Calculus">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/calculus/single-variable/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Single Variable</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Single Variable</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: Single Variable">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/calculus/single-variable/1.html" class="sidebar-item-text sidebar-link">
@@ -410,12 +420,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/calculus/multivariable/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multivariable</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Multivariable</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Multivariable">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/calculus/multivariable/1.html" class="sidebar-item-text sidebar-link">
@@ -483,12 +493,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/linear-algebra/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Algebra</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Linear Algebra</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: Linear Algebra">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/linear-algebra/1.html" class="sidebar-item-text sidebar-link">
@@ -542,12 +552,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/math-for-cs-and-ai/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math for CS and AI</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Math for CS and AI</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section: Math for CS and AI">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/math-for-cs-and-ai/1.html" class="sidebar-item-text sidebar-link">
@@ -595,21 +605,21 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/general-physics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">General Physics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-7-label">General Physics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: General Physics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mechanics &amp; Thermal</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Mechanics &amp; Thermal</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section: Mechanics &amp; Thermal">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/general-physics/mechanics-and-thermal-physics/1.html" class="sidebar-item-text sidebar-link">
@@ -705,12 +715,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/general-physics/electricity-and-magnetism/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Electromagnetism</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-9-label">Electromagnetism</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-controls="quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section: Electromagnetism">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-9" aria-labelledby="quarto-sidebar-section-9-label" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/general-physics/electricity-and-magnetism/1.html" class="sidebar-item-text sidebar-link">
@@ -772,12 +782,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/deep-learning/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-10-label">Deep Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-controls="quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section: Deep Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-10" aria-labelledby="quarto-sidebar-section-10-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/deep-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -819,12 +829,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/advanced-applied-probability/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Applied Probability</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-11-label">Applied Probability</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-controls="quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section: Applied Probability">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" aria-labelledby="quarto-sidebar-section-11-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-applied-probability/1.html" class="sidebar-item-text sidebar-link">
@@ -842,12 +852,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/machine-learning/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-12-label">Machine Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-controls="quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section: Machine Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-12" aria-labelledby="quarto-sidebar-section-12-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/1.html" class="sidebar-item-text sidebar-link">
@@ -871,12 +881,12 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/advanced-computer-graphics/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Computer Graphics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-13-label">Computer Graphics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-controls="quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section: Computer Graphics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-13" aria-labelledby="quarto-sidebar-section-13-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/1.html" class="sidebar-item-text sidebar-link">
@@ -907,17 +917,23 @@ window.Quarto = {
  <span class="menu-text">Shading</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../content/notes/artificial-intelligence/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Artificial Intelligence</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-14-label">Artificial Intelligence</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-controls="quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section: Artificial Intelligence">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-14" aria-labelledby="quarto-sidebar-section-14-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/artificial-intelligence/1.html" class="sidebar-item-text sidebar-link">
@@ -942,6 +958,12 @@ window.Quarto = {
  <span class="menu-text">Probabilistic Inference</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -952,7 +974,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -983,10 +1005,10 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/3.html">Generating Functions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></li><li class="breadcrumb-item"><a href="../../../content/notes/math-for-cs-and-ai/3.html">Generating Functions</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Generating Functions</h1>
 </div>
@@ -1303,7 +1325,7 @@ F_n(x) &amp;= \frac{e^{nx} - 1}{x} \cdot \hat{B}(-x)
 </div>
 </div>
 <div id="thm-math3-sequences-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.2 (Faulhaber’s formula)</strong></span> For all <span class="math inline">\(k \ge 0\)</span> and <span class="math inline">\(n \ge 1\)</span>, <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 3.2 (Faulhaber’s Formula)</strong></span> For all <span class="math inline">\(k \ge 0\)</span> and <span class="math inline">\(n \ge 1\)</span>, <span class="math display">\[
 \begin{aligned}
 S_k(n) = \frac{1}{k+1} \sum_{j=0}^k (-1)^j \binom{k+1}{j} B_j n^{k+1-j}.
 \end{aligned}
@@ -1344,7 +1366,7 @@ z = x + iy, \quad x, y \in \mathbb{R},
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Complex functions
+<span class="screen-reader-only">Note</span>Complex Functions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1355,7 +1377,7 @@ z = x + iy, \quad x, y \in \mathbb{R},
 </div>
 </div>
 <div id="def-mc-3-7" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.7 (Power series)</strong></span> A power series is an infinite sum of the form</p>
+<p><span class="theorem-title"><strong>Definition 3.7 (Power Series)</strong></span> A power series is an infinite sum of the form</p>
 <p><span class="math display">\[
 \sum_{n \geq 0} a_n z^n,
 \]</span></p>
@@ -1365,13 +1387,13 @@ z = x + iy, \quad x, y \in \mathbb{R},
 \]</span></p>
 </div>
 <div id="def-mc-3-8" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.8 (Limits of complex sequences)</strong></span> We say that a sequence <span class="math inline">\((z_n)_{n \geq 0}\)</span> of complex numbers converges to <span class="math inline">\(A \in \mathbb{C}\)</span> if for every <span class="math inline">\(\epsilon &gt; 0\)</span> there exists <span class="math inline">\(N\)</span> such that</p>
+<p><span class="theorem-title"><strong>Definition 3.8 (Limits of Complex Sequences)</strong></span> We say that a sequence <span class="math inline">\((z_n)_{n \geq 0}\)</span> of complex numbers converges to <span class="math inline">\(A \in \mathbb{C}\)</span> if for every <span class="math inline">\(\epsilon &gt; 0\)</span> there exists <span class="math inline">\(N\)</span> such that</p>
 <p><span class="math display">\[
 |z_n - A| &lt; \epsilon \quad \text{for all } n \geq N.
 \]</span></p>
 </div>
 <div id="thm-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.3 (Cauchy–Hadamard theorem)</strong></span> Let <span class="math inline">\(\sum_{n \geq 0} a_n z^n\)</span>. Define</p>
+<p><span class="theorem-title"><strong>Theorem 3.3 (Cauchy–Hadamard Theorem)</strong></span> Let <span class="math inline">\(\sum_{n \geq 0} a_n z^n\)</span>. Define</p>
 <p><span class="math display">\[
 R := \frac{1}{\limsup_{n \to \infty} |a_n|^{1/n}} \in [0, +\infty) \cup \{+\infty\}.
 \]</span></p>
@@ -1383,7 +1405,7 @@ R := \frac{1}{\limsup_{n \to \infty} |a_n|^{1/n}} \in [0, +\infty) \cup \{+\inft
 <p>This <span class="math inline">\(R\)</span> is called the radius of convergence of the power series.</p>
 </div>
 <div id="thm-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.4 (Euler’s formula)</strong></span> For every <span class="math inline">\(x \in \mathbb{R}\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 3.4 (Euler’s Formula)</strong></span> For every <span class="math inline">\(x \in \mathbb{R}\)</span>,</p>
 <p><span class="math display">\[
 e^{ix} = \cos x + i \sin x.
 \]</span></p>
@@ -1402,7 +1424,7 @@ e^{ix} = \cos x + i \sin x.
 <section id="holomorphic-functions" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="holomorphic-functions"><span class="header-section-number">3.2.3</span> Holomorphic Functions</h3>
 <div id="def-mc-3-10" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.10 (Open and closed sets)</strong></span> Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a set. We say that <span class="math inline">\(S\)</span> is open if for every <span class="math inline">\(z_0 \in S\)</span>, there exists some <span class="math inline">\(\delta &gt; 0\)</span> such that for all <span class="math inline">\(z \in \mathbb{C}\)</span> with <span class="math inline">\(|z - z_0| &lt; \delta\)</span>, we have</p>
+<p><span class="theorem-title"><strong>Definition 3.10 (Open and Closed Sets)</strong></span> Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a set. We say that <span class="math inline">\(S\)</span> is open if for every <span class="math inline">\(z_0 \in S\)</span>, there exists some <span class="math inline">\(\delta &gt; 0\)</span> such that for all <span class="math inline">\(z \in \mathbb{C}\)</span> with <span class="math inline">\(|z - z_0| &lt; \delta\)</span>, we have</p>
 <p><span class="math display">\[
 z \in S.
 \]</span></p>
@@ -1416,7 +1438,7 @@ f'(z_0) := \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}
 <p>exists. Further, we say that <span class="math inline">\(f\)</span> is differentiable on <span class="math inline">\(S\)</span> if it is differentiable at every point of <span class="math inline">\(S\)</span>.</p>
 </div>
 <div id="def-mc-3-12" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.12 (Infinite differentiability)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is infinitely differentiable at <span class="math inline">\(z_0 \in S\)</span> if all the higher order derivatives of <span class="math inline">\(f\)</span>,</p>
+<p><span class="theorem-title"><strong>Definition 3.12 (Infinite Differentiability)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is infinitely differentiable at <span class="math inline">\(z_0 \in S\)</span> if all the higher order derivatives of <span class="math inline">\(f\)</span>,</p>
 <p><span class="math display">\[
 f'(z_0), f''(z_0), f^{(3)}(z_0), f^{(4)}(z_0), \dots
 \]</span></p>
@@ -1438,10 +1460,10 @@ f(z) = \sum_{n \geq 0} a_n (z - z_0)^n.
 </ol>
 </div>
 <div id="def-mc-3-14" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.14 (Holomorphic function)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(z_0 \in S\)</span> if it is differentiable in an open set containing <span class="math inline">\(z_0\)</span>. Further, we say that <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(S\)</span> if it is differentiable at every point of <span class="math inline">\(S\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 3.14 (Holomorphic Function)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. We say that <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(z_0 \in S\)</span> if it is differentiable in an open set containing <span class="math inline">\(z_0\)</span>. Further, we say that <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(S\)</span> if it is differentiable at every point of <span class="math inline">\(S\)</span>.</p>
 </div>
 <div id="thm-math3-cr-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.6 (Cauchy–Riemann equations)</strong></span> Let <span class="math inline">\(f\)</span> be differentiable at <span class="math inline">\(z_0 = x_0 + iy_0\)</span>, and write <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 3.6 (Cauchy–Riemann Equations)</strong></span> Let <span class="math inline">\(f\)</span> be differentiable at <span class="math inline">\(z_0 = x_0 + iy_0\)</span>, and write <span class="math display">\[
 \begin{aligned}
 f(x + iy) = u(x, y) + iv(x, y).
 \end{aligned}
@@ -1479,7 +1501,7 @@ f(x + iy) = u(x, y) + iv(x, y).
 <p>such that the end point of <span class="math inline">\(\gamma_i\)</span> is the starting point of <span class="math inline">\(\gamma_{i+1}\)</span> for <span class="math inline">\(i \in [n - 1]\)</span>.</p>
 </div>
 <div id="def-mc-3-17" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.17 (Line integral)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. If <span class="math inline">\(\gamma : [a, b] \to S\)</span> is a smooth curve in <span class="math inline">\(S\)</span>, then the integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is defined by</p>
+<p><span class="theorem-title"><strong>Definition 3.17 (Line Integral)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. If <span class="math inline">\(\gamma : [a, b] \to S\)</span> is a smooth curve in <span class="math inline">\(S\)</span>, then the integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is defined by</p>
 <p><span class="math display">\[
 \int_\gamma f(z) \, \mathrm{d}z := \int_a^b f(\gamma(t))\gamma'(t) \, \mathrm{d}t.
 \]</span></p>
@@ -1489,7 +1511,7 @@ f(x + iy) = u(x, y) + iv(x, y).
 \]</span></p>
 </div>
 <div id="thm-math3-reparam-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.7 (Reparameterization and reversal of direction)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma_1 : [a, b] \to S\)</span> and <span class="math inline">\(\gamma_2 : [c, d] \to S\)</span> be two smooth curves. If there exists an increasing continuously differentiable function <span class="math inline">\(\phi : [c, d] \to [a, b]\)</span> such that <span class="math inline">\(\phi(c) = a\)</span>, <span class="math inline">\(\phi(d) = b\)</span>, and <span class="math inline">\(\gamma_2(t) = \gamma_1(\phi(t))\)</span> for all <span class="math inline">\(t \in [c, d]\)</span>, then <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 3.7 (Reparameterization and Reversal of Direction)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma_1 : [a, b] \to S\)</span> and <span class="math inline">\(\gamma_2 : [c, d] \to S\)</span> be two smooth curves. If there exists an increasing continuously differentiable function <span class="math inline">\(\phi : [c, d] \to [a, b]\)</span> such that <span class="math inline">\(\phi(c) = a\)</span>, <span class="math inline">\(\phi(d) = b\)</span>, and <span class="math inline">\(\gamma_2(t) = \gamma_1(\phi(t))\)</span> for all <span class="math inline">\(t \in [c, d]\)</span>, then <span class="math display">\[
 \begin{aligned}
 \int_{\gamma_2} f(z) \mathrm{d}z = \int_{\gamma_1} f(z) \mathrm{d}z.
 \end{aligned}
@@ -1502,7 +1524,7 @@ f(x + iy) = u(x, y) + iv(x, y).
 \]</span></p>
 </div>
 <div id="thm-5" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.9 (Cauchy–Goursat theorem)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then the contour integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is zero. That is,</p>
+<p><span class="theorem-title"><strong>Theorem 3.9 (Cauchy–Goursat Theorem)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function defined on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then the contour integral of <span class="math inline">\(f\)</span> along <span class="math inline">\(\gamma\)</span> is zero. That is,</p>
 <p><span class="math display">\[
 \int_\gamma f(z) \, \mathrm{d}z = 0.
 \]</span></p>
@@ -1514,16 +1536,16 @@ f(x + iy) = u(x, y) + iv(x, y).
 <p><span class="theorem-title"><strong>Definition 3.18 (Singularity)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function. We say that <span class="math inline">\(z_0\)</span> is a singular point, or a singularity of <span class="math inline">\(f\)</span> if <span class="math inline">\(f\)</span> is either not defined at <span class="math inline">\(z_0\)</span> or not holomorphic at <span class="math inline">\(z_0\)</span>, but for every <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a complex number <span class="math inline">\(z \in S\)</span> such that <span class="math inline">\(|z - z_0| &lt; \epsilon\)</span> and <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(z\)</span>.</p>
 </div>
 <div id="def-mc-3-19" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.19 (Isolated singularity)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function. We say that <span class="math inline">\(z_0\)</span> is an isolated singularity of <span class="math inline">\(f\)</span> if <span class="math inline">\(f\)</span> is either not defined at <span class="math inline">\(z_0\)</span> or not holomorphic at <span class="math inline">\(z_0\)</span>, but there exists an <span class="math inline">\(\epsilon &gt; 0\)</span> such that <span class="math inline">\(f\)</span> is holomorphic on the punctured disk <span class="math inline">\(\{z \in \mathbb{C} : 0 &lt; |z - z_0| &lt; \epsilon\}\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 3.19 (Isolated Singularity)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function. We say that <span class="math inline">\(z_0\)</span> is an isolated singularity of <span class="math inline">\(f\)</span> if <span class="math inline">\(f\)</span> is either not defined at <span class="math inline">\(z_0\)</span> or not holomorphic at <span class="math inline">\(z_0\)</span>, but there exists an <span class="math inline">\(\epsilon &gt; 0\)</span> such that <span class="math inline">\(f\)</span> is holomorphic on the punctured disk <span class="math inline">\(\{z \in \mathbb{C} : 0 &lt; |z - z_0| &lt; \epsilon\}\)</span>.</p>
 </div>
 <div id="thm-6" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.10 (Cauchy’s integral formula)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z\)</span> enclosed by <span class="math inline">\(\gamma\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 3.10 (Cauchy’s Integral Formula)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z\)</span> enclosed by <span class="math inline">\(\gamma\)</span>,</p>
 <p><span class="math display">\[
 f(z) = \frac{1}{2\pi i} \int_\gamma \frac{f(w)}{w - z} \, \mathrm{d}w.
 \]</span></p>
 </div>
 <div id="thm-7" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.11 (Cauchy’s estimate)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(z_0 \in S\)</span> and <span class="math inline">\(r &gt; 0\)</span> be such that the closed disk <span class="math inline">\(\overline{D}(z_0, r) \subseteq S\)</span>. If <span class="math inline">\(|f(z)| \leq M\)</span> for all <span class="math inline">\(z \in \overline{D}(z_0, r)\)</span>, then for all <span class="math inline">\(n \geq 0\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 3.11 (Cauchy’s Estimate)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(z_0 \in S\)</span> and <span class="math inline">\(r &gt; 0\)</span> be such that the closed disk <span class="math inline">\(\overline{D}(z_0, r) \subseteq S\)</span>. If <span class="math inline">\(|f(z)| \leq M\)</span> for all <span class="math inline">\(z \in \overline{D}(z_0, r)\)</span>, then for all <span class="math inline">\(n \geq 0\)</span>,</p>
 <p><span class="math display">\[
 |f^{(n)}(z_0)| \leq \frac{n! M}{r^n}.
 \]</span></p>
@@ -1535,16 +1557,16 @@ f(z) = \sum_{n \geq 0} a_n(z-z_0)^n, \quad \text{where } a_n = \frac{1}{2\pi i} 
 \]</span></p>
 </div>
 <div id="thm-9" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.13 (Cauchy integral formula for derivatives)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z\)</span> enclosed by <span class="math inline">\(\gamma\)</span> and every integer <span class="math inline">\(n \geq 0\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 3.13 (Cauchy Integral Formula for Derivatives)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span>. Then for every <span class="math inline">\(z\)</span> enclosed by <span class="math inline">\(\gamma\)</span> and every integer <span class="math inline">\(n \geq 0\)</span>,</p>
 <p><span class="math display">\[
 f^{(n)}(z) = \frac{n!}{2\pi i} \int_\gamma \frac{f(w)}{(w - z)^{n+1}} \, \mathrm{d}w.
 \]</span></p>
 </div>
 <div id="thm-10" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.14 (Identity theorem)</strong></span> Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a connected open set, and let <span class="math inline">\(f,g : S \rightarrow \mathbb{C}\)</span> be holomorphic. If there exists a non-empty open set <span class="math inline">\(U \subseteq S\)</span> such that <span class="math inline">\(f(z)=g(z)\)</span> for every <span class="math inline">\(z\in U\)</span>, then <span class="math inline">\(f(z)=g(z)\)</span> for every <span class="math inline">\(z\in S\)</span>.</p>
+<p><span class="theorem-title"><strong>Theorem 3.14 (Identity Theorem)</strong></span> Let <span class="math inline">\(S \subseteq \mathbb{C}\)</span> be a connected open set, and let <span class="math inline">\(f,g : S \rightarrow \mathbb{C}\)</span> be holomorphic. If there exists a non-empty open set <span class="math inline">\(U \subseteq S\)</span> such that <span class="math inline">\(f(z)=g(z)\)</span> for every <span class="math inline">\(z\in U\)</span>, then <span class="math inline">\(f(z)=g(z)\)</span> for every <span class="math inline">\(z\in S\)</span>.</p>
 </div>
 <div id="def-mc-3-20" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.20 (Removable and non-removable singularities)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function with an isolated singularity at <span class="math inline">\(z_0\)</span>. We say that <span class="math inline">\(z_0\)</span> is a removable singularity of <span class="math inline">\(f\)</span> if there exists a complex number <span class="math inline">\(w \in \mathbb{C}\)</span> such that assigning the value <span class="math inline">\(w\)</span> to <span class="math inline">\(f(z_0)\)</span> makes <span class="math inline">\(f\)</span> holomorphic at <span class="math inline">\(z_0\)</span>. We say that <span class="math inline">\(z_0\)</span> is a non-removable singularity of <span class="math inline">\(f\)</span> if it is not removable.</p>
+<p><span class="theorem-title"><strong>Definition 3.20 (Removable and Non-Removable Singularities)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a complex function with an isolated singularity at <span class="math inline">\(z_0\)</span>. We say that <span class="math inline">\(z_0\)</span> is a removable singularity of <span class="math inline">\(f\)</span> if there exists a complex number <span class="math inline">\(w \in \mathbb{C}\)</span> such that assigning the value <span class="math inline">\(w\)</span> to <span class="math inline">\(f(z_0)\)</span> makes <span class="math inline">\(f\)</span> holomorphic at <span class="math inline">\(z_0\)</span>. We say that <span class="math inline">\(z_0\)</span> is a non-removable singularity of <span class="math inline">\(f\)</span> if it is not removable.</p>
 </div>
 <div id="thm-11" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.15 (Radius of Convergence from Singularities)</strong></span> Let <span class="math inline">\(f : S \to \mathbb{C}\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Fix <span class="math inline">\(z_0 \in S\)</span>. If the following holds for some <span class="math inline">\(R &gt; 0\)</span>:</p>
@@ -1562,14 +1584,14 @@ f^{(n)}(z) = \frac{n!}{2\pi i} \int_\gamma \frac{f(w)}{(w - z)^{n+1}} \, \mathrm
 <section id="expansion-around-isolated-singularities" class="level3" data-number="3.2.6">
 <h3 data-number="3.2.6" class="anchored" data-anchor-id="expansion-around-isolated-singularities"><span class="header-section-number">3.2.6</span> Expansion Around Isolated Singularities</h3>
 <div id="thm-12" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.16 (Laurent’s theorem)</strong></span> Let <span class="math inline">\(f\)</span> be holomorphic on a punctured disk <span class="math inline">\(D_r(z_0) \setminus \{z_0\}\)</span> for some <span class="math inline">\(z_0 \in \mathbb{C}\)</span> and some <span class="math inline">\(r &gt; 0\)</span>. Then there exists a unique sequence <span class="math inline">\((a_n)_{n \geq 0}\)</span> and a unique sequence <span class="math inline">\((b_n)_{n \geq 1}\)</span> such that</p>
+<p><span class="theorem-title"><strong>Theorem 3.16 (Laurent’s Theorem)</strong></span> Let <span class="math inline">\(f\)</span> be holomorphic on a punctured disk <span class="math inline">\(D_r(z_0) \setminus \{z_0\}\)</span> for some <span class="math inline">\(z_0 \in \mathbb{C}\)</span> and some <span class="math inline">\(r &gt; 0\)</span>. Then there exists a unique sequence <span class="math inline">\((a_n)_{n \geq 0}\)</span> and a unique sequence <span class="math inline">\((b_n)_{n \geq 1}\)</span> such that</p>
 <p><span class="math display">\[
 f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n + \sum_{n=1}^\infty b_n (z - z_0)^{-n}
 \]</span></p>
 <p>for every <span class="math inline">\(z \in D_r(z_0) \setminus \{z_0\}\)</span>.</p>
 </div>
 <div id="def-mc-3-21" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.21 (Classification of isolated singularities)</strong></span> Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span> with Laurent series expansion</p>
+<p><span class="theorem-title"><strong>Definition 3.21 (Classification of Isolated Singularities)</strong></span> Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span> with Laurent series expansion</p>
 <p><span class="math display">\[
 f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n.
 \]</span></p>
@@ -1587,13 +1609,13 @@ f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n
 <p>Then the coefficient <span class="math inline">\(a_{-1}\)</span> of <span class="math inline">\((z - z_0)^{-1}\)</span> is called the residue of <span class="math inline">\(f\)</span> at <span class="math inline">\(z_0\)</span>, which is denoted by <span class="math inline">\(\operatorname{Res}(f, z_0)\)</span>.</p>
 </div>
 <div id="thm-13" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.17 (Cauchy’s residue theorem)</strong></span> Let <span class="math inline">\(f\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span> except for <span class="math inline">\(m\)</span> isolated singularities <span class="math inline">\(z_1, \dots, z_m\)</span>. Then</p>
+<p><span class="theorem-title"><strong>Theorem 3.17 (Cauchy’s Residue Theorem)</strong></span> Let <span class="math inline">\(f\)</span> be a holomorphic function on an open set <span class="math inline">\(S \subseteq \mathbb{C}\)</span>. Let <span class="math inline">\(\gamma\)</span> be a simple closed counterclockwise contour such that the region enclosed by <span class="math inline">\(\gamma\)</span> is contained in <span class="math inline">\(S\)</span> except for <span class="math inline">\(m\)</span> isolated singularities <span class="math inline">\(z_1, \dots, z_m\)</span>. Then</p>
 <p><span class="math display">\[
 \frac{1}{2\pi i} \int_\gamma f(z) \, \mathrm{d}z = \sum_{j=1}^m \operatorname{Res}(f, z_j).
 \]</span></p>
 </div>
 <div id="prp-mc-3-1" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3.1 (How to compute residues)</strong></span> Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span>.</p>
+<p><span class="theorem-title"><strong>Proposition 3.1 (How to Compute Residues)</strong></span> Let <span class="math inline">\(z_0\)</span> be an isolated singularity of <span class="math inline">\(f\)</span>.</p>
 <ol type="1">
 <li><p>If <span class="math inline">\(\lim_{z \to z_0} (z - z_0)f(z)\)</span> exists, then</p>
 <p><span class="math display">\[
@@ -1624,13 +1646,13 @@ f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n
 <section id="probability-generating-functions" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="probability-generating-functions"><span class="header-section-number">3.3.1</span> Probability Generating Functions</h3>
 <div id="def-mc-3-23" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.23 (Probability generating function)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in non-negative integers. Its probability generating function (PGF) is defined as</p>
+<p><span class="theorem-title"><strong>Definition 3.23 (Probability Generating Function)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in non-negative integers. Its probability generating function (PGF) is defined as</p>
 <p><span class="math display">\[
 G_X(z) := \sum_{k \geq 0} \operatorname{Pr}[X = k] z^k.
 \]</span></p>
 </div>
 <div id="thm-15" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.19 (Expectation and variance from the PGF)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in non-negative integers. Then</p>
+<p><span class="theorem-title"><strong>Theorem 3.19 (Expectation and Variance from the PGF)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable taking values in non-negative integers. Then</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mathbb{E}[X] &amp;= G_X'(1), \\
@@ -1649,7 +1671,7 @@ G_{X+Y}(z) = G_X(z)G_Y(z).
 <section id="moment-generating-functions" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="moment-generating-functions"><span class="header-section-number">3.3.2</span> Moment Generating Functions</h3>
 <div id="def-mc-3-24" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.24 (Moment generating function)</strong></span> The moment generating function (MGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="theorem-title"><strong>Definition 3.24 (Moment Generating Function)</strong></span> The moment generating function (MGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
 <p><span class="math display">\[
 M_X(t) := \mathbb{E}[e^{tX}].
 \]</span></p>
@@ -1680,7 +1702,7 @@ M_X(t) = \prod_{k=1}^n M_{X_k}(c_k t).
 <p>where <span class="math inline">\(\int_{c-iT}^{c+iT}\)</span> means integrating along the line segment from <span class="math inline">\(c - iT\)</span> to <span class="math inline">\(c + iT\)</span>, i.e., <span class="math inline">\(\gamma_{c,T}(t) = c + it\)</span> for <span class="math inline">\(t \in [-T, T]\)</span>.</p>
 </div>
 <div id="thm-19" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.23 (Inversion formula for the MGF)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with MGF <span class="math inline">\(M_X(t)\)</span>. For every <span class="math inline">\(x_1 &lt; x_2\)</span>, define</p>
+<p><span class="theorem-title"><strong>Theorem 3.23 (Inversion Formula for the MGF)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with MGF <span class="math inline">\(M_X(t)\)</span>. For every <span class="math inline">\(x_1 &lt; x_2\)</span>, define</p>
 <p><span class="math display">\[
 p_X(x_1, x_2) := \frac{1}{2} \operatorname{Pr}[X = x_1] + \operatorname{Pr}[x_1 &lt; X &lt; x_2] + \frac{1}{2} \operatorname{Pr}[X = x_2].
 \]</span></p>
@@ -1693,7 +1715,7 @@ p_X(x_1, x_2) = \frac{1}{2\pi i} \lim_{T \to +\infty} \int_{c-iT}^{c+iT} \frac{e
 <section id="cumulant-generating-functions" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="cumulant-generating-functions"><span class="header-section-number">3.3.4</span> Cumulant Generating Functions</h3>
 <div id="def-mc-3-25" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.25 (Cumulant generating function)</strong></span> The cumulant generating function (CGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
+<p><span class="theorem-title"><strong>Definition 3.25 (Cumulant Generating Function)</strong></span> The cumulant generating function (CGF) of a random variable <span class="math inline">\(X\)</span> is defined as</p>
 <p><span class="math display">\[
 K_X(t) := \log M_X(t) = \sum_{m \geq 1} \kappa_m(X) \frac{t^m}{m!}, \quad \kappa_m(X) = K_X^{(m)}(0).
 \]</span></p>
@@ -1746,7 +1768,7 @@ K_X(t) = \sum_{k=1}^n K_{X_k}(c_k t), \quad \kappa_m(X) = \sum_{k=1}^n \kappa_m(
 <section id="exponential-tilting" class="level3" data-number="3.3.5">
 <h3 data-number="3.3.5" class="anchored" data-anchor-id="exponential-tilting"><span class="header-section-number">3.3.5</span> Exponential Tilting</h3>
 <div id="def-mc-3-26" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.26 (Exponential tilting)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with probability mass function <span class="math inline">\(p_X(x)\)</span>. The <span class="math inline">\(\lambda\)</span>-tilted distribution of <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(\mathcal{T}_{X,\lambda}\)</span>, is defined by the distribution corresponding to the probability mass function</p>
+<p><span class="theorem-title"><strong>Definition 3.26 (Exponential Tilting)</strong></span> Let <span class="math inline">\(X\)</span> be a random variable with probability mass function <span class="math inline">\(p_X(x)\)</span>. The <span class="math inline">\(\lambda\)</span>-tilted distribution of <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(\mathcal{T}_{X,\lambda}\)</span>, is defined by the distribution corresponding to the probability mass function</p>
 <p><span class="math display">\[
 q(x) = \frac{p_X(x)e^{\lambda x}}{M_X(\lambda)}, \quad \forall x \in \mathbb{R}.
 \]</span></p>
@@ -1789,7 +1811,7 @@ h_n(w) = \left( \frac{1}{f(w)} \right)^n.
 \]</span></p>
 </div>
 <div id="thm-23" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.27 (Laurent series coefficient representation and uniqueness)</strong></span> Let <span class="math inline">\(f(z)\)</span> be a holomorphic function defined in an open annulus centered at <span class="math inline">\(z_0\)</span>. If <span class="math inline">\(f(z)\)</span> can be represented as a Laurent series of the form</p>
+<p><span class="theorem-title"><strong>Theorem 3.27 (Laurent Series Coefficient Representation and Uniqueness)</strong></span> Let <span class="math inline">\(f(z)\)</span> be a holomorphic function defined in an open annulus centered at <span class="math inline">\(z_0\)</span>. If <span class="math inline">\(f(z)\)</span> can be represented as a Laurent series of the form</p>
 <p><span class="math display">\[
 f(z) = \sum_{n=-\infty}^{\infty} a_n (z - z_0)^n
 \]</span></p>
@@ -2126,15 +2148,50 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -2213,7 +2270,8 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -2222,8 +2280,69 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -2237,6 +2356,7 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -2399,44 +2519,54 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -2535,7 +2665,10 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../../../content/notes/math-for-cs-and-ai/2.html" class="pagination-link" aria-label="Sampling and Concentration">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sampling and Concentration</span>
