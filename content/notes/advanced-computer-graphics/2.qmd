@@ -13,9 +13,8 @@ crossref:
 
 #### Transformations
 
-Translation (not linear), rotation, reflection, scaling, and shear.
-
-We could leverage matrix multiplication without translation.
+- Translation (not linear), rotation, reflection, scaling, and shear.
+- We could leverage matrix multiplication without translation.
 
 #### Homogeneous Coordinates
 
@@ -71,8 +70,7 @@ Structural properties of a manifold.
 
 ::: {#def-acg-2-4 name="Topological Equivalence"}
 
-Two surfaces $M$ and $N$ are topologically equivalent if
-there is a differentiable bijection between $M$ and $N$.
+Two surfaces $M$ and $N$ are topologically equivalent if there is a homeomorphism between them: a continuous bijection $f:M\to N$ whose inverse $f^{-1}$ is also continuous.
 
 :::
 
@@ -98,7 +96,6 @@ The topology of $SO(2)$ and $SO(3)$ is different from $(-1,1)^n$, so parameteriz
 
 :::
 
-## 3D Rotation Representations
 
 ### Euler Angles
 
@@ -144,7 +141,7 @@ $$
 
 ::: {.callout-note collapse="true"}
 
-## Why Euler Angles Are Not Unique
+## Euler Angles
 
 Euler Angle is not unique for some rotations (gimbal lock).
 
@@ -380,14 +377,13 @@ this is a rotation by the single unit quaternion $q_2q_1$.
   $$
   \hat{\omega}
   =
-  \begin{cases}
-  \displaystyle
-  \frac{1}{\sin(\theta/2)}\vec{v},
-  & \theta\neq 0, \\[8pt]
-  0,
-  & \theta=0.
-  \end{cases}
+  \frac{\vec{v}}{\sin(\theta/2)}
+  =
+  \frac{\vec{v}}{\|\vec{v}\|},
+  \qquad \vec{v}\neq 0.
   $$
+
+  When $\vec{v}=0$, $q=\pm1$ is the identity rotation, so the axis can be arbitrary.
 
 :::
 
@@ -448,7 +444,7 @@ $$
 - Drop Z coordinate
 - Translate and scale the resulting rectangle to $[-1, 1]^2$
 
-Translate the center to the origin first, then scale each dimension to length 2.
+Translate the center to the origin first, then scale each dimension to length 2. Here $n$ and $f$ are the $z$-coordinates of the near and far planes; since the camera looks at $-z$, $0>n>f$.
 
 $$
 M_{\text{ortho}} =
@@ -493,13 +489,36 @@ M_{\mathrm{ortho}}
 \begin{bmatrix}
 \dfrac{2}{r-l} & 0 & 0 & -\dfrac{r+l}{r-l} \\[6pt]
 0 & \dfrac{2}{t-b} & 0 & -\dfrac{t+b}{t-b} \\[6pt]
-0 & 0 & -\dfrac{2}{f-n} & -\dfrac{f+n}{f-n} \\[6pt]
+0 & 0 & \dfrac{2}{n-f} & -\dfrac{n+f}{n-f} \\[6pt]
 0 & 0 & 0 & 1
 \end{bmatrix}
 $$
 
 - Aspect ratio = width / height
-- Field of view (FOV) = angle of the camera lens = $2\arctan(\frac{h}{2n})$ where $h$ is the height of the near plane and $n$ is the distance from the camera to the near plane.
+- Field of view (FOV) = angle of the camera lens = $2\arctan(\frac{h}{2|n|})$ where $h$ is the height of the near plane and $|n|$ is the distance from the camera to the near plane.
+
+:::
+
+::: {.callout-note collapse="true"}
+
+## Effect on a Point $(x,y,z)$
+
+Here $n$ and $f$ are the $z$-coordinates of the near and far planes, so $0>n>f$. Apply the squish matrix, then divide by $w=z$:
+
+$$
+M_{\mathrm{persp}\to\mathrm{ortho}}
+\begin{bmatrix} x \\ y \\ z \\ 1 \end{bmatrix}
+=
+\begin{bmatrix} nx \\ ny \\ (n+f)z-nf \\ z \end{bmatrix}
+\sim
+\begin{bmatrix} \dfrac{nx}{z} \\[6pt] \dfrac{ny}{z} \\[6pt] n+f-\dfrac{nf}{z} \\[6pt] 1 \end{bmatrix}.
+$$
+
+Suppose the depth buffer stores values in $[0,1]$, with the near plane at $0$ and the far plane at $1$. Remapping the depth $n+f-nf/z$ above to this range gives
+
+$$
+z_{\mathrm{buf}}=\frac{f-nf/z}{f-n}.
+$$
 
 :::
 
@@ -517,14 +536,7 @@ $$
 
 - Usually set $s_x,s_y$ to $0$, treat $w_s,h_s$ as the screen width and height, and set $f_s,n_s$ to $-1,1$ so that the $z$ coordinates are untouched.
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
-### Key Results
+### Key Results -->
 
-- @def-acg-2-3: Homogeneous coordinates let a single $4\times4$ matrix express translation together with linear transformations.
-- @def-acg-2-5: $SO(n)$ is the set of rotations, the matrices with $\det(R)=1$ and $RR^T=I$.
-- @thm-acg-2-1: Any rotation in $SO(3)$ is a rotation about a fixed axis through a positive angle.
-- @thm-acg-2-2: $e^{[\hat{\omega}]\theta}=I+[\hat{\omega}]\sin\theta+[\hat{\omega}]^2(1-\cos\theta)$.
-- @prp-acg-2-3: A unit quaternion rotates by $x'=qxq^{-1}$, and rotations compose as $q_{\text{total}}=q_2q_1$.
-- @prp-acg-2-4: $q=[\cos(\theta/2),\sin(\theta/2)\hat{\omega}]$.
-- @def-acg-2-10: Squish the frustum into a cuboid, then apply the orthographic projection.

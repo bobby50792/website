@@ -130,9 +130,9 @@ A canonical problem.
 
 #### 2D to 2.5D — Depth Prediction
 
-Input image $\to$ convolutional network $\to$ predicted depth.
+- Input image $\to$ convolutional network $\to$ predicted depth.
 
-Compare predicted depth $y$ with ground-truth depth $y^*$:
+- Compare predicted depth $y$ with ground-truth depth $y^*$:
 
 ::: {#def-acg-3-1 name="Squared Depth Loss"}
 
@@ -162,9 +162,9 @@ $$
 
 #### Image-Based 3D Object Modeling
 
-Object-centric, supervised 3D learning.
+- Object-centric, supervised 3D learning.
 
-Input image $\to$ CNN $\to$ predicted 3D; compare with ground-truth 3D.
+- Input image $\to$ CNN $\to$ predicted 3D; compare with ground-truth 3D.
 
 #### Learning Workflow
 
@@ -215,10 +215,8 @@ Advantages of using meshes:
 - Smoothness objectives respect connectivity: Laplacian smoothness and normal consistency.
 - Can sample a varying number of points.
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
-### Key Results
+### Key Results -->
 
-- @def-acg-3-2: The offset $\alpha$ removes a global scale from the comparison between predicted and ground-truth depth.
-- [Implicit Volumetric Representation](#implicit-volumetric-representation): Instead of a voxel grid, learn a continuous occupancy function of a latent code and a query point.
-- @def-acg-3-3: Each point is matched to its nearest neighbor in the other set, so the loss compares unordered point sets.
+

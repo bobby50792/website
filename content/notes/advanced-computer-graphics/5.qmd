@@ -10,22 +10,18 @@ crossref:
 
 ## Shading
 
-#### Shading Is Local
+Compute the light reflected toward the camera at a specific shading point.
 
-Compute light reflected toward camera
-at a specific shading point.
+### Diffuse Reflection
 
-#### Diffuse Reflection
+- Light is scattered uniformly in all directions.
+- The light received per unit area is proportional to
 
-Light is scattered uniformly in all directions.
+  $$
+  \cos\theta = \mathbf{l}\cdot\mathbf{n}.
+  $$
 
-In general, light per unit area is proportional to
-
-$$
-\cos\theta = \mathbf{l}\cdot\mathbf{n}.
-$$
-
-::: {#def-acg-5-1 name="Lambertian (Diffuse) Shading"}
+::: {#def-acg-5-1 name="Diffuse Shading (Lambertian)"}
 
 $$
 L_d = k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l}).
@@ -39,6 +35,8 @@ $$
 - $\mathbf{l}$: Unit direction from the shading point toward the light source.
 
 :::
+
+### Specular Reflection
 
 ::: {#def-acg-5-2 name="Specular Term (Blinn–Phong)"}
 
@@ -57,6 +55,8 @@ $$
 
 :::
 
+### Ambient Reflection
+
 ::: {#def-acg-5-3 name="Ambient Term"}
 
 $$
@@ -68,9 +68,11 @@ $$
 
 :::
 
+#### Blinn–Phong Reflection Model
+
 ::: {#def-acg-5-4 name="Blinn–Phong Reflection Model"}
 
-Ambient + diffuse + specular.
+Sum the ambient, diffuse, and specular terms:
 
 $$
 \begin{aligned}
@@ -85,10 +87,8 @@ $$
 #### Shading Frequencies
 
 - Flat shading (Face): One color per polygon. Not good for smooth surfaces.
-
 - Gouraud shading (Vertex): Interpolate vertex colors across polygon.
-
-- Phong Shading (Pixel): Interpolate normals across polygon and compute color per pixel. More expensive but better results.
+- Phong shading (Pixel): Interpolate normals across polygon and compute color per pixel. More expensive but better results.
 
 ::: {#def-acg-5-5 name="Per-Vertex Normals"}
 
@@ -119,7 +119,7 @@ Here $\alpha,\beta,\gamma$ are barycentric weights with $\alpha+\beta+\gamma=1$.
 
 #### Real-Time Rendering Pipeline
 
-Convert 3D vertices into a pixel image.
+- Convert 3D vertices into a pixel image.
 
 1. Vertex processing: Transform and project 3D vertices.
 2. Triangle processing: Assemble vertices into triangles and clip them to the view volume.
@@ -127,16 +127,13 @@ Convert 3D vertices into a pixel image.
 4. Fragment processing: Compute fragment colors using shading and textures.
 5. Framebuffer operations: Apply depth/stencil tests and blending, then write the final image for display.
 
-Data flow: Vertices → triangles → fragments → shaded fragments → pixels.
+- Data flow: Vertices → triangles → fragments → shaded fragments → pixels.
 
 ## Texturing
 
 ### Texture Mapping
 
-#### UV Unwrapping by Optimization
-
-Assign 2D $(u,v)$ coordinates to mesh vertices to flatten the surface with minimal distortion.
-
+- Assign 2D $(u,v)$ coordinates to mesh vertices to flatten the surface with minimal distortion.
 - Preserve surface distances and/or triangle angles as closely as possible.
 - Cuts (seams) are usually required to unfold the surface into UV charts.
 
@@ -182,13 +179,18 @@ Barycentric coordinates are generally not preserved under perspective projection
 
 ### Texture Queries
 
-#### Texture Magnification - Easy Case
+#### Texture Magnification (Easy Case)
 
-Bilinear, Bicubic interpolation of texels.
+Interpolate texels bilinearly or bicubically.
 
-#### Texture Minification - Hard Case
+#### Texture Minification (Hard Case)
 
-- Screen Pixel Footprint in Texture
+A screen pixel's footprint in the texture can cover many texels, so the texture must be filtered over that footprint.
+
+#### Mipmap
+
+- Precompute a hierarchy of downsampled textures.
+- Use the level that best matches the screen pixel's footprint in the texture.
 
 ::: {#def-acg-5-9 name="Mipmap Level Selection"}
 
@@ -206,45 +208,40 @@ D &= \log_2 L.
 $$
 
 - Use base-level texels for $(u,v)$ and screen pixels for $(x,y)$; scale normalized UVs by texture width and height first.
-
 - Clamp $D$ to the available levels, and blend adjacent levels when $D$ is fractional (trilinear filtering).
-
-- Limitation: Overblur
+- Limitation: Overblur (anisotropic footprints are poorly matched).
 
 :::
 
-#### Anisotropic Filtering
+#### Ripmaps and Summed-Area Tables (Anisotropic Filtering)
 
-- Ripmaps and summed-area tables: Support filtering over axis-aligned rectangular regions.
+- Support filtering over axis-aligned rectangular regions.
 - Limitation: Diagonal footprints are poorly matched and may cause overblurring.
 
-EWA filtering (Elliptical Weighted Average):
+#### EWA Filtering (Elliptical Weighted Average)
 
+- Approximate tilted or irregular footprints with elliptical filters.
 - Use multiple texture lookups and compute a weighted average.
 - A mipmap hierarchy helps reduce sampling cost.
-- Approximate tilted or irregular footprints with elliptical filters.
 
 ### Applications of Textures
 
-In modern GPUs, texture = memory + range query (filtering)
+In modern GPUs, texture = memory + range query (filtering).
 
 #### Environment Mapping
 
 - Use a texture to represent the surrounding environment for reflections.
-
-- Prone to distortion (top and bottom parts)
+- Prone to distortion (top and bottom parts).
 
 #### Cube Map
 
-- A vector maps to cube point along that direction. The cube is textured with 6 square textures, one for each face.
-
-- Much less distortion
+- A vector maps to the cube point along that direction. The cube is textured with 6 square textures, one for each face.
+- Much less distortion.
 
 #### Bump Mapping
 
-- Perturb surface normal per pixel (for shading computations only)
-
-- "Height shift" per texel defined by a texture
+- Perturb the surface normal per pixel (for shading computations only).
+- "Height shift" per texel defined by a texture.
 
 ::: {#prp-acg-5-1 name="Normal Perturbation (Local Coordinates)"}
 
@@ -271,7 +268,8 @@ The normal is perpendicular to both tangents $(1,0,d_u)$ and $(0,1,d_v)$. Steps 
 
 #### Displacement Mapping
 
-Actually moves the vertices
+- Uses the same texture as in bump mapping.
+- Actually moves the vertices.
 
 ## Shadow Mapping
 
@@ -288,14 +286,11 @@ A camera-visible point is unshadowed if it is also visible from the light.
 - Involves equality comparison of floating point depth values, which means issues of scale, bias, and tolerance.
 - Rasterization cannot handle global effects well.
 
+Use ray tracing for more general shadows.
+
 :::
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
-### Key Results
+### Key Results -->
 
-- @def-acg-5-1: Diffuse light depends on $\mathbf{n}\cdot\mathbf{l}$ and is independent of the view direction.
-- @def-acg-5-4: $L=L_a+L_d+L_s$, the sum of ambient, diffuse, and specular terms.
-- @def-acg-5-7: The weights of a point in a triangle are the area ratios of its opposite subtriangles.
-- @def-acg-5-8: Vertex attributes are interpolated with the barycentric weights, with a perspective correction after projection.
-- @def-acg-5-9: $D=\log_2 L$ selects a mipmap level from the footprint size $L$ of a screen pixel in the texture.

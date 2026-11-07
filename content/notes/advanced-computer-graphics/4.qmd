@@ -10,32 +10,25 @@ crossref:
 
 ## Display
 
-An image is a **2D array of pixel colors**. Display hardware converts these values into visible light.
-
-#### Cathode Ray Tube (CRT)
-
-- An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen.
-- Beam intensity controls brightness.
-- Applications include oscilloscopes and traditional televisions.
-
-#### Raster Scan
-
-The beam sweeps across the screen line by line while its intensity is modulated. **Interlaced scanning** alternates odd and even lines in successive fields.
+- An image is a 2D array of pixel colors.
+- Display hardware converts these values into visible light.
 
 #### Frame Buffer
 
-Memory storing the color of each pixel. For analog CRT displays, **DACs (Digital-to-Analog Converters)** convert digital RGB values into analog signals.
+- Memory storing the color of each pixel.
+- For analog CRT displays, DACs (Digital-to-Analog Converters) convert digital RGB values into analog signals. 
+- For modern digital displays, the frame buffer is sent to the display controller, which drives the pixels directly.
 
-#### Flat-Panel Displays
+#### Display Technologies at a Glance
 
-::: {.overflow-auto tabindex="0" role="region" aria-label="Flat-panel display technologies"}
+::: {.overflow-auto}
 
-| Technology | Principle |
+| Display | How pixel values become light |
 |---|---|
-| **LCD** | Liquid crystals change light polarization; polarizers control how much backlight passes through. Partial rotation produces intermediate brightness levels. |
-| **OLED** | Organic light-emitting materials produce their own light. |
-| **LED array** | Individually controlled LEDs form an image. |
-| **E-Ink** | Electric fields move charged black and white particles to change the visible color. |
+| CRT | Value → voltage → electron-beam intensity → phosphor **emits light** |
+| LCD | Value → liquid-crystal rotation → controls how much **backlight passes through** |
+| OLED | Value → current → each pixel **emits its own light** |
+| E-Ink | Value → electric field → black and white particles move → **reflect** ambient light |
 
 :::
 
@@ -53,45 +46,55 @@ Sample a 2D indicator function by testing whether each pixel center lies inside 
 
 #### Incremental Triangle Traversal
 
-Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel.
+Use edge functions to test whether a pixel center is inside the triangle.
 
 ::: {#prp-acg-4-1 name="Incremental Edge-Function Updates"}
 
-For each triangle edge:
+For an edge from $(x_0,y_0)$ to $(x_1,y_1)$:
 
 $$
 \begin{aligned}
-E(x,y) &= Ax + By + C, \\
+E(x,y) &= (x_1-x_0)(y-y_0) - (y_1-y_0)(x-x_0) = Ax + By + C, \\
 E(x+1,y) &= E(x,y) + A, \\
-E(x,y+1) &= E(x,y) + B.
+E(x,y+1) &= E(x,y) + B,
 \end{aligned}
 $$
 
-:::
-
-::: {.callout-note collapse="true"}
-
-## How Traversal Uses the Updates
-
-Compute the three edge functions at the starting pixel, then update them as traversal proceeds. Their signs determine coverage, using a consistent vertex winding and boundary rule.
+where $A=y_0-y_1$ and $B=x_1-x_0$. A pixel is inside when all three edge functions have the same sign.
 
 :::
+
+#### Bresenham's Line Algorithm
+
+Incrementally traverse a line segment from one endpoint to the other.
+
+```python
+# Integer endpoints, x0 < x1, 0 <= slope <= 1 (other slopes by symmetry)
+dx, dy = x1 - x0, y1 - y0
+D = 2*dy - dx               # decision variable
+y = y0
+for x in range(x0, x1 + 1):
+    plot(x, y)
+    if D > 0:               # line passes above the midpoint: step up
+        y += 1
+        D -= 2*dx
+    D += 2*dy
+```
 
 #### Hierarchical Rasterization
 
-Test blocks of pixels before testing individual samples.
+Test blocks of pixels before testing individual samples:
 
 - Fully outside: Skip the entire block.
 - Fully inside: Mark all samples as covered; color and depth still need to be computed.
 - Partially intersecting: Subdivide into smaller blocks until individual pixel tests are needed.
 
-For example, subdivide a $4\times4$ block into $2\times2$ blocks, then individual pixels. Incremental edge-function updates can be used within the remaining blocks.
 
 ## Antialiasing
 
 #### Aliasing
 
-Artifacts caused by sampling are called **aliasing**:
+Artifacts caused by sampling are called aliasing:
 
 - Jaggies: Sampling in space.
 - Moiré patterns: Undersampling images.
@@ -107,8 +110,7 @@ Aliasing occurs when a signal changes too quickly (high frequency) relative to i
 
 #### Antialiased Sampling
 
-Original signal → **Pre-filter** → Sample
-
+- Original signal → Pre-filter → Sample.
 - Remove frequencies above the Nyquist limit before sampling.
 - Along antialiased triangle edges, pixel values take intermediate values.
 
@@ -130,15 +132,18 @@ $$
 
 :::
 
-::: {#prp-acg-4-2 name="Sampling and Frequency Replicas"}
+::: {#thm-acg-4-1 name="Nyquist–Shannon Sampling Theorem"}
 
-Sampling with period $T$ and rate $f_s=1/T$ repeats the frequency content $X(f)$:
+A signal with no frequencies above $f_{\max}$ can be reconstructed exactly from samples taken at rate
 
 $$
-S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
+f_s > 2f_{\max}.
 $$
+
+Frequencies above the Nyquist limit $f_s/2$ cannot be represented and alias to lower frequencies.
 
 :::
+
 
 #### Reducing Aliasing Error
 
@@ -150,14 +155,10 @@ $$
 Remove selected frequency components using either approach:
 
 1. Spatial domain: Convolve the signal with a filter kernel.
-2. Frequency domain:
+2. Frequency domain (not practical for images):
    - Apply the Fourier transform.
    - Multiply by the Fourier transform of the convolution kernel.
    - Apply the inverse Fourier transform.
-
-#### Antialiasing by Computing Average Pixel Values
-
-For a triangle indicator function $f(x,y) = \text{inside}(\text{triangle},x,y)$, the average over a pixel gives the fraction of its area covered by the triangle.
 
 #### Supersample Antialiasing
 
@@ -184,8 +185,7 @@ Approximate a one-pixel box filter by:
 
 #### Depth Buffer
 
-Store the minimum depth value for each sample (pixel).
-
+- Store the minimum depth value for each sample (pixel).
 - Frame buffer: Stores color values.
 - Depth buffer (z-buffer): Stores depth values in an additional buffer.
 
@@ -207,12 +207,7 @@ for each triangle T:
         # else: discard the fragment
 ```
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
-### Key Results
+### Key Results -->
 
-- @prp-acg-4-1: Moving one pixel changes an edge function by the constant $A$ or $B$, so traversal needs only additions.
-- [Aliasing](#aliasing): Jaggies, moiré patterns, and the wagon-wheel effect are all sampling artifacts.
-- @prp-acg-4-2: Sampling repeats the frequency content, so aliasing appears when the replicas overlap.
-- [Supersample Antialiasing](#supersample-antialiasing): Averaging multiple samples per pixel approximates a one-pixel box filter.
-- [Depth Buffer](#depth-buffer): Keeping the minimum depth per sample resolves visibility one fragment at a time.
