@@ -1054,7 +1054,7 @@ window.Quarto = {
 <h2 data-number="6.1" class="anchored" data-anchor-id="ray-casting"><span class="header-section-number">6.1</span> Ray Casting</h2>
 <section id="light-rays" class="level4" data-number="6.1.0.1">
 <h4 data-number="6.1.0.1" class="anchored" data-anchor-id="light-rays"><span class="header-section-number">6.1.0.1</span> Light Rays</h4>
-<p>Three ideas about light rays</p>
+<p>Three ideas about light rays:</p>
 <ol type="1">
 <li>Light travels in straight lines (though this is wrong)</li>
 <li>Light rays do not collide with each other if they cross (though this is still wrong)</li>
@@ -1089,7 +1089,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        color <span class="op">+=</span> shade(p, L)               <span class="co"># local shading term (shadow test as above)</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> surface at p <span class="kw">is</span> reflective:</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        color <span class="op">+=</span> k_reflect <span class="op">*</span> IntersectColor(p, reflect_dir)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> surface at p <span class="kw">is</span> refractive:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> surface at p <span class="kw">is</span> refractive:         <span class="co"># glass both reflects and refracts</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">+=</span> k_refract <span class="op">*</span> IntersectColor(p, refract_dir)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> color</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -1108,22 +1108,19 @@ window.Quarto = {
 </ul>
 </div>
 <section id="ray-intersection-with-sphere-plane-and-triangle" class="level4" data-number="6.3.0.1">
-<h4 data-number="6.3.0.1" class="anchored" data-anchor-id="ray-intersection-with-sphere-plane-and-triangle"><span class="header-section-number">6.3.0.1</span> Ray Intersection With Sphere, Plane, and Triangle</h4>
+<h4 data-number="6.3.0.1" class="anchored" data-anchor-id="ray-intersection-with-sphere-plane-and-triangle"><span class="header-section-number">6.3.0.1</span> Ray Intersection with Sphere, Plane, and Triangle</h4>
 </section>
 <section id="ray-intersection-with-planar-polygon" class="level4" data-number="6.3.0.2">
-<h4 data-number="6.3.0.2" class="anchored" data-anchor-id="ray-intersection-with-planar-polygon"><span class="header-section-number">6.3.0.2</span> Ray Intersection With Planar Polygon</h4>
-<ul>
-<li>Test ray-plane intersection</li>
-<li>Project onto the XY plane
-<ul>
-<li>Shooting rays to the +x direction from the projected intersection point</li>
-<li>Determine inside/outside through crossing test</li>
-</ul></li>
-</ul>
+<h4 data-number="6.3.0.2" class="anchored" data-anchor-id="ray-intersection-with-planar-polygon"><span class="header-section-number">6.3.0.2</span> Ray Intersection with Planar Polygon</h4>
+<ol type="1">
+<li>Intersect the ray with the polygon’s plane.</li>
+<li>Project the hit point and the polygon onto an axis-aligned plane by dropping the coordinate where the polygon’s normal has the largest absolute component. A fixed plane such as XY degenerates when the polygon is perpendicular to it.</li>
+<li>Shoot a ray from the projected hit point along one of the two remaining axes, and use the crossing test to decide inside/outside.</li>
+</ol>
 </section>
 <section id="möller-trumbore-algorithm" class="level4" data-number="6.3.0.3">
 <h4 data-number="6.3.0.3" class="anchored" data-anchor-id="möller-trumbore-algorithm"><span class="header-section-number">6.3.0.3</span> Möller-Trumbore Algorithm</h4>
-<p>Solve for <span class="math inline">\(t\)</span> and the barycentric coordinates of the hit point at once, without first intersecting the triangle’s plane</p>
+<p>Solve for <span class="math inline">\(t\)</span> and the barycentric coordinates of the hit point at once, without first intersecting the triangle’s plane.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1161,12 +1158,10 @@ window.Quarto = {
 </section>
 <section id="accelerating-ray-tracing" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="accelerating-ray-tracing"><span class="header-section-number">6.4</span> Accelerating Ray Tracing</h2>
-<ul>
-<li>Naive algorithm = #pixels ⨉ # traingles (⨉ #bounces)</li>
-</ul>
+<p>Naive algorithm = #pixels ⨉ #triangles (⨉ #bounces).</p>
 <section id="bounding-volumes" class="level4" data-number="6.4.0.1">
 <h4 data-number="6.4.0.1" class="anchored" data-anchor-id="bounding-volumes"><span class="header-section-number">6.4.0.1</span> Bounding Volumes</h4>
-<p>Quick way to avoid intersections: bound complex object with a simple volume. If it doesn’t hit the volume, it doesn’t hit the object</p>
+<p>A quick way to avoid intersection tests is to bound a complex object with a simple volume: if the ray doesn’t hit the volume, it doesn’t hit the object.</p>
 </section>
 <section id="aabb-axis-aligned-bounding-box-of-a-transform" class="level4" data-number="6.4.0.2">
 <h4 data-number="6.4.0.2" class="anchored" data-anchor-id="aabb-axis-aligned-bounding-box-of-a-transform"><span class="header-section-number">6.4.0.2</span> AABB (Axis-Aligned Bounding Box) of a Transform</h4>
@@ -1178,8 +1173,8 @@ window.Quarto = {
 <section id="ray-intersection-with-axis-aligned-box" class="level4" data-number="6.4.0.3">
 <h4 data-number="6.4.0.3" class="anchored" data-anchor-id="ray-intersection-with-axis-aligned-box"><span class="header-section-number">6.4.0.3</span> Ray Intersection with Axis-Aligned Box</h4>
 <ul>
-<li><p>For the 3D box, <span class="math inline">\(t_{\text{enter}} = \max\{t_{\min}\}\)</span>, <span class="math inline">\(t_{\text{exit}} = \min\{t_{\max}\}\)</span></p></li>
-<li><p>Check if <span class="math inline">\(t_{\text{enter}} &lt; t_{\text{exit}}\)</span> and <span class="math inline">\(t_{\text{exit}}&gt;0\)</span> to determine if the ray hits the box.</p></li>
+<li>For a 3D box, <span class="math inline">\(t_{\text{enter}} = \max\{t_{\min}\}\)</span> and <span class="math inline">\(t_{\text{exit}} = \min\{t_{\max}\}\)</span> over the three slabs.</li>
+<li>The ray hits the box if <span class="math inline">\(t_{\text{enter}} &lt; t_{\text{exit}}\)</span> and <span class="math inline">\(t_{\text{exit}}&gt;0\)</span>.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1211,19 +1206,19 @@ t = \frac{\mathbf{p}'_x-\mathbf{o}_x}{\mathbf{d}_x}
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="uniform-spatial-partitions-grids"><span class="header-section-number">6.4.1</span> Uniform Spatial Partitions (Grids)</h3>
 <section id="build-acceleration-grid" class="level4" data-number="6.4.1.1">
 <h4 data-number="6.4.1.1" class="anchored" data-anchor-id="build-acceleration-grid"><span class="header-section-number">6.4.1.1</span> Build Acceleration Grid</h4>
-<ul>
-<li>Find bounding box</li>
-<li>Create grid</li>
-<li>Store each object in overlapping cells</li>
-</ul>
+<ol type="1">
+<li>Find the bounding box.</li>
+<li>Create the grid.</li>
+<li>Store each object in the cells it overlaps.</li>
+</ol>
 </section>
 <section id="ray-scene-intersection" class="level4" data-number="6.4.1.2">
 <h4 data-number="6.4.1.2" class="anchored" data-anchor-id="ray-scene-intersection"><span class="header-section-number">6.4.1.2</span> Ray-Scene Intersection</h4>
 <ul>
-<li><p>Step through grid in ray traversal order</p></li>
-<li><p>For each grid cell Test intersection with all objects stored at that cell</p></li>
-<li><p>Heuristic: #cells = C * #objs (C <span class="math inline">\(\approx\)</span> 27 in 3D)</p></li>
-<li><p>Teapot in a stadium problem</p></li>
+<li>Step through the grid in ray traversal order.</li>
+<li>For each grid cell, test intersection with all objects stored in that cell.</li>
+<li>Heuristic: #cells = C ⨉ #objs (C <span class="math inline">\(\approx\)</span> 27 in 3D).</li>
+<li>Uniform grids handle unevenly distributed objects poorly (the “teapot in a stadium” problem).</li>
 </ul>
 </section>
 <section id="triangle-voxel-overlap" class="level4" data-number="6.4.1.3">
@@ -1254,45 +1249,43 @@ t = \frac{\mathbf{p}'_x-\mathbf{o}_x}{\mathbf{d}_x}
 </section>
 <section id="spatial-partitioning" class="level3" data-number="6.4.2">
 <h3 data-number="6.4.2" class="anchored" data-anchor-id="spatial-partitioning"><span class="header-section-number">6.4.2</span> Spatial Partitioning</h3>
-<ul>
-<li>An object can be contained in multiple regions</li>
-</ul>
+<p>An object can be contained in multiple regions.</p>
 <section id="oct-tree" class="level4" data-number="6.4.2.1">
 <h4 data-number="6.4.2.1" class="anchored" data-anchor-id="oct-tree"><span class="header-section-number">6.4.2.1</span> Oct-Tree</h4>
 <ul>
-<li>Top-down approach: Intersect root and find intersected children recursively</li>
-<li>Bottom-up approach: Find first leaf voxel intersected. Use neighbour finding to find next voxels</li>
+<li>Top-down approach: Intersect root and find intersected children recursively.</li>
+<li>Bottom-up approach: Find first leaf voxel intersected. Use neighbour finding to find next voxels.</li>
 </ul>
 </section>
 <section id="bsp-tree" class="level4" data-number="6.4.2.2">
 <h4 data-number="6.4.2.2" class="anchored" data-anchor-id="bsp-tree"><span class="header-section-number">6.4.2.2</span> BSP-Tree</h4>
 <ul>
-<li>General case uses arbitrary splitting planes</li>
-<li>Difficult to build, traversal isn’t too bad</li>
-<li>Generally not used for rendering</li>
+<li>General case uses arbitrary splitting planes.</li>
+<li>Difficult to build, but traversal isn’t too bad.</li>
+<li>Generally not used for rendering.</li>
 </ul>
 </section>
 <section id="kd-tree" class="level4" data-number="6.4.2.3">
 <h4 data-number="6.4.2.3" class="anchored" data-anchor-id="kd-tree"><span class="header-section-number">6.4.2.3</span> KD-Tree</h4>
 <ul>
-<li>Split position: coordinate of split plane along axis</li>
-<li>No objects are stored in internal nodes</li>
-<li>Record [t_start, t_end] for each node to avoid traversing subtrees that are not intersected by the ray</li>
+<li>Split position: Coordinate of the split plane along the axis.</li>
+<li>No objects are stored in internal nodes.</li>
+<li>Record <span class="math inline">\([t_{\text{start}},t_{\text{end}}]\)</span> for each node to avoid traversing subtrees that the ray does not intersect.</li>
 </ul>
 </section>
 </section>
 <section id="object-partitions" class="level3" data-number="6.4.3">
 <h3 data-number="6.4.3" class="anchored" data-anchor-id="object-partitions"><span class="header-section-number">6.4.3</span> Object Partitions</h3>
-<ul>
-<li>Bounding boxes for each set may overlap in space</li>
-</ul>
+<p>Bounding boxes for each set may overlap in space.</p>
 <section id="bounding-volume-hierarchy-bvh" class="level4" data-number="6.4.3.1">
 <h4 data-number="6.4.3.1" class="anchored" data-anchor-id="bounding-volume-hierarchy-bvh"><span class="header-section-number">6.4.3.1</span> Bounding Volume Hierarchy (BVH)</h4>
+<ol type="1">
+<li>Find the bounding box.</li>
+<li>Recursively split the set of objects into two subsets.</li>
+<li>Stop when necessary.</li>
+</ol>
 <ul>
-<li>Find bounding box</li>
-<li>Recursively split set of objects in two subsets</li>
-<li>Stop when necessary</li>
-<li>Poor splitting can lead to unbalanced trees and poor performance</li>
+<li>Poor splitting can lead to unbalanced trees and poor performance.</li>
 </ul>
 </section>
 </section>
@@ -1319,13 +1312,18 @@ t = \frac{\mathbf{p}'_x-\mathbf{o}_x}{\mathbf{d}_x}
 </section>
 <section id="radiance" class="level4" data-number="6.5.0.5">
 <h4 data-number="6.5.0.5" class="anchored" data-anchor-id="radiance"><span class="header-section-number">6.5.0.5</span> Radiance</h4>
-<p>The radiance (luminance) is the power emitted, reflected, transmitted or received by a surface, per unit solid angle, per projected unit area.</p>
-<p><span class="math inline">\(\displaystyle L(p, \omega) = \frac{d^2\Phi}{d\omega dA \cos \theta} [\text{W/(sr m}^2)] \text{ also }[ \text{cd/m}^2 = \text{nit} ]\)</span></p>
 <ul>
+<li><p>The radiance (luminance) is the power emitted, reflected, transmitted or received by a surface, per unit solid angle, per projected unit area.</p>
+<p><span class="math inline">\(\displaystyle L(p, \omega) = \frac{d^2\Phi}{d\omega dA \cos \theta} [\text{W/(sr m}^2)] \text{ also }[ \text{cd/m}^2 = \text{nit} ]\)</span></p></li>
 <li><p><span class="math inline">\(\theta\)</span> is the angle between the surface normal and the direction <span class="math inline">\(\omega\)</span>.</p></li>
-<li><p><span class="math inline">\(\displaystyle L(p, \omega) = \frac{dI(p, \omega)}{dA \cos \theta} = \frac{dE(p)}{d\omega \cos \theta}\)</span>.</p></li>
-<li><p><span class="math inline">\(\displaystyle dE(p) = L(p, \omega) \cos \theta \, d\omega\)</span>.</p></li>
-<li><p><span class="math inline">\(\displaystyle E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega\)</span>, where <span class="math inline">\(H^2\)</span> is the unit hemisphere.</p></li>
+<li><p>Radiance is intensity per projected unit area, or irradiance per unit solid angle:</p>
+<p><span class="math display">\[
+L(p, \omega) = \frac{dI(p, \omega)}{dA \cos \theta} = \frac{dE(p)}{d\omega \cos \theta}.
+\]</span></p></li>
+<li><p>Hence <span class="math inline">\(dE(p) = L(p, \omega) \cos \theta \, d\omega\)</span>, and integrating over the unit hemisphere <span class="math inline">\(H^2\)</span> gives</p>
+<p><span class="math display">\[
+E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega.
+\]</span></p></li>
 </ul>
 </section>
 </section>
@@ -1345,6 +1343,9 @@ t = \frac{\mathbf{p}'_x-\mathbf{o}_x}{\mathbf{d}_x}
 \, \underbrace{\cos \theta_i}_{\substack{\text{Cosine of} \\ \text{Incident Angle} \\ \text{Known}}}
 \, d\omega_i
 \]</span></p>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
 </section>

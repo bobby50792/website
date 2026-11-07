@@ -981,10 +981,6 @@ window.Quarto = {
   <li><a href="#geometric-datasets" id="toc-geometric-datasets" class="nav-link active" data-scroll-target="#geometric-datasets"><span class="header-section-number">3.1</span> Geometric Datasets</a></li>
   <li><a href="#data-driven-shape-analysis" id="toc-data-driven-shape-analysis" class="nav-link" data-scroll-target="#data-driven-shape-analysis"><span class="header-section-number">3.2</span> Data-Driven Shape Analysis</a></li>
   <li><a href="#data-driven-shape-synthesis" id="toc-data-driven-shape-synthesis" class="nav-link" data-scroll-target="#data-driven-shape-synthesis"><span class="header-section-number">3.3</span> Data-Driven Shape Synthesis</a></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">3.4</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">3.4.1</span> Key Results</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1181,8 +1177,10 @@ window.Quarto = {
 </section>
 <section id="d-to-2.5d-depth-prediction" class="level4" data-number="3.3.0.4">
 <h4 data-number="3.3.0.4" class="anchored" data-anchor-id="d-to-2.5d-depth-prediction"><span class="header-section-number">3.3.0.4</span> 2D to 2.5D — Depth Prediction</h4>
-<p>Input image <span class="math inline">\(\to\)</span> convolutional network <span class="math inline">\(\to\)</span> predicted depth.</p>
-<p>Compare predicted depth <span class="math inline">\(y\)</span> with ground-truth depth <span class="math inline">\(y^*\)</span>:</p>
+<ul>
+<li><p>Input image <span class="math inline">\(\to\)</span> convolutional network <span class="math inline">\(\to\)</span> predicted depth.</p></li>
+<li><p>Compare predicted depth <span class="math inline">\(y\)</span> with ground-truth depth <span class="math inline">\(y^*\)</span>:</p></li>
+</ul>
 <div id="def-acg-3-1" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3.1 (Squared Depth Loss)</strong></span> <span class="math display">\[
 L(y, y^*) = \sum_i \|y_i - y_i^*\|^2.
@@ -1203,8 +1201,10 @@ L(y, y^*) = \sum_i
 </section>
 <section id="image-based-3d-object-modeling" class="level4" data-number="3.3.0.5">
 <h4 data-number="3.3.0.5" class="anchored" data-anchor-id="image-based-3d-object-modeling"><span class="header-section-number">3.3.0.5</span> Image-Based 3D Object Modeling</h4>
-<p>Object-centric, supervised 3D learning.</p>
-<p>Input image <span class="math inline">\(\to\)</span> CNN <span class="math inline">\(\to\)</span> predicted 3D; compare with ground-truth 3D.</p>
+<ul>
+<li><p>Object-centric, supervised 3D learning.</p></li>
+<li><p>Input image <span class="math inline">\(\to\)</span> CNN <span class="math inline">\(\to\)</span> predicted 3D; compare with ground-truth 3D.</p></li>
+</ul>
 </section>
 <section id="learning-workflow" class="level4" data-number="3.3.0.6">
 <h4 data-number="3.3.0.6" class="anchored" data-anchor-id="learning-workflow"><span class="header-section-number">3.3.0.6</span> Learning Workflow</h4>
@@ -1257,17 +1257,9 @@ d_{\mathrm{CD}}(S_1, S_2)
 <li>Smoothness objectives respect connectivity: Laplacian smoothness and normal consistency.</li>
 <li>Can sample a varying number of points.</li>
 </ul>
-</section>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="3.4">
-<h2 class="supplementary-notes anchored" data-number="3.4" data-anchor-id="supplementary-notes"><span class="header-section-number">3.4</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">3.4.1</span> Key Results</h3>
-<ul>
-<li><a href="#def-acg-3-2" class="quarto-xref">Definition&nbsp;3.2</a>: The offset <span class="math inline">\(\alpha\)</span> removes a global scale from the comparison between predicted and ground-truth depth.</li>
-<li><a href="#implicit-volumetric-representation">Implicit Volumetric Representation</a>: Instead of a voxel grid, learn a continuous occupancy function of a latent code and a query point.</li>
-<li><a href="#def-acg-3-3" class="quarto-xref">Definition&nbsp;3.3</a>: Each point is matched to its nearest neighbor in the other set, so the loss compares unordered point sets.</li>
-</ul>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
 </section>

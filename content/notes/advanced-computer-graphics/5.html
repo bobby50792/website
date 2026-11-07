@@ -978,7 +978,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#shading" id="toc-shading" class="nav-link active" data-scroll-target="#shading"><span class="header-section-number">5.1</span> Shading</a></li>
+  <li><a href="#shading" id="toc-shading" class="nav-link active" data-scroll-target="#shading"><span class="header-section-number">5.1</span> Shading</a>
+  <ul class="collapse">
+  <li><a href="#diffuse-reflection" id="toc-diffuse-reflection" class="nav-link" data-scroll-target="#diffuse-reflection"><span class="header-section-number">5.1.1</span> Diffuse Reflection</a></li>
+  <li><a href="#specular-reflection" id="toc-specular-reflection" class="nav-link" data-scroll-target="#specular-reflection"><span class="header-section-number">5.1.2</span> Specular Reflection</a></li>
+  <li><a href="#ambient-reflection" id="toc-ambient-reflection" class="nav-link" data-scroll-target="#ambient-reflection"><span class="header-section-number">5.1.3</span> Ambient Reflection</a></li>
+  </ul></li>
   <li><a href="#graphics-pipeline" id="toc-graphics-pipeline" class="nav-link" data-scroll-target="#graphics-pipeline"><span class="header-section-number">5.2</span> Graphics Pipeline</a></li>
   <li><a href="#texturing" id="toc-texturing" class="nav-link" data-scroll-target="#texturing"><span class="header-section-number">5.3</span> Texturing</a>
   <ul class="collapse">
@@ -988,10 +993,6 @@ window.Quarto = {
   <li><a href="#applications-of-textures" id="toc-applications-of-textures" class="nav-link" data-scroll-target="#applications-of-textures"><span class="header-section-number">5.3.4</span> Applications of Textures</a></li>
   </ul></li>
   <li><a href="#shadow-mapping" id="toc-shadow-mapping" class="nav-link" data-scroll-target="#shadow-mapping"><span class="header-section-number">5.4</span> Shadow Mapping</a></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">5.5</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">5.5.1</span> Key Results</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1020,19 +1021,18 @@ window.Quarto = {
 
 <section id="shading" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="shading"><span class="header-section-number">5.1</span> Shading</h2>
-<section id="shading-is-local" class="level4" data-number="5.1.0.1">
-<h4 data-number="5.1.0.1" class="anchored" data-anchor-id="shading-is-local"><span class="header-section-number">5.1.0.1</span> Shading Is Local</h4>
-<p>Compute light reflected toward camera at a specific shading point.</p>
-</section>
-<section id="diffuse-reflection" class="level4" data-number="5.1.0.2">
-<h4 data-number="5.1.0.2" class="anchored" data-anchor-id="diffuse-reflection"><span class="header-section-number">5.1.0.2</span> Diffuse Reflection</h4>
-<p>Light is scattered uniformly in all directions.</p>
-<p>In general, light per unit area is proportional to</p>
+<p>Compute the light reflected toward the camera at a specific shading point.</p>
+<section id="diffuse-reflection" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="diffuse-reflection"><span class="header-section-number">5.1.1</span> Diffuse Reflection</h3>
+<ul>
+<li><p>Light is scattered uniformly in all directions.</p></li>
+<li><p>The light received per unit area is proportional to</p>
 <p><span class="math display">\[
 \cos\theta = \mathbf{l}\cdot\mathbf{n}.
-\]</span></p>
+\]</span></p></li>
+</ul>
 <div id="def-acg-5-1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.1 (Lambertian (Diffuse) Shading)</strong></span> <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.1 (Diffuse Shading (Lambertian))</strong></span> <span class="math display">\[
 L_d = k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l}).
 \]</span></p>
 <ul>
@@ -1044,6 +1044,9 @@ L_d = k_d\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{l}).
 <li><span class="math inline">\(\mathbf{l}\)</span>: Unit direction from the shading point toward the light source.</li>
 </ul>
 </div>
+</section>
+<section id="specular-reflection" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="specular-reflection"><span class="header-section-number">5.1.2</span> Specular Reflection</h3>
 <div id="def-acg-5-2" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.2 (Specular Term (Blinn–Phong))</strong></span> Intensity depends on view direction.</p>
 <p><span class="math display">\[
@@ -1058,6 +1061,9 @@ L_s &amp;= k_s\frac{I}{r^2}\max(0,\mathbf{n}\cdot\mathbf{h})^p.
 <li><span class="math inline">\(p\)</span>: Shininess exponent; larger values produce narrower highlights.</li>
 </ul>
 </div>
+</section>
+<section id="ambient-reflection" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="ambient-reflection"><span class="header-section-number">5.1.3</span> Ambient Reflection</h3>
 <div id="def-acg-5-3" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.3 (Ambient Term)</strong></span> <span class="math display">\[
 L_a = k_a I_a.
@@ -1067,8 +1073,10 @@ L_a = k_a I_a.
 <li><span class="math inline">\(k_a\)</span>: Ambient reflection coefficient; <span class="math inline">\(I_a\)</span>: Ambient light intensity.</li>
 </ul>
 </div>
+<section id="blinnphong-reflection-model" class="level4" data-number="5.1.3.1">
+<h4 data-number="5.1.3.1" class="anchored" data-anchor-id="blinnphong-reflection-model"><span class="header-section-number">5.1.3.1</span> Blinn–Phong Reflection Model</h4>
 <div id="def-acg-5-4" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.4 (Blinn–Phong Reflection Model)</strong></span> Ambient + diffuse + specular.</p>
+<p><span class="theorem-title"><strong>Definition 5.4 (Blinn–Phong Reflection Model)</strong></span> Sum the ambient, diffuse, and specular terms:</p>
 <p><span class="math display">\[
 \begin{aligned}
 L &amp;= L_a + L_d + L_s \\
@@ -1078,12 +1086,12 @@ L &amp;= L_a + L_d + L_s \\
 \]</span></p>
 </div>
 </section>
-<section id="shading-frequencies" class="level4" data-number="5.1.0.3">
-<h4 data-number="5.1.0.3" class="anchored" data-anchor-id="shading-frequencies"><span class="header-section-number">5.1.0.3</span> Shading Frequencies</h4>
+<section id="shading-frequencies" class="level4" data-number="5.1.3.2">
+<h4 data-number="5.1.3.2" class="anchored" data-anchor-id="shading-frequencies"><span class="header-section-number">5.1.3.2</span> Shading Frequencies</h4>
 <ul>
-<li><p>Flat shading (Face): One color per polygon. Not good for smooth surfaces.</p></li>
-<li><p>Gouraud shading (Vertex): Interpolate vertex colors across polygon.</p></li>
-<li><p>Phong Shading (Pixel): Interpolate normals across polygon and compute color per pixel. More expensive but better results.</p></li>
+<li>Flat shading (Face): One color per polygon. Not good for smooth surfaces.</li>
+<li>Gouraud shading (Vertex): Interpolate vertex colors across polygon.</li>
+<li>Phong shading (Pixel): Interpolate normals across polygon and compute color per pixel. More expensive but better results.</li>
 </ul>
 <div id="def-acg-5-5" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.5 (Per-Vertex Normals)</strong></span> Use the underlying geometry when available (e.g., radial normals for a sphere). Otherwise, average adjacent unit face normals <span class="math inline">\(\mathbf{N}_i\)</span> and normalize:</p>
@@ -1103,11 +1111,14 @@ L &amp;= L_a + L_d + L_s \\
 </div>
 </section>
 </section>
+</section>
 <section id="graphics-pipeline" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="graphics-pipeline"><span class="header-section-number">5.2</span> Graphics Pipeline</h2>
 <section id="real-time-rendering-pipeline" class="level4" data-number="5.2.0.1">
 <h4 data-number="5.2.0.1" class="anchored" data-anchor-id="real-time-rendering-pipeline"><span class="header-section-number">5.2.0.1</span> Real-Time Rendering Pipeline</h4>
-<p>Convert 3D vertices into a pixel image.</p>
+<ul>
+<li>Convert 3D vertices into a pixel image.</li>
+</ul>
 <ol type="1">
 <li>Vertex processing: Transform and project 3D vertices.</li>
 <li>Triangle processing: Assemble vertices into triangles and clip them to the view volume.</li>
@@ -1115,21 +1126,20 @@ L &amp;= L_a + L_d + L_s \\
 <li>Fragment processing: Compute fragment colors using shading and textures.</li>
 <li>Framebuffer operations: Apply depth/stencil tests and blending, then write the final image for display.</li>
 </ol>
-<p>Data flow: Vertices → triangles → fragments → shaded fragments → pixels.</p>
+<ul>
+<li>Data flow: Vertices → triangles → fragments → shaded fragments → pixels.</li>
+</ul>
 </section>
 </section>
 <section id="texturing" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="texturing"><span class="header-section-number">5.3</span> Texturing</h2>
 <section id="texture-mapping" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="texture-mapping"><span class="header-section-number">5.3.1</span> Texture Mapping</h3>
-<section id="uv-unwrapping-by-optimization" class="level4" data-number="5.3.1.1">
-<h4 data-number="5.3.1.1" class="anchored" data-anchor-id="uv-unwrapping-by-optimization"><span class="header-section-number">5.3.1.1</span> UV Unwrapping by Optimization</h4>
-<p>Assign 2D <span class="math inline">\((u,v)\)</span> coordinates to mesh vertices to flatten the surface with minimal distortion.</p>
 <ul>
+<li>Assign 2D <span class="math inline">\((u,v)\)</span> coordinates to mesh vertices to flatten the surface with minimal distortion.</li>
 <li>Preserve surface distances and/or triangle angles as closely as possible.</li>
 <li>Cuts (seams) are usually required to unfold the surface into UV charts.</li>
 </ul>
-</section>
 </section>
 <section id="barycentric-coordinates" class="level3" data-number="5.3.2">
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="barycentric-coordinates"><span class="header-section-number">5.3.2</span> Barycentric Coordinates</h3>
@@ -1171,14 +1181,19 @@ V = \alpha V_A + \beta V_B + \gamma V_C.
 </section>
 <section id="texture-queries" class="level3" data-number="5.3.3">
 <h3 data-number="5.3.3" class="anchored" data-anchor-id="texture-queries"><span class="header-section-number">5.3.3</span> Texture Queries</h3>
-<section id="texture-magnification---easy-case" class="level4" data-number="5.3.3.1">
-<h4 data-number="5.3.3.1" class="anchored" data-anchor-id="texture-magnification---easy-case"><span class="header-section-number">5.3.3.1</span> Texture Magnification - Easy Case</h4>
-<p>Bilinear, Bicubic interpolation of texels.</p>
+<section id="texture-magnification-easy-case" class="level4" data-number="5.3.3.1">
+<h4 data-number="5.3.3.1" class="anchored" data-anchor-id="texture-magnification-easy-case"><span class="header-section-number">5.3.3.1</span> Texture Magnification (Easy Case)</h4>
+<p>Interpolate texels bilinearly or bicubically.</p>
 </section>
-<section id="texture-minification---hard-case" class="level4" data-number="5.3.3.2">
-<h4 data-number="5.3.3.2" class="anchored" data-anchor-id="texture-minification---hard-case"><span class="header-section-number">5.3.3.2</span> Texture Minification - Hard Case</h4>
+<section id="texture-minification-hard-case" class="level4" data-number="5.3.3.2">
+<h4 data-number="5.3.3.2" class="anchored" data-anchor-id="texture-minification-hard-case"><span class="header-section-number">5.3.3.2</span> Texture Minification (Hard Case)</h4>
+<p>A screen pixel’s footprint in the texture can cover many texels, so the texture must be filtered over that footprint.</p>
+</section>
+<section id="mipmap" class="level4" data-number="5.3.3.3">
+<h4 data-number="5.3.3.3" class="anchored" data-anchor-id="mipmap"><span class="header-section-number">5.3.3.3</span> Mipmap</h4>
 <ul>
-<li>Screen Pixel Footprint in Texture</li>
+<li>Precompute a hierarchy of downsampled textures.</li>
+<li>Use the level that best matches the screen pixel’s footprint in the texture.</li>
 </ul>
 <div id="def-acg-5-9" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.9 (Mipmap Level Selection)</strong></span> Each level halves the texture width and height. Estimate the footprint size from neighboring screen samples:</p>
@@ -1193,48 +1208,50 @@ D &amp;= \log_2 L.
 \end{aligned}
 \]</span></p>
 <ul>
-<li><p>Use base-level texels for <span class="math inline">\((u,v)\)</span> and screen pixels for <span class="math inline">\((x,y)\)</span>; scale normalized UVs by texture width and height first.</p></li>
-<li><p>Clamp <span class="math inline">\(D\)</span> to the available levels, and blend adjacent levels when <span class="math inline">\(D\)</span> is fractional (trilinear filtering).</p></li>
-<li><p>Limitation: Overblur</p></li>
+<li>Use base-level texels for <span class="math inline">\((u,v)\)</span> and screen pixels for <span class="math inline">\((x,y)\)</span>; scale normalized UVs by texture width and height first.</li>
+<li>Clamp <span class="math inline">\(D\)</span> to the available levels, and blend adjacent levels when <span class="math inline">\(D\)</span> is fractional (trilinear filtering).</li>
+<li>Limitation: Overblur (anisotropic footprints are poorly matched).</li>
 </ul>
 </div>
 </section>
-<section id="anisotropic-filtering" class="level4" data-number="5.3.3.3">
-<h4 data-number="5.3.3.3" class="anchored" data-anchor-id="anisotropic-filtering"><span class="header-section-number">5.3.3.3</span> Anisotropic Filtering</h4>
+<section id="ripmaps-and-summed-area-tables-anisotropic-filtering" class="level4" data-number="5.3.3.4">
+<h4 data-number="5.3.3.4" class="anchored" data-anchor-id="ripmaps-and-summed-area-tables-anisotropic-filtering"><span class="header-section-number">5.3.3.4</span> Ripmaps and Summed-Area Tables (Anisotropic Filtering)</h4>
 <ul>
-<li>Ripmaps and summed-area tables: Support filtering over axis-aligned rectangular regions.</li>
+<li>Support filtering over axis-aligned rectangular regions.</li>
 <li>Limitation: Diagonal footprints are poorly matched and may cause overblurring.</li>
 </ul>
-<p>EWA filtering (Elliptical Weighted Average):</p>
+</section>
+<section id="ewa-filtering-elliptical-weighted-average" class="level4" data-number="5.3.3.5">
+<h4 data-number="5.3.3.5" class="anchored" data-anchor-id="ewa-filtering-elliptical-weighted-average"><span class="header-section-number">5.3.3.5</span> EWA Filtering (Elliptical Weighted Average)</h4>
 <ul>
+<li>Approximate tilted or irregular footprints with elliptical filters.</li>
 <li>Use multiple texture lookups and compute a weighted average.</li>
 <li>A mipmap hierarchy helps reduce sampling cost.</li>
-<li>Approximate tilted or irregular footprints with elliptical filters.</li>
 </ul>
 </section>
 </section>
 <section id="applications-of-textures" class="level3" data-number="5.3.4">
 <h3 data-number="5.3.4" class="anchored" data-anchor-id="applications-of-textures"><span class="header-section-number">5.3.4</span> Applications of Textures</h3>
-<p>In modern GPUs, texture = memory + range query (filtering)</p>
+<p>In modern GPUs, texture = memory + range query (filtering).</p>
 <section id="environment-mapping" class="level4" data-number="5.3.4.1">
 <h4 data-number="5.3.4.1" class="anchored" data-anchor-id="environment-mapping"><span class="header-section-number">5.3.4.1</span> Environment Mapping</h4>
 <ul>
-<li><p>Use a texture to represent the surrounding environment for reflections.</p></li>
-<li><p>Prone to distortion (top and bottom parts)</p></li>
+<li>Use a texture to represent the surrounding environment for reflections.</li>
+<li>Prone to distortion (top and bottom parts).</li>
 </ul>
 </section>
 <section id="cube-map" class="level4" data-number="5.3.4.2">
 <h4 data-number="5.3.4.2" class="anchored" data-anchor-id="cube-map"><span class="header-section-number">5.3.4.2</span> Cube Map</h4>
 <ul>
-<li><p>A vector maps to cube point along that direction. The cube is textured with 6 square textures, one for each face.</p></li>
-<li><p>Much less distortion</p></li>
+<li>A vector maps to the cube point along that direction. The cube is textured with 6 square textures, one for each face.</li>
+<li>Much less distortion.</li>
 </ul>
 </section>
 <section id="bump-mapping" class="level4" data-number="5.3.4.3">
 <h4 data-number="5.3.4.3" class="anchored" data-anchor-id="bump-mapping"><span class="header-section-number">5.3.4.3</span> Bump Mapping</h4>
 <ul>
-<li><p>Perturb surface normal per pixel (for shading computations only)</p></li>
-<li><p>“Height shift” per texel defined by a texture</p></li>
+<li>Perturb the surface normal per pixel (for shading computations only).</li>
+<li>“Height shift” per texel defined by a texture.</li>
 </ul>
 <div id="prp-acg-5-1" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 5.1 (Normal Perturbation (Local Coordinates))</strong></span> &nbsp;</p>
@@ -1269,7 +1286,10 @@ d_v &amp;\approx c_2[h(u,v+\Delta v)-h(u,v)], \\
 </section>
 <section id="displacement-mapping" class="level4" data-number="5.3.4.4">
 <h4 data-number="5.3.4.4" class="anchored" data-anchor-id="displacement-mapping"><span class="header-section-number">5.3.4.4</span> Displacement Mapping</h4>
-<p>Actually moves the vertices</p>
+<ul>
+<li>Uses the same texture as in bump mapping.</li>
+<li>Actually moves the vertices.</li>
+</ul>
 </section>
 </section>
 </section>
@@ -1296,22 +1316,13 @@ d_v &amp;\approx c_2[h(u,v+\Delta v)-h(u,v)], \\
 <li>Involves equality comparison of floating point depth values, which means issues of scale, bias, and tolerance.</li>
 <li>Rasterization cannot handle global effects well.</li>
 </ul>
+<p>Use ray tracing for more general shadows.</p>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="5.5">
-<h2 class="supplementary-notes anchored" data-number="5.5" data-anchor-id="supplementary-notes"><span class="header-section-number">5.5</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">5.5.1</span> Key Results</h3>
-<ul>
-<li><a href="#def-acg-5-1" class="quarto-xref">Definition&nbsp;5.1</a>: Diffuse light depends on <span class="math inline">\(\mathbf{n}\cdot\mathbf{l}\)</span> and is independent of the view direction.</li>
-<li><a href="#def-acg-5-4" class="quarto-xref">Definition&nbsp;5.4</a>: <span class="math inline">\(L=L_a+L_d+L_s\)</span>, the sum of ambient, diffuse, and specular terms.</li>
-<li><a href="#def-acg-5-7" class="quarto-xref">Definition&nbsp;5.7</a>: The weights of a point in a triangle are the area ratios of its opposite subtriangles.</li>
-<li><a href="#def-acg-5-8" class="quarto-xref">Definition&nbsp;5.8</a>: Vertex attributes are interpolated with the barycentric weights, with a perspective correction after projection.</li>
-<li><a href="#def-acg-5-9" class="quarto-xref">Definition&nbsp;5.9</a>: <span class="math inline">\(D=\log_2 L\)</span> selects a mipmap level from the footprint size <span class="math inline">\(L\)</span> of a screen pixel in the texture.</li>
-</ul>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
 </section>

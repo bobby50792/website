@@ -1017,10 +1017,6 @@ window.Quarto = {
   <li><a href="#rasterizing-a-triangle" id="toc-rasterizing-a-triangle" class="nav-link" data-scroll-target="#rasterizing-a-triangle"><span class="header-section-number">4.2</span> Rasterizing a Triangle</a></li>
   <li><a href="#antialiasing" id="toc-antialiasing" class="nav-link" data-scroll-target="#antialiasing"><span class="header-section-number">4.3</span> Antialiasing</a></li>
   <li><a href="#z-buffering" id="toc-z-buffering" class="nav-link" data-scroll-target="#z-buffering"><span class="header-section-number">4.4</span> Z-Buffering</a></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">4.5</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">4.5.1</span> Key Results</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1049,26 +1045,21 @@ window.Quarto = {
 
 <section id="display" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="display"><span class="header-section-number">4.1</span> Display</h2>
-<p>An image is a <strong>2D array of pixel colors</strong>. Display hardware converts these values into visible light.</p>
-<section id="cathode-ray-tube-crt" class="level4" data-number="4.1.0.1">
-<h4 data-number="4.1.0.1" class="anchored" data-anchor-id="cathode-ray-tube-crt"><span class="header-section-number">4.1.0.1</span> Cathode Ray Tube (CRT)</h4>
 <ul>
-<li>An electron beam is emitted, accelerated, focused, and deflected onto a phosphor-coated screen.</li>
-<li>Beam intensity controls brightness.</li>
-<li>Applications include oscilloscopes and traditional televisions.</li>
+<li>An image is a 2D array of pixel colors.</li>
+<li>Display hardware converts these values into visible light.</li>
+</ul>
+<section id="frame-buffer" class="level4" data-number="4.1.0.1">
+<h4 data-number="4.1.0.1" class="anchored" data-anchor-id="frame-buffer"><span class="header-section-number">4.1.0.1</span> Frame Buffer</h4>
+<ul>
+<li>Memory storing the color of each pixel.</li>
+<li>For analog CRT displays, DACs (Digital-to-Analog Converters) convert digital RGB values into analog signals.</li>
+<li>For modern digital displays, the frame buffer is sent to the display controller, which drives the pixels directly.</li>
 </ul>
 </section>
-<section id="raster-scan" class="level4" data-number="4.1.0.2">
-<h4 data-number="4.1.0.2" class="anchored" data-anchor-id="raster-scan"><span class="header-section-number">4.1.0.2</span> Raster Scan</h4>
-<p>The beam sweeps across the screen line by line while its intensity is modulated. <strong>Interlaced scanning</strong> alternates odd and even lines in successive fields.</p>
-</section>
-<section id="frame-buffer" class="level4" data-number="4.1.0.3">
-<h4 data-number="4.1.0.3" class="anchored" data-anchor-id="frame-buffer"><span class="header-section-number">4.1.0.3</span> Frame Buffer</h4>
-<p>Memory storing the color of each pixel. For analog CRT displays, <strong>DACs (Digital-to-Analog Converters)</strong> convert digital RGB values into analog signals.</p>
-</section>
-<section id="flat-panel-displays" class="level4" data-number="4.1.0.4">
-<h4 data-number="4.1.0.4" class="anchored" data-anchor-id="flat-panel-displays"><span class="header-section-number">4.1.0.4</span> Flat-Panel Displays</h4>
-<div class="overflow-auto" tabindex="0" role="region" aria-label="Flat-panel display technologies">
+<section id="display-technologies-at-a-glance" class="level4" data-number="4.1.0.2">
+<h4 data-number="4.1.0.2" class="anchored" data-anchor-id="display-technologies-at-a-glance"><span class="header-section-number">4.1.0.2</span> Display Technologies at a Glance</h4>
+<div class="overflow-auto">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1076,26 +1067,26 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Technology</th>
-<th>Principle</th>
+<th>Display</th>
+<th>How pixel values become light</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>LCD</strong></td>
-<td>Liquid crystals change light polarization; polarizers control how much backlight passes through. Partial rotation produces intermediate brightness levels.</td>
+<td>CRT</td>
+<td>Value → voltage → electron-beam intensity → phosphor <strong>emits light</strong></td>
 </tr>
 <tr class="even">
-<td><strong>OLED</strong></td>
-<td>Organic light-emitting materials produce their own light.</td>
+<td>LCD</td>
+<td>Value → liquid-crystal rotation → controls how much <strong>backlight passes through</strong></td>
 </tr>
 <tr class="odd">
-<td><strong>LED array</strong></td>
-<td>Individually controlled LEDs form an image.</td>
+<td>OLED</td>
+<td>Value → current → each pixel <strong>emits its own light</strong></td>
 </tr>
 <tr class="even">
-<td><strong>E-Ink</strong></td>
-<td>Electric fields move charged black and white particles to change the visible color.</td>
+<td>E-Ink</td>
+<td>Value → electric field → black and white particles move → <strong>reflect</strong> ambient light</td>
 </tr>
 </tbody>
 </table>
@@ -1118,57 +1109,55 @@ window.Quarto = {
 </section>
 <section id="incremental-triangle-traversal" class="level4" data-number="4.2.0.3">
 <h4 data-number="4.2.0.3" class="anchored" data-anchor-id="incremental-triangle-traversal"><span class="header-section-number">4.2.0.3</span> Incremental Triangle Traversal</h4>
-<p>Visit candidate pixel centers and update edge-function values using additions instead of recomputing them at every pixel.</p>
+<p>Use edge functions to test whether a pixel center is inside the triangle.</p>
 <div id="prp-acg-4-1" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.1 (Incremental Edge-Function Updates)</strong></span> For each triangle edge:</p>
+<p><span class="theorem-title"><strong>Proposition 4.1 (Incremental Edge-Function Updates)</strong></span> For an edge from <span class="math inline">\((x_0,y_0)\)</span> to <span class="math inline">\((x_1,y_1)\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-E(x,y) &amp;= Ax + By + C, \\
+E(x,y) &amp;= (x_1-x_0)(y-y_0) - (y_1-y_0)(x-x_0) = Ax + By + C, \\
 E(x+1,y) &amp;= E(x,y) + A, \\
-E(x,y+1) &amp;= E(x,y) + B.
+E(x,y+1) &amp;= E(x,y) + B,
 \end{aligned}
 \]</span></p>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>How Traversal Uses the Updates
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Compute the three edge functions at the starting pixel, then update them as traversal proceeds. Their signs determine coverage, using a consistent vertex winding and boundary rule.</p>
-</div>
-</div>
+<p>where <span class="math inline">\(A=y_0-y_1\)</span> and <span class="math inline">\(B=x_1-x_0\)</span>. A pixel is inside when all three edge functions have the same sign.</p>
 </div>
 </section>
-<section id="hierarchical-rasterization" class="level4" data-number="4.2.0.4">
-<h4 data-number="4.2.0.4" class="anchored" data-anchor-id="hierarchical-rasterization"><span class="header-section-number">4.2.0.4</span> Hierarchical Rasterization</h4>
-<p>Test blocks of pixels before testing individual samples.</p>
+<section id="bresenhams-line-algorithm" class="level4" data-number="4.2.0.4">
+<h4 data-number="4.2.0.4" class="anchored" data-anchor-id="bresenhams-line-algorithm"><span class="header-section-number">4.2.0.4</span> Bresenham’s Line Algorithm</h4>
+<p>Incrementally traverse a line segment from one endpoint to the other.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Integer endpoints, x0 &lt; x1, 0 &lt;= slope &lt;= 1 (other slopes by symmetry)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dx, dy <span class="op">=</span> x1 <span class="op">-</span> x0, y1 <span class="op">-</span> y0</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>dy <span class="op">-</span> dx               <span class="co"># decision variable</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y0</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x0, x1 <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    plot(x, y)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> D <span class="op">&gt;</span> <span class="dv">0</span>:               <span class="co"># line passes above the midpoint: step up</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        y <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        D <span class="op">-=</span> <span class="dv">2</span><span class="op">*</span>dx</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    D <span class="op">+=</span> <span class="dv">2</span><span class="op">*</span>dy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="hierarchical-rasterization" class="level4" data-number="4.2.0.5">
+<h4 data-number="4.2.0.5" class="anchored" data-anchor-id="hierarchical-rasterization"><span class="header-section-number">4.2.0.5</span> Hierarchical Rasterization</h4>
+<p>Test blocks of pixels before testing individual samples:</p>
 <ul>
 <li>Fully outside: Skip the entire block.</li>
 <li>Fully inside: Mark all samples as covered; color and depth still need to be computed.</li>
 <li>Partially intersecting: Subdivide into smaller blocks until individual pixel tests are needed.</li>
 </ul>
-<p>For example, subdivide a <span class="math inline">\(4\times4\)</span> block into <span class="math inline">\(2\times2\)</span> blocks, then individual pixels. Incremental edge-function updates can be used within the remaining blocks.</p>
 </section>
 </section>
 <section id="antialiasing" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="antialiasing"><span class="header-section-number">4.3</span> Antialiasing</h2>
 <section id="aliasing" class="level4" data-number="4.3.0.1">
 <h4 data-number="4.3.0.1" class="anchored" data-anchor-id="aliasing"><span class="header-section-number">4.3.0.1</span> Aliasing</h4>
-<p>Artifacts caused by sampling are called <strong>aliasing</strong>:</p>
+<p>Artifacts caused by sampling are called aliasing:</p>
 <ul>
 <li>Jaggies: Sampling in space.</li>
 <li>Moiré patterns: Undersampling images.</li>
 <li>Wagon-wheel effect: Sampling in time.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1177,7 +1166,7 @@ E(x,y+1) &amp;= E(x,y) + B.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Aliasing occurs when a signal changes too quickly (high frequency) relative to its sampling rate.</p>
 </div>
@@ -1186,8 +1175,8 @@ E(x,y+1) &amp;= E(x,y) + B.
 </section>
 <section id="antialiased-sampling" class="level4" data-number="4.3.0.2">
 <h4 data-number="4.3.0.2" class="anchored" data-anchor-id="antialiased-sampling"><span class="header-section-number">4.3.0.2</span> Antialiased Sampling</h4>
-<p>Original signal → <strong>Pre-filter</strong> → Sample</p>
 <ul>
+<li>Original signal → Pre-filter → Sample.</li>
 <li>Remove frequencies above the Nyquist limit before sampling.</li>
 <li>Along antialiased triangle edges, pixel values take intermediate values.</li>
 </ul>
@@ -1202,11 +1191,12 @@ F(\omega) = \int_{-\infty}^{\infty} f(x)e^{-2\pi i\omega x}\,dx.
 f(x) = \int_{-\infty}^{\infty} F(\omega)e^{2\pi i\omega x}\,d\omega.
 \]</span></p>
 </div>
-<div id="prp-acg-4-2" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.2 (Sampling and Frequency Replicas)</strong></span> Sampling with period <span class="math inline">\(T\)</span> and rate <span class="math inline">\(f_s=1/T\)</span> repeats the frequency content <span class="math inline">\(X(f)\)</span>:</p>
+<div id="thm-acg-4-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.1 (Nyquist–Shannon Sampling Theorem)</strong></span> A signal with no frequencies above <span class="math inline">\(f_{\max}\)</span> can be reconstructed exactly from samples taken at rate</p>
 <p><span class="math display">\[
-S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
+f_s &gt; 2f_{\max}.
 \]</span></p>
+<p>Frequencies above the Nyquist limit <span class="math inline">\(f_s/2\)</span> cannot be represented and alias to lower frequencies.</p>
 </div>
 </section>
 <section id="reducing-aliasing-error" class="level4" data-number="4.3.0.3">
@@ -1221,7 +1211,7 @@ S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
 <p>Remove selected frequency components using either approach:</p>
 <ol type="1">
 <li>Spatial domain: Convolve the signal with a filter kernel.</li>
-<li>Frequency domain:
+<li>Frequency domain (not practical for images):
 <ul>
 <li>Apply the Fourier transform.</li>
 <li>Multiply by the Fourier transform of the convolution kernel.</li>
@@ -1229,20 +1219,16 @@ S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
 </ul></li>
 </ol>
 </section>
-<section id="antialiasing-by-computing-average-pixel-values" class="level4" data-number="4.3.0.5">
-<h4 data-number="4.3.0.5" class="anchored" data-anchor-id="antialiasing-by-computing-average-pixel-values"><span class="header-section-number">4.3.0.5</span> Antialiasing by Computing Average Pixel Values</h4>
-<p>For a triangle indicator function <span class="math inline">\(f(x,y) = \text{inside}(\text{triangle},x,y)\)</span>, the average over a pixel gives the fraction of its area covered by the triangle.</p>
-</section>
-<section id="supersample-antialiasing" class="level4" data-number="4.3.0.6">
-<h4 data-number="4.3.0.6" class="anchored" data-anchor-id="supersample-antialiasing"><span class="header-section-number">4.3.0.6</span> Supersample Antialiasing</h4>
+<section id="supersample-antialiasing" class="level4" data-number="4.3.0.5">
+<h4 data-number="4.3.0.5" class="anchored" data-anchor-id="supersample-antialiasing"><span class="header-section-number">4.3.0.5</span> Supersample Antialiasing</h4>
 <p>Approximate a one-pixel box filter by:</p>
 <ol type="1">
 <li>Sampling multiple locations within each pixel.</li>
 <li>Averaging the sample values.</li>
 </ol>
 </section>
-<section id="antialiasing-methods-at-a-glance" class="level4" data-number="4.3.0.7">
-<h4 data-number="4.3.0.7" class="anchored" data-anchor-id="antialiasing-methods-at-a-glance"><span class="header-section-number">4.3.0.7</span> Antialiasing Methods at a Glance</h4>
+<section id="antialiasing-methods-at-a-glance" class="level4" data-number="4.3.0.6">
+<h4 data-number="4.3.0.6" class="anchored" data-anchor-id="antialiasing-methods-at-a-glance"><span class="header-section-number">4.3.0.6</span> Antialiasing Methods at a Glance</h4>
 <div class="overflow-auto" tabindex="0" role="region" aria-label="Comparison of antialiasing methods">
 <table class="caption-top table">
 <colgroup>
@@ -1292,40 +1278,30 @@ S(f) = \frac{1}{T} \sum_k X(f - k \cdot f_s).
 <h2 data-number="4.4" class="anchored" data-anchor-id="z-buffering"><span class="header-section-number">4.4</span> Z-Buffering</h2>
 <section id="depth-buffer" class="level4" data-number="4.4.0.1">
 <h4 data-number="4.4.0.1" class="anchored" data-anchor-id="depth-buffer"><span class="header-section-number">4.4.0.1</span> Depth Buffer</h4>
-<p>Store the minimum depth value for each sample (pixel).</p>
 <ul>
+<li>Store the minimum depth value for each sample (pixel).</li>
 <li>Frame buffer: Stores color values.</li>
 <li>Depth buffer (z-buffer): Stores depth values in an additional buffer.</li>
 </ul>
 </section>
 <section id="z-buffer-algorithm-pseudocode" class="level4" data-number="4.4.0.2">
 <h4 data-number="4.4.0.2" class="anchored" data-anchor-id="z-buffer-algorithm-pseudocode"><span class="header-section-number">4.4.0.2</span> Z-Buffer Algorithm (Pseudocode)</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialization</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each sample (x, y):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    zbuffer[x][y]     <span class="op">=</span> <span class="op">+</span>infinity   <span class="co"># farthest depth</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    framebuffer[x][y] <span class="op">=</span> background_color</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rasterization</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each triangle T:</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each sample (x, y) covered by T:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> interpolate_depth(T, x, y)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> z <span class="op">&lt;</span> zbuffer[x][y]:       <span class="co"># closer than the current one</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            zbuffer[x][y]     <span class="op">=</span> z</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            framebuffer[x][y] <span class="op">=</span> shade(T, x, y)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># else: discard the fragment</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="4.5">
-<h2 class="supplementary-notes anchored" data-number="4.5" data-anchor-id="supplementary-notes"><span class="header-section-number">4.5</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">4.5.1</span> Key Results</h3>
-<ul>
-<li><a href="#prp-acg-4-1" class="quarto-xref">Proposition&nbsp;4.1</a>: Moving one pixel changes an edge function by the constant <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>, so traversal needs only additions.</li>
-<li><a href="#aliasing">Aliasing</a>: Jaggies, moiré patterns, and the wagon-wheel effect are all sampling artifacts.</li>
-<li><a href="#prp-acg-4-2" class="quarto-xref">Proposition&nbsp;4.2</a>: Sampling repeats the frequency content, so aliasing appears when the replicas overlap.</li>
-<li><a href="#supersample-antialiasing">Supersample Antialiasing</a>: Averaging multiple samples per pixel approximates a one-pixel box filter.</li>
-<li><a href="#depth-buffer">Depth Buffer</a>: Keeping the minimum depth per sample resolves visibility one fragment at a time.</li>
-</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialization</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each sample (x, y):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    zbuffer[x][y]     <span class="op">=</span> <span class="op">+</span>infinity   <span class="co"># farthest depth</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    framebuffer[x][y] <span class="op">=</span> background_color</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rasterization</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each triangle T:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each sample (x, y) covered by T:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> interpolate_depth(T, x, y)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> z <span class="op">&lt;</span> zbuffer[x][y]:       <span class="co"># closer than the current one</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            zbuffer[x][y]     <span class="op">=</span> z</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            framebuffer[x][y] <span class="op">=</span> shade(T, x, y)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># else: discard the fragment</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
 </section>
