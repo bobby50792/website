@@ -950,11 +950,3 @@ $$
 ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
-
-- @thm-aap-1-1: A measure is monotone, subadditive, and continuous from below; continuity from above also needs $\mu(A_1)<\infty$.
-- @thm-aap-1-5 and @thm-aap-1-6: Monotonicity, the limits at infinity, and right continuity characterize distribution functions.
-- @thm-aap-1-9: If $\nu\ll\mu$ for $\sigma$-finite measures, then $\nu(A)=\int_A f\,d\mu$ with $f=d\nu/d\mu$.
-- @thm-aap-1-10 and @thm-aap-1-11: Jensen's inequality gives $\varphi\left(\int f\,d\mu\right)\le\int\varphi(f)\,d\mu$, and Hölder's inequality gives $\int|fg|\,d\mu\le\|f\|_p\|g\|_q$.
-- @thm-aap-1-13, @thm-aap-1-14, and @thm-aap-1-15: Fatou's lemma bounds the limit of integrals, while monotone and dominated convergence let a limit pass through the integral.
-- @thm-aap-1-16: $Ef(X)=\int_S f(y)\,\mu(dy)$, so an expectation can be computed from the distribution of $X$.
-- @thm-aap-1-18: Under its conditions, Fubini's theorem lets a double integral be computed as an iterated integral in either order.

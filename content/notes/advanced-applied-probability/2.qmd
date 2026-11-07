@@ -10,157 +10,97 @@ crossref:
 
 ## Independence
 
-### Basic Definitions
+### Definitions
+
+Work on a probability space $(\Omega,\mathcal F,P)$.
 
 ::: {#def-aap-2-1 name="Independent Events"}
 
-Two events $A$ and $B$ are **independent** if
-
-$$
-P(A\cap B)=P(A)P(B).
-$$
-
-:::
-
-::: {#def-aap-2-2 name="Independent Random Variables"}
-
-Let $X$ and $Y$ be random variables defined on the same
-probability space $(\Omega,\mathcal F,P)$:
-
-$$
-X,Y:(\Omega,\mathcal F,P)\to(\mathbb R,\mathcal R).
-$$
-
-They are **independent** if, for all $C,D\in\mathcal R$,
-
-$$
-P(X\in C,Y\in D)=P(X\in C)P(Y\in D).
-$$
-
-That is, the events $A=\{X\in C\}$ and $B=\{Y\in D\}$ are independent.
-
-:::
-
-::: {#def-aap-2-3 name="Independent σ-Fields"}
-
-Let $(\Omega,\mathcal H,P)$ be a probability space, and let
-$\mathcal F,\mathcal G\subseteq\mathcal H$ be two sub-$\sigma$-fields. They are
-**independent** if
-
-$$
-P(A\cap B)=P(A)P(B),
-\qquad\forall A\in\mathcal F,\ \forall B\in\mathcal G.
-$$
-
-That is, every event in $\mathcal F$ is independent of every event in $\mathcal G$.
-
-:::
-
-::: {#thm-aap-2-1 name="Independence and Generated σ-Fields"}
-
-Let $X$ and $Y$ be random variables on the same probability space $(\Omega,\mathcal H,P)$.
-
-i) If $X$ and $Y$ are independent, then $\sigma(X)$ and $\sigma(Y)$ are independent.
-
-ii) Conversely, if $\mathcal F,\mathcal G\subseteq\mathcal H$ are independent
-    sub-$\sigma$-fields, $X$ is $\mathcal F$-measurable, and $Y$ is
-    $\mathcal G$-measurable, then $X$ and $Y$ are independent.
-
-:::
-
-### Independence of Finite Families
-
-Work on a common probability space $(\Omega,\mathcal H,P)$.
-
-::: {#def-aap-2-4 name="Independence of Finitely Many σ-Fields"}
-
-The sub-$\sigma$-fields
-$\mathcal F_1,\ldots,\mathcal F_n\subseteq\mathcal H$ are **independent** if,
-whenever $A_i\in\mathcal F_i$ for $i=1,\ldots,n$,
-
-$$
-P\left(\bigcap_{i=1}^n A_i\right)=\prod_{i=1}^n P(A_i).
-$$
-
-:::
-
-::: {#def-aap-2-5 name="Independence of Finitely Many Random Variables"}
-
-The random variables $X_1,\ldots,X_n$ are **independent**
-if, whenever $B_i\in\mathcal R$ for $i=1,\ldots,n$,
-
-$$
-P\left(\bigcap_{i=1}^n\{X_i\in B_i\}\right)
-=\prod_{i=1}^n P(X_i\in B_i).
-$$
-
-:::
-
-::: {#def-aap-2-6 name="Independence of Finitely Many Events"}
-
-The events $A_1,\ldots,A_n\in\mathcal H$ are **independent** if, for
-every nonempty subset $I\subseteq\{1,\ldots,n\}$,
+The events $A_1,\ldots,A_n$ are **independent** if, for every nonempty
+$I\subseteq\{1,\ldots,n\}$,
 
 $$
 P\left(\bigcap_{i\in I}A_i\right)=\prod_{i\in I}P(A_i).
 $$
 
+For two events this reads $P(A\cap B)=P(A)P(B)$.
+
 :::
 
-### Joint Distributions
+::: {#def-aap-2-2 name="Independent σ-Fields"}
+
+The sub-$\sigma$-fields $\mathcal F_1,\ldots,\mathcal F_n\subseteq\mathcal F$
+are **independent** if
+
+$$
+P\left(\bigcap_{i=1}^n A_i\right)=\prod_{i=1}^n P(A_i)
+\qquad\text{whenever }A_i\in\mathcal F_i.
+$$
+
+:::
+
+::: {#def-aap-2-3 name="Independent Random Variables"}
+
+The random variables $X_1,\ldots,X_n$ are **independent** if
+
+$$
+P(X_1\in B_1,\ldots,X_n\in B_n)=\prod_{i=1}^n P(X_i\in B_i)
+\qquad\text{for all }B_1,\ldots,B_n\in\mathcal R.
+$$
+
+:::
+
+::: {.callout-note title="Why No Condition on Subsets" collapse="true"}
+
+Every $\mathcal F_i$ contains $\Omega$, so setting $A_i=\Omega$ (or
+$B_i=\mathbb R$) removes index $i$ from both sides. The product rule for all
+$n$ therefore implies it for every subfamily, so unlike @def-aap-2-1 no
+condition on subsets is needed.
+
+For events this fails: with $A_3=\varnothing$,
+$P(A_1\cap A_2\cap A_3)=P(A_1)P(A_2)P(A_3)=0$ holds automatically, even when
+$A_1$ and $A_2$ are not independent.
+
+:::
+
+::: {#thm-aap-2-1 name="Independence and Generated σ-Fields"}
+
+i) If $X$ and $Y$ are independent, then $\sigma(X)$ and $\sigma(Y)$ are independent.
+
+ii) If $\mathcal G,\mathcal H$ are independent sub-$\sigma$-fields, $X$ is
+    $\mathcal G$-measurable, and $Y$ is $\mathcal H$-measurable, then $X$ and
+    $Y$ are independent.
+
+:::
+
+### Distributions and Expectations
 
 ::: {#thm-aap-2-2 name="Joint Distribution of Independent Random Variables"}
 
-Suppose $X_1,\ldots,X_n$ are independent random variables and $X_i$ has
-distribution $\mu_i$ for $i=1,\ldots,n$. Then $(X_1,\ldots,X_n)$ has distribution
-
-$$
-\mu_1\times\cdots\times\mu_n.
-$$
+If $X_1,\ldots,X_n$ are independent and $X_i$ has distribution $\mu_i$, then
+$(X_1,\ldots,X_n)$ has distribution $\mu_1\times\cdots\times\mu_n$.
 
 :::
 
-### Expectations
-
 ::: {#thm-aap-2-3 name="Expectations of Functions of Independent Random Variables"}
 
-Suppose $X$ and $Y$ are independent and have distributions $\mu$ and $\nu$.
-Let $h:\mathbb R^2\to\mathbb R$ be measurable. If either
-
-a) $h\ge0$, or
-
-b) $E|h(X,Y)|<\infty$,
-
-then
+Let $X$ and $Y$ be independent with distributions $\mu$ and $\nu$, and let
+$h:\mathbb R^2\to\mathbb R$ be measurable with $h\ge0$ or $E|h(X,Y)|<\infty$.
+Then
 
 $$
 E[h(X,Y)]=\iint_{\mathbb R^2}h(x,y)\,\mu(dx)\,\nu(dy).
 $$
 
-In particular, let $h(x,y)=f(x)g(y)$, where $f,g:\mathbb R\to\mathbb R$ are
-measurable functions. If either
-
-a) $f,g\ge0$, or
-
-b) both $E|f(X)|<\infty$ and $E|g(Y)|<\infty$,
-
-then
-
-$$
-E[f(X)g(Y)]=E[f(X)]\cdot E[g(Y)].
-$$
+In particular, if $f,g\ge0$ or $E|f(X)|,E|g(Y)|<\infty$, then
+$E[f(X)g(Y)]=E[f(X)]\,E[g(Y)]$.
 
 :::
 
 ::: {#thm-aap-2-4 name="Expectation of a Product of Independent Random Variables"}
 
-Let $X_1,\ldots,X_n$ be independent random variables. If either
-
-a) $X_i\ge0$ for all $i$, or
-
-b) $E|X_i|<\infty$ for all $i$,
-
-then
+If $X_1,\ldots,X_n$ are independent and either all $X_i\ge0$ or all
+$E|X_i|<\infty$, then
 
 $$
 E\left[\prod_{i=1}^n X_i\right]=\prod_{i=1}^n EX_i.
@@ -168,25 +108,18 @@ $$
 
 :::
 
-### Sums and Convolution
-
 ::: {#thm-aap-2-5 name="Distribution of the Sum of Independent Random Variables"}
 
-If $X$ and $Y$ are independent, $F(x)=P(X\le x)$, and $G(y)=P(Y\le y)$,
-then
+If $X$ and $Y$ are independent with distribution functions $F$ and $G$, then
 
 $$
-P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y).
+P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)=:(F*G)(z),
 $$
+
+the **convolution** of $F$ and $G$. Here $dG$ means integration against the
+distribution of $Y$.
 
 :::
-
-#### Convolution
-
-The integral on the right-hand side is called the
-**convolution** of $F$ and $G$ and is denoted by $(F*G)(z)$.
-
-Here $dG(y)$ denotes integration with respect to the distribution measure of $Y$.
 
 ## Conditional Expectation
 
@@ -277,176 +210,151 @@ Then $(\omega,A)\mapsto\mu(Y(\omega),A)$ is a **regular conditional distribution
 
 ## Laws of Large Numbers
 
-Throughout this section, $S_n=X_1+\cdots+X_n$.
 
 ### Weak Laws of Large Numbers
 
-::: {#thm-aap-2-6 name="L² Weak Law"}
+::: {#thm-aap-2-7 name="Weak Law of Large Numbers"}
 
-Let $X_1,X_2,\ldots$ be uncorrelated random variables with $EX_i=\mu$ and
-$\operatorname{Var}(X_i)\le C<\infty$. Then, as $n\to\infty$,
-
-$$
-\frac{S_n}{n}\to\mu
-\quad\text{in } L^2 \text{ and in probability.}
-$$
-
-:::
-
-::: {.callout-note collapse="true"}
-
-## Why the Variance Bound Is Enough
-
-Because the variables are uncorrelated, the variance of the sum is the sum of the variances:
+Let $X_1,X_2,\ldots$ be i.i.d. random variables such that
 
 $$
-E\left(\frac{S_n}{n}-\mu\right)^2
-=\frac{\operatorname{Var}(S_n)}{n^2}
-\le\frac{C}{n}\to0.
+x\,\mathbb{P}(|X_1|>x)\longrightarrow 0
+\qquad \text{as } x\to\infty.
 $$
 
-This gives convergence in $L^2$, and Chebyshev's inequality then gives convergence in probability.
-
-:::
-
-::: {#thm-aap-2-7 name="Khinchin's Weak Law"}
-
-Let $X_1,X_2,\ldots$ be i.i.d. with $E|X_1|<\infty$ and $EX_1=\mu$. Then
+Define the partial sum and the truncated mean by
 
 $$
-\frac{S_n}{n}\to\mu
-\quad\text{in probability.}
+S_n=\sum_{i=1}^{n}X_i,
+\qquad
+\mu_n=\mathbb{E}\!\left[X_1\mathbf{1}_{\{|X_1|\le n\}}\right].
+$$
+
+Then
+
+$$
+\frac{S_n}{n}-\mu_n\xrightarrow{\mathbb{P}}0.
 $$
 
 :::
-
-::: {.callout-note collapse="true"}
-
-## Why No Variance Is Needed
-
-The variables may have infinite variance, so @thm-aap-2-6 does not apply directly. The proof truncates $X_i$ at level $n$ and applies the variance argument to the truncated variables. The condition $E|X_1|<\infty$ makes the truncated part negligible.
-
-:::
+    
 
 ### Borel-Cantelli Lemmas
 
-::: {#def-aap-2-9 name="Infinitely Often"}
+::: {#def-aap-2-9 name="Limit Superior and Limit Inferior of Sets"}
 
-For events $A_1,A_2,\ldots$, the event that **$A_n$ occurs infinitely often** is
-
-$$
-\{A_n\text{ i.o.}\}
-=\limsup_{n\to\infty}A_n
-=\bigcap_{m=1}^\infty\bigcup_{n=m}^\infty A_n.
-$$
-
-:::
-
-::: {#lem-aap-2-1 name="First Borel-Cantelli Lemma"}
-
-If $\sum_{n=1}^\infty P(A_n)<\infty$, then
+Let $A_n$ be a sequence of subsets of $\Omega$. Define
 
 $$
-P(A_n\text{ i.o.})=0.
+\limsup A_n=\lim_{m\to\infty}\bigcup_{n=m}^\infty A_n
+=\{\omega\text{ that are in infinitely many }A_n\},
+$$
+
+where the limit exists since $\bigcup_{n=m}^\infty A_n$ is decreasing in $m$, and
+
+$$
+\liminf A_n=\lim_{m\to\infty}\bigcap_{n=m}^\infty A_n
+=\{\omega\text{ that are in all but finitely many }A_n\}.
 $$
 
 :::
 
-::: {#lem-aap-2-2 name="Second Borel-Cantelli Lemma"}
+::: {#thm-aap-2-8 name="Characterization of Almost Sure Convergence"}
 
-If the events $A_1,A_2,\ldots$ are independent and
-$\sum_{n=1}^\infty P(A_n)=\infty$, then
-
-$$
-P(A_n\text{ i.o.})=1.
-$$
-
-:::
-
-::: {.callout-note collapse="true"}
-
-## Why Each Lemma Holds
-
-For the first lemma, the union bound gives
+Let $X_1,X_2,\ldots$ be random variables on a probability space. Then
 
 $$
-P(A_n\text{ i.o.})
-\le P\left(\bigcup_{n=m}^\infty A_n\right)
-\le\sum_{n=m}^\infty P(A_n)\to0
-\quad\text{as } m\to\infty.
+X_n \xrightarrow{\mathrm{a.s.}} 0
+\quad\Longleftrightarrow\quad
+\mathbb P(|X_n|>\epsilon\text{ i.o.})=0
+\quad\text{for every }\epsilon>0,
 $$
 
-For the second lemma, independence and $1-x\le e^{-x}$ give
+where **i.o.** means *infinitely often*. If $A_n(\epsilon)=\{|X_n|>\epsilon\}$, then
 
 $$
-P\left(\bigcap_{n=m}^M A_n^c\right)
-=\prod_{n=m}^M\bigl(1-P(A_n)\bigr)
-\le\exp\left(-\sum_{n=m}^M P(A_n)\right)\to0
-\quad\text{as } M\to\infty.
-$$
-
-Independence cannot be dropped. If $A_n=A$ for all $n$ and $0<P(A)<1$, then $\sum_n P(A_n)=\infty$ but $P(A_n\text{ i.o.})=P(A)<1$.
-
-:::
-
-### Khinchin–Kolmogorov Theorem
-
-::: {#lem-aap-2-3 name="Kolmogorov's Maximal Inequality"}
-
-Let $X_1,\ldots,X_n$ be independent with $EX_i=0$ and
-$\operatorname{Var}(X_i)<\infty$. Then, for every $x>0$,
-
-$$
-P\left(\max_{1\le k\le n}|S_k|\ge x\right)
-\le\frac{\operatorname{Var}(S_n)}{x^2}.
+\{|X_n|>\epsilon\text{ i.o.}\}
+=\limsup_{n\to\infty}A_n(\epsilon).
 $$
 
 :::
 
-::: {#thm-aap-2-8 name="Khinchin–Kolmogorov Convergence Theorem"}
+::: {#thm-aap-2-9 name="Borel-Cantelli Lemma"}
 
-Let $X_1,X_2,\ldots$ be independent with $EX_n=0$. If
+If $\sum_{n=1}^\infty \mathbb P(A_n)<\infty$, then
+
+$$
+\mathbb P(A_n\text{ i.o.})=0.
+$$
+
+:::
+
+::: {#thm-aap-2-10 name="Kolmogorov's Maximal Inequality"}
+
+Suppose $X_1,\ldots,X_n$ are independent with $\mathbb E X_i=0$ and
+$\operatorname{Var}(X_i)<\infty$. If $S_n=X_1+\cdots+X_n$, then for every
+$\epsilon>0$,
+
+$$
+\mathbb P\left(\max_{1\le k\le n}|S_k|\ge\epsilon\right)
+\le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
+$$
+
+:::
+
+::: {.callout-note title="Comparison with Chebyshev's Inequality" collapse="true"}
+
+Under the same hypotheses, Chebyshev's inequality gives only
+
+$$
+\mathbb P(|S_n|\ge\epsilon)\le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
+$$
+
+@thm-aap-2-10 gives the same bound for $\displaystyle \max_{1\le k\le n}|S_k|$, which is
+at least $|S_n|$.
+
+:::
+
+::: {#thm-aap-2-11 name="Kolmogorov's One-Series Theorem"}
+
+Suppose $X_1,X_2,\ldots$ are independent with $\mathbb E X_n=0$. If
 
 $$
 \sum_{n=1}^\infty\operatorname{Var}(X_n)<\infty,
 $$
 
-then $\sum_{n=1}^\infty X_n$ converges almost surely.
+then $\sum_{n=1}^\infty X_n(\omega)$ converges almost surely.
 
 :::
 
-::: {.callout-note collapse="true"}
+::: {#thm-aap-2-12 name="Kronecker's Lemma"}
 
-## Why the Series Converges
-
-Apply @lem-aap-2-3 to the terms after index $M$:
+If $a_n\uparrow\infty$ and $\sum_{n=1}^\infty x_n/a_n$ converges, then
 
 $$
-P\left(\max_{M<k\le N}|S_k-S_M|\ge\varepsilon\right)
-\le\frac{1}{\varepsilon^2}\sum_{n=M+1}^N\operatorname{Var}(X_n).
+\frac{1}{a_n}\sum_{m=1}^n x_m\to0.
 $$
 
-Let $N\to\infty$ and then $M\to\infty$. The right side tends to $0$, so the partial sums are almost surely a Cauchy sequence.
+:::
+
+### Strong Law of Large Numbers
+
+::: {#thm-aap-2-13 name="Strong Law of Large Numbers"}
+
+Let $X_1,X_2,\ldots$ be i.i.d. random variables with $\mathbb E|X_i|<\infty$.
+Let $\mathbb E X_i=\mu$ and $S_n=X_1+\cdots+X_n$. Then
+
+$$
+\frac{S_n}{n}\xrightarrow{\mathrm{a.s.}}\mu
+\qquad\text{as }n\to\infty.
+$$
 
 :::
 
-::: {.callout-note collapse="true"}
 
-## Example: Random Harmonic Series
 
-Let $\varepsilon_1,\varepsilon_2,\ldots$ be independent with $P(\varepsilon_n=\pm1)=1/2$. Then $\sum_n\operatorname{Var}(\varepsilon_n/n)=\sum_n 1/n^2<\infty$, so $\sum_n\varepsilon_n/n$ converges almost surely, even though $\sum_n 1/n$ diverges.
-
-:::
 
 ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
 
-- @thm-aap-2-1: Independent random variables generate independent $\sigma$-fields, and variables measurable with respect to independent $\sigma$-fields are independent.
-- @thm-aap-2-2: Independent random variables have the product distribution $\mu_1\times\cdots\times\mu_n$ as their joint distribution.
-- @thm-aap-2-3 and @thm-aap-2-4: Under independence, $E[f(X)g(Y)]=E[f(X)]\cdot E[g(Y)]$, and expectation factors over products.
-- @thm-aap-2-5: $P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)$, the convolution of $F$ and $G$.
-- @def-aap-2-7: $E(X\mid\mathcal F)$ is an $\mathcal F$-measurable variable with the same integral as $X$ over every $A\in\mathcal F$.
-- @thm-aap-2-7: If $X_1,X_2,\ldots$ are i.i.d. with $E|X_1|<\infty$, then $S_n/n\to EX_1$ in probability.
-- @lem-aap-2-1 and @lem-aap-2-2: $\sum_n P(A_n)<\infty$ gives $P(A_n\text{ i.o.})=0$; for independent events, $\sum_n P(A_n)=\infty$ gives $P(A_n\text{ i.o.})=1$.
-- @thm-aap-2-8: For independent mean-zero $X_n$ with $\sum_n\operatorname{Var}(X_n)<\infty$, the series $\sum_n X_n$ converges almost surely.
