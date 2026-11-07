@@ -980,11 +980,8 @@ window.Quarto = {
   <ul>
   <li><a href="#independence" id="toc-independence" class="nav-link active" data-scroll-target="#independence"><span class="header-section-number">2.1</span> Independence</a>
   <ul class="collapse">
-  <li><a href="#basic-definitions" id="toc-basic-definitions" class="nav-link" data-scroll-target="#basic-definitions"><span class="header-section-number">2.1.1</span> Basic Definitions</a></li>
-  <li><a href="#independence-of-finite-families" id="toc-independence-of-finite-families" class="nav-link" data-scroll-target="#independence-of-finite-families"><span class="header-section-number">2.1.2</span> Independence of Finite Families</a></li>
-  <li><a href="#joint-distributions" id="toc-joint-distributions" class="nav-link" data-scroll-target="#joint-distributions"><span class="header-section-number">2.1.3</span> Joint Distributions</a></li>
-  <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations"><span class="header-section-number">2.1.4</span> Expectations</a></li>
-  <li><a href="#sums-and-convolution" id="toc-sums-and-convolution" class="nav-link" data-scroll-target="#sums-and-convolution"><span class="header-section-number">2.1.5</span> Sums and Convolution</a></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">2.1.1</span> Definitions</a></li>
+  <li><a href="#distributions-and-expectations" id="toc-distributions-and-expectations" class="nav-link" data-scroll-target="#distributions-and-expectations"><span class="header-section-number">2.1.2</span> Distributions and Expectations</a></li>
   </ul></li>
   <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">2.2</span> Conditional Expectation</a>
   <ul class="collapse">
@@ -994,7 +991,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#weak-laws-of-large-numbers" id="toc-weak-laws-of-large-numbers" class="nav-link" data-scroll-target="#weak-laws-of-large-numbers"><span class="header-section-number">2.3.1</span> Weak Laws of Large Numbers</a></li>
   <li><a href="#borel-cantelli-lemmas" id="toc-borel-cantelli-lemmas" class="nav-link" data-scroll-target="#borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</a></li>
-  <li><a href="#khinchinkolmogorov-theorem" id="toc-khinchinkolmogorov-theorem" class="nav-link" data-scroll-target="#khinchinkolmogorov-theorem"><span class="header-section-number">2.3.3</span> Khinchin–Kolmogorov Theorem</a></li>
+  <li><a href="#strong-law-of-large-numbers" id="toc-strong-law-of-large-numbers" class="nav-link" data-scroll-target="#strong-law-of-large-numbers"><span class="header-section-number">2.3.3</span> Strong Law of Large Numbers</a></li>
   </ul></li>
   <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">2.4</span> Supplementary Notes</a>
   <ul class="collapse">
@@ -1028,126 +1025,86 @@ window.Quarto = {
 
 <section id="independence" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="independence"><span class="header-section-number">2.1</span> Independence</h2>
-<section id="basic-definitions" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="basic-definitions"><span class="header-section-number">2.1.1</span> Basic Definitions</h3>
+<section id="definitions" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="definitions"><span class="header-section-number">2.1.1</span> Definitions</h3>
+<p>Work on a probability space <span class="math inline">\((\Omega,\mathcal F,P)\)</span>.</p>
 <div id="def-aap-2-1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.1 (Independent Events)</strong></span> Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> if</p>
-<p><span class="math display">\[
-P(A\cap B)=P(A)P(B).
-\]</span></p>
-</div>
-<div id="def-aap-2-2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.2 (Independent Random Variables)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables defined on the same probability space <span class="math inline">\((\Omega,\mathcal F,P)\)</span>:</p>
-<p><span class="math display">\[
-X,Y:(\Omega,\mathcal F,P)\to(\mathbb R,\mathcal R).
-\]</span></p>
-<p>They are <strong>independent</strong> if, for all <span class="math inline">\(C,D\in\mathcal R\)</span>,</p>
-<p><span class="math display">\[
-P(X\in C,Y\in D)=P(X\in C)P(Y\in D).
-\]</span></p>
-<p>That is, the events <span class="math inline">\(A=\{X\in C\}\)</span> and <span class="math inline">\(B=\{Y\in D\}\)</span> are independent.</p>
-</div>
-<div id="def-aap-2-3" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.3 (Independent σ-Fields)</strong></span> Let <span class="math inline">\((\Omega,\mathcal H,P)\)</span> be a probability space, and let <span class="math inline">\(\mathcal F,\mathcal G\subseteq\mathcal H\)</span> be two sub-<span class="math inline">\(\sigma\)</span>-fields. They are <strong>independent</strong> if</p>
-<p><span class="math display">\[
-P(A\cap B)=P(A)P(B),
-\qquad\forall A\in\mathcal F,\ \forall B\in\mathcal G.
-\]</span></p>
-<p>That is, every event in <span class="math inline">\(\mathcal F\)</span> is independent of every event in <span class="math inline">\(\mathcal G\)</span>.</p>
-</div>
-<div id="thm-aap-2-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.1 (Independence and Generated σ-Fields)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables on the same probability space <span class="math inline">\((\Omega,\mathcal H,P)\)</span>.</p>
-<ol type="i">
-<li><p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(\sigma(X)\)</span> and <span class="math inline">\(\sigma(Y)\)</span> are independent.</p></li>
-<li><p>Conversely, if <span class="math inline">\(\mathcal F,\mathcal G\subseteq\mathcal H\)</span> are independent sub-<span class="math inline">\(\sigma\)</span>-fields, <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal G\)</span>-measurable, then <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.</p></li>
-</ol>
-</div>
-</section>
-<section id="independence-of-finite-families" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="independence-of-finite-families"><span class="header-section-number">2.1.2</span> Independence of Finite Families</h3>
-<p>Work on a common probability space <span class="math inline">\((\Omega,\mathcal H,P)\)</span>.</p>
-<div id="def-aap-2-4" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.4 (Independence of Finitely Many σ-Fields)</strong></span> The sub-<span class="math inline">\(\sigma\)</span>-fields <span class="math inline">\(\mathcal F_1,\ldots,\mathcal F_n\subseteq\mathcal H\)</span> are <strong>independent</strong> if, whenever <span class="math inline">\(A_i\in\mathcal F_i\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span>,</p>
-<p><span class="math display">\[
-P\left(\bigcap_{i=1}^n A_i\right)=\prod_{i=1}^n P(A_i).
-\]</span></p>
-</div>
-<div id="def-aap-2-5" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.5 (Independence of Finitely Many Random Variables)</strong></span> The random variables <span class="math inline">\(X_1,\ldots,X_n\)</span> are <strong>independent</strong> if, whenever <span class="math inline">\(B_i\in\mathcal R\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span>,</p>
-<p><span class="math display">\[
-P\left(\bigcap_{i=1}^n\{X_i\in B_i\}\right)
-=\prod_{i=1}^n P(X_i\in B_i).
-\]</span></p>
-</div>
-<div id="def-aap-2-6" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.6 (Independence of Finitely Many Events)</strong></span> The events <span class="math inline">\(A_1,\ldots,A_n\in\mathcal H\)</span> are <strong>independent</strong> if, for every nonempty subset <span class="math inline">\(I\subseteq\{1,\ldots,n\}\)</span>,</p>
+<p><span class="theorem-title"><strong>Definition 2.1 (Independent Events)</strong></span> The events <span class="math inline">\(A_1,\ldots,A_n\)</span> are <strong>independent</strong> if, for every nonempty <span class="math inline">\(I\subseteq\{1,\ldots,n\}\)</span>,</p>
 <p><span class="math display">\[
 P\left(\bigcap_{i\in I}A_i\right)=\prod_{i\in I}P(A_i).
 \]</span></p>
+<p>For two events this reads <span class="math inline">\(P(A\cap B)=P(A)P(B)\)</span>.</p>
 </div>
-</section>
-<section id="joint-distributions" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="joint-distributions"><span class="header-section-number">2.1.3</span> Joint Distributions</h3>
-<div id="thm-aap-2-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.2 (Joint Distribution of Independent Random Variables)</strong></span> Suppose <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent random variables and <span class="math inline">\(X_i\)</span> has distribution <span class="math inline">\(\mu_i\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span>. Then <span class="math inline">\((X_1,\ldots,X_n)\)</span> has distribution</p>
+<div id="def-aap-2-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.2 (Independent σ-Fields)</strong></span> The sub-<span class="math inline">\(\sigma\)</span>-fields <span class="math inline">\(\mathcal F_1,\ldots,\mathcal F_n\subseteq\mathcal F\)</span> are <strong>independent</strong> if</p>
 <p><span class="math display">\[
-\mu_1\times\cdots\times\mu_n.
+P\left(\bigcap_{i=1}^n A_i\right)=\prod_{i=1}^n P(A_i)
+\qquad\text{whenever }A_i\in\mathcal F_i.
 \]</span></p>
 </div>
-</section>
-<section id="expectations" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="expectations"><span class="header-section-number">2.1.4</span> Expectations</h3>
-<div id="thm-aap-2-3" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.3 (Expectations of Functions of Independent Random Variables)</strong></span> Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent and have distributions <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span>. Let <span class="math inline">\(h:\mathbb R^2\to\mathbb R\)</span> be measurable. If either</p>
-<ol type="a">
-<li><p><span class="math inline">\(h\ge0\)</span>, or</p></li>
-<li><p><span class="math inline">\(E|h(X,Y)|&lt;\infty\)</span>,</p></li>
+<div id="def-aap-2-3" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.3 (Independent Random Variables)</strong></span> The random variables <span class="math inline">\(X_1,\ldots,X_n\)</span> are <strong>independent</strong> if</p>
+<p><span class="math display">\[
+P(X_1\in B_1,\ldots,X_n\in B_n)=\prod_{i=1}^n P(X_i\in B_i)
+\qquad\text{for all }B_1,\ldots,B_n\in\mathcal R.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why No Condition on Subsets
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Every <span class="math inline">\(\mathcal F_i\)</span> contains <span class="math inline">\(\Omega\)</span>, so setting <span class="math inline">\(A_i=\Omega\)</span> (or <span class="math inline">\(B_i=\mathbb R\)</span>) removes index <span class="math inline">\(i\)</span> from both sides. The product rule for all <span class="math inline">\(n\)</span> therefore implies it for every subfamily, so unlike <a href="#def-aap-2-1" class="quarto-xref">Definition&nbsp;2.1</a> no condition on subsets is needed.</p>
+<p>For events this fails: with <span class="math inline">\(A_3=\varnothing\)</span>, <span class="math inline">\(P(A_1\cap A_2\cap A_3)=P(A_1)P(A_2)P(A_3)=0\)</span> holds automatically, even when <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span> are not independent.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-2-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.1 (Independence and Generated σ-Fields)</strong></span> &nbsp;</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(\sigma(X)\)</span> and <span class="math inline">\(\sigma(Y)\)</span> are independent.</p></li>
+<li><p>If <span class="math inline">\(\mathcal G,\mathcal H\)</span> are independent sub-<span class="math inline">\(\sigma\)</span>-fields, <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal G\)</span>-measurable, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal H\)</span>-measurable, then <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.</p></li>
 </ol>
-<p>then</p>
+</div>
+</section>
+<section id="distributions-and-expectations" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="distributions-and-expectations"><span class="header-section-number">2.1.2</span> Distributions and Expectations</h3>
+<div id="thm-aap-2-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.2 (Joint Distribution of Independent Random Variables)</strong></span> If <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent and <span class="math inline">\(X_i\)</span> has distribution <span class="math inline">\(\mu_i\)</span>, then <span class="math inline">\((X_1,\ldots,X_n)\)</span> has distribution <span class="math inline">\(\mu_1\times\cdots\times\mu_n\)</span>.</p>
+</div>
+<div id="thm-aap-2-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.3 (Expectations of Functions of Independent Random Variables)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be independent with distributions <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span>, and let <span class="math inline">\(h:\mathbb R^2\to\mathbb R\)</span> be measurable with <span class="math inline">\(h\ge0\)</span> or <span class="math inline">\(E|h(X,Y)|&lt;\infty\)</span>. Then</p>
 <p><span class="math display">\[
 E[h(X,Y)]=\iint_{\mathbb R^2}h(x,y)\,\mu(dx)\,\nu(dy).
 \]</span></p>
-<p>In particular, let <span class="math inline">\(h(x,y)=f(x)g(y)\)</span>, where <span class="math inline">\(f,g:\mathbb R\to\mathbb R\)</span> are measurable functions. If either</p>
-<ol type="a">
-<li><p><span class="math inline">\(f,g\ge0\)</span>, or</p></li>
-<li><p>both <span class="math inline">\(E|f(X)|&lt;\infty\)</span> and <span class="math inline">\(E|g(Y)|&lt;\infty\)</span>,</p></li>
-</ol>
-<p>then</p>
-<p><span class="math display">\[
-E[f(X)g(Y)]=E[f(X)]\cdot E[g(Y)].
-\]</span></p>
+<p>In particular, if <span class="math inline">\(f,g\ge0\)</span> or <span class="math inline">\(E|f(X)|,E|g(Y)|&lt;\infty\)</span>, then <span class="math inline">\(E[f(X)g(Y)]=E[f(X)]\,E[g(Y)]\)</span>.</p>
 </div>
 <div id="thm-aap-2-4" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.4 (Expectation of a Product of Independent Random Variables)</strong></span> Let <span class="math inline">\(X_1,\ldots,X_n\)</span> be independent random variables. If either</p>
-<ol type="a">
-<li><p><span class="math inline">\(X_i\ge0\)</span> for all <span class="math inline">\(i\)</span>, or</p></li>
-<li><p><span class="math inline">\(E|X_i|&lt;\infty\)</span> for all <span class="math inline">\(i\)</span>,</p></li>
-</ol>
-<p>then</p>
+<p><span class="theorem-title"><strong>Theorem 2.4 (Expectation of a Product of Independent Random Variables)</strong></span> If <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent and either all <span class="math inline">\(X_i\ge0\)</span> or all <span class="math inline">\(E|X_i|&lt;\infty\)</span>, then</p>
 <p><span class="math display">\[
 E\left[\prod_{i=1}^n X_i\right]=\prod_{i=1}^n EX_i.
 \]</span></p>
 </div>
-</section>
-<section id="sums-and-convolution" class="level3" data-number="2.1.5">
-<h3 data-number="2.1.5" class="anchored" data-anchor-id="sums-and-convolution"><span class="header-section-number">2.1.5</span> Sums and Convolution</h3>
 <div id="thm-aap-2-5" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.5 (Distribution of the Sum of Independent Random Variables)</strong></span> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, <span class="math inline">\(F(x)=P(X\le x)\)</span>, and <span class="math inline">\(G(y)=P(Y\le y)\)</span>, then</p>
+<p><span class="theorem-title"><strong>Theorem 2.5 (Distribution of the Sum of Independent Random Variables)</strong></span> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent with distribution functions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span>, then</p>
 <p><span class="math display">\[
-P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y).
+P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)=:(F*G)(z),
 \]</span></p>
+<p>the <strong>convolution</strong> of <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span>. Here <span class="math inline">\(dG\)</span> means integration against the distribution of <span class="math inline">\(Y\)</span>.</p>
 </div>
-<section id="convolution" class="level4" data-number="2.1.5.1">
-<h4 data-number="2.1.5.1" class="anchored" data-anchor-id="convolution"><span class="header-section-number">2.1.5.1</span> Convolution</h4>
-<p>The integral on the right-hand side is called the <strong>convolution</strong> of <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> and is denoted by <span class="math inline">\((F*G)(z)\)</span>.</p>
-<p>Here <span class="math inline">\(dG(y)\)</span> denotes integration with respect to the distribution measure of <span class="math inline">\(Y\)</span>.</p>
-</section>
 </section>
 </section>
 <section id="conditional-expectation" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">2.2</span> Conditional Expectation</h2>
 <div id="def-aap-2-7" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.7 (Conditional Expectation)</strong></span> Given a probability space <span class="math inline">\((\Omega,\mathcal F_0,P)\)</span>, a sub-<span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal F\subseteq\mathcal F_0\)</span>, and an <span class="math inline">\(\mathcal F_0\)</span>-measurable random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(E|X|&lt;\infty\)</span>, the conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal F\)</span>, denoted <span class="math inline">\(E(X\mid\mathcal F)\)</span>, is any random variable <span class="math inline">\(Y\)</span> satisfying:</p>
+<p><span class="theorem-title"><strong>Definition 2.4 (Conditional Expectation)</strong></span> Given a probability space <span class="math inline">\((\Omega,\mathcal F_0,P)\)</span>, a sub-<span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal F\subseteq\mathcal F_0\)</span>, and an <span class="math inline">\(\mathcal F_0\)</span>-measurable random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(E|X|&lt;\infty\)</span>, the conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal F\)</span>, denoted <span class="math inline">\(E(X\mid\mathcal F)\)</span>, is any random variable <span class="math inline">\(Y\)</span> satisfying:</p>
 <ol type="i">
 <li><p><span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable.</p></li>
 <li><p>For all <span class="math inline">\(A\in\mathcal F\)</span>,</p>
@@ -1158,7 +1115,7 @@ P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y).
 <p>Any <span class="math inline">\(Y\)</span> satisfying (i) and (ii) is called a version of <span class="math inline">\(E(X\mid\mathcal F)\)</span>.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1167,7 +1124,7 @@ P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(E|X|&lt;\infty\)</span> and <span class="math inline">\(\mathcal F=\sigma(Z)\)</span>. Then</p>
 <p><span class="math display">\[
@@ -1182,7 +1139,7 @@ Y(\omega)=g(Z(\omega))\quad\text{for almost every }\omega.
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1191,7 +1148,7 @@ Y(\omega)=g(Z(\omega))\quad\text{for almost every }\omega.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If <span class="math inline">\(E[X^2]&lt;\infty\)</span>, <span class="math inline">\(Y=E[X\mid Z]\)</span> is the best predictor of <span class="math inline">\(X\)</span> based on <span class="math inline">\(Z\)</span> under squared loss:</p>
 <p><span class="math display">\[
@@ -1204,7 +1161,7 @@ E[(X-Y)^2]=\min_{h\text{ measurable}}E[(X-h(Z))^2].
 <section id="regular-conditional-probabilities" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="regular-conditional-probabilities"><span class="header-section-number">2.2.1</span> Regular Conditional Probabilities</h3>
 <div id="def-aap-2-8" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.8 (Regular Conditional Distribution)</strong></span> Let <span class="math inline">\((\Omega,\mathcal F,P)\)</span> be a probability space, <span class="math inline">\(X:(\Omega,\mathcal F)\to(S,\mathcal S)\)</span> a measurable map, and <span class="math inline">\(\mathcal G\subseteq\mathcal F\)</span> a sub-<span class="math inline">\(\sigma\)</span>-field. A map <span class="math inline">\(\mu:\Omega\times\mathcal S\to[0,1]\)</span> is a regular conditional distribution for <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal G\)</span> if:</p>
+<p><span class="theorem-title"><strong>Definition 2.5 (Regular Conditional Distribution)</strong></span> Let <span class="math inline">\((\Omega,\mathcal F,P)\)</span> be a probability space, <span class="math inline">\(X:(\Omega,\mathcal F)\to(S,\mathcal S)\)</span> a measurable map, and <span class="math inline">\(\mathcal G\subseteq\mathcal F\)</span> a sub-<span class="math inline">\(\sigma\)</span>-field. A map <span class="math inline">\(\mu:\Omega\times\mathcal S\to[0,1]\)</span> is a regular conditional distribution for <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal G\)</span> if:</p>
 <ol type="i">
 <li><p>For each <span class="math inline">\(A\in\mathcal S\)</span>, <span class="math inline">\(\omega\mapsto\mu(\omega,A)\)</span> is a version of <span class="math inline">\(P(X\in A\mid\mathcal G)\)</span>.</p></li>
 <li><p>For almost every <span class="math inline">\(\omega\)</span>, <span class="math inline">\(A\mapsto\mu(\omega,A)\)</span> is a probability measure on <span class="math inline">\((S,\mathcal S)\)</span>.</p></li>
@@ -1212,7 +1169,7 @@ E[(X-Y)^2]=\min_{h\text{ measurable}}E[(X-h(Z))^2].
 <p>When <span class="math inline">\(S=\Omega\)</span> and <span class="math inline">\(X\)</span> is the identity map, <span class="math inline">\(\mu\)</span> is called a regular conditional probability.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1221,7 +1178,7 @@ E[(X-Y)^2]=\min_{h\text{ measurable}}E[(X-h(Z))^2].
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Suppose <span class="math inline">\(X,Y\)</span> have a joint density <span class="math inline">\(f(x,y)&gt;0\)</span>. For Borel <span class="math inline">\(A\subseteq\mathbb R\)</span>, define</p>
 <p><span class="math display">\[
@@ -1237,43 +1194,65 @@ E[(X-Y)^2]=\min_{h\text{ measurable}}E[(X-h(Z))^2].
 </section>
 <section id="laws-of-large-numbers" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="laws-of-large-numbers"><span class="header-section-number">2.3</span> Laws of Large Numbers</h2>
-<p>Throughout this section, <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>.</p>
 <section id="weak-laws-of-large-numbers" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="weak-laws-of-large-numbers"><span class="header-section-number">2.3.1</span> Weak Laws of Large Numbers</h3>
-<div id="thm-aap-2-6" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.6 (L² Weak Law)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be uncorrelated random variables with <span class="math inline">\(EX_i=\mu\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)\le C&lt;\infty\)</span>. Then, as <span class="math inline">\(n\to\infty\)</span>,</p>
-<p><span class="math display">\[
-\frac{S_n}{n}\to\mu
-\quad\text{in } L^2 \text{ and in probability.}
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why the Variance Bound Is Enough
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Because the variables are uncorrelated, the variance of the sum is the sum of the variances:</p>
-<p><span class="math display">\[
-E\left(\frac{S_n}{n}-\mu\right)^2
-=\frac{\operatorname{Var}(S_n)}{n^2}
-\le\frac{C}{n}\to0.
-\]</span></p>
-<p>This gives convergence in <span class="math inline">\(L^2\)</span>, and Chebyshev’s inequality then gives convergence in probability.</p>
-</div>
-</div>
-</div>
 <div id="thm-aap-2-7" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.7 (Khinchin’s Weak Law)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. with <span class="math inline">\(E|X_1|&lt;\infty\)</span> and <span class="math inline">\(EX_1=\mu\)</span>. Then</p>
+<p><span class="theorem-title"><strong>Theorem 2.6 (Weak Law of Large Numbers)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. random variables such that</p>
 <p><span class="math display">\[
-\frac{S_n}{n}\to\mu
-\quad\text{in probability.}
+x\,\mathbb{P}(|X_1|&gt;x)\longrightarrow 0
+\qquad \text{as } x\to\infty.
+\]</span></p>
+<p>Define the partial sum and the truncated mean by</p>
+<p><span class="math display">\[
+S_n=\sum_{i=1}^{n}X_i,
+\qquad
+\mu_n=\mathbb{E}\!\left[X_1\mathbf{1}_{\{|X_1|\le n\}}\right].
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\frac{S_n}{n}-\mu_n\xrightarrow{\mathbb{P}}0.
+\]</span></p>
+</div>
+</section>
+<section id="borel-cantelli-lemmas" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</h3>
+<div id="def-aap-2-9" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.6 (Limit Superior and Limit Inferior of Sets)</strong></span> Let <span class="math inline">\(A_n\)</span> be a sequence of subsets of <span class="math inline">\(\Omega\)</span>. Define</p>
+<p><span class="math display">\[
+\limsup A_n=\lim_{m\to\infty}\bigcup_{n=m}^\infty A_n
+=\{\omega\text{ that are in infinitely many }A_n\},
+\]</span></p>
+<p>where the limit exists since <span class="math inline">\(\bigcup_{n=m}^\infty A_n\)</span> is decreasing in <span class="math inline">\(m\)</span>, and</p>
+<p><span class="math display">\[
+\liminf A_n=\lim_{m\to\infty}\bigcap_{n=m}^\infty A_n
+=\{\omega\text{ that are in all but finitely many }A_n\}.
+\]</span></p>
+</div>
+<div id="thm-aap-2-8" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.7 (Characterization of Almost Sure Convergence)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be random variables on a probability space. Then</p>
+<p><span class="math display">\[
+X_n \xrightarrow{\mathrm{a.s.}} 0
+\quad\Longleftrightarrow\quad
+\mathbb P(|X_n|&gt;\epsilon\text{ i.o.})=0
+\quad\text{for every }\epsilon&gt;0,
+\]</span></p>
+<p>where <strong>i.o.</strong> means <em>infinitely often</em>. If <span class="math inline">\(A_n(\epsilon)=\{|X_n|&gt;\epsilon\}\)</span>, then</p>
+<p><span class="math display">\[
+\{|X_n|&gt;\epsilon\text{ i.o.}\}
+=\limsup_{n\to\infty}A_n(\epsilon).
+\]</span></p>
+</div>
+<div id="thm-aap-2-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.8 (Borel-Cantelli Lemma)</strong></span> If <span class="math inline">\(\sum_{n=1}^\infty \mathbb P(A_n)&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb P(A_n\text{ i.o.})=0.
+\]</span></p>
+</div>
+<div id="thm-aap-2-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.9 (Kolmogorov’s Maximal Inequality)</strong></span> Suppose <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent with <span class="math inline">\(\mathbb E X_i=0\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)&lt;\infty\)</span>. If <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>, then for every <span class="math inline">\(\epsilon&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P\left(\max_{1\le k\le n}|S_k|\ge\epsilon\right)
+\le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1282,122 +1261,42 @@ E\left(\frac{S_n}{n}-\mu\right)^2
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why No Variance Is Needed
+<span class="screen-reader-only">Note</span>Comparison with Chebyshev’s Inequality
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The variables may have infinite variance, so <a href="#thm-aap-2-6" class="quarto-xref">Theorem&nbsp;2.6</a> does not apply directly. The proof truncates <span class="math inline">\(X_i\)</span> at level <span class="math inline">\(n\)</span> and applies the variance argument to the truncated variables. The condition <span class="math inline">\(E|X_1|&lt;\infty\)</span> makes the truncated part negligible.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="borel-cantelli-lemmas" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</h3>
-<div id="def-aap-2-9" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.9 (Infinitely Often)</strong></span> For events <span class="math inline">\(A_1,A_2,\ldots\)</span>, the event that <strong><span class="math inline">\(A_n\)</span> occurs infinitely often</strong> is</p>
+<p>Under the same hypotheses, Chebyshev’s inequality gives only</p>
 <p><span class="math display">\[
-\{A_n\text{ i.o.}\}
-=\limsup_{n\to\infty}A_n
-=\bigcap_{m=1}^\infty\bigcup_{n=m}^\infty A_n.
+\mathbb P(|S_n|\ge\epsilon)\le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
 \]</span></p>
-</div>
-<div id="lem-aap-2-1" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 2.1 (First Borel-Cantelli Lemma)</strong></span> If <span class="math inline">\(\sum_{n=1}^\infty P(A_n)&lt;\infty\)</span>, then</p>
-<p><span class="math display">\[
-P(A_n\text{ i.o.})=0.
-\]</span></p>
-</div>
-<div id="lem-aap-2-2" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 2.2 (Second Borel-Cantelli Lemma)</strong></span> If the events <span class="math inline">\(A_1,A_2,\ldots\)</span> are independent and <span class="math inline">\(\sum_{n=1}^\infty P(A_n)=\infty\)</span>, then</p>
-<p><span class="math display">\[
-P(A_n\text{ i.o.})=1.
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why Each Lemma Holds
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>For the first lemma, the union bound gives</p>
-<p><span class="math display">\[
-P(A_n\text{ i.o.})
-\le P\left(\bigcup_{n=m}^\infty A_n\right)
-\le\sum_{n=m}^\infty P(A_n)\to0
-\quad\text{as } m\to\infty.
-\]</span></p>
-<p>For the second lemma, independence and <span class="math inline">\(1-x\le e^{-x}\)</span> give</p>
-<p><span class="math display">\[
-P\left(\bigcap_{n=m}^M A_n^c\right)
-=\prod_{n=m}^M\bigl(1-P(A_n)\bigr)
-\le\exp\left(-\sum_{n=m}^M P(A_n)\right)\to0
-\quad\text{as } M\to\infty.
-\]</span></p>
-<p>Independence cannot be dropped. If <span class="math inline">\(A_n=A\)</span> for all <span class="math inline">\(n\)</span> and <span class="math inline">\(0&lt;P(A)&lt;1\)</span>, then <span class="math inline">\(\sum_n P(A_n)=\infty\)</span> but <span class="math inline">\(P(A_n\text{ i.o.})=P(A)&lt;1\)</span>.</p>
+<p><a href="#thm-aap-2-10" class="quarto-xref">Theorem&nbsp;2.9</a> gives the same bound for <span class="math inline">\(\displaystyle \max_{1\le k\le n}|S_k|\)</span>, which is at least <span class="math inline">\(|S_n|\)</span>.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="khinchinkolmogorov-theorem" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="khinchinkolmogorov-theorem"><span class="header-section-number">2.3.3</span> Khinchin–Kolmogorov Theorem</h3>
-<div id="lem-aap-2-3" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 2.3 (Kolmogorov’s Maximal Inequality)</strong></span> Let <span class="math inline">\(X_1,\ldots,X_n\)</span> be independent with <span class="math inline">\(EX_i=0\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)&lt;\infty\)</span>. Then, for every <span class="math inline">\(x&gt;0\)</span>,</p>
-<p><span class="math display">\[
-P\left(\max_{1\le k\le n}|S_k|\ge x\right)
-\le\frac{\operatorname{Var}(S_n)}{x^2}.
-\]</span></p>
-</div>
-<div id="thm-aap-2-8" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.8 (Khinchin–Kolmogorov Convergence Theorem)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be independent with <span class="math inline">\(EX_n=0\)</span>. If</p>
+<div id="thm-aap-2-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.10 (Kolmogorov’s One-Series Theorem)</strong></span> Suppose <span class="math inline">\(X_1,X_2,\ldots\)</span> are independent with <span class="math inline">\(\mathbb E X_n=0\)</span>. If</p>
 <p><span class="math display">\[
 \sum_{n=1}^\infty\operatorname{Var}(X_n)&lt;\infty,
 \]</span></p>
-<p>then <span class="math inline">\(\sum_{n=1}^\infty X_n\)</span> converges almost surely.</p>
+<p>then <span class="math inline">\(\sum_{n=1}^\infty X_n(\omega)\)</span> converges almost surely.</p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why the Series Converges
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Apply <a href="#lem-aap-2-3" class="quarto-xref">Lemma&nbsp;2.3</a> to the terms after index <span class="math inline">\(M\)</span>:</p>
+<div id="thm-aap-2-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.11 (Kronecker’s Lemma)</strong></span> If <span class="math inline">\(a_n\uparrow\infty\)</span> and <span class="math inline">\(\sum_{n=1}^\infty x_n/a_n\)</span> converges, then</p>
 <p><span class="math display">\[
-P\left(\max_{M&lt;k\le N}|S_k-S_M|\ge\varepsilon\right)
-\le\frac{1}{\varepsilon^2}\sum_{n=M+1}^N\operatorname{Var}(X_n).
+\frac{1}{a_n}\sum_{m=1}^n x_m\to0.
 \]</span></p>
-<p>Let <span class="math inline">\(N\to\infty\)</span> and then <span class="math inline">\(M\to\infty\)</span>. The right side tends to <span class="math inline">\(0\)</span>, so the partial sums are almost surely a Cauchy sequence.</p>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Example: Random Harmonic Series
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(\varepsilon_1,\varepsilon_2,\ldots\)</span> be independent with <span class="math inline">\(P(\varepsilon_n=\pm1)=1/2\)</span>. Then <span class="math inline">\(\sum_n\operatorname{Var}(\varepsilon_n/n)=\sum_n 1/n^2&lt;\infty\)</span>, so <span class="math inline">\(\sum_n\varepsilon_n/n\)</span> converges almost surely, even though <span class="math inline">\(\sum_n 1/n\)</span> diverges.</p>
-</div>
-</div>
+</section>
+<section id="strong-law-of-large-numbers" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="strong-law-of-large-numbers"><span class="header-section-number">2.3.3</span> Strong Law of Large Numbers</h3>
+<div id="thm-aap-2-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.12 (Strong Law of Large Numbers)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. random variables with <span class="math inline">\(\mathbb E|X_i|&lt;\infty\)</span>. Let <span class="math inline">\(\mathbb E X_i=\mu\)</span> and <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>. Then</p>
+<p><span class="math display">\[
+\frac{S_n}{n}\xrightarrow{\mathrm{a.s.}}\mu
+\qquad\text{as }n\to\infty.
+\]</span></p>
 </div>
 </section>
 </section>
@@ -1405,16 +1304,6 @@ P\left(\max_{M&lt;k\le N}|S_k-S_M|\ge\varepsilon\right)
 <h2 class="supplementary-notes anchored" data-number="2.4" data-anchor-id="supplementary-notes"><span class="header-section-number">2.4</span> Supplementary Notes</h2>
 <section id="key-results" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">2.4.1</span> Key Results</h3>
-<ul>
-<li><a href="#thm-aap-2-1" class="quarto-xref">Theorem&nbsp;2.1</a>: Independent random variables generate independent <span class="math inline">\(\sigma\)</span>-fields, and variables measurable with respect to independent <span class="math inline">\(\sigma\)</span>-fields are independent.</li>
-<li><a href="#thm-aap-2-2" class="quarto-xref">Theorem&nbsp;2.2</a>: Independent random variables have the product distribution <span class="math inline">\(\mu_1\times\cdots\times\mu_n\)</span> as their joint distribution.</li>
-<li><a href="#thm-aap-2-3" class="quarto-xref">Theorem&nbsp;2.3</a> and <a href="#thm-aap-2-4" class="quarto-xref">Theorem&nbsp;2.4</a>: Under independence, <span class="math inline">\(E[f(X)g(Y)]=E[f(X)]\cdot E[g(Y)]\)</span>, and expectation factors over products.</li>
-<li><a href="#thm-aap-2-5" class="quarto-xref">Theorem&nbsp;2.5</a>: <span class="math inline">\(P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)\)</span>, the convolution of <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span>.</li>
-<li><a href="#def-aap-2-7" class="quarto-xref">Definition&nbsp;2.7</a>: <span class="math inline">\(E(X\mid\mathcal F)\)</span> is an <span class="math inline">\(\mathcal F\)</span>-measurable variable with the same integral as <span class="math inline">\(X\)</span> over every <span class="math inline">\(A\in\mathcal F\)</span>.</li>
-<li><a href="#thm-aap-2-7" class="quarto-xref">Theorem&nbsp;2.7</a>: If <span class="math inline">\(X_1,X_2,\ldots\)</span> are i.i.d. with <span class="math inline">\(E|X_1|&lt;\infty\)</span>, then <span class="math inline">\(S_n/n\to EX_1\)</span> in probability.</li>
-<li><a href="#lem-aap-2-1" class="quarto-xref">Lemma&nbsp;2.1</a> and <a href="#lem-aap-2-2" class="quarto-xref">Lemma&nbsp;2.2</a>: <span class="math inline">\(\sum_n P(A_n)&lt;\infty\)</span> gives <span class="math inline">\(P(A_n\text{ i.o.})=0\)</span>; for independent events, <span class="math inline">\(\sum_n P(A_n)=\infty\)</span> gives <span class="math inline">\(P(A_n\text{ i.o.})=1\)</span>.</li>
-<li><a href="#thm-aap-2-8" class="quarto-xref">Theorem&nbsp;2.8</a>: For independent mean-zero <span class="math inline">\(X_n\)</span> with <span class="math inline">\(\sum_n\operatorname{Var}(X_n)&lt;\infty\)</span>, the series <span class="math inline">\(\sum_n X_n\)</span> converges almost surely.</li>
-</ul>
 
 
 </section>
