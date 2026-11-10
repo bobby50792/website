@@ -1,5 +1,6 @@
 ---
 title: "Determinants"
+description: "Determinants of order 2 and order n, and their properties."
 page-layout: article
 search: true
 number-offset: [4]

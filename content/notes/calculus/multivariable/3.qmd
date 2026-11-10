@@ -1,5 +1,6 @@
 ---
 title: "Implicit Function and Inverse Mapping Theorem"
+description: "The implicit function and inverse mapping theorems, tangent planes, and Lagrange multipliers."
 page-layout: article
 search: true
 number-offset: [3]

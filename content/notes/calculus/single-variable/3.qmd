@@ -1,5 +1,6 @@
 ---
 title: "Derivatives and Differentials of Functions"
+description: "Derivatives, mean value theorems, convexity, L'Hospital's rule, and the Taylor formula."
 page-layout: article
 search: true
 number-offset: [3]

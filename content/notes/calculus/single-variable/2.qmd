@@ -1,5 +1,6 @@
 ---
 title: "Continuity of Functions"
+description: "Cardinality, limits of functions, big O and small o, continuity, and uniform continuity."
 page-layout: article
 search: true
 number-offset: [2]

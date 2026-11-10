@@ -1,5 +1,6 @@
 ---
 title: "Transformations"
+description: "Homogeneous coordinates, ways to parameterize rotation, and the viewing transformation."
 page-layout: article
 search: true
 number-offset: [2]

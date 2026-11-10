@@ -1,5 +1,6 @@
 ---
 title: "Ordinary Differential Equations"
+description: "First-order equations, linear equations and systems, order reduction, and variation of constants."
 page-layout: article
 search: true
 number-offset: [6]

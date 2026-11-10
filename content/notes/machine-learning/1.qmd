@@ -1,5 +1,6 @@
 ---
 title: "Optimization"
+description: "Gradient descent, stochastic gradient descent, mirror descent, matrix completion, and nonconvex optimization."
 page-layout: article
 search: true
 number-offset: [1]

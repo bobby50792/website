@@ -1,5 +1,6 @@
 ---
 title: "Measure Theory"
+description: "Probability spaces, random variables, distributions, the Lebesgue integral, expected value, and product measures."
 page-layout: article
 search: true
 number-offset: [1]

@@ -1,0 +1,13 @@
+```{=html}
+<div class="course-grid list">
+<% for (const item of items) { %>
+  <% const description = item["home-description"] || item.description; %>
+  <article class="course" <%= metadataAttrs(item) %>>
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="<%- item.path %>"><%- item["home-title"] || item.title %></a></h3>
+      <% if (description) { %><p class="course-desc listing-description"><%- description %></p><% } %>
+    </div>
+  </article>
+<% } %>
+</div>
+```

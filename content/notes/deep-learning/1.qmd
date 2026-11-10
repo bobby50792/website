@@ -1,5 +1,6 @@
 ---
 title: "Supervised Learning"
+description: "Classification, backpropagation, regularization, convolutional networks, and optimization methods."
 page-layout: article
 search: true
 number-offset: [1]

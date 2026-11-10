@@ -1,5 +1,6 @@
 ---
 title: "Geometry"
+description: "Basic geometric entities, with explicit and implicit representations of curves and surfaces."
 page-layout: article
 search: true
 number-offset: [1]

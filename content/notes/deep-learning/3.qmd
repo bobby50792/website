@@ -1,5 +1,6 @@
 ---
 title: "Generative Adversarial Network"
+description: "The GAN objective, the optimal discriminator, JS divergence, and training techniques."
 page-layout: article
 search: true
 number-offset: [3]

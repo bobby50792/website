@@ -1,5 +1,6 @@
 ---
 title: "Logic"
+description: "Logical representation, inference, and semantics."
 page-layout: article
 search: true
 number-offset: [2]

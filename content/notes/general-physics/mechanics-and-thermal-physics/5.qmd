@@ -1,5 +1,6 @@
 ---
 title: "Angular Momentum"
+description: "Angular momentum of a particle and of a system of particles, and its conservation."
 page-layout: article
 search: true
 number-offset: [5]

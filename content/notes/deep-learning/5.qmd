@@ -1,5 +1,6 @@
 ---
 title: "Diffusion Models & Flow Matching"
+description: "DDPM and its variational derivation, training loss and sampling, and score-based diffusion models."
 page-layout: article
 search: true
 number-offset: [5]

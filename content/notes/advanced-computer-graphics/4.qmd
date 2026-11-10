@@ -1,5 +1,6 @@
 ---
 title: "Rasterization"
+description: "Displays, triangle rasterization, antialiasing, and z-buffering."
 page-layout: article
 search: true
 number-offset: [4]

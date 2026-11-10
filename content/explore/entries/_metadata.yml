@@ -1,0 +1,3 @@
+# Every Explore entry is written in Chinese and shares the article layout in styles.css.
+lang: zh
+body-classes: explore-article

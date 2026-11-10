@@ -1,5 +1,6 @@
 ---
 title: "Energy and Work"
+description: "Work, potential energy, and conservation of mechanical energy."
 page-layout: article
 search: true
 number-offset: [4]

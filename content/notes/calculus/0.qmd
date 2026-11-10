@@ -2,10 +2,18 @@
 title: "Calculus"
 output-file: index.html
 home-order: 1
-home-symbol: "∫"
-home-description: "Limits, derivatives, integrals, vector calculus, and series."
+description: "Limits, derivatives, integrals, vector calculus, and series."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**微积分**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::

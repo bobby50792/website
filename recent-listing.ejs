@@ -1,12 +1,18 @@
 ```{=html}
-<div class="recent-list list">
+<div class="entry-list list">
 <% for (const item of items) { %>
   <% const title = item["home-title"] || item.title; %>
   <% const description = item["home-description"] || item.description || item.subtitle; %>
-  <article class="recent-item" <%= metadataAttrs(item) %>>
-    <span class="recent-date listing-date"><%- item.date %></span>
-    <h3><a class="listing-title" href="<%- item.path %>"><%- title %></a></h3>
-    <% if (description) { %><p class="listing-description"><%- description %></p><% } %>
+  <% const chinese = /[一-鿿]/.test(item.title || ""); %>
+  <article class="entry" <%= metadataAttrs(item) %>>
+    <p class="entry-meta">
+      <span class="entry-date listing-date"><%- item.date %></span>
+      <% if (item.categories && item.categories.length) { %><span class="entry-cats"><%- item.categories.join(" · ") %></span><% } %>
+    </p>
+    <div class="entry-main">
+      <h3 class="entry-title"><a class="listing-title" href="<%- item.path %>"><%- title %></a><% if (chinese) { %><span class="entry-lang" lang="zh">中文</span><% } %></h3>
+      <% if (description) { %><p class="entry-desc listing-description"><%- description %></p><% } %>
+    </div>
   </article>
 <% } %>
 </div>

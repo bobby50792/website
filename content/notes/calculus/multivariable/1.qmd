@@ -1,5 +1,6 @@
 ---
 title: "Limits and Continuity of Multivariate Functions"
+description: "Multivariate functions, convergence in Euclidean space, limits, and continuity."
 page-layout: article
 search: true
 number-offset: [1]

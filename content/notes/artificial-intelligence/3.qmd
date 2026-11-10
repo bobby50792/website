@@ -1,5 +1,6 @@
 ---
 title: "Probabilistic Models"
+description: "Probability basics and Bayesian networks: representation and inference."
 page-layout: article
 search: true
 number-offset: [3]

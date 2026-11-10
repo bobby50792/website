@@ -2,10 +2,20 @@
 title: "Math for CS and AI"
 output-file: index.html
 home-order: 3
-home-symbol: "P"
-home-description: "Probability, concentration, generating functions, and optimization."
+description: "Probability, concentration, generating functions, and optimization."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**计算机与人工智能应用数学**相关知识 (其实大部分都是 Probability), 希望对你能有所启发。
+其实大部分都是 Probability。
+
+::: {#chapters}
+:::

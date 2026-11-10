@@ -1,5 +1,6 @@
 ---
 title: "Canonical Forms"
+description: "The Jordan canonical form and generalized eigenspaces."
 page-layout: article
 search: true
 number-offset: [7]

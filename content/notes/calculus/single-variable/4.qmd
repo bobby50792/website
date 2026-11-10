@@ -1,5 +1,6 @@
 ---
 title: "Indefinite Integrals"
+description: "Antiderivatives and the computation of indefinite integrals."
 page-layout: article
 search: true
 number-offset: [4]

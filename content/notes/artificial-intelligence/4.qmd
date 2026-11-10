@@ -1,5 +1,6 @@
 ---
 title: "Probabilistic Inference"
+description: "Exact and approximate inference in Bayesian networks, and probabilistic reasoning over time."
 page-layout: article
 search: true
 toc-depth: 3

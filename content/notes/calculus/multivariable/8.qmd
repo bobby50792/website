@@ -1,5 +1,6 @@
 ---
 title: "Series"
+description: "Convergence tests for series: Cauchy, comparison, integral, ratio, root, Raabe, and Gauss."
 page-layout: article
 search: true
 number-offset: [8]

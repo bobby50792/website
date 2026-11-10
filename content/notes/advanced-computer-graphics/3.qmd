@@ -1,5 +1,6 @@
 ---
 title: "Learning Geometry"
+description: "Geometric datasets and data-driven shape analysis and synthesis."
 page-layout: article
 search: true
 number-offset: [3]

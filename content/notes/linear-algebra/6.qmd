@@ -1,5 +1,6 @@
 ---
 title: "Inner Product Spaces"
+description: "Inner products, Gram–Schmidt, adjoints, normal and unitary operators, the spectral theorem, the SVD, and quadratic forms."
 page-layout: article
 search: true
 number-offset: [6]

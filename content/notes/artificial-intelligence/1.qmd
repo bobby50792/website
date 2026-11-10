@@ -1,5 +1,6 @@
 ---
 title: "Search"
+description: "Single-agent search and adversarial search."
 page-layout: article
 search: true
 number-offset: [1]

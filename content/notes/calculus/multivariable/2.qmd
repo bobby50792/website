@@ -1,5 +1,6 @@
 ---
 title: "Differential of Multivariable Functions"
+description: "Differentials, partial and directional derivatives, the gradient, Taylor expansion, extrema, and convexity."
 page-layout: article
 search: true
 number-offset: [2]

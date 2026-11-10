@@ -1,5 +1,6 @@
 ---
 title: "Definite Integral"
+description: "The definite integral, its properties and computation, improper integrals, and applications."
 page-layout: article
 search: true
 number-offset: [5]

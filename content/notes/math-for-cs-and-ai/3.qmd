@@ -1,5 +1,6 @@
 ---
 title: "Generating Functions"
+description: "Generating functions of sequences, the complex analysis behind them, and generating functions of random variables."
 page-layout: article
 search: true
 number-offset: [3]

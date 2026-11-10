@@ -1,5 +1,6 @@
 ---
 title: "Collision Theory"
+description: "Characterizing collisions, with elastic collisions in one and two dimensions."
 page-layout: article
 search: true
 number-offset: [6]

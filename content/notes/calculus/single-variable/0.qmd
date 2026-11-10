@@ -1,9 +1,19 @@
 ---
 title: "Single Variable Calculus"
 output-file: index.html
-home-description: "Limits, continuity, derivatives, integrals, and differential equations."
+home-order: 1
+description: "Limits, continuity, derivatives, integrals, and differential equations."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**一元微积分**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::

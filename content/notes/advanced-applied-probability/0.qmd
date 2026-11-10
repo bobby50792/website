@@ -2,10 +2,18 @@
 title: "Advanced Applied Probability"
 output-file: index.html
 home-order: 6
-home-symbol: "𝔼"
-home-description: "Advanced probability methods and applications."
+description: "Measure-theoretic probability: integration, independence, conditional expectation, and laws of large numbers."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**高等应用概率**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::

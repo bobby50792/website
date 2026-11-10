@@ -1,5 +1,6 @@
 ---
 title: "Ray Tracing"
+description: "Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, and light transport."
 page-layout: article
 search: true
 number-offset: [6]

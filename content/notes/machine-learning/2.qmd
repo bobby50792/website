@@ -1,5 +1,6 @@
 ---
 title: "Generalization"
+description: "The no-free-lunch theorem, finite hypothesis classes, PAC learning, and VC dimension."
 page-layout: article
 search: true
 number-offset: [2]

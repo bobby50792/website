@@ -1,0 +1,46 @@
+```{=html}
+<%
+// The notes catalog: every course with its summary, parts, and progress.
+const dirOf = (item) => item.path.slice(0, item.path.lastIndexOf("/"));
+const depthOf = (dir) => dir.split("/").length;
+const isIndex = (item) => item.filename === "0.qmd";
+const isChapter = (item) => !Number.isNaN(parseInt(item.filename, 10)) && !isIndex(item);
+// A chapter with almost no text has not been written yet.
+const wordsOf = (item) => parseInt(String(item["word-count"] || "0").replace(/\D/g, ""), 10) || 0;
+const orderOf = (item) => (item["home-order"] != null ? Number(item["home-order"]) : Infinity);
+const summaryOf = (item) => item["home-description"] || (item.description && !/[<>]/.test(item.description) ? item.description : "");
+
+const indexes = items.filter(isIndex);
+const top = Math.min(...indexes.map((item) => depthOf(dirOf(item))));
+const courses = indexes
+  .filter((item) => depthOf(dirOf(item)) === top)
+  .sort((a, b) => orderOf(a) - orderOf(b) || a.title.localeCompare(b.title));
+const within = (item, course) => (dirOf(item) + "/").startsWith(dirOf(course) + "/");
+const progressOf = (course) => {
+  const chapters = items.filter((item) => isChapter(item) && within(item, course));
+  const planned = chapters.filter((item) => wordsOf(item) < 30).length;
+  const written = chapters.length - planned;
+  return `${written} ${written === 1 ? "chapter" : "chapters"}` + (planned ? ` · ${planned} planned` : "");
+};
+const partsOf = (course) => indexes
+  .filter((item) => item !== course && within(item, course))
+  .sort((a, b) => orderOf(a) - orderOf(b) || a.title.localeCompare(b.title));
+%>
+<div class="course-list list">
+<% for (const course of courses) { %>
+<% const parts = partsOf(course); const summary = summaryOf(course); %>
+  <article class="course" <%= metadataAttrs(course) %>>
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="<%- course.path %>"><%= course.title %></a></h3>
+<% if (summary) { %>
+      <p class="course-desc listing-description"><%= summary %></p>
+<% } %>
+      <p class="course-meta">
+        <%= progressOf(course) %><% if (parts.length) { %> ·
+        <span class="course-parts"><% parts.forEach((part, i) => { %><a href="<%- part.path %>"><%= part.title %></a><%= i < parts.length - 1 ? ", " : "" %><% }); %></span><% } %>
+      </p>
+    </div>
+  </article>
+<% } %>
+</div>
+```

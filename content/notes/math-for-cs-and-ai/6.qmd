@@ -1,5 +1,6 @@
 ---
 title: "Optimization"
+description: "Gradient descent, its exact dynamics on linear regression, and learning rates for quadratic objectives."
 page-layout: article
 search: true
 number-offset: [6]

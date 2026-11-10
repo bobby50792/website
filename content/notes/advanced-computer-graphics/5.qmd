@@ -1,5 +1,6 @@
 ---
 title: "Shading"
+description: "Shading, the graphics pipeline, texturing, and shadow mapping."
 page-layout: article
 search: true
 number-offset: [5]

@@ -2,10 +2,18 @@
 title: "Deep Learning"
 output-file: index.html
 home-order: 5
-home-symbol: "∇"
-home-description: "Supervised learning, generative models, and sequence modeling."
+description: "Supervised learning, generative models, and sequence modeling."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**深度学习**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::

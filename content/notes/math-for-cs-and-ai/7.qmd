@@ -1,8 +1,8 @@
 ---
-title: "Continuous Probability"
+title: "Continuous Approximations"
 page-layout: article
 search: true
-number-offset: [4]
+number-offset: [7]
 
 crossref:
   chapters: true      

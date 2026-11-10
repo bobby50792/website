@@ -1,5 +1,6 @@
 ---
 title: "Statistical Mechanics"
+description: "The statistical view of entropy, microscopic ensembles, temperature, and statistical distributions of particles."
 page-layout: article
 search: true
 number-offset: [15]

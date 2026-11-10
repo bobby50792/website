@@ -1,5 +1,6 @@
 ---
 title: "Calculus of Vector Fields"
+description: "Line and surface integrals of vector fields, potentials, curl and divergence, and the theorems of Green, Gauss, and Stokes."
 page-layout: article
 search: true
 number-offset: [7]

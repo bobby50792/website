@@ -1,5 +1,6 @@
 ---
 title: "Diagonalization"
+description: "Eigenvalues and eigenvectors, diagonalizability, direct sums, invariant subspaces, and the Cayley–Hamilton theorem."
 page-layout: article
 search: true
 number-offset: [5]

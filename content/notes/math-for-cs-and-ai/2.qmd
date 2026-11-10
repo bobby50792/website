@@ -1,5 +1,6 @@
 ---
 title: "Sampling and Concentration"
+description: "The Markov, Chebyshev, Chernoff, Hoeffding, Azuma–Hoeffding, and McDiarmid inequalities."
 page-layout: article
 search: true
 number-offset: [2]

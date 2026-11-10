@@ -1,5 +1,6 @@
 ---
 title: "Linear Transformations and Matrices"
+description: "Linear transformations, matrix representations, invertibility, change of coordinates, and dual spaces."
 page-layout: article
 search: true
 number-offset: [2]

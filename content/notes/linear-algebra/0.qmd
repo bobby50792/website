@@ -1,11 +1,19 @@
 ---
 title: "Linear Algebra"
 output-file: index.html
+home-order: 2
+description: "Vector spaces, linear maps, determinants, spectral theory, and canonical forms."
 page-layout: article
 search: true
-home-order: 2
-home-symbol: "L"
-home-description: "Vector spaces, linear maps, determinants, spectral theory, and canonical forms."
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**线性代数**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::

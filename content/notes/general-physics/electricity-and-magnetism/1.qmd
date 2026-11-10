@@ -1,5 +1,6 @@
 ---
 title: "Scalar and Vector Fields"
+description: "Scalar and vector fields, flux and circulation, the exterior derivative, gradient, divergence, curl, and Stokes' theorem."
 page-layout: article
 search: true
 number-offset: [1]

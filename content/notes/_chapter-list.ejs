@@ -1,0 +1,68 @@
+```{=html}
+<%
+// A course page's table of contents. Chapters are grouped by folder, so a course
+// with parts (Calculus, General Physics) gets one group per part.
+const dirOf = (item) => item.path.slice(0, item.path.lastIndexOf("/"));
+const isIndex = (item) => item.filename === "0.qmd";
+const numberOf = (item) => {
+  const n = parseInt(item.filename, 10);
+  return Number.isNaN(n) ? Infinity : n;
+};
+// A chapter with almost no text has not been written yet.
+const wordsOf = (item) => parseInt(String(item["word-count"] || "0").replace(/\D/g, ""), 10) || 0;
+const isPlanned = (item) => wordsOf(item) < 30;
+// Without a description in the front matter, Quarto fills in the first paragraph as HTML; skip that.
+const summaryOf = (item) => (item.description && !/[<>]/.test(item.description) ? item.description : "");
+
+const groups = new Map();
+for (const item of items) {
+  const dir = dirOf(item);
+  if (!groups.has(dir)) groups.set(dir, { dir, index: null, chapters: [] });
+  if (isIndex(item)) groups.get(dir).index = item;
+  else groups.get(dir).chapters.push(item);
+}
+const orderOf = (group) => (group.index && group.index["home-order"] != null ? Number(group.index["home-order"]) : Infinity);
+const list = [...groups.values()]
+  .filter((group) => group.chapters.length)
+  .sort((a, b) => orderOf(a) - orderOf(b) || a.dir.localeCompare(b.dir));
+list.forEach((group) => group.chapters.sort((a, b) => numberOf(a) - numberOf(b)));
+const countOf = (group) => {
+  const planned = group.chapters.filter(isPlanned).length;
+  const written = group.chapters.length - planned;
+  return `${written} written` + (planned ? ` · ${planned} planned` : "");
+};
+%>
+<div class="chapter-toc list">
+<% for (const group of list) { %>
+  <section class="chapter-group">
+<% if (list.length > 1 && group.index) { %>
+    <div class="chapter-group-head">
+      <h2 class="chapter-group-title"><a href="<%- group.index.path %>"><%= group.index.title %></a></h2>
+      <span class="chapter-count"><%= countOf(group) %></span>
+    </div>
+<% } %>
+    <div class="chapter-list" role="list">
+<% for (const item of group.chapters) { %>
+<% const planned = isPlanned(item); const n = numberOf(item); const summary = summaryOf(item); %>
+      <div class="chapter-row<%= planned ? " is-planned" : "" %>" role="listitem" <%= metadataAttrs(item) %>>
+        <span class="chapter-num"><%= Number.isFinite(n) ? n : "" %></span>
+        <span class="chapter-main">
+<% if (planned) { %>
+          <span class="chapter-title listing-title"><%= item.title %></span>
+<% } else { %>
+          <a class="chapter-title listing-title" href="<%- item.path %>"><%= item.title %></a>
+<% if (summary) { %>
+          <span class="chapter-desc listing-description"><%= summary %></span>
+<% } %>
+<% } %>
+        </span>
+<% if (planned) { %>
+        <span class="chapter-state">Planned</span>
+<% } %>
+      </div>
+<% } %>
+    </div>
+  </section>
+<% } %>
+</div>
+```

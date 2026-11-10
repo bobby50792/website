@@ -1,5 +1,6 @@
 ---
 title: "Central Limit Theorem"
+description: "The limiting behavior of sample averages, the weak law of large numbers, and the central limit theorem."
 page-layout: article
 search: true
 number-offset: [5]

@@ -1,5 +1,6 @@
 ---
 title: "Momentum"
+description: "Momentum and impulse, conservation of momentum, rocket dynamics, the center of mass, and the two-body problem."
 page-layout: article
 search: true
 number-offset: [3]

@@ -2,10 +2,18 @@
 title: "Advanced Computer Graphics"
 output-file: index.html
 home-order: 8
-home-symbol: "△"
-home-description: "Advanced computer graphics methods and applications."
+description: "Geometric representations, transformations, rasterization, shading, and ray tracing."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**高级计算机图形学**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::

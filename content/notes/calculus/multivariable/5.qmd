@@ -1,5 +1,6 @@
 ---
 title: "Multiple Integrals"
+description: "Jordan measurable sets, Riemann integrals in several variables, and the change of variables formula."
 page-layout: article
 search: true
 number-offset: [5]

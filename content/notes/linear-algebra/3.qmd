@@ -1,5 +1,6 @@
 ---
 title: "Elementary Matrix Operations and Systems of Linear Equations"
+description: "Elementary matrix operations, rank, matrix inverses, and systems of linear equations."
 page-layout: article
 search: true
 number-offset: [3]

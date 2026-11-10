@@ -1,5 +1,6 @@
 ---
 title: "Discrete Probability"
+description: "Asymptotic notation, probability spaces, conditional probability, random variables, and linearity of expectation."
 page-layout: article
 search: true
 number-offset: [1]

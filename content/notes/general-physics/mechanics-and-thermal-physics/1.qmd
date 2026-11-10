@@ -1,5 +1,6 @@
 ---
 title: "Kinematics"
+description: "Basic concepts, the vector description of motion, and circular motion."
 page-layout: article
 search: true
 number-offset: [1]

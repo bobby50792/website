@@ -1,5 +1,6 @@
 ---
 title: "Real Numbers and Limits of Sequences"
+description: "Number systems, convergent and monotonic sequences, the Cauchy criterion, suprema, and limit superior and inferior."
 page-layout: article
 search: true
 number-offset: [1]

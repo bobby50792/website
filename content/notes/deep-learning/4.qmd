@@ -1,5 +1,6 @@
 ---
 title: "Normalizing Flow & Variational Autoencoder"
+description: "Normalizing flows, variational autoencoders, the evidence lower bound, and hierarchical VAEs."
 page-layout: article
 search: true
 number-offset: [4]

@@ -1,5 +1,6 @@
 ---
 title: "Rigid Body"
+description: "Rigid-body kinematics, moment of inertia, rotational dynamics and energy, and rolling without slipping."
 page-layout: article
 search: true
 number-offset: [7]

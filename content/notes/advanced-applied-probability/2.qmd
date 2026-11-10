@@ -1,5 +1,6 @@
 ---
 title: "Laws of Large Numbers"
+description: "Independence, conditional expectation, and the weak and strong laws of large numbers."
 page-layout: article
 search: true
 number-offset: [2]

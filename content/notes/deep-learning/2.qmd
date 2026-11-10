@@ -1,5 +1,6 @@
 ---
 title: "Energy-Based Model"
+description: "Hopfield networks, Boltzmann machines, contrastive divergence, and sampling methods."
 page-layout: article
 search: true
 number-offset: [2]

@@ -1,11 +1,23 @@
 ---
 title: "Electricity and Magnetism"
 output-file: index.html
-home-description: "Electric and magnetic fields, Maxwell equations, circuits, and waves."
+home-order: 2
+description: "Electric and magnetic fields, Maxwell equations, circuits, and waves."
 page-layout: article
 search: true
+listing:
+  id: chapters
+  contents:
+    - "*.qmd"
+    - "*/*.qmd"
+  template: ../../_chapter-list.ejs
+  sort-ui: false
+  filter-ui: false
 ---
 
-本界面梳理了**电学与磁学**相关知识, 希望对你能有所启发。
+::: {#chapters}
+:::
 
-参考资料：[Feynman lectures on electricity and magnetism](https://www.feynmanlectures.caltech.edu/II_toc.html)
+## References {.unnumbered .unlisted .course-section}
+
+- [The Feynman Lectures on Physics, Volume II](https://www.feynmanlectures.caltech.edu/II_toc.html)

@@ -1,5 +1,6 @@
 ---
 title: "Newton's Laws"
+description: "Forces, Newton's laws, and non-inertial frames with effective forces."
 page-layout: article
 search: true
 number-offset: [2]

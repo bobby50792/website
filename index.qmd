@@ -1,6 +1,6 @@
 ---
 pagetitle: "Bobby"
-description: "Bobby's evolving knowledge base for notes, ideas, projects, and writing."
+description: "Bobby's notes on mathematics, physics, and computer science, with a few essays and projects."
 page-layout: custom
 section-divs: false
 anchor-sections: false
@@ -9,75 +9,80 @@ css: index.css
 editor: source
 date-format: "YYYY.MM.DD"
 listing:
-  - id: current-topics-list
+  - id: home-courses
     contents: "content/notes/*/0.qmd"
-    template: topic-listing.ejs
+    template: home-courses.ejs
     sort: "home-order desc"
-    max-items: 4
     sort-ui: false
     filter-ui: false
-  - id: recent-writing-list
+  - id: home-entries
     contents: "content/explore/entries/*/index.qmd"
     template: recent-listing.ejs
     sort: "date desc"
-    max-items: 2
+    max-items: 3
     sort-ui: false
     filter-ui: false
 ---
 
-::: {.home-page}
-::: {.home-hero}
-::: {.home-shell .hero-grid}
-::: {.hero-copy}
+::: {.home}
 
-<p class="hero-eyebrow">BOBBY'S KNOWLEDGE BASE</p>
+::: {.home-intro}
+::: {.home-intro-text}
 
-# A place for ideas to grow.
+<p class="kb-kicker">Bobby's Knowledge Base</p>
 
-Notes, projects, and things I am learning along the way.
+<h1 class="home-title">Notes on mathematics, physics, and computer science.</h1>
 
-<div class="hero-actions">
-  <a class="home-button home-button-primary" href="content/notes/0.qmd">Browse notes <span aria-hidden="true">→</span></a>
-  <a class="home-button home-button-secondary" href="content/explore/index.qmd">Explore the collection</a>
+<p class="home-lede">Course notes written as I learn. Definitions and theorems are set apart from the discussion, and chapters have a review mode for testing yourself. Alongside them are a few essays and things I have built.</p>
+
+<div class="home-actions">
+  <a class="kb-button" href="content/notes/0.qmd">Browse the notes <span aria-hidden="true">→</span></a>
+  <a class="kb-link" href="content/explore/index.qmd">Essays and projects <span aria-hidden="true">→</span></a>
 </div>
 
 :::
 
-::: {.hero-visual}
-<img class="hero-illustration" src="hero-knowledge.svg" alt="Abstract illustration of connected notes and ideas.">
-:::
-:::
-:::
+::: {.home-specimen}
+::: {.specimen}
 
-::: {.home-shell .home-main}
-::: {.topic-section}
-::: {.section-heading .section-heading-compact}
+<p class="specimen-kind">Theorem 2.12</p>
+<p class="specimen-name">Strong Law of Large Numbers</p>
 
-<p class="section-kicker">TOPICS</p>
+Let $X_1, X_2, \ldots$ be i.i.d. random variables with $\mathbb E|X_i| < \infty$. Let $\mathbb E X_i = \mu$ and $S_n = X_1 + \cdots + X_n$. Then
 
-## Current topics
+$$
+\frac{S_n}{n} \xrightarrow{\mathrm{a.s.}} \mu \qquad \text{as } n \to \infty.
+$$
 
 :::
 
-::: {#current-topics-list}
-:::
-:::
-
-::: {.recent-section}
-::: {.recent-copy}
-
-<p class="section-kicker">EXPLORE</p>
-
-## Recent additions
-
-A growing collection of essays, guides, experiments, and projects.
-
-[Explore the collection <span aria-hidden="true">→</span>](content/explore/index.qmd){.text-link}
+[A theorem as it appears in [Applied Probability](content/notes/advanced-applied-probability/2.qmd#thm-aap-2-13).]{.specimen-source}
 
 :::
+:::
 
-::: {#recent-writing-list}
+::: {.home-section}
+
+<div class="home-section-head">
+  <h2 class="home-h2">Notes</h2>
+  <a class="kb-link" href="content/notes/0.qmd">All courses <span aria-hidden="true">→</span></a>
+</div>
+
+::: {#home-courses}
 :::
+
 :::
+
+::: {.home-section}
+
+<div class="home-section-head">
+  <h2 class="home-h2">Explore</h2>
+  <a class="kb-link" href="content/explore/index.qmd">All entries <span aria-hidden="true">→</span></a>
+</div>
+
+::: {#home-entries}
 :::
+
+:::
+
 :::

@@ -1,5 +1,6 @@
 ---
 title: "Linear Algebra Exercises"
+description: "Exercises for the linear algebra notes."
 page-layout: article
 search: true
 

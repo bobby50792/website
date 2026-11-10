@@ -1,5 +1,6 @@
 ---
 title: "Supervised Learning"
+description: "Linear, logistic, ridge, and LASSO regression, and compressed sensing."
 page-layout: article
 search: true
 number-offset: [3]

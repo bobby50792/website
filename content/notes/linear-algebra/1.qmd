@@ -1,5 +1,6 @@
 ---
 title: "Vector Spaces"
+description: "Fields, vector spaces, subspaces, linear independence, bases, and dimension."
 page-layout: article
 search: true
 number-offset: [1]

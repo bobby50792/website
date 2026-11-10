@@ -1,5 +1,6 @@
 ---
 title: "Integrals with Parameters and Improper Integrals"
+description: "Integrals depending on a parameter, improper integrals with parameters, and integral transforms."
 page-layout: article
 search: true
 number-offset: [4]

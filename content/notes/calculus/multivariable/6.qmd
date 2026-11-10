@@ -1,5 +1,6 @@
 ---
 title: "Integration of Functions on Curves and Surfaces"
+description: "Line integrals and surface integrals of the first kind."
 page-layout: article
 search: true
 number-offset: [6]

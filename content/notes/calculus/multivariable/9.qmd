@@ -1,5 +1,6 @@
 ---
 title: "Series of Functions and Power Series"
+description: "Uniform convergence and the properties of limit functions."
 page-layout: article
 search: true
 number-offset: [9]

@@ -1,5 +1,6 @@
 ---
 title: "Continuous Probability"
+description: "Continuous distributions, the Gaussian, the geometry of high dimensions, and probability distances."
 page-layout: article
 search: true
 number-offset: [4]
