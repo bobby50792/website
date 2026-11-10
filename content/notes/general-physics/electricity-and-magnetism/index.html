@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Electric and magnetic fields, Maxwell equations, circuits, and waves.">
 
 <title>Electricity and Magnetism – Bobby</title>
 <style>
@@ -39,6 +40,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../content/notes/general-physics/electricity-and-magnetism/1.html" rel="next">
 <link href="../../../../content/notes/general-physics/mechanics-and-thermal-physics/15.html" rel="prev">
 <link href="../../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -51,9 +54,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-42b4644679e9e3b57c8b2cb2e5fc0c04.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,7 +84,62 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-chapters .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-highlight-style','listing-number-sections','listing-number-depth','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-body-classes','listing-include-after-body','listing-title','listing-description','listing-page-layout','listing-search','listing-number-offset','listing-crossref','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-highlight-style","listing-number-sections","listing-number-depth","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-body-classes","listing-include-after-body","listing-title","listing-description","listing-page-layout","listing-search","listing-number-offset","listing-crossref","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-chapters'] = new List('listing-chapters', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
@@ -956,6 +1014,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Electricity and Magnetism</h1>
 </div>
 
+<div>
+  <div class="description">
+    Electric and magnetic fields, Maxwell equations, circuits, and waves.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -970,10 +1033,137 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>本界面梳理了<strong>电学与磁学</strong>相关知识, 希望对你能有所启发。</p>
-<p>参考资料：<a href="https://www.feynmanlectures.caltech.edu/II_toc.html">Feynman lectures on electricity and magnetism</a></p>
+<div id="listing-chapters" class="quarto-listing quarto-listing-container-custom">
+
+<div class="chapter-toc list">
+
+  <section class="chapter-group">
+
+    <div class="chapter-list" role="list">
+
+      <div class="chapter-row" role="listitem" data-index="0" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="2" data-listing-word-count-sort="360">
+        <span class="chapter-num">1</span>
+        <span class="chapter-main">
+
+          <a class="chapter-title listing-title" href="../../../../content/notes/general-physics/electricity-and-magnetism/1.html">Scalar and Vector Fields</a>
+
+          <span class="chapter-desc listing-description">Scalar and vector fields, flux and circulation, the exterior derivative, gradient, divergence, curl, and Stokes' theorem.</span>
+
+        </span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="1" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">2</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Electrostatics</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="2" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">3</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Magnetostatics</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="3" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">4</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Laws of Induction</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="4" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">5</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Maxwell Equations and Solutions</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="5" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">6</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">AC Circuits</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="6" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">7</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Resonators</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="7" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">8</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Waveguides</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+      <div class="chapter-row is-planned" role="listitem" data-index="8" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+        <span class="chapter-num">9</span>
+        <span class="chapter-main">
+
+          <span class="chapter-title listing-title">Quantum Information Processing</span>
+
+        </span>
+
+        <span class="chapter-state">Planned</span>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+<section id="references" class="level2 unnumbered unlisted course-section">
+<h2 class="unnumbered unlisted course-section anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://www.feynmanlectures.caltech.edu/II_toc.html">The Feynman Lectures on Physics, Volume II</a></li>
+</ul>
 
 
+
+</section>
 
 </main> <!-- /main -->
 <script>

@@ -1,6 +1,3 @@
-
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap");
-
 /* Hide section numbers in headings and the page table of contents. */
 .header-section-number {
   display: none;
@@ -161,8 +158,8 @@ body.quarto-dark #quarto-header {
   font-variant-ligatures: none;
 }
 
-/* Notes studio: an annotated-textbook layout, enabled for all notes in content/notes/_metadata.yml. */
-body.notes-studio {
+/* Design tokens, shared by every page. */
+body {
   --studio-serif: "Source Serif 4", "Songti SC", "Noto Serif SC", Georgia, serif;
   /* Songti barely changes when bold, so bold Chinese uses a sans face, as Chinese typesetting usually does. */
   --studio-serif-bold: "Source Serif 4", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", Georgia, sans-serif;
@@ -178,9 +175,12 @@ body.notes-studio {
   --studio-thm-bg: #fdf8ee;
   --studio-thm-line: #eedfbf;
   --studio-thm-ink: #87590a;
+  --kb-button-bg: #2f6690;
+  --kb-button-hover: #275779;
+  --kb-button-ink: #ffffff;
 }
 
-body.notes-studio.quarto-dark {
+body.quarto-dark {
   --studio-ink: #e8eaec;
   --studio-muted: #a3adb6;
   --studio-line: #363c43;
@@ -192,7 +192,12 @@ body.notes-studio.quarto-dark {
   --studio-thm-bg: #231e14;
   --studio-thm-line: #463a21;
   --studio-thm-ink: #e2b866;
+  --kb-button-bg: #8fbde6;
+  --kb-button-hover: #a9cdec;
+  --kb-button-ink: #10202c;
 }
+
+/* Notes studio: an annotated-textbook layout, enabled for all notes in content/notes/_metadata.yml. */
 
 .notes-studio #quarto-document-content {
   color: var(--studio-ink);
@@ -721,7 +726,7 @@ body.notes-studio.quarto-dark {
 }
 
 /* Page contents: a small label, sections above their subsections, and a clear current position. */
-.notes-studio #toc-title {
+:is(.notes-studio, .explore-article) #toc-title {
   margin-block-end: .5rem;
   color: var(--studio-muted);
   font-family: var(--studio-sans);
@@ -731,7 +736,7 @@ body.notes-studio.quarto-dark {
   text-transform: uppercase;
 }
 
-.notes-studio #TOC a.nav-link {
+:is(.notes-studio, .explore-article) #TOC a.nav-link {
   padding-block: .2rem;
   padding-inline-start: .7rem;
   border-inline-start-color: var(--studio-line);
@@ -741,19 +746,19 @@ body.notes-studio.quarto-dark {
   line-height: 1.35;
 }
 
-.notes-studio #TOC ul ul a.nav-link {
+:is(.notes-studio, .explore-article) #TOC ul ul a.nav-link {
   padding-inline-start: 1.3rem;
   color: var(--studio-muted);
   font-size: .76rem;
   font-weight: 400;
 }
 
-.notes-studio #TOC a.nav-link:hover {
+:is(.notes-studio, .explore-article) #TOC a.nav-link:hover {
   color: var(--studio-accent);
 }
 
-.notes-studio #TOC a.nav-link.active,
-.notes-studio #TOC ul ul a.nav-link.active {
+:is(.notes-studio, .explore-article) #TOC a.nav-link.active,
+:is(.notes-studio, .explore-article) #TOC ul ul a.nav-link.active {
   border-inline-start-color: var(--studio-accent);
   box-shadow: inset 1px 0 0 var(--studio-accent);
   color: var(--studio-accent);
@@ -1081,5 +1086,362 @@ body.notes-studio.quarto-dark {
   /* The tools follow the title here, not the margin sidebar. */
   #quarto-document-content > .notes-review-tools {
     margin-block-start: 1.25rem;
+  }
+}
+
+/* ---------- Shared pieces: homepage, notes catalog, course pages, Explore ---------- */
+.kb-kicker {
+  margin: 0 0 .6rem;
+  color: var(--studio-accent);
+  font-family: var(--studio-sans);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.kb-button,
+.kb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-block-size: 2.75rem;
+  font-family: var(--studio-sans);
+  font-size: .95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.kb-button {
+  padding: .5rem 1.15rem;
+  border-radius: 8px;
+  background: var(--kb-button-bg);
+  color: var(--kb-button-ink);
+}
+
+.kb-button:hover {
+  background: var(--kb-button-hover);
+  color: var(--kb-button-ink);
+}
+
+.kb-link {
+  color: var(--studio-accent);
+}
+
+.kb-link:hover {
+  color: var(--studio-accent);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+:is(.kb-button, .kb-link, .course-title a, a.chapter-title, .entry-title a, .course-parts a):focus-visible {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kb-button,
+  .course-title a,
+  a.chapter-title,
+  .entry-title a {
+    transition: background-color .15s ease, color .15s ease;
+  }
+}
+
+/* A course: its name and what it covers. The whole row is the link. */
+.course {
+  position: relative;
+  padding-block: 1.1rem 1.25rem;
+  border-block-start: 1px solid var(--studio-line);
+}
+
+h3.course-title,
+.notes-studio #quarto-document-content h3.course-title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--studio-serif-bold);
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.course-title a {
+  color: var(--studio-ink);
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.course-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.course:hover .course-title a {
+  color: var(--studio-accent);
+}
+
+.course-desc,
+.course-meta {
+  margin: .3rem 0 0;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+.course-meta {
+  margin-block-start: .5rem;
+  font-size: .76rem;
+}
+
+/* Links to a course's parts sit above the row link. */
+.course-parts {
+  position: relative;
+  z-index: 1;
+}
+
+.course-list > .course:last-child {
+  border-block-end: 1px solid var(--studio-line);
+}
+
+/* A course page: the chapters as a table of contents. */
+.chapter-group + .chapter-group {
+  margin-block-start: 2.75rem;
+}
+
+.chapter-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: .6rem;
+}
+
+h2.chapter-group-title,
+.notes-studio #quarto-document-content h2.chapter-group-title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--studio-serif-bold);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.chapter-group-title a {
+  color: var(--studio-ink);
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.chapter-group-title a:hover {
+  color: var(--studio-accent);
+}
+
+.chapter-count {
+  flex: none;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .76rem;
+}
+
+.chapter-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  column-gap: .75rem;
+  align-items: baseline;
+  padding-block: .8rem .85rem;
+  border-block-start: 1px solid var(--studio-line);
+}
+
+.chapter-list > .chapter-row:last-child {
+  border-block-end: 1px solid var(--studio-line);
+}
+
+.chapter-num {
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter-title {
+  color: var(--studio-ink);
+  font-family: var(--studio-serif-bold);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+a.chapter-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.chapter-row:hover a.chapter-title {
+  color: var(--studio-accent);
+}
+
+.chapter-desc {
+  display: block;
+  margin-block-start: .2rem;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.chapter-state {
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.chapter-row.is-planned .chapter-title {
+  color: var(--studio-muted);
+  font-weight: 500;
+}
+
+.notes-studio .listing-pagination {
+  display: none;
+}
+
+/* The one-line summary under a notes title. */
+.notes-studio #title-block-header .description {
+  max-inline-size: 44rem;
+  margin-block-start: .65rem;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* A small labelled section on a course page, such as References. */
+.notes-studio #quarto-document-content h2.course-section {
+  margin-block: 2.75rem .6rem;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Explore articles, enabled in content/explore/entries/_metadata.yml ---------- */
+.explore-article #title-block-header {
+  margin-block-end: 2.25rem;
+  padding-block-end: 1.5rem;
+  border-block-end: 1px solid var(--studio-line);
+}
+
+.explore-article #title-block-header h1.title {
+  margin-block: .5rem .45rem;
+  font-family: var(--studio-serif-bold);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--studio-ink);
+  letter-spacing: -.01em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.explore-article #title-block-header .subtitle {
+  margin: 0;
+  color: var(--studio-muted);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.explore-article #title-block-header .quarto-categories {
+  gap: .9rem;
+  margin-block: .9rem .8rem;
+  padding: 0;
+}
+
+.explore-article #title-block-header .quarto-category {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--studio-accent);
+  font-family: var(--studio-sans);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  opacity: 1;
+  text-transform: uppercase;
+}
+
+.explore-article #title-block-header .description {
+  max-inline-size: 44rem;
+  margin-block-start: .9rem;
+  line-height: 1.7;
+}
+
+.explore-article #title-block-header .quarto-title-meta {
+  margin-block-start: 1rem;
+}
+
+.explore-article #title-block-header .quarto-title-meta-heading {
+  display: none;
+}
+
+.explore-article #title-block-header .quarto-title-meta-contents {
+  color: var(--studio-muted);
+  font-family: var(--bs-font-monospace);
+  font-size: .76rem;
+}
+
+.explore-article #title-block-header .quarto-title-meta-contents p {
+  margin: 0;
+}
+
+.explore-article main.content {
+  line-height: 1.75;
+}
+
+.explore-article main.content h2 {
+  margin-block: 2.75rem 1rem;
+  padding-block-end: .4rem;
+  border-block-end: 1px solid var(--studio-line);
+  font-family: var(--studio-serif-bold);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Quarto removes the space above a section's first heading. */
+.explore-article #quarto-document-content > section > h2 {
+  margin-block-start: 2.75rem;
+}
+
+/* Kept at the lowest specificity so an article's own blocks can restyle their headings. */
+:where(.explore-article main.content) h3 {
+  font-family: var(--studio-serif-bold);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+@media (max-width: 575.98px) {
+  .explore-article #title-block-header h1.title {
+    font-size: 1.9rem;
+  }
+
+  .explore-article main.content h2 {
+    font-size: 1.4rem;
+  }
+
+  .chapter-row {
+    grid-template-columns: 1.6rem minmax(0, 1fr) auto;
+    column-gap: .5rem;
   }
 }

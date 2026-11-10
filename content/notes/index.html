@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Course notes in mathematics, physics, and computer science. Each course opens on its table of contents.">
 
 <title>Notes – Bobby</title>
 <style>
@@ -26,45 +27,10 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,6 +39,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <link href="../../content/notes/calculus/index.html" rel="next">
 <link href="../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -85,9 +53,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-42b4644679e9e3b57c8b2cb2e5fc0c04.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,9 +83,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+<script>
 
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-courses .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-highlight-style','listing-number-sections','listing-number-depth','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-body-classes','listing-include-after-body','listing-title','listing-output-file','listing-home-order','listing-description','listing-page-layout','listing-search','listing-listing','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-number-offset','listing-crossref','listing-toc-depth',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-project","listing-highlight-style","listing-number-sections","listing-number-depth","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-body-classes","listing-include-after-body","listing-title","listing-output-file","listing-home-order","listing-description","listing-page-layout","listing-search","listing-listing","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-number-offset","listing-crossref","listing-toc-depth"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-courses'] = new List('listing-courses', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -384,7 +376,7 @@ window.Quarto = {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
     <div class="sidebar-menu-container"> 
@@ -1014,18 +1006,22 @@ window.Quarto = {
         
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Notes</h1>
-<p class="subtitle lead">A collection of notes to reference.</p>
+</div>
+
+<div>
+  <div class="description">
+    Course notes in mathematics, physics, and computer science. Each course opens on its table of contents.
+  </div>
 </div>
 
 
-
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta">
 
     
   
@@ -1037,89 +1033,127 @@ window.Quarto = {
 </header>
 
 
-<div id="9fe747b1" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.executable)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello from VS Code"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/opt/hostedtoolcache/Python/3.12.16/x64/bin/python3
-Hello from VS Code</code></pre>
-</div>
-</div>
-<p>This is a simple mathematical equation:</p>
-<p><span class="math display">\[
-y = x^2 + 2x + 1
-\]</span></p>
-<div id="b28caf22" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"epoch"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"accuracy"</span>: [<span class="fl">0.55</span>, <span class="fl">0.68</span>, <span class="fl">0.76</span>, <span class="fl">0.82</span>, <span class="fl">0.87</span>]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
+<div id="listing-courses" class="quarto-listing quarto-listing-container-custom">
 
+<div class="course-list list">
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">epoch</th>
-<th data-quarto-table-cell-role="th">accuracy</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>0.55</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>2</td>
-<td>0.68</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>3</td>
-<td>0.76</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>4</td>
-<td>0.82</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>5</td>
-<td>0.87</td>
-</tr>
-</tbody>
-</table>
+  <article class="course" data-index="0" data-listing-file-modified-sort="1794314794217" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/calculus/index.html">Calculus</a></h3>
+
+      <p class="course-desc listing-description">Limits, derivatives, integrals, vector calculus, and series.</p>
+
+      <p class="course-meta">
+        15 chapters · 1 planned ·
+        <span class="course-parts"><a href="../../content/notes/calculus/single-variable/index.html">Single Variable Calculus</a>, <a href="../../content/notes/calculus/multivariable/index.html">Multivariable Calculus</a></span>
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="1" data-listing-file-modified-sort="1794314794220" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/linear-algebra/index.html">Linear Algebra</a></h3>
+
+      <p class="course-desc listing-description">Vector spaces, linear maps, determinants, spectral theory, and canonical forms.</p>
+
+      <p class="course-meta">
+        7 chapters
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="2" data-listing-file-modified-sort="1794314794221" data-listing-reading-time-sort="1" data-listing-word-count-sort="3">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></h3>
+
+      <p class="course-desc listing-description">Probability, concentration, generating functions, and optimization.</p>
+
+      <p class="course-meta">
+        6 chapters · 1 planned
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="3" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/general-physics/index.html">General Physics</a></h3>
+
+      <p class="course-desc listing-description">Mechanics, thermal physics, electromagnetism, and relativity.</p>
+
+      <p class="course-meta">
+        9 chapters · 15 planned ·
+        <span class="course-parts"><a href="../../content/notes/general-physics/mechanics-and-thermal-physics/index.html">Mechanics and Thermal Physics</a>, <a href="../../content/notes/general-physics/electricity-and-magnetism/index.html">Electricity and Magnetism</a></span>
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="4" data-listing-file-modified-sort="1794314794218" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/deep-learning/index.html">Deep Learning</a></h3>
+
+      <p class="course-desc listing-description">Supervised learning, generative models, and sequence modeling.</p>
+
+      <p class="course-meta">
+        5 chapters · 1 planned
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="5" data-listing-file-modified-sort="1794314794216" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/advanced-applied-probability/index.html">Advanced Applied Probability</a></h3>
+
+      <p class="course-desc listing-description">Measure-theoretic probability: integration, independence, conditional expectation, and laws of large numbers.</p>
+
+      <p class="course-meta">
+        2 chapters
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="6" data-listing-file-modified-sort="1794314794220" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/machine-learning/index.html">Machine Learning</a></h3>
+
+      <p class="course-desc listing-description">Optimization, generalization theory, and supervised learning.</p>
+
+      <p class="course-meta">
+        3 chapters
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="7" data-listing-file-modified-sort="1794314794216" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/advanced-computer-graphics/index.html">Advanced Computer Graphics</a></h3>
+
+      <p class="course-desc listing-description">Geometric representations, transformations, rasterization, shading, and ray tracing.</p>
+
+      <p class="course-meta">
+        6 chapters
+      </p>
+    </div>
+  </article>
+
+  <article class="course" data-index="8" data-listing-file-modified-sort="1794314794216" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title anchored"><a class="listing-title" href="../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></h3>
+
+      <p class="course-desc listing-description">Search, logic, Bayesian networks, and probabilistic inference.</p>
+
+      <p class="course-meta">
+        4 chapters · 1 planned
+      </p>
+    </div>
+  </article>
 
 </div>
+<div class="listing-no-matching d-none">No matching items</div>
+<nav id="courses-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
-</div>
-<div id="83b712f6" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">"epoch"</span>], data[<span class="st">"accuracy"</span>], marker<span class="op">=</span><span class="st">"o"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Accuracy"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Training Accuracy"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="0_files/figure-html/cell-4-output-1.png" width="598" height="451" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+
 
 
 
@@ -1965,7 +1999,7 @@ y = x^2 + 2x + 1
   <script type="application/javascript">
   window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
-<nav class="page-navigation column-page-right" aria-label="Page">
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">

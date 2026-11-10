@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Bobby’s evolving knowledge base for notes, ideas, projects, and writing.">
+<meta name="description" content="Bobby’s notes on mathematics, physics, and computer science, with a few essays and projects.">
 
 <title>Bobby</title>
 <style>
@@ -51,9 +51,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-42b4644679e9e3b57c8b2cb2e5fc0c04.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-dfe18f037cddae4a5fde2595eedbbc30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,20 +84,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-current-topics-list .list');
+    const listingTargetEl = window.document.querySelector('#listing-home-courses .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-project','listing-highlight-style','listing-number-sections','listing-number-depth','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-body-classes','listing-include-after-body','listing-title','listing-output-file','listing-home-order','listing-home-symbol','listing-home-description','listing-page-layout','listing-search','listing-path','listing-outputHref','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-project','listing-highlight-style','listing-number-sections','listing-number-depth','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-body-classes','listing-include-after-body','listing-title','listing-output-file','listing-home-order','listing-description','listing-page-layout','listing-search','listing-listing','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-highlight-style","listing-number-sections","listing-number-depth","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-body-classes","listing-include-after-body","listing-title","listing-output-file","listing-home-order","listing-home-symbol","listing-home-description","listing-page-layout","listing-search","listing-path","listing-outputHref","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+      searchColumns: ["listing-project","listing-highlight-style","listing-number-sections","listing-number-depth","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-body-classes","listing-include-after-body","listing-title","listing-output-file","listing-home-order","listing-description","listing-page-layout","listing-search","listing-listing","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-current-topics-list'] = new List('listing-current-topics-list', options);
+    window['quarto-listings']['listing-home-courses'] = new List('listing-home-courses', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -106,26 +106,29 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-recent-writing-list .list');
+    const listingTargetEl = window.document.querySelector('#listing-home-entries .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-project','listing-highlight-style','listing-number-sections','listing-number-depth','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-title','listing-subtitle','listing-home-title','listing-home-description','listing-date','listing-categories','listing-image','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-toc','listing-toc-depth','listing-css',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-project','listing-highlight-style','listing-number-sections','listing-number-depth','listing-website','listing-format','listing-freeze','listing-engines','listing-language','listing-lang','listing-body-classes','listing-title','listing-subtitle','listing-home-title','listing-home-description','listing-date','listing-categories','listing-image','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-toc','listing-toc-depth','listing-css',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-highlight-style","listing-number-sections","listing-number-depth","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-title","listing-subtitle","listing-home-title","listing-home-description","listing-date","listing-categories","listing-image","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-toc","listing-toc-depth","listing-css"],
+      searchColumns: ["listing-project","listing-highlight-style","listing-number-sections","listing-number-depth","listing-website","listing-format","listing-freeze","listing-engines","listing-language","listing-lang","listing-body-classes","listing-title","listing-subtitle","listing-home-title","listing-home-description","listing-date","listing-categories","listing-image","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-toc","listing-toc-depth","listing-css"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-recent-writing-list'] = new List('listing-recent-writing-list', options);
+    window['quarto-listings']['listing-home-entries'] = new List('listing-home-entries', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
     }
   });
   </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -392,106 +395,178 @@ window.Quarto = {
 
 
 
-<div class="home-page">
-<div class="home-hero">
-<div class="home-shell hero-grid">
-<div class="hero-copy">
-<p class="hero-eyebrow">
-BOBBY’S KNOWLEDGE BASE
+<div class="home">
+<div class="home-intro">
+<div class="home-intro-text">
+<p class="kb-kicker">
+Bobby’s Knowledge Base
 </p>
-<h1 data-number="1" id="a-place-for-ideas-to-grow."><span class="header-section-number">1</span> A place for ideas to grow.</h1>
-<p>Notes, projects, and things I am learning along the way.</p>
-<div class="hero-actions">
-<p><a class="home-button home-button-primary" href="./content/notes/index.html">Browse notes <span aria-hidden="true">→</span></a> <a class="home-button home-button-secondary" href="./content/explore/index.html">Explore the collection</a></p>
-</div>
-</div>
-<div class="hero-visual">
-<p><img class="hero-illustration" src="hero-knowledge.svg" alt="Abstract illustration of connected notes and ideas."></p>
-</div>
-</div>
-</div>
-<div class="home-shell home-main">
-<div class="topic-section">
-<div class="section-heading section-heading-compact">
-<p class="section-kicker">
-TOPICS
+<h1 class="home-title">
+Notes on mathematics, physics, and computer science.
+</h1>
+<p class="home-lede">
+Course notes written as I learn. Definitions and theorems are set apart from the discussion, and chapters have a review mode for testing yourself. Alongside them are a few essays and things I have built.
 </p>
-<h2 data-number="1.1" id="current-topics"><span class="header-section-number">1.1</span> Current topics</h2>
+<div class="home-actions">
+<p><a class="kb-button" href="./content/notes/index.html">Browse the notes <span aria-hidden="true">→</span></a> <a class="kb-link" href="./content/explore/index.html">Essays and projects <span aria-hidden="true">→</span></a></p>
 </div>
-<div id="listing-current-topics-list" class="quarto-listing quarto-listing-container-custom">
-<div class="topic-grid list">
+</div>
+<div class="home-specimen">
+<div class="specimen">
+<p class="specimen-kind">
+Theorem 2.12
+</p>
+<p class="specimen-name">
+Strong Law of Large Numbers
+</p>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots\)</span> be i.i.d. random variables with <span class="math inline">\(\mathbb E|X_i| &lt; \infty\)</span>. Let <span class="math inline">\(\mathbb E X_i = \mu\)</span> and <span class="math inline">\(S_n = X_1 + \cdots + X_n\)</span>. Then</p>
+<p><span class="math display">\[
+\frac{S_n}{n} \xrightarrow{\mathrm{a.s.}} \mu \qquad \text{as } n \to \infty.
+\]</span></p>
+</div>
+<p><span class="specimen-source">A theorem as it appears in <a href="./content/notes/advanced-applied-probability/2.html#thm-aap-2-13">Applied Probability</a>.</span></p>
+</div>
+</div>
+<div class="home-section">
+<div class="home-section-head">
+<h2 class="home-h2">
+Notes
+</h2>
+<p><a class="kb-link" href="./content/notes/index.html">All courses <span aria-hidden="true">→</span></a></p>
+</div>
+<div id="listing-home-courses" class="quarto-listing quarto-listing-container-custom">
+<div class="course-grid list">
 
   
-  
-  
-  <article class="topic-card" data-index="0" data-listing-file-modified-sort="1794023944585" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
-    <span class="topic-mark" aria-hidden="true">∀</span>
-    <h3><a class="listing-title" href="./content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></h3>
-    <p class="listing-description">Artificial intelligence concepts, methods, and applications.</p>
+  <article class="course" data-index="0" data-listing-file-modified-sort="1794314794216" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></h3>
+      <p class="course-desc listing-description">Search, logic, Bayesian networks, and probabilistic inference.</p>
+    </div>
   </article>
 
   
-  
-  
-  <article class="topic-card" data-index="1" data-listing-file-modified-sort="1794023944585" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
-    <span class="topic-mark" aria-hidden="true">△</span>
-    <h3><a class="listing-title" href="./content/notes/advanced-computer-graphics/index.html">Advanced Computer Graphics</a></h3>
-    <p class="listing-description">Advanced computer graphics methods and applications.</p>
+  <article class="course" data-index="1" data-listing-file-modified-sort="1794314794216" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/advanced-computer-graphics/index.html">Advanced Computer Graphics</a></h3>
+      <p class="course-desc listing-description">Geometric representations, transformations, rasterization, shading, and ray tracing.</p>
+    </div>
   </article>
 
   
-  
-  
-  <article class="topic-card" data-index="2" data-listing-file-modified-sort="1794023944588" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
-    <span class="topic-mark" aria-hidden="true">θ</span>
-    <h3><a class="listing-title" href="./content/notes/machine-learning/index.html">Machine Learning</a></h3>
-    <p class="listing-description">Machine learning methods, models, and applications.</p>
+  <article class="course" data-index="2" data-listing-file-modified-sort="1794314794220" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/machine-learning/index.html">Machine Learning</a></h3>
+      <p class="course-desc listing-description">Optimization, generalization theory, and supervised learning.</p>
+    </div>
   </article>
 
   
+  <article class="course" data-index="3" data-listing-file-modified-sort="1794314794216" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/advanced-applied-probability/index.html">Advanced Applied Probability</a></h3>
+      <p class="course-desc listing-description">Measure-theoretic probability: integration, independence, conditional expectation, and laws of large numbers.</p>
+    </div>
+  </article>
+
   
+  <article class="course" data-index="4" data-listing-file-modified-sort="1794314794218" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/deep-learning/index.html">Deep Learning</a></h3>
+      <p class="course-desc listing-description">Supervised learning, generative models, and sequence modeling.</p>
+    </div>
+  </article>
+
   
-  <article class="topic-card" data-index="3" data-listing-file-modified-sort="1794023944585" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
-    <span class="topic-mark" aria-hidden="true">𝔼</span>
-    <h3><a class="listing-title" href="./content/notes/advanced-applied-probability/index.html">Advanced Applied Probability</a></h3>
-    <p class="listing-description">Advanced probability methods and applications.</p>
+  <article class="course" data-index="5" data-listing-file-modified-sort="1794314794219" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/general-physics/index.html">General Physics</a></h3>
+      <p class="course-desc listing-description">Mechanics, thermal physics, electromagnetism, and relativity.</p>
+    </div>
+  </article>
+
+  
+  <article class="course" data-index="6" data-listing-file-modified-sort="1794314794221" data-listing-reading-time-sort="1" data-listing-word-count-sort="3">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/math-for-cs-and-ai/index.html">Math for CS and AI</a></h3>
+      <p class="course-desc listing-description">Probability, concentration, generating functions, and optimization.</p>
+    </div>
+  </article>
+
+  
+  <article class="course" data-index="7" data-listing-file-modified-sort="1794314794220" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/linear-algebra/index.html">Linear Algebra</a></h3>
+      <p class="course-desc listing-description">Vector spaces, linear maps, determinants, spectral theory, and canonical forms.</p>
+    </div>
+  </article>
+
+  
+  <article class="course" data-index="8" data-listing-file-modified-sort="1794314794217" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+    <div class="course-main">
+      <h3 class="course-title"><a class="listing-title" href="./content/notes/calculus/index.html">Calculus</a></h3>
+      <p class="course-desc listing-description">Limits, derivatives, integrals, vector calculus, and series.</p>
+    </div>
   </article>
 
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
 </div>
-<div class="recent-section">
-<div class="recent-copy">
-<p class="section-kicker">
-EXPLORE
-</p>
-<h2 data-number="1.2" id="recent-additions"><span class="header-section-number">1.2</span> Recent additions</h2>
-<p>A growing collection of essays, guides, experiments, and projects.</p>
-<p><a href="./content/explore/index.html" class="text-link">Explore the collection <span aria-hidden="true">→</span></a></p>
+<div class="home-section">
+<div class="home-section-head">
+<h2 class="home-h2">
+Explore
+</h2>
+<p><a class="kb-link" href="./content/explore/index.html">All entries <span aria-hidden="true">→</span></a></p>
 </div>
-<div id="listing-recent-writing-list" class="quarto-listing quarto-listing-container-custom">
-<div class="recent-list list">
+<div id="listing-home-entries" class="quarto-listing quarto-listing-container-custom">
+<div class="entry-list list">
 
   
   
-  <article class="recent-item" data-index="0" data-categories="R2FtZXMlMkNQcm9qZWN0cw==" data-listing-date-sort="1792886400000" data-listing-file-modified-sort="1794023944584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125">
-    <span class="recent-date listing-date">2026.10.25</span>
-    <h3><a class="listing-title" href="./content/explore/entries/2026-10-25/index.html">Tower Defense</a></h3>
-    <p class="listing-description">A small Unity tower defense game, playable right in the browser.</p>
+  
+  <article class="entry" data-index="0" data-categories="R2FtZXMlMkNQcm9qZWN0cw==" data-listing-date-sort="1792886400000" data-listing-file-modified-sort="1794314794215" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125">
+    <p class="entry-meta">
+      <span class="entry-date listing-date">2026.10.25</span>
+      <span class="entry-cats">Games · Projects</span>
+    </p>
+    <div class="entry-main">
+      <h3 class="entry-title"><a class="listing-title" href="./content/explore/entries/2026-10-25/index.html">Tower Defense</a><span class="entry-lang" lang="zh">中文</span></h3>
+      <p class="entry-desc listing-description">A small Unity tower defense game, playable right in the browser.</p>
+    </div>
   </article>
 
   
   
-  <article class="recent-item" data-index="1" data-categories="TXVzaWM=" data-listing-date-sort="1789257600000" data-listing-file-modified-sort="1794023944518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1492">
-    <span class="recent-date listing-date">2026.09.13</span>
-    <h3><a class="listing-title" href="./content/explore/entries/2026-09-13/index.html">Music Theory Fundamentals</a></h3>
-    <p class="listing-description">A structured reference for rhythm, notation, intervals, scales, harmony, and musical analysis.</p>
+  
+  <article class="entry" data-index="1" data-categories="TXVzaWM=" data-listing-date-sort="1789257600000" data-listing-file-modified-sort="1794314794157" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1492">
+    <p class="entry-meta">
+      <span class="entry-date listing-date">2026.09.13</span>
+      <span class="entry-cats">Music</span>
+    </p>
+    <div class="entry-main">
+      <h3 class="entry-title"><a class="listing-title" href="./content/explore/entries/2026-09-13/index.html">Music Theory Fundamentals</a><span class="entry-lang" lang="zh">中文</span></h3>
+      <p class="entry-desc listing-description">A structured reference for rhythm, notation, intervals, scales, harmony, and musical analysis.</p>
+    </div>
+  </article>
+
+  
+  
+  
+  <article class="entry" data-index="2" data-categories="QUklMkNQcm9qZWN0cw==" data-listing-date-sort="1780012800000" data-listing-file-modified-sort="1794314794150" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1449">
+    <p class="entry-meta">
+      <span class="entry-date listing-date">2026.05.29</span>
+      <span class="entry-cats">AI · Projects</span>
+    </p>
+    <div class="entry-main">
+      <h3 class="entry-title"><a class="listing-title" href="./content/explore/entries/2026-05-29/index.html">Pragmatics in Prompt Engineering</a><span class="entry-lang" lang="zh">中文</span></h3>
+      <p class="entry-desc listing-description">How to express real requirements clearly and use AI to build better presentations more efficiently.</p>
+    </div>
   </article>
 
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div>
 </div>
 </div>
 </div>
