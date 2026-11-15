@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1001,10 +1001,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value"><span class="header-section-number">1.6</span> Expected Value</a></li>
   <li><a href="#product-measures" id="toc-product-measures" class="nav-link" data-scroll-target="#product-measures"><span class="header-section-number">1.7</span> Product Measures</a></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">1.8</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">1.8.1</span> Key Results</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1570,87 +1566,66 @@ P(X\in A)=\int_A f_X\,d\lambda=\int_A f_X(x)\,dx.
 <section id="almost-everywhere-convergence" class="level4" data-number="1.5.3.2">
 <h4 data-number="1.5.3.2" class="anchored" data-anchor-id="almost-everywhere-convergence"><span class="header-section-number">1.5.3.2</span> Almost-Everywhere Convergence</h4>
 <p>We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> almost everywhere if there exists a measurable set <span class="math inline">\(Z\subseteq X\)</span> with <span class="math inline">\(\mu(Z)=0\)</span> such that <span class="math display">\[
-\lim_{n\to\infty}f_n(x)=f(x)
-\]</span> for every <span class="math inline">\(x\in X\setminus Z\)</span>. We write <span class="math display">\[
+\lim_{n\to\infty}f_n(x)=f(x) \text{  for all } x\in X\setminus Z
+\]</span></p>
+<p>or <span class="math display">\[
+\mu\bigl(\{x\in X:f_n(x) \not\to f(x)\}\bigr)\to0.
+\]</span> We write <span class="math display">\[
 f_n\xrightarrow{\mathrm{a.e.}}f.
 \]</span></p>
 </section>
-<section id="uniform-convergence" class="level4" data-number="1.5.3.3">
-<h4 data-number="1.5.3.3" class="anchored" data-anchor-id="uniform-convergence"><span class="header-section-number">1.5.3.3</span> Uniform Convergence</h4>
-<p>We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> uniformly on <span class="math inline">\(X\)</span> if, for every <span class="math inline">\(\epsilon&gt;0\)</span>, there exists an integer <span class="math inline">\(N\ge1\)</span> such that <span class="math display">\[
-|f_n(x)-f(x)|&lt;\epsilon
-\]</span> for every <span class="math inline">\(n\ge N\)</span> and every <span class="math inline">\(x\in X\)</span>. The integer <span class="math inline">\(N\)</span> may depend on <span class="math inline">\(\epsilon\)</span>, but not on <span class="math inline">\(x\)</span>.</p>
-</section>
-<section id="almost-uniform-convergence" class="level4" data-number="1.5.3.4">
-<h4 data-number="1.5.3.4" class="anchored" data-anchor-id="almost-uniform-convergence"><span class="header-section-number">1.5.3.4</span> Almost-Uniform Convergence</h4>
+<section id="almost-uniform-convergence" class="level4" data-number="1.5.3.3">
+<h4 data-number="1.5.3.3" class="anchored" data-anchor-id="almost-uniform-convergence"><span class="header-section-number">1.5.3.3</span> Almost-Uniform Convergence</h4>
 <p>We say that <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> almost uniformly on <span class="math inline">\(X\)</span> if, for every <span class="math inline">\(\delta&gt;0\)</span>, there exists a measurable set <span class="math inline">\(D_\delta\subseteq X\)</span> such that <span class="math display">\[
 \mu(D_\delta)&lt;\delta
 \]</span> and <span class="math inline">\(f_n\)</span> converges to <span class="math inline">\(f\)</span> uniformly on <span class="math inline">\(X\setminus D_\delta\)</span>.</p>
-<p>The exceptional set <span class="math inline">\(D_\delta\)</span> may depend on <span class="math inline">\(\delta\)</span>, but not on <span class="math inline">\(n\)</span>.</p>
-<p>On a space of finite measure, almost-everywhere convergence implies convergence in measure, but the converse need not hold.</p>
 </section>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Properties of Convergence
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>For measurable functions on a measure space <span class="math inline">\((X,\mathcal F,\mu)\)</span>, we have <span class="math display">\[
-\text{uniform convergence}
-\;\Longrightarrow\;
-\text{almost-uniform convergence}
-\;\Longrightarrow\;
-\text{almost-everywhere convergence},
-\]</span> and <span class="math display">\[
-\text{almost-uniform convergence}
+<div id="thm-aap-1-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.12 (Properties of Convergence)</strong></span> Let <span class="math inline">\(f_n,f\)</span> be measurable functions on a measure space <span class="math inline">\((X,\mathcal A,\mu)\)</span>. Then</p>
+<p><span class="math display">\[
+\text{a.u. convergence}
 \;\Longrightarrow\;
 \text{convergence in measure}.
 \]</span></p>
-<p>If <span class="math inline">\(\mu(X)&lt;\infty\)</span>, Egorov’s theorem also gives <span class="math display">\[
-\text{almost-everywhere convergence (almost surely)}
+<p>If <span class="math inline">\(\mu(X)&lt;\infty\)</span>, Egorov’s theorem also gives</p>
+<p><span class="math display">\[
+\text{a.e. (a.s.)}
 \;\Longrightarrow\;
-\text{almost-uniform convergence}
+\text{a.u.}
 \;\Longrightarrow\;
-\text{convergence in measure (convergence in probability)}.
-\]</span> The finite-measure assumption cannot generally be omitted from this implication.</p>
+\text{in measure (in probability)}.
+\]</span></p>
+<p>The finite-measure assumption cannot generally be omitted from this implication.</p>
 </div>
-</div>
-</div>
-<div id="thm-aap-1-12" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.12 (Bounded Convergence Theorem)</strong></span> Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E)&lt;\infty\)</span>. Suppose <span class="math inline">\(f_n\)</span> vanishes on <span class="math inline">\(E^c\)</span>, <span class="math inline">\(|f_n(x)|\le M\)</span>, and <span class="math inline">\(f_n\to f\)</span> in measure. Then</p>
+<div id="thm-aap-1-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.13 (Bounded Convergence Theorem)</strong></span> Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E)&lt;\infty\)</span>. Suppose <span class="math inline">\(f_n\)</span> vanishes on <span class="math inline">\(E^c\)</span>, <span class="math inline">\(|f_n(x)|\le M\)</span>, and <span class="math inline">\(f_n\to f\)</span> in measure. Then</p>
 <p><span class="math display">\[
 \int f \, d\mu = \lim_{n\to\infty} \int f_n \, d\mu.
 \]</span></p>
 </div>
-<div id="thm-aap-1-13" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.13 (Fatou’s Lemma)</strong></span> If <span class="math inline">\(f_n \ge 0\)</span> then</p>
+<div id="thm-aap-1-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.14 (Fatou’s Lemma)</strong></span> If <span class="math inline">\(f_n \ge 0\)</span> then</p>
 <p><span class="math display">\[
 \liminf_{n\to\infty}\int f_n\,d\mu
 \ge
 \int\left(\liminf_{n\to\infty}f_n\right)\,d\mu.
 \]</span></p>
 </div>
-<div id="thm-aap-1-14" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.14 (Monotone Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\ge0\)</span> and <span class="math inline">\(f_n\uparrow f\)</span>, then</p>
+<div id="thm-aap-1-15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.15 (Monotone Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\ge0\)</span> and <span class="math inline">\(f_n\uparrow f\)</span>, then</p>
 <p><span class="math display">\[
 \int f_n\,d\mu \uparrow \int f\,d\mu.
 \]</span></p>
 </div>
-<div id="thm-aap-1-15" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.15 (Dominated Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\to f\)</span> a.e., <span class="math inline">\(|f_n|\le g\)</span> for all <span class="math inline">\(n\)</span>, and <span class="math inline">\(g\)</span> is integrable, then</p>
+<div id="thm-aap-1-16" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.16 (Dominated Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\to f\)</span> a.e., <span class="math inline">\(|f_n|\le g\)</span> for all <span class="math inline">\(n\)</span>, and <span class="math inline">\(g\)</span> is integrable, then</p>
 <p><span class="math display">\[
 \int f_n\,d\mu \longrightarrow \int f\,d\mu.
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1659,9 +1634,9 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Although the versions of <a href="#thm-aap-1-13" class="quarto-xref">Theorem&nbsp;1.13</a>, <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a>, and <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods.</p>
+<p>Although the versions of <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a>, <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a>, and <a href="#thm-aap-1-16" class="quarto-xref">Theorem&nbsp;1.16</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods. But in practice, most measures of interest are <span class="math inline">\(\sigma\)</span>-finite, and some theorems in the future are correctly require <span class="math inline">\(\sigma\)</span>-finiteness. So we will not discuss the general case further.</p>
 </div>
 </div>
 </div>
@@ -1677,8 +1652,8 @@ EX=\int X\,dP,
 <p>if the integral exists. This is the case if <span class="math inline">\(X\)</span> is integrable, i.e., if <span class="math inline">\(E|X|&lt;\infty\)</span>.</p>
 <p>When <span class="math inline">\(X \ge 0\)</span>, <span class="math inline">\(EX\)</span> always makes sense, but may be <span class="math inline">\(\infty\)</span>.</p>
 </div>
-<div id="thm-aap-1-16" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.16 (Expected Value of a Function of a Random Variable)</strong></span> Let <span class="math inline">\(X\)</span> be a random element of <span class="math inline">\((S,\mathcal S)\)</span> with distribution <span class="math inline">\(\mu\)</span>, i.e., <span class="math inline">\(\mu(A)=P(X\in A)\)</span>. If <span class="math inline">\(f\)</span> is a measurable function from <span class="math inline">\((S,\mathcal S)\)</span> to <span class="math inline">\((\mathbb R,\mathcal R)\)</span> such that <span class="math inline">\(f\ge0\)</span> or <span class="math inline">\(E|f(X)|&lt;\infty\)</span>, then <span class="math display">\[
+<div id="thm-aap-1-17" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.17 (Expected Value of a Function of a Random Variable)</strong></span> Let <span class="math inline">\(X\)</span> be a random element of <span class="math inline">\((S,\mathcal S)\)</span> with distribution <span class="math inline">\(\mu\)</span>, i.e., <span class="math inline">\(\mu(A)=P(X\in A)\)</span>. If <span class="math inline">\(f\)</span> is a measurable function from <span class="math inline">\((S,\mathcal S)\)</span> to <span class="math inline">\((\mathbb R,\mathcal R)\)</span> such that <span class="math inline">\(f\ge0\)</span> or <span class="math inline">\(E|f(X)|&lt;\infty\)</span>, then <span class="math display">\[
 Ef(X)=\int_S f(y)\,\mu(dy).
 \]</span></p>
 <p>If, in addition, <span class="math inline">\(S=\mathbb R\)</span> and <span class="math inline">\(\mu\)</span> has a density <span class="math inline">\(f_X\)</span> with respect to Lebesgue measure, then <span class="math display">\[
@@ -1706,15 +1681,15 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
 \]</span></p>
 <p>Let <span class="math inline">\(\mathcal F=\mathcal A\times\mathcal B\)</span> be the <span class="math inline">\(\sigma\)</span>-algebra generated by <span class="math inline">\(\mathcal S\)</span>.</p>
 </div>
-<div id="thm-aap-1-17" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.17 (Existence and Uniqueness of Product Measures)</strong></span> There exists a unique measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\(\mathcal F\)</span> such that</p>
+<div id="thm-aap-1-18" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.18 (Existence and Uniqueness of Product Measures)</strong></span> There exists a <strong>unique</strong> measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\(\mathcal F\)</span> such that</p>
 <p><span class="math display">\[
 \mu(A\times B)=\mu_1(A)\mu_2(B)
 \]</span></p>
 <p>for every <span class="math inline">\(A\in\mathcal A\)</span> and <span class="math inline">\(B\in\mathcal B\)</span>. This measure is called the <strong>product measure</strong> and is denoted by <span class="math inline">\(\mu_1\times\mu_2\)</span>.</p>
 </div>
-<div id="thm-aap-1-18" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1.18 (Fubini’s Theorem)</strong></span> Let <span class="math inline">\(\mu=\mu_1\times\mu_2\)</span>, and let <span class="math inline">\(f:X\times Y\to\mathbb R\)</span> be <span class="math inline">\(\mathcal F\)</span>-measurable. If <span class="math inline">\(f\ge0\)</span> or</p>
+<div id="thm-aap-1-19" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.19 (Fubini’s Theorem)</strong></span> Let <span class="math inline">\(\mu=\mu_1\times\mu_2\)</span>, and let <span class="math inline">\(f:X\times Y\to\mathbb R\)</span> be <span class="math inline">\(\mathcal F\)</span>-measurable. If <span class="math inline">\(f\ge0\)</span> or</p>
 <p><span class="math display">\[
 \int_{X\times Y}|f|\,d\mu&lt;\infty,
 \]</span></p>
@@ -1727,14 +1702,11 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
 \end{aligned}
 \]</span></p>
 </div>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="1.8">
-<h2 class="supplementary-notes anchored" data-number="1.8" data-anchor-id="supplementary-notes"><span class="header-section-number">1.8</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="1.8.1">
-<h3 data-number="1.8.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">1.8.1</span> Key Results</h3>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

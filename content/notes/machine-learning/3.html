@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Linear, logistic, ridge, and LASSO regression, and compressed sensing.">
+<meta name="description" content="Linear, logistic, ridge, and LASSO regression, compressed sensing, and support vector machines.">
 
 <title>Supervised Learning – Bobby</title>
 <style>
@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -990,6 +990,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#entropy-and-cross-entropy" id="toc-entropy-and-cross-entropy" class="nav-link" data-scroll-target="#entropy-and-cross-entropy"><span class="header-section-number">3.2.1</span> Entropy and Cross-Entropy</a></li>
   <li><a href="#kl-divergence" id="toc-kl-divergence" class="nav-link" data-scroll-target="#kl-divergence"><span class="header-section-number">3.2.2</span> KL Divergence</a></li>
+  <li><a href="#representation-learning" id="toc-representation-learning" class="nav-link" data-scroll-target="#representation-learning"><span class="header-section-number">3.2.3</span> Representation Learning</a></li>
   </ul></li>
   <li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression"><span class="header-section-number">3.3</span> Ridge Regression</a></li>
   <li><a href="#lasso-regression" id="toc-lasso-regression" class="nav-link" data-scroll-target="#lasso-regression"><span class="header-section-number">3.4</span> LASSO Regression</a></li>
@@ -998,9 +999,13 @@ window.Quarto = {
   <li><a href="#sparsity-assumption" id="toc-sparsity-assumption" class="nav-link" data-scroll-target="#sparsity-assumption"><span class="header-section-number">3.5.1</span> Sparsity Assumption</a></li>
   <li><a href="#restricted-isometry-property-rip" id="toc-restricted-isometry-property-rip" class="nav-link" data-scroll-target="#restricted-isometry-property-rip"><span class="header-section-number">3.5.2</span> Restricted Isometry Property (RIP)</a></li>
   </ul></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">3.6</span> Supplementary Notes</a>
+  <li><a href="#support-vector-machine" id="toc-support-vector-machine" class="nav-link" data-scroll-target="#support-vector-machine"><span class="header-section-number">3.6</span> Support Vector Machine</a>
   <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">3.6.1</span> Key Results</a></li>
+  <li><a href="#hard-margin" id="toc-hard-margin" class="nav-link" data-scroll-target="#hard-margin"><span class="header-section-number">3.6.1</span> Hard Margin</a></li>
+  <li><a href="#soft-margin" id="toc-soft-margin" class="nav-link" data-scroll-target="#soft-margin"><span class="header-section-number">3.6.2</span> Soft Margin</a></li>
+  <li><a href="#lagrangian-duality" id="toc-lagrangian-duality" class="nav-link" data-scroll-target="#lagrangian-duality"><span class="header-section-number">3.6.3</span> Lagrangian Duality</a></li>
+  <li><a href="#dual-form" id="toc-dual-form" class="nav-link" data-scroll-target="#dual-form"><span class="header-section-number">3.6.4</span> Dual Form</a></li>
+  <li><a href="#kernel-method" id="toc-kernel-method" class="nav-link" data-scroll-target="#kernel-method"><span class="header-section-number">3.6.5</span> Kernel Method</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1016,7 +1021,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Linear, logistic, ridge, and LASSO regression, and compressed sensing.
+    Linear, logistic, ridge, and LASSO regression, compressed sensing, and support vector machines.
   </div>
 </div>
 
@@ -1112,14 +1117,14 @@ H(y)=-\sum_i y_i\log y_i.
 <li>Cross-entropy is the expected encoding length when using <span class="math inline">\(p\)</span> to encode outcomes from <span class="math inline">\(y\)</span>:</li>
 </ul>
 <p><span class="math display">\[
-XE(y,p)=-\sum_i y_i\log p_i\ge H(y).
+\mathrm{XE}(y,p)=-\sum_i y_i\log p_i\ge H(y).
 \]</span></p>
 </section>
 <section id="kl-divergence" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="kl-divergence"><span class="header-section-number">3.2.2</span> KL Divergence</h3>
 <p><span class="math display">\[
 \begin{aligned}
-D_{\mathrm{KL}}(y\|p)&amp;=XE(y,p)-H(y) \\
+D_{\mathrm{KL}}(y\|p)&amp;=\mathrm{XE}(y,p)-H(y) \\
 &amp;=\sum_i y_i\log\frac{y_i}{p_i}\ge0.
 \end{aligned}
 \]</span></p>
@@ -1128,13 +1133,13 @@ D_{\mathrm{KL}}(y\|p)&amp;=XE(y,p)-H(y) \\
 <li>For fixed <span class="math inline">\(y\)</span>, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.</li>
 <li>KL divergence and cross-entropy are asymmetric.</li>
 </ul>
-<section id="representation-learning" class="level4" data-number="3.2.2.1">
-<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="representation-learning"><span class="header-section-number">3.2.2.1</span> Representation Learning</h4>
-<ul>
-<li><p>Deep learning is also called representation learning because it learns features automatically.</p></li>
-<li><p>The learned features are commonly passed to a final linear regression/classification layer.</p></li>
-</ul>
 </section>
+<section id="representation-learning" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="representation-learning"><span class="header-section-number">3.2.3</span> Representation Learning</h3>
+<ul>
+<li>Deep learning is also called representation learning because it learns features automatically.</li>
+<li>The learned features are commonly passed to a final linear regression/classification layer.</li>
+</ul>
 </section>
 </section>
 <section id="ridge-regression" class="level2" data-number="3.3">
@@ -1154,11 +1159,16 @@ D_{\mathrm{KL}}(y\|p)&amp;=XE(y,p)-H(y) \\
 +\frac{\lambda}{2}\|w\|_2^2.
 \]</span></p>
 <ul>
-<li><p>This is <span class="math inline">\(\ell_2\)</span> regularization, called ridge regression.</p></li>
-<li><p><span class="math inline">\(\lambda=0\)</span> gives no penalty; increasing <span class="math inline">\(\lambda\)</span> shrinks the optimal weight norm. As <span class="math inline">\(\lambda\to\infty\)</span>, <span class="math inline">\(w\to0\)</span>.</p></li>
-<li><p>Part1: <span class="math inline">\(\widehat{w_{t+1}} = w_t - \frac{\eta}{N}\sum_i (w_t^T x_i - y_i)\,x_i\)</span></p></li>
-<li><p>Part2: <span class="math inline">\(w_{t+1} = \widehat{w_{t+1}} * (1 - \eta\lambda)\)</span></p></li>
+<li>This is <span class="math inline">\(\ell_2\)</span> regularization, called ridge regression.</li>
+<li><span class="math inline">\(\lambda=0\)</span> gives no penalty; increasing <span class="math inline">\(\lambda\)</span> shrinks the optimal weight norm. As <span class="math inline">\(\lambda\to\infty\)</span>, <span class="math inline">\(w\to0\)</span>.</li>
+<li>Update in two parts: a gradient step on the loss, then a shrink of the weights:</li>
 </ul>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat w_{t+1}&amp;=w_t-\frac{\eta}{N}\sum_i(w_t^\top x_i-y_i)\,x_i, \\
+w_{t+1}&amp;=(1-\eta\lambda)\,\widehat w_{t+1}.
+\end{aligned}
+\]</span></p>
 </section>
 <section id="lasso-regression" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="lasso-regression"><span class="header-section-number">3.4</span> LASSO Regression</h2>
@@ -1169,18 +1179,22 @@ D_{\mathrm{KL}}(y\|p)&amp;=XE(y,p)-H(y) \\
 \min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+ \lambda\|w\|_1.
 \]</span></p>
 <ul>
-<li><p>This relaxation encourages sparse weights (feature selection).</p></li>
-<li><p>Part1: <span class="math inline">\(\widehat{w_{t+1}} = w_t - \frac{\eta}{N}\sum_i (w_t^T x_i - y_i)\,x_i\)</span></p>
+<li>This relaxation encourages sparse weights (feature selection).</li>
+<li>Update in two parts: the same gradient step as linear regression, then a threshold on every coordinate <span class="math inline">\(j\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\widehat w_{t+1}=w_t-\frac{\eta}{N}\sum_i(w_t^\top x_i-y_i)\,x_i,
+\]</span></p>
+<p><span class="math display">\[
+(w_{t+1})_j=
+\begin{cases}
+(\widehat w_{t+1})_j-\eta\lambda &amp; \text{if } (\widehat w_{t+1})_j&gt;\eta\lambda,\\
+(\widehat w_{t+1})_j+\eta\lambda &amp; \text{if } (\widehat w_{t+1})_j&lt;-\eta\lambda,\\
+0 &amp; \text{if } (\widehat w_{t+1})_j\in[-\eta\lambda,\eta\lambda].
+\end{cases}
+\]</span></p>
 <ul>
-<li>Same as linear regression</li>
-</ul></li>
-<li><p>Part2: for every coordinate <span class="math inline">\(i\)</span></p>
-<ul>
-<li>If <span class="math inline">\(\widehat{w_{t+1}}_i &gt; \eta\lambda\)</span>, <span class="math inline">\(w_{t+1} = \widehat{w_{t+1}}_i - \eta\lambda\)</span></li>
-<li>If <span class="math inline">\(\widehat{w_{t+1}}_i &lt; -\eta\lambda\)</span>, <span class="math inline">\(w_{t+1} = \widehat{w_{t+1}}_i + \eta\lambda\)</span></li>
-<li>If <span class="math inline">\(\widehat{w_{t+1}}_i \in [-\eta\lambda, \eta\lambda]\)</span>, <span class="math inline">\(w_{t+1} = 0\)</span></li>
 <li>Essentially: <span style="color:red">pulling to 0</span></li>
-</ul></li>
 </ul>
 </section>
 <section id="compressed-sensing" class="level2" data-number="3.5">
@@ -1194,13 +1208,15 @@ D_{\mathrm{KL}}(y\|p)&amp;=XE(y,p)-H(y) \\
 </section>
 <section id="restricted-isometry-property-rip" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="restricted-isometry-property-rip"><span class="header-section-number">3.5.2</span> Restricted Isometry Property (RIP)</h3>
-<p><span class="math inline">\(W\in\mathbb R^{n\times d} \, (n &lt; d)\)</span> is <span class="math inline">\((\epsilon,s)\)</span>-RIP if, for every <span class="math inline">\(s\)</span>-sparse <span class="math inline">\(x\in\mathbb R^d\)</span>,</p>
+<div id="def-rip" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.1 (Restricted Isometry Property)</strong></span> A matrix <span class="math inline">\(W\in\mathbb R^{n\times d}\)</span> with <span class="math inline">\(n&lt;d\)</span> is <span class="math inline">\((\epsilon,s)\)</span>-RIP if, for every <span class="math inline">\(s\)</span>-sparse <span class="math inline">\(x\in\mathbb R^d\)</span>,</p>
 <p><span class="math display">\[
 (1-\epsilon)\|x\|_2^2\le\|Wx\|_2^2\le(1+\epsilon)\|x\|_2^2.
 \]</span></p>
+</div>
 <ul>
-<li><p>Thus, <span class="math inline">\(W\)</span> approximately preserves the lengths of sparse vectors.</p></li>
-<li><p>Without sparsity condition, this is impossible.</p></li>
+<li>Thus, <span class="math inline">\(W\)</span> approximately preserves the lengths of sparse vectors.</li>
+<li>Without sparsity condition, this is impossible.</li>
 </ul>
 <div id="thm-rip-sparse-recovery" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.2 (Sparse Recovery via RIP)</strong></span> Let <span class="math inline">\(W\)</span> be <span class="math inline">\((\epsilon,2s)\)</span>-RIP with <span class="math inline">\(0\le\epsilon&lt;1\)</span>. If <span class="math inline">\(\|x\|_0\le s\)</span> and <span class="math inline">\(y=Wx\)</span>, then</p>
@@ -1216,7 +1232,7 @@ D_{\mathrm{KL}}(y\|p)&amp;=XE(y,p)-H(y) \\
 <p><br>
 </p>
 <div id="thm-rip-l1-recovery" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.3 (Exact Recovery via l1 Minimization)</strong></span> Let <span class="math inline">\(W\)</span> be <span class="math inline">\((\epsilon,2s)\)</span>-RIP with <span class="math inline">\(0\le\epsilon&lt;\frac{1}{1+\sqrt2}\)</span>. If <span class="math inline">\(\|x\|_0\le s\)</span> and <span class="math inline">\(y=Wx\)</span>, then</p>
+<p><span class="theorem-title"><strong>Theorem 3.3 (Exact Recovery via ℓ1 Minimization)</strong></span> Let <span class="math inline">\(W\)</span> be <span class="math inline">\((\epsilon,2s)\)</span>-RIP with <span class="math inline">\(0\le\epsilon&lt;\frac{1}{1+\sqrt2}\)</span>. If <span class="math inline">\(\|x\|_0\le s\)</span> and <span class="math inline">\(y=Wx\)</span>, then</p>
 <p><span class="math display">\[
 \arg\min_{v:\,Wv=y}\|v\|_0
 =\arg\min_{v:\,Wv=y}\|v\|_1
@@ -1243,15 +1259,142 @@ x^*\in\arg\min_{v:\,Wv=y}\|v\|_1.
 </ul>
 </section>
 </section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="3.6">
-<h2 class="supplementary-notes anchored" data-number="3.6" data-anchor-id="supplementary-notes"><span class="header-section-number">3.6</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">3.6.1</span> Key Results</h3>
+<section id="support-vector-machine" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="support-vector-machine"><span class="header-section-number">3.6</span> Support Vector Machine</h2>
+<p>A linear classifier <span class="math inline">\(\operatorname{sign}(w^\top x+b)\)</span> with labels <span class="math inline">\(y_i\in\{-1,1\}\)</span> that separates the two classes with the largest possible margin.</p>
+<section id="hard-margin" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="hard-margin"><span class="header-section-number">3.6.1</span> Hard Margin</h3>
+<div id="def-svm-hard-margin" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.2 (Hard-Margin SVM)</strong></span> For linearly separable examples <span class="math inline">\((x_i,y_i)\)</span> with <span class="math inline">\(y_i\in\{-1,1\}\)</span>, the hard-margin SVM solves</p>
+<p><span class="math display">\[
+\begin{aligned}
+\min_{w,b}\quad&amp;\|w\|_2 \\
+\text{subject to}\quad&amp;y_i(w^\top x_i+b)\ge1\ \text{ for all } i.
+\end{aligned}
+\]</span></p>
+</div>
 <ul>
-<li><a href="#thm-perceptron-convergence" class="quarto-xref">Theorem&nbsp;3.1</a>: The margin <span class="math inline">\(\gamma\)</span> bounds the number of perceptron mistakes.</li>
-<li><a href="#thm-rip-sparse-recovery" class="quarto-xref">Theorem&nbsp;3.2</a>: RIP makes sparse recovery possible from <span class="math inline">\(y=Wx\)</span>.</li>
-<li><a href="#thm-rip-l1-recovery" class="quarto-xref">Theorem&nbsp;3.3</a>: With a small enough RIP constant, <span class="math inline">\(\ell_1\)</span> minimization recovers <span class="math inline">\(x\)</span> exactly.</li>
+<li>The margin boundaries are <span class="math inline">\(w^\top x+b=\pm1\)</span>. Margin length is <span class="math inline">\(\frac{1}{\|w\|_2}\)</span>, so we want <span class="math inline">\(\|w\|_2\)</span> small.</li>
+<li>The constraint puts every example on the correct side of its boundary:</li>
 </ul>
+<p><span class="math display">\[
+w^\top x_i+b\ge1\ \text{ if } y_i=1,
+\qquad
+w^\top x_i+b\le-1\ \text{ if } y_i=-1.
+\]</span></p>
+</section>
+<section id="soft-margin" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="soft-margin"><span class="header-section-number">3.6.2</span> Soft Margin</h3>
+<div id="def-svm-soft-margin" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.3 (Soft-Margin SVM)</strong></span> For examples that may not be linearly separable, the soft-margin SVM relaxes the constraints with slack variables <span class="math inline">\(\xi_i\)</span> and a penalty <span class="math inline">\(\lambda&gt;0\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\min_{w,b,\xi}\quad&amp;\|w\|_2+\lambda\sum_i\xi_i \\
+\text{subject to}\quad&amp;y_i(w^\top x_i+b)\ge1-\xi_i,\quad \xi_i\ge0\ \text{ for all } i.
+\end{aligned}
+\]</span></p>
+</div>
+<ul>
+<li><span class="math inline">\(\xi_i\)</span> is how far example <span class="math inline">\(i\)</span> falls short of the margin; violating the constraint a little is OK.</li>
+<li>A larger <span class="math inline">\(\lambda\)</span> allows less slack and moves closer to the hard margin.</li>
+<li>The optimal slack is <span class="math inline">\(\xi_i=\max\bigl(0,\,1-y_i(w^\top x_i+b)\bigr)\)</span>, so soft-margin SVM is just minimizing the <strong>hinge loss</strong> with a norm penalty:</li>
+</ul>
+<p><span class="math display">\[
+\min_{w,b}\|w\|_2+\lambda\sum_i\max\bigl(0,\,1-y_i(w^\top x_i+b)\bigr).
+\]</span></p>
+</section>
+<section id="lagrangian-duality" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="lagrangian-duality"><span class="header-section-number">3.6.3</span> Lagrangian Duality</h3>
+<ul>
+<li>Primal problem and its Lagrangian, with multipliers <span class="math inline">\(\alpha_i\ge0\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+p^*=\min_xf(x)\ \text{ subject to }\ g_i(x)\le0,
+\qquad
+L(x,\alpha)=f(x)+\sum_i\alpha_ig_i(x).
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\max_{\alpha\ge0}L(x,\alpha)\)</span> equals <span class="math inline">\(f(x)\)</span> if <span class="math inline">\(x\)</span> is feasible and <span class="math inline">\(+\infty\)</span> otherwise, so <span class="math inline">\(p^*=\min_x\max_{\alpha\ge0}L(x,\alpha)\)</span>. The dual problem swaps the order:</li>
+</ul>
+<p><span class="math display">\[
+d^*=\max_{\alpha\ge0}\min_xL(x,\alpha).
+\]</span></p>
+<div id="thm-lagrangian-duality" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.5 (Weak and Strong Duality)</strong></span> Weak duality <span class="math inline">\(d^*\le p^*\)</span> always holds. If <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> are convex and Slater’s condition holds, that is, some <span class="math inline">\(x\)</span> has <span class="math inline">\(g_i(x)&lt;0\)</span> for all <span class="math inline">\(i\)</span>, then strong duality <span class="math inline">\(d^*=p^*\)</span> holds.</p>
+</div>
+<ul>
+<li>Proof of weak duality: for feasible <span class="math inline">\(x\)</span> and <span class="math inline">\(\alpha\ge0\)</span>, <span class="math inline">\(\min_{x'}L(x',\alpha)\le L(x,\alpha)\le f(x)\)</span>.</li>
+</ul>
+<p><br>
+</p>
+<div id="thm-kkt" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.6 (KKT Conditions)</strong></span> Let <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> be differentiable. If strong duality holds and <span class="math inline">\(x^*\)</span>, <span class="math inline">\(\alpha^*\)</span> are primal and dual optimal, then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\nabla f(x^*)+\sum_i\alpha_i^*\nabla g_i(x^*)&amp;=0 &amp;&amp;\text{(stationarity)},\\
+g_i(x^*)&amp;\le0 &amp;&amp;\text{(primal feasibility)},\\
+\alpha_i^*&amp;\ge0 &amp;&amp;\text{(dual feasibility)},\\
+\alpha_i^*g_i(x^*)&amp;=0 &amp;&amp;\text{(complementary slackness)}.
+\end{aligned}
+\]</span></p>
+<p>Conversely, if <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> are convex, any <span class="math inline">\(x^*\)</span> and <span class="math inline">\(\alpha^*\)</span> satisfying these conditions are primal and dual optimal.</p>
+</div>
+</section>
+<section id="dual-form" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="dual-form"><span class="header-section-number">3.6.4</span> Dual Form</h3>
+<div id="thm-svm-dual" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.7 (Dual of the SVM)</strong></span> Write the norm term in <a href="#def-svm-hard-margin" class="quarto-xref">Definition&nbsp;3.2</a> and <a href="#def-svm-soft-margin" class="quarto-xref">Definition&nbsp;3.3</a> as <span class="math inline">\(\frac12\|w\|_2^2\)</span>. Both problems then have the dual</p>
+<p><span class="math display">\[
+\begin{aligned}
+\max_\alpha\quad&amp;\sum_i\alpha_i-\frac12\sum_{i,j}\alpha_i\alpha_jy_iy_j\,x_i^\top x_j \\
+\text{subject to}\quad&amp;\sum_i\alpha_iy_i=0,\qquad
+\begin{cases}
+\alpha_i\ge0 &amp; \text{(hard margin)},\\
+0\le\alpha_i\le\lambda &amp; \text{(soft margin)},
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>and the optimal weights are <span class="math inline">\(w=\sum_i\alpha_iy_ix_i\)</span>.</p>
+</div>
+<ul>
+<li>Proof sketch: give each margin constraint a multiplier <span class="math inline">\(\alpha_i\ge0\)</span>. Stationarity in <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> gives <span class="math inline">\(w=\sum_i\alpha_iy_ix_i\)</span> and <span class="math inline">\(\sum_i\alpha_iy_i=0\)</span>; stationarity in <span class="math inline">\(\xi_i\)</span> gives the bound <span class="math inline">\(\alpha_i\le\lambda\)</span>.</li>
+<li>Thus, the soft margin only adds the upper bound <span class="math inline">\(\lambda\)</span> on each <span class="math inline">\(\alpha_i\)</span>.</li>
+<li>Examples with <span class="math inline">\(\alpha_i&gt;0\)</span> are the support vectors, and the data enters only through the inner products <span class="math inline">\(x_i^\top x_j\)</span>.</li>
+</ul>
+</section>
+<section id="kernel-method" class="level3" data-number="3.6.5">
+<h3 data-number="3.6.5" class="anchored" data-anchor-id="kernel-method"><span class="header-section-number">3.6.5</span> Kernel Method</h3>
+<div id="def-kernel" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.4 (Kernel)</strong></span> <span class="math inline">\(K\)</span> is a kernel if there is a feature map <span class="math inline">\(\phi\)</span> such that</p>
+<p><span class="math display">\[
+K(x,z)=\phi(x)^\top\phi(z)\ \text{ for all } x,z.
+\]</span></p>
+</div>
+<ul>
+<li>For a nonlinear boundary, run the linear SVM on the features <span class="math inline">\(\phi(x)\)</span>. The dual needs only inner products, so replace <span class="math inline">\(x_i^\top x_j\)</span> with <span class="math inline">\(K(x_i,x_j)\)</span>, without ever computing <span class="math inline">\(\phi\)</span>.</li>
+<li>Prediction needs only the kernel as well:</li>
+</ul>
+<p><span class="math display">\[
+f(x)=\operatorname{sign}\Bigl(\sum_i\alpha_iy_iK(x_i,x)+b\Bigr).
+\]</span></p>
+<ul>
+<li><span class="math inline">\(b\)</span> comes from any support vector <span class="math inline">\(x_s\)</span> on the margin, where <span class="math inline">\(y_s\bigl(w^\top\phi(x_s)+b\bigr)=1\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
+\]</span></p>
+<ul>
+<li>Polynomial kernel <span class="math inline">\((x^\top z+c)^p\)</span>: the features are all monomials of degree at most <span class="math inline">\(p\)</span>.</li>
+<li>Gaussian kernel <span class="math inline">\(\exp\bigl(-\|x-z\|_2^2/(2\sigma^2)\bigr)\)</span>: similarity decays with distance, and the feature space is infinite-dimensional.</li>
+</ul>
+<p><br>
+</p>
+<div id="thm-mercer" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.8 (Mercer’s Condition)</strong></span> <span class="math inline">\(K\)</span> is a kernel if and only if it is symmetric and, for every finite set of points <span class="math inline">\(x_1,\dots,x_n\)</span>, the matrix <span class="math inline">\(\bigl[K(x_i,x_j)\bigr]_{i,j}\)</span> is positive semidefinite.</p>
+</div>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
 </section>

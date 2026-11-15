@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -997,10 +997,6 @@ window.Quarto = {
   <li><a href="#borel-cantelli-lemmas" id="toc-borel-cantelli-lemmas" class="nav-link" data-scroll-target="#borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</a></li>
   <li><a href="#strong-law-of-large-numbers" id="toc-strong-law-of-large-numbers" class="nav-link" data-scroll-target="#strong-law-of-large-numbers"><span class="header-section-number">2.3.3</span> Strong Law of Large Numbers</a></li>
   </ul></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">2.4</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">2.4.1</span> Key Results</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1115,13 +1111,13 @@ P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)=:(F*G)(z),
 <div id="def-aap-2-7" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.4 (Conditional Expectation)</strong></span> Given a probability space <span class="math inline">\((\Omega,\mathcal F_0,P)\)</span>, a sub-<span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal F\subseteq\mathcal F_0\)</span>, and an <span class="math inline">\(\mathcal F_0\)</span>-measurable random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(E|X|&lt;\infty\)</span>, the conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal F\)</span>, denoted <span class="math inline">\(E(X\mid\mathcal F)\)</span>, is any random variable <span class="math inline">\(Y\)</span> satisfying:</p>
 <ol type="i">
-<li><p><span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable.</p></li>
+<li><p><span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable (i.e <span class="math inline">\(\displaystyle \sigma(Y) \subseteq \mathcal F\)</span>).</p></li>
 <li><p>For all <span class="math inline">\(A\in\mathcal F\)</span>,</p>
 <p><span class="math display">\[
 \int_A X\,dP=\int_A Y\,dP.
 \]</span></p></li>
 </ol>
-<p>Any <span class="math inline">\(Y\)</span> satisfying (i) and (ii) is called a version of <span class="math inline">\(E(X\mid\mathcal F)\)</span>.</p>
+<p>An <strong>unique</strong> <span class="math inline">\(Y\)</span> satisfying (i) and (ii) is called a version of <span class="math inline">\(E(X\mid\mathcal F)\)</span>.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1307,12 +1303,9 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
 \qquad\text{as }n\to\infty.
 \]</span></p>
 </div>
-</section>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="2.4">
-<h2 class="supplementary-notes anchored" data-number="2.4" data-anchor-id="supplementary-notes"><span class="header-section-number">2.4</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">2.4.1</span> Key Results</h3>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
 
 
 </section>
