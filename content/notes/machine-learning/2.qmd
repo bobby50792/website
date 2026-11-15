@@ -204,11 +204,7 @@ benchmark promised, making learning guarantees possible without providing a univ
 
 :::
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
-### Key Results
+### Key Results -->
 
-- @thm-1: No learning algorithm succeeds on every task without prior knowledge.
-- @thm-2: Finite hypothesis classes are learnable with enough samples.
-- @thm-4: A class of infinite VC dimension is not PAC learnable.
-- @thm-5: The fundamental theorem of statistical learning relates PAC learnability to VC dimension.

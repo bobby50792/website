@@ -344,6 +344,11 @@ body.quarto-dark {
   margin-block-end: 0;
 }
 
+/* The display-formula margin below is more specific; a block ending in a formula drops it too. */
+.notes-studio #quarto-document-content .theorem > p:last-child:has(> .math.display:only-child) {
+  margin-block-end: 0;
+}
+
 .notes-studio .theorem:target {
   outline: 2px solid var(--studio-accent);
   outline-offset: 2px;

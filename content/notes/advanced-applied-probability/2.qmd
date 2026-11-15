@@ -131,7 +131,7 @@ $\mathcal F\subseteq\mathcal F_0$, and an $\mathcal F_0$-measurable random
 variable $X$ with $E|X|<\infty$, the conditional expectation of $X$ given
 $\mathcal F$, denoted $E(X\mid\mathcal F)$, is any random variable $Y$ satisfying:
 
-i) $Y$ is $\mathcal F$-measurable.
+i) $Y$ is $\mathcal F$-measurable (i.e $\displaystyle \sigma(Y) \subseteq \mathcal F$).
 
 ii) For all $A\in\mathcal F$,
 
@@ -139,7 +139,7 @@ ii) For all $A\in\mathcal F$,
     \int_A X\,dP=\int_A Y\,dP.
     $$
 
-Any $Y$ satisfying (i) and (ii) is called a version of $E(X\mid\mathcal F)$.
+An **unique** $Y$ satisfying (i) and (ii) is called a version of $E(X\mid\mathcal F)$.
 
 :::
 
@@ -355,7 +355,7 @@ $$
 
 
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
-### Key Results
+### Key Results -->
 

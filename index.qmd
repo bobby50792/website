@@ -27,11 +27,12 @@ listing:
 ::: {.home}
 
 ::: {.home-intro}
-::: {.home-intro-text}
 
-<p class="kb-kicker">Bobby's Knowledge Base</p>
+<p class="kb-kicker home-kicker">Bobby's Knowledge Base</p>
 
 <h1 class="home-title">Notes on mathematics, physics, and computer science.</h1>
+
+::: {.home-intro-text}
 
 <p class="home-lede">Course notes written as I learn. Definitions and theorems are set apart from the discussion, and chapters have a review mode for testing yourself. Alongside them are a few essays and things I have built.</p>
 

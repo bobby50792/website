@@ -1,6 +1,6 @@
 ---
 title: "Supervised Learning"
-description: "Linear, logistic, ridge, and LASSO regression, and compressed sensing."
+description: "Linear, logistic, ridge, and LASSO regression, compressed sensing, and support vector machines."
 page-layout: article
 search: true
 number-offset: [3]
@@ -50,8 +50,7 @@ repeat until all examples are classified correctly:
 
 ::: {#thm-perceptron-convergence name="Perceptron Mistake Bound"}
 
-Use labels $y_i\in\{-1,+1\}$ and initialize $w_0=0$. Suppose there exist
-$w^*$ with $\|w^*\|=1$ and $\gamma>0$ such that, for every $i$,
+Use labels $y_i\in\{-1,+1\}$ and initialize $w_0=0$. Suppose there exist $w^*$ with $\|w^*\|=1$ and $\gamma>0$ such that, for every $i$,
 
 $$
 y_i\langle w^*,x_i\rangle\ge\gamma,
@@ -91,14 +90,14 @@ $$
 - Cross-entropy is the expected encoding length when using $p$ to encode outcomes from $y$:
 
 $$
-XE(y,p)=-\sum_i y_i\log p_i\ge H(y).
+\mathrm{XE}(y,p)=-\sum_i y_i\log p_i\ge H(y).
 $$
 
 ### KL Divergence
 
 $$
 \begin{aligned}
-D_{\mathrm{KL}}(y\|p)&=XE(y,p)-H(y) \\
+D_{\mathrm{KL}}(y\|p)&=\mathrm{XE}(y,p)-H(y) \\
 &=\sum_i y_i\log\frac{y_i}{p_i}\ge0.
 \end{aligned}
 $$
@@ -107,10 +106,9 @@ $$
 - For fixed $y$, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.
 - KL divergence and cross-entropy are asymmetric.
 
-#### Representation Learning
+### Representation Learning
 
 - Deep learning is also called representation learning because it learns features automatically.
-
 - The learned features are commonly passed to a final linear regression/classification layer.
 
 ## Ridge Regression
@@ -131,10 +129,14 @@ $$
 
 - This is $\ell_2$ regularization, called ridge regression.
 - $\lambda=0$ gives no penalty; increasing $\lambda$ shrinks the optimal weight norm. As $\lambda\to\infty$, $w\to0$.
+- Update in two parts: a gradient step on the loss, then a shrink of the weights:
 
-- Part1: $\widehat{w_{t+1}} = w_t - \frac{\eta}{N}\sum_i (w_t^T x_i - y_i)\,x_i$
-
-- Part2: $w_{t+1} = \widehat{w_{t+1}} * (1 - \eta\lambda)$
+$$
+\begin{aligned}
+\widehat w_{t+1}&=w_t-\frac{\eta}{N}\sum_i(w_t^\top x_i-y_i)\,x_i, \\
+w_{t+1}&=(1-\eta\lambda)\,\widehat w_{t+1}.
+\end{aligned}
+$$
 
 ## LASSO Regression
 
@@ -145,14 +147,22 @@ $$
 $$
 
 - This relaxation encourages sparse weights (feature selection).
+- Update in two parts: the same gradient step as linear regression, then a threshold on every coordinate $j$:
 
-- Part1: $\widehat{w_{t+1}} = w_t - \frac{\eta}{N}\sum_i (w_t^T x_i - y_i)\,x_i$
-  - Same as linear regression
-- Part2: for every coordinate $i$
-  - If $\widehat{w_{t+1}}_i > \eta\lambda$, $w_{t+1} = \widehat{w_{t+1}}_i - \eta\lambda$
-  - If $\widehat{w_{t+1}}_i < -\eta\lambda$, $w_{t+1} = \widehat{w_{t+1}}_i + \eta\lambda$
-  - If $\widehat{w_{t+1}}_i \in [-\eta\lambda, \eta\lambda]$, $w_{t+1} = 0$
-  - Essentially: <span style="color:red">pulling to 0</span>
+$$
+\widehat w_{t+1}=w_t-\frac{\eta}{N}\sum_i(w_t^\top x_i-y_i)\,x_i,
+$$
+
+$$
+(w_{t+1})_j=
+\begin{cases}
+(\widehat w_{t+1})_j-\eta\lambda & \text{if } (\widehat w_{t+1})_j>\eta\lambda,\\
+(\widehat w_{t+1})_j+\eta\lambda & \text{if } (\widehat w_{t+1})_j<-\eta\lambda,\\
+0 & \text{if } (\widehat w_{t+1})_j\in[-\eta\lambda,\eta\lambda].
+\end{cases}
+$$
+
+- Essentially: <span style="color:red">pulling to 0</span>
 
 ## Compressed Sensing
 
@@ -163,14 +173,17 @@ $$
 
 ### Restricted Isometry Property (RIP)
 
-$W\in\mathbb R^{n\times d} \, (n < d)$ is $(\epsilon,s)$-RIP if, for every $s$-sparse $x\in\mathbb R^d$,
+::: {#def-rip name="Restricted Isometry Property"}
+
+A matrix $W\in\mathbb R^{n\times d}$ with $n<d$ is $(\epsilon,s)$-RIP if, for every $s$-sparse $x\in\mathbb R^d$,
 
 $$
 (1-\epsilon)\|x\|_2^2\le\|Wx\|_2^2\le(1+\epsilon)\|x\|_2^2.
 $$
 
-- Thus, $W$ approximately preserves the lengths of sparse vectors.
+:::
 
+- Thus, $W$ approximately preserves the lengths of sparse vectors.
 - Without sparsity condition, this is impossible.
 
 ::: {#thm-rip-sparse-recovery name="Sparse Recovery via RIP"}
@@ -189,7 +202,7 @@ $$
 
 \
 
-::: {#thm-rip-l1-recovery name="Exact Recovery via l1 Minimization"}
+::: {#thm-rip-l1-recovery name="Exact Recovery via ℓ1 Minimization"}
 
 Let $W$ be $(\epsilon,2s)$-RIP with $0\le\epsilon<\frac{1}{1+\sqrt2}$. If $\|x\|_0\le s$ and $y=Wx$, then
 
@@ -223,10 +236,161 @@ $$
 
 - Recovery error is controlled by the non-sparse tail; $x=x_s$ gives exact recovery.
 
-## Supplementary Notes {.supplementary-notes}
+## Support Vector Machine
 
-### Key Results
+A linear classifier $\operatorname{sign}(w^\top x+b)$ with labels $y_i\in\{-1,1\}$ that separates the two classes with the largest possible margin.
 
-- @thm-perceptron-convergence: The margin $\gamma$ bounds the number of perceptron mistakes.
-- @thm-rip-sparse-recovery: RIP makes sparse recovery possible from $y=Wx$.
-- @thm-rip-l1-recovery: With a small enough RIP constant, $\ell_1$ minimization recovers $x$ exactly.
+### Hard Margin
+
+::: {#def-svm-hard-margin name="Hard-Margin SVM"}
+
+For linearly separable examples $(x_i,y_i)$ with $y_i\in\{-1,1\}$, the hard-margin SVM solves
+
+$$
+\begin{aligned}
+\min_{w,b}\quad&\|w\|_2 \\
+\text{subject to}\quad&y_i(w^\top x_i+b)\ge1\ \text{ for all } i.
+\end{aligned}
+$$
+
+:::
+
+- The margin boundaries are $w^\top x+b=\pm1$. Margin length is $\frac{1}{\|w\|_2}$, so we want $\|w\|_2$ small.
+- The constraint puts every example on the correct side of its boundary:
+
+$$
+w^\top x_i+b\ge1\ \text{ if } y_i=1,
+\qquad
+w^\top x_i+b\le-1\ \text{ if } y_i=-1.
+$$
+
+### Soft Margin
+
+::: {#def-svm-soft-margin name="Soft-Margin SVM"}
+
+For examples that may not be linearly separable, the soft-margin SVM relaxes the constraints with slack variables $\xi_i$ and a penalty $\lambda>0$:
+
+$$
+\begin{aligned}
+\min_{w,b,\xi}\quad&\|w\|_2+\lambda\sum_i\xi_i \\
+\text{subject to}\quad&y_i(w^\top x_i+b)\ge1-\xi_i,\quad \xi_i\ge0\ \text{ for all } i.
+\end{aligned}
+$$
+
+:::
+
+- $\xi_i$ is how far example $i$ falls short of the margin; violating the constraint a little is OK.
+- A larger $\lambda$ allows less slack and moves closer to the hard margin.
+- The optimal slack is $\xi_i=\max\bigl(0,\,1-y_i(w^\top x_i+b)\bigr)$, so soft-margin SVM is just minimizing the **hinge loss** with a norm penalty:
+
+$$
+\min_{w,b}\|w\|_2+\lambda\sum_i\max\bigl(0,\,1-y_i(w^\top x_i+b)\bigr).
+$$
+
+### Lagrangian Duality
+
+- Primal problem and its Lagrangian, with multipliers $\alpha_i\ge0$:
+
+$$
+p^*=\min_xf(x)\ \text{ subject to }\ g_i(x)\le0,
+\qquad
+L(x,\alpha)=f(x)+\sum_i\alpha_ig_i(x).
+$$
+
+- $\max_{\alpha\ge0}L(x,\alpha)$ equals $f(x)$ if $x$ is feasible and $+\infty$ otherwise, so $p^*=\min_x\max_{\alpha\ge0}L(x,\alpha)$. The dual problem swaps the order:
+
+$$
+d^*=\max_{\alpha\ge0}\min_xL(x,\alpha).
+$$
+
+::: {#thm-lagrangian-duality name="Weak and Strong Duality"}
+
+Weak duality $d^*\le p^*$ always holds. If $f$ and every $g_i$ are convex and Slater's condition holds, that is, some $x$ has $g_i(x)<0$ for all $i$, then strong duality $d^*=p^*$ holds.
+
+:::
+
+- Proof of weak duality: for feasible $x$ and $\alpha\ge0$, $\min_{x'}L(x',\alpha)\le L(x,\alpha)\le f(x)$.
+
+\
+
+::: {#thm-kkt name="KKT Conditions"}
+
+Let $f$ and every $g_i$ be differentiable. If strong duality holds and $x^*$, $\alpha^*$ are primal and dual optimal, then
+
+$$
+\begin{aligned}
+\nabla f(x^*)+\sum_i\alpha_i^*\nabla g_i(x^*)&=0 &&\text{(stationarity)},\\
+g_i(x^*)&\le0 &&\text{(primal feasibility)},\\
+\alpha_i^*&\ge0 &&\text{(dual feasibility)},\\
+\alpha_i^*g_i(x^*)&=0 &&\text{(complementary slackness)}.
+\end{aligned}
+$$
+
+Conversely, if $f$ and every $g_i$ are convex, any $x^*$ and $\alpha^*$ satisfying these conditions are primal and dual optimal.
+
+:::
+
+### Dual Form
+
+::: {#thm-svm-dual name="Dual of the SVM"}
+
+Write the norm term in @def-svm-hard-margin and @def-svm-soft-margin as $\frac12\|w\|_2^2$. Both problems then have the dual
+
+$$
+\begin{aligned}
+\max_\alpha\quad&\sum_i\alpha_i-\frac12\sum_{i,j}\alpha_i\alpha_jy_iy_j\,x_i^\top x_j \\
+\text{subject to}\quad&\sum_i\alpha_iy_i=0,\qquad
+\begin{cases}
+\alpha_i\ge0 & \text{(hard margin)},\\
+0\le\alpha_i\le\lambda & \text{(soft margin)},
+\end{cases}
+\end{aligned}
+$$
+
+and the optimal weights are $w=\sum_i\alpha_iy_ix_i$.
+
+:::
+
+- Proof sketch: give each margin constraint a multiplier $\alpha_i\ge0$. Stationarity in $w$ and $b$ gives $w=\sum_i\alpha_iy_ix_i$ and $\sum_i\alpha_iy_i=0$; stationarity in $\xi_i$ gives the bound $\alpha_i\le\lambda$.
+- Thus, the soft margin only adds the upper bound $\lambda$ on each $\alpha_i$.
+- Examples with $\alpha_i>0$ are the support vectors, and the data enters only through the inner products $x_i^\top x_j$.
+
+### Kernel Method
+
+::: {#def-kernel name="Kernel"}
+
+$K$ is a kernel if there is a feature map $\phi$ such that
+
+$$
+K(x,z)=\phi(x)^\top\phi(z)\ \text{ for all } x,z.
+$$
+
+:::
+
+- For a nonlinear boundary, run the linear SVM on the features $\phi(x)$. The dual needs only inner products, so replace $x_i^\top x_j$ with $K(x_i,x_j)$, without ever computing $\phi$.
+- Prediction needs only the kernel as well:
+
+$$
+f(x)=\operatorname{sign}\Bigl(\sum_i\alpha_iy_iK(x_i,x)+b\Bigr).
+$$
+
+- $b$ comes from any support vector $x_s$ on the margin, where $y_s\bigl(w^\top\phi(x_s)+b\bigr)=1$:
+
+$$
+b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
+$$
+
+- Polynomial kernel $(x^\top z+c)^p$: the features are all monomials of degree at most $p$.
+- Gaussian kernel $\exp\bigl(-\|x-z\|_2^2/(2\sigma^2)\bigr)$: similarity decays with distance, and the feature space is infinite-dimensional.
+
+\
+
+::: {#thm-mercer name="Mercer's Condition"}
+
+$K$ is a kernel if and only if it is symmetric and, for every finite set of points $x_1,\dots,x_n$, the matrix $\bigl[K(x_i,x_j)\bigr]_{i,j}$ is positive semidefinite.
+
+:::
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->
