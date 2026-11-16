@@ -1771,7 +1771,7 @@ f_X(x) = f_Y(x) \quad \text{for all } x \in \mathbb{R}.
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

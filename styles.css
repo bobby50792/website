@@ -349,9 +349,21 @@ body.quarto-dark {
   margin-block-end: 0;
 }
 
+/* Arriving at a theorem from a link: a frame marks it for a moment, then fades. */
 .notes-studio .theorem:target {
-  outline: 2px solid var(--studio-accent);
+  outline: 2px solid transparent;
   outline-offset: 2px;
+  animation: studio-target-mark 3s ease-out;
+}
+
+@keyframes studio-target-mark {
+  0%, 60% {
+    outline-color: var(--studio-accent);
+  }
+
+  100% {
+    outline-color: transparent;
+  }
 }
 
 .notes-studio .theorem-title {
@@ -445,6 +457,11 @@ body.quarto-dark {
   opacity: 1;
 }
 
+/* Once open, the title reads as a label for what is shown beneath it. */
+.notes-studio .callout.callout-style-default > .callout-header:not(.collapsed) {
+  color: var(--studio-ink);
+}
+
 .notes-studio .callout.callout-style-default > .callout-header:hover {
   color: var(--studio-accent);
 }
@@ -471,12 +488,22 @@ body.quarto-dark {
 }
 
 .notes-studio .callout.callout-style-default .callout-body {
-  margin-block: .15rem .6rem;
+  margin-block: .25rem .7rem;
   margin-inline-start: .4rem;
-  padding: 0 0 0 1rem;
-  border-inline-start: 2px solid var(--studio-line);
+  padding: .1rem 0 .1rem 1.1rem;
+  /* The rule takes a little of the tag's colour, so the two read as one note. */
+  border-inline-start: 2px solid color-mix(in srgb, var(--studio-accent) 30%, var(--studio-line));
   color: var(--studio-ink);
   font-size: .94em;
+}
+
+/* A list inside a note stays close to the note's text edge, with quiet markers. */
+.notes-studio .callout.callout-style-default .callout-body :is(ul, ol) {
+  padding-inline-start: 1.25rem;
+}
+
+.notes-studio .callout.callout-style-default .callout-body li::marker {
+  color: var(--studio-muted);
 }
 
 .notes-studio .callout.callout-style-default .callout-body > :first-child {
@@ -1430,10 +1457,121 @@ a.chapter-title::after {
 
 /* Kept at the lowest specificity so an article's own blocks can restyle their headings. */
 :where(.explore-article main.content) h3 {
+  /* More room above than below, so a heading belongs to what follows it. */
+  margin-block: 2.5rem .5rem;
   font-family: var(--studio-serif-bold);
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.35;
+}
+
+/* Directly under a section heading, that heading's own margin is enough. */
+:where(.explore-article main.content) h2 + section > h3:first-child {
+  margin-block-start: 0;
+}
+
+/* Inline code: the monospace face and a faint tint set it apart, in the text colour
+   rather than the theme's purple. The tint is translucent so it also shows on cards. */
+.explore-article main.content :not(pre) > code {
+  background: color-mix(in srgb, var(--studio-ink) 7%, transparent);
+  color: var(--studio-ink);
+}
+
+.explore-article main.content a > code {
+  color: inherit;
+}
+
+/* A link written out as its address: slightly smaller, with a light underline, and
+   allowed to break so a long address never widens the page. */
+.explore-article main.content a.uri {
+  font-size: .94em;
+  overflow-wrap: anywhere;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+}
+
+.explore-article main.content a.uri:hover {
+  text-decoration-color: currentColor;
+}
+
+/* A list of such links, as in a reference section: closer together, with quiet numbers. */
+.explore-article main.content li:has(> p:only-child > a.uri:only-child) > p {
+  margin-block: .3rem;
+}
+
+.explore-article main.content li:has(> p:only-child > a.uri:only-child)::marker,
+.explore-article main.content li:has(> a.uri:only-child)::marker {
+  color: var(--studio-muted);
+  font-size: .9em;
+}
+
+/* Callouts: a framed aside in the same quiet style as the article's other cards,
+   whatever its type. When it folds, the title row is what opens it. */
+.explore-article main.content .callout.callout-style-default {
+  margin-block: 1.6rem;
+  overflow: hidden;
+  border: 1px solid var(--studio-line);
+  border-radius: 10px;
+  background: none;
+}
+
+.explore-article main.content .callout.callout-style-default > .callout-header {
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: .6rem 1.1rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--studio-fill);
+  color: var(--studio-ink);
+  font-family: var(--studio-sans);
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.5;
+  opacity: 1;
+}
+
+.explore-article main.content .callout .callout-icon-container {
+  display: none;
+}
+
+.explore-article main.content .callout.callout-style-default .callout-title-container {
+  margin: 0;
+  padding: 0;
+}
+
+.explore-article main.content .callout .callout-header[data-bs-toggle] {
+  cursor: pointer;
+}
+
+.explore-article main.content .callout .callout-header[data-bs-toggle]:hover {
+  color: var(--studio-accent);
+}
+
+.explore-article main.content .callout .callout-btn-toggle {
+  padding: 0;
+  line-height: 1;
+  opacity: .65;
+}
+
+.explore-article main.content .callout.callout-style-default .callout-body {
+  margin: 0;
+  padding: .9rem 1.1rem 1rem;
+  border-block-start: 1px solid var(--studio-line);
+  color: var(--studio-ink);
+  font-size: .95em;
+  line-height: 1.7;
+}
+
+.explore-article main.content .callout.callout-style-default .callout-body > :first-child {
+  margin-block-start: 0;
+  padding-block-start: 0;
+}
+
+.explore-article main.content .callout.callout-style-default .callout-body > :last-child {
+  margin-block-end: 0;
+  padding-block-end: 0;
 }
 
 @media (max-width: 575.98px) {

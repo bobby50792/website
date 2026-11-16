@@ -1444,7 +1444,7 @@ a_1u_1 + a_2u_2 + \cdots + a_nu_n = 0.
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

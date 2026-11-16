@@ -1527,7 +1527,7 @@ m_t[x_t] &amp;= \max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

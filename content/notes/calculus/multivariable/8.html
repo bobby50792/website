@@ -1388,7 +1388,7 @@ R = \limsup_{k \to +\infty} \frac{\|a_{k+1}\|}{\|a_k\|}, \quad \text{and} \quad 
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

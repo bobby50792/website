@@ -1117,7 +1117,7 @@ P(X+Y\le z)=\int_{\mathbb R}F(z-y)\,dG(y)=:(F*G)(z),
 \int_A X\,dP=\int_A Y\,dP.
 \]</span></p></li>
 </ol>
-<p>An <strong>unique</strong> <span class="math inline">\(Y\)</span> satisfying (i) and (ii) is called a version of <span class="math inline">\(E(X\mid\mathcal F)\)</span>.</p>
+<p>Any <span class="math inline">\(Y\)</span> satisfying (i) and (ii) is called a version of <span class="math inline">\(E(X\mid\mathcal F)\)</span>; it is <strong>unique</strong> up to almost-sure equality.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1568,7 +1568,7 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

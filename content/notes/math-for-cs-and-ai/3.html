@@ -2092,7 +2092,7 @@ a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(w)}{(w - z_0)^{n+1}} \, \mathrm{d
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

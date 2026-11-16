@@ -1041,7 +1041,7 @@ window.Quarto = {
 
     <div class="chapter-list" role="list">
 
-      <div class="chapter-row" role="listitem" data-index="0" data-listing-file-modified-sort="1794754441853" data-listing-reading-time-sort="14" data-listing-word-count-sort="2754">
+      <div class="chapter-row" role="listitem" data-index="0" data-listing-file-modified-sort="1794821521341" data-listing-reading-time-sort="14" data-listing-word-count-sort="2751">
         <span class="chapter-num">1</span>
         <span class="chapter-main">
 
@@ -1053,7 +1053,7 @@ window.Quarto = {
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="1" data-listing-file-modified-sort="1794754441853" data-listing-reading-time-sort="5" data-listing-word-count-sort="804">
+      <div class="chapter-row" role="listitem" data-index="1" data-listing-file-modified-sort="1794821521341" data-listing-reading-time-sort="5" data-listing-word-count-sort="810">
         <span class="chapter-num">2</span>
         <span class="chapter-main">
 
@@ -1332,7 +1332,7 @@ window.Quarto = {
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

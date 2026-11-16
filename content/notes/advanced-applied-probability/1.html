@@ -1569,7 +1569,7 @@ P(X\in A)=\int_A f_X\,d\lambda=\int_A f_X(x)\,dx.
 \lim_{n\to\infty}f_n(x)=f(x) \text{  for all } x\in X\setminus Z
 \]</span></p>
 <p>or <span class="math display">\[
-\mu\bigl(\{x\in X:f_n(x) \not\to f(x)\}\bigr)\to0.
+\mu\bigl(\{x\in X:f_n(x) \not\to f(x)\}\bigr)=0.
 \]</span> We write <span class="math display">\[
 f_n\xrightarrow{\mathrm{a.e.}}f.
 \]</span></p>
@@ -1636,7 +1636,7 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Although the versions of <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a>, <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a>, and <a href="#thm-aap-1-16" class="quarto-xref">Theorem&nbsp;1.16</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods. But in practice, most measures of interest are <span class="math inline">\(\sigma\)</span>-finite, and some theorems in the future are correctly require <span class="math inline">\(\sigma\)</span>-finiteness. So we will not discuss the general case further.</p>
+<p>Although the versions of <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a>, <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a>, and <a href="#thm-aap-1-16" class="quarto-xref">Theorem&nbsp;1.16</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods. But in practice, most measures of interest are <span class="math inline">\(\sigma\)</span>-finite, and some later theorems do require <span class="math inline">\(\sigma\)</span>-finiteness. So we will not discuss the general case further.</p>
 </div>
 </div>
 </div>
@@ -1966,7 +1966,7 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());

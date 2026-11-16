@@ -1387,8 +1387,6 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
 <li>Polynomial kernel <span class="math inline">\((x^\top z+c)^p\)</span>: the features are all monomials of degree at most <span class="math inline">\(p\)</span>.</li>
 <li>Gaussian kernel <span class="math inline">\(\exp\bigl(-\|x-z\|_2^2/(2\sigma^2)\bigr)\)</span>: similarity decays with distance, and the feature space is infinite-dimensional.</li>
 </ul>
-<p><br>
-</p>
 <div id="thm-mercer" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.8 (Mercer’s Condition)</strong></span> <span class="math inline">\(K\)</span> is a kernel if and only if it is symmetric and, for every finite set of points <span class="math inline">\(x_1,\dots,x_n\)</span>, the matrix <span class="math inline">\(\bigl[K(x_i,x_j)\bigr]_{i,j}\)</span> is positive semidefinite.</p>
 </div>
@@ -1657,7 +1655,7 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
   content.querySelectorAll("section ul").forEach((list) => {
     if (list.closest(".theorem, .callout, .supplementary-notes")) return;
     const rows = [...list.children];
-    const onlyLinks = rows.length > 1 && rows.every((row) => {
+    const onlyLinks = rows.length > 0 && rows.every((row) => {
       const copy = row.cloneNode(true);
       const hasLink = copy.querySelector("a");
       copy.querySelectorAll("a").forEach((link) => link.remove());
