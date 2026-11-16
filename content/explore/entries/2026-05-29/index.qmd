@@ -153,9 +153,38 @@ body.quarto-dark {
   font-weight: 800;
 }
 
+/* A prompt to copy: it sits close under the sentence that introduces it, is labelled,
+   and reads as a message in the article's own typeface. Long lines wrap. */
+.prompt-box {
+  margin: 14px 0 26px;
+  padding: 14px 20px 18px;
+}
+
+.prompt-box::before {
+  content: "提示词";
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ppt-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
 .prompt-box pre {
-  margin-bottom: 0;
-  border-radius: 8px;
+  margin: 0;
+  border-radius: 0;
+  font-family: var(--bs-body-font-family);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.prompt-box pre code {
+  padding: 0;
+  color: var(--ppt-strong);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  white-space: inherit;
 }
 
 .figure-panel {

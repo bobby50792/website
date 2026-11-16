@@ -749,7 +749,7 @@ $$
 
 or 
 $$
-\mu\bigl(\{x\in X:f_n(x) \not\to f(x)\}\bigr)\to0.
+\mu\bigl(\{x\in X:f_n(x) \not\to f(x)\}\bigr)=0.
 $$
 We write
 $$
@@ -838,7 +838,7 @@ $$
 
 ## Beyond σ-Finite Measures
 
-Although the versions of @thm-aap-1-14, @thm-aap-1-15, and @thm-aap-1-16 presented in class assume that $\mu$ is $\sigma$-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods. But in practice, most measures of interest are $\sigma$-finite, and some theorems in the future are correctly require $\sigma$-finiteness. So we will not discuss the general case further.
+Although the versions of @thm-aap-1-14, @thm-aap-1-15, and @thm-aap-1-16 presented in class assume that $\mu$ is $\sigma$-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods. But in practice, most measures of interest are $\sigma$-finite, and some later theorems do require $\sigma$-finiteness. So we will not discuss the general case further.
 
 :::
 

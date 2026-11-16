@@ -28,8 +28,6 @@ listing:
 
 ::: {.home-intro}
 
-<p class="kb-kicker home-kicker">Bobby's Knowledge Base</p>
-
 <h1 class="home-title">Notes on mathematics, physics, and computer science.</h1>
 
 ::: {.home-intro-text}
@@ -47,9 +45,9 @@ listing:
 ::: {.specimen}
 
 <p class="specimen-kind">Theorem 2.12</p>
-<p class="specimen-name">Strong Law of Large Numbers</p>
+<p class="specimen-name"><a href="content/notes/advanced-applied-probability/2.qmd#thm-aap-2-13">Strong Law of Large Numbers</a></p>
 
-Let $X_1, X_2, \ldots$ be i.i.d. random variables with $\mathbb E|X_i| < \infty$. Let $\mathbb E X_i = \mu$ and $S_n = X_1 + \cdots + X_n$. Then
+Let $X_1, X_2, \ldots$ be i.i.d. random variables with [$\mathbb E|X_i| < \infty$.]{.nobreak} Let $\mathbb E X_i = \mu$ and [$S_n = X_1 + \cdots + X_n$. Then]{.nobreak}
 
 $$
 \frac{S_n}{n} \xrightarrow{\mathrm{a.s.}} \mu \qquad \text{as } n \to \infty.

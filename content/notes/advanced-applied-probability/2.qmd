@@ -139,7 +139,7 @@ ii) For all $A\in\mathcal F$,
     \int_A X\,dP=\int_A Y\,dP.
     $$
 
-An **unique** $Y$ satisfying (i) and (ii) is called a version of $E(X\mid\mathcal F)$.
+Any $Y$ satisfying (i) and (ii) is called a version of $E(X\mid\mathcal F)$; it is **unique** up to almost-sure equality.
 
 :::
 

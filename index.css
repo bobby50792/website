@@ -28,16 +28,8 @@ nav.page-navigation {
   padding-block: clamp(3.25rem, 7vw, 5.5rem) clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.home-kicker,
 .home-title {
   grid-column: 1 / -1;
-}
-
-.home-kicker {
-  margin-block-end: .9rem;
-}
-
-.home-title {
   max-inline-size: 17em;
   margin: 0 0 2.25rem;
   padding: 0;
@@ -78,6 +70,7 @@ nav.page-navigation {
 }
 
 .specimen {
+  position: relative;
   padding: 1.35rem 1.5rem 1.5rem;
   border: 1px solid var(--studio-thm-line);
   border-radius: 10px;
@@ -91,12 +84,9 @@ nav.page-navigation {
   margin-block-end: 0;
 }
 
-/* No single word left on the statement's last line. */
-.specimen > p {
-  text-wrap: pretty;
-}
-
-/* A formula in the statement stays on one line. */
+/* A formula in the statement stays on one line, together with the full stop
+   (and the closing "Then") that follows it, so neither starts a line alone. */
+.specimen .nobreak,
 .specimen .math.inline,
 .specimen .math.inline mjx-break {
   white-space: nowrap;
@@ -129,6 +119,34 @@ nav.page-navigation {
   font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.35;
+}
+
+/* The whole card opens the theorem in the notes. */
+.specimen-name a {
+  color: var(--studio-ink);
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.specimen-name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;                 /* above the formulas, which are positioned too */
+  border-radius: inherit;
+}
+
+.specimen:hover .specimen-name a {
+  color: var(--studio-accent);
+}
+
+.specimen-name a:focus-visible {
+  outline: none;
+}
+
+.specimen:has(.specimen-name a:focus-visible) {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 2px;
 }
 
 .home-specimen > p {

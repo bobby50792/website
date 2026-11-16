@@ -383,7 +383,6 @@ $$
 - Polynomial kernel $(x^\top z+c)^p$: the features are all monomials of degree at most $p$.
 - Gaussian kernel $\exp\bigl(-\|x-z\|_2^2/(2\sigma^2)\bigr)$: similarity decays with distance, and the feature space is infinite-dimensional.
 
-\
 
 ::: {#thm-mercer name="Mercer's Condition"}
 
