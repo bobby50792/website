@@ -11,8 +11,6 @@ crossref:
 
 ## Independence
 
-### Definitions
-
 Work on a probability space $(\Omega,\mathcal F,P)$.
 
 ::: {#def-aap-2-1 name="Independent Events"}

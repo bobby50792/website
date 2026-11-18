@@ -1,0 +1,365 @@
+---
+title: "Central Limit Theorems"
+description: "Weak convergence, characteristic functions, and the central limit theorem."
+page-layout: article
+search: true
+number-offset: [3]
+
+crossref:
+  chapters: true
+---
+
+## Weak Convergence
+
+::: {#def-aap-3-1 name="Weak Convergence"}
+
+A sequence of distribution functions $F_n$ **converges weakly** to a
+distribution function $F$, written $F_n\Rightarrow F$, if
+
+$$
+F_n(x)\to F(x)
+\qquad\text{for every continuity point }x\text{ of }F.
+$$
+
+Equivalently, for distribution functions $F_n$ and $F$,
+
+$$
+F_n\Rightarrow F
+\quad\Longleftrightarrow\quad
+F_n(x)\to F(x)\quad\text{for Lebesgue-a.e. }x\in\mathbb R.
+$$
+
+
+A sequence of random variables $X_n$ **converges in distribution** to $X$,
+written $X_n\Rightarrow X$, if their distribution functions
+$F_n(x)=\mathbb P(X_n\le x)$ converge weakly to that of $X$.
+
+:::
+
+::: {.callout-note title="Why Only Continuity Points" collapse="true"}
+
+Let $X$ have distribution function $F$ and set $X_n=X+1/n$. Then
+
+$$
+F_n(x)=\mathbb P(X+1/n\le x)=F(x-1/n)\to F(x-),
+$$
+
+the left limit of $F$ at $x$. So $F_n(x)\to F(x)$ only where $F$ is
+continuous, even though $X_n\to X$ at every point of $\Omega$. Requiring
+convergence at every $x$ would exclude this sequence.
+
+\ 
+
+More generally, if $X_n$ and $X$ are defined on a common probability space
+and $X_n(\omega)\to X(\omega)$ for $\mathbb P$-a.e. $\omega$, then $X_n$
+**converges in distribution** to $X$:
+
+$$
+X_n\xrightarrow{\mathrm{a.s.}}X
+\quad\Longrightarrow\quad
+X_n\xrightarrow{\mathbb P}X
+\quad\Longrightarrow\quad
+X_n\Rightarrow X.
+$$
+
+Here a.e. refers to $\mathbb P$ on $\Omega$, whereas the a.e. convergence
+of distribution functions in @def-aap-3-1 refers to Lebesgue measure on
+$\mathbb R$.
+
+:::
+
+::: {#thm-aap-3-1 name="Convergence in Probability and in Distribution"}
+
+i) If $X_n\xrightarrow{\mathbb P}X$, then $X_n\Rightarrow X$.
+
+ii) If $X_n\Rightarrow c$ for a constant $c$, then $X_n\xrightarrow{\mathbb P}c$.
+
+:::
+
+::: {#thm-aap-3-3 name="Convergence of Expectations"}
+
+$X_n\Rightarrow X_\infty$ if and only if
+
+$$
+\mathbb E\,g(X_n)\to\mathbb E\,g(X_\infty)
+\qquad\text{for every bounded continuous }g:\mathbb R\to\mathbb R.
+$$
+
+:::
+
+::: {#thm-aap-3-4 name="Continuous Mapping Theorem"}
+
+Let $g$ be measurable and let $D_g$ be the set of points at which $g$ is
+discontinuous. If $X_n\Rightarrow X_\infty$ and $\mathbb P(X_\infty\in D_g)=0$,
+then
+
+$$
+g(X_n)\Rightarrow g(X_\infty).
+$$
+
+If in addition $g$ is bounded, then $\mathbb E\,g(X_n)\to\mathbb E\,g(X_\infty)$.
+
+:::
+
+::: {#thm-aap-3-6 name="Slutsky's Theorem"}
+
+If $X_n\Rightarrow X$ and $Y_n\Rightarrow c$ for a constant $c$, then
+
+$$
+X_n+Y_n\Rightarrow X+c
+\qquad\text{and}\qquad
+X_nY_n\Rightarrow cX.
+$$
+
+:::
+
+## Characteristic Functions
+
+### Definition and Basic Properties
+
+::: {#def-aap-3-3 name="Characteristic Function"}
+
+The **characteristic function** of a random variable $X$ is
+
+$$
+\varphi(t)=\mathbb E\,e^{itX}=\mathbb E\cos(tX)+i\,\mathbb E\sin(tX),
+\qquad t\in\mathbb R.
+$$
+
+:::
+
+::: {#thm-aap-3-9 name="Properties of Characteristic Functions"}
+
+Every characteristic function $\varphi$ satisfies:
+
+i) $\varphi(0)=1$.
+
+ii) $\varphi(-t)=\overline{\varphi(t)}$.
+
+iii) $|\varphi(t)|\le1$.
+
+iv) $\varphi$ is uniformly continuous on $\mathbb R$.
+
+v) $\mathbb E\,e^{it(aX+b)}=e^{itb}\varphi(at)$ for all $a,b\in\mathbb R$.
+
+:::
+
+::: {#thm-aap-3-10 name="Characteristic Function of a Sum of Independent Random Variables"}
+
+If $X_1$ and $X_2$ are independent with characteristic functions $\varphi_1$
+and $\varphi_2$, then $X_1+X_2$ has characteristic function
+
+$$
+\varphi_{X_1+X_2}(t)=\varphi_1(t)\,\varphi_2(t).
+$$
+
+:::
+
+::: {.callout-note title="Examples: Common Characteristic Functions" collapse="true"}
+
+$$
+\begin{aligned}
+\text{Coin flips, }\mathbb P(X=\pm1)=\tfrac12:&\quad \varphi(t)=\cos t\\
+\text{Poisson}(\lambda):&\quad \varphi(t)=\exp\bigl(\lambda(e^{it}-1)\bigr)\\
+\text{Normal}(\mu,\sigma^2):&\quad \varphi(t)=\exp\bigl(i\mu t-\sigma^2t^2/2\bigr)\\
+\text{Uniform}(a,b):&\quad \varphi(t)=\frac{e^{itb}-e^{ita}}{it(b-a)}\\
+\text{Exponential, density }\lambda e^{-\lambda x}:&\quad \varphi(t)=\frac{\lambda}{\lambda-it}\\
+\text{Cauchy, density }\frac{1}{\pi(1+x^2)}:&\quad \varphi(t)=e^{-|t|}
+\end{aligned}
+$$
+
+In particular, the standard normal distribution has $\varphi(t)=e^{-t^2/2}$.
+
+:::
+
+### Inversion and Continuity
+
+::: {#thm-aap-3-11 name="Inversion Formula"}
+
+Let $\varphi(t)=\int e^{itx}\,\mu(dx)$, where $\mu$ is a probability measure
+on $\mathbb R$. If $a<b$, then
+
+$$
+\lim_{T\to\infty}\frac{1}{2\pi}\int_{-T}^{T}
+\frac{e^{-ita}-e^{-itb}}{it}\,\varphi(t)\,dt
+=\mu\bigl((a,b)\bigr)+\frac12\mu\bigl(\{a,b\}\bigr).
+$$
+
+In particular, the characteristic function determines the distribution: if
+two probability measures have the same characteristic function, they are
+equal.
+
+:::
+
+::: {#thm-aap-3-12 name="Density from an Integrable Characteristic Function"}
+
+If $\int|\varphi(t)|\,dt<\infty$, then $\mu$ has a bounded continuous density
+
+$$
+f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
+$$
+
+:::
+
+::: {#thm-aap-3-13 name="Lévy's Continuity Theorem"}
+
+Let $\mu_n$, $1\le n\le\infty$, be probability measures with characteristic
+functions $\varphi_n$.
+
+i) If $\mu_n\Rightarrow\mu_\infty$, then $\varphi_n(t)\to\varphi_\infty(t)$
+   for every $t$.
+
+ii) If $\varphi_n(t)$ converges pointwise to a limit $\varphi(t)$ that is
+    continuous at $0$, then the sequence $\mu_n$ is tight and converges
+    weakly to the probability measure $\mu$ with characteristic function
+    $\varphi$.
+
+:::
+
+::: {.callout-note title="Why Continuity at 0 Is Needed" collapse="true"}
+
+Let $\mu_n$ be the normal distribution with mean $0$ and variance $n$. Then
+
+$$
+\varphi_n(t)=e^{-nt^2/2}\to
+\begin{cases}
+1, & t=0,\\
+0, & t\ne0,
+\end{cases}
+$$
+
+which is not continuous at $0$. The sequence $\mu_n$ is not tight, since
+$\mu_n\bigl((-\infty,x]\bigr)\to\tfrac12$ for every $x$, and it has no weak
+limit.
+
+:::
+
+### Moments and Derivatives
+
+::: {#thm-aap-3-14 name="Derivatives of a Characteristic Function"}
+
+If $\int|x|^n\,\mu(dx)<\infty$, then $\varphi$ has a continuous derivative of
+order $n$ given by
+
+$$
+\varphi^{(n)}(t)=\int(ix)^n e^{itx}\,\mu(dx).
+$$
+
+In particular, $\varphi^{(n)}(0)=i^n\,\mathbb E X^n$.
+
+:::
+
+::: {#thm-aap-3-15 name="Second-Order Expansion at 0"}
+
+If $\mathbb E|X|^2<\infty$, then
+
+$$
+\varphi(t)=1+it\,\mathbb E X-\frac{t^2}{2}\,\mathbb E X^2+o(t^2)
+\qquad\text{as }t\to0.
+$$
+
+:::
+
+## Central Limit Theorems
+
+### I.I.D. Sequences
+
+::: {#thm-aap-3-16 name="Central Limit Theorem"}
+
+Let $X_1,X_2,\ldots$ be i.i.d. random variables with $\mathbb E X_i=\mu$ and
+$\operatorname{Var}(X_i)=\sigma^2\in(0,\infty)$. If $S_n=X_1+\cdots+X_n$, then
+
+$$
+\frac{S_n-n\mu}{\sigma\sqrt n}\Rightarrow\chi
+\qquad\text{as }n\to\infty,
+$$
+
+where $\chi$ has the standard normal distribution.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Replacing $X_i$ by $X_i-\mu$, assume $\mu=0$. Let $\varphi$ be the
+characteristic function of $X_1$. By @thm-aap-3-9 and @thm-aap-3-10,
+$S_n/(\sigma\sqrt n)$ has characteristic function
+$\varphi\bigl(t/(\sigma\sqrt n)\bigr)^n$, and by @thm-aap-3-15,
+
+$$
+\varphi\left(\frac{t}{\sigma\sqrt n}\right)^n
+=\left(1-\frac{t^2}{2n}+o\left(\frac1n\right)\right)^n
+\to e^{-t^2/2}.
+$$
+
+The limit is the characteristic function of the standard normal
+distribution, so @thm-aap-3-13 gives the result.
+
+:::
+
+::: {.callout-note title="Example: De Moivre-Laplace Theorem" collapse="true"}
+
+Let $X_1,X_2,\ldots$ be i.i.d. with $\mathbb P(X_i=1)=\mathbb P(X_i=-1)=\tfrac12$,
+so that $\mu=0$ and $\sigma^2=1$. For $a<b$, @thm-aap-3-16 gives
+
+$$
+\mathbb P\left(a\le\frac{S_n}{\sqrt n}\le b\right)
+\to\int_a^b\frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx.
+$$
+
+:::
+
+### Triangular Arrays
+
+::: {#thm-aap-3-17 name="Lindeberg-Feller Theorem"}
+
+For each $n$, let $X_{n,m}$, $1\le m\le n$, be independent random variables
+with $\mathbb E X_{n,m}=0$. Suppose:
+
+i) $\displaystyle\sum_{m=1}^n\mathbb E X_{n,m}^2\to\sigma^2>0$.
+
+ii) For every $\epsilon>0$,
+    $\displaystyle\lim_{n\to\infty}\sum_{m=1}^n
+    \mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|>\epsilon\}}\bigr]=0$.
+
+Then $S_n=X_{n,1}+\cdots+X_{n,n}\Rightarrow\sigma\chi$ as $n\to\infty$, where
+$\chi$ has the standard normal distribution.
+
+:::
+
+::: {.callout-note title="Recovering the I.I.D. Case" collapse="true"}
+
+Let $Y_1,Y_2,\ldots$ be i.i.d. with $\mathbb E Y_i=0$ and
+$\mathbb E Y_i^2=\sigma^2\in(0,\infty)$, and set $X_{n,m}=Y_m/\sqrt n$. Then
+$\sum_{m=1}^n\mathbb E X_{n,m}^2=\sigma^2$, and
+
+$$
+\sum_{m=1}^n\mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|>\epsilon\}}\bigr]
+=\mathbb E\bigl[Y_1^2\mathbf 1_{\{|Y_1|>\epsilon\sqrt n\}}\bigr]\to0
+$$
+
+by the dominated convergence theorem. So @thm-aap-3-17 contains
+@thm-aap-3-16.
+
+:::
+
+### Rates of Convergence
+
+::: {#thm-aap-3-18 name="Berry-Esseen Theorem"}
+
+Let $X_1,X_2,\ldots$ be i.i.d. with $\mathbb E X_i=0$,
+$\mathbb E X_i^2=\sigma^2$, and $\mathbb E|X_i|^3=\rho<\infty$. If $F_n$ is
+the distribution function of $(X_1+\cdots+X_n)/(\sigma\sqrt n)$ and $\Phi$ is
+the standard normal distribution function, then for every $x$ and $n$,
+
+$$
+|F_n(x)-\Phi(x)|\le\frac{3\rho}{\sigma^3\sqrt n}.
+$$
+
+:::
+
+
+
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

@@ -1,0 +1,26 @@
+---
+title: "Advanced Rendering Topics + Learning"
+description: "Materials and appearance modeling, neural radiance fields with volume rendering, and NeRF extensions."
+page-layout: article
+search: true
+number-offset: [7]
+
+crossref:
+  chapters: true
+---
+
+## Materials and Appearances
+
+## Advanced Appearance Modeling
+
+## Neural Radiance Fields (NeRF)
+
+### Volume Rendering with Ray Marching
+
+### Learning NeRF
+
+## NeRF Extensions
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

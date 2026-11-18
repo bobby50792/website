@@ -195,6 +195,8 @@ website:
                   href: content/notes/advanced-applied-probability/1.qmd
                 - text: "Laws of Large Numbers"
                   href: content/notes/advanced-applied-probability/2.qmd
+                - text: "Central Limit Theorems"
+                  href: content/notes/advanced-applied-probability/3.qmd
             - section: "Machine Learning"
               href: content/notes/machine-learning/0.qmd
               contents:
@@ -219,6 +221,8 @@ website:
                   href: content/notes/advanced-computer-graphics/5.qmd
                 - text: "Ray Tracing"
                   href: content/notes/advanced-computer-graphics/6.qmd
+                - text: "Advanced Rendering + Learning"
+                  href: content/notes/advanced-computer-graphics/7.qmd
             - section: "Artificial Intelligence"
               href: content/notes/artificial-intelligence/0.qmd
               contents:
