@@ -37,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../content/notes/machine-learning/index.html" rel="next">
+<link href="../../../content/notes/advanced-applied-probability/3.html" rel="next">
 <link href="../../../content/notes/advanced-applied-probability/1.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -851,6 +851,12 @@ window.Quarto = {
  <span class="menu-text">Laws of Large Numbers</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Central Limit Theorems</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -927,6 +933,12 @@ window.Quarto = {
  <span class="menu-text">Ray Tracing</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced Rendering + Learning</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -984,8 +996,7 @@ window.Quarto = {
   <ul>
   <li><a href="#independence" id="toc-independence" class="nav-link active" data-scroll-target="#independence"><span class="header-section-number">2.1</span> Independence</a>
   <ul class="collapse">
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">2.1.1</span> Definitions</a></li>
-  <li><a href="#distributions-and-expectations" id="toc-distributions-and-expectations" class="nav-link" data-scroll-target="#distributions-and-expectations"><span class="header-section-number">2.1.2</span> Distributions and Expectations</a></li>
+  <li><a href="#distributions-and-expectations" id="toc-distributions-and-expectations" class="nav-link" data-scroll-target="#distributions-and-expectations"><span class="header-section-number">2.1.1</span> Distributions and Expectations</a></li>
   </ul></li>
   <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">2.2</span> Conditional Expectation</a>
   <ul class="collapse">
@@ -1030,8 +1041,6 @@ window.Quarto = {
 
 <section id="independence" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="independence"><span class="header-section-number">2.1</span> Independence</h2>
-<section id="definitions" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="definitions"><span class="header-section-number">2.1.1</span> Definitions</h3>
 <p>Work on a probability space <span class="math inline">\((\Omega,\mathcal F,P)\)</span>.</p>
 <div id="def-aap-2-1" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.1 (Independent Events)</strong></span> The events <span class="math inline">\(A_1,\ldots,A_n\)</span> are <strong>independent</strong> if, for every nonempty <span class="math inline">\(I\subseteq\{1,\ldots,n\}\)</span>,</p>
@@ -1078,9 +1087,8 @@ P(X_1\in B_1,\ldots,X_n\in B_n)=\prod_{i=1}^n P(X_i\in B_i)
 <li><p>If <span class="math inline">\(\mathcal G,\mathcal H\)</span> are independent sub-<span class="math inline">\(\sigma\)</span>-fields, <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal G\)</span>-measurable, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal H\)</span>-measurable, then <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.</p></li>
 </ol>
 </div>
-</section>
-<section id="distributions-and-expectations" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="distributions-and-expectations"><span class="header-section-number">2.1.2</span> Distributions and Expectations</h3>
+<section id="distributions-and-expectations" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="distributions-and-expectations"><span class="header-section-number">2.1.1</span> Distributions and Expectations</h3>
 <div id="thm-aap-2-2" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.2 (Joint Distribution of Independent Random Variables)</strong></span> If <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent and <span class="math inline">\(X_i\)</span> has distribution <span class="math inline">\(\mu_i\)</span>, then <span class="math inline">\((X_1,\ldots,X_n)\)</span> has distribution <span class="math inline">\(\mu_1\times\cdots\times\mu_n\)</span>.</p>
 </div>
@@ -2160,8 +2168,8 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../content/notes/machine-learning/index.html" class="pagination-link" aria-label="Machine Learning">
-        <span class="nav-page-text">Machine Learning</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../content/notes/advanced-applied-probability/3.html" class="pagination-link" aria-label="Central Limit Theorems">
+        <span class="nav-page-text">Central Limit Theorems</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
