@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -857,6 +857,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +890,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -936,7 +948,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1265,6 +1277,29 @@ P(X = x) = F(x) - F(x-).
 \]</span></p></li>
 </ol>
 </div>
+<div id="cor-aap-1-5" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1.2 (Determination of a Distribution Function on a Dense Set)</strong></span> Let <span class="math inline">\(D\subseteq\mathbb R\)</span> be a dense subset (for instance, <span class="math inline">\(\mathbb Q\)</span> or the set of continuity points of a distribution function). Any distribution function <span class="math inline">\(F\)</span> is uniquely determined by its values on <span class="math inline">\(D\)</span>: for every <span class="math inline">\(x\in\mathbb R\)</span>,</p>
+<p><span class="math display">\[
+F(x)=\inf_{\substack{d\in D\\ d&gt;x}} F(d)=\lim_{\substack{d\in D\\ d\downarrow x}} F(d).
+\]</span></p>
+<p>In particular, if two distribution functions <span class="math inline">\(F_X\)</span> and <span class="math inline">\(F_Y\)</span> satisfy <span class="math inline">\(F_X(d)=F_Y(d)\)</span> for all <span class="math inline">\(d\in D\)</span>, then <span class="math inline">\(F_X(x)=F_Y(x)\)</span> for all <span class="math inline">\(x\in\mathbb R\)</span>, and hence <span class="math inline">\(X\stackrel{d}{=}Y\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(D\)</span> is dense in <span class="math inline">\(\mathbb R\)</span>, for any <span class="math inline">\(x\in\mathbb R\)</span> there is a sequence <span class="math inline">\(d_n\in D\)</span> with <span class="math inline">\(d_n\downarrow x\)</span>. Right-continuity in <a href="#thm-aap-1-5" class="quarto-xref">Theorem&nbsp;1.5</a>(iii) gives <span class="math inline">\(F(x)=\lim_{n\to\infty}F(d_n)\)</span>, and monotonicity in <a href="#thm-aap-1-5" class="quarto-xref">Theorem&nbsp;1.5</a>(i) implies that this limit equals <span class="math inline">\(\inf_{d\in D,\,d&gt;x}F(d)\)</span>. Since a distribution function uniquely determines the probability measure on <span class="math inline">\(\mathcal R\)</span> (<a href="#thm-aap-1-2" class="quarto-xref">Theorem&nbsp;1.2</a>), <span class="math inline">\(F_X=F_Y\)</span> implies <span class="math inline">\(X\stackrel{d}{=}Y\)</span>.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-1-6" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.6 (Existence of a Distribution)</strong></span> If <span class="math inline">\(F\)</span> satisfies properties (i), (ii), and (iii), then <span class="math inline">\(F\)</span> is the distribution function of some random variable.</p>
 </div>
@@ -1326,7 +1361,7 @@ P(X = x) = F(x) - F(x-).
 \]</span></p>
 </div>
 <div id="cor-aap-1-2" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.2 (Properties of the Integral for Bounded Functions)</strong></span> Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E) &lt; \infty\)</span>. If <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are bounded functions that vanish on <span class="math inline">\(E^c\)</span>, then:</p>
+<p><span class="theorem-title"><strong>Corollary 1.3 (Properties of the Integral for Bounded Functions)</strong></span> Let <span class="math inline">\(E\)</span> be a set with <span class="math inline">\(\mu(E) &lt; \infty\)</span>. If <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are bounded functions that vanish on <span class="math inline">\(E^c\)</span>, then:</p>
 <ol type="i">
 <li><p><strong>Nonnegativity.</strong> If <span class="math inline">\(f \ge 0\)</span> a.e., then <span class="math inline">\(\int f \, d\mu \ge 0\)</span>.</p></li>
 <li><p><strong>Homogeneity.</strong> For any <span class="math inline">\(a \in \mathbb{R}\)</span>, <span class="math inline">\(\int af \, d\mu = a \int f \, d\mu\)</span>.</p></li>
@@ -1367,7 +1402,7 @@ P(X = x) = F(x) - F(x-).
 \]</span></p>
 </div>
 <div id="cor-aap-1-3" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.3 (Properties of the Integral for Nonnegative Functions)</strong></span> Suppose <span class="math inline">\(f,g \ge 0\)</span>.</p>
+<p><span class="theorem-title"><strong>Corollary 1.4 (Properties of the Integral for Nonnegative Functions)</strong></span> Suppose <span class="math inline">\(f,g \ge 0\)</span>.</p>
 <ol type="i">
 <li><p><strong>Nonnegativity.</strong> <span class="math inline">\(\int f \, d\mu \ge 0\)</span>.</p></li>
 <li><p><strong>Homogeneity.</strong> If <span class="math inline">\(a &gt; 0\)</span>, then <span class="math inline">\(\int af \, d\mu = a \int f \, d\mu\)</span>.</p></li>
@@ -1380,7 +1415,7 @@ P(X = x) = F(x) - F(x-).
 </ol>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1389,7 +1424,7 @@ P(X = x) = F(x) - F(x-).
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\((X,\mathcal A,\mu)\)</span> be a measure space. For a nonnegative measurable function <span class="math inline">\(f:X\to[0,\infty]\)</span>, define</p>
 <p><span class="math display">\[
@@ -1462,26 +1497,47 @@ f(x) &amp;= f^+(x)-f^-(x), \\
 \int f(x) \, dx = \int f \, d\lambda.
 \]</span></p>
 </section>
-<section id="lebesgue-measure-on-an-interval" class="level4" data-number="1.4.5.2">
-<h4 data-number="1.4.5.2" class="anchored" data-anchor-id="lebesgue-measure-on-an-interval"><span class="header-section-number">1.4.5.2</span> Lebesgue Measure on an Interval</h4>
-<p>For <span class="math inline">\(E = [a,b] \subset \mathbb{R}\)</span>,</p>
-<p><span class="math display">\[
-\int_a^b f(x) \, dx = \int_E f \, d\lambda.
-\]</span></p>
-</section>
-<section id="stieltjes-measure" class="level4" data-number="1.4.5.3">
-<h4 data-number="1.4.5.3" class="anchored" data-anchor-id="stieltjes-measure"><span class="header-section-number">1.4.5.3</span> Stieltjes Measure</h4>
+<section id="stieltjes-measure" class="level4" data-number="1.4.5.2">
+<h4 data-number="1.4.5.2" class="anchored" data-anchor-id="stieltjes-measure"><span class="header-section-number">1.4.5.2</span> Stieltjes Measure</h4>
 <p>For <span class="math inline">\(\mu\)</span> on <span class="math inline">\((\mathbb{R}, \mathcal{R})\)</span>, with <span class="math inline">\(\mu((a,b]) = G(b) - G(a)\)</span> for <span class="math inline">\(a &lt; b\)</span>,</p>
 <p><span class="math display">\[
 \int f(x) \, dG(x) = \int f \, d\mu.
 \]</span></p>
 </section>
-<section id="counting-measure" class="level4" data-number="1.4.5.4">
-<h4 data-number="1.4.5.4" class="anchored" data-anchor-id="counting-measure"><span class="header-section-number">1.4.5.4</span> Counting Measure</h4>
+<section id="counting-measure" class="level4" data-number="1.4.5.3">
+<h4 data-number="1.4.5.3" class="anchored" data-anchor-id="counting-measure"><span class="header-section-number">1.4.5.3</span> Counting Measure</h4>
 <p>For a countable set <span class="math inline">\(\Omega\)</span>, with <span class="math inline">\(\mathcal{F}\)</span> containing all subsets,</p>
 <p><span class="math display">\[
 \sum_{i \in \Omega} f(i) = \int f \, d\mu.
 \]</span></p>
+</section>
+<section id="lebesgue-measure-on-an-interval" class="level4" data-number="1.4.5.4">
+<h4 data-number="1.4.5.4" class="anchored" data-anchor-id="lebesgue-measure-on-an-interval"><span class="header-section-number">1.4.5.4</span> Lebesgue Measure on an Interval</h4>
+<p>For <span class="math inline">\(E = [a,b] \subset \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[
+\int_a^b f(x) \, dx = \int_E f \, d\lambda.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Agreement with the Riemann Integral
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Measurable sets.</strong> A set is Jordan measurable if and only if it is bounded and its boundary has Lebesgue measure <span class="math inline">\(0\)</span>; every such set is Lebesgue measurable, but not conversely.</p></li>
+<li><p><strong>Proper integrals.</strong> Proper Riemann integrability implies Lebesgue integrability (for the completed Lebesgue measure) with the same integral, regardless of dimension or sign.</p></li>
+<li><p><strong>Improper integrals.</strong> If <span class="math inline">\(f\ge 0\)</span> (or if one of <span class="math inline">\(f^+\)</span> and <span class="math inline">\(f^-\)</span> is integrable), the improper Riemann and Lebesgue integrals agree, possibly taking the value <span class="math inline">\(\infty\)</span>. By contrast, a conditionally convergent improper Riemann integral is not Lebesgue integrable.</p></li>
+</ul>
+<p>Probability theory rests on Lebesgue integration over general measure spaces, while concrete computations reduce to Riemann integrals whenever these conditions hold.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -1543,6 +1599,27 @@ P(X\in A)=\int_A f_X\,d\lambda=\int_A f_X(x)\,dx.
 \int \varphi(f) \, d\mu.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(c=\int f\,d\mu\)</span>. Because <span class="math inline">\(\varphi\)</span> is convex, it has a supporting line at <span class="math inline">\(c\)</span>: there exists <span class="math inline">\(a\in\mathbb R\)</span> such that <span class="math inline">\(\varphi(x)\ge\varphi(c)+a(x-c)\)</span> for all <span class="math inline">\(x\in\mathbb R\)</span>. Substituting <span class="math inline">\(x=f(\omega)\)</span> and integrating with respect to the probability measure <span class="math inline">\(\mu\)</span> gives</p>
+<p><span class="math display">\[
+\int\varphi(f)\,d\mu
+\ge\varphi(c)+a\left(\int f\,d\mu-c\right)
+=\varphi\left(\int f\,d\mu\right).
+\]</span></p>
+</div>
+</div>
+</div>
 <p>For <span class="math inline">\(1 \le p &lt; \infty\)</span>, let</p>
 <p><span class="math display">\[
 \|f\|_p = \left(\int |f|^p \, d\mu\right)^{1/p}.
@@ -1558,8 +1635,29 @@ P(X\in A)=\int_A f_X\,d\lambda=\int_A f_X(x)\,dx.
 \int |fg| \, d\mu \le \|f\|_p \|g\|_q.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The boundary cases <span class="math inline">\(\|f\|_p=0\)</span>, <span class="math inline">\(\|g\|_q=0\)</span>, or either norm infinite are immediate. Otherwise, replacing <span class="math inline">\(f,g\)</span> by <span class="math inline">\(f/\|f\|_p\)</span> and <span class="math inline">\(g/\|g\|_q\)</span>, assume <span class="math inline">\(\|f\|_p=\|g\|_q=1\)</span>. By concavity of <span class="math inline">\(\log\)</span>, Young’s inequality gives <span class="math inline">\(ab\le a^p/p+b^q/q\)</span> for all <span class="math inline">\(a,b\ge0\)</span>. Setting <span class="math inline">\(a=|f|\)</span> and <span class="math inline">\(b=|g|\)</span> and integrating yields</p>
+<p><span class="math display">\[
+\int|fg|\,d\mu
+\le\frac1p\int|f|^p\,d\mu+\frac1q\int|g|^q\,d\mu
+=\frac1p+\frac1q=1.
+\]</span></p>
+</div>
+</div>
+</div>
 <div id="cor-aap-1-4" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1.4 (Cauchy–Schwarz Inequality)</strong></span> If <span class="math inline">\(p=q=2\)</span>, then Hölder’s inequality becomes the Cauchy–Schwarz inequality:</p>
+<p><span class="theorem-title"><strong>Corollary 1.5 (Cauchy–Schwarz Inequality)</strong></span> If <span class="math inline">\(p=q=2\)</span>, then Hölder’s inequality becomes the Cauchy–Schwarz inequality:</p>
 <p><span class="math display">\[
 \int |fg| \, d\mu \le \|f\|_2 \|g\|_2.
 \]</span></p>
@@ -1616,6 +1714,28 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 \int f \, d\mu = \lim_{n\to\infty} \int f_n \, d\mu.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Fix <span class="math inline">\(\epsilon&gt;0\)</span> and set <span class="math inline">\(A_n=\{x\in E:|f_n(x)-f(x)|&gt;\epsilon\}\)</span>. Since <span class="math inline">\(|f_n-f|\le2M\)</span> on <span class="math inline">\(A_n\)</span> and <span class="math inline">\(|f_n-f|\le\epsilon\)</span> on <span class="math inline">\(E\setminus A_n\)</span>,</p>
+<p><span class="math display">\[
+\left|\int f_n\,d\mu-\int f\,d\mu\right|
+\le\int_E|f_n-f|\,d\mu
+\le\epsilon\,\mu(E)+2M\,\mu(A_n).
+\]</span></p>
+<p>Because <span class="math inline">\(\mu(A_n)\to0\)</span>, letting <span class="math inline">\(n\to\infty\)</span> gives <span class="math inline">\(\limsup_n\bigl|\int f_n\,d\mu-\int f\,d\mu\bigr|\le\epsilon\,\mu(E)\)</span>; letting <span class="math inline">\(\epsilon\downarrow0\)</span> concludes the proof.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-1-14" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.14 (Fatou’s Lemma)</strong></span> If <span class="math inline">\(f_n \ge 0\)</span> then</p>
 <p><span class="math display">\[
@@ -1624,11 +1744,47 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 \int\left(\liminf_{n\to\infty}f_n\right)\,d\mu.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(g=\liminf_n f_n\)</span>, and take any bounded <span class="math inline">\(h\)</span> with <span class="math inline">\(0\le h\le g\)</span> vanishing outside a set <span class="math inline">\(E\)</span> of finite measure. Set <span class="math inline">\(h_n=\min(f_n,h)\)</span>. Then <span class="math inline">\(0\le h_n\le h\)</span>, <span class="math inline">\(h_n=0\)</span> off <span class="math inline">\(E\)</span>, and <span class="math inline">\(h_n\to h\)</span> a.e. (hence in measure on <span class="math inline">\(E\)</span>). By <a href="#thm-aap-1-13" class="quarto-xref">Theorem&nbsp;1.13</a>,</p>
+<p><span class="math display">\[
+\int h\,d\mu=\lim_{n\to\infty}\int h_n\,d\mu\le\liminf_{n\to\infty}\int f_n\,d\mu.
+\]</span></p>
+<p>Taking the supremum over all such <span class="math inline">\(h\)</span> gives <span class="math inline">\(\int g\,d\mu\le\liminf_n\int f_n\,d\mu\)</span>.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-1-15" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.15 (Monotone Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\ge0\)</span> and <span class="math inline">\(f_n\uparrow f\)</span>, then</p>
 <p><span class="math display">\[
 \int f_n\,d\mu \uparrow \int f\,d\mu.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(0\le f_n\le f\)</span>, monotonicity of the integral gives <span class="math inline">\(\int f_n\,d\mu\le\int f\,d\mu\)</span> and hence <span class="math inline">\(\limsup_n\int f_n\,d\mu\le\int f\,d\mu\)</span>. On the other hand, <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a> gives <span class="math inline">\(\liminf_n\int f_n\,d\mu\ge\int f\,d\mu\)</span>.</p>
+</div>
+</div>
 </div>
 <div id="thm-aap-1-16" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.16 (Dominated Convergence Theorem)</strong></span> If <span class="math inline">\(f_n\to f\)</span> a.e., <span class="math inline">\(|f_n|\le g\)</span> for all <span class="math inline">\(n\)</span>, and <span class="math inline">\(g\)</span> is integrable, then</p>
@@ -1637,7 +1793,29 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Apply <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a> to the nonnegative sequences <span class="math inline">\(g+f_n\ge0\)</span> and <span class="math inline">\(g-f_n\ge0\)</span>:</p>
+<p><span class="math display">\[
+\int(g+f)\,d\mu\le\liminf_{n\to\infty}\int(g+f_n)\,d\mu,
+\qquad
+\int(g-f)\,d\mu\le\liminf_{n\to\infty}\int(g-f_n)\,d\mu.
+\]</span></p>
+<p>Since <span class="math inline">\(\int g\,d\mu&lt;\infty\)</span>, subtracting <span class="math inline">\(\int g\,d\mu\)</span> from both inequalities yields <span class="math inline">\(\int f\,d\mu\le\liminf_n\int f_n\,d\mu\le\limsup_n\int f_n\,d\mu\le\int f\,d\mu\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1646,7 +1824,7 @@ f_n\xrightarrow{\mathrm{a.e.}}f.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Although the versions of <a href="#thm-aap-1-14" class="quarto-xref">Theorem&nbsp;1.14</a>, <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a>, and <a href="#thm-aap-1-16" class="quarto-xref">Theorem&nbsp;1.16</a> presented in class assume that <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\sigma\)</span>-finite, all three theorems hold for arbitrary measures and can be proved without this assumption using other methods. But in practice, most measures of interest are <span class="math inline">\(\sigma\)</span>-finite, and some later theorems do require <span class="math inline">\(\sigma\)</span>-finiteness. So we will not discuss the general case further.</p>
 </div>
@@ -1671,6 +1849,29 @@ Ef(X)=\int_S f(y)\,\mu(dy).
 <p>If, in addition, <span class="math inline">\(S=\mathbb R\)</span> and <span class="math inline">\(\mu\)</span> has a density <span class="math inline">\(f_X\)</span> with respect to Lebesgue measure, then <span class="math display">\[
 Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Build up in four steps (the standard machine):</p>
+<ol type="i">
+<li><p><strong>Indicators.</strong> For <span class="math inline">\(f=\mathbf 1_A\)</span>, both sides equal <span class="math inline">\(P(X\in A)=\mu(A)\)</span>.</p></li>
+<li><p><strong>Simple functions.</strong> Follows from (i) by linearity of the integral.</p></li>
+<li><p><strong>Nonnegative functions.</strong> Approximate <span class="math inline">\(f\ge0\)</span> from below by simple functions <span class="math inline">\(s_n\uparrow f\)</span> and pass to the limit using <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a>.</p></li>
+<li><p><strong>General integrable functions.</strong> Split <span class="math inline">\(f=f^+-f^-\)</span> and apply (iii).</p></li>
+</ol>
+<p>When <span class="math inline">\(\mu\)</span> has density <span class="math inline">\(f_X\)</span>, the second identity follows from the same four-step bootstrap starting from <span class="math inline">\(\mu(A)=\int_A f_X(y)\,dy\)</span>.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="product-measures" class="level2" data-number="1.7">
@@ -1713,6 +1914,23 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
 &amp;=\int_Y\left(\int_X f(x,y)\,\mu_1(dx)\right)\mu_2(dy).
 \end{aligned}
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First assume <span class="math inline">\(\mu_1,\mu_2\)</span> are finite and <span class="math inline">\(f=\mathbf 1_E\)</span>. The collection of sets <span class="math inline">\(E\in\mathcal F\)</span> for which the iterated integrals equal <span class="math inline">\(\mu(E)\)</span> is a <span class="math inline">\(\lambda\)</span>-system containing the <span class="math inline">\(\pi\)</span>-system of rectangles <span class="math inline">\(\mathcal S\)</span>, so it equals <span class="math inline">\(\mathcal F\)</span> by the <span class="math inline">\(\pi\)</span>-<span class="math inline">\(\lambda\)</span> theorem.</p>
+<p>Extend to simple functions by linearity, to nonnegative <span class="math inline">\(f\ge0\)</span> (and from finite to <span class="math inline">\(\sigma\)</span>-finite spaces via exhausting sets <span class="math inline">\(X_n\uparrow X\)</span> and <span class="math inline">\(Y_n\uparrow Y\)</span>) by <a href="#thm-aap-1-15" class="quarto-xref">Theorem&nbsp;1.15</a>, and finally to integrable <span class="math inline">\(f\)</span> by splitting <span class="math inline">\(f=f^+-f^-\)</span>.</p>
+</div>
+</div>
 </div>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
@@ -1931,23 +2149,26 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1963,7 +2184,9 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -2001,7 +2224,97 @@ Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {

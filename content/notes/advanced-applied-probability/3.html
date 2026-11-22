@@ -37,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../content/notes/machine-learning/index.html" rel="next">
+<link href="../../../content/notes/advanced-applied-probability/4.html" rel="next">
 <link href="../../../content/notes/advanced-applied-probability/2.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -857,6 +857,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +890,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -936,7 +948,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1091,12 +1103,62 @@ X_n\Rightarrow X.
 <li><p>If <span class="math inline">\(X_n\Rightarrow c\)</span> for a constant <span class="math inline">\(c\)</span>, then <span class="math inline">\(X_n\xrightarrow{\mathbb P}c\)</span>.</p></li>
 </ol>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (i), let <span class="math inline">\(x\)</span> be a continuity point of <span class="math inline">\(F_X\)</span> and fix <span class="math inline">\(\epsilon&gt;0\)</span>. Since <span class="math inline">\(\{X_n\le x\}\subseteq\{X\le x+\epsilon\}\cup\{|X_n-X|&gt;\epsilon\}\)</span>,</p>
+<p><span class="math display">\[
+\limsup_{n\to\infty}F_n(x)\le F_X(x+\epsilon),
+\]</span></p>
+<p>and symmetrically <span class="math inline">\(\liminf_{n\to\infty}F_n(x)\ge F_X(x-\epsilon)\)</span>. Letting <span class="math inline">\(\epsilon\downarrow0\)</span> and using continuity of <span class="math inline">\(F_X\)</span> at <span class="math inline">\(x\)</span> gives <span class="math inline">\(F_n(x)\to F_X(x)\)</span>.</p>
+<p>For (ii), the distribution function of <span class="math inline">\(c\)</span> is continuous at <span class="math inline">\(c\pm\epsilon\)</span> for every <span class="math inline">\(\epsilon&gt;0\)</span>, so</p>
+<p><span class="math display">\[
+\mathbb P(|X_n-c|&gt;\epsilon)
+\le F_n(c-\epsilon)+\bigl(1-F_n(c+\epsilon)\bigr)
+\to 0+(1-1)=0.
+\]</span></p>
+</div>
+</div>
+</div>
 <div id="thm-aap-3-3" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.2 (Convergence of Expectations)</strong></span> <span class="math inline">\(X_n\Rightarrow X_\infty\)</span> if and only if</p>
 <p><span class="math display">\[
 \mathbb E\,g(X_n)\to\mathbb E\,g(X_\infty)
 \qquad\text{for every bounded continuous }g:\mathbb R\to\mathbb R.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>(<span class="math inline">\(\Rightarrow\)</span>)</strong> Let <span class="math inline">\(U\sim\mathrm{Uniform}(0,1)\)</span> and set <span class="math inline">\(Y_n=F_n^{-1}(U):=\inf\{x:F_n(x)\ge U\}\)</span>. Then <span class="math inline">\(Y_n\stackrel{d}{=}X_n\)</span> and <span class="math inline">\(Y_n\to Y_\infty\)</span> a.s. (Skorokhod’s representation). For any bounded continuous <span class="math inline">\(g\)</span>, <span class="math inline">\(g(Y_n)\to g(Y_\infty)\)</span> a.s., so dominated convergence gives <span class="math inline">\(\mathbb E\,g(X_n)=\mathbb E\,g(Y_n)\to\mathbb E\,g(Y_\infty)=\mathbb E\,g(X_\infty)\)</span>.</p>
+<p><strong>(<span class="math inline">\(\Leftarrow\)</span>)</strong> Let <span class="math inline">\(x\)</span> be a continuity point of <span class="math inline">\(F_{X_\infty}\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>. Sandwich <span class="math inline">\(\mathbf 1_{(-\infty,x]}\)</span> between continuous piecewise-linear functions <span class="math inline">\(g_{\epsilon,-}\le\mathbf 1_{(-\infty,x]}\le g_{\epsilon,+}\)</span>, where <span class="math inline">\(g_{\epsilon,+}\)</span> drops linearly from <span class="math inline">\(1\)</span> to <span class="math inline">\(0\)</span> on <span class="math inline">\([x,x+\epsilon]\)</span> and <span class="math inline">\(g_{\epsilon,-}\)</span> drops on <span class="math inline">\([x-\epsilon,x]\)</span>. Passing to the limit gives</p>
+<p><span class="math display">\[
+F_{X_\infty}(x-\epsilon)
+\le\liminf_{n\to\infty}F_n(x)
+\le\limsup_{n\to\infty}F_n(x)
+\le F_{X_\infty}(x+\epsilon),
+\]</span></p>
+<p>and letting <span class="math inline">\(\epsilon\downarrow0\)</span> yields <span class="math inline">\(F_n(x)\to F_{X_\infty}(x)\)</span>.</p>
+</div>
+</div>
 </div>
 <div id="thm-aap-3-4" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.3 (Continuous Mapping Theorem)</strong></span> Let <span class="math inline">\(g\)</span> be measurable and let <span class="math inline">\(D_g\)</span> be the set of points at which <span class="math inline">\(g\)</span> is discontinuous. If <span class="math inline">\(X_n\Rightarrow X_\infty\)</span> and <span class="math inline">\(\mathbb P(X_\infty\in D_g)=0\)</span>, then</p>
@@ -1105,6 +1167,22 @@ g(X_n)\Rightarrow g(X_\infty).
 \]</span></p>
 <p>If in addition <span class="math inline">\(g\)</span> is bounded, then <span class="math inline">\(\mathbb E\,g(X_n)\to\mathbb E\,g(X_\infty)\)</span>.</p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Take the Skorokhod representation <span class="math inline">\(Y_n\stackrel{d}{=}X_n\)</span> with <span class="math inline">\(Y_n\to Y_\infty\)</span> a.s. Since <span class="math inline">\(\mathbb P(Y_\infty\in D_g)=\mathbb P(X_\infty\in D_g)=0\)</span>, we have <span class="math inline">\(g(Y_n)\to g(Y_\infty)\)</span> a.s. By <a href="#thm-aap-3-1" class="quarto-xref">Theorem&nbsp;3.1</a>, <span class="math inline">\(g(Y_n)\Rightarrow g(Y_\infty)\)</span>, which is equivalent to <span class="math inline">\(g(X_n)\Rightarrow g(X_\infty)\)</span>. If <span class="math inline">\(g\)</span> is bounded, dominated convergence gives <span class="math inline">\(\mathbb E\,g(X_n)=\mathbb E\,g(Y_n)\to\mathbb E\,g(Y_\infty)=\mathbb E\,g(X_\infty)\)</span>.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-3-6" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.4 (Slutsky’s Theorem)</strong></span> If <span class="math inline">\(X_n\Rightarrow X\)</span> and <span class="math inline">\(Y_n\Rightarrow c\)</span> for a constant <span class="math inline">\(c\)</span>, then</p>
 <p><span class="math display">\[
@@ -1112,6 +1190,28 @@ X_n+Y_n\Rightarrow X+c
 \qquad\text{and}\qquad
 X_nY_n\Rightarrow cX.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>By <a href="#thm-aap-3-1" class="quarto-xref">Theorem&nbsp;3.1</a>(ii), <span class="math inline">\(Y_n\xrightarrow{\mathbb P}c\)</span>. For any continuity point <span class="math inline">\(x\)</span> of <span class="math inline">\(F_{X+c}\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(X_n+Y_n\le x)
+\le\mathbb P(X_n+c\le x+\epsilon)+\mathbb P(|Y_n-c|&gt;\epsilon),
+\]</span></p>
+<p>with a symmetric lower bound at <span class="math inline">\(x-\epsilon\)</span>. Letting <span class="math inline">\(n\to\infty\)</span> then <span class="math inline">\(\epsilon\downarrow0\)</span> gives <span class="math inline">\(X_n+Y_n\Rightarrow X+c\)</span>.</p>
+<p>For the product, write <span class="math inline">\(X_nY_n=cX_n+(Y_n-c)X_n\)</span>. Since <span class="math inline">\(X_n\Rightarrow X\)</span> is tight and <span class="math inline">\(Y_n-c\xrightarrow{\mathbb P}0\)</span>, we have <span class="math inline">\((Y_n-c)X_n\xrightarrow{\mathbb P}0\)</span>. Since <span class="math inline">\(cX_n\Rightarrow cX\)</span>, the sum case yields <span class="math inline">\(X_nY_n\Rightarrow cX\)</span>.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="characteristic-functions" class="level2" data-number="3.2">
@@ -1142,7 +1242,7 @@ X_nY_n\Rightarrow cX.
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1151,7 +1251,7 @@ X_nY_n\Rightarrow cX.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[
 \begin{aligned}
@@ -1179,11 +1279,53 @@ X_nY_n\Rightarrow cX.
 \]</span></p>
 <p>In particular, the characteristic function determines the distribution: if two probability measures have the same characteristic function, they are equal.</p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(\bigl|(e^{-ita}-e^{-itb})/(it)\bigr|=\bigl|\int_a^b e^{-ity}\,dy\bigr|\le b-a\)</span>, Fubini’s theorem exchanges the <span class="math inline">\(t\)</span>- and <span class="math inline">\(x\)</span>-integrals:</p>
+<p><span class="math display">\[
+\frac{1}{2\pi}\int_{-T}^{T}\frac{e^{-ita}-e^{-itb}}{it}\,\varphi(t)\,dt
+=\int_{\mathbb R}R_T(x)\,\mu(dx),
+\]</span></p>
+<p>where <span class="math inline">\(R_T(x)=\frac{1}{\pi}\int_0^T\bigl(\frac{\sin(t(x-a))}{t}-\frac{\sin(t(x-b))}{t}\bigr)\,dt\)</span>. By the Dirichlet integral <span class="math inline">\(\lim_{T\to\infty}\frac{1}{\pi}\int_0^T\frac{\sin(tu)}{t}\,dt=\tfrac12\operatorname{sgn}(u)\)</span> (uniformly bounded in <span class="math inline">\(T,u\)</span>), <span class="math inline">\(R_T(x)\to\mathbf 1_{(a,b)}(x)+\tfrac12\mathbf 1_{\{a,b\}}(x)\)</span> pointwise and boundedly, so dominated convergence gives the formula.</p>
+<p>For uniqueness, <span class="math inline">\(\mu\)</span> has at most countably many atoms, so the formula determines <span class="math inline">\(\mu((a,b))\)</span> for all non-atoms <span class="math inline">\(a&lt;b\)</span> (a dense set). Letting <span class="math inline">\(a\to-\infty\)</span> determines <span class="math inline">\(F_\mu(b)\)</span> on a dense set, hence everywhere by <a href="../../../content/notes/advanced-applied-probability/1.html#cor-aap-1-5">right-continuity on a dense set</a>, which uniquely determines <span class="math inline">\(\mu\)</span>.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-3-12" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.8 (Density from an Integrable Characteristic Function)</strong></span> If <span class="math inline">\(\int|\varphi(t)|\,dt&lt;\infty\)</span>, then <span class="math inline">\(\mu\)</span> has a bounded continuous density</p>
 <p><span class="math display">\[
 f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Write <span class="math inline">\((e^{-ita}-e^{-itb})/(it)=\int_a^b e^{-ity}\,dy\)</span>. Since <span class="math inline">\(\int|\varphi(t)|\,dt&lt;\infty\)</span>, we may send <span class="math inline">\(T\to\infty\)</span> directly in <a href="#thm-aap-3-11" class="quarto-xref">Theorem&nbsp;3.7</a> and apply Fubini’s theorem to get</p>
+<p><span class="math display">\[
+\mu\bigl((a,b)\bigr)+\frac12\mu\bigl(\{a,b\}\bigr)=\int_a^b f(y)\,dy.
+\]</span></p>
+<p>The bound <span class="math inline">\(|f(y)|\le\frac{1}{2\pi}\int|\varphi(t)|\,dt&lt;\infty\)</span> and dominated convergence show that <span class="math inline">\(f\)</span> is bounded and continuous. Letting <span class="math inline">\(b\downarrow a\)</span> forces <span class="math inline">\(\mu(\{a\})=0\)</span> for every <span class="math inline">\(a\)</span>, so <span class="math inline">\(\mu((a,b))=\int_a^b f(y)\,dy\)</span> for all <span class="math inline">\(a&lt;b\)</span>, meaning <span class="math inline">\(f\)</span> is the density of <span class="math inline">\(\mu\)</span>.</p>
+</div>
+</div>
 </div>
 <div id="thm-aap-3-13" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3.9 (Lévy’s Continuity Theorem)</strong></span> Let <span class="math inline">\(\mu_n\)</span>, <span class="math inline">\(1\le n\le\infty\)</span>, be probability measures with characteristic functions <span class="math inline">\(\varphi_n\)</span>.</p>
@@ -1193,7 +1335,30 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </ol>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Part (i) follows directly from <a href="#thm-aap-3-3" class="quarto-xref">Theorem&nbsp;3.2</a> applied to <span class="math inline">\(x\mapsto\cos(tx)\)</span> and <span class="math inline">\(x\mapsto\sin(tx)\)</span>.</p>
+<p>For (ii), Fubini’s theorem and the bound <span class="math inline">\(1-\frac{\sin(ux)}{ux}\ge\tfrac12\mathbf 1_{\{|ux|&gt;2\}}\)</span> give, for every <span class="math inline">\(u&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mu_n\bigl(\{|x|&gt;2/u\}\bigr)
+\le\frac{1}{u}\int_{-u}^{u}\bigl(1-\varphi_n(t)\bigr)\,dt.
+\]</span></p>
+<p>Letting <span class="math inline">\(n\to\infty\)</span> by dominated convergence gives <span class="math inline">\(\limsup_n\mu_n(\{|x|&gt;2/u\})\le\frac1u\int_{-u}^{u}(1-\varphi(t))\,dt\)</span>, which tends to <span class="math inline">\(0\)</span> as <span class="math inline">\(u\to0\)</span> because <span class="math inline">\(\varphi\)</span> is continuous at <span class="math inline">\(0\)</span> with <span class="math inline">\(\varphi(0)=1\)</span>. Hence <span class="math inline">\(\{\mu_n\}\)</span> is tight.</p>
+<p>By Helly’s selection theorem and tightness, every subsequence of <span class="math inline">\(\{\mu_n\}\)</span> has a further subsequence converging weakly to some probability measure <span class="math inline">\(\nu\)</span>. By (i), <span class="math inline">\(\nu\)</span> has characteristic function <span class="math inline">\(\varphi\)</span>, so by uniqueness (<a href="#thm-aap-3-11" class="quarto-xref">Theorem&nbsp;3.7</a>) every subsequential limit is the same <span class="math inline">\(\mu\)</span>; thus <span class="math inline">\(\mu_n\Rightarrow\mu\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1202,7 +1367,7 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(\mu_n\)</span> be the normal distribution with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\(n\)</span>. Then</p>
 <p><span class="math display">\[
@@ -1219,36 +1384,24 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </section>
 <section id="moments-and-derivatives" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="moments-and-derivatives"><span class="header-section-number">3.2.3</span> Moments and Derivatives</h3>
-<div id="thm-aap-3-14" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.10 (Derivatives of a Characteristic Function)</strong></span> If <span class="math inline">\(\int|x|^n\,\mu(dx)&lt;\infty\)</span>, then <span class="math inline">\(\varphi\)</span> has a continuous derivative of order <span class="math inline">\(n\)</span> given by</p>
+<div id="thm-aap-3-17" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.10 (Differentiation Under the Integral Sign)</strong></span> Let <span class="math inline">\((S,\mathcal S,\mu)\)</span> be a measure space and <span class="math inline">\(f:(a,b)\times S\to\mathbb C\)</span>. Fix <span class="math inline">\(y\in(a,b)\)</span> and suppose there is <span class="math inline">\(\delta&gt;0\)</span> such that on <span class="math inline">\(I=(y-\delta,y+\delta)\subseteq(a,b)\)</span>:</p>
+<ol type="i">
+<li><p><span class="math inline">\(f(t,\cdot)\)</span> is integrable for every <span class="math inline">\(t\in I\)</span>.</p></li>
+<li><p><span class="math inline">\(f(\cdot,x)\)</span> is continuously differentiable on <span class="math inline">\(I\)</span> for every <span class="math inline">\(x\in S\)</span>.</p></li>
+<li><p><span class="math inline">\(\partial_t f(t,\cdot)\)</span> is integrable for every <span class="math inline">\(t\in I\)</span>, and <span class="math inline">\(v(t)=\int_S\partial_t f(t,x)\,\mu(dx)\)</span> is continuous at <span class="math inline">\(y\)</span>.</p></li>
+<li><p>The partial derivative satisfies</p>
 <p><span class="math display">\[
-\varphi^{(n)}(t)=\int(ix)^n e^{itx}\,\mu(dx).
-\]</span></p>
-<p>In particular, <span class="math inline">\(\varphi^{(n)}(0)=i^n\,\mathbb E X^n\)</span>.</p>
-</div>
-<div id="thm-aap-3-15" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.11 (Second-Order Expansion at 0)</strong></span> If <span class="math inline">\(\mathbb E|X|^2&lt;\infty\)</span>, then</p>
+\int_S\int_{y-\delta}^{y+\delta}|\partial_t f(t,x)|\,dt\,\mu(dx)&lt;\infty.
+\]</span></p></li>
+</ol>
+<p>Then <span class="math inline">\(u(t)=\int_S f(t,x)\,\mu(dx)\)</span> is differentiable at <span class="math inline">\(y\)</span> and</p>
 <p><span class="math display">\[
-\varphi(t)=1+it\,\mathbb E X-\frac{t^2}{2}\,\mathbb E X^2+o(t^2)
-\qquad\text{as }t\to0.
+u'(y)=\int_S\partial_t f(y,x)\,\mu(dx).
 \]</span></p>
-</div>
-</section>
-</section>
-<section id="central-limit-theorems" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="central-limit-theorems"><span class="header-section-number">3.3</span> Central Limit Theorems</h2>
-<section id="i.i.d.-sequences" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="i.i.d.-sequences"><span class="header-section-number">3.3.1</span> I.I.D. Sequences</h3>
-<div id="thm-aap-3-16" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.12 (Central Limit Theorem)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. random variables with <span class="math inline">\(\mathbb E X_i=\mu\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)=\sigma^2\in(0,\infty)\)</span>. If <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>, then</p>
-<p><span class="math display">\[
-\frac{S_n-n\mu}{\sigma\sqrt n}\Rightarrow\chi
-\qquad\text{as }n\to\infty,
-\]</span></p>
-<p>where <span class="math inline">\(\chi\)</span> has the standard normal distribution.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1257,9 +1410,166 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Replacing <span class="math inline">\(X_i\)</span> by <span class="math inline">\(X_i-\mu\)</span>, assume <span class="math inline">\(\mu=0\)</span>. Let <span class="math inline">\(\varphi\)</span> be the characteristic function of <span class="math inline">\(X_1\)</span>. By <a href="#thm-aap-3-9" class="quarto-xref">Theorem&nbsp;3.5</a> and <a href="#thm-aap-3-10" class="quarto-xref">Theorem&nbsp;3.6</a>, <span class="math inline">\(S_n/(\sigma\sqrt n)\)</span> has characteristic function <span class="math inline">\(\varphi\bigl(t/(\sigma\sqrt n)\bigr)^n\)</span>, and by <a href="#thm-aap-3-15" class="quarto-xref">Theorem&nbsp;3.11</a>,</p>
+<p>The derivative is measurable in <span class="math inline">\(x\)</span> as a limit of difference quotients, and continuity in <span class="math inline">\(t\)</span> gives joint measurability. The set on which <span class="math inline">\(G(x)=\int_I|\partial_t f(t,x)|\,dt\)</span> is positive is <span class="math inline">\(\sigma\)</span>-finite, since each <span class="math inline">\(\{G\ge 1/n\}\)</span> has finite measure by (iv). By (ii), the derivative vanishes on <span class="math inline">\(I\)</span> for every <span class="math inline">\(x\)</span> outside that set, so Fubini’s theorem applies on the <span class="math inline">\(\sigma\)</span>-finite set.</p>
+<p>For <span class="math inline">\(0&lt;|h|&lt;\delta\)</span>, the fundamental theorem of calculus and Fubini’s theorem give</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{u(y+h)-u(y)}{h}
+&amp;=\frac1h\int_S\int_y^{y+h}\partial_t f(t,x)\,dt\,\mu(dx)\\
+&amp;=\frac1h\int_y^{y+h}v(t)\,dt.
+\end{aligned}
+\]</span></p>
+<p>By continuity at <span class="math inline">\(y\)</span>, this average tends to <span class="math inline">\(v(y)\)</span> as <span class="math inline">\(h\to0\)</span>.</p>
+<p>For <a href="#thm-aap-3-14" class="quarto-xref">Theorem&nbsp;3.11</a>, take <span class="math inline">\(f(t,x)=(ix)^ke^{itx}\)</span> for <span class="math inline">\(0\le k&lt;n\)</span>. Its derivative has absolute value <span class="math inline">\(|x|^{k+1}\)</span>, which is integrable under the moment assumption. This gives (iv) and, by dominated convergence, the continuity of <span class="math inline">\(v\)</span> in (iii).</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-3-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.11 (Derivatives of a Characteristic Function)</strong></span> If <span class="math inline">\(\int|x|^n\,\mu(dx)&lt;\infty\)</span>, then <span class="math inline">\(\varphi\)</span> has a continuous derivative of order <span class="math inline">\(n\)</span> given by</p>
+<p><span class="math display">\[
+\varphi^{(n)}(t)=\int(ix)^n e^{itx}\,\mu(dx).
+\]</span></p>
+<p>In particular, <span class="math inline">\(\varphi^{(n)}(0)=i^n\,\mathbb E X^n\)</span>.</p>
+</div>
+<div id="lem-aap-3-1" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 3.1 (Taylor Remainder Bound for Complex Exponentials)</strong></span> For every <span class="math inline">\(x\in\mathbb R\)</span> and integer <span class="math inline">\(n\ge0\)</span>,</p>
+<p><span class="math display">\[
+\left|e^{ix}-\sum_{m=0}^n\frac{(ix)^m}{m!}\right|
+\le\min\left(\frac{|x|^{n+1}}{(n+1)!},\,\frac{2|x|^n}{n!}\right).
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Integrating by parts gives, for every <span class="math inline">\(k\ge0\)</span>,</p>
+<p><span class="math display">\[
+\int_0^x(x-s)^k e^{is}\,ds
+=\frac{x^{k+1}}{k+1}+\frac{i}{k+1}\int_0^x(x-s)^{k+1}e^{is}\,ds.
+\]</span></p>
+<p>Starting from <span class="math inline">\(e^{ix}-1=i\int_0^x e^{is}\,ds\)</span>, induction yields</p>
+<p><span class="math display">\[
+e^{ix}-\sum_{m=0}^n\frac{(ix)^m}{m!}
+=\frac{i^{n+1}}{n!}\int_0^x(x-s)^n e^{is}\,ds.
+\]</span></p>
+<p>Using <span class="math inline">\(|e^{is}|=1\)</span> gives the bound <span class="math inline">\(|x|^{n+1}/(n+1)!\)</span>. For the second bound, <span class="math inline">\(n=0\)</span> follows from <span class="math inline">\(|e^{ix}-1|\le2\)</span>; for <span class="math inline">\(n\ge1\)</span>, rewriting the <span class="math inline">\((n-1)\)</span>-th remainder as</p>
+<p><span class="math display">\[
+e^{ix}-\sum_{m=0}^n\frac{(ix)^m}{m!}
+=\frac{i^n}{(n-1)!}\int_0^x(x-s)^{n-1}(e^{is}-1)\,ds
+\]</span></p>
+<p>and using <span class="math inline">\(|e^{is}-1|\le2\)</span> gives <span class="math inline">\(2|x|^n/n!\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why the Integral Remainder Instead of Lagrange
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a complex-valued function <span class="math inline">\(f=u+iv:\mathbb R\to\mathbb C\)</span>, both the <strong>Peano remainder</strong> and the <strong>integral remainder</strong> carry over verbatim by applying the real result to <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> and forming <span class="math inline">\(u+iv\)</span>: <span class="math inline">\(o(x^n)+i\,o(x^n)=o(x^n)\)</span>, and the two integrals share the same interval <span class="math inline">\([0,x]\)</span>.</p>
+<p>The <strong>Lagrange remainder</strong> fails because the real and imaginary parts yield different intermediate points <span class="math inline">\(\xi_1\ne\xi_2\)</span>. Already for <span class="math inline">\(n=0\)</span> (the mean value theorem), <span class="math inline">\(f(t)=e^{it}\)</span> has <span class="math inline">\(f(2\pi)-f(0)=0\)</span>, yet <span class="math inline">\(|f'(\xi)|=1\)</span> for every <span class="math inline">\(\xi\in(0,2\pi)\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Remainder</th>
+<th>Holds for <span class="math inline">\(f:\mathbb R\to\mathbb C\)</span>?</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Peano (<span class="math inline">\(o(x^n)\)</span>)</td>
+<td>Yes</td>
+<td><span class="math inline">\(o(x^n)+i\,o(x^n)=o(x^n)\)</span></td>
+</tr>
+<tr class="even">
+<td>Integral</td>
+<td>Yes</td>
+<td>Same interval <span class="math inline">\([0,x]\)</span>; combines linearly</td>
+</tr>
+<tr class="odd">
+<td>Lagrange</td>
+<td>No</td>
+<td>Real and imaginary parts need <span class="math inline">\(\xi_1\ne\xi_2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="thm-aap-3-15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.12 (Second-Order Expansion at 0)</strong></span> If <span class="math inline">\(\mathbb E|X|^2&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\varphi(t)=1+it\,\mathbb E X-\frac{t^2}{2}\,\mathbb E X^2+o(t^2)
+\qquad\text{as }t\to0.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Two Proofs and Why the Explicit Bound Matters
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>By <a href="#thm-aap-3-14" class="quarto-xref">Theorem&nbsp;3.11</a>, <span class="math inline">\(\varphi\)</span> is twice continuously differentiable with <span class="math inline">\(\varphi(0)=1\)</span>, <span class="math inline">\(\varphi'(0)=i\,\mathbb E X\)</span>, and <span class="math inline">\(\varphi''(0)=-\mathbb E X^2\)</span>, so a second-order Taylor expansion at <span class="math inline">\(0\)</span> gives the result immediately.</p>
+<p>Alternatively, applying <a href="#lem-aap-3-1" class="quarto-xref">Lemma&nbsp;3.1</a> with <span class="math inline">\(n=2\)</span> and <span class="math inline">\(x=tX\)</span> gives</p>
+<p><span class="math display">\[
+\frac{1}{t^2}\left|e^{itX}-\left(1+itX-\frac{t^2X^2}{2}\right)\right|
+\le\min\left(\frac{|t|\,|X|^3}{6},\,X^2\right).
+\]</span></p>
+<p>As <span class="math inline">\(t\to0\)</span>, the first bound tends to <span class="math inline">\(0\)</span> pointwise while the second provides the integrable dominating function <span class="math inline">\(X^2\)</span>, so dominated convergence yields the expansion without differentiating <span class="math inline">\(\varphi\)</span>. Unlike the qualitative <span class="math inline">\(o(t^2)\)</span> remainder, this explicit bound can also be summed uniformly across non-identically distributed summands (such as triangular arrays).</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="central-limit-theorems" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="central-limit-theorems"><span class="header-section-number">3.3</span> Central Limit Theorems</h2>
+<section id="i.i.d.-sequences" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="i.i.d.-sequences"><span class="header-section-number">3.3.1</span> I.I.D. Sequences</h3>
+<div id="thm-aap-3-16" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.13 (Central Limit Theorem)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. random variables with <span class="math inline">\(\mathbb E X_i=\mu\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)=\sigma^2\in(0,\infty)\)</span>. If <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>, then</p>
+<p><span class="math display">\[
+\frac{S_n-n\mu}{\sigma\sqrt n}\Rightarrow\chi
+\qquad\text{as }n\to\infty,
+\]</span></p>
+<p>where <span class="math inline">\(\chi\)</span> has the standard normal distribution.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Replacing <span class="math inline">\(X_i\)</span> by <span class="math inline">\(X_i-\mu\)</span>, assume <span class="math inline">\(\mu=0\)</span>. Let <span class="math inline">\(\varphi\)</span> be the characteristic function of <span class="math inline">\(X_1\)</span>. By <a href="#thm-aap-3-9" class="quarto-xref">Theorem&nbsp;3.5</a> and <a href="#thm-aap-3-10" class="quarto-xref">Theorem&nbsp;3.6</a>, <span class="math inline">\(S_n/(\sigma\sqrt n)\)</span> has characteristic function <span class="math inline">\(\varphi\bigl(t/(\sigma\sqrt n)\bigr)^n\)</span>, and by <a href="#thm-aap-3-15" class="quarto-xref">Theorem&nbsp;3.12</a>,</p>
 <p><span class="math display">\[
 \varphi\left(\frac{t}{\sigma\sqrt n}\right)^n
 =\left(1-\frac{t^2}{2n}+o\left(\frac1n\right)\right)^n
@@ -1270,7 +1580,7 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1279,9 +1589,9 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. with <span class="math inline">\(\mathbb P(X_i=1)=\mathbb P(X_i=-1)=\tfrac12\)</span>, so that <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma^2=1\)</span>. For <span class="math inline">\(a&lt;b\)</span>, <a href="#thm-aap-3-16" class="quarto-xref">Theorem&nbsp;3.12</a> gives</p>
+<p>Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. with <span class="math inline">\(\mathbb P(X_i=1)=\mathbb P(X_i=-1)=\tfrac12\)</span>, so that <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma^2=1\)</span>. For <span class="math inline">\(a&lt;b\)</span>, <a href="#thm-aap-3-16" class="quarto-xref">Theorem&nbsp;3.13</a> gives</p>
 <p><span class="math display">\[
 \mathbb P\left(a\le\frac{S_n}{\sqrt n}\le b\right)
 \to\int_a^b\frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx.
@@ -1289,20 +1599,68 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example: Asymptotic Confidence Intervals
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\in(0,\infty)\)</span>, and let <span class="math inline">\(\bar X_n=S_n/n\)</span>. Given <span class="math inline">\(\alpha\in(0,1)\)</span>, choose <span class="math inline">\(z_{\alpha/2}&gt;0\)</span> with <span class="math inline">\(\Phi(z_{\alpha/2})=1-\alpha/2\)</span> (for example, <span class="math inline">\(z_{0.025}\approx1.96\)</span> for <span class="math inline">\(1-\alpha=0.95\)</span>). By <a href="#thm-aap-3-16" class="quarto-xref">Theorem&nbsp;3.13</a>,</p>
+<p><span class="math display">\[
+\mathbb P\left(\mu\in\left[\bar X_n-z_{\alpha/2}\frac{\sigma}{\sqrt n},\;
+\bar X_n+z_{\alpha/2}\frac{\sigma}{\sqrt n}\right]\right)
+=\mathbb P\left(\left|\frac{\bar X_n-\mu}{\sigma/\sqrt n}\right|\le z_{\alpha/2}\right)
+\to 1-\alpha.
+\]</span></p>
+<p>This random interval is an <strong>asymptotic <span class="math inline">\((1-\alpha)\)</span> confidence interval</strong> for <span class="math inline">\(\mu\)</span>: the interval varies with the sample, while <span class="math inline">\(\mu\)</span> is fixed. When <span class="math inline">\(\sigma\)</span> is unknown, replacing it by a consistent estimator <span class="math inline">\(\hat\sigma_n\)</span> (such as the sample standard deviation) preserves the same asymptotic coverage by <a href="#thm-aap-3-6" class="quarto-xref">Theorem&nbsp;3.4</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="triangular-arrays" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="triangular-arrays"><span class="header-section-number">3.3.2</span> Triangular Arrays</h3>
-<div id="thm-aap-3-17" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.13 (Lindeberg-Feller Theorem)</strong></span> For each <span class="math inline">\(n\)</span>, let <span class="math inline">\(X_{n,m}\)</span>, <span class="math inline">\(1\le m\le n\)</span>, be independent random variables with <span class="math inline">\(\mathbb E X_{n,m}=0\)</span>. Suppose:</p>
+<div id="thm-aap-3-18" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.14 (Lindeberg–Feller Theorem)</strong></span> For each <span class="math inline">\(n\)</span>, let <span class="math inline">\(X_{n,m}\)</span>, <span class="math inline">\(1\le m\le n\)</span>, be independent random variables with <span class="math inline">\(\mathbb E X_{n,m}=0\)</span>. Suppose:</p>
 <ol type="i">
 <li><p><span class="math inline">\(\displaystyle\sum_{m=1}^n\mathbb E X_{n,m}^2\to\sigma^2&gt;0\)</span>.</p></li>
-<li><p>For every <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math inline">\(\displaystyle\lim_{n\to\infty}\sum_{m=1}^n
-\mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|&gt;\epsilon\}}\bigr]=0\)</span>.</p></li>
+<li><p>For every <span class="math inline">\(\epsilon&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\lim_{n\to\infty}\sum_{m=1}^n
+\mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|&gt;\epsilon\}}\bigr]=0.
+\]</span></p></li>
 </ol>
 <p>Then <span class="math inline">\(S_n=X_{n,1}+\cdots+X_{n,n}\Rightarrow\sigma\chi\)</span> as <span class="math inline">\(n\to\infty\)</span>, where <span class="math inline">\(\chi\)</span> has the standard normal distribution.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\varphi_{n,m}(t)=\mathbb E\,e^{itX_{n,m}}\)</span> and <span class="math inline">\(\sigma_{n,m}^2=\mathbb E X_{n,m}^2\)</span>. Applying <a href="#lem-aap-3-1" class="quarto-xref">Lemma&nbsp;3.1</a> with <span class="math inline">\(n=2\)</span> and splitting on <span class="math inline">\(\{|X_{n,m}|\le\epsilon\}\)</span> and <span class="math inline">\(\{|X_{n,m}|&gt;\epsilon\}\)</span> gives</p>
+<p><span class="math display">\[
+\left|\varphi_{n,m}(t)-\left(1-\frac{t^2}{2}\sigma_{n,m}^2\right)\right|
+\le\frac{|t|^3\epsilon}{6}\sigma_{n,m}^2
++t^2\,\mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|&gt;\epsilon\}}\bigr].
+\]</span></p>
+<p>Summing over <span class="math inline">\(m\)</span> and letting <span class="math inline">\(n\to\infty\)</span> then <span class="math inline">\(\epsilon\to0\)</span> shows <span class="math inline">\(\sum_{m=1}^n\bigl|\varphi_{n,m}(t)-(1-\tfrac12 t^2\sigma_{n,m}^2)\bigr|\to0\)</span>. Condition (ii) also implies <span class="math inline">\(\max_{1\le m\le n}\sigma_{n,m}^2\to0\)</span>, so for large <span class="math inline">\(n\)</span> all factors lie in the closed unit disk and <span class="math inline">\(\prod_{m=1}^n(1-\tfrac12 t^2\sigma_{n,m}^2)\to e^{-\sigma^2 t^2/2}\)</span>. Using <span class="math inline">\(\bigl|\prod_{m=1}^n z_m-\prod_{m=1}^n w_m\bigr|\le\sum_{m=1}^n|z_m-w_m|\)</span> for <span class="math inline">\(|z_m|,|w_m|\le1\)</span> yields <span class="math inline">\(\varphi_{S_n}(t)=\prod_{m=1}^n\varphi_{n,m}(t)\to e^{-\sigma^2 t^2/2}\)</span>, and <a href="#thm-aap-3-13" class="quarto-xref">Theorem&nbsp;3.9</a> concludes the proof.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1311,25 +1669,45 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(Y_1,Y_2,\ldots\)</span> be i.i.d. with <span class="math inline">\(\mathbb E Y_i=0\)</span> and <span class="math inline">\(\mathbb E Y_i^2=\sigma^2\in(0,\infty)\)</span>, and set <span class="math inline">\(X_{n,m}=Y_m/\sqrt n\)</span>. Then <span class="math inline">\(\sum_{m=1}^n\mathbb E X_{n,m}^2=\sigma^2\)</span>, and</p>
 <p><span class="math display">\[
 \sum_{m=1}^n\mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|&gt;\epsilon\}}\bigr]
 =\mathbb E\bigl[Y_1^2\mathbf 1_{\{|Y_1|&gt;\epsilon\sqrt n\}}\bigr]\to0
 \]</span></p>
-<p>by the dominated convergence theorem. So <a href="#thm-aap-3-17" class="quarto-xref">Theorem&nbsp;3.13</a> contains <a href="#thm-aap-3-16" class="quarto-xref">Theorem&nbsp;3.12</a>.</p>
+<p>by the dominated convergence theorem. Thus <a href="#thm-aap-3-18" class="quarto-xref">Theorem&nbsp;3.14</a> contains <a href="#thm-aap-3-16" class="quarto-xref">Theorem&nbsp;3.13</a>.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="rates-of-convergence" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="rates-of-convergence"><span class="header-section-number">3.3.3</span> Rates of Convergence</h3>
-<div id="thm-aap-3-18" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.14 (Berry-Esseen Theorem)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. with <span class="math inline">\(\mathbb E X_i=0\)</span>, <span class="math inline">\(\mathbb E X_i^2=\sigma^2\)</span>, and <span class="math inline">\(\mathbb E|X_i|^3=\rho&lt;\infty\)</span>. If <span class="math inline">\(F_n\)</span> is the distribution function of <span class="math inline">\((X_1+\cdots+X_n)/(\sigma\sqrt n)\)</span> and <span class="math inline">\(\Phi\)</span> is the standard normal distribution function, then for every <span class="math inline">\(x\)</span> and <span class="math inline">\(n\)</span>,</p>
+<div id="thm-aap-3-19" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.15 (Berry–Esseen Theorem)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. with <span class="math inline">\(\mathbb E X_i=0\)</span>, <span class="math inline">\(\mathbb E X_i^2=\sigma^2\in(0,\infty)\)</span>, and <span class="math inline">\(\mathbb E|X_i|^3=\rho&lt;\infty\)</span>. If <span class="math inline">\(F_n\)</span> is the distribution function of <span class="math inline">\((X_1+\cdots+X_n)/(\sigma\sqrt n)\)</span> and <span class="math inline">\(\Phi\)</span> is the standard normal distribution function, then for every <span class="math inline">\(x\in\mathbb R\)</span> and <span class="math inline">\(n\ge1\)</span>,</p>
 <p><span class="math display">\[
 |F_n(x)-\Phi(x)|\le\frac{3\rho}{\sigma^3\sqrt n}.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why the 1/√n Rate Is Sharp
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Take i.i.d. coin flips with <span class="math inline">\(\mathbb P(X_i=\pm1)=\tfrac12\)</span>, so <span class="math inline">\(\sigma=1\)</span> and <span class="math inline">\(\rho=1\)</span>. When <span class="math inline">\(n=2m\)</span> is even, <span class="math inline">\(F_n\)</span> has a jump at <span class="math inline">\(x=0\)</span> of size</p>
+<p><span class="math display">\[
+\mathbb P(S_{2m}=0)=\binom{2m}{m}2^{-2m}\sim\frac{1}{\sqrt{\pi m}}=\sqrt{\frac{2}{\pi n}},
+\]</span></p>
+<p>whereas <span class="math inline">\(\Phi\)</span> is continuous. Hence <span class="math inline">\(\sup_x|F_n(x)-\Phi(x)|\)</span> must be at least half that jump, so the <span class="math inline">\(n^{-1/2}\)</span> rate cannot be improved in general. (The constant <span class="math inline">\(3\)</span> is convenient for the proof; the best known universal constant is below <span class="math inline">\(0.4748\)</span>.)</p>
+</div>
+</div>
 </div>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
@@ -1549,23 +1927,26 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1581,7 +1962,9 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -1619,7 +2002,97 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {
@@ -2188,8 +2661,8 @@ f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../content/notes/machine-learning/index.html" class="pagination-link" aria-label="Machine Learning">
-        <span class="nav-page-text">Machine Learning</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../content/notes/advanced-applied-probability/4.html" class="pagination-link" aria-label="Martingales">
+        <span class="nav-page-text">Martingales</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

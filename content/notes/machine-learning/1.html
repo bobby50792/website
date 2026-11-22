@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -857,6 +857,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +890,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -936,7 +948,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1061,23 +1073,22 @@ window.Quarto = {
 </section>
 <section id="gradient-descent" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">1.1</span> Gradient Descent</h2>
-<ul>
-<li><p>To minimize a function <span class="math inline">\(f(x)\)</span>:</p>
+<div id="def-gradient-descent" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.1 (Gradient Descent)</strong></span> Gradient descent minimizes a differentiable function <span class="math inline">\(f\)</span> by stepping along the negative gradient with step size <span class="math inline">\(\eta\)</span>.</p>
 <p><span class="math display">\[
-x_{t+1}=x_t-\eta \nabla f(x_t)
-\]</span></p></li>
-<li><p><span class="math inline">\(\eta\)</span> is the step size (learning rate).</p></li>
-</ul>
+x_{t+1}=x_t-\eta\nabla f(x_t).
+\]</span></p>
+</div>
 <section id="smoothness-assumption" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="smoothness-assumption"><span class="header-section-number">1.1.1</span> Smoothness Assumption</h3>
-<ul>
-<li><p>Gradient is Lipschitz:</p>
+<div id="def-smoothness" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.2 (Smoothness)</strong></span> A differentiable function <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-smooth if its gradient is <span class="math inline">\(L\)</span>-Lipschitz.</p>
 <p><span class="math display">\[
-\|\nabla f(w)-\nabla f(w')\|
-\leq
-L\|w-w'\|,
+\|\nabla f(w)-\nabla f(w')\|\le L\|w-w'\|,
 \qquad \forall\, w,w'.
-\]</span></p></li>
+\]</span></p>
+</div>
+<ul>
 <li><p>Equivalent to:</p>
 <p><span class="math display">\[
 \left|
@@ -1130,17 +1141,13 @@ f(w') - f(w) &lt; 0.
 </section>
 <section id="mu-strongly-convex-function" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="mu-strongly-convex-function"><span class="header-section-number">1.1.2</span> <span class="math inline">\(\mu\)</span>-Strongly Convex Function</h3>
-<ul>
-<li><p>A function <span class="math inline">\(f\)</span> is <span class="math inline">\(\mu\)</span>-strongly convex if</p>
+<div id="def-strong-convexity" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.3 (Strong Convexity)</strong></span> A differentiable function <span class="math inline">\(f\)</span> is <span class="math inline">\(\mu\)</span>-strongly convex for <span class="math inline">\(\mu&gt;0\)</span> if for all <span class="math inline">\(w,w'\)</span>,</p>
 <p><span class="math display">\[
-f(w')
-\ge
-f(w)
-+
-\left\langle \nabla f(w),\, w'-w \right\rangle
-+
-\frac{\mu}{2}\|w'-w\|^2.
-\]</span></p></li>
+f(w')\ge f(w)+\langle\nabla f(w),w'-w\rangle+\frac{\mu}{2}\|w'-w\|^2.
+\]</span></p>
+</div>
+<ul>
 <li><p>Equivalently, if <span class="math inline">\(f\)</span> is twice differentiable,</p>
 <p><span class="math display">\[
 \lambda_{\min}\left(\nabla^2 f(w)\right)
@@ -1234,26 +1241,21 @@ w_i-w^*
 </section>
 <section id="stochastic-gradient-descent" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="stochastic-gradient-descent"><span class="header-section-number">1.2</span> Stochastic Gradient Descent</h2>
-<p>Similar to GD, but the gradient has some randomness:</p>
+<div id="def-stochastic-gradient-descent" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.4 (Stochastic Gradient Descent)</strong></span> Stochastic gradient descent updates <span class="math inline">\(w_t\)</span> using a random gradient estimate <span class="math inline">\(G_t\)</span>. In the unbiased setting,</p>
 <p><span class="math display">\[
-w_{t+1}
-=
-w_t-\eta G_t,
+w_{t+1}=w_t-\eta G_t,
+\qquad \mathbb E[G_t\mid w_t]=\nabla L(w_t).
 \]</span></p>
-<p>with</p>
-<p><span class="math display">\[
-\mathbb E[G_t]
-=
-\nabla L(w_t).
-\]</span></p>
+</div>
+<p>For a randomly selected mini-batch <span class="math inline">\(S\subseteq[N]\)</span>,</p>
 <p><span class="math display">\[
 G_t
 =
 \frac{1}{|S|}
 \sum_{i\in S}
-\nabla l(w,x_i,y_i),
+\nabla l(w_t,x_i,y_i).
 \]</span></p>
-<p>where <span class="math inline">\(S\subseteq[N]\)</span> is a randomly selected subset.</p>
 <section id="analysis-of-sgd" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="analysis-of-sgd"><span class="header-section-number">1.2.1</span> Analysis of SGD</h3>
 <p>If <span class="math inline">\(f\)</span> is an <span class="math inline">\(L\)</span>-smooth convex function, and we run SGD with</p>
@@ -1514,12 +1516,14 @@ v_t^{\mathrm{SVRG}}
 <h2 data-number="1.3" class="anchored" data-anchor-id="mirror-descent"><span class="header-section-number">1.3</span> Mirror Descent</h2>
 <section id="bregman-divergence" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="bregman-divergence"><span class="header-section-number">1.3.1</span> Bregman Divergence</h3>
-<ul>
-<li><p>Given any <strong>1-strongly convex function</strong> <span class="math inline">\(w\)</span> as the distance generating function, we can define distance between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<div id="def-bregman-divergence" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.5 (Bregman Divergence)</strong></span> For a differentiable convex function <span class="math inline">\(w\)</span>, its Bregman divergence is</p>
 <p><span class="math display">\[
-V_x(y) = w(y) - \langle \nabla w(x), y-x \rangle - w(x)
-\]</span></p></li>
-<li><p>So</p>
+V_x(y)=w(y)-w(x)-\langle\nabla w(x),y-x\rangle.
+\]</span></p>
+</div>
+<ul>
+<li><p>If <span class="math inline">\(w\)</span> is <span class="math inline">\(1\)</span>-strongly convex, then</p>
 <p><span class="math display">\[
 V_x(y) \ge \frac{1}{2}\|x-y\|^2
 \]</span></p></li>
@@ -1533,7 +1537,8 @@ V_x(u)-V_y(u)-V_x(y)
 </section>
 <section id="mirror-descent-algorithm" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="mirror-descent-algorithm"><span class="header-section-number">1.3.2</span> Mirror Descent Algorithm</h3>
-<p>Mirror step with length <span class="math inline">\(\alpha\)</span> is:</p>
+<div id="def-mirror-descent" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.6 (Mirror Descent)</strong></span> Mirror descent uses the Bregman divergence to take a step of size <span class="math inline">\(\alpha\)</span>.</p>
 <p><span class="math display">\[
 x_{k+1} = \operatorname{Mirr}_{x_k}(\alpha \cdot \nabla f(x_k)),
 \]</span></p>
@@ -1546,6 +1551,7 @@ x_{k+1} = \operatorname{Mirr}_{x_k}(\alpha \cdot \nabla f(x_k)),
 V_x(y) + \langle g, y-x\rangle
 \right\}.
 \]</span></p>
+</div>
 <p>equation:</p>
 <p><span class="math display">\[
 \nabla w(y) = \nabla w(x) - \alpha \nabla f(x_k).
@@ -1602,13 +1608,10 @@ T=O\left(\frac{\Theta\rho^2}{\epsilon^2}\right).
 <h2 data-number="1.4" class="anchored" data-anchor-id="matrix-completion"><span class="header-section-number">1.4</span> Matrix Completion</h2>
 <section id="matrix-completion-problem" class="level4" data-number="1.4.0.1">
 <h4 data-number="1.4.0.1" class="anchored" data-anchor-id="matrix-completion-problem"><span class="header-section-number">1.4.0.1</span> Matrix Completion Problem</h4>
-<ul>
-<li><span class="math inline">\(n \times m\)</span> matrix <span class="math inline">\(A\)</span></li>
-<li>Score is in <span class="math inline">\(\{1,2,3,4,5\}\)</span></li>
-<li>Some are known (existing ratings)</li>
-<li>Some are unknown (?)</li>
-<li>Want to recommend movies to users</li>
-</ul>
+<div id="def-matrix-completion" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.7 (Matrix Completion)</strong></span> Matrix completion estimates the missing entries of a partially observed matrix <span class="math inline">\(A\in\mathbb R^{n\times m}\)</span>.</p>
+</div>
+<p>For movie recommendations, the observed entries are user ratings in <span class="math inline">\(\{1,2,3,4,5\}\)</span>.</p>
 </section>
 <section id="assumptions" class="level4" data-number="1.4.0.2">
 <h4 data-number="1.4.0.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">1.4.0.2</span> Assumptions</h4>
@@ -1629,7 +1632,10 @@ T=O\left(\frac{\Theta\rho^2}{\epsilon^2}\right).
 </section>
 <section id="minimizing-the-nuclear-norm" class="level4" data-number="1.4.0.3">
 <h4 data-number="1.4.0.3" class="anchored" data-anchor-id="minimizing-the-nuclear-norm"><span class="header-section-number">1.4.0.3</span> Minimizing the Nuclear Norm</h4>
-<p>The sum of singular values (SDP Problem).</p>
+<div id="def-nuclear-norm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.8 (Nuclear Norm)</strong></span> The nuclear norm <span class="math inline">\(\|A\|_* = \sum_i \sigma_i(A)\)</span> is the sum of the singular values of <span class="math inline">\(A\)</span>.</p>
+</div>
+<p>Nuclear norm minimization can be formulated as a semidefinite program.</p>
 </section>
 <section id="alternating-least-square-minimization" class="level4" data-number="1.4.0.4">
 <h4 data-number="1.4.0.4" class="anchored" data-anchor-id="alternating-least-square-minimization"><span class="header-section-number">1.4.0.4</span> Alternating Least Square Minimization</h4>
@@ -1667,11 +1673,11 @@ U^{t+1}
 <ul>
 <li>If <span class="math inline">\(\nabla^2L(w)\succ0\)</span>, it’s a local minimum.</li>
 <li>If <span class="math inline">\(\nabla^2L(w)\prec0\)</span>, it’s a local maximum.</li>
-<li>If <span class="math inline">\(\nabla^2L(w)\)</span> has both positive and negative eigenvalues, it’s a <strong>strict saddle point</strong>.
+<li>If <span class="math inline">\(\nabla^2L(w)\)</span> has both positive and negative eigenvalues, it’s a strict saddle point.
 <ul>
 <li>At least one direction to escape!</li>
 </ul></li>
-<li>If <span class="math inline">\(\nabla^2L(w)\succeq0\)</span>, it’s a local minimum or a <strong>flat saddle point</strong>.
+<li>If <span class="math inline">\(\nabla^2L(w)\succeq0\)</span>, it’s a local minimum or a flat saddle point.
 <ul>
 <li>No good direction to get out!</li>
 </ul></li>
@@ -1681,7 +1687,7 @@ U^{t+1}
 </section>
 <section id="theorem" class="level4" data-number="1.5.0.2">
 <h4 data-number="1.5.0.2" class="anchored" data-anchor-id="theorem"><span class="header-section-number">1.5.0.2</span> Theorem</h4>
-<p>If <span class="math inline">\(L\)</span> is <strong>smooth, bounded and strict saddle</strong> (actually a more general version applies to points with small gradients rather than zero gradients), and the <strong>Hessian is smooth</strong>, and if <strong>SGD noise has non-negligible variance in every direction with constant probability</strong>, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.</p>
+<p>If <span class="math inline">\(L\)</span> is smooth, bounded and strict saddle (actually a more general version applies to points with small gradients rather than zero gradients), and the Hessian is smooth, and if SGD noise has non-negligible variance in every direction with constant probability, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.</p>
 </section>
 </section>
 <section id="supplementary-notes" class="level2 supplementary-notes" data-number="1.6">
@@ -1953,23 +1959,26 @@ V_p(q) = \sum_x p(x) \log \frac{p(x)}
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1985,7 +1994,9 @@ V_p(q) = \sum_x p(x) \log \frac{p(x)}
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -2023,7 +2034,97 @@ V_p(q) = \sum_x p(x) \log \frac{p(x)}
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {

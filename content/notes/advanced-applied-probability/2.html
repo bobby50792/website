@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -857,6 +857,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +890,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -936,7 +948,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1226,6 +1238,29 @@ S_n=\sum_{i=1}^{n}X_i,
 \frac{S_n}{n}-\mu_n\xrightarrow{\mathbb{P}}0.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Truncate at level <span class="math inline">\(n\)</span>: let <span class="math inline">\(\bar X_{n,k}=X_k\mathbf 1_{\{|X_k|\le n\}}\)</span> and <span class="math inline">\(\bar S_n=\sum_{k=1}^n\bar X_{n,k}\)</span>. By the union bound, <span class="math inline">\(\mathbb P(S_n\ne\bar S_n)\le n\,\mathbb P(|X_1|&gt;n)\to0\)</span>. By Chebyshev’s inequality and independence,</p>
+<p><span class="math display">\[
+\mathbb P\!\left(\left|\frac{\bar S_n}{n}-\mu_n\right|&gt;\epsilon\right)
+\le\frac{\operatorname{Var}(\bar S_n)}{n^2\epsilon^2}
+\le\frac{\mathbb E[\bar X_{n,1}^2]}{n\epsilon^2}
+=\frac{1}{n\epsilon^2}\int_0^n 2y\,\mathbb P(|X_1|&gt;y)\,dy.
+\]</span></p>
+<p>Since <span class="math inline">\(y\,\mathbb P(|X_1|&gt;y)\to0\)</span>, its average over <span class="math inline">\([0,n]\)</span> also tends to <span class="math inline">\(0\)</span>. Combining the two estimates gives <span class="math inline">\(S_n/n-\mu_n\xrightarrow{\mathbb P}0\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="borel-cantelli-lemmas" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="borel-cantelli-lemmas"><span class="header-section-number">2.3.2</span> Borel-Cantelli Lemmas</h3>
@@ -1261,15 +1296,89 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
 \mathbb P(A_n\text{ i.o.})=0.
 \]</span></p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(\{A_n\text{ i.o.}\}=\bigcap_{m=1}^\infty\bigcup_{n=m}^\infty A_n\)</span>, countable subadditivity gives, for every <span class="math inline">\(m\ge1\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(A_n\text{ i.o.})
+\le\mathbb P\!\left(\bigcup_{n=m}^\infty A_n\right)
+\le\sum_{n=m}^\infty\mathbb P(A_n).
+\]</span></p>
+<p>Because <span class="math inline">\(\sum_{n=1}^\infty\mathbb P(A_n)&lt;\infty\)</span>, the tail tends to <span class="math inline">\(0\)</span> as <span class="math inline">\(m\to\infty\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-2-15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.9 (Second Borel–Cantelli Lemma)</strong></span> If the events <span class="math inline">\(A_1,A_2,\ldots\)</span> are independent and <span class="math inline">\(\sum_{n=1}^\infty\mathbb P(A_n)=\infty\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb P(A_n\text{ i.o.})=1.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It suffices to show <span class="math inline">\(\mathbb P\bigl(\bigcap_{n=M}^\infty A_n^c\bigr)=0\)</span> for every <span class="math inline">\(M\ge1\)</span>. For any <span class="math inline">\(N\ge M\)</span>, independence and <span class="math inline">\(1-x\le e^{-x}\)</span> give</p>
+<p><span class="math display">\[
+\mathbb P\!\left(\bigcap_{n=M}^N A_n^c\right)
+=\prod_{n=M}^N\bigl(1-\mathbb P(A_n)\bigr)
+\le\exp\!\left(-\sum_{n=M}^N\mathbb P(A_n)\right).
+\]</span></p>
+<p>Letting <span class="math inline">\(N\to\infty\)</span>, the sum diverges so the right-hand side tends to <span class="math inline">\(0\)</span>. By continuity from above, <span class="math inline">\(\mathbb P\bigl(\bigcap_{n=M}^\infty A_n^c\bigr)=0\)</span> for every <span class="math inline">\(M\)</span>, and hence <span class="math inline">\(\mathbb P(A_n\text{ i.o.})=1\)</span>.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-2-10" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.9 (Kolmogorov’s Maximal Inequality)</strong></span> Suppose <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent with <span class="math inline">\(\mathbb E X_i=0\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)&lt;\infty\)</span>. If <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>, then for every <span class="math inline">\(\epsilon&gt;0\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 2.10 (Kolmogorov’s Maximal Inequality)</strong></span> Suppose <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent with <span class="math inline">\(\mathbb E X_i=0\)</span> and <span class="math inline">\(\operatorname{Var}(X_i)&lt;\infty\)</span>. If <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>, then for every <span class="math inline">\(\epsilon&gt;0\)</span>,</p>
 <p><span class="math display">\[
 \mathbb P\left(\max_{1\le k\le n}|S_k|\ge\epsilon\right)
 \le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
 \]</span></p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Partition <span class="math inline">\(A=\{\max_{1\le k\le n}|S_k|\ge\epsilon\}\)</span> by the first hitting time: <span class="math inline">\(A_k=\{|S_j|&lt;\epsilon\text{ for }j&lt;k,\;|S_k|\ge\epsilon\}\)</span>. The sets <span class="math inline">\(A_k\)</span> are disjoint with union <span class="math inline">\(A\)</span>. Since <span class="math inline">\(S_n-S_k\)</span> is independent of <span class="math inline">\(S_k\mathbf 1_{A_k}\)</span> and has mean <span class="math inline">\(0\)</span>, the cross term <span class="math inline">\(\mathbb E[(S_n-S_k)S_k\mathbf 1_{A_k}]\)</span> vanishes, giving</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}(S_n)=\mathbb E S_n^2
+&amp;\ge\sum_{k=1}^n\mathbb E\bigl[(S_k+(S_n-S_k))^2\mathbf 1_{A_k}\bigr]\\
+&amp;\ge\sum_{k=1}^n\mathbb E[S_k^2\mathbf 1_{A_k}]
+\ge\epsilon^2\sum_{k=1}^n\mathbb P(A_k)=\epsilon^2\mathbb P(A).
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1278,38 +1387,145 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Under the same hypotheses, Chebyshev’s inequality gives only</p>
 <p><span class="math display">\[
 \mathbb P(|S_n|\ge\epsilon)\le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
 \]</span></p>
-<p><a href="#thm-aap-2-10" class="quarto-xref">Theorem&nbsp;2.9</a> gives the same bound for <span class="math inline">\(\displaystyle \max_{1\le k\le n}|S_k|\)</span>, which is at least <span class="math inline">\(|S_n|\)</span>.</p>
+<p><a href="#thm-aap-2-10" class="quarto-xref">Theorem&nbsp;2.10</a> gives the same bound for <span class="math inline">\(\displaystyle \max_{1\le k\le n}|S_k|\)</span>, which is at least <span class="math inline">\(|S_n|\)</span>.</p>
 </div>
 </div>
 </div>
 <div id="thm-aap-2-11" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.10 (Kolmogorov’s One-Series Theorem)</strong></span> Suppose <span class="math inline">\(X_1,X_2,\ldots\)</span> are independent with <span class="math inline">\(\mathbb E X_n=0\)</span>. If</p>
+<p><span class="theorem-title"><strong>Theorem 2.11 (Kolmogorov’s One-Series Theorem)</strong></span> Suppose <span class="math inline">\(X_1,X_2,\ldots\)</span> are independent with <span class="math inline">\(\mathbb E X_n=0\)</span>. If</p>
 <p><span class="math display">\[
 \sum_{n=1}^\infty\operatorname{Var}(X_n)&lt;\infty,
 \]</span></p>
 <p>then <span class="math inline">\(\sum_{n=1}^\infty X_n(\omega)\)</span> converges almost surely.</p>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(S_n=\sum_{k=1}^n X_k\)</span>. By <a href="#thm-aap-2-10" class="quarto-xref">Theorem&nbsp;2.10</a>, for every <span class="math inline">\(m&lt;N\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P\!\left(\max_{m\le k\le N}|S_k-S_m|\ge\epsilon\right)
+\le\frac{1}{\epsilon^2}\sum_{k=m+1}^N\operatorname{Var}(X_k).
+\]</span></p>
+<p>Letting <span class="math inline">\(N\to\infty\)</span> gives <span class="math inline">\(\mathbb P\bigl(\sup_{k\ge m}|S_k-S_m|&gt;\epsilon\bigr)\le\epsilon^{-2}\sum_{k=m+1}^\infty\operatorname{Var}(X_k)\to0\)</span> as <span class="math inline">\(m\to\infty\)</span>. Thus <span class="math inline">\(W_m=\sup_{j,k\ge m}|S_j-S_k|\downarrow0\)</span> a.s., so <span class="math inline">\(\{S_n\}\)</span> is a.s. Cauchy and therefore converges a.s.</p>
+</div>
+</div>
+</div>
 <div id="thm-aap-2-12" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.11 (Kronecker’s Lemma)</strong></span> If <span class="math inline">\(a_n\uparrow\infty\)</span> and <span class="math inline">\(\sum_{n=1}^\infty x_n/a_n\)</span> converges, then</p>
+<p><span class="theorem-title"><strong>Theorem 2.12 (Kronecker’s Lemma)</strong></span> If <span class="math inline">\(a_n\uparrow\infty\)</span> and <span class="math inline">\(\sum_{n=1}^\infty x_n/a_n\)</span> converges, then</p>
 <p><span class="math display">\[
 \frac{1}{a_n}\sum_{m=1}^n x_m\to0.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Set <span class="math inline">\(b_n=\sum_{k=1}^n x_k/a_k\)</span> with <span class="math inline">\(b_0=a_0=0\)</span>, so <span class="math inline">\(x_m=a_m(b_m-b_{m-1})\)</span>. Summation by parts gives</p>
+<p><span class="math display">\[
+\frac{1}{a_n}\sum_{m=1}^n x_m
+=b_n-\frac{1}{a_n}\sum_{m=1}^n(a_m-a_{m-1})b_{m-1}.
+\]</span></p>
+<p>Since <span class="math inline">\(b_n\to b_\infty\)</span> and <span class="math inline">\(a_n\uparrow\infty\)</span>, splitting the weighted average at a large <span class="math inline">\(N\)</span> (where <span class="math inline">\(|b_{m-1}-b_\infty|&lt;\epsilon\)</span>) shows that the second term also converges to <span class="math inline">\(b_\infty\)</span>, so the difference tends to <span class="math inline">\(0\)</span>.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="strong-law-of-large-numbers" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="strong-law-of-large-numbers"><span class="header-section-number">2.3.3</span> Strong Law of Large Numbers</h3>
 <div id="thm-aap-2-13" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.12 (Strong Law of Large Numbers)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. random variables with <span class="math inline">\(\mathbb E|X_i|&lt;\infty\)</span>. Let <span class="math inline">\(\mathbb E X_i=\mu\)</span> and <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>. Then</p>
+<p><span class="theorem-title"><strong>Theorem 2.13 (Strong Law of Large Numbers)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d. random variables with <span class="math inline">\(\mathbb E|X_i|&lt;\infty\)</span>. Let <span class="math inline">\(\mathbb E X_i=\mu\)</span> and <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>. Then</p>
 <p><span class="math display">\[
 \frac{S_n}{n}\xrightarrow{\mathrm{a.s.}}\mu
 \qquad\text{as }n\to\infty.
 \]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Replacing <span class="math inline">\(X_i\)</span> by <span class="math inline">\(X_i-\mu\)</span>, assume <span class="math inline">\(\mu=0\)</span>. Truncate <span class="math inline">\(Y_k=X_k\mathbf 1_{\{|X_k|\le k\}}\)</span>. Since <span class="math inline">\(\sum_{k=1}^\infty\mathbb P(X_k\ne Y_k)=\sum_{k=1}^\infty\mathbb P(|X_1|&gt;k)\le\mathbb E|X_1|&lt;\infty\)</span>, <a href="#thm-aap-2-9" class="quarto-xref">Theorem&nbsp;2.8</a> implies <span class="math inline">\(X_k=Y_k\)</span> for all large <span class="math inline">\(k\)</span> a.s., so it suffices to show <span class="math inline">\(\frac1n\sum_{k=1}^n Y_k\to0\)</span> a.s.</p>
+<p>By Fubini’s theorem and <span class="math inline">\(\sum_{k\ge x}k^{-2}\le 2/x\)</span>,</p>
+<p><span class="math display">\[
+\sum_{k=1}^\infty\frac{\operatorname{Var}(Y_k)}{k^2}
+\le\sum_{k=1}^\infty\frac{\mathbb E[Y_k^2]}{k^2}
+\le 2\,\mathbb E|X_1|&lt;\infty.
+\]</span></p>
+<p>By <a href="#thm-aap-2-11" class="quarto-xref">Theorem&nbsp;2.11</a>, <span class="math inline">\(\sum_{k=1}^\infty(Y_k-\mathbb E Y_k)/k\)</span> converges a.s.; by <a href="#thm-aap-2-12" class="quarto-xref">Theorem&nbsp;2.12</a>, <span class="math inline">\(\frac1n\sum_{k=1}^n(Y_k-\mathbb E Y_k)\to0\)</span> a.s. Finally, <span class="math inline">\(\mathbb E Y_k\to\mathbb E X_1=0\)</span> by dominated convergence, so its Cesàro average <span class="math inline">\(\frac1n\sum_{k=1}^n\mathbb E Y_k\to0\)</span> as well.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-2-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.14 (Marcinkiewicz–Zygmund Strong Law of Large Numbers)</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be i.i.d., <span class="math inline">\(S_n=X_1+\cdots+X_n\)</span>, and <span class="math inline">\(0&lt;p&lt;2\)</span>. Set <span class="math inline">\(c=\mathbb E X_1\)</span> if <span class="math inline">\(1\le p&lt;2\)</span> and <span class="math inline">\(c=0\)</span> if <span class="math inline">\(0&lt;p&lt;1\)</span>. If <span class="math inline">\(\mathbb E|X_1|^p&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\frac{S_n-nc}{n^{1/p}}\to0
+\qquad\text{a.s.}
+\]</span></p>
+<p>Conversely, if <span class="math inline">\((S_n-nc)/n^{1/p}\)</span> converges a.s. to a finite limit for some constant <span class="math inline">\(c\)</span>, then <span class="math inline">\(\mathbb E|X_1|^p&lt;\infty\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the forward direction, assume <span class="math inline">\(c=0\)</span> (subtracting <span class="math inline">\(\mathbb E X_1\)</span> when <span class="math inline">\(1\le p&lt;2\)</span>) and truncate <span class="math inline">\(Y_k=X_k\mathbf 1_{\{|X_k|\le k^{1/p}\}}\)</span>. Since <span class="math inline">\(\sum_{k=1}^\infty\mathbb P(X_k\ne Y_k)\le\mathbb E|X_1|^p&lt;\infty\)</span>, <a href="#thm-aap-2-9" class="quarto-xref">Theorem&nbsp;2.8</a> reduces the limit to <span class="math inline">\(Y_k\)</span>. Because <span class="math inline">\(p&lt;2\)</span>, <span class="math inline">\(\sum_{k=1}^\infty\operatorname{Var}(Y_k)/k^{2/p}\le C_p\,\mathbb E|X_1|^p&lt;\infty\)</span>, so <a href="#thm-aap-2-11" class="quarto-xref">Theorem&nbsp;2.11</a> and <a href="#thm-aap-2-12" class="quarto-xref">Theorem&nbsp;2.12</a> (with <span class="math inline">\(a_k=k^{1/p}\)</span>) give <span class="math inline">\(n^{-1/p}\sum_{k=1}^n(Y_k-\mathbb E Y_k)\to0\)</span> a.s., while the centering <span class="math inline">\(n^{-1/p}\sum_{k=1}^n\mathbb E Y_k\to0\)</span>.</p>
+<p>Conversely, if <span class="math inline">\((S_n-nc)/n^{1/p}\)</span> converges a.s., then <span class="math inline">\((X_n-c)/n^{1/p}\to0\)</span> a.s. By independence and <a href="#thm-aap-2-15" class="quarto-xref">Theorem&nbsp;2.9</a>, <span class="math inline">\(\sum_{n=1}^\infty\mathbb P(|X_1-c|^p&gt;n)&lt;\infty\)</span>, hence <span class="math inline">\(\mathbb E|X_1|^p&lt;\infty\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Between the Strong Law and the CLT
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(p=1\)</span> this is the strong law, <a href="#thm-aap-2-13" class="quarto-xref">Theorem&nbsp;2.13</a>. Larger <span class="math inline">\(p\)</span> gives a faster rate: with <span class="math inline">\(\mathbb E X_1=0\)</span> and more moments, <span class="math inline">\(S_n\)</span> grows more slowly than <span class="math inline">\(n^{1/p}\)</span>.</p>
+<p>The range stops short of <span class="math inline">\(p=2\)</span>. If <span class="math inline">\(\mathbb E X_1=0\)</span> and <span class="math inline">\(\operatorname{Var}(X_1)=\sigma^2&gt;0\)</span>, then by the <a href="../../../content/notes/advanced-applied-probability/3.html#thm-aap-3-16">central limit theorem</a> the ratio <span class="math inline">\(S_n/\sqrt n\)</span> converges in distribution to <span class="math inline">\(N(0,\sigma^2)\)</span>, so it does not converge to <span class="math inline">\(0\)</span>, even in probability.</p>
+</div>
+</div>
 </div>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
@@ -1529,23 +1745,26 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1561,7 +1780,9 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -1599,7 +1820,97 @@ X_n \xrightarrow{\mathrm{a.s.}} 0
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {

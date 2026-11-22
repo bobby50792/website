@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Linear, logistic, ridge, and LASSO regression, compressed sensing, and support vector machines.">
+<meta name="description" content="Linear, logistic, ridge, and LASSO regression, compressed sensing, support vector machines, decision trees, and random forests.">
 
 <title>Supervised Learning – Bobby</title>
 <style>
@@ -37,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../content/notes/advanced-computer-graphics/index.html" rel="next">
+<link href="../../../content/notes/machine-learning/4.html" rel="next">
 <link href="../../../content/notes/machine-learning/2.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -857,6 +857,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +890,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -936,7 +948,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1010,6 +1022,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sparsity-assumption" id="toc-sparsity-assumption" class="nav-link" data-scroll-target="#sparsity-assumption"><span class="header-section-number">3.5.1</span> Sparsity Assumption</a></li>
   <li><a href="#restricted-isometry-property-rip" id="toc-restricted-isometry-property-rip" class="nav-link" data-scroll-target="#restricted-isometry-property-rip"><span class="header-section-number">3.5.2</span> Restricted Isometry Property (RIP)</a></li>
+  <li><a href="#generative-models" id="toc-generative-models" class="nav-link" data-scroll-target="#generative-models"><span class="header-section-number">3.5.3</span> Generative Models</a></li>
   </ul></li>
   <li><a href="#support-vector-machine" id="toc-support-vector-machine" class="nav-link" data-scroll-target="#support-vector-machine"><span class="header-section-number">3.6</span> Support Vector Machine</a>
   <ul class="collapse">
@@ -1018,6 +1031,17 @@ window.Quarto = {
   <li><a href="#lagrangian-duality" id="toc-lagrangian-duality" class="nav-link" data-scroll-target="#lagrangian-duality"><span class="header-section-number">3.6.3</span> Lagrangian Duality</a></li>
   <li><a href="#dual-form" id="toc-dual-form" class="nav-link" data-scroll-target="#dual-form"><span class="header-section-number">3.6.4</span> Dual Form</a></li>
   <li><a href="#kernel-method" id="toc-kernel-method" class="nav-link" data-scroll-target="#kernel-method"><span class="header-section-number">3.6.5</span> Kernel Method</a></li>
+  </ul></li>
+  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree"><span class="header-section-number">3.7</span> Decision Tree</a>
+  <ul class="collapse">
+  <li><a href="#gini-index" id="toc-gini-index" class="nav-link" data-scroll-target="#gini-index"><span class="header-section-number">3.7.1</span> Gini Index</a></li>
+  </ul></li>
+  <li><a href="#random-forest-and-boosting" id="toc-random-forest-and-boosting" class="nav-link" data-scroll-target="#random-forest-and-boosting"><span class="header-section-number">3.8</span> Random Forest and Boosting</a>
+  <ul class="collapse">
+  <li><a href="#boosting-framework" id="toc-boosting-framework" class="nav-link" data-scroll-target="#boosting-framework"><span class="header-section-number">3.8.1</span> Boosting Framework</a></li>
+  <li><a href="#adaboost" id="toc-adaboost" class="nav-link" data-scroll-target="#adaboost"><span class="header-section-number">3.8.2</span> AdaBoost</a></li>
+  <li><a href="#margin-based-analysis" id="toc-margin-based-analysis" class="nav-link" data-scroll-target="#margin-based-analysis"><span class="header-section-number">3.8.3</span> Margin-Based Analysis</a></li>
+  <li><a href="#gradient-boosting" id="toc-gradient-boosting" class="nav-link" data-scroll-target="#gradient-boosting"><span class="header-section-number">3.8.4</span> Gradient Boosting</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1033,7 +1057,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Linear, logistic, ridge, and LASSO regression, compressed sensing, and support vector machines.
+    Linear, logistic, ridge, and LASSO regression, compressed sensing, support vector machines, decision trees, and random forests.
   </div>
 </div>
 
@@ -1052,15 +1076,14 @@ window.Quarto = {
 
 <section id="linear-regression" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">3.1</span> Linear Regression</h2>
-<ul>
-<li>Inputs <span class="math inline">\(x_i\in\mathbb R^d\)</span>; targets <span class="math inline">\(y_i\in\mathbb R\)</span>.</li>
-<li>Model: <span class="math inline">\(f_{w,b}(x)=w^\top x+b\)</span>. Absorb <span class="math inline">\(b\)</span> into <span class="math inline">\(w\)</span> by appending a constant 1 to <span class="math inline">\(x\)</span>.</li>
-<li>Squared loss:</li>
-</ul>
+<div id="def-linear-regression" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.1 (Linear Regression)</strong></span> Linear regression predicts a real target <span class="math inline">\(y\)</span> from <span class="math inline">\(x\in\mathbb R^d\)</span> with <span class="math inline">\(f_{w,b}(x)=w^\top x+b\)</span>. Ordinary least squares fits the model by minimizing the sum of squared losses.</p>
 <p><span class="math display">\[
 L(f,x_i,y_i)=\frac12\bigl(f(x_i)-y_i\bigr)^2.
 \]</span></p>
+</div>
 <ul>
+<li>Absorb <span class="math inline">\(b\)</span> into <span class="math inline">\(w\)</span> by appending a constant 1 to <span class="math inline">\(x\)</span>.</li>
 <li>Exact minimizer, when <span class="math inline">\(X^\top X\)</span> is invertible:</li>
 </ul>
 <p><span class="math display">\[
@@ -1071,8 +1094,10 @@ w^*=(X^\top X)^{-1}X^\top y.
 </ul>
 <section id="perceptron" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="perceptron"><span class="header-section-number">3.1.1</span> Perceptron</h3>
+<div id="def-perceptron" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.2 (Perceptron)</strong></span> A perceptron is a binary linear classifier with prediction <span class="math inline">\(f(x)=\operatorname{sign}(w^\top x)\)</span>, with the bias absorbed into <span class="math inline">\(w\)</span>.</p>
+</div>
 <ul>
-<li>A simple neural network with prediction <span class="math inline">\(f(x)=\operatorname{sign}(w^\top x)\)</span>.</li>
 <li>The hard sign output cannot be optimized directly with ordinary gradient descent.</li>
 <li>Let <span class="math inline">\(P\)</span> and <span class="math inline">\(N\)</span> be the positive and negative training examples:</li>
 </ul>
@@ -1110,38 +1135,33 @@ M\gamma\le\langle w_M,w^*\rangle\le\|w_M\|\le R\sqrt M
 </section>
 <section id="logistic-regression" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">3.2</span> Logistic Regression</h2>
-<ul>
-<li>Make the output a probability using the sigmoid function:</li>
-</ul>
+<div id="def-logistic-regression" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.3 (Logistic Regression)</strong></span> Binary logistic regression models the probability of the positive class by applying the sigmoid to a linear score.</p>
 <p><span class="math display">\[
-g(z)=\frac{1}{1+e^{-z}}\in[0,1].
+P(y=1\mid x)=\sigma(w^\top x+b),
+\qquad \sigma(z)=\frac{1}{1+e^{-z}}.
 \]</span></p>
+</div>
 <section id="entropy-and-cross-entropy" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="entropy-and-cross-entropy"><span class="header-section-number">3.2.1</span> Entropy and Cross-Entropy</h3>
-<p>Let <span class="math inline">\(y\)</span> be the true probability distribution and <span class="math inline">\(p\)</span> the predicted distribution.</p>
-<ul>
-<li>Entropy measures uncertainty and the ideal expected encoding length for <span class="math inline">\(y\)</span>:</li>
-</ul>
+<div id="def-entropy-cross-entropy" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.4 (Entropy and Cross-Entropy)</strong></span> For distributions <span class="math inline">\(y\)</span> and <span class="math inline">\(p\)</span> on the same outcomes, entropy measures uncertainty as the ideal expected encoding length for <span class="math inline">\(y\)</span>. Cross-entropy is the expected length when using <span class="math inline">\(p\)</span> to encode outcomes from <span class="math inline">\(y\)</span>.</p>
 <p><span class="math display">\[
-H(y)=-\sum_i y_i\log y_i.
+H(y)=-\sum_{i:\,y_i&gt;0} y_i\log y_i,
+\qquad \mathrm{XE}(y,p)=-\sum_{i:\,y_i&gt;0} y_i\log p_i.
 \]</span></p>
-<ul>
-<li>Cross-entropy is the expected encoding length when using <span class="math inline">\(p\)</span> to encode outcomes from <span class="math inline">\(y\)</span>:</li>
-</ul>
-<p><span class="math display">\[
-\mathrm{XE}(y,p)=-\sum_i y_i\log p_i\ge H(y).
-\]</span></p>
+</div>
 </section>
 <section id="kl-divergence" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="kl-divergence"><span class="header-section-number">3.2.2</span> KL Divergence</h3>
-<p><span class="math display">\[
-\begin{aligned}
-D_{\mathrm{KL}}(y\|p)&amp;=\mathrm{XE}(y,p)-H(y) \\
-&amp;=\sum_i y_i\log\frac{y_i}{p_i}\ge0.
-\end{aligned}
+<div id="def-kl-divergence" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.5 (KL Divergence)</strong></span> <span class="math display">\[
+D_{\mathrm{KL}}(y\|p)=\sum_{i:\,y_i&gt;0} y_i\log\frac{y_i}{p_i}
+=\mathrm{XE}(y,p)-H(y).
 \]</span></p>
+</div>
 <ul>
-<li>Equality holds exactly when <span class="math inline">\(y_i=p_i\)</span> for all <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(D_{\mathrm{KL}}(y\|p)\ge0\)</span>, so <span class="math inline">\(\mathrm{XE}(y,p)\ge H(y)\)</span>. Equality holds exactly when <span class="math inline">\(y=p\)</span>.</li>
 <li>For fixed <span class="math inline">\(y\)</span>, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.</li>
 <li>KL divergence and cross-entropy are asymmetric.</li>
 </ul>
@@ -1156,22 +1176,21 @@ D_{\mathrm{KL}}(y\|p)&amp;=\mathrm{XE}(y,p)-H(y) \\
 </section>
 <section id="ridge-regression" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="ridge-regression"><span class="header-section-number">3.3</span> Ridge Regression</h2>
+<div id="def-ridge-regression" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.6 (Ridge Regression)</strong></span> Ridge regression fits a linear model with a squared <span class="math inline">\(\ell_2\)</span> penalty on the weights, where <span class="math inline">\(\lambda\ge0\)</span>.</p>
+<p><span class="math display">\[
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
++\frac{\lambda}{2}\|w\|_2^2.
+\]</span></p>
+</div>
 <ul>
-<li>Restrict the set of solutions by bounding the weight norm, helping reduce overfitting:</li>
+<li>The penalty corresponds to bounding the weight norm for an appropriate choice of <span class="math inline">\(c\)</span>, which helps reduce overfitting:</li>
 </ul>
 <p><span class="math display">\[
 \min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
 \quad\text{subject to}\quad\|w\|_2^2\le c.
 \]</span></p>
 <ul>
-<li>Use an appropriate penalty <span class="math inline">\(\lambda\ge0\)</span> to obtain an unconstrained formulation:</li>
-</ul>
-<p><span class="math display">\[
-\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
-+\frac{\lambda}{2}\|w\|_2^2.
-\]</span></p>
-<ul>
-<li>This is <span class="math inline">\(\ell_2\)</span> regularization, called ridge regression.</li>
 <li><span class="math inline">\(\lambda=0\)</span> gives no penalty; increasing <span class="math inline">\(\lambda\)</span> shrinks the optimal weight norm. As <span class="math inline">\(\lambda\to\infty\)</span>, <span class="math inline">\(w\to0\)</span>.</li>
 <li>Update in two parts: a gradient step on the loss, then a shrink of the weights:</li>
 </ul>
@@ -1184,14 +1203,14 @@ w_{t+1}&amp;=(1-\eta\lambda)\,\widehat w_{t+1}.
 </section>
 <section id="lasso-regression" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="lasso-regression"><span class="header-section-number">3.4</span> LASSO Regression</h2>
-<ul>
-<li>The sparsity constraint <span class="math inline">\(\|w\|_0\le c\)</span> counts nonzero weights and is hard to optimize. Replace it with the convex <span class="math inline">\(\ell_1\)</span> constraint:</li>
-</ul>
+<div id="def-lasso-regression" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.7 (LASSO Regression)</strong></span> LASSO regression fits a linear model with an <span class="math inline">\(\ell_1\)</span> penalty on the weights, where <span class="math inline">\(\lambda\ge0\)</span>.</p>
 <p><span class="math display">\[
-\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+ \lambda\|w\|_1.
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+\lambda\|w\|_1.
 \]</span></p>
+</div>
 <ul>
-<li>This relaxation encourages sparse weights (feature selection).</li>
+<li>The convex <span class="math inline">\(\ell_1\)</span> penalty encourages sparse weights for feature selection. Directly constraining the number of nonzero weights with <span class="math inline">\(\|w\|_0\le c\)</span> is hard to optimize.</li>
 <li>Update in two parts: the same gradient step as linear regression, then a threshold on every coordinate <span class="math inline">\(j\)</span>:</li>
 </ul>
 <p><span class="math display">\[
@@ -1213,15 +1232,17 @@ w_{t+1}&amp;=(1-\eta\lambda)\,\widehat w_{t+1}.
 <h2 data-number="3.5" class="anchored" data-anchor-id="compressed-sensing"><span class="header-section-number">3.5</span> Compressed Sensing</h2>
 <section id="sparsity-assumption" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="sparsity-assumption"><span class="header-section-number">3.5.1</span> Sparsity Assumption</h3>
+<div id="def-sparsity" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.8 (Sparsity)</strong></span> A vector <span class="math inline">\(x\in\mathbb R^n\)</span> is <span class="math inline">\(k\)</span>-sparse if <span class="math inline">\(\|x\|_0\le k\)</span>, where <span class="math inline">\(\|x\|_0\)</span> counts its nonzero entries.</p>
+</div>
 <ul>
-<li><span class="math inline">\(k\)</span>-sparse: <span class="math inline">\(\|x\|_0\le k\ll n\)</span>; only a few entries are nonzero.</li>
-<li>With suitable <span class="math inline">\(A\)</span>, sparsity enables recovery from <span class="math inline">\(m\ll n\)</span> measurements <span class="math inline">\(y=Ax\)</span>.</li>
+<li>For <span class="math inline">\(k\ll n\)</span> and suitable <span class="math inline">\(A\)</span>, sparsity enables recovery from <span class="math inline">\(m\ll n\)</span> measurements <span class="math inline">\(y=Ax\)</span>.</li>
 </ul>
 </section>
 <section id="restricted-isometry-property-rip" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="restricted-isometry-property-rip"><span class="header-section-number">3.5.2</span> Restricted Isometry Property (RIP)</h3>
 <div id="def-rip" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.1 (Restricted Isometry Property)</strong></span> A matrix <span class="math inline">\(W\in\mathbb R^{n\times d}\)</span> with <span class="math inline">\(n&lt;d\)</span> is <span class="math inline">\((\epsilon,s)\)</span>-RIP if, for every <span class="math inline">\(s\)</span>-sparse <span class="math inline">\(x\in\mathbb R^d\)</span>,</p>
+<p><span class="theorem-title"><strong>Definition 3.9 (Restricted Isometry Property)</strong></span> A matrix <span class="math inline">\(W\in\mathbb R^{n\times d}\)</span> with <span class="math inline">\(n&lt;d\)</span> is <span class="math inline">\((\epsilon,s)\)</span>-RIP if, for every <span class="math inline">\(s\)</span>-sparse <span class="math inline">\(x\in\mathbb R^d\)</span>,</p>
 <p><span class="math display">\[
 (1-\epsilon)\|x\|_2^2\le\|Wx\|_2^2\le(1+\epsilon)\|x\|_2^2.
 \]</span></p>
@@ -1269,6 +1290,37 @@ x^*\in\arg\min_{v:\,Wv=y}\|v\|_1.
 <ul>
 <li>Recovery error is controlled by the non-sparse tail; <span class="math inline">\(x=x_s\)</span> gives exact recovery.</li>
 </ul>
+<p><br>
+</p>
+<div id="thm-rip-random-matrix" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.5 (Random Gaussian Matrix Is RIP)</strong></span> Let <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span>, let <span class="math inline">\(s\in[d]\)</span>, and let <span class="math inline">\(n\)</span> be an integer satisfying</p>
+<p><span class="math display">\[
+n\ge 216\,\frac{s\log\!\left(\dfrac{120d}{\delta\epsilon}\right)}{\epsilon^2}.
+\]</span></p>
+<p>If <span class="math inline">\(W\in\mathbb R^{n\times d}\)</span> has i.i.d. entries <span class="math inline">\(W_{ij}\sim\mathcal N(0,1/n)\)</span>, then with probability at least <span class="math inline">\(1-\delta\)</span>, <span class="math inline">\(W\)</span> is <span class="math inline">\((\epsilon,s)\)</span>-RIP.</p>
+</div>
+<ul>
+<li>Thus, the required number of measurements <span class="math inline">\(n\)</span> grows linearly with sparsity <span class="math inline">\(s\)</span> and only logarithmically with ambient dimension <span class="math inline">\(d\)</span>.</li>
+<li>Orthogonal invariance. For any orthonormal <span class="math inline">\(U\)</span>, each row <span class="math inline">\(A_i=W_iU\)</span> remains Gaussian with mean <span class="math inline">\(0\)</span> and covariance <span class="math inline">\(U^\top\operatorname{Cov}(W_i^\top)U=\frac1n I\)</span>, so <span class="math inline">\(WU\)</span> still has i.i.d. <span class="math inline">\(\mathcal N(0,1/n)\)</span> entries and is still <span class="math inline">\((\epsilon,s)\)</span>-RIP.</li>
+<li>Transform sparsity. Even if <span class="math inline">\(x\)</span> is not sparse itself, if <span class="math inline">\(x=Ua\)</span> is sparse in an orthonormal basis <span class="math inline">\(U\)</span> (e.g., Fourier or wavelet), then <span class="math inline">\(y=Wx=(WU)a\)</span> can still be recovered via <span class="math inline">\(\ell_1\)</span> minimization without knowing <span class="math inline">\(U\)</span> when choosing <span class="math inline">\(W\)</span>.</li>
+</ul>
+</section>
+<section id="generative-models" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="generative-models"><span class="header-section-number">3.5.3</span> Generative Models</h3>
+<div id="def-generative-model" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.10 (Generative Model)</strong></span> In compressed sensing, a generative model represents candidate signals as <span class="math inline">\(G(z)\)</span> for a map <span class="math inline">\(G\colon\mathbb R^k\to\mathbb R^n\)</span>. The latent vector <span class="math inline">\(z\)</span> typically has far fewer coordinates than the output signal.</p>
+</div>
+<div id="thm-generative-recovery" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.6 (Recovery with a ReLU Generative Model)</strong></span> Suppose <span class="math inline">\(G\colon\mathbb R^k\to\mathbb R^n\)</span> is the generator given by a <span class="math inline">\(d\)</span>-layer ReLU network. Use <span class="math inline">\(m=O(kd\log n)\)</span> measurements with a sensing matrix <span class="math inline">\(A\in\mathbb R^{m\times n}\)</span> whose entries are i.i.d. <span class="math inline">\(\mathcal N(0,1/m)\)</span>.</p>
+<p>For any signal <span class="math inline">\(x^*\in\mathbb R^n\)</span> and noisy measurements <span class="math inline">\(y=Ax^*+\eta\)</span>, choose <span class="math inline">\(\widehat z\in\mathbb R^k\)</span> whose measurement residual <span class="math inline">\(\|y-AG(\widehat z)\|_2\)</span> is within <span class="math inline">\(\epsilon\)</span> of the smallest possible residual. Then, with probability <span class="math inline">\(1-e^{-\Omega(m)}\)</span> over the draw of <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+\|G(\widehat z)-x^*\|_2
+\le 6\min_{z^*\in\mathbb R^k}\|G(z^*)-x^*\|_2+3\|\eta\|_2+2\epsilon.
+\]</span></p>
+</div>
+<ul>
+<li>This is Theorem 1.1 of Bora et al.&nbsp;(2017). <a href="https://proceedings.mlr.press/v70/bora17a/bora17a.pdf">Compressed Sensing using Generative Models</a></li>
+</ul>
 </section>
 </section>
 <section id="support-vector-machine" class="level2" data-number="3.6">
@@ -1277,7 +1329,7 @@ x^*\in\arg\min_{v:\,Wv=y}\|v\|_1.
 <section id="hard-margin" class="level3" data-number="3.6.1">
 <h3 data-number="3.6.1" class="anchored" data-anchor-id="hard-margin"><span class="header-section-number">3.6.1</span> Hard Margin</h3>
 <div id="def-svm-hard-margin" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.2 (Hard-Margin SVM)</strong></span> For linearly separable examples <span class="math inline">\((x_i,y_i)\)</span> with <span class="math inline">\(y_i\in\{-1,1\}\)</span>, the hard-margin SVM solves</p>
+<p><span class="theorem-title"><strong>Definition 3.11 (Hard-Margin SVM)</strong></span> For linearly separable examples <span class="math inline">\((x_i,y_i)\)</span> with <span class="math inline">\(y_i\in\{-1,1\}\)</span>, the hard-margin SVM solves</p>
 <p><span class="math display">\[
 \begin{aligned}
 \min_{w,b}\quad&amp;\|w\|_2 \\
@@ -1298,7 +1350,7 @@ w^\top x_i+b\le-1\ \text{ if } y_i=-1.
 <section id="soft-margin" class="level3" data-number="3.6.2">
 <h3 data-number="3.6.2" class="anchored" data-anchor-id="soft-margin"><span class="header-section-number">3.6.2</span> Soft Margin</h3>
 <div id="def-svm-soft-margin" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.3 (Soft-Margin SVM)</strong></span> For examples that may not be linearly separable, the soft-margin SVM relaxes the constraints with slack variables <span class="math inline">\(\xi_i\)</span> and a penalty <span class="math inline">\(\lambda&gt;0\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 3.12 (Soft-Margin SVM)</strong></span> For examples that may not be linearly separable, the soft-margin SVM relaxes the constraints with slack variables <span class="math inline">\(\xi_i\)</span> and a penalty <span class="math inline">\(\lambda&gt;0\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \min_{w,b,\xi}\quad&amp;\|w\|_2+\lambda\sum_i\xi_i \\
@@ -1317,22 +1369,20 @@ w^\top x_i+b\le-1\ \text{ if } y_i=-1.
 </section>
 <section id="lagrangian-duality" class="level3" data-number="3.6.3">
 <h3 data-number="3.6.3" class="anchored" data-anchor-id="lagrangian-duality"><span class="header-section-number">3.6.3</span> Lagrangian Duality</h3>
-<ul>
-<li>Primal problem and its Lagrangian, with multipliers <span class="math inline">\(\alpha_i\ge0\)</span>:</li>
-</ul>
+<div id="def-lagrangian" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.13 (Lagrangian)</strong></span> For the primal problem of minimizing <span class="math inline">\(f(x)\)</span> under the constraints <span class="math inline">\(g_i(x)\le0\)</span>, the Lagrangian is</p>
 <p><span class="math display">\[
-p^*=\min_xf(x)\ \text{ subject to }\ g_i(x)\le0,
-\qquad
-L(x,\alpha)=f(x)+\sum_i\alpha_ig_i(x).
+L(x,\alpha)=f(x)+\sum_i\alpha_i g_i(x),\qquad \alpha_i\ge0.
 \]</span></p>
+</div>
 <ul>
-<li><span class="math inline">\(\max_{\alpha\ge0}L(x,\alpha)\)</span> equals <span class="math inline">\(f(x)\)</span> if <span class="math inline">\(x\)</span> is feasible and <span class="math inline">\(+\infty\)</span> otherwise, so <span class="math inline">\(p^*=\min_x\max_{\alpha\ge0}L(x,\alpha)\)</span>. The dual problem swaps the order:</li>
+<li><span class="math inline">\(\max_{\alpha\ge0}L(x,\alpha)\)</span> equals <span class="math inline">\(f(x)\)</span> if <span class="math inline">\(x\)</span> is feasible and <span class="math inline">\(+\infty\)</span> otherwise, so the primal optimal value is <span class="math inline">\(p^*=\min_x\max_{\alpha\ge0}L(x,\alpha)\)</span>. The dual problem swaps the order:</li>
 </ul>
 <p><span class="math display">\[
 d^*=\max_{\alpha\ge0}\min_xL(x,\alpha).
 \]</span></p>
 <div id="thm-lagrangian-duality" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.5 (Weak and Strong Duality)</strong></span> Weak duality <span class="math inline">\(d^*\le p^*\)</span> always holds. If <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> are convex and Slater’s condition holds, that is, some <span class="math inline">\(x\)</span> has <span class="math inline">\(g_i(x)&lt;0\)</span> for all <span class="math inline">\(i\)</span>, then strong duality <span class="math inline">\(d^*=p^*\)</span> holds.</p>
+<p><span class="theorem-title"><strong>Theorem 3.7 (Weak and Strong Duality)</strong></span> Weak duality <span class="math inline">\(d^*\le p^*\)</span> always holds. If <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> are convex and Slater’s condition holds, that is, some <span class="math inline">\(x\)</span> has <span class="math inline">\(g_i(x)&lt;0\)</span> for all <span class="math inline">\(i\)</span>, then strong duality <span class="math inline">\(d^*=p^*\)</span> holds.</p>
 </div>
 <ul>
 <li>Proof of weak duality: for feasible <span class="math inline">\(x\)</span> and <span class="math inline">\(\alpha\ge0\)</span>, <span class="math inline">\(\min_{x'}L(x',\alpha)\le L(x,\alpha)\le f(x)\)</span>.</li>
@@ -1340,7 +1390,7 @@ d^*=\max_{\alpha\ge0}\min_xL(x,\alpha).
 <p><br>
 </p>
 <div id="thm-kkt" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.6 (KKT Conditions)</strong></span> Let <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> be differentiable. If strong duality holds and <span class="math inline">\(x^*\)</span>, <span class="math inline">\(\alpha^*\)</span> are primal and dual optimal, then</p>
+<p><span class="theorem-title"><strong>Theorem 3.8 (KKT Conditions)</strong></span> Let <span class="math inline">\(f\)</span> and every <span class="math inline">\(g_i\)</span> be differentiable. If strong duality holds and <span class="math inline">\(x^*\)</span>, <span class="math inline">\(\alpha^*\)</span> are primal and dual optimal, then</p>
 <p><span class="math display">\[
 \begin{aligned}
 \nabla f(x^*)+\sum_i\alpha_i^*\nabla g_i(x^*)&amp;=0 &amp;&amp;\text{(stationarity)},\\
@@ -1355,7 +1405,7 @@ g_i(x^*)&amp;\le0 &amp;&amp;\text{(primal feasibility)},\\
 <section id="dual-form" class="level3" data-number="3.6.4">
 <h3 data-number="3.6.4" class="anchored" data-anchor-id="dual-form"><span class="header-section-number">3.6.4</span> Dual Form</h3>
 <div id="thm-svm-dual" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.7 (Dual of the SVM)</strong></span> Write the norm term in <a href="#def-svm-hard-margin" class="quarto-xref">Definition&nbsp;3.2</a> and <a href="#def-svm-soft-margin" class="quarto-xref">Definition&nbsp;3.3</a> as <span class="math inline">\(\frac12\|w\|_2^2\)</span>. Both problems then have the dual</p>
+<p><span class="theorem-title"><strong>Theorem 3.9 (Dual of the SVM)</strong></span> Write the norm term in <a href="#def-svm-hard-margin" class="quarto-xref">Definition&nbsp;3.11</a> and <a href="#def-svm-soft-margin" class="quarto-xref">Definition&nbsp;3.12</a> as <span class="math inline">\(\frac12\|w\|_2^2\)</span>. Both problems then have the dual</p>
 <p><span class="math display">\[
 \begin{aligned}
 \max_\alpha\quad&amp;\sum_i\alpha_i-\frac12\sum_{i,j}\alpha_i\alpha_jy_iy_j\,x_i^\top x_j \\
@@ -1377,7 +1427,7 @@ g_i(x^*)&amp;\le0 &amp;&amp;\text{(primal feasibility)},\\
 <section id="kernel-method" class="level3" data-number="3.6.5">
 <h3 data-number="3.6.5" class="anchored" data-anchor-id="kernel-method"><span class="header-section-number">3.6.5</span> Kernel Method</h3>
 <div id="def-kernel" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.4 (Kernel)</strong></span> <span class="math inline">\(K\)</span> is a kernel if there is a feature map <span class="math inline">\(\phi\)</span> such that</p>
+<p><span class="theorem-title"><strong>Definition 3.14 (Kernel)</strong></span> <span class="math inline">\(K\)</span> is a kernel if there is a feature map <span class="math inline">\(\phi\)</span> such that</p>
 <p><span class="math display">\[
 K(x,z)=\phi(x)^\top\phi(z)\ \text{ for all } x,z.
 \]</span></p>
@@ -1400,13 +1450,183 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
 <li>Gaussian kernel <span class="math inline">\(\exp\bigl(-\|x-z\|_2^2/(2\sigma^2)\bigr)\)</span>: similarity decays with distance, and the feature space is infinite-dimensional.</li>
 </ul>
 <div id="thm-mercer" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3.8 (Mercer’s Condition)</strong></span> <span class="math inline">\(K\)</span> is a kernel if and only if it is symmetric and, for every finite set of points <span class="math inline">\(x_1,\dots,x_n\)</span>, the matrix <span class="math inline">\(\bigl[K(x_i,x_j)\bigr]_{i,j}\)</span> is positive semidefinite.</p>
+<p><span class="theorem-title"><strong>Theorem 3.10 (Mercer’s Condition)</strong></span> <span class="math inline">\(K\)</span> is a kernel if and only if it is symmetric and, for every finite set of points <span class="math inline">\(x_1,\dots,x_n\)</span>, the matrix <span class="math inline">\(\bigl[K(x_i,x_j)\bigr]_{i,j}\)</span> is positive semidefinite.</p>
 </div>
+</section>
+</section>
+<section id="decision-tree" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="decision-tree"><span class="header-section-number">3.7</span> Decision Tree</h2>
+<div id="def-decision-tree" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.15 (Decision Tree)</strong></span> A decision tree is a rooted tree whose internal nodes test features and route inputs based on the results. Each input follows a path to a leaf that predicts a class or numerical value.</p>
+</div>
+<ul>
+<li>A small tree explains each prediction through its path, making it easier to interpret than a deep neural network.</li>
+<li>Trees can grow large and deep.</li>
+<li>Hard routing can abruptly change the prediction when an input crosses a split threshold.</li>
+<li>Deep trees can easily overfit training noise.</li>
+</ul>
+<section id="gini-index" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="gini-index"><span class="header-section-number">3.7.1</span> Gini Index</h3>
+<div id="def-gini-index" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.16 (Gini Index)</strong></span> The Gini index measures class impurity in a node. If <span class="math inline">\(p_c\)</span> is the fraction of samples at node <span class="math inline">\(S\)</span> belonging to class <span class="math inline">\(c\)</span> out of <span class="math inline">\(K\)</span> classes, then</p>
+<p><span class="math display">\[
+I(S)=1-\sum_{c=1}^K p_c^2.
+\]</span></p>
+<p>The index is zero when all samples belong to one class.</p>
+</div>
+<p>For a binary split into <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span>, choose the split with the smallest weighted child impurity</p>
+<p><span class="math display">\[
+\frac{|S_L|}{|S|}I(S_L)+\frac{|S_R|}{|S|}I(S_R).
+\]</span></p>
+</section>
+</section>
+<section id="random-forest-and-boosting" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="random-forest-and-boosting"><span class="header-section-number">3.8</span> Random Forest and Boosting</h2>
+<div id="def-random-forest" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.17 (Random Forest)</strong></span> A random forest is an ensemble of decision trees. Each tree trains on a bootstrap sample of the training data (drawn with replacement) and considers a random subset of features at each split. For classification, the forest picks the class with the most votes. For regression, it averages the trees’ predictions.</p>
+</div>
+<ul>
+<li><strong>Feature bagging</strong> (Bootstrap Aggregating). At each split, sample <span class="math inline">\(m\)</span> of the <span class="math inline">\(p\)</span> features without replacement and choose the best split among those features. This helps decorrelate the trees and makes their combined predictions less variable.</li>
+</ul>
+<section id="boosting-framework" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="boosting-framework"><span class="header-section-number">3.8.1</span> Boosting Framework</h3>
+<div id="def-boosting" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.18 (Boosting)</strong></span> Boosting trains weak classifiers in sequence and combines them into a final classifier.</p>
+</div>
+<p>Given training examples <span class="math inline">\((x_i,y_i)_{i=1}^m\)</span> with <span class="math inline">\(x_i\in\mathcal X\)</span> and <span class="math inline">\(y_i\in\{-1,+1\}\)</span>, repeat for <span class="math inline">\(t=1,\ldots,T\)</span>:</p>
+<ol type="1">
+<li><p>Construct a distribution <span class="math inline">\(D_t\)</span> over training indices, where <span class="math inline">\(D_t(i)\)</span> is the weight of example <span class="math inline">\(i\)</span>.</p></li>
+<li><p>Find a weak classifier <span class="math inline">\(h_t\colon\mathcal X\to\{-1,+1\}\)</span> with low weighted error.</p>
+<p><span class="math display">\[
+\epsilon_t=\Pr_{i\sim D_t}\bigl[h_t(x_i)\ne y_i\bigr]
+=\sum_{i:\,h_t(x_i)\ne y_i}D_t(i).
+\]</span></p></li>
+</ol>
+<p>After <span class="math inline">\(T\)</span> rounds, combine <span class="math inline">\(h_1,\ldots,h_T\)</span> into <span class="math inline">\(H_{\mathrm{final}}\)</span>, often using a weighted vote.</p>
+</section>
+<section id="adaboost" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="adaboost"><span class="header-section-number">3.8.2</span> AdaBoost</h3>
+<div id="def-adaboost" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.19 (AdaBoost)</strong></span> AdaBoost starts with uniform sample weights <span class="math inline">\(D_1(i)=1/m\)</span>. In each round, train <span class="math inline">\(h_t\)</span> under <span class="math inline">\(D_t\)</span> and compute its weighted error <span class="math inline">\(\epsilon_t\)</span>. For <span class="math inline">\(0&lt;\epsilon_t&lt;1/2\)</span>, set</p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha_t &amp;= \frac12\log\frac{1-\epsilon_t}{\epsilon_t}, \\
+D_{t+1}(i) &amp;= \frac{D_t(i)\exp\!\bigl(-\alpha_t y_i h_t(x_i)\bigr)}{Z_t}.
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(Z_t\)</span> normalizes the weights to sum to 1. The update increases the weights of misclassified examples. The final prediction is the weighted vote</p>
+<p><span class="math display">\[
+H_{\mathrm{final}}(x)=\operatorname{sign}\!\left(\sum_{t=1}^T\alpha_t h_t(x)\right).
+\]</span></p>
+</div>
+<div id="thm-adaboost-training-error" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.11 (AdaBoost Training Error Bound)</strong></span> Write the weighted error in round <span class="math inline">\(t\)</span> as <span class="math inline">\(\epsilon_t=\tfrac12-\gamma_t\)</span>. Then the fraction of training examples misclassified by <span class="math inline">\(H_{\mathrm{final}}\)</span> satisfies</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{err}_{\mathrm{train}}(H_{\mathrm{final}})
+&amp;\le \prod_{t=1}^T 2\sqrt{\epsilon_t(1-\epsilon_t)} \\
+&amp;= \prod_{t=1}^T \sqrt{1-4\gamma_t^2}
+\le \exp\!\left(-2\sum_{t=1}^T\gamma_t^2\right).
+\end{aligned}
+\]</span></p>
+<p>If <span class="math inline">\(\gamma_t\ge\gamma&gt;0\)</span> in every round, then <span class="math inline">\(\operatorname{err}_{\mathrm{train}}(H_{\mathrm{final}})\le e^{-2\gamma^2T}\)</span>.</p>
+</div>
+<p><strong>Proof.</strong> Let <span class="math inline">\(f(x)=\sum_{t=1}^T\alpha_t h_t(x)\)</span>, so <span class="math inline">\(H_{\mathrm{final}}(x)=\operatorname{sign}(f(x))\)</span>.</p>
+<p>Unrolling the updates from <span class="math inline">\(D_1(i)=1/m\)</span> gives</p>
+<p><span class="math display">\[
+D_{T+1}(i)
+=\frac{e^{-y_i f(x_i)}}{m\prod_{t=1}^T Z_t}.
+\]</span></p>
+<p>On each mistake, <span class="math inline">\(y_i f(x_i)\le0\)</span>, so the exponential loss is at least 1.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{err}_{\mathrm{train}}(H_{\mathrm{final}})
+&amp;\le\frac{1}{m}\sum_i e^{-y_i f(x_i)} \\
+&amp;=\left(\prod_{t=1}^T Z_t\right)\sum_i D_{T+1}(i)
+=\prod_{t=1}^T Z_t.
+\end{aligned}
+\]</span></p>
+<p>To compute <span class="math inline">\(Z_t\)</span>, group the wrong and correct predictions, which contribute weights <span class="math inline">\(\epsilon_t\)</span> and <span class="math inline">\(1-\epsilon_t\)</span>.</p>
+<p><span class="math display">\[
+Z_t=\epsilon_t e^{\alpha_t}+(1-\epsilon_t)e^{-\alpha_t}.
+\]</span></p>
+<p>Setting the derivative to zero gives <span class="math inline">\(\alpha_t=\tfrac12\log((1-\epsilon_t)/\epsilon_t)\)</span> and <span class="math inline">\(Z_t=2\sqrt{\epsilon_t(1-\epsilon_t)}\)</span>. Since <span class="math inline">\(\sqrt{1-4\gamma_t^2}\le e^{-2\gamma_t^2}\)</span>, multiplying over the rounds gives the bound.</p>
+</section>
+<section id="margin-based-analysis" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="margin-based-analysis"><span class="header-section-number">3.8.3</span> Margin-Based Analysis</h3>
+<div id="def-voting-margin" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.20 (Voting Margin)</strong></span> For the margin analysis, normalize AdaBoost’s vote as <span class="math inline">\(f(x)=\sum_t\alpha_t h_t(x)/\sum_t\alpha_t\)</span>. The margin <span class="math inline">\(yf(x)\)</span> measures how much the weighted vote favors the true label.</p>
+</div>
+<div id="thm-boosting-margin-generalization" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.12 (Margin-Based Generalization Bound)</strong></span> Let <span class="math inline">\(S\)</span> contain <span class="math inline">\(m\)</span> independent examples drawn from a distribution <span class="math inline">\(D\)</span> on <span class="math inline">\(\mathcal X\times\{-1,+1\}\)</span>. Let <span class="math inline">\(\mathcal H\)</span> be a finite class of binary base classifiers and <span class="math inline">\(\mathcal C=\operatorname{conv}(\mathcal H)\)</span> the class of their weighted averages. Write <span class="math inline">\(P_D\)</span> for population probability and <span class="math inline">\(P_S\)</span> for the fraction of training examples satisfying an event.</p>
+<p>For <span class="math inline">\(0&lt;\delta&lt;1\)</span>, with probability at least <span class="math inline">\(1-\delta\)</span> over <span class="math inline">\(S\)</span>, the following holds simultaneously for every <span class="math inline">\(f\in\mathcal C\)</span> and every <span class="math inline">\(\theta&gt;0\)</span>.</p>
+<p><span class="math display">\[
+P_D[yf(x)\le0]
+\le P_S[yf(x)\le\theta]
++O\!\left(\sqrt{\frac{1}{m}\left(
+\frac{\log m\,\log|\mathcal H|}{\theta^2}
++\log\frac{1}{\delta}\right)}\right).
+\]</span></p>
+</div>
+<ul>
+<li>This is Theorem 1 of Schapire et al.&nbsp;(1998). <a href="https://cseweb.ucsd.edu/~yfreund/papers/BoostingtheMargin.pdf#page=7">Boosting the Margin</a></li>
+</ul>
+<div id="thm-adaboost-margin" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3.13 (AdaBoost Training Margin Bound)</strong></span> Let <span class="math inline">\(\epsilon_1,\ldots,\epsilon_T\)</span> be the weighted training errors of the base classifiers in AdaBoost, and let <span class="math inline">\(f\)</span> be the normalized vote above. For any threshold <span class="math inline">\(\theta\)</span>,</p>
+<p><span class="math display">\[
+P_S[yf(x)\le\theta]
+\le 2^T\prod_{t=1}^T\sqrt{\epsilon_t^{1-\theta}(1-\epsilon_t)^{1+\theta}}.
+\]</span></p>
+<p>If <span class="math inline">\(\epsilon_t\le\tfrac12-\gamma\)</span> in every round for some fixed <span class="math inline">\(\gamma&gt;0\)</span>, then this upper bound decays exponentially in <span class="math inline">\(T\)</span> whenever <span class="math inline">\(\theta&lt;\gamma\)</span>.</p>
+</div>
+<p><strong>Proof sketch.</strong> Let <span class="math inline">\(A_T=\sum_t\alpha_t\)</span>. If <span class="math inline">\(yf(x)\le\theta\)</span>, then <span class="math inline">\(e^{A_T(\theta-yf(x))}\ge1\)</span>. Averaging over the training set and using the weight identity from the proof of <a href="#thm-adaboost-training-error" class="quarto-xref">Theorem&nbsp;3.11</a> gives</p>
+<p><span class="math display">\[
+P_S[yf(x)\le\theta]
+\le e^{\theta A_T}\frac1m\sum_i e^{-A_T y_i f(x_i)}
+=\prod_{t=1}^T e^{\theta\alpha_t}Z_t.
+\]</span></p>
+<p>Substituting <span class="math inline">\(\alpha_t=\tfrac12\log((1-\epsilon_t)/\epsilon_t)\)</span> and <span class="math inline">\(Z_t=2\sqrt{\epsilon_t(1-\epsilon_t)}\)</span> gives the stated product.</p>
+<p>For exponential decay, use <span class="math inline">\(Z_t=1/\cosh\alpha_t\)</span> and <span class="math inline">\(\tanh\alpha_t=1-2\epsilon_t\ge2\gamma\)</span>. Since <span class="math inline">\(\tanh\)</span> is concave on <span class="math inline">\([0,\infty)\)</span>,</p>
+<p><span class="math display">\[
+\log\cosh\alpha_t=\int_0^{\alpha_t}\tanh u\,du
+\ge\tfrac12\alpha_t\tanh\alpha_t\ge\gamma\alpha_t.
+\]</span></p>
+<p>Thus <span class="math inline">\(e^{\theta\alpha_t}Z_t\le e^{-(\gamma-\theta)\alpha_t}\)</span>. Since <span class="math inline">\(\alpha_t\ge\tanh\alpha_t\ge2\gamma\)</span>, the product is at most <span class="math inline">\(e^{-2\gamma(\gamma-\theta)T}\)</span> when <span class="math inline">\(\theta&lt;\gamma\)</span>.</p>
+<ul>
+<li>This is Theorem 5 of Schapire et al.&nbsp;(1998). <a href="https://cseweb.ucsd.edu/~yfreund/papers/BoostingtheMargin.pdf#page=12">Boosting the Margin</a></li>
+</ul>
+</section>
+<section id="gradient-boosting" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="gradient-boosting"><span class="header-section-number">3.8.4</span> Gradient Boosting</h3>
+<section id="adaboost-as-coordinate-descent" class="level4" data-number="3.8.4.1">
+<h4 data-number="3.8.4.1" class="anchored" data-anchor-id="adaboost-as-coordinate-descent"><span class="header-section-number">3.8.4.1</span> AdaBoost as Coordinate Descent</h4>
+<p>Each weak learner <span class="math inline">\(g_j\)</span> has a coefficient <span class="math inline">\(\lambda_j\)</span>, initially zero. AdaBoost reduces the average exponential loss</p>
+<p><span class="math display">\[
+F_\lambda(x)=\sum_j\lambda_jg_j(x),
+\qquad L(\lambda)=\frac{1}{m}\sum_{i=1}^m e^{-y_i F_\lambda(x_i)}.
+\]</span></p>
+<p>Each round selects a learner <span class="math inline">\(g_j\)</span> with low weighted error and updates one coordinate, <span class="math inline">\(\lambda_j\gets\lambda_j+\alpha_t\)</span>, by line search. After <span class="math inline">\(T\)</span> rounds, <span class="math inline">\(L(\lambda)=\prod_{t=1}^T Z_t\)</span> by the proof of <a href="#thm-adaboost-training-error" class="quarto-xref">Theorem&nbsp;3.11</a>.</p>
+</section>
+<section id="squared-loss" class="level4" data-number="3.8.4.2">
+<h4 data-number="3.8.4.2" class="anchored" data-anchor-id="squared-loss"><span class="header-section-number">3.8.4.2</span> Squared Loss</h4>
+<div id="def-gradient-boosting" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.21 (Gradient Boosting)</strong></span> Gradient boosting adds a weak learner each round to approximate the negative loss gradient with respect to the current predictions.</p>
+</div>
+<p>Treat the training predictions <span class="math inline">\((F(x_1),\ldots,F(x_n))\)</span> as the coordinates of a vector. For squared loss,</p>
+<p><span class="math display">\[
+L(Y,F)=\frac12\sum_{i=1}^n\bigl(y_i-F(x_i)\bigr)^2,
+\qquad r_i=-\frac{\partial L}{\partial F(x_i)}=y_i-F(x_i).
+\]</span></p>
+<p>Adding the exact residual would give <span class="math inline">\(F(x_i)+r_i=y_i\)</span>. Fit a shallow regression tree <span class="math inline">\(h\)</span> to the pairs <span class="math inline">\((x_i,r_i)\)</span> to approximate that correction. Add the tree with a small learning rate <span class="math inline">\(\eta\)</span> to damp each update.</p>
+<p><span class="math display">\[
+F_{\mathrm{new}}(x)=F(x)+\eta h(x).
+\]</span></p>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results -->
 
 
+</section>
 </section>
 </section>
 
@@ -1620,23 +1840,26 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1652,7 +1875,9 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -1690,7 +1915,97 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {
@@ -2259,8 +2574,8 @@ b=y_s-w^\top\phi(x_s)=y_s-\sum_i\alpha_iy_iK(x_i,x_s).
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../content/notes/advanced-computer-graphics/index.html" class="pagination-link" aria-label="Computer Graphics">
-        <span class="nav-page-text">Computer Graphics</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../content/notes/machine-learning/4.html" class="pagination-link" aria-label="Unsupervised Learning">
+        <span class="nav-page-text">Unsupervised Learning</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

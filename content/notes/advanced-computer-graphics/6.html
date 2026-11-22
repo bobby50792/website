@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, and light transport.">
+<meta name="description" content="Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, light transport, Monte Carlo integration, path tracing, and advanced light transport.">
 
 <title>Ray Tracing – Bobby</title>
 <style>
@@ -87,9 +87,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -892,6 +892,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -919,6 +925,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -971,7 +983,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1040,6 +1052,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#basic-radiometry" id="toc-basic-radiometry" class="nav-link" data-scroll-target="#basic-radiometry"><span class="header-section-number">6.5</span> Basic Radiometry</a></li>
   <li><a href="#light-transport" id="toc-light-transport" class="nav-link" data-scroll-target="#light-transport"><span class="header-section-number">6.6</span> Light Transport</a></li>
+  <li><a href="#monte-carlo-integration" id="toc-monte-carlo-integration" class="nav-link" data-scroll-target="#monte-carlo-integration"><span class="header-section-number">6.7</span> Monte Carlo Integration</a></li>
+  <li><a href="#path-tracing" id="toc-path-tracing" class="nav-link" data-scroll-target="#path-tracing"><span class="header-section-number">6.8</span> Path Tracing</a></li>
+  <li><a href="#advanced-light-transport" id="toc-advanced-light-transport" class="nav-link" data-scroll-target="#advanced-light-transport"><span class="header-section-number">6.9</span> Advanced Light Transport</a></li>
   </ul>
 </nav>
     </div>
@@ -1054,7 +1069,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, and light transport.
+    Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, light transport, Monte Carlo integration, path tracing, and advanced light transport.
   </div>
 </div>
 
@@ -1364,6 +1379,176 @@ E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega.
 \, \underbrace{\cos \theta_i}_{\substack{\text{Cosine of} \\ \text{Incident Angle} \\ \text{Known}}}
 \, d\omega_i
 \]</span></p>
+</section>
+<section id="rendering-equation-as-a-linear-operator-equation" class="level4" data-number="6.6.0.3">
+<h4 data-number="6.6.0.3" class="anchored" data-anchor-id="rendering-equation-as-a-linear-operator-equation"><span class="header-section-number">6.6.0.3</span> Rendering Equation as a Linear Operator Equation</h4>
+<p>The rendering equation is a <strong>Fredholm integral equation of the second kind</strong> with canonical form <span class="math inline">\(l(u) = e(u) + \int l(v)K(u,v)\,dv\)</span>. Writing it in operator (or discretized matrix) form gives <span class="math inline">\(L = E + KL\)</span>, where <span class="math inline">\(K\)</span> is the light transport operator. By the binomial expansion:</p>
+<p><span class="math display">\[
+(I - K)L = E
+\implies
+L = (I - K)^{-1}E = E + KE + K^2 E + K^3 E + \cdots
+\]</span></p>
+<ul>
+<li><span class="math inline">\(E\)</span>: Emission directly from light sources.</li>
+<li><span class="math inline">\(KE\)</span>: Direct illumination on surfaces (<span class="math inline">\(E + KE\)</span> corresponds to shading in rasterization).</li>
+<li><span class="math inline">\(K^2 E\)</span>: One-bounce indirect illumination (mirrors, refraction).</li>
+<li><span class="math inline">\(K^3 E + \cdots\)</span>: Multi-bounce indirect illumination.</li>
+<li>Global illumination = direct + indirect illumination.</li>
+</ul>
+</section>
+</section>
+<section id="monte-carlo-integration" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="monte-carlo-integration"><span class="header-section-number">6.7</span> Monte Carlo Integration</h2>
+<p>Used to numerically estimate integrals that cannot be solved analytically, by averaging random samples of the integrand.</p>
+<div id="def-acg-6-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6.2 (Monte Carlo Estimator)</strong></span> To estimate <span class="math inline">\(\displaystyle I = \int_a^b f(x)\,dx\)</span>, draw i.i.d. samples <span class="math inline">\(X_1,\ldots,X_N \sim p(x)\)</span>:</p>
+<p><span class="math display">\[
+F_N = \frac{1}{N}\sum_{i=1}^N \frac{f(X_i)}{p(X_i)}.
+\]</span></p>
+<ul>
+<li><strong>Uniform Monte Carlo estimator</strong>: For <span class="math inline">\(p(x) = \frac{1}{b-a}\)</span>, <span class="math inline">\(F_N = \frac{b-a}{N}\sum_{i=1}^N f(X_i)\)</span>.</li>
+<li>More samples <span class="math inline">\(\implies\)</span> less variance.</li>
+<li><strong>Sample on <span class="math inline">\(x\)</span>, integrate on <span class="math inline">\(x\)</span></strong>: The PDF must be defined over the same domain as the integration variable.</li>
+</ul>
+</div>
+</section>
+<section id="path-tracing" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="path-tracing"><span class="header-section-number">6.8</span> Path Tracing</h2>
+<section id="limitations-of-whitted-style-ray-tracing" class="level4" data-number="6.8.0.1">
+<h4 data-number="6.8.0.1" class="anchored" data-anchor-id="limitations-of-whitted-style-ray-tracing"><span class="header-section-number">6.8.0.1</span> Limitations of Whitted-Style Ray Tracing</h4>
+<ul>
+<li>Always performs ideal specular reflections/refractions and stops bouncing at diffuse surfaces.</li>
+<li>Problem 1: Cannot handle <strong>glossy reflections</strong> (e.g., Utah teapot).</li>
+<li>Problem 2: Misses <strong>indirect diffuse reflections</strong> (e.g., color bleeding in the Cornell box).</li>
+</ul>
+</section>
+<section id="from-recursive-monte-carlo-to-path-tracing" class="level4" data-number="6.8.0.2">
+<h4 data-number="6.8.0.2" class="anchored" data-anchor-id="from-recursive-monte-carlo-to-path-tracing"><span class="header-section-number">6.8.0.2</span> From Recursive Monte Carlo to Path Tracing</h4>
+<p>Solving the reflection equation numerically with <span class="math inline">\(N\)</span> random directions per bounce causes exponential ray explosion (<span class="math inline">\(\#\text{rays} = N^{\#\text{bounces}}\)</span>).</p>
+<ul>
+<li><strong>Path tracing</strong> sets <span class="math inline">\(N = 1\)</span> (only 1 ray is traced at each shading point; <span class="math inline">\(N \ne 1\)</span> is <em>Distributed Ray Tracing</em>).</li>
+<li>To reduce noise, trace multiple paths through each pixel (<strong>SPP</strong>, samples per pixel) and average their radiance:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ray_generation(camPos, pixel):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Uniformly choose N sample positions within the pixel</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    pixel_radiance <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each sample <span class="kw">in</span> pixel:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        ray <span class="op">=</span> Ray(camPos, cam_to_sample)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> closest_intersection(ray, scene)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p exists:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            pixel_radiance <span class="op">+=</span> (<span class="dv">1</span> <span class="op">/</span> N) <span class="op">*</span> shade(p, sample_to_cam)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pixel_radiance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="russian-roulette-rr" class="level4" data-number="6.8.0.3">
+<h4 data-number="6.8.0.3" class="anchored" data-anchor-id="russian-roulette-rr"><span class="header-section-number">6.8.0.3</span> Russian Roulette (RR)</h4>
+<p>Cutting the number of bounces at a fixed depth cuts energy (introduces bias). With <strong>Russian Roulette</strong>, choose a survival probability <span class="math inline">\(P_{\text{RR}} \in (0, 1)\)</span>:</p>
+<ul>
+<li>Draw <span class="math inline">\(\xi \sim \mathrm{Uniform}[0, 1]\)</span>.</li>
+<li>If <span class="math inline">\(\xi \le P_{\text{RR}}\)</span>: shoot a bounce ray and return <span class="math inline">\(L_o / P_{\text{RR}}\)</span>.</li>
+<li>If <span class="math inline">\(\xi &gt; P_{\text{RR}}\)</span>: terminate and return <span class="math inline">\(0\)</span>.</li>
+</ul>
+<p>The expected value remains unbiased:</p>
+<p><span class="math display">\[
+\mathbb{E}[L] = P_{\text{RR}}\cdot\frac{L_o}{P_{\text{RR}}} + (1 - P_{\text{RR}})\cdot 0 = L_o.
+\]</span></p>
+</section>
+<section id="sampling-the-light-directly" class="level4" data-number="6.8.0.4">
+<h4 data-number="6.8.0.4" class="anchored" data-anchor-id="sampling-the-light-directly"><span class="header-section-number">6.8.0.4</span> Sampling the Light Directly</h4>
+<p>Uniform hemisphere sampling (<span class="math inline">\(p(\omega_i) = \frac{1}{2\pi}\)</span>) wastes most rays when light sources are small, producing noisy results at low SPP. Split shading into <strong>direct</strong> (light source, no RR) and <strong>indirect</strong> (other reflectors, with RR) contributions.</p>
+<p>Sample uniformly on the light area <span class="math inline">\(A\)</span> with <span class="math inline">\(p(x') = 1/A\)</span>, and rewrite the integral from solid angle <span class="math inline">\(d\omega_i\)</span> to area <span class="math inline">\(dA\)</span> via <span class="math inline">\(d\omega_i = \frac{\cos\theta'}{\|x'-x\|^2}\,dA\)</span>:</p>
+<p><span class="math display">\[
+L_{\text{dir}}(x, \omega_o)
+= \int_A L_i(x, \omega_i)\,f_r(x, \omega_i, \omega_o)\,
+  \frac{\cos\theta\,\cos\theta'}{\|x'-x\|^2}\,dA.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span>: Angle between <span class="math inline">\(\omega_i\)</span> and the surface normal at <span class="math inline">\(x\)</span>.</li>
+<li><span class="math inline">\(\theta'\)</span>: Angle between <span class="math inline">\(-\omega_i\)</span> and the light normal at <span class="math inline">\(x'\)</span>.</li>
+<li>Shoot a shadow ray from <span class="math inline">\(x\)</span> to <span class="math inline">\(x'\)</span> to check whether the light sample is blocked.</li>
+</ul>
+</section>
+<section id="path-tracing-algorithm-pseudocode" class="level4" data-number="6.8.0.5">
+<h4 data-number="6.8.0.5" class="anchored" data-anchor-id="path-tracing-algorithm-pseudocode"><span class="header-section-number">6.8.0.5</span> Path Tracing Algorithm (Pseudocode)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>shade(p, wo):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Contribution from the light source (direct, no RR)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    L_dir <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    x_prime <span class="op">=</span> sample_light()               <span class="co"># pdf_light = 1 / A</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> blocked(p, x_prime):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        L_dir <span class="op">=</span> L_i <span class="op">*</span> f_r <span class="op">*</span> cos_theta <span class="op">*</span> cos_theta_prime <span class="op">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                <span class="op">/</span> (dist(p, x_prime)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> pdf_light)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Contribution from other reflectors (indirect, with RR)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    L_indir <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rand() <span class="op">&lt;=</span> P_RR:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        wi <span class="op">=</span> sample_hemisphere(N)          <span class="co"># pdf_hemi = 1 / (2 * pi)</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        q <span class="op">=</span> closest_intersection(ray(p, wi), scene)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> q exists <span class="kw">and</span> <span class="kw">not</span> is_light(q):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            L_indir <span class="op">=</span> shade(q, <span class="op">-</span>wi) <span class="op">*</span> f_r <span class="op">*</span> cos_theta <span class="op">/</span> (pdf_hemi <span class="op">*</span> P_RR)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L_dir <span class="op">+</span> L_indir</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Additional Topics in Modern Path Tracing
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Sampling &amp; variance reduction</strong>: Sampling arbitrary PDFs, importance sampling, low-discrepancy sequences, and combining light + hemisphere sampling via <strong>Multiple Importance Sampling (MIS)</strong>.</li>
+<li><strong>Image formation</strong>: Pixel reconstruction filters (beyond uniform averaging) and converting radiance to display color (gamma correction, tone-mapping curves, color spaces).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="advanced-light-transport" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="advanced-light-transport"><span class="header-section-number">6.9</span> Advanced Light Transport</h2>
+<section id="biased-vs.-unbiased-monte-carlo-estimators" class="level4" data-number="6.9.0.1">
+<h4 data-number="6.9.0.1" class="anchored" data-anchor-id="biased-vs.-unbiased-monte-carlo-estimators"><span class="header-section-number">6.9.0.1</span> Biased vs.&nbsp;Unbiased Monte Carlo Estimators</h4>
+<ul>
+<li><strong>Unbiased</strong>: No systematic error—the expected value equals the true value regardless of the number of samples.</li>
+<li><strong>Biased</strong>: Otherwise. A biased estimator is <strong>consistent</strong> if its expected value converges to the true value as the number of samples approaches infinity.</li>
+<li>Visual intuition: <em>biased</em> <span class="math inline">\(\leftrightarrow\)</span> blurry; <em>consistent</em> <span class="math inline">\(\leftrightarrow\)</span> not blurry with infinite samples.</li>
+</ul>
+</section>
+<section id="bidirectional-path-tracing-bdpt" class="level4" data-number="6.9.0.2">
+<h4 data-number="6.9.0.2" class="anchored" data-anchor-id="bidirectional-path-tracing-bdpt"><span class="header-section-number">6.9.0.2</span> Bidirectional Path Tracing (BDPT)</h4>
+<p><em>Unbiased</em> (Veach 1997).</p>
+<ul>
+<li>Traces sub-paths from <strong>both</strong> the camera and the light source, then connects their endpoints.</li>
+<li>Suitable when light transport is complex on the light’s side; difficult to implement and relatively slow.</li>
+</ul>
+</section>
+<section id="metropolis-light-transport-mlt" class="level4" data-number="6.9.0.3">
+<h4 data-number="6.9.0.3" class="anchored" data-anchor-id="metropolis-light-transport-mlt"><span class="header-section-number">6.9.0.3</span> Metropolis Light Transport (MLT)</h4>
+<p><em>Unbiased</em>, based on Markov Chain Monte Carlo (MCMC).</p>
+<ul>
+<li>Locally perturbs an existing path to generate the next path; excels at exploring difficult light paths (e.g., light passing through a small gap or caustics).</li>
+<li>Cons: Hard to estimate convergence rate, uneven convergence across pixels (“dirty” look), and generally unsuitable for animations.</li>
+</ul>
+</section>
+<section id="photon-mapping" class="level4" data-number="6.9.0.4">
+<h4 data-number="6.9.0.4" class="anchored" data-anchor-id="photon-mapping"><span class="header-section-number">6.9.0.4</span> Photon Mapping</h4>
+<p><em>Biased, consistent</em>, two-stage method. Excels at <strong>Specular–Diffuse–Specular (SDS)</strong> paths and <strong>caustics</strong>.</p>
+<ol type="1">
+<li><strong>Photon tracing</strong>: Emit photons from light sources, bounce them through the scene, and record hits on diffuse surfaces.</li>
+<li><strong>Photon collection (final gathering)</strong>: Shoot sub-paths from the camera until they hit diffuse surfaces, then estimate local radiance by finding the nearest <span class="math inline">\(N\)</span> photons covering surface area <span class="math inline">\(\Delta A\)</span>.</li>
+</ol>
+<ul>
+<li>Why biased: Local density estimation approximates <span class="math inline">\(dN/dA\)</span> by <span class="math inline">\(\Delta N / \Delta A\)</span>.</li>
+<li>Why consistent: As more photons are emitted, the same <span class="math inline">\(N\)</span> photons cover a smaller <span class="math inline">\(\Delta A \to dA\)</span>.</li>
+<li>Trade-off: Small <span class="math inline">\(N \leftrightarrow\)</span> noisy; large <span class="math inline">\(N \leftrightarrow\)</span> blurry.</li>
+</ul>
+</section>
+<section id="vertex-connection-and-merging-vcm" class="level4" data-number="6.9.0.5">
+<h4 data-number="6.9.0.5" class="anchored" data-anchor-id="vertex-connection-and-merging-vcm"><span class="header-section-number">6.9.0.5</span> Vertex Connection and Merging (VCM)</h4>
+<p><em>Biased, consistent</em> (Georgiev et al.&nbsp;2012). Combines <strong>BDPT</strong> and <strong>Photon Mapping</strong>: instead of wasting BDPT sub-paths whose endpoints cannot be connected directly, merges nearby endpoints using photon-mapping density estimation.</p>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results -->
@@ -1582,23 +1767,26 @@ E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega.
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1614,7 +1802,9 @@ E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega.
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -1652,7 +1842,97 @@ E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega.
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {
@@ -2221,8 +2501,8 @@ E(p) = \int_{H^2} L_i(p, \omega) \cos \theta \, d\omega.
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../content/notes/advanced-computer-graphics/7.html" class="pagination-link" aria-label="Advanced Rendering + Learning">
-        <span class="nav-page-text">Advanced Rendering + Learning</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../content/notes/advanced-computer-graphics/7.html" class="pagination-link" aria-label="Advanced Rendering">
+        <span class="nav-page-text">Advanced Rendering</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

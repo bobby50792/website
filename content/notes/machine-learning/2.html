@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-4f82796183050fd1699ed1e1133f164c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d3b348c85f7cec4741c214e5bd37bcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -857,6 +857,12 @@ window.Quarto = {
  <span class="menu-text">Central Limit Theorems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-applied-probability/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Martingales</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -884,6 +890,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/machine-learning/3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/machine-learning/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
   </div>
 </li>
       </ul>
@@ -936,7 +948,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Rendering + Learning</span></a>
+ <span class="menu-text">Advanced Rendering</span></a>
   </div>
 </li>
       </ul>
@@ -1058,18 +1070,25 @@ L_D(A(S)) \ge \frac{1}{8}
 <h2 data-number="2.2" class="anchored" data-anchor-id="finite-hypothesis-classes"><span class="header-section-number">2.2</span> Finite Hypothesis Classes</h2>
 <section id="hypothesis-class-h" class="level4" data-number="2.2.0.1">
 <h4 data-number="2.2.0.1" class="anchored" data-anchor-id="hypothesis-class-h"><span class="header-section-number">2.2.0.1</span> Hypothesis Class (<span class="math inline">\(H\)</span>)</h4>
-<p>The class of functions can be finite or infinite.</p>
+<div id="def-hypothesis-class" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.1 (Hypothesis Class)</strong></span> A hypothesis class <span class="math inline">\(H\)</span> is a set of candidate prediction functions. It can be finite or infinite.</p>
+</div>
 </section>
 <section id="empirical-risk-minimization-erm" class="level4" data-number="2.2.0.2">
 <h4 data-number="2.2.0.2" class="anchored" data-anchor-id="empirical-risk-minimization-erm"><span class="header-section-number">2.2.0.2</span> Empirical Risk Minimization (ERM)</h4>
-<p>Pick the hypothesis with the smallest training loss.</p>
+<div id="def-erm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.2 (Empirical Risk Minimization)</strong></span> Pick the hypothesis with the smallest training loss.</p>
 <p><span class="math display">\[
 \mathrm{ERM}_H(S)\in\arg\min_{h\in H}L_S(h).
 \]</span></p>
+</div>
 </section>
 <section id="realizability-assumption" class="level4" data-number="2.2.0.3">
 <h4 data-number="2.2.0.3" class="anchored" data-anchor-id="realizability-assumption"><span class="header-section-number">2.2.0.3</span> Realizability Assumption</h4>
-<p>There exists <span class="math inline">\(h^*\in H\)</span> such that <span class="math inline">\(L_{D,f}(h^*)=0\)</span>. Therefore, for every training set <span class="math inline">\(S\)</span>, we have <span class="math inline">\(L_S(h^*)=0\)</span>.</p>
+<div id="def-realizability" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.3 (Realizability)</strong></span> The realizability assumption holds if some <span class="math inline">\(h^*\in H\)</span> has zero population loss, <span class="math inline">\(L_{D,f}(h^*)=0\)</span>.</p>
+</div>
+<p>Then <span class="math inline">\(L_S(h^*)=0\)</span> almost surely for a sample drawn from <span class="math inline">\(D\)</span> and labeled by <span class="math inline">\(f\)</span>.</p>
 <div id="thm-2" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.2 (ERM for Finite Hypothesis Classes)</strong></span> Let <span class="math inline">\(H\)</span> be a finite hypothesis class. Let <span class="math inline">\(\delta\in(0,1)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, and let <span class="math inline">\(m\)</span> be an integer that satisfies</p>
 <p><span class="math display">\[
@@ -1086,9 +1105,8 @@ L_{D,f}(h_S)\le\epsilon.
 <h2 data-number="2.3" class="anchored" data-anchor-id="pac-learning"><span class="header-section-number">2.3</span> PAC Learning</h2>
 <section id="realizable-pac-learning" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="realizable-pac-learning"><span class="header-section-number">2.3.1</span> Realizable PAC Learning</h3>
-<section id="pac-learning-1" class="level4" data-number="2.3.1.1">
-<h4 data-number="2.3.1.1" class="anchored" data-anchor-id="pac-learning-1"><span class="header-section-number">2.3.1.1</span> PAC Learning</h4>
-<p>A hypothesis class <span class="math inline">\(H\)</span> is PAC learnable if there exist a function <span class="math inline">\(m_H:(0,1)^2\to\mathbb N\)</span> and a learning algorithm with the following property:</p>
+<div id="def-pac-learning" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.4 (PAC Learnability)</strong></span> A hypothesis class <span class="math inline">\(H\)</span> is PAC learnable if there exist a function <span class="math inline">\(m_H:(0,1)^2\to\mathbb N\)</span> and a learning algorithm with the following property:</p>
 <p>For every <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span>, every distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\)</span>, and every labeling function <span class="math inline">\(f:X\to\{0,1\}\)</span>, if the realizability assumption holds with respect to <span class="math inline">\(H,D,f\)</span>, then, when running the learning algorithm on</p>
 <p><span class="math display">\[
 m\ge m_H(\epsilon,\delta)
@@ -1097,18 +1115,17 @@ m\ge m_H(\epsilon,\delta)
 <p><span class="math display">\[
 L_{D,f}(h)\le\epsilon.
 \]</span></p>
-</section>
+</div>
 </section>
 <section id="agnostic-pac-learning" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="agnostic-pac-learning"><span class="header-section-number">2.3.2</span> Agnostic PAC Learning</h3>
-<section id="agnostic-pac-learnable" class="level4" data-number="2.3.2.1">
-<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="agnostic-pac-learnable"><span class="header-section-number">2.3.2.1</span> Agnostic PAC Learnable</h4>
-<p>A hypothesis class <span class="math inline">\(H\)</span> is agnostic PAC learnable if there exist a function <span class="math inline">\(m_H:(0,1)^2\to\mathbb N\)</span> and a learning algorithm with the following property:</p>
+<div id="def-agnostic-pac-learning" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.5 (Agnostic PAC Learnability)</strong></span> A hypothesis class <span class="math inline">\(H\)</span> is agnostic PAC learnable if there exist a function <span class="math inline">\(m_H:(0,1)^2\to\mathbb N\)</span> and a learning algorithm with the following property:</p>
 <p>For every <span class="math inline">\(\epsilon,\delta\in(0,1)\)</span> and every distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\times Y\)</span>, when running the learning algorithm on <span class="math inline">\(m\ge m_H(\epsilon,\delta)\)</span> i.i.d. examples generated by <span class="math inline">\(D\)</span>, the algorithm returns a hypothesis <span class="math inline">\(h\)</span> such that, with probability at least <span class="math inline">\(1-\delta\)</span> over the choice of the <span class="math inline">\(m\)</span> training examples,</p>
 <p><span class="math display">\[
 L_D(h)\le\min_{h'\in H}L_D(h')+\epsilon.
 \]</span></p>
-</section>
+</div>
 </section>
 <section id="error-decomposition" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="error-decomposition"><span class="header-section-number">2.3.3</span> Error Decomposition</h3>
@@ -1150,18 +1167,22 @@ m_H(\epsilon,\delta)
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="restriction-and-shattering"><span class="header-section-number">2.4.1</span> Restriction and Shattering</h3>
 <section id="restriction-of-h-to-c" class="level4" data-number="2.4.1.1">
 <h4 data-number="2.4.1.1" class="anchored" data-anchor-id="restriction-of-h-to-c"><span class="header-section-number">2.4.1.1</span> Restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span></h4>
-<p>Let <span class="math inline">\(H\)</span> be a class of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(\{0,1\}\)</span>, and let <span class="math inline">\(C=\{c_1,\ldots,c_m\}\subset X\)</span>. The restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span> is the set of functions from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span> that can be derived from <span class="math inline">\(H\)</span>. That is,</p>
+<div id="def-hypothesis-restriction" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.6 (Restriction of a Hypothesis Class)</strong></span> Let <span class="math inline">\(H\)</span> be a class of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(\{0,1\}\)</span>, and let <span class="math inline">\(C=\{c_1,\ldots,c_m\}\subset X\)</span>. The restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span> is the set of functions from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span> that can be derived from <span class="math inline">\(H\)</span>. That is,</p>
 <p><span class="math display">\[
 H_C=\left\{\bigl(h(c_1),\ldots,h(c_m)\bigr):h\in H\right\}.
 \]</span></p>
 <p>Here we represent each function from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span> as a vector in <span class="math inline">\(\{0,1\}^{|C|}\)</span>.</p>
+</div>
 </section>
 <section id="shattering" class="level4" data-number="2.4.1.2">
 <h4 data-number="2.4.1.2" class="anchored" data-anchor-id="shattering"><span class="header-section-number">2.4.1.2</span> Shattering</h4>
-<p>A hypothesis class <span class="math inline">\(H\)</span> shatters a finite set <span class="math inline">\(C\subset X\)</span> if the restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span> is the set of all functions from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span>. That is,</p>
+<div id="def-shattering" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.7 (Shattering)</strong></span> A hypothesis class <span class="math inline">\(H\)</span> shatters a finite set <span class="math inline">\(C\subset X\)</span> if the restriction of <span class="math inline">\(H\)</span> to <span class="math inline">\(C\)</span> is the set of all functions from <span class="math inline">\(C\)</span> to <span class="math inline">\(\{0,1\}\)</span>. That is,</p>
 <p><span class="math display">\[
 |H_C|=2^{|C|}.
 \]</span></p>
+</div>
 <div id="thm-3" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.3 (Sample Lower Bound from Shattering)</strong></span> Let <span class="math inline">\(H\)</span> be a hypothesis class of functions from <span class="math inline">\(X\)</span> to <span class="math inline">\(\{0,1\}\)</span>. Let <span class="math inline">\(m\)</span> be a training set size. Assume that there exists a set <span class="math inline">\(C\subset X\)</span> of size <span class="math inline">\(2m\)</span> that is shattered by <span class="math inline">\(H\)</span>. Then, for any learning algorithm <span class="math inline">\(A\)</span>, there exist a distribution <span class="math inline">\(D\)</span> over <span class="math inline">\(X\times\{0,1\}\)</span> and a predictor <span class="math inline">\(h\in H\)</span> such that <span class="math inline">\(L_D(h)=0\)</span>, but with probability at least <span class="math inline">\(\frac17\)</span> over the choice of <span class="math inline">\(S\sim D^m\)</span>, we have</p>
 <p><span class="math display">\[
@@ -1172,13 +1193,12 @@ L_D(A(S))\ge\frac18.
 </section>
 <section id="vc-dimension-and-learnability" class="level3" data-number="2.4.2">
 <h3 data-number="2.4.2" class="anchored" data-anchor-id="vc-dimension-and-learnability"><span class="header-section-number">2.4.2</span> VC Dimension and Learnability</h3>
-<section id="vc-dimension-1" class="level4" data-number="2.4.2.1">
-<h4 data-number="2.4.2.1" class="anchored" data-anchor-id="vc-dimension-1"><span class="header-section-number">2.4.2.1</span> VC-Dimension</h4>
-<p>The VC dimension of a hypothesis class <span class="math inline">\(H\)</span>, denoted <span class="math inline">\(\mathrm{VCdim}(H)\)</span>, is the maximal size of a set <span class="math inline">\(C\subset X\)</span> that can be shattered by <span class="math inline">\(H\)</span>. If <span class="math inline">\(H\)</span> can shatter sets of arbitrarily large size, we say that <span class="math inline">\(H\)</span> has infinite VC dimension.</p>
+<div id="def-vc-dimension" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.8 (VC Dimension)</strong></span> The VC dimension of a hypothesis class <span class="math inline">\(H\)</span>, denoted <span class="math inline">\(\mathrm{VCdim}(H)\)</span>, is the maximal size of a set <span class="math inline">\(C\subset X\)</span> that can be shattered by <span class="math inline">\(H\)</span>. If <span class="math inline">\(H\)</span> can shatter sets of arbitrarily large size, we say that <span class="math inline">\(H\)</span> has infinite VC dimension.</p>
+</div>
 <div id="thm-4" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2.4 (Infinite VC Dimension)</strong></span> Let <span class="math inline">\(H\)</span> be a class of infinite VC dimension. Then <span class="math inline">\(H\)</span> is not PAC learnable.</p>
 </div>
-</section>
 </section>
 <section id="sample-complexity" class="level3" data-number="2.4.3">
 <h3 data-number="2.4.3" class="anchored" data-anchor-id="sample-complexity"><span class="header-section-number">2.4.3</span> Sample Complexity</h3>
@@ -1433,23 +1453,26 @@ C_1\frac{d+\log(1/\delta)}{\epsilon}
   if (!content) return;
 
   // Separate a block's type and number from its name so each can be styled.
-  content.querySelectorAll(".theorem-title strong").forEach((label) => {
-    const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
-    if (!match) return;
-    label.textContent = "";
-    const kind = document.createElement("span");
-    kind.className = "notes-kind";
-    kind.textContent = match[1];
-    // Hover previews copy only the block's contents, so the type travels with the label.
-    kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
-    label.append(kind);
-    if (match[2]) {
-      const name = document.createElement("span");
-      name.className = "notes-name";
-      name.textContent = match[2];
-      label.append(name);
-    }
-  });
+  const formatTheoremLabels = (root) => {
+    root.querySelectorAll(".theorem-title strong").forEach((label) => {
+      const match = label.textContent.match(/^(\S+\s[\d.]+)(?:\s\((.*)\))?$/);
+      if (!match) return;
+      label.textContent = "";
+      const kind = document.createElement("span");
+      kind.className = "notes-kind";
+      kind.textContent = match[1];
+      // Hover previews copy only the block's contents, so the type travels with the label.
+      kind.dataset.type = match[1].split(/\s/)[0].toLowerCase();
+      label.append(kind);
+      if (match[2]) {
+        const name = document.createElement("span");
+        name.className = "notes-name";
+        name.textContent = match[2];
+        label.append(name);
+      }
+    });
+  };
+  formatTheoremLabels(content);
 
   // Tag each side note by what it adds: a reason, an example, or a remark.
   content.querySelectorAll(".callout .callout-title-container").forEach((title) => {
@@ -1465,7 +1488,9 @@ C_1\frac{d+\log(1/\delta)}{\epsilon}
     tag.className = "notes-tag";
     tag.textContent = type;
     title.insertBefore(tag, text);
-    title.closest(".callout").dataset.noteType = type.toLowerCase();
+    const callout = title.closest(".callout");
+    callout.dataset.noteType = type.toLowerCase();
+    callout.removeAttribute("title");
   });
 
   // The frame sits on a wrapper so a wide table scrolls inside it.
@@ -1503,7 +1528,97 @@ C_1\frac{d+\log(1/\delta)}{\epsilon}
     });
   });
 
+  // Keep trailing punctuation attached to inline math so it never wraps onto its own line.
+  content.querySelectorAll(".math.inline").forEach((math) => {
+    const next = math.nextSibling;
+    if (!next || next.nodeType !== 3) return;
+    const match = next.nodeValue.match(/^([.,;:!?)\]]+)/);
+    if (!match) return;
+    const group = document.createElement("span");
+    group.className = "notes-math-punct";
+    math.before(group);
+    group.append(math, match[1]);
+    next.nodeValue = next.nodeValue.slice(match[1].length);
+  });
+
   setupReview(content);
+
+  // Cross-chapter theorem/definition links get the same live hover preview as same-page @xrefs.
+  if (window.tippy) {
+    const pageCache = new Map();
+    const fetchPage = (url) => {
+      if (!pageCache.has(url)) {
+        pageCache.set(
+          url,
+          fetch(url)
+            .then((res) => (res.ok ? res.text() : ""))
+            .then((html) => (html ? new DOMParser().parseFromString(html, "text/html") : null))
+            .catch(() => null)
+        );
+      }
+      return pageCache.get(url);
+    };
+
+    const previewCache = new Map();
+    const loadPreview = async (pageUrl, id) => {
+      const key = `${pageUrl}#${id}`;
+      if (previewCache.has(key)) return previewCache.get(key);
+      const doc = await fetchPage(pageUrl);
+      const target = doc?.getElementById(id);
+      if (!target) return null;
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll("a.anchorjs-link").forEach((el) => el.remove());
+      clone.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.setAttribute("href", pageUrl + a.getAttribute("href"));
+      });
+      formatTheoremLabels(clone);
+      const wrapper = document.createElement("div");
+      while (clone.firstChild) wrapper.append(clone.firstChild);
+      if (window.MathJax?.typesetPromise) {
+        await window.MathJax.typesetPromise([wrapper]);
+      } else if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(wrapper);
+      }
+      previewCache.set(key, wrapper);
+      return wrapper;
+    };
+
+    content.querySelectorAll('a[href*="#"]:not(.quarto-xref):not(.anchorjs-link)').forEach((link) => {
+      let parsed;
+      try {
+        parsed = new URL(link.getAttribute("href"), window.location.href);
+      } catch {
+        return;
+      }
+      const id = parsed.hash.replace(/^#/, "");
+      if (!id || parsed.origin !== window.location.origin || parsed.pathname === window.location.pathname) return;
+      if (!/^(thm|def|cor|lem|prp|exr|exm)-/.test(id)) return;
+      const pageUrl = `${parsed.origin}${parsed.pathname}`;
+      window.tippy(link, {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: () => link.parentElement,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: "quarto",
+        placement: "bottom-start",
+        content: "Loading…",
+        onShow(instance) {
+          const key = `${pageUrl}#${id}`;
+          if (previewCache.has(key)) {
+            instance.setContent(previewCache.get(key));
+            return;
+          }
+          loadPreview(pageUrl, id).then((node) => {
+            if (node) instance.setContent(node);
+            else instance.hide();
+          });
+        },
+      });
+    });
+  }
 
   // Mark each pseudocode function signature.
   content.querySelectorAll("pre code > span").forEach((line) => {
