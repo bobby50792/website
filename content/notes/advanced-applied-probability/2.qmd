@@ -236,6 +236,25 @@ $$
 $$
 
 :::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Truncate at level $n$: let $\bar X_{n,k}=X_k\mathbf 1_{\{|X_k|\le n\}}$ and
+$\bar S_n=\sum_{k=1}^n\bar X_{n,k}$. By the union bound,
+$\mathbb P(S_n\ne\bar S_n)\le n\,\mathbb P(|X_1|>n)\to0$. By Chebyshev's
+inequality and independence,
+
+$$
+\mathbb P\!\left(\left|\frac{\bar S_n}{n}-\mu_n\right|>\epsilon\right)
+\le\frac{\operatorname{Var}(\bar S_n)}{n^2\epsilon^2}
+\le\frac{\mathbb E[\bar X_{n,1}^2]}{n\epsilon^2}
+=\frac{1}{n\epsilon^2}\int_0^n 2y\,\mathbb P(|X_1|>y)\,dy.
+$$
+
+Since $y\,\mathbb P(|X_1|>y)\to0$, its average over $[0,n]$ also tends to
+$0$. Combining the two estimates gives $S_n/n-\mu_n\xrightarrow{\mathbb P}0$.
+
+:::
     
 
 ### Borel-Cantelli Lemmas
@@ -288,6 +307,50 @@ $$
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Since $\{A_n\text{ i.o.}\}=\bigcap_{m=1}^\infty\bigcup_{n=m}^\infty A_n$,
+countable subadditivity gives, for every $m\ge1$,
+
+$$
+\mathbb P(A_n\text{ i.o.})
+\le\mathbb P\!\left(\bigcup_{n=m}^\infty A_n\right)
+\le\sum_{n=m}^\infty\mathbb P(A_n).
+$$
+
+Because $\sum_{n=1}^\infty\mathbb P(A_n)<\infty$, the tail tends to $0$ as
+$m\to\infty$.
+
+:::
+
+::: {#thm-aap-2-15 name="Second Borel–Cantelli Lemma"}
+
+If the events $A_1,A_2,\ldots$ are independent and
+$\sum_{n=1}^\infty\mathbb P(A_n)=\infty$, then
+
+$$
+\mathbb P(A_n\text{ i.o.})=1.
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+It suffices to show $\mathbb P\bigl(\bigcap_{n=M}^\infty A_n^c\bigr)=0$ for
+every $M\ge1$. For any $N\ge M$, independence and $1-x\le e^{-x}$ give
+
+$$
+\mathbb P\!\left(\bigcap_{n=M}^N A_n^c\right)
+=\prod_{n=M}^N\bigl(1-\mathbb P(A_n)\bigr)
+\le\exp\!\left(-\sum_{n=M}^N\mathbb P(A_n)\right).
+$$
+
+Letting $N\to\infty$, the sum diverges so the right-hand side tends to $0$.
+By continuity from above, $\mathbb P\bigl(\bigcap_{n=M}^\infty A_n^c\bigr)=0$
+for every $M$, and hence $\mathbb P(A_n\text{ i.o.})=1$.
+
+:::
+
 ::: {#thm-aap-2-10 name="Kolmogorov's Maximal Inequality"}
 
 Suppose $X_1,\ldots,X_n$ are independent with $\mathbb E X_i=0$ and
@@ -297,6 +360,25 @@ $\epsilon>0$,
 $$
 \mathbb P\left(\max_{1\le k\le n}|S_k|\ge\epsilon\right)
 \le\frac{\operatorname{Var}(S_n)}{\epsilon^2}.
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Partition $A=\{\max_{1\le k\le n}|S_k|\ge\epsilon\}$ by the first hitting
+time: $A_k=\{|S_j|<\epsilon\text{ for }j<k,\;|S_k|\ge\epsilon\}$. The sets
+$A_k$ are disjoint with union $A$. Since $S_n-S_k$ is independent of
+$S_k\mathbf 1_{A_k}$ and has mean $0$, the cross term
+$\mathbb E[(S_n-S_k)S_k\mathbf 1_{A_k}]$ vanishes, giving
+
+$$
+\begin{aligned}
+\operatorname{Var}(S_n)=\mathbb E S_n^2
+&\ge\sum_{k=1}^n\mathbb E\bigl[(S_k+(S_n-S_k))^2\mathbf 1_{A_k}\bigr]\\
+&\ge\sum_{k=1}^n\mathbb E[S_k^2\mathbf 1_{A_k}]
+\ge\epsilon^2\sum_{k=1}^n\mathbb P(A_k)=\epsilon^2\mathbb P(A).
+\end{aligned}
 $$
 
 :::
@@ -326,6 +408,23 @@ then $\sum_{n=1}^\infty X_n(\omega)$ converges almost surely.
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Let $S_n=\sum_{k=1}^n X_k$. By @thm-aap-2-10, for every $m<N$ and
+$\epsilon>0$,
+
+$$
+\mathbb P\!\left(\max_{m\le k\le N}|S_k-S_m|\ge\epsilon\right)
+\le\frac{1}{\epsilon^2}\sum_{k=m+1}^N\operatorname{Var}(X_k).
+$$
+
+Letting $N\to\infty$ gives
+$\mathbb P\bigl(\sup_{k\ge m}|S_k-S_m|>\epsilon\bigr)\le\epsilon^{-2}\sum_{k=m+1}^\infty\operatorname{Var}(X_k)\to0$
+as $m\to\infty$. Thus $W_m=\sup_{j,k\ge m}|S_j-S_k|\downarrow0$ a.s., so
+$\{S_n\}$ is a.s. Cauchy and therefore converges a.s.
+
+:::
+
 ::: {#thm-aap-2-12 name="Kronecker's Lemma"}
 
 If $a_n\uparrow\infty$ and $\sum_{n=1}^\infty x_n/a_n$ converges, then
@@ -333,6 +432,22 @@ If $a_n\uparrow\infty$ and $\sum_{n=1}^\infty x_n/a_n$ converges, then
 $$
 \frac{1}{a_n}\sum_{m=1}^n x_m\to0.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Set $b_n=\sum_{k=1}^n x_k/a_k$ with $b_0=a_0=0$, so $x_m=a_m(b_m-b_{m-1})$.
+Summation by parts gives
+
+$$
+\frac{1}{a_n}\sum_{m=1}^n x_m
+=b_n-\frac{1}{a_n}\sum_{m=1}^n(a_m-a_{m-1})b_{m-1}.
+$$
+
+Since $b_n\to b_\infty$ and $a_n\uparrow\infty$, splitting the weighted
+average at a large $N$ (where $|b_{m-1}-b_\infty|<\epsilon$) shows that the
+second term also converges to $b_\infty$, so the difference tends to $0$.
 
 :::
 
@@ -347,6 +462,77 @@ $$
 \frac{S_n}{n}\xrightarrow{\mathrm{a.s.}}\mu
 \qquad\text{as }n\to\infty.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Replacing $X_i$ by $X_i-\mu$, assume $\mu=0$. Truncate
+$Y_k=X_k\mathbf 1_{\{|X_k|\le k\}}$. Since
+$\sum_{k=1}^\infty\mathbb P(X_k\ne Y_k)=\sum_{k=1}^\infty\mathbb P(|X_1|>k)\le\mathbb E|X_1|<\infty$,
+@thm-aap-2-9 implies $X_k=Y_k$ for all large $k$ a.s., so it suffices to
+show $\frac1n\sum_{k=1}^n Y_k\to0$ a.s.
+
+By Fubini's theorem and $\sum_{k\ge x}k^{-2}\le 2/x$,
+
+$$
+\sum_{k=1}^\infty\frac{\operatorname{Var}(Y_k)}{k^2}
+\le\sum_{k=1}^\infty\frac{\mathbb E[Y_k^2]}{k^2}
+\le 2\,\mathbb E|X_1|<\infty.
+$$
+
+By @thm-aap-2-11, $\sum_{k=1}^\infty(Y_k-\mathbb E Y_k)/k$ converges a.s.;
+by @thm-aap-2-12, $\frac1n\sum_{k=1}^n(Y_k-\mathbb E Y_k)\to0$ a.s. Finally,
+$\mathbb E Y_k\to\mathbb E X_1=0$ by dominated convergence, so its Cesàro
+average $\frac1n\sum_{k=1}^n\mathbb E Y_k\to0$ as well.
+
+:::
+
+::: {#thm-aap-2-14 name="Marcinkiewicz–Zygmund Strong Law of Large Numbers"}
+
+Let $X_1,X_2,\ldots$ be i.i.d., $S_n=X_1+\cdots+X_n$, and $0<p<2$. Set
+$c=\mathbb E X_1$ if $1\le p<2$ and $c=0$ if $0<p<1$. If
+$\mathbb E|X_1|^p<\infty$, then
+
+$$
+\frac{S_n-nc}{n^{1/p}}\to0
+\qquad\text{a.s.}
+$$
+
+Conversely, if $(S_n-nc)/n^{1/p}$ converges a.s. to a finite limit for some
+constant $c$, then $\mathbb E|X_1|^p<\infty$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+For the forward direction, assume $c=0$ (subtracting $\mathbb E X_1$ when
+$1\le p<2$) and truncate $Y_k=X_k\mathbf 1_{\{|X_k|\le k^{1/p}\}}$. Since
+$\sum_{k=1}^\infty\mathbb P(X_k\ne Y_k)\le\mathbb E|X_1|^p<\infty$,
+@thm-aap-2-9 reduces the limit to $Y_k$. Because $p<2$,
+$\sum_{k=1}^\infty\operatorname{Var}(Y_k)/k^{2/p}\le C_p\,\mathbb E|X_1|^p<\infty$,
+so @thm-aap-2-11 and @thm-aap-2-12 (with $a_k=k^{1/p}$) give
+$n^{-1/p}\sum_{k=1}^n(Y_k-\mathbb E Y_k)\to0$ a.s., while the centering
+$n^{-1/p}\sum_{k=1}^n\mathbb E Y_k\to0$.
+
+Conversely, if $(S_n-nc)/n^{1/p}$ converges a.s., then
+$(X_n-c)/n^{1/p}\to0$ a.s. By independence and @thm-aap-2-15,
+$\sum_{n=1}^\infty\mathbb P(|X_1-c|^p>n)<\infty$, hence
+$\mathbb E|X_1|^p<\infty$.
+
+:::
+
+::: {.callout-note title="Between the Strong Law and the CLT" collapse="true"}
+
+For $p=1$ this is the strong law, @thm-aap-2-13. Larger $p$
+gives a faster rate: with $\mathbb E X_1=0$ and more moments, $S_n$ grows more
+slowly than $n^{1/p}$.
+
+The range stops short of $p=2$. If $\mathbb E X_1=0$ and
+$\operatorname{Var}(X_1)=\sigma^2>0$, then by the
+[central limit theorem](3.qmd#thm-aap-3-16) the ratio
+$S_n/\sqrt n$ converges in distribution to $N(0,\sigma^2)$, so it does not
+converge to $0$, even in probability.
 
 :::
 

@@ -1,6 +1,6 @@
 ---
 title: "Ray Tracing"
-description: "Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, and light transport."
+description: "Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, light transport, Monte Carlo integration, path tracing, and advanced light transport."
 page-layout: article
 search: true
 number-offset: [6]
@@ -267,6 +267,165 @@ $$
 \, \underbrace{\cos \theta_i}_{\substack{\text{Cosine of} \\ \text{Incident Angle} \\ \text{Known}}}
 \, d\omega_i
 $$
+
+#### Rendering Equation as a Linear Operator Equation
+
+The rendering equation is a **Fredholm integral equation of the second kind** with canonical form $l(u) = e(u) + \int l(v)K(u,v)\,dv$. Writing it in operator (or discretized matrix) form gives $L = E + KL$, where $K$ is the light transport operator. By the binomial expansion:
+
+$$
+(I - K)L = E
+\implies
+L = (I - K)^{-1}E = E + KE + K^2 E + K^3 E + \cdots
+$$
+
+- $E$: Emission directly from light sources.
+- $KE$: Direct illumination on surfaces ($E + KE$ corresponds to shading in rasterization).
+- $K^2 E$: One-bounce indirect illumination (mirrors, refraction).
+- $K^3 E + \cdots$: Multi-bounce indirect illumination.
+- Global illumination = direct + indirect illumination.
+
+## Monte Carlo Integration
+
+Used to numerically estimate integrals that cannot be solved analytically, by averaging random samples of the integrand.
+
+::: {#def-acg-6-2 name="Monte Carlo Estimator"}
+
+To estimate $\displaystyle I = \int_a^b f(x)\,dx$, draw i.i.d. samples $X_1,\ldots,X_N \sim p(x)$:
+
+$$
+F_N = \frac{1}{N}\sum_{i=1}^N \frac{f(X_i)}{p(X_i)}.
+$$
+
+- **Uniform Monte Carlo estimator**: For $p(x) = \frac{1}{b-a}$, $F_N = \frac{b-a}{N}\sum_{i=1}^N f(X_i)$.
+- More samples $\implies$ less variance.
+- **Sample on $x$, integrate on $x$**: The PDF must be defined over the same domain as the integration variable.
+
+:::
+
+## Path Tracing
+
+#### Limitations of Whitted-Style Ray Tracing
+
+- Always performs ideal specular reflections/refractions and stops bouncing at diffuse surfaces.
+- Problem 1: Cannot handle **glossy reflections** (e.g., Utah teapot).
+- Problem 2: Misses **indirect diffuse reflections** (e.g., color bleeding in the Cornell box).
+
+#### From Recursive Monte Carlo to Path Tracing
+
+Solving the reflection equation numerically with $N$ random directions per bounce causes exponential ray explosion ($\#\text{rays} = N^{\#\text{bounces}}$).
+
+- **Path tracing** sets $N = 1$ (only 1 ray is traced at each shading point; $N \ne 1$ is *Distributed Ray Tracing*).
+- To reduce noise, trace multiple paths through each pixel (**SPP**, samples per pixel) and average their radiance:
+
+```python
+ray_generation(camPos, pixel):
+    # Uniformly choose N sample positions within the pixel
+    pixel_radiance = 0.0
+    for each sample in pixel:
+        ray = Ray(camPos, cam_to_sample)
+        p = closest_intersection(ray, scene)
+        if p exists:
+            pixel_radiance += (1 / N) * shade(p, sample_to_cam)
+    return pixel_radiance
+```
+
+#### Russian Roulette (RR)
+
+Cutting the number of bounces at a fixed depth cuts energy (introduces bias). With **Russian Roulette**, choose a survival probability $P_{\text{RR}} \in (0, 1)$:
+
+- Draw $\xi \sim \mathrm{Uniform}[0, 1]$.
+- If $\xi \le P_{\text{RR}}$: shoot a bounce ray and return $L_o / P_{\text{RR}}$.
+- If $\xi > P_{\text{RR}}$: terminate and return $0$.
+
+The expected value remains unbiased:
+
+$$
+\mathbb{E}[L] = P_{\text{RR}}\cdot\frac{L_o}{P_{\text{RR}}} + (1 - P_{\text{RR}})\cdot 0 = L_o.
+$$
+
+#### Sampling the Light Directly
+
+Uniform hemisphere sampling ($p(\omega_i) = \frac{1}{2\pi}$) wastes most rays when light sources are small, producing noisy results at low SPP. Split shading into **direct** (light source, no RR) and **indirect** (other reflectors, with RR) contributions.
+
+Sample uniformly on the light area $A$ with $p(x') = 1/A$, and rewrite the integral from solid angle $d\omega_i$ to area $dA$ via $d\omega_i = \frac{\cos\theta'}{\|x'-x\|^2}\,dA$:
+
+$$
+L_{\text{dir}}(x, \omega_o)
+= \int_A L_i(x, \omega_i)\,f_r(x, \omega_i, \omega_o)\,
+  \frac{\cos\theta\,\cos\theta'}{\|x'-x\|^2}\,dA.
+$$
+
+- $\theta$: Angle between $\omega_i$ and the surface normal at $x$.
+- $\theta'$: Angle between $-\omega_i$ and the light normal at $x'$.
+- Shoot a shadow ray from $x$ to $x'$ to check whether the light sample is blocked.
+
+#### Path Tracing Algorithm (Pseudocode)
+
+```python
+shade(p, wo):
+    # 1. Contribution from the light source (direct, no RR)
+    L_dir = 0.0
+    x_prime = sample_light()               # pdf_light = 1 / A
+    if not blocked(p, x_prime):
+        L_dir = L_i * f_r * cos_theta * cos_theta_prime \
+                / (dist(p, x_prime)**2 * pdf_light)
+
+    # 2. Contribution from other reflectors (indirect, with RR)
+    L_indir = 0.0
+    if rand() <= P_RR:
+        wi = sample_hemisphere(N)          # pdf_hemi = 1 / (2 * pi)
+        q = closest_intersection(ray(p, wi), scene)
+        if q exists and not is_light(q):
+            L_indir = shade(q, -wi) * f_r * cos_theta / (pdf_hemi * P_RR)
+
+    return L_dir + L_indir
+```
+
+::: {.callout-note collapse="true"}
+
+## Additional Topics in Modern Path Tracing
+
+- **Sampling & variance reduction**: Sampling arbitrary PDFs, importance sampling, low-discrepancy sequences, and combining light + hemisphere sampling via **Multiple Importance Sampling (MIS)**.
+- **Image formation**: Pixel reconstruction filters (beyond uniform averaging) and converting radiance to display color (gamma correction, tone-mapping curves, color spaces).
+
+:::
+
+## Advanced Light Transport
+
+#### Biased vs. Unbiased Monte Carlo Estimators
+
+- **Unbiased**: No systematic error—the expected value equals the true value regardless of the number of samples.
+- **Biased**: Otherwise. A biased estimator is **consistent** if its expected value converges to the true value as the number of samples approaches infinity.
+- Visual intuition: *biased* $\leftrightarrow$ blurry; *consistent* $\leftrightarrow$ not blurry with infinite samples.
+
+#### Bidirectional Path Tracing (BDPT)
+
+*Unbiased* (Veach 1997).
+
+- Traces sub-paths from **both** the camera and the light source, then connects their endpoints.
+- Suitable when light transport is complex on the light's side; difficult to implement and relatively slow.
+
+#### Metropolis Light Transport (MLT)
+
+*Unbiased*, based on Markov Chain Monte Carlo (MCMC).
+
+- Locally perturbs an existing path to generate the next path; excels at exploring difficult light paths (e.g., light passing through a small gap or caustics).
+- Cons: Hard to estimate convergence rate, uneven convergence across pixels ("dirty" look), and generally unsuitable for animations.
+
+#### Photon Mapping
+
+*Biased, consistent*, two-stage method. Excels at **Specular–Diffuse–Specular (SDS)** paths and **caustics**.
+
+1. **Photon tracing**: Emit photons from light sources, bounce them through the scene, and record hits on diffuse surfaces.
+2. **Photon collection (final gathering)**: Shoot sub-paths from the camera until they hit diffuse surfaces, then estimate local radiance by finding the nearest $N$ photons covering surface area $\Delta A$.
+
+- Why biased: Local density estimation approximates $dN/dA$ by $\Delta N / \Delta A$.
+- Why consistent: As more photons are emitted, the same $N$ photons cover a smaller $\Delta A \to dA$.
+- Trade-off: Small $N \leftrightarrow$ noisy; large $N \leftrightarrow$ blurry.
+
+#### Vertex Connection and Merging (VCM)
+
+*Biased, consistent* (Georgiev et al. 2012). Combines **BDPT** and **Photon Mapping**: instead of wasting BDPT sub-paths whose endpoints cannot be connected directly, merges nearby endpoints using photon-mapping density estimation.
 
 <!-- ## Supplementary Notes {.supplementary-notes}
 

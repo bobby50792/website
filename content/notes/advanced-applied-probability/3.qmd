@@ -76,6 +76,30 @@ ii) If $X_n\Rightarrow c$ for a constant $c$, then $X_n\xrightarrow{\mathbb P}c$
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+For (i), let $x$ be a continuity point of $F_X$ and fix $\epsilon>0$. Since
+$\{X_n\le x\}\subseteq\{X\le x+\epsilon\}\cup\{|X_n-X|>\epsilon\}$,
+
+$$
+\limsup_{n\to\infty}F_n(x)\le F_X(x+\epsilon),
+$$
+
+and symmetrically $\liminf_{n\to\infty}F_n(x)\ge F_X(x-\epsilon)$. Letting
+$\epsilon\downarrow0$ and using continuity of $F_X$ at $x$ gives
+$F_n(x)\to F_X(x)$.
+
+For (ii), the distribution function of $c$ is continuous at $c\pm\epsilon$
+for every $\epsilon>0$, so
+
+$$
+\mathbb P(|X_n-c|>\epsilon)
+\le F_n(c-\epsilon)+\bigl(1-F_n(c+\epsilon)\bigr)
+\to 0+(1-1)=0.
+$$
+
+:::
+
 ::: {#thm-aap-3-3 name="Convergence of Expectations"}
 
 $X_n\Rightarrow X_\infty$ if and only if
@@ -84,6 +108,31 @@ $$
 \mathbb E\,g(X_n)\to\mathbb E\,g(X_\infty)
 \qquad\text{for every bounded continuous }g:\mathbb R\to\mathbb R.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+**($\Rightarrow$)** Let $U\sim\mathrm{Uniform}(0,1)$ and set
+$Y_n=F_n^{-1}(U):=\inf\{x:F_n(x)\ge U\}$. Then $Y_n\stackrel{d}{=}X_n$ and
+$Y_n\to Y_\infty$ a.s. (Skorokhod's representation). For any bounded
+continuous $g$, $g(Y_n)\to g(Y_\infty)$ a.s., so dominated convergence gives
+$\mathbb E\,g(X_n)=\mathbb E\,g(Y_n)\to\mathbb E\,g(Y_\infty)=\mathbb E\,g(X_\infty)$.
+
+**($\Leftarrow$)** Let $x$ be a continuity point of $F_{X_\infty}$ and
+$\epsilon>0$. Sandwich $\mathbf 1_{(-\infty,x]}$ between continuous
+piecewise-linear functions $g_{\epsilon,-}\le\mathbf 1_{(-\infty,x]}\le g_{\epsilon,+}$,
+where $g_{\epsilon,+}$ drops linearly from $1$ to $0$ on $[x,x+\epsilon]$ and
+$g_{\epsilon,-}$ drops on $[x-\epsilon,x]$. Passing to the limit gives
+
+$$
+F_{X_\infty}(x-\epsilon)
+\le\liminf_{n\to\infty}F_n(x)
+\le\limsup_{n\to\infty}F_n(x)
+\le F_{X_\infty}(x+\epsilon),
+$$
+
+and letting $\epsilon\downarrow0$ yields $F_n(x)\to F_{X_\infty}(x)$.
 
 :::
 
@@ -101,6 +150,17 @@ If in addition $g$ is bounded, then $\mathbb E\,g(X_n)\to\mathbb E\,g(X_\infty)$
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Take the Skorokhod representation $Y_n\stackrel{d}{=}X_n$ with
+$Y_n\to Y_\infty$ a.s. Since $\mathbb P(Y_\infty\in D_g)=\mathbb P(X_\infty\in D_g)=0$,
+we have $g(Y_n)\to g(Y_\infty)$ a.s. By @thm-aap-3-1,
+$g(Y_n)\Rightarrow g(Y_\infty)$, which is equivalent to
+$g(X_n)\Rightarrow g(X_\infty)$. If $g$ is bounded, dominated convergence
+gives $\mathbb E\,g(X_n)=\mathbb E\,g(Y_n)\to\mathbb E\,g(Y_\infty)=\mathbb E\,g(X_\infty)$.
+
+:::
+
 ::: {#thm-aap-3-6 name="Slutsky's Theorem"}
 
 If $X_n\Rightarrow X$ and $Y_n\Rightarrow c$ for a constant $c$, then
@@ -110,6 +170,26 @@ X_n+Y_n\Rightarrow X+c
 \qquad\text{and}\qquad
 X_nY_n\Rightarrow cX.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+By @thm-aap-3-1(ii), $Y_n\xrightarrow{\mathbb P}c$. For any continuity point
+$x$ of $F_{X+c}$ and $\epsilon>0$,
+
+$$
+\mathbb P(X_n+Y_n\le x)
+\le\mathbb P(X_n+c\le x+\epsilon)+\mathbb P(|Y_n-c|>\epsilon),
+$$
+
+with a symmetric lower bound at $x-\epsilon$. Letting $n\to\infty$ then
+$\epsilon\downarrow0$ gives $X_n+Y_n\Rightarrow X+c$.
+
+For the product, write $X_nY_n=cX_n+(Y_n-c)X_n$. Since $X_n\Rightarrow X$ is
+tight and $Y_n-c\xrightarrow{\mathbb P}0$, we have
+$(Y_n-c)X_n\xrightarrow{\mathbb P}0$. Since $cX_n\Rightarrow cX$, the sum
+case yields $X_nY_n\Rightarrow cX$.
 
 :::
 
@@ -191,6 +271,30 @@ equal.
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Since $\bigl|(e^{-ita}-e^{-itb})/(it)\bigr|=\bigl|\int_a^b e^{-ity}\,dy\bigr|\le b-a$,
+Fubini's theorem exchanges the $t$- and $x$-integrals:
+
+$$
+\frac{1}{2\pi}\int_{-T}^{T}\frac{e^{-ita}-e^{-itb}}{it}\,\varphi(t)\,dt
+=\int_{\mathbb R}R_T(x)\,\mu(dx),
+$$
+
+where
+$R_T(x)=\frac{1}{\pi}\int_0^T\bigl(\frac{\sin(t(x-a))}{t}-\frac{\sin(t(x-b))}{t}\bigr)\,dt$.
+By the Dirichlet integral $\lim_{T\to\infty}\frac{1}{\pi}\int_0^T\frac{\sin(tu)}{t}\,dt=\tfrac12\operatorname{sgn}(u)$
+(uniformly bounded in $T,u$), $R_T(x)\to\mathbf 1_{(a,b)}(x)+\tfrac12\mathbf 1_{\{a,b\}}(x)$
+pointwise and boundedly, so dominated convergence gives the formula.
+
+For uniqueness, $\mu$ has at most countably many atoms, so the formula
+determines $\mu((a,b))$ for all non-atoms $a<b$ (a dense set). Letting
+$a\to-\infty$ determines $F_\mu(b)$ on a dense set, hence everywhere by
+[right-continuity on a dense set](1.qmd#cor-aap-1-5), which uniquely
+determines $\mu$.
+
+:::
+
 ::: {#thm-aap-3-12 name="Density from an Integrable Characteristic Function"}
 
 If $\int|\varphi(t)|\,dt<\infty$, then $\mu$ has a bounded continuous density
@@ -198,6 +302,23 @@ If $\int|\varphi(t)|\,dt<\infty$, then $\mu$ has a bounded continuous density
 $$
 f(y)=\frac{1}{2\pi}\int_{\mathbb R}e^{-ity}\varphi(t)\,dt.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Write $(e^{-ita}-e^{-itb})/(it)=\int_a^b e^{-ity}\,dy$. Since
+$\int|\varphi(t)|\,dt<\infty$, we may send $T\to\infty$ directly in
+@thm-aap-3-11 and apply Fubini's theorem to get
+
+$$
+\mu\bigl((a,b)\bigr)+\frac12\mu\bigl(\{a,b\}\bigr)=\int_a^b f(y)\,dy.
+$$
+
+The bound $|f(y)|\le\frac{1}{2\pi}\int|\varphi(t)|\,dt<\infty$ and dominated
+convergence show that $f$ is bounded and continuous. Letting $b\downarrow a$
+forces $\mu(\{a\})=0$ for every $a$, so $\mu((a,b))=\int_a^b f(y)\,dy$ for
+all $a<b$, meaning $f$ is the density of $\mu$.
 
 :::
 
@@ -213,6 +334,32 @@ ii) If $\varphi_n(t)$ converges pointwise to a limit $\varphi(t)$ that is
     continuous at $0$, then the sequence $\mu_n$ is tight and converges
     weakly to the probability measure $\mu$ with characteristic function
     $\varphi$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Part (i) follows directly from @thm-aap-3-3 applied to $x\mapsto\cos(tx)$ and
+$x\mapsto\sin(tx)$.
+
+For (ii), Fubini's theorem and the bound
+$1-\frac{\sin(ux)}{ux}\ge\tfrac12\mathbf 1_{\{|ux|>2\}}$ give, for every $u>0$,
+
+$$
+\mu_n\bigl(\{|x|>2/u\}\bigr)
+\le\frac{1}{u}\int_{-u}^{u}\bigl(1-\varphi_n(t)\bigr)\,dt.
+$$
+
+Letting $n\to\infty$ by dominated convergence gives
+$\limsup_n\mu_n(\{|x|>2/u\})\le\frac1u\int_{-u}^{u}(1-\varphi(t))\,dt$,
+which tends to $0$ as $u\to0$ because $\varphi$ is continuous at $0$ with
+$\varphi(0)=1$. Hence $\{\mu_n\}$ is tight.
+
+By Helly's selection theorem and tightness, every subsequence of $\{\mu_n\}$
+has a further subsequence converging weakly to some probability measure $\nu$.
+By (i), $\nu$ has characteristic function $\varphi$, so by uniqueness
+(@thm-aap-3-11) every subsequential limit is the same $\mu$; thus
+$\mu_n\Rightarrow\mu$.
 
 :::
 
@@ -236,6 +383,61 @@ limit.
 
 ### Moments and Derivatives
 
+::: {#thm-aap-3-17 name="Differentiation Under the Integral Sign"}
+
+Let $(S,\mathcal S,\mu)$ be a measure space and $f:(a,b)\times S\to\mathbb C$.
+Fix $y\in(a,b)$ and suppose there is $\delta>0$ such that on
+$I=(y-\delta,y+\delta)\subseteq(a,b)$:
+
+i) $f(t,\cdot)$ is integrable for every $t\in I$.
+
+ii) $f(\cdot,x)$ is continuously differentiable on $I$ for every $x\in S$.
+
+iii) $\partial_t f(t,\cdot)$ is integrable for every $t\in I$, and
+     $v(t)=\int_S\partial_t f(t,x)\,\mu(dx)$ is continuous at $y$.
+
+iv) The partial derivative satisfies
+
+    $$
+    \int_S\int_{y-\delta}^{y+\delta}|\partial_t f(t,x)|\,dt\,\mu(dx)<\infty.
+    $$
+
+Then $u(t)=\int_S f(t,x)\,\mu(dx)$ is differentiable at $y$ and
+
+$$
+u'(y)=\int_S\partial_t f(y,x)\,\mu(dx).
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+The derivative is measurable in $x$ as a limit of difference quotients, and
+continuity in $t$ gives joint measurability. The set on which
+$G(x)=\int_I|\partial_t f(t,x)|\,dt$ is positive is $\sigma$-finite, since
+each $\{G\ge 1/n\}$ has finite measure by (iv). By (ii), the derivative
+vanishes on $I$ for every $x$ outside that set, so Fubini's theorem applies
+on the $\sigma$-finite set.
+
+For $0<|h|<\delta$, the fundamental theorem of calculus and Fubini's theorem give
+
+$$
+\begin{aligned}
+\frac{u(y+h)-u(y)}{h}
+&=\frac1h\int_S\int_y^{y+h}\partial_t f(t,x)\,dt\,\mu(dx)\\
+&=\frac1h\int_y^{y+h}v(t)\,dt.
+\end{aligned}
+$$
+
+By continuity at $y$, this average tends to $v(y)$ as $h\to0$.
+
+For @thm-aap-3-14, take $f(t,x)=(ix)^ke^{itx}$ for $0\le k<n$. Its
+derivative has absolute value $|x|^{k+1}$, which is integrable under the
+moment assumption. This gives (iv) and, by dominated convergence, the
+continuity of $v$ in (iii).
+
+:::
+
 ::: {#thm-aap-3-14 name="Derivatives of a Characteristic Function"}
 
 If $\int|x|^n\,\mu(dx)<\infty$, then $\varphi$ has a continuous derivative of
@@ -249,6 +451,66 @@ In particular, $\varphi^{(n)}(0)=i^n\,\mathbb E X^n$.
 
 :::
 
+::: {#lem-aap-3-1 name="Taylor Remainder Bound for Complex Exponentials"}
+
+For every $x\in\mathbb R$ and integer $n\ge0$,
+
+$$
+\left|e^{ix}-\sum_{m=0}^n\frac{(ix)^m}{m!}\right|
+\le\min\left(\frac{|x|^{n+1}}{(n+1)!},\,\frac{2|x|^n}{n!}\right).
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Integrating by parts gives, for every $k\ge0$,
+
+$$
+\int_0^x(x-s)^k e^{is}\,ds
+=\frac{x^{k+1}}{k+1}+\frac{i}{k+1}\int_0^x(x-s)^{k+1}e^{is}\,ds.
+$$
+
+Starting from $e^{ix}-1=i\int_0^x e^{is}\,ds$, induction yields
+
+$$
+e^{ix}-\sum_{m=0}^n\frac{(ix)^m}{m!}
+=\frac{i^{n+1}}{n!}\int_0^x(x-s)^n e^{is}\,ds.
+$$
+
+Using $|e^{is}|=1$ gives the bound $|x|^{n+1}/(n+1)!$. For the second bound,
+$n=0$ follows from $|e^{ix}-1|\le2$; for $n\ge1$, rewriting the $(n-1)$-th
+remainder as
+
+$$
+e^{ix}-\sum_{m=0}^n\frac{(ix)^m}{m!}
+=\frac{i^n}{(n-1)!}\int_0^x(x-s)^{n-1}(e^{is}-1)\,ds
+$$
+
+and using $|e^{is}-1|\le2$ gives $2|x|^n/n!$.
+
+:::
+
+::: {.callout-note title="Why the Integral Remainder Instead of Lagrange" collapse="true"}
+
+For a complex-valued function $f=u+iv:\mathbb R\to\mathbb C$, both the
+**Peano remainder** and the **integral remainder** carry over verbatim by
+applying the real result to $u$ and $v$ and forming $u+iv$: $o(x^n)+i\,o(x^n)=o(x^n)$,
+and the two integrals share the same interval $[0,x]$.
+
+The **Lagrange remainder** fails because the real and imaginary parts yield
+different intermediate points $\xi_1\ne\xi_2$. Already for $n=0$ (the mean
+value theorem), $f(t)=e^{it}$ has $f(2\pi)-f(0)=0$, yet $|f'(\xi)|=1$ for
+every $\xi\in(0,2\pi)$.
+
+| Remainder | Holds for $f:\mathbb R\to\mathbb C$? | Reason |
+|---|---|---|
+| Peano ($o(x^n)$) | Yes | $o(x^n)+i\,o(x^n)=o(x^n)$ |
+| Integral | Yes | Same interval $[0,x]$; combines linearly |
+| Lagrange | No | Real and imaginary parts need $\xi_1\ne\xi_2$ |
+
+:::
+
 ::: {#thm-aap-3-15 name="Second-Order Expansion at 0"}
 
 If $\mathbb E|X|^2<\infty$, then
@@ -257,6 +519,27 @@ $$
 \varphi(t)=1+it\,\mathbb E X-\frac{t^2}{2}\,\mathbb E X^2+o(t^2)
 \qquad\text{as }t\to0.
 $$
+
+:::
+
+::: {.callout-note title="Two Proofs and Why the Explicit Bound Matters" collapse="true"}
+
+By @thm-aap-3-14, $\varphi$ is twice continuously differentiable with
+$\varphi(0)=1$, $\varphi'(0)=i\,\mathbb E X$, and $\varphi''(0)=-\mathbb E X^2$,
+so a second-order Taylor expansion at $0$ gives the result immediately.
+
+Alternatively, applying @lem-aap-3-1 with $n=2$ and $x=tX$ gives
+
+$$
+\frac{1}{t^2}\left|e^{itX}-\left(1+itX-\frac{t^2X^2}{2}\right)\right|
+\le\min\left(\frac{|t|\,|X|^3}{6},\,X^2\right).
+$$
+
+As $t\to0$, the first bound tends to $0$ pointwise while the second provides
+the integrable dominating function $X^2$, so dominated convergence yields the
+expansion without differentiating $\varphi$. Unlike the qualitative $o(t^2)$
+remainder, this explicit bound can also be summed uniformly across
+non-identically distributed summands (such as triangular arrays).
 
 :::
 
@@ -308,9 +591,31 @@ $$
 
 :::
 
+::: {.callout-note title="Example: Asymptotic Confidence Intervals" collapse="true"}
+
+Let $X_1,X_2,\ldots$ be i.i.d. with unknown mean $\mu$ and variance
+$\sigma^2\in(0,\infty)$, and let $\bar X_n=S_n/n$. Given $\alpha\in(0,1)$,
+choose $z_{\alpha/2}>0$ with $\Phi(z_{\alpha/2})=1-\alpha/2$ (for example,
+$z_{0.025}\approx1.96$ for $1-\alpha=0.95$). By @thm-aap-3-16,
+
+$$
+\mathbb P\left(\mu\in\left[\bar X_n-z_{\alpha/2}\frac{\sigma}{\sqrt n},\;
+\bar X_n+z_{\alpha/2}\frac{\sigma}{\sqrt n}\right]\right)
+=\mathbb P\left(\left|\frac{\bar X_n-\mu}{\sigma/\sqrt n}\right|\le z_{\alpha/2}\right)
+\to 1-\alpha.
+$$
+
+This random interval is an **asymptotic $(1-\alpha)$ confidence interval** for
+$\mu$: the interval varies with the sample, while $\mu$ is fixed. When
+$\sigma$ is unknown, replacing it by a consistent estimator $\hat\sigma_n$
+(such as the sample standard deviation) preserves the same asymptotic
+coverage by @thm-aap-3-6.
+
+:::
+
 ### Triangular Arrays
 
-::: {#thm-aap-3-17 name="Lindeberg-Feller Theorem"}
+::: {#thm-aap-3-18 name="Lindeberg–Feller Theorem"}
 
 For each $n$, let $X_{n,m}$, $1\le m\le n$, be independent random variables
 with $\mathbb E X_{n,m}=0$. Suppose:
@@ -318,11 +623,38 @@ with $\mathbb E X_{n,m}=0$. Suppose:
 i) $\displaystyle\sum_{m=1}^n\mathbb E X_{n,m}^2\to\sigma^2>0$.
 
 ii) For every $\epsilon>0$,
-    $\displaystyle\lim_{n\to\infty}\sum_{m=1}^n
-    \mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|>\epsilon\}}\bigr]=0$.
+
+    $$
+    \lim_{n\to\infty}\sum_{m=1}^n
+    \mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|>\epsilon\}}\bigr]=0.
+    $$
 
 Then $S_n=X_{n,1}+\cdots+X_{n,n}\Rightarrow\sigma\chi$ as $n\to\infty$, where
 $\chi$ has the standard normal distribution.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Let $\varphi_{n,m}(t)=\mathbb E\,e^{itX_{n,m}}$ and
+$\sigma_{n,m}^2=\mathbb E X_{n,m}^2$. Applying @lem-aap-3-1 with $n=2$ and
+splitting on $\{|X_{n,m}|\le\epsilon\}$ and $\{|X_{n,m}|>\epsilon\}$ gives
+
+$$
+\left|\varphi_{n,m}(t)-\left(1-\frac{t^2}{2}\sigma_{n,m}^2\right)\right|
+\le\frac{|t|^3\epsilon}{6}\sigma_{n,m}^2
++t^2\,\mathbb E\bigl[|X_{n,m}|^2\mathbf 1_{\{|X_{n,m}|>\epsilon\}}\bigr].
+$$
+
+Summing over $m$ and letting $n\to\infty$ then $\epsilon\to0$ shows
+$\sum_{m=1}^n\bigl|\varphi_{n,m}(t)-(1-\tfrac12 t^2\sigma_{n,m}^2)\bigr|\to0$.
+Condition (ii) also implies $\max_{1\le m\le n}\sigma_{n,m}^2\to0$, so for
+large $n$ all factors lie in the closed unit disk and
+$\prod_{m=1}^n(1-\tfrac12 t^2\sigma_{n,m}^2)\to e^{-\sigma^2 t^2/2}$. Using
+$\bigl|\prod_{m=1}^n z_m-\prod_{m=1}^n w_m\bigr|\le\sum_{m=1}^n|z_m-w_m|$
+for $|z_m|,|w_m|\le1$ yields
+$\varphi_{S_n}(t)=\prod_{m=1}^n\varphi_{n,m}(t)\to e^{-\sigma^2 t^2/2}$, and
+@thm-aap-3-13 concludes the proof.
 
 :::
 
@@ -337,19 +669,19 @@ $$
 =\mathbb E\bigl[Y_1^2\mathbf 1_{\{|Y_1|>\epsilon\sqrt n\}}\bigr]\to0
 $$
 
-by the dominated convergence theorem. So @thm-aap-3-17 contains
-@thm-aap-3-16.
+by the dominated convergence theorem. Thus @thm-aap-3-18 contains @thm-aap-3-16.
 
 :::
 
 ### Rates of Convergence
 
-::: {#thm-aap-3-18 name="Berry-Esseen Theorem"}
+::: {#thm-aap-3-19 name="Berry–Esseen Theorem"}
 
 Let $X_1,X_2,\ldots$ be i.i.d. with $\mathbb E X_i=0$,
-$\mathbb E X_i^2=\sigma^2$, and $\mathbb E|X_i|^3=\rho<\infty$. If $F_n$ is
-the distribution function of $(X_1+\cdots+X_n)/(\sigma\sqrt n)$ and $\Phi$ is
-the standard normal distribution function, then for every $x$ and $n$,
+$\mathbb E X_i^2=\sigma^2\in(0,\infty)$, and $\mathbb E|X_i|^3=\rho<\infty$. If
+$F_n$ is the distribution function of $(X_1+\cdots+X_n)/(\sigma\sqrt n)$ and
+$\Phi$ is the standard normal distribution function, then for every $x\in\mathbb R$
+and $n\ge1$,
 
 $$
 |F_n(x)-\Phi(x)|\le\frac{3\rho}{\sigma^3\sqrt n}.
@@ -357,6 +689,21 @@ $$
 
 :::
 
+::: {.callout-note title="Why the 1/√n Rate Is Sharp" collapse="true"}
+
+Take i.i.d. coin flips with $\mathbb P(X_i=\pm1)=\tfrac12$, so $\sigma=1$ and
+$\rho=1$. When $n=2m$ is even, $F_n$ has a jump at $x=0$ of size
+
+$$
+\mathbb P(S_{2m}=0)=\binom{2m}{m}2^{-2m}\sim\frac{1}{\sqrt{\pi m}}=\sqrt{\frac{2}{\pi n}},
+$$
+
+whereas $\Phi$ is continuous. Hence $\sup_x|F_n(x)-\Phi(x)|$ must be at least
+half that jump, so the $n^{-1/2}$ rate cannot be improved in general. (The
+constant $3$ is convenient for the proof; the best known universal constant
+is below $0.4748$.)
+
+:::
 
 
 

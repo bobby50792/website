@@ -1,6 +1,6 @@
 ---
 title: "Supervised Learning"
-description: "Linear, logistic, ridge, and LASSO regression, compressed sensing, and support vector machines."
+description: "Linear, logistic, ridge, and LASSO regression, compressed sensing, support vector machines, decision trees, and random forests."
 page-layout: article
 search: true
 number-offset: [3]
@@ -11,14 +11,17 @@ crossref:
 
 ## Linear Regression
 
-- Inputs $x_i\in\mathbb R^d$; targets $y_i\in\mathbb R$.
-- Model: $f_{w,b}(x)=w^\top x+b$. Absorb $b$ into $w$ by appending a constant 1 to $x$.
-- Squared loss:
+::: {#def-linear-regression name="Linear Regression"}
+
+Linear regression predicts a real target $y$ from $x\in\mathbb R^d$ with $f_{w,b}(x)=w^\top x+b$. Ordinary least squares fits the model by minimizing the sum of squared losses.
 
 $$
 L(f,x_i,y_i)=\frac12\bigl(f(x_i)-y_i\bigr)^2.
 $$
 
+:::
+
+- Absorb $b$ into $w$ by appending a constant 1 to $x$.
 - Exact minimizer, when $X^\top X$ is invertible:
 
 $$
@@ -29,7 +32,12 @@ $$
 
 ### Perceptron
 
-- A simple neural network with prediction $f(x)=\operatorname{sign}(w^\top x)$.
+::: {#def-perceptron name="Perceptron"}
+
+A perceptron is a binary linear classifier with prediction $f(x)=\operatorname{sign}(w^\top x)$, with the bias absorbed into $w$.
+
+:::
+
 - The hard sign output cannot be optimized directly with ordinary gradient descent.
 - Let $P$ and $N$ be the positive and negative training examples:
 
@@ -71,38 +79,42 @@ $$
 
 ## Logistic Regression
 
-- Make the output a probability using the sigmoid function:
+::: {#def-logistic-regression name="Logistic Regression"}
+
+Binary logistic regression models the probability of the positive class by applying the sigmoid to a linear score.
 
 $$
-g(z)=\frac{1}{1+e^{-z}}\in[0,1].
+P(y=1\mid x)=\sigma(w^\top x+b),
+\qquad \sigma(z)=\frac{1}{1+e^{-z}}.
 $$
+
+:::
 
 ### Entropy and Cross-Entropy
 
-Let $y$ be the true probability distribution and $p$ the predicted distribution.
+::: {#def-entropy-cross-entropy name="Entropy and Cross-Entropy"}
 
-- Entropy measures uncertainty and the ideal expected encoding length for $y$:
-
-$$
-H(y)=-\sum_i y_i\log y_i.
-$$
-
-- Cross-entropy is the expected encoding length when using $p$ to encode outcomes from $y$:
+For distributions $y$ and $p$ on the same outcomes, entropy measures uncertainty as the ideal expected encoding length for $y$. Cross-entropy is the expected length when using $p$ to encode outcomes from $y$.
 
 $$
-\mathrm{XE}(y,p)=-\sum_i y_i\log p_i\ge H(y).
+H(y)=-\sum_{i:\,y_i>0} y_i\log y_i,
+\qquad \mathrm{XE}(y,p)=-\sum_{i:\,y_i>0} y_i\log p_i.
 $$
+
+:::
 
 ### KL Divergence
 
+::: {#def-kl-divergence name="KL Divergence"}
+
 $$
-\begin{aligned}
-D_{\mathrm{KL}}(y\|p)&=\mathrm{XE}(y,p)-H(y) \\
-&=\sum_i y_i\log\frac{y_i}{p_i}\ge0.
-\end{aligned}
+D_{\mathrm{KL}}(y\|p)=\sum_{i:\,y_i>0} y_i\log\frac{y_i}{p_i}
+=\mathrm{XE}(y,p)-H(y).
 $$
 
-- Equality holds exactly when $y_i=p_i$ for all $i$.
+:::
+
+- $D_{\mathrm{KL}}(y\|p)\ge0$, so $\mathrm{XE}(y,p)\ge H(y)$. Equality holds exactly when $y=p$.
 - For fixed $y$, minimizing cross-entropy also minimizes KL divergence, making it a useful loss function.
 - KL divergence and cross-entropy are asymmetric.
 
@@ -113,21 +125,24 @@ $$
 
 ## Ridge Regression
 
-- Restrict the set of solutions by bounding the weight norm, helping reduce overfitting:
+::: {#def-ridge-regression name="Ridge Regression"}
 
-$$
-\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
-\quad\text{subject to}\quad\|w\|_2^2\le c.
-$$
-
-- Use an appropriate penalty $\lambda\ge0$ to obtain an unconstrained formulation:
+Ridge regression fits a linear model with a squared $\ell_2$ penalty on the weights, where $\lambda\ge0$.
 
 $$
 \min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
 +\frac{\lambda}{2}\|w\|_2^2.
 $$
 
-- This is $\ell_2$ regularization, called ridge regression.
+:::
+
+- The penalty corresponds to bounding the weight norm for an appropriate choice of $c$, which helps reduce overfitting:
+
+$$
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2
+\quad\text{subject to}\quad\|w\|_2^2\le c.
+$$
+
 - $\lambda=0$ gives no penalty; increasing $\lambda$ shrinks the optimal weight norm. As $\lambda\to\infty$, $w\to0$.
 - Update in two parts: a gradient step on the loss, then a shrink of the weights:
 
@@ -140,13 +155,17 @@ $$
 
 ## LASSO Regression
 
-- The sparsity constraint $\|w\|_0\le c$ counts nonzero weights and is hard to optimize. Replace it with the convex $\ell_1$ constraint:
+::: {#def-lasso-regression name="LASSO Regression"}
+
+LASSO regression fits a linear model with an $\ell_1$ penalty on the weights, where $\lambda\ge0$.
 
 $$
-\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+ \lambda\|w\|_1.
+\min_w\frac{1}{2N}\sum_i(w^\top x_i-y_i)^2+\lambda\|w\|_1.
 $$
 
-- This relaxation encourages sparse weights (feature selection).
+:::
+
+- The convex $\ell_1$ penalty encourages sparse weights for feature selection. Directly constraining the number of nonzero weights with $\|w\|_0\le c$ is hard to optimize.
 - Update in two parts: the same gradient step as linear regression, then a threshold on every coordinate $j$:
 
 $$
@@ -168,8 +187,13 @@ $$
 
 ### Sparsity Assumption
 
-- $k$-sparse: $\|x\|_0\le k\ll n$; only a few entries are nonzero.
-- With suitable $A$, sparsity enables recovery from $m\ll n$ measurements $y=Ax$.
+::: {#def-sparsity name="Sparsity"}
+
+A vector $x\in\mathbb R^n$ is $k$-sparse if $\|x\|_0\le k$, where $\|x\|_0$ counts its nonzero entries.
+
+:::
+
+- For $k\ll n$ and suitable $A$, sparsity enables recovery from $m\ll n$ measurements $y=Ax$.
 
 ### Restricted Isometry Property (RIP)
 
@@ -236,6 +260,48 @@ $$
 
 - Recovery error is controlled by the non-sparse tail; $x=x_s$ gives exact recovery.
 
+\
+
+::: {#thm-rip-random-matrix name="Random Gaussian Matrix Is RIP"}
+
+Let $\epsilon,\delta\in(0,1)$, let $s\in[d]$, and let $n$ be an integer satisfying
+
+$$
+n\ge 216\,\frac{s\log\!\left(\dfrac{120d}{\delta\epsilon}\right)}{\epsilon^2}.
+$$
+
+If $W\in\mathbb R^{n\times d}$ has i.i.d. entries $W_{ij}\sim\mathcal N(0,1/n)$, then with probability at least $1-\delta$, $W$ is $(\epsilon,s)$-RIP.
+
+:::
+
+- Thus, the required number of measurements $n$ grows linearly with sparsity $s$ and only logarithmically with ambient dimension $d$.
+- Orthogonal invariance. For any orthonormal $U$, each row $A_i=W_iU$ remains Gaussian with mean $0$ and covariance $U^\top\operatorname{Cov}(W_i^\top)U=\frac1n I$, so $WU$ still has i.i.d. $\mathcal N(0,1/n)$ entries and is still $(\epsilon,s)$-RIP.
+- Transform sparsity. Even if $x$ is not sparse itself, if $x=Ua$ is sparse in an orthonormal basis $U$ (e.g., Fourier or wavelet), then $y=Wx=(WU)a$ can still be recovered via $\ell_1$ minimization without knowing $U$ when choosing $W$.
+
+### Generative Models
+
+::: {#def-generative-model name="Generative Model"}
+
+In compressed sensing, a generative model represents candidate signals as $G(z)$ for a map $G\colon\mathbb R^k\to\mathbb R^n$. The latent vector $z$ typically has far fewer coordinates than the output signal.
+
+:::
+
+::: {#thm-generative-recovery name="Recovery with a ReLU Generative Model"}
+
+Suppose $G\colon\mathbb R^k\to\mathbb R^n$ is the generator given by a $d$-layer ReLU network. Use $m=O(kd\log n)$ measurements with a sensing matrix $A\in\mathbb R^{m\times n}$ whose entries are i.i.d. $\mathcal N(0,1/m)$.
+
+For any signal $x^*\in\mathbb R^n$ and noisy measurements $y=Ax^*+\eta$, choose $\widehat z\in\mathbb R^k$ whose measurement residual $\|y-AG(\widehat z)\|_2$ is within $\epsilon$ of the smallest possible residual. Then, with probability $1-e^{-\Omega(m)}$ over the draw of $A$,
+
+$$
+\|G(\widehat z)-x^*\|_2
+\le 6\min_{z^*\in\mathbb R^k}\|G(z^*)-x^*\|_2+3\|\eta\|_2+2\epsilon.
+$$
+
+:::
+
+- This is Theorem 1.1 of Bora et al. (2017). [Compressed Sensing using Generative Models](https://proceedings.mlr.press/v70/bora17a/bora17a.pdf)
+
+
 ## Support Vector Machine
 
 A linear classifier $\operatorname{sign}(w^\top x+b)$ with labels $y_i\in\{-1,1\}$ that separates the two classes with the largest possible margin.
@@ -289,15 +355,17 @@ $$
 
 ### Lagrangian Duality
 
-- Primal problem and its Lagrangian, with multipliers $\alpha_i\ge0$:
+::: {#def-lagrangian name="Lagrangian"}
+
+For the primal problem of minimizing $f(x)$ under the constraints $g_i(x)\le0$, the Lagrangian is
 
 $$
-p^*=\min_xf(x)\ \text{ subject to }\ g_i(x)\le0,
-\qquad
-L(x,\alpha)=f(x)+\sum_i\alpha_ig_i(x).
+L(x,\alpha)=f(x)+\sum_i\alpha_i g_i(x),\qquad \alpha_i\ge0.
 $$
 
-- $\max_{\alpha\ge0}L(x,\alpha)$ equals $f(x)$ if $x$ is feasible and $+\infty$ otherwise, so $p^*=\min_x\max_{\alpha\ge0}L(x,\alpha)$. The dual problem swaps the order:
+:::
+
+- $\max_{\alpha\ge0}L(x,\alpha)$ equals $f(x)$ if $x$ is feasible and $+\infty$ otherwise, so the primal optimal value is $p^*=\min_x\max_{\alpha\ge0}L(x,\alpha)$. The dual problem swaps the order:
 
 $$
 d^*=\max_{\alpha\ge0}\min_xL(x,\alpha).
@@ -389,6 +457,230 @@ $$
 $K$ is a kernel if and only if it is symmetric and, for every finite set of points $x_1,\dots,x_n$, the matrix $\bigl[K(x_i,x_j)\bigr]_{i,j}$ is positive semidefinite.
 
 :::
+
+## Decision Tree
+
+::: {#def-decision-tree name="Decision Tree"}
+
+A decision tree is a rooted tree whose internal nodes test features and route inputs based on the results. Each input follows a path to a leaf that predicts a class or numerical value.
+
+:::
+
+- A small tree explains each prediction through its path, making it easier to interpret than a deep neural network.
+- Trees can grow large and deep.
+- Hard routing can abruptly change the prediction when an input crosses a split threshold.
+- Deep trees can easily overfit training noise.
+
+### Gini Index
+
+::: {#def-gini-index name="Gini Index"}
+
+The Gini index measures class impurity in a node. If $p_c$ is the fraction of samples at node $S$ belonging to class $c$ out of $K$ classes, then
+
+$$
+I(S)=1-\sum_{c=1}^K p_c^2.
+$$
+
+The index is zero when all samples belong to one class.
+
+:::
+
+For a binary split into $S_L$ and $S_R$, choose the split with the smallest weighted child impurity
+
+$$
+\frac{|S_L|}{|S|}I(S_L)+\frac{|S_R|}{|S|}I(S_R).
+$$
+
+## Random Forest and Boosting
+
+::: {#def-random-forest name="Random Forest"}
+
+A random forest is an ensemble of decision trees. Each tree trains on a bootstrap sample of the training data (drawn with replacement) and considers a random subset of features at each split. For classification, the forest picks the class with the most votes. For regression, it averages the trees' predictions.
+
+:::
+
+- **Feature bagging** (Bootstrap Aggregating). At each split, sample $m$ of the $p$ features without replacement and choose the best split among those features. This helps decorrelate the trees and makes their combined predictions less variable.
+
+### Boosting Framework
+
+::: {#def-boosting name="Boosting"}
+
+Boosting trains weak classifiers in sequence and combines them into a final classifier.
+
+:::
+
+Given training examples $(x_i,y_i)_{i=1}^m$ with $x_i\in\mathcal X$ and $y_i\in\{-1,+1\}$, repeat for $t=1,\ldots,T$:
+
+1. Construct a distribution $D_t$ over training indices, where $D_t(i)$ is the weight of example $i$.
+2. Find a weak classifier $h_t\colon\mathcal X\to\{-1,+1\}$ with low weighted error.
+
+   $$
+   \epsilon_t=\Pr_{i\sim D_t}\bigl[h_t(x_i)\ne y_i\bigr]
+   =\sum_{i:\,h_t(x_i)\ne y_i}D_t(i).
+   $$
+
+After $T$ rounds, combine $h_1,\ldots,h_T$ into $H_{\mathrm{final}}$, often using a weighted vote.
+
+### AdaBoost
+
+::: {#def-adaboost name="AdaBoost"}
+
+AdaBoost starts with uniform sample weights $D_1(i)=1/m$. In each round, train $h_t$ under $D_t$ and compute its weighted error $\epsilon_t$. For $0<\epsilon_t<1/2$, set
+
+$$
+\begin{aligned}
+\alpha_t &= \frac12\log\frac{1-\epsilon_t}{\epsilon_t}, \\
+D_{t+1}(i) &= \frac{D_t(i)\exp\!\bigl(-\alpha_t y_i h_t(x_i)\bigr)}{Z_t}.
+\end{aligned}
+$$
+
+$Z_t$ normalizes the weights to sum to 1. The update increases the weights of misclassified examples. The final prediction is the weighted vote
+
+$$
+H_{\mathrm{final}}(x)=\operatorname{sign}\!\left(\sum_{t=1}^T\alpha_t h_t(x)\right).
+$$
+
+:::
+
+::: {#thm-adaboost-training-error name="AdaBoost Training Error Bound"}
+
+Write the weighted error in round $t$ as $\epsilon_t=\tfrac12-\gamma_t$. Then the fraction of training examples misclassified by $H_{\mathrm{final}}$ satisfies
+
+$$
+\begin{aligned}
+\operatorname{err}_{\mathrm{train}}(H_{\mathrm{final}})
+&\le \prod_{t=1}^T 2\sqrt{\epsilon_t(1-\epsilon_t)} \\
+&= \prod_{t=1}^T \sqrt{1-4\gamma_t^2}
+\le \exp\!\left(-2\sum_{t=1}^T\gamma_t^2\right).
+\end{aligned}
+$$
+
+If $\gamma_t\ge\gamma>0$ in every round, then $\operatorname{err}_{\mathrm{train}}(H_{\mathrm{final}})\le e^{-2\gamma^2T}$.
+
+:::
+
+**Proof.** Let $f(x)=\sum_{t=1}^T\alpha_t h_t(x)$, so $H_{\mathrm{final}}(x)=\operatorname{sign}(f(x))$.
+
+Unrolling the updates from $D_1(i)=1/m$ gives
+
+$$
+D_{T+1}(i)
+=\frac{e^{-y_i f(x_i)}}{m\prod_{t=1}^T Z_t}.
+$$
+
+On each mistake, $y_i f(x_i)\le0$, so the exponential loss is at least 1.
+
+$$
+\begin{aligned}
+\operatorname{err}_{\mathrm{train}}(H_{\mathrm{final}})
+&\le\frac{1}{m}\sum_i e^{-y_i f(x_i)} \\
+&=\left(\prod_{t=1}^T Z_t\right)\sum_i D_{T+1}(i)
+=\prod_{t=1}^T Z_t.
+\end{aligned}
+$$
+
+To compute $Z_t$, group the wrong and correct predictions, which contribute weights $\epsilon_t$ and $1-\epsilon_t$.
+
+$$
+Z_t=\epsilon_t e^{\alpha_t}+(1-\epsilon_t)e^{-\alpha_t}.
+$$
+
+Setting the derivative to zero gives $\alpha_t=\tfrac12\log((1-\epsilon_t)/\epsilon_t)$ and $Z_t=2\sqrt{\epsilon_t(1-\epsilon_t)}$. Since $\sqrt{1-4\gamma_t^2}\le e^{-2\gamma_t^2}$, multiplying over the rounds gives the bound.
+
+### Margin-Based Analysis
+
+::: {#def-voting-margin name="Voting Margin"}
+
+For the margin analysis, normalize AdaBoost's vote as $f(x)=\sum_t\alpha_t h_t(x)/\sum_t\alpha_t$. The margin $yf(x)$ measures how much the weighted vote favors the true label.
+
+:::
+
+::: {#thm-boosting-margin-generalization name="Margin-Based Generalization Bound"}
+
+Let $S$ contain $m$ independent examples drawn from a distribution $D$ on $\mathcal X\times\{-1,+1\}$. Let $\mathcal H$ be a finite class of binary base classifiers and $\mathcal C=\operatorname{conv}(\mathcal H)$ the class of their weighted averages. Write $P_D$ for population probability and $P_S$ for the fraction of training examples satisfying an event.
+
+For $0<\delta<1$, with probability at least $1-\delta$ over $S$, the following holds simultaneously for every $f\in\mathcal C$ and every $\theta>0$.
+
+$$
+P_D[yf(x)\le0]
+\le P_S[yf(x)\le\theta]
++O\!\left(\sqrt{\frac{1}{m}\left(
+\frac{\log m\,\log|\mathcal H|}{\theta^2}
++\log\frac{1}{\delta}\right)}\right).
+$$
+
+:::
+
+- This is Theorem 1 of Schapire et al. (1998). [Boosting the Margin](https://cseweb.ucsd.edu/~yfreund/papers/BoostingtheMargin.pdf#page=7)
+
+::: {#thm-adaboost-margin name="AdaBoost Training Margin Bound"}
+
+Let $\epsilon_1,\ldots,\epsilon_T$ be the weighted training errors of the base classifiers in AdaBoost, and let $f$ be the normalized vote above. For any threshold $\theta$,
+
+$$
+P_S[yf(x)\le\theta]
+\le 2^T\prod_{t=1}^T\sqrt{\epsilon_t^{1-\theta}(1-\epsilon_t)^{1+\theta}}.
+$$
+
+If $\epsilon_t\le\tfrac12-\gamma$ in every round for some fixed $\gamma>0$, then this upper bound decays exponentially in $T$ whenever $\theta<\gamma$.
+
+:::
+
+**Proof sketch.** Let $A_T=\sum_t\alpha_t$. If $yf(x)\le\theta$, then $e^{A_T(\theta-yf(x))}\ge1$. Averaging over the training set and using the weight identity from the proof of @thm-adaboost-training-error gives
+
+$$
+P_S[yf(x)\le\theta]
+\le e^{\theta A_T}\frac1m\sum_i e^{-A_T y_i f(x_i)}
+=\prod_{t=1}^T e^{\theta\alpha_t}Z_t.
+$$
+
+Substituting $\alpha_t=\tfrac12\log((1-\epsilon_t)/\epsilon_t)$ and $Z_t=2\sqrt{\epsilon_t(1-\epsilon_t)}$ gives the stated product.
+
+For exponential decay, use $Z_t=1/\cosh\alpha_t$ and $\tanh\alpha_t=1-2\epsilon_t\ge2\gamma$. Since $\tanh$ is concave on $[0,\infty)$,
+
+$$
+\log\cosh\alpha_t=\int_0^{\alpha_t}\tanh u\,du
+\ge\tfrac12\alpha_t\tanh\alpha_t\ge\gamma\alpha_t.
+$$
+
+Thus $e^{\theta\alpha_t}Z_t\le e^{-(\gamma-\theta)\alpha_t}$. Since $\alpha_t\ge\tanh\alpha_t\ge2\gamma$, the product is at most $e^{-2\gamma(\gamma-\theta)T}$ when $\theta<\gamma$.
+
+- This is Theorem 5 of Schapire et al. (1998). [Boosting the Margin](https://cseweb.ucsd.edu/~yfreund/papers/BoostingtheMargin.pdf#page=12)
+
+### Gradient Boosting
+
+#### AdaBoost as Coordinate Descent
+
+Each weak learner $g_j$ has a coefficient $\lambda_j$, initially zero. AdaBoost reduces the average exponential loss
+
+$$
+F_\lambda(x)=\sum_j\lambda_jg_j(x),
+\qquad L(\lambda)=\frac{1}{m}\sum_{i=1}^m e^{-y_i F_\lambda(x_i)}.
+$$
+
+Each round selects a learner $g_j$ with low weighted error and updates one coordinate, $\lambda_j\gets\lambda_j+\alpha_t$, by line search. After $T$ rounds, $L(\lambda)=\prod_{t=1}^T Z_t$ by the proof of @thm-adaboost-training-error.
+
+#### Squared Loss
+
+::: {#def-gradient-boosting name="Gradient Boosting"}
+
+Gradient boosting adds a weak learner each round to approximate the negative loss gradient with respect to the current predictions.
+
+:::
+
+Treat the training predictions $(F(x_1),\ldots,F(x_n))$ as the coordinates of a vector. For squared loss,
+
+$$
+L(Y,F)=\frac12\sum_{i=1}^n\bigl(y_i-F(x_i)\bigr)^2,
+\qquad r_i=-\frac{\partial L}{\partial F(x_i)}=y_i-F(x_i).
+$$
+
+Adding the exact residual would give $F(x_i)+r_i=y_i$. Fit a shallow regression tree $h$ to the pairs $(x_i,r_i)$ to approximate that correction. Add the tree with a small learning rate $\eta$ to damp each update.
+
+$$
+F_{\mathrm{new}}(x)=F(x)+\eta h(x).
+$$
+
 
 <!-- ## Supplementary Notes {.supplementary-notes}
 

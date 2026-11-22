@@ -313,6 +313,34 @@ v) The probability at a point is
 
 :::
 
+::: {#cor-aap-1-5 name="Determination of a Distribution Function on a Dense Set"}
+
+Let $D\subseteq\mathbb R$ be a dense subset (for instance, $\mathbb Q$ or the
+set of continuity points of a distribution function). Any distribution
+function $F$ is uniquely determined by its values on $D$: for every
+$x\in\mathbb R$,
+
+$$
+F(x)=\inf_{\substack{d\in D\\ d>x}} F(d)=\lim_{\substack{d\in D\\ d\downarrow x}} F(d).
+$$
+
+In particular, if two distribution functions $F_X$ and $F_Y$ satisfy
+$F_X(d)=F_Y(d)$ for all $d\in D$, then $F_X(x)=F_Y(x)$ for all
+$x\in\mathbb R$, and hence $X\stackrel{d}{=}Y$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Since $D$ is dense in $\mathbb R$, for any $x\in\mathbb R$ there is a
+sequence $d_n\in D$ with $d_n\downarrow x$. Right-continuity in
+@thm-aap-1-5(iii) gives $F(x)=\lim_{n\to\infty}F(d_n)$, and monotonicity in
+@thm-aap-1-5(i) implies that this limit equals $\inf_{d\in D,\,d>x}F(d)$.
+Since a distribution function uniquely determines the probability measure on
+$\mathcal R$ (@thm-aap-1-2), $F_X=F_Y$ implies $X\stackrel{d}{=}Y$.
+
+:::
+
 ::: {#thm-aap-1-6 name="Existence of a Distribution"}
 
 If $F$ satisfies properties (i), (ii), and (iii), then $F$ is the distribution function of some random variable.
@@ -584,14 +612,6 @@ $$
 \int f(x) \, dx = \int f \, d\lambda.
 $$
 
-#### Lebesgue Measure on an Interval
-
-For $E = [a,b] \subset \mathbb{R}$,
-
-$$
-\int_a^b f(x) \, dx = \int_E f \, d\lambda.
-$$
-
 #### Stieltjes Measure
 
 For $\mu$ on $(\mathbb{R}, \mathcal{R})$, with
@@ -609,6 +629,36 @@ containing all subsets,
 $$
 \sum_{i \in \Omega} f(i) = \int f \, d\mu.
 $$
+
+
+#### Lebesgue Measure on an Interval
+
+For $E = [a,b] \subset \mathbb{R}$,
+
+$$
+\int_a^b f(x) \, dx = \int_E f \, d\lambda.
+$$
+
+::: {.callout-note collapse="true" title="Agreement with the Riemann Integral"}
+
+- **Measurable sets.** A set is Jordan measurable if and only if it is
+  bounded and its boundary has Lebesgue measure $0$; every such set is
+  Lebesgue measurable, but not conversely.
+
+- **Proper integrals.** Proper Riemann integrability implies Lebesgue
+  integrability (for the completed Lebesgue measure) with the same integral,
+  regardless of dimension or sign.
+
+- **Improper integrals.** If $f\ge 0$ (or if one of $f^+$ and $f^-$ is
+  integrable), the improper Riemann and Lebesgue integrals agree, possibly
+  taking the value $\infty$. By contrast, a conditionally convergent improper
+  Riemann integral is not Lebesgue integrable.
+
+Probability theory rests on Lebesgue integration over general measure spaces,
+while concrete computations reduce to Riemann integrals whenever these
+conditions hold.
+
+:::
 
 ## Properties of the Integral
 
@@ -691,6 +741,22 @@ $$
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Let $c=\int f\,d\mu$. Because $\varphi$ is convex, it has a supporting line
+at $c$: there exists $a\in\mathbb R$ such that
+$\varphi(x)\ge\varphi(c)+a(x-c)$ for all $x\in\mathbb R$. Substituting
+$x=f(\omega)$ and integrating with respect to the probability measure $\mu$
+gives
+
+$$
+\int\varphi(f)\,d\mu
+\ge\varphi(c)+a\left(\int f\,d\mu-c\right)
+=\varphi\left(\int f\,d\mu\right).
+$$
+
+:::
+
 For $1 \le p < \infty$, let
 
 $$
@@ -711,6 +777,22 @@ then
 
 $$
 \int |fg| \, d\mu \le \|f\|_p \|g\|_q.
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+The boundary cases $\|f\|_p=0$, $\|g\|_q=0$, or either norm infinite are
+immediate. Otherwise, replacing $f,g$ by $f/\|f\|_p$ and $g/\|g\|_q$, assume
+$\|f\|_p=\|g\|_q=1$. By concavity of $\log$, Young's inequality gives
+$ab\le a^p/p+b^q/q$ for all $a,b\ge0$. Setting $a=|f|$ and $b=|g|$ and
+integrating yields
+
+$$
+\int|fg|\,d\mu
+\le\frac1p\int|f|^p\,d\mu+\frac1q\int|g|^q\,d\mu
+=\frac1p+\frac1q=1.
 $$
 
 :::
@@ -802,6 +884,23 @@ $$
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Fix $\epsilon>0$ and set $A_n=\{x\in E:|f_n(x)-f(x)|>\epsilon\}$. Since
+$|f_n-f|\le2M$ on $A_n$ and $|f_n-f|\le\epsilon$ on $E\setminus A_n$,
+
+$$
+\left|\int f_n\,d\mu-\int f\,d\mu\right|
+\le\int_E|f_n-f|\,d\mu
+\le\epsilon\,\mu(E)+2M\,\mu(A_n).
+$$
+
+Because $\mu(A_n)\to0$, letting $n\to\infty$ gives
+$\limsup_n\bigl|\int f_n\,d\mu-\int f\,d\mu\bigr|\le\epsilon\,\mu(E)$;
+letting $\epsilon\downarrow0$ concludes the proof.
+
+:::
+
 ::: {#thm-aap-1-14 name="Fatou's Lemma"}
 
 If $f_n \ge 0$ then
@@ -811,6 +910,21 @@ $$
 \ge
 \int\left(\liminf_{n\to\infty}f_n\right)\,d\mu.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Let $g=\liminf_n f_n$, and take any bounded $h$ with $0\le h\le g$ vanishing
+outside a set $E$ of finite measure. Set $h_n=\min(f_n,h)$. Then
+$0\le h_n\le h$, $h_n=0$ off $E$, and $h_n\to h$ a.e. (hence in measure on
+$E$). By @thm-aap-1-13,
+
+$$
+\int h\,d\mu=\lim_{n\to\infty}\int h_n\,d\mu\le\liminf_{n\to\infty}\int f_n\,d\mu.
+$$
+
+Taking the supremum over all such $h$ gives $\int g\,d\mu\le\liminf_n\int f_n\,d\mu$.
 
 :::
 
@@ -824,6 +938,15 @@ $$
 
 :::
 
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Since $0\le f_n\le f$, monotonicity of the integral gives
+$\int f_n\,d\mu\le\int f\,d\mu$ and hence
+$\limsup_n\int f_n\,d\mu\le\int f\,d\mu$. On the other hand, @thm-aap-1-14
+gives $\liminf_n\int f_n\,d\mu\ge\int f\,d\mu$.
+
+:::
+
 ::: {#thm-aap-1-16 name="Dominated Convergence Theorem"}
 
 If $f_n\to f$ a.e., $|f_n|\le g$ for all $n$, and $g$ is integrable, then
@@ -831,6 +954,23 @@ If $f_n\to f$ a.e., $|f_n|\le g$ for all $n$, and $g$ is integrable, then
 $$
 \int f_n\,d\mu \longrightarrow \int f\,d\mu.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Apply @thm-aap-1-14 to the nonnegative sequences $g+f_n\ge0$ and
+$g-f_n\ge0$:
+
+$$
+\int(g+f)\,d\mu\le\liminf_{n\to\infty}\int(g+f_n)\,d\mu,
+\qquad
+\int(g-f)\,d\mu\le\liminf_{n\to\infty}\int(g-f_n)\,d\mu.
+$$
+
+Since $\int g\,d\mu<\infty$, subtracting $\int g\,d\mu$ from both
+inequalities yields
+$\int f\,d\mu\le\liminf_n\int f_n\,d\mu\le\limsup_n\int f_n\,d\mu\le\int f\,d\mu$.
 
 :::
 
@@ -870,6 +1010,24 @@ If, in addition, $S=\mathbb R$ and $\mu$ has a density $f_X$ with respect to Leb
 $$
 Ef(X)=\int_{\mathbb R} f(y) f_X(y)\,dy.
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Build up in four steps (the standard machine):
+
+i) **Indicators.** For $f=\mathbf 1_A$, both sides equal $P(X\in A)=\mu(A)$.
+
+ii) **Simple functions.** Follows from (i) by linearity of the integral.
+
+iii) **Nonnegative functions.** Approximate $f\ge0$ from below by simple
+     functions $s_n\uparrow f$ and pass to the limit using @thm-aap-1-15.
+
+iv) **General integrable functions.** Split $f=f^+-f^-$ and apply (iii).
+
+When $\mu$ has density $f_X$, the second identity follows from the same
+four-step bootstrap starting from $\mu(A)=\int_A f_X(y)\,dy$.
 
 :::
 
@@ -930,6 +1088,20 @@ $$
 &=\int_Y\left(\int_X f(x,y)\,\mu_1(dx)\right)\mu_2(dy).
 \end{aligned}
 $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+First assume $\mu_1,\mu_2$ are finite and $f=\mathbf 1_E$. The collection of
+sets $E\in\mathcal F$ for which the iterated integrals equal $\mu(E)$ is a
+$\lambda$-system containing the $\pi$-system of rectangles $\mathcal S$, so
+it equals $\mathcal F$ by the $\pi$-$\lambda$ theorem.
+
+Extend to simple functions by linearity, to nonnegative $f\ge0$ (and from
+finite to $\sigma$-finite spaces via exhausting sets $X_n\uparrow X$ and
+$Y_n\uparrow Y$) by @thm-aap-1-15, and finally to integrable $f$ by splitting
+$f=f^+-f^-$.
 
 :::
 

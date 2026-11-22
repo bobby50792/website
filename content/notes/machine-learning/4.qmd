@@ -1,0 +1,107 @@
+---
+title: "Unsupervised Learning"
+description: "Learning structure from unlabeled data."
+page-layout: article
+search: true
+number-offset: [4]
+
+crossref:
+  chapters: true
+---
+
+## Dimensionality Reduction
+
+::: {#thm-johnson-lindenstrauss name="Johnson–Lindenstrauss Lemma"}
+
+For any $n$ points $x_1,\ldots,x_n\in\mathbb R^d$ and $0<\epsilon<1$, a random linear map $A\colon\mathbb R^d\to\mathbb R^k$ with $k=O(\epsilon^{-2}\log n)$ can preserve all pairwise distances up to distortion $\epsilon$. With high probability, every pair $i,j$ satisfies
+
+$$
+(1-\epsilon)\|x_i-x_j\|_2^2
+\le\|A x_i-A x_j\|_2^2
+\le(1+\epsilon)\|x_i-x_j\|_2^2.
+$$
+
+:::
+
+### PCA
+
+::: {#def-pca name="Principal Component Analysis"}
+
+PCA projects centered data onto the $k$-dimensional subspace that captures the most variance. Let $x_i$ denote the centered samples and set $X=[x_1,\ldots,x_n]$. The empirical covariance is
+
+$$
+\Sigma=\frac1n\sum_{i=1}^n x_i x_i^\top=\frac1nXX^\top.
+$$
+
+Let $U_k$ contain the orthonormal eigenvectors for the $k$ largest eigenvalues of $\Sigma$. The projected coordinates and centered reconstruction are
+
+$$
+z_i=U_k^\top x_i,
+\qquad \widehat x_i=U_k z_i.
+$$
+
+This subspace also minimizes the mean squared reconstruction error. Add the original sample mean to return to the original coordinates.
+
+:::
+
+#### Power Method
+
+Let $A=XX^\top$. Starting from a random unit vector $b_0$, iterate
+
+$$
+b_{t+1}=\frac{Ab_t}{\|Ab_t\|_2}.
+$$
+
+If $b_0=\sum_i a_i v_i$ in the eigenbasis of $A$, then $A^t b_0=\sum_i a_i\lambda_i^t v_i$. When $\lambda_1>\lambda_2$ and $a_1\ne0$, normalization makes $b_t$ converge to $v_1$ up to sign.
+
+To find the second principal direction, start from $(I-v_1v_1^\top)b_0$ and run the same iteration. Since $A$ is symmetric, it keeps the iterates orthogonal to $v_1$ in exact arithmetic. Reproject after each multiplication to control rounding error. For later components, project out all directions already found.
+
+## Nearest neighbor
+
+- kNN classification finds the $k$ closest labeled training points and predicts the class with the most votes. This is supervised learning.
+- Nearest neighbor search retrieves the closest data points given a query and a distance metric. Locality-sensitive hashing (LSH) supports approximate search for kNN and other retrieval tasks.
+- Compare points in $\mathbb R^d$ or in a feature space. PCA can learn features from unlabeled data. NCA (Neighborhood Components Analysis) and LMNN (Large Margin Nearest Neighbor) learn a distance from labeled examples.
+
+### Search Problems
+
+::: {#def-exact-neighbor-search name="Exact Neighbor Search"}
+
+Let $P\subset\mathbb R^d$ be finite and nonempty, and let $q\in\mathbb R^d$ be a query.
+
+- Exact nearest neighbor search returns $p\in\operatorname*{arg\,min}_{u\in P}\|u-q\|_2$.
+- $R$-near neighbor search returns any $p\in P$ with $\|p-q\|_2\le R$, if one exists.
+
+:::
+
+::: {#def-approximate-near-neighbor name="Randomized Approximate Near Neighbor"}
+
+Given $c>1$, $R>0$, and $0<\delta<1$, a randomized $(c,R)$-NN data structure returns a point $p\in P$ with $\|p-q\|_2\le cR$ with probability at least $1-\delta$ whenever $q$ has an $R$-near neighbor in $P$.
+
+:::
+
+### Locality-Sensitive Hashing
+
+::: {#def-lsh name="Locality-Sensitive Hashing"}
+
+A hash family $\mathcal H$ is $(R,cR,P_1,P_2)$-sensitive if for every $p,q\in\mathbb R^d$,
+
+$$
+\begin{aligned}
+\|p-q\|_2\le R &\quad\Longrightarrow\quad \Pr_{h\sim\mathcal H}[h(p)=h(q)]\ge P_1, \\
+\|p-q\|_2\ge cR &\quad\Longrightarrow\quad \Pr_{h\sim\mathcal H}[h(p)=h(q)]\le P_2.
+\end{aligned}
+$$
+
+LSH requires $P_1>P_2$ so nearby points are more likely to collide.
+
+:::
+
+#### Amplifying the Collision Gap
+
+1. Build the tables from $Lk$ independent hashes $h_{i,j}$ drawn from $\mathcal H$. In table $i$, store each point $p$ under the key $g_i(p)=(h_{i,1}(p),\ldots,h_{i,k}(p))$.
+2. Query each table $i$ by scanning the bucket with key $g_i(q)$ and checking the actual distance to each candidate. Return the first point within $cR$. Stop once $L'$ candidates have been checked or all matching buckets have been scanned.
+
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

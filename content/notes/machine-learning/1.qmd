@@ -16,23 +16,28 @@ crossref:
 
 ## Gradient Descent
 
-- To minimize a function $f(x)$:
+::: {#def-gradient-descent name="Gradient Descent"}
 
-  $$
-  x_{t+1}=x_t-\eta \nabla f(x_t)
-  $$
-- $\eta$ is the step size (learning rate).
+Gradient descent minimizes a differentiable function $f$ by stepping along the negative gradient with step size $\eta$.
+
+$$
+x_{t+1}=x_t-\eta\nabla f(x_t).
+$$
+
+:::
 
 ### Smoothness Assumption
 
-- Gradient is Lipschitz:
+::: {#def-smoothness name="Smoothness"}
 
-  $$
-  \|\nabla f(w)-\nabla f(w')\|
-  \leq
-  L\|w-w'\|,
-  \qquad \forall\, w,w'.
-  $$
+A differentiable function $f$ is $L$-smooth if its gradient is $L$-Lipschitz.
+
+$$
+\|\nabla f(w)-\nabla f(w')\|\le L\|w-w'\|,
+\qquad \forall\, w,w'.
+$$
+
+:::
 
 - Equivalent to:
 
@@ -96,17 +101,15 @@ $$
 
 ### $\mu$-Strongly Convex Function
 
-- A function $f$ is $\mu$-strongly convex if
+::: {#def-strong-convexity name="Strong Convexity"}
 
-  $$
-  f(w')
-  \ge
-  f(w)
-  +
-  \left\langle \nabla f(w),\, w'-w \right\rangle
-  +
-  \frac{\mu}{2}\|w'-w\|^2.
-  $$
+A differentiable function $f$ is $\mu$-strongly convex for $\mu>0$ if for all $w,w'$,
+
+$$
+f(w')\ge f(w)+\langle\nabla f(w),w'-w\rangle+\frac{\mu}{2}\|w'-w\|^2.
+$$
+
+:::
 
 - Equivalently, if $f$ is twice differentiable,
 
@@ -219,31 +222,26 @@ $$
 
 ## Stochastic Gradient Descent
 
-Similar to GD, but the gradient has some randomness:
+::: {#def-stochastic-gradient-descent name="Stochastic Gradient Descent"}
+
+Stochastic gradient descent updates $w_t$ using a random gradient estimate $G_t$. In the unbiased setting,
 
 $$
-w_{t+1}
-=
-w_t-\eta G_t,
+w_{t+1}=w_t-\eta G_t,
+\qquad \mathbb E[G_t\mid w_t]=\nabla L(w_t).
 $$
 
-with
+:::
 
-$$
-\mathbb E[G_t]
-=
-\nabla L(w_t).
-$$
+For a randomly selected mini-batch $S\subseteq[N]$,
 
 $$
 G_t
 =
 \frac{1}{|S|}
 \sum_{i\in S}
-\nabla l(w,x_i,y_i),
+\nabla l(w_t,x_i,y_i).
 $$
-
-where $S\subseteq[N]$ is a randomly selected subset.
 
 ### Analysis of SGD
 
@@ -466,13 +464,17 @@ $$
 
 ### Bregman Divergence
 
-- Given any **1-strongly convex function** $w$ as the distance generating function, we can define distance between $x$ and $y$.
+::: {#def-bregman-divergence name="Bregman Divergence"}
 
-  $$
-  V_x(y) = w(y) - \langle \nabla w(x), y-x \rangle - w(x)
-  $$
+For a differentiable convex function $w$, its Bregman divergence is
 
-- So
+$$
+V_x(y)=w(y)-w(x)-\langle\nabla w(x),y-x\rangle.
+$$
+
+:::
+
+- If $w$ is $1$-strongly convex, then
 
   $$
   V_x(y) \ge \frac{1}{2}\|x-y\|^2
@@ -488,7 +490,9 @@ $$
 
 ### Mirror Descent Algorithm
 
-Mirror step with length $\alpha$ is:
+::: {#def-mirror-descent name="Mirror Descent"}
+
+Mirror descent uses the Bregman divergence to take a step of size $\alpha$.
 
 $$
 x_{k+1} = \operatorname{Mirr}_{x_k}(\alpha \cdot \nabla f(x_k)),
@@ -504,6 +508,8 @@ $$
 V_x(y) + \langle g, y-x\rangle
 \right\}.
 $$
+
+:::
 
 equation:
 
@@ -573,11 +579,13 @@ $$
 
 #### Matrix Completion Problem
 
-- $n \times m$ matrix $A$
-- Score is in $\{1,2,3,4,5\}$
-- Some are known (existing ratings)
-- Some are unknown (?)
-- Want to recommend movies to users
+::: {#def-matrix-completion name="Matrix Completion"}
+
+Matrix completion estimates the missing entries of a partially observed matrix $A\in\mathbb R^{n\times m}$.
+
+:::
+
+For movie recommendations, the observed entries are user ratings in $\{1,2,3,4,5\}$.
 
 #### Assumptions
 
@@ -599,7 +607,13 @@ $$
 
 #### Minimizing the Nuclear Norm
 
-The sum of singular values (SDP Problem).
+::: {#def-nuclear-norm name="Nuclear Norm"}
+
+The nuclear norm $\|A\|_* = \sum_i \sigma_i(A)$ is the sum of the singular values of $A$.
+
+:::
+
+Nuclear norm minimization can be formulated as a semidefinite program.
 
 #### Alternating Least Square Minimization
 
@@ -638,16 +652,16 @@ No-spurious-local-min (all the local min are equally good).
 - For stationary points, $\nabla L(w)=0$:
   - If $\nabla^2L(w)\succ0$, it’s a local minimum.
   - If $\nabla^2L(w)\prec0$, it’s a local maximum.
-  - If $\nabla^2L(w)$ has both positive and negative eigenvalues, it’s a **strict saddle point**.
+  - If $\nabla^2L(w)$ has both positive and negative eigenvalues, it’s a strict saddle point.
     - At least one direction to escape!
-  - If $\nabla^2L(w)\succeq0$, it’s a local minimum or a **flat saddle point**.
+  - If $\nabla^2L(w)\succeq0$, it’s a local minimum or a flat saddle point.
     - No good direction to get out!
 
 - We call a function **strict saddle** if it does not contain any flat saddle points.
 
 #### Theorem
 
-If $L$ is **smooth, bounded and strict saddle** (actually a more general version applies to points with small gradients rather than zero gradients), and the **Hessian is smooth**, and if **SGD noise has non-negligible variance in every direction with constant probability**, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.
+If $L$ is smooth, bounded and strict saddle (actually a more general version applies to points with small gradients rather than zero gradients), and the Hessian is smooth, and if SGD noise has non-negligible variance in every direction with constant probability, then SGD will escape all saddle points and local maxima and converge to a local minimum after a polynomial number of steps.
 
 ## Supplementary Notes {.supplementary-notes}
 

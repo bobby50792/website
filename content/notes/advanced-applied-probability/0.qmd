@@ -2,7 +2,7 @@
 title: "Advanced Applied Probability"
 output-file: index.html
 home-order: 6
-description: "Measure-theoretic probability: integration, independence, conditional expectation, laws of large numbers, and central limit theorems."
+description: "Measure-theoretic probability: integration, independence, conditional expectation, laws of large numbers, central limit theorems, and martingales."
 page-layout: article
 search: true
 listing:

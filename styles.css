@@ -405,6 +405,14 @@ body.quarto-dark {
   margin-block-end: .5rem;
 }
 
+.notes-studio .notes-math-punct {
+  white-space: nowrap;
+}
+
+.notes-studio .notes-math-punct > .math.inline {
+  white-space: normal;
+}
+
 .notes-studio .math.display mjx-container[display="true"] {
   margin-block: .2rem;
   padding-block: .35rem;

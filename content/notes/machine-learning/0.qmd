@@ -2,7 +2,7 @@
 title: "Machine Learning"
 output-file: index.html
 home-order: 7
-description: "Optimization, generalization theory, and supervised learning."
+description: "Optimization, generalization theory, and supervised and unsupervised learning."
 page-layout: article
 search: true
 listing:
