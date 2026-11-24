@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Linear regression and classification, nonlinear methods, regularization, evaluation, and unsupervised learning.">
 
 <title>Machine Learning – Bobby</title>
 <style>
@@ -36,6 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
+<link href="../../../content/notes/artificial-intelligence/6.html" rel="next">
 <link href="../../../content/notes/artificial-intelligence/4.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -50,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,6 +86,35 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -961,6 +992,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Machine Learning</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -975,7 +1012,38 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link active" data-scroll-target="#linear-regression"><span class="header-section-number">5.1</span> Linear Regression</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link active" data-scroll-target="#linear-regression"><span class="header-section-number">5.1</span> Linear Regression</a>
+  <ul class="collapse">
+  <li><a href="#canonical-machine-learning-problem" id="toc-canonical-machine-learning-problem" class="nav-link" data-scroll-target="#canonical-machine-learning-problem"><span class="header-section-number">5.1.1</span> Canonical Machine Learning Problem</a></li>
+  <li><a href="#least-squares" id="toc-least-squares" class="nav-link" data-scroll-target="#least-squares"><span class="header-section-number">5.1.2</span> Least Squares</a></li>
+  </ul></li>
+  <li><a href="#linear-classification" id="toc-linear-classification" class="nav-link" data-scroll-target="#linear-classification"><span class="header-section-number">5.2</span> Linear Classification</a>
+  <ul class="collapse">
+  <li><a href="#formal-setting-and-loss-functions" id="toc-formal-setting-and-loss-functions" class="nav-link" data-scroll-target="#formal-setting-and-loss-functions"><span class="header-section-number">5.2.1</span> Formal Setting and Loss Functions</a></li>
+  <li><a href="#support-vector-machine" id="toc-support-vector-machine" class="nav-link" data-scroll-target="#support-vector-machine"><span class="header-section-number">5.2.2</span> Support Vector Machine</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">5.2.3</span> Logistic Regression</a></li>
+  <li><a href="#multiclass-classification" id="toc-multiclass-classification" class="nav-link" data-scroll-target="#multiclass-classification"><span class="header-section-number">5.2.4</span> Multiclass Classification</a></li>
+  </ul></li>
+  <li><a href="#nonlinear-methods" id="toc-nonlinear-methods" class="nav-link" data-scroll-target="#nonlinear-methods"><span class="header-section-number">5.3</span> Nonlinear Methods</a>
+  <ul class="collapse">
+  <li><a href="#nonlinear-features" id="toc-nonlinear-features" class="nav-link" data-scroll-target="#nonlinear-features"><span class="header-section-number">5.3.1</span> Nonlinear Features</a></li>
+  <li><a href="#kernel-methods" id="toc-kernel-methods" class="nav-link" data-scroll-target="#kernel-methods"><span class="header-section-number">5.3.2</span> Kernel Methods</a></li>
+  <li><a href="#nearest-neighbor-methods" id="toc-nearest-neighbor-methods" class="nav-link" data-scroll-target="#nearest-neighbor-methods"><span class="header-section-number">5.3.3</span> Nearest Neighbor Methods</a></li>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">5.3.4</span> Decision Trees</a></li>
+  <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link" data-scroll-target="#neural-networks"><span class="header-section-number">5.3.5</span> Neural Networks</a></li>
+  <li><a href="#ensemble-methods" id="toc-ensemble-methods" class="nav-link" data-scroll-target="#ensemble-methods"><span class="header-section-number">5.3.6</span> Ensemble Methods</a></li>
+  </ul></li>
+  <li><a href="#overfitting-generalization-and-regularization" id="toc-overfitting-generalization-and-regularization" class="nav-link" data-scroll-target="#overfitting-generalization-and-regularization"><span class="header-section-number">5.4</span> Overfitting, Generalization, and Regularization</a>
+  <ul class="collapse">
+  <li><a href="#parameters-hyperparameters-and-cross-validation" id="toc-parameters-hyperparameters-and-cross-validation" class="nav-link" data-scroll-target="#parameters-hyperparameters-and-cross-validation"><span class="header-section-number">5.4.1</span> Parameters, Hyperparameters, and Cross-Validation</a></li>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">5.4.2</span> Regularization</a></li>
+  </ul></li>
+  <li><a href="#evaluating-machine-learning-algorithms" id="toc-evaluating-machine-learning-algorithms" class="nav-link" data-scroll-target="#evaluating-machine-learning-algorithms"><span class="header-section-number">5.5</span> Evaluating Machine Learning Algorithms</a></li>
+  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning"><span class="header-section-number">5.6</span> Unsupervised Learning</a>
+  <ul class="collapse">
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">5.6.1</span> <span class="math inline">\(k\)</span>-Means</a></li>
+  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis"><span class="header-section-number">5.6.2</span> Principal Component Analysis</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -988,6 +1056,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Machine Learning</h1>
 </div>
 
+<div>
+  <div class="description">
+    Linear regression and classification, nonlinear methods, regularization, evaluation, and unsupervised learning.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -1002,10 +1075,295 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<ul>
+<li>Supervised learning: Learn a mapping from inputs <span class="math inline">\(x^{(i)}\)</span> to outputs <span class="math inline">\(y^{(i)}\)</span> (regression when <span class="math inline">\(y\in\mathbb R\)</span>, classification when <span class="math inline">\(y\)</span> is discrete).</li>
+<li>Unsupervised learning: Extract structure from unlabeled inputs <span class="math inline">\(x^{(i)}\)</span> alone (clustering, dimensionality reduction).</li>
+</ul>
 <section id="linear-regression" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">5.1</span> Linear Regression</h2>
+<section id="canonical-machine-learning-problem" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="canonical-machine-learning-problem"><span class="header-section-number">5.1.1</span> Canonical Machine Learning Problem</h3>
+<ul>
+<li>Training data: inputs <span class="math inline">\(x^{(i)}\in\mathbb R^n\)</span> and outputs <span class="math inline">\(y^{(i)}\in\mathbb R\)</span> for <span class="math inline">\(i=1,\ldots,m\)</span> (often appending a constant <span class="math inline">\(1\)</span> to <span class="math inline">\(x^{(i)}\)</span> for the intercept).</li>
+<li>Model parameters: <span class="math inline">\(\theta\in\mathbb R^n\)</span>; hypothesis function: <span class="math inline">\(h_\theta:\mathbb R^n\to\mathbb R\)</span> (e.g., <span class="math inline">\(h_\theta(x)=\theta^\top x\)</span>).</li>
+<li>Loss function: <span class="math inline">\(\ell:\mathbb R\times\mathbb R\to\mathbb R_+\)</span>, measuring how far a prediction <span class="math inline">\(h_\theta(x)\)</span> is from <span class="math inline">\(y\)</span>.</li>
+</ul>
+<div id="def-ai-5-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.1 (Canonical Machine Learning Optimization)</strong></span> Given training pairs <span class="math inline">\((x^{(i)},y^{(i)})\)</span> for <span class="math inline">\(i=1,\ldots,m\)</span>, choose parameters <span class="math inline">\(\theta\)</span> to minimize the total loss:</p>
+<p><span class="math display">\[
+\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr).
+\]</span></p>
+</div>
+<p>Virtually all supervised learning algorithms specify three ingredients:</p>
+<ol type="1">
+<li>The hypothesis function <span class="math inline">\(h_\theta\)</span>.</li>
+<li>The loss function <span class="math inline">\(\ell\)</span>.</li>
+<li>The optimization algorithm used to minimize the objective.</li>
+</ol>
+</section>
+<section id="least-squares" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="least-squares"><span class="header-section-number">5.1.2</span> Least Squares</h3>
+<p>Take a linear hypothesis <span class="math inline">\(h_\theta(x)=\theta^\top x\)</span> and squared loss <span class="math inline">\(\ell(h_\theta(x),y)=(h_\theta(x)-y)^2\)</span>. Stacking <span class="math inline">\(x^{(i)\top}\)</span> as rows of <span class="math inline">\(X\in\mathbb R^{m\times n}\)</span> and <span class="math inline">\(y^{(i)}\)</span> into <span class="math inline">\(y\in\mathbb R^m\)</span>:</p>
+<p><span class="math display">\[
+\min_\theta \sum_{i=1}^m (\theta^\top x^{(i)}-y^{(i)})^2
+= \min_\theta \|X\theta - y\|_2^2.
+\]</span></p>
+<p>This objective is convex in <span class="math inline">\(\theta\)</span>, so any stationary point is a global minimum, with gradient <span class="math inline">\(\nabla_\theta \|X\theta-y\|_2^2 = 2X^\top(X\theta - y)\)</span>.</p>
+<section id="solution-via-gradient-descent" class="level4" data-number="5.1.2.1">
+<h4 data-number="5.1.2.1" class="anchored" data-anchor-id="solution-via-gradient-descent"><span class="header-section-number">5.1.2.1</span> Solution via Gradient Descent</h4>
+<p>Iteratively step opposite the gradient with step size <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+\theta \leftarrow \theta - 2\alpha\sum_{i=1}^m x^{(i)}\bigl(\theta^\top x^{(i)}-y^{(i)}\bigr).
+\]</span></p>
+</section>
+<section id="normal-equations-closed-form-solution" class="level4" data-number="5.1.2.2">
+<h4 data-number="5.1.2.2" class="anchored" data-anchor-id="normal-equations-closed-form-solution"><span class="header-section-number">5.1.2.2</span> Normal Equations (Closed-Form Solution)</h4>
+<p>Setting the gradient to zero yields the <strong>normal equations</strong></p>
+<p><span class="math display">\[
+2X^\top(X\theta^*-y)=0
+\;\implies\;
+X^\top X\theta^* = X^\top y
+\;\implies\;
+\theta^* = (X^\top X)^{-1}X^\top y.
+\]</span></p>
+</section>
+<section id="alternative-loss-functions" class="level4" data-number="5.1.2.3">
+<h4 data-number="5.1.2.3" class="anchored" data-anchor-id="alternative-loss-functions"><span class="header-section-number">5.1.2.3</span> Alternative Loss Functions</h4>
+<p>Using absolute loss <span class="math inline">\(\ell(h_\theta(x),y)=|h_\theta(x)-y|\)</span> leads to <span class="math inline">\(\ell_1\)</span> regression:</p>
+<p><span class="math display">\[
+\min_\theta \|X\theta - y\|_1.
+\]</span></p>
+<p>There is no closed-form solution, but it can be minimized with subgradient descent using <span class="math inline">\(\nabla_\theta \|X\theta-y\|_1 = X^\top\operatorname{sign}(X\theta-y)\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="linear-classification" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="linear-classification"><span class="header-section-number">5.2</span> Linear Classification</h2>
+<section id="formal-setting-and-loss-functions" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="formal-setting-and-loss-functions"><span class="header-section-number">5.2.1</span> Formal Setting and Loss Functions</h3>
+<ul>
+<li>Binary outputs <span class="math inline">\(y^{(i)}\in\{-1,+1\}\)</span>; linear hypothesis <span class="math inline">\(h_\theta(x)=\theta^\top x\in\mathbb R\)</span> (a signed confidence score), with predicted label <span class="math inline">\(\hat y=\operatorname{sign}(h_\theta(x))\)</span>.</li>
+<li>Squared loss is poorly suited for classification because confident correct predictions are heavily penalized.</li>
+<li>The ideal error metric is 0/1 loss:</li>
+</ul>
+<p><span class="math display">\[
+\ell_{0/1}\bigl(h_\theta(x),y\bigr) = \mathbf 1\{y\cdot h_\theta(x)\le 0\}.
+\]</span></p>
+<ul>
+<li>Minimizing 0/1 loss is NP-hard (non-convex), so convex surrogate losses are used instead:</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Loss</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0/1 loss</td>
+<td><span class="math inline">\(\mathbf 1\{y\cdot h_\theta(x)\le 0\}\)</span></td>
+</tr>
+<tr class="even">
+<td>Logistic loss</td>
+<td><span class="math inline">\(\log\bigl(1+\exp(-y\cdot h_\theta(x))\bigr)\)</span></td>
+</tr>
+<tr class="odd">
+<td>Hinge loss</td>
+<td><span class="math inline">\(\max\{1 - y\cdot h_\theta(x),\, 0\}\)</span></td>
+</tr>
+<tr class="even">
+<td>Exponential loss</td>
+<td><span class="math inline">\(\exp\bigl(-y\cdot h_\theta(x)\bigr)\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="support-vector-machine" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="support-vector-machine"><span class="header-section-number">5.2.2</span> Support Vector Machine</h3>
+<p>A linear SVM solves the canonical problem with hinge loss and a linear hypothesis (standard SVMs also add an <span class="math inline">\(\ell_2\)</span> regularization term):</p>
+<p><span class="math display">\[
+\min_\theta \sum_{i=1}^m \max\{1 - y^{(i)}\cdot\theta^\top x^{(i)},\, 0\}.
+\]</span></p>
+<p>Subgradient descent update:</p>
+<p><span class="math display">\[
+\theta \leftarrow \theta - \alpha\sum_{i=1}^m \Bigl(-y^{(i)}x^{(i)}\mathbf 1\{y^{(i)}\cdot\theta^\top x^{(i)}\le 1\}\Bigr).
+\]</span></p>
+</section>
+<section id="logistic-regression" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">5.2.3</span> Logistic Regression</h3>
+<p>Regularized logistic regression minimizes</p>
+<p><span class="math display">\[
+\min_\theta\; \lambda\|\theta\|_2^2 + \sum_{i=1}^m \log\bigl(1 + e^{-y^{(i)}h_\theta(x^{(i)})}\bigr).
+\]</span></p>
+<ul>
+<li>Probabilistic interpretation: <span class="math inline">\(p(y=+1\mid x)=\dfrac{1}{1+\exp(-\theta^\top x)}\)</span>.</li>
+<li>Differentiable and convex, with no closed-form solution; commonly solved with Newton’s method or gradient descent.</li>
+</ul>
+</section>
+<section id="multiclass-classification" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="multiclass-classification"><span class="header-section-number">5.2.4</span> Multiclass Classification</h3>
+<p>When <span class="math inline">\(y\in\{1,\ldots,k\}\)</span>:</p>
+<ol type="1">
+<li>One-vs-all: Train <span class="math inline">\(k\)</span> binary classifiers <span class="math inline">\(h_{\theta_i}\)</span> (class <span class="math inline">\(i\)</span> vs.&nbsp;all others) and predict <span class="math inline">\(\hat y=\arg\max_i h_{\theta_i}(x)\)</span>.</li>
+<li>Softmax (cross-entropy) loss: Use a vector-valued hypothesis <span class="math inline">\(h_\theta:\mathbb R^n\to\mathbb R^k\)</span> with loss</li>
+</ol>
+<p><span class="math display">\[
+\ell\bigl(h_\theta(x), y\bigr) = \log\sum_{j=1}^k \exp\bigl(h_\theta(x)_j\bigr) - h_\theta(x)_y.
+\]</span></p>
+</section>
+</section>
+<section id="nonlinear-methods" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="nonlinear-methods"><span class="header-section-number">5.3</span> Nonlinear Methods</h2>
+<section id="nonlinear-features" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="nonlinear-features"><span class="header-section-number">5.3.1</span> Nonlinear Features</h3>
+<p>Apply linear regression or classification to nonlinear feature mappings of the raw input (e.g., polynomial features <span class="math inline">\(x^{(i)}=[(z^{(i)})^2,\,z^{(i)},\,1]^\top\)</span>).</p>
+<ul>
+<li>Hypothesis remains linear in <span class="math inline">\(\theta\)</span> (<span class="math inline">\(h_\theta(x)=\theta^\top x\)</span>), so the same normal equations <span class="math inline">\(\theta=(X^\top X)^{-1}X^\top y\)</span> apply while producing nonlinear fits in the original input.</li>
+</ul>
+</section>
+<section id="kernel-methods" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="kernel-methods"><span class="header-section-number">5.3.2</span> Kernel Methods</h3>
+<p>A linear hypothesis parameterized by similarity to every training example:</p>
+<p><span class="math display">\[
+h_\theta(x) = \sum_{i=1}^m \theta_i K(x, x_i),
+\]</span></p>
+<p>where <span class="math inline">\(K:\mathbb R^n\times\mathbb R^n\to\mathbb R\)</span> is a <strong>kernel function</strong> measuring similarity.</p>
+<ul>
+<li>For suitable <span class="math inline">\(K\)</span>, this corresponds to operating in a high-dimensional feature space without forming features explicitly (e.g., <span class="math inline">\(\phi(a,b)=(a,b,a^2+b^2)\)</span> yields <span class="math inline">\(K(x,y)=x\cdot y+\|x\|^2\|y\|^2\)</span>).</li>
+<li>Still linear in <span class="math inline">\(\theta\)</span>, so the same optimization algorithms apply.</li>
+<li>Non-parametric: <span class="math inline">\(\theta\in\mathbb R^m\)</span> has as many parameters as training examples.</li>
+</ul>
+</section>
+<section id="nearest-neighbor-methods" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="nearest-neighbor-methods"><span class="header-section-number">5.3.3</span> Nearest Neighbor Methods</h3>
+<p>Predict using the closest training example under a distance function <span class="math inline">\(\operatorname{dist}:\mathbb R^n\times\mathbb R^n\to\mathbb R_+\)</span>:</p>
+<p><span class="math display">\[
+h_\theta(x) = y_{\arg\min_i \operatorname{dist}(x, x_i)}.
+\]</span></p>
+<ul>
+<li>Generalizes to <span class="math inline">\(k\)</span>-nearest neighbors by averaging or voting over the <span class="math inline">\(k\)</span> closest points.</li>
+<li>No separate training phase, but non-parametric: requires storing all training data.</li>
+</ul>
+</section>
+<section id="decision-trees" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">5.3.4</span> Decision Trees</h3>
+<ul>
+<li>Recursively partition the input space into regions by testing feature thresholds at internal nodes; leaves output labels or local linear predictors.</li>
+<li>Built greedily by choosing splits that best separate the data.</li>
+</ul>
+</section>
+<section id="neural-networks" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="neural-networks"><span class="header-section-number">5.3.5</span> Neural Networks</h3>
+<p>Compose affine maps with elementwise nonlinearities, such as a 2-layer network:</p>
+<p><span class="math display">\[
+h_\theta(x) = \sigma\bigl(\theta_2^\top \sigma(\Theta_1^\top x)\bigr),
+\]</span></p>
+<p>where <span class="math inline">\(\Theta_1\in\mathbb R^{n\times p}\)</span>, <span class="math inline">\(\theta_2\in\mathbb R^p\)</span>, and <span class="math inline">\(\sigma(z)=1/(1+e^{-z})\)</span> is the sigmoid function applied elementwise.</p>
+</section>
+<section id="ensemble-methods" class="level3" data-number="5.3.6">
+<h3 data-number="5.3.6" class="anchored" data-anchor-id="ensemble-methods"><span class="header-section-number">5.3.6</span> Ensemble Methods</h3>
+<p>Combine multiple base hypotheses:</p>
+<p><span class="math display">\[
+h_\theta(x) = \sum_{i=1}^k \theta_i \operatorname{sign}\bigl(h_i(x)\bigr).
+\]</span></p>
+<ul>
+<li>Random forests: Ensemble of decision trees trained on different subsets of the training data.</li>
+<li>Boosting: Iteratively train models on reweighted examples that emphasize errors of previous hypotheses.</li>
+</ul>
+</section>
+</section>
+<section id="overfitting-generalization-and-regularization" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="overfitting-generalization-and-regularization"><span class="header-section-number">5.4</span> Overfitting, Generalization, and Regularization</h2>
+<section id="parameters-hyperparameters-and-cross-validation" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="parameters-hyperparameters-and-cross-validation"><span class="header-section-number">5.4.1</span> Parameters, Hyperparameters, and Cross-Validation</h3>
+<p>High-complexity models (e.g., high-degree polynomials) can fit any finite training set exactly while incurring large generalization error on unseen data (<strong>overfitting</strong>).</p>
+<ul>
+<li>Parameters (<span class="math inline">\(\theta\)</span>): Fit on the training set.</li>
+<li>Hyperparameters (polynomial degree, regularization <span class="math inline">\(\lambda\)</span>, etc.): Chosen on a holdout (validation) set.</li>
+</ul>
+<section id="k-fold-cross-validation" class="level4" data-number="5.4.1.1">
+<h4 data-number="5.4.1.1" class="anchored" data-anchor-id="k-fold-cross-validation"><span class="header-section-number">5.4.1.1</span> <span class="math inline">\(k\)</span>-Fold Cross-Validation</h4>
+<p>Partition the data into <span class="math inline">\(k\)</span> folds; train <span class="math inline">\(k\)</span> times using <span class="math inline">\(k-1\)</span> folds for training and the remaining fold for validation, and average the validation error.</p>
+<ul>
+<li>Leave-one-out CV: Limit <span class="math inline">\(k=m\)</span> (each fold is one example; for least squares, computable with the same complexity as a single matrix solve).</li>
+<li>Stratified CV: Keep roughly equal class proportions in every fold.</li>
+<li>Caution: <span class="math inline">\(k\)</span>-fold CV is not always appropriate—for time series, holdout data must occur after the training data.</li>
+</ul>
+</section>
+</section>
+<section id="regularization" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="regularization"><span class="header-section-number">5.4.2</span> Regularization</h3>
+<p>Overfitted high-degree models typically have enormous parameter magnitudes. <strong>Regularization</strong> controls complexity by penalizing large weights:</p>
+<div id="def-ai-5-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.2 (Regularized Loss Minimization)</strong></span> <span class="math display">\[
+\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr) + \frac{\lambda}{2}\|\theta\|_2^2.
+\]</span></p>
+<p>Sweeping <span class="math inline">\(\lambda\)</span> from <span class="math inline">\(0\)</span> (no regularization) to <span class="math inline">\(\infty\)</span> (<span class="math inline">\(\theta\to 0\)</span>) controls the trade-off between training fit and model complexity.</p>
+</div>
+<section id="regularized-least-squares" class="level4" data-number="5.4.2.1">
+<h4 data-number="5.4.2.1" class="anchored" data-anchor-id="regularized-least-squares"><span class="header-section-number">5.4.2.1</span> Regularized Least Squares</h4>
+<p>Minimizing <span class="math inline">\(\frac12\|X\theta-y\|_2^2 + \frac{\lambda}{2}\|\theta\|_2^2\)</span> gives gradient <span class="math inline">\(X^\top(X\theta-y)+\lambda\theta=0\)</span>, so:</p>
+<p><span class="math display">\[
+(X^\top X + \lambda I)\theta = X^\top y
+\;\implies\;
+\theta = (X^\top X + \lambda I)^{-1}X^\top y.
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="evaluating-machine-learning-algorithms" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="evaluating-machine-learning-algorithms"><span class="header-section-number">5.5</span> Evaluating Machine Learning Algorithms</h2>
+<ul>
+<li>Pitfall of a single train/holdout split: Selecting the best algorithm or hyperparameters by holdout error effectively fits the hyperparameters to the holdout set (even random predictors can score well given enough searches).</li>
+<li>Proper split: Divide data into training, validation (holdout), and test sets—fit parameters on training, choose hyperparameters on validation, and report performance on the untouched test set.</li>
+<li>Test-set leakage in practice: Once you inspect test performance to guide design choices, the test set is corrupted. Mitigate by evaluating on fresh live data, recollecting test sets when needed, and checking test performance sparingly (theoretically addressed by adaptive data analysis / differential privacy).</li>
+</ul>
+</section>
+<section id="unsupervised-learning" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="unsupervised-learning"><span class="header-section-number">5.6</span> Unsupervised Learning</h2>
+<p>Given unlabeled inputs <span class="math inline">\(x_1,\ldots,x_m\in\mathbb R^n\)</span>, many unsupervised methods fit a hypothesis <span class="math inline">\(h_\theta:\mathbb R^n\to\mathbb R^n\)</span> by minimizing a <strong>reconstruction loss</strong>:</p>
+<p><span class="math display">\[
+\ell\bigl(x_i, h_\theta(x_i)\bigr) = \|x_i - h_\theta(x_i)\|_2^2.
+\]</span></p>
+<section id="k-means" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">5.6.1</span> <span class="math inline">\(k\)</span>-Means</h3>
+<ul>
+<li>Parameters: <span class="math inline">\(k\)</span> cluster centers <span class="math inline">\(\theta=\{\mu_1,\ldots,\mu_k\}\)</span> with <span class="math inline">\(\mu_j\in\mathbb R^n\)</span>.</li>
+<li>Hypothesis maps <span class="math inline">\(x\)</span> to its closest center: <span class="math inline">\(h_\theta(x)=\mu_{\arg\min_j \|x-\mu_j\|_2^2}\)</span>, minimizing</li>
+</ul>
+<p><span class="math display">\[
+\min_{\mu_1,\ldots,\mu_k}\sum_{i=1}^m \bigl\|x_i - \mu_{\arg\min_j \|x_i-\mu_j\|_2^2}\bigr\|_2^2.
+\]</span></p>
+<ul>
+<li>Non-convex; solved iteratively by alternating between assigning each <span class="math inline">\(x_i\)</span> to its nearest <span class="math inline">\(\mu_j\)</span> and updating each <span class="math inline">\(\mu_j\)</span> to the mean of its assigned points.</li>
+</ul>
+</section>
+<section id="principal-component-analysis" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="principal-component-analysis"><span class="header-section-number">5.6.2</span> Principal Component Analysis</h3>
+<ul>
+<li>Parameters: two matrices <span class="math inline">\(\Theta_1\in\mathbb R^{n\times k}\)</span> and <span class="math inline">\(\Theta_2\in\mathbb R^{k\times n}\)</span> (<span class="math inline">\(k&lt;n\)</span>), with hypothesis <span class="math inline">\(h_\theta(x)=\Theta_1\Theta_2 x\)</span>.</li>
+<li>Interpretation: <span class="math inline">\(\Theta_2 x\in\mathbb R^k\)</span> projects <span class="math inline">\(x\)</span> to a lower-dimensional representation preserving enough information for <span class="math inline">\(\Theta_1\)</span> to reconstruct <span class="math inline">\(x\)</span>.</li>
+<li>Objective:</li>
+</ul>
+<p><span class="math display">\[
+\min_{\Theta_1,\Theta_2}\sum_{i=1}^m \|x_i - \Theta_1\Theta_2 x_i\|_2^2.
+\]</span></p>
+<ul>
+<li>Non-convex, yet solvable exactly via eigenvalue decomposition.</li>
+</ul>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Canonical Machine Learning Problem](#canonical-machine-learning-problem): Supervised algorithms specify a hypothesis function, a loss function, and an optimization method to minimize $\sum_i \ell(h_\theta(x^{(i)}), y^{(i)})$.
+- [Normal Equations](#normal-equations-closed-form-solution): Least squares has closed-form solution $\theta^*=(X^\top X)^{-1}X^\top y$, and $\ell_2$ regularization adds $\lambda I$ to $X^\top X$.
+- [Linear Classification](#linear-classification): Because 0/1 loss is non-convex and NP-hard, SVM (hinge), logistic regression (logistic), and multiclass softmax optimize convex surrogates.
+- [Evaluating Machine Learning Algorithms](#evaluating-machine-learning-algorithms): Use separate training, validation, and test sets to avoid overfitting hyperparameters to the evaluation set.
+- [Unsupervised Learning](#unsupervised-learning): Both $k$-means and PCA can be cast as minimizing reconstruction loss $\|x_i-h_\theta(x_i)\|_2^2$; $k$-means alternates assignment and averaging, while PCA is solved exactly by eigendecomposition. -->
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1952,6 +2310,9 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../../content/notes/artificial-intelligence/6.html" class="pagination-link" aria-label="Deep Learning">
+        <span class="nav-page-text">Deep Learning</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

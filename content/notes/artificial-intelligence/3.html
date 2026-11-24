@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -992,6 +992,12 @@ window.Quarto = {
  <span class="menu-text">Machine Learning</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -1023,10 +1029,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">3.3.1</span> Inference</a></li>
   <li><a href="#inference-by-enumeration" id="toc-inference-by-enumeration" class="nav-link" data-scroll-target="#inference-by-enumeration"><span class="header-section-number">3.3.2</span> Inference by Enumeration</a></li>
-  </ul></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">3.4</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">3.4.1</span> Key Results</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1156,17 +1158,13 @@ P(x_i \mid \operatorname{parents}(X_i)).
 <li><strong>Eliminate</strong> all hidden variables.</li>
 <li><strong>Normalize</strong> the result.</li>
 </ol>
-</section>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="3.4">
-<h2 class="supplementary-notes anchored" data-number="3.4" data-anchor-id="supplementary-notes"><span class="header-section-number">3.4</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">3.4.1</span> Key Results</h3>
-<ul>
-<li><a href="#assumptions">Assumptions</a>: A Bayes’ net assumes <span class="math inline">\(P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))\)</span>.</li>
-<li><a href="#d-separation">D-Separation</a>: If all paths between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are blocked given <span class="math inline">\(Z\)</span>, then <span class="math inline">\(A \perp\!\!\!\perp B \mid Z\)</span>.</li>
-<li><a href="#inference-by-enumeration">Inference by Enumeration</a>: Join all factors, eliminate hidden variables, then normalize.</li>
-</ul>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Assumptions](#assumptions): A Bayes' net assumes $P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))$.
+- [D-Separation](#d-separation): If all paths between $A$ and $B$ are blocked given $Z$, then $A \perp\!\!\!\perp B \mid Z$.
+- [Inference by Enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize. -->
 
 
 </section>
