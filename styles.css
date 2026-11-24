@@ -145,6 +145,17 @@ body.quarto-dark #quarto-header {
 }
 
 /* Notes fixes. */
+.notes-studio .cell-output-display {
+  margin-block: 1rem 1.25rem;
+}
+
+.notes-studio .figure-img {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+  margin-inline: auto;
+}
+
 .notes-studio .math.display {
   display: block;
   max-inline-size: 100%;

@@ -8,7 +8,7 @@
 
 <meta name="description" content="Neural networks, depth and modularity, stochastic gradient descent, backpropagation, and momentum.">
 
-<title>Deep Learning – Bobby</title>
+<title>Deep Learning I – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -37,6 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
+<link href="../../../content/notes/artificial-intelligence/7.html" rel="next">
 <link href="../../../content/notes/artificial-intelligence/5.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -51,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -343,7 +344,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/6.html">Deep Learning</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/6.html">Deep Learning I</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -994,7 +995,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/artificial-intelligence/6.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Deep Learning</span></a>
+ <span class="menu-text">Deep Learning I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/artificial-intelligence/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From MDPs to RL</span></a>
   </div>
 </li>
       </ul>
@@ -1013,18 +1026,15 @@ window.Quarto = {
   <ul>
   <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link active" data-scroll-target="#neural-networks"><span class="header-section-number">6.1</span> Neural Networks</a>
   <ul class="collapse">
-  <li><a href="#universal-approximation" id="toc-universal-approximation" class="nav-link" data-scroll-target="#universal-approximation"><span class="header-section-number">6.1.1</span> Universal Approximation</a></li>
+  <li><a href="#activation-functions" id="toc-activation-functions" class="nav-link" data-scroll-target="#activation-functions"><span class="header-section-number">6.1.1</span> Activation Functions</a></li>
+  <li><a href="#universal-approximation" id="toc-universal-approximation" class="nav-link" data-scroll-target="#universal-approximation"><span class="header-section-number">6.1.2</span> Universal Approximation</a></li>
   </ul></li>
-  <li><a href="#why-deep" id="toc-why-deep" class="nav-link" data-scroll-target="#why-deep"><span class="header-section-number">6.2</span> Why Deep?</a></li>
+  <li><a href="#depth-and-representation" id="toc-depth-and-representation" class="nav-link" data-scroll-target="#depth-and-representation"><span class="header-section-number">6.2</span> Depth and Representation</a></li>
   <li><a href="#training-neural-networks" id="toc-training-neural-networks" class="nav-link" data-scroll-target="#training-neural-networks"><span class="header-section-number">6.3</span> Training Neural Networks</a>
   <ul class="collapse">
   <li><a href="#stochastic-gradient-descent" id="toc-stochastic-gradient-descent" class="nav-link" data-scroll-target="#stochastic-gradient-descent"><span class="header-section-number">6.3.1</span> Stochastic Gradient Descent</a></li>
   <li><a href="#jacobians-and-backpropagation" id="toc-jacobians-and-backpropagation" class="nav-link" data-scroll-target="#jacobians-and-backpropagation"><span class="header-section-number">6.3.2</span> Jacobians and Backpropagation</a></li>
   <li><a href="#non-convexity-and-momentum" id="toc-non-convexity-and-momentum" class="nav-link" data-scroll-target="#non-convexity-and-momentum"><span class="header-section-number">6.3.3</span> Non-Convexity and Momentum</a></li>
-  </ul></li>
-  <li><a href="#supplementary-notes" id="toc-supplementary-notes" class="nav-link" data-scroll-target="#supplementary-notes"><span class="header-section-number">6.4</span> Supplementary Notes</a>
-  <ul class="collapse">
-  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results"><span class="header-section-number">6.4.1</span> Key Results</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1033,9 +1043,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/6.html">Deep Learning</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/index.html">Artificial Intelligence</a></li><li class="breadcrumb-item"><a href="../../../content/notes/artificial-intelligence/6.html">Deep Learning I</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Deep Learning</h1>
+<h1 class="title">Deep Learning I</h1>
 </div>
 
 <div>
@@ -1059,80 +1069,52 @@ window.Quarto = {
 
 <section id="neural-networks" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="neural-networks"><span class="header-section-number">6.1</span> Neural Networks</h2>
-<p>A neural network is a hypothesis class built from <strong>composed nonlinear functions</strong> that learns features directly from raw inputs.</p>
-<ul>
-<li>Composing linear maps alone collapses into a single linear map.</li>
-<li>Applying an elementwise nonlinearity after each affine layer gives:</li>
-</ul>
+<p>A neural network is a hypothesis class built from <strong>composed nonlinear functions</strong> that learns features directly from raw inputs. Composing linear maps alone collapses into a single linear map; applying an elementwise nonlinearity after each affine layer gives</p>
 <p><span class="math display">\[
 z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i), \qquad h_\theta(x) = z_k.
 \]</span></p>
+<p>Expressing each layer as a matrix operation maps naturally to parallel hardware (GPUs).</p>
+<section id="activation-functions" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="activation-functions"><span class="header-section-number">6.1.1</span> Activation Functions</h3>
+<p>Common elementwise nonlinearities <span class="math inline">\(f_i:\mathbb R\to\mathbb R\)</span>:</p>
 <ul>
-<li>Common activations <span class="math inline">\(f_i:\mathbb R\to\mathbb R\)</span>: <span class="math inline">\(\tanh(x) = \frac{e^{2x}-1}{e^{2x}+1}\)</span>, sigmoid <span class="math inline">\(\sigma(x) = \frac{1}{1+e^{-x}}\)</span>, and ReLU <span class="math inline">\(\max\{x, 0\}\)</span>.</li>
+<li>Hyperbolic tangent: <span class="math inline">\(\tanh(x) = \dfrac{e^{2x}-1}{e^{2x}+1}\)</span></li>
+<li>Sigmoid: <span class="math inline">\(\sigma(x) = \dfrac{1}{1+e^{-x}}\)</span></li>
+<li>ReLU: <span class="math inline">\(\max\{x, 0\}\)</span></li>
 </ul>
-<svg viewbox="0 0 720 190" width="100%" role="img" aria-label="Plots of tanh, sigmoid, and ReLU activation functions" style="display:block;max-width:720px;margin:0.75rem auto 1rem;font-family:var(--studio-sans);">
-  <text x="120" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--studio-ink)">tanh(x)</text>
-  <rect x="10" y="28" width="220" height="148" rx="6" fill="none" stroke="var(--studio-line)"></rect>
-  <line x1="16" y1="47.2" x2="224" y2="47.2" stroke="var(--studio-line)" stroke-dasharray="4 3"></line>
-  <line x1="16" y1="156.8" x2="224" y2="156.8" stroke="var(--studio-line)" stroke-dasharray="4 3"></line>
-  <line x1="16" y1="102.0" x2="224" y2="102.0" stroke="var(--studio-muted)" opacity="0.6"></line>
-  <line x1="120.0" y1="34" x2="120.0" y2="170" stroke="var(--studio-muted)" opacity="0.6"></line>
-  <line x1="117.0" y1="47.2" x2="123.0" y2="47.2" stroke="var(--studio-muted)"></line>
-  <text x="114.0" y="50.7" text-anchor="end" font-size="10" fill="var(--studio-muted)">1</text>
-  <line x1="117.0" y1="156.8" x2="123.0" y2="156.8" stroke="var(--studio-muted)"></line>
-  <text x="114.0" y="160.3" text-anchor="end" font-size="10" fill="var(--studio-muted)">-1</text>
-  <polyline fill="none" stroke="var(--studio-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="10.0,156.8 17.9,156.7 25.7,156.7 33.6,156.6 41.4,156.5 49.3,156.2 57.1,155.7 65.0,154.8 72.9,153.4 80.7,150.9 88.6,146.7 96.4,140.1 104.3,130.3 112.1,117.2 120.0,102.0 127.9,86.8 135.7,73.7 143.6,63.9 151.4,57.3 159.3,53.1 167.1,50.6 175.0,49.2 182.9,48.3 190.7,47.8 198.6,47.5 206.4,47.4 214.3,47.3 222.1,47.3 230.0,47.2"></polyline>
-  <text x="360" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--studio-ink)">Sigmoid σ(x)</text>
-  <rect x="250" y="28" width="220" height="148" rx="6" fill="none" stroke="var(--studio-line)"></rect>
-  <line x1="256" y1="52.7" x2="464" y2="52.7" stroke="var(--studio-line)" stroke-dasharray="4 3"></line>
-  <line x1="256" y1="151.3" x2="464" y2="151.3" stroke="var(--studio-muted)" opacity="0.6"></line>
-  <line x1="360.0" y1="34" x2="360.0" y2="170" stroke="var(--studio-muted)" opacity="0.6"></line>
-  <line x1="357.0" y1="52.7" x2="363.0" y2="52.7" stroke="var(--studio-muted)"></line>
-  <text x="354.0" y="56.2" text-anchor="end" font-size="10" fill="var(--studio-muted)">1</text>
-  <line x1="357.0" y1="102.0" x2="363.0" y2="102.0" stroke="var(--studio-muted)"></line>
-  <text x="354.0" y="105.5" text-anchor="end" font-size="10" fill="var(--studio-muted)">0.5</text>
-  <polyline fill="none" stroke="var(--studio-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="250.0,150.7 257.9,150.4 265.7,150.0 273.6,149.4 281.4,148.6 289.3,147.5 297.1,146.0 305.0,143.8 312.9,141.0 320.7,137.2 328.6,132.3 336.4,126.2 344.3,118.9 352.1,110.7 360.0,102.0 367.9,93.3 375.7,85.1 383.6,77.8 391.4,71.7 399.3,66.8 407.1,63.0 415.0,60.2 422.9,58.0 430.7,56.5 438.6,55.4 446.4,54.6 454.3,54.0 462.1,53.6 470.0,53.3"></polyline>
-  <text x="600" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--studio-ink)">ReLU max(x, 0)</text>
-  <rect x="490" y="28" width="220" height="148" rx="6" fill="none" stroke="var(--studio-line)"></rect>
-  <line x1="496" y1="152.6" x2="704" y2="152.6" stroke="var(--studio-muted)" opacity="0.6"></line>
-  <line x1="600.0" y1="34" x2="600.0" y2="170" stroke="var(--studio-muted)" opacity="0.6"></line>
-  <line x1="597.0" y1="113.7" x2="603.0" y2="113.7" stroke="var(--studio-muted)"></line>
-  <text x="594.0" y="117.2" text-anchor="end" font-size="10" fill="var(--studio-muted)">1</text>
-  <line x1="597.0" y1="74.7" x2="603.0" y2="74.7" stroke="var(--studio-muted)"></line>
-  <text x="594.0" y="78.2" text-anchor="end" font-size="10" fill="var(--studio-muted)">2</text>
-  <line x1="597.0" y1="35.8" x2="603.0" y2="35.8" stroke="var(--studio-muted)"></line>
-  <text x="594.0" y="39.3" text-anchor="end" font-size="10" fill="var(--studio-muted)">3</text>
-  <polyline fill="none" stroke="var(--studio-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="490.0,152.6 600.0,152.6 710.0,35.8"></polyline>
-</svg>
-<ul>
-<li>Matrix formulation maps naturally to parallel hardware (GPUs).</li>
-</ul>
-<section id="universal-approximation" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="universal-approximation"><span class="header-section-number">6.1.1</span> Universal Approximation</h3>
+<div id="6ff407df" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="6_files/figure-html/cell-2-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="721" height="216"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="universal-approximation" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="universal-approximation"><span class="header-section-number">6.1.2</span> Universal Approximation</h3>
 <div id="thm-ai-6-1" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 6.1 (Universal Approximation Theorem)</strong></span> Any continuous function can be approximated arbitrarily well by a neural network with a single hidden layer, given enough hidden neurons.</p>
 </div>
 </section>
 </section>
-<section id="why-deep" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="why-deep"><span class="header-section-number">6.2</span> Why Deep?</h2>
+<section id="depth-and-representation" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="depth-and-representation"><span class="header-section-number">6.2</span> Depth and Representation</h2>
 <ul>
 <li>Biology: Loosely inspired by hierarchical processing in the visual cortex (though the actual biological link is weak).</li>
 <li>Circuit theory: Depth yields exponentially more compact representations—e.g., <span class="math inline">\(n\)</span>-bit parity needs <span class="math inline">\(O(2^n)\)</span> units in one hidden layer, vs.&nbsp;<span class="math inline">\(O(n)\)</span> units across <span class="math inline">\(O(\log n)\)</span> layers.</li>
 <li>Modularity: Lower layers learn reusable features shared by higher layers (a learnable kernel rather than a hand-crafted one), improving data efficiency.</li>
 <li>Empirical performance: At the same parameter budget, deep (“thin + tall”) networks outperform wide shallow (“fat + short”) ones.</li>
-<li>Why now: Driven by large datasets, parallel compute, and better architectures/optimization.</li>
+<li>Why now: Driven by large datasets, parallel compute, and better architectures and optimization.</li>
 </ul>
 </section>
 <section id="training-neural-networks" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="training-neural-networks"><span class="header-section-number">6.3</span> Training Neural Networks</h2>
-<p>Minimize <span class="math inline">\(\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}), y^{(i)}\bigr)\)</span> with standard losses (squared error, logistic/hinge, softmax). The objective is non-convex, so optimization targets good local solutions.</p>
+<p>Training minimizes <span class="math inline">\(\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}), y^{(i)}\bigr)\)</span> with standard losses (squared error, logistic/hinge, softmax). Because the objective is non-convex, optimization targets good local solutions rather than guaranteed global optima.</p>
 <section id="stochastic-gradient-descent" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="stochastic-gradient-descent"><span class="header-section-number">6.3.1</span> Stochastic Gradient Descent</h3>
-<ul>
-<li>Full gradient descent averages over all <span class="math inline">\(m\)</span> samples per step, which is costly for large datasets.</li>
-<li><strong>Stochastic gradient descent (SGD)</strong> updates on one sample (or a small <strong>minibatch</strong>) at a time:</li>
-</ul>
+<p>Full gradient descent averages over all <span class="math inline">\(m\)</span> samples per step, which is costly for large datasets. <strong>Stochastic gradient descent (SGD)</strong> updates on one sample (or in practice a small <strong>minibatch</strong>) at a time:</p>
 <p><span class="math display">\[
 \theta \leftarrow \theta - \alpha\,\nabla_\theta\ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr).
 \]</span></p>
@@ -1142,28 +1124,26 @@ z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i), \qquad h_\theta(x) = z_k.
 <div id="def-ai-6-1" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6.1 (Jacobian Matrix)</strong></span> For <span class="math inline">\(f:\mathbb R^n\to\mathbb R^m\)</span>, the Jacobian <span class="math inline">\(\frac{\partial f(x)}{\partial x}\in\mathbb R^{m\times n}\)</span> has <span class="math inline">\((i,j)\)</span>-entry <span class="math inline">\(\frac{\partial f_i(x)}{\partial x_j}\)</span>. For scalar <span class="math inline">\(f\)</span>, <span class="math inline">\(\nabla_x f(x) = \bigl(\frac{\partial f(x)}{\partial x}\bigr)^\top\)</span>.</p>
 </div>
-<p>Key rules: chain rule <span class="math inline">\(\frac{\partial f(g(x))}{\partial x} = \frac{\partial f}{\partial g}\frac{\partial g}{\partial x}\)</span>, linear map <span class="math inline">\(\frac{\partial(Ax)}{\partial x}=A\)</span>, and elementwise map <span class="math inline">\(\frac{\partial f(x)}{\partial x}=\operatorname{diag}(f'(x))\)</span>.</p>
-<p><strong>Backpropagation</strong> computes all parameter gradients simultaneously in one forward pass and one backward pass by caching intermediate products:</p>
+<p>Three Jacobian rules used in the derivation:</p>
 <ul>
-<li>Layer Jacobians: <span class="math inline">\(\frac{\partial z_{i+1}}{\partial z_i} = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)W_i\)</span> and <span class="math inline">\(\frac{\partial z_{i+1}}{\partial b_i} = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)\)</span>.</li>
-<li>Upstream gradients <span class="math inline">\(g_i^\top = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}\)</span> satisfy the backward recursion (with <span class="math inline">\(\circ\)</span> elementwise):</li>
+<li>Chain rule: <span class="math inline">\(\dfrac{\partial f(g(x))}{\partial x} = \dfrac{\partial f}{\partial g}\dfrac{\partial g}{\partial x}\)</span>.</li>
+<li>Linear map: <span class="math inline">\(\dfrac{\partial(Ax)}{\partial x} = A\)</span>.</li>
+<li>Elementwise map: <span class="math inline">\(\dfrac{\partial f(x)}{\partial x} = \operatorname{diag}\bigl(f'(x)\bigr)\)</span>.</li>
 </ul>
+<p><strong>Backpropagation</strong> computes all parameter gradients simultaneously in one forward pass and one backward pass by caching intermediate products. For layer <span class="math inline">\(z_{i+1} = f_i(W_i z_i + b_i)\)</span>, let <span class="math inline">\(D_i = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)\)</span>, so <span class="math inline">\(\frac{\partial z_{i+1}}{\partial z_i} = D_i W_i\)</span> and <span class="math inline">\(\frac{\partial z_{i+1}}{\partial b_i} = D_i\)</span>.</p>
+<p>Define the upstream gradient <span class="math inline">\(g_i^\top = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}\)</span>. Then <span class="math inline">\(g_i\)</span> satisfies the backward recursion (with <span class="math inline">\(\circ\)</span> elementwise):</p>
 <p><span class="math display">\[
 g_k = \nabla_{z_k}\ell(z_k, y),
 \qquad
-g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr).
+g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr),
 \]</span></p>
-<ul>
-<li>Parameter gradients:</li>
-</ul>
+<p>which immediately gives the parameter gradients:</p>
 <p><span class="math display">\[
 \nabla_{b_i}\ell = g_{i+1}\circ f_i'(W_i z_i + b_i),
 \qquad
 \nabla_{W_i}\ell = \bigl(g_{i+1}\circ f_i'(W_i z_i + b_i)\bigr)z_i^\top.
 \]</span></p>
-<ul>
-<li>Complexity: Evaluating <span class="math inline">\(g_i\)</span> via vector-matrix products costs <span class="math inline">\(O(n^2(k-i))\)</span> instead of <span class="math inline">\(O(n^3(k-i))\)</span> for matrix-matrix products.</li>
-</ul>
+<p>Evaluating <span class="math inline">\(g_i\)</span> via vector–matrix products from left to right costs <span class="math inline">\(O(n^2(k-i))\)</span> instead of <span class="math inline">\(O(n^3(k-i))\)</span> for matrix–matrix products.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1176,7 +1156,12 @@ g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr).
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Using <span class="math inline">\(\operatorname{vec}(ABC)=(C^\top\otimes A)\operatorname{vec}(B)\)</span>, write <span class="math inline">\(W_i z_i = (z_i^\top\otimes I)\operatorname{vec}(W_i)\)</span>. The chain rule gives <span class="math inline">\(\frac{\partial \ell}{\partial\operatorname{vec}(W_i)} = g_{i+1}^\top\operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top\otimes I)\)</span>, which reshapes to <span class="math inline">\(\nabla_{W_i}\ell = \bigl(f_i'(W_i z_i + b_i)\circ g_{i+1}\bigr)z_i^\top\)</span>.</p>
+<p>Using <span class="math inline">\(\operatorname{vec}(ABC)=(C^\top\otimes A)\operatorname{vec}(B)\)</span>, write <span class="math inline">\(W_i z_i = (z_i^\top\otimes I)\operatorname{vec}(W_i)\)</span>. The chain rule gives</p>
+<p><span class="math display">\[
+\frac{\partial \ell}{\partial\operatorname{vec}(W_i)}
+= g_{i+1}^\top\operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top\otimes I),
+\]</span></p>
+<p>which reshapes to <span class="math inline">\(\nabla_{W_i}\ell = \bigl(f_i'(W_i z_i + b_i)\circ g_{i+1}\bigr)z_i^\top\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1184,21 +1169,17 @@ g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr).
 <section id="non-convexity-and-momentum" class="level3" data-number="6.3.3">
 <h3 data-number="6.3.3" class="anchored" data-anchor-id="non-convexity-and-momentum"><span class="header-section-number">6.3.3</span> Non-Convexity and Momentum</h3>
 <ul>
-<li>Non-convex losses have plateaus, saddle points, and local minima; gradient descent has no global-optimum guarantee.</li>
-<li><strong>Momentum</strong> adds inertia from the previous step (<span class="math inline">\(\text{movement} = -\text{gradient} + \text{momentum}\)</span>) to help pass plateaus, saddle points, and shallow local minima.</li>
+<li>Non-convex losses contain plateaus, saddle points, and local minima, so gradient descent has no global-optimum guarantee.</li>
+<li><strong>Momentum</strong> adds inertia from the previous step (<span class="math inline">\(\text{movement} = -\text{gradient} + \text{momentum}\)</span>) to help carry updates past plateaus, saddle points, and shallow local minima.</li>
 </ul>
-</section>
-</section>
-<section id="supplementary-notes" class="level2 supplementary-notes" data-number="6.4">
-<h2 class="supplementary-notes anchored" data-number="6.4" data-anchor-id="supplementary-notes"><span class="header-section-number">6.4</span> Supplementary Notes</h2>
-<section id="key-results" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">6.4.1</span> Key Results</h3>
-<ul>
-<li><a href="#universal-approximation">Universal Approximation</a>: One hidden layer suffices for continuity, but depth represents structured functions exponentially more compactly.</li>
-<li><a href="#stochastic-gradient-descent">Stochastic Gradient Descent</a>: Minibatch updates avoid scanning the full dataset every step.</li>
-<li><a href="#jacobians-and-backpropagation">Jacobians and Backpropagation</a>: Caching upstream gradients <span class="math inline">\(g_i = W_i^\top(g_{i+1}\circ f_i'(W_i z_i + b_i))\)</span> computes all gradients in <span class="math inline">\(O(n^2)\)</span> per layer.</li>
-<li><a href="#non-convexity-and-momentum">Non-Convexity and Momentum</a>: Momentum helps carry updates past plateaus, saddle points, and shallow local minima.</li>
-</ul>
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Universal Approximation](#universal-approximation): One hidden layer suffices for continuity, but depth represents structured functions exponentially more compactly.
+- [Stochastic Gradient Descent](#stochastic-gradient-descent): Minibatch updates avoid scanning the full dataset every step.
+- [Jacobians and Backpropagation](#jacobians-and-backpropagation): Caching upstream gradients $g_i = W_i^\top(g_{i+1}\circ f_i'(W_i z_i + b_i))$ computes all gradients in $O(n^2)$ per layer.
+- [Non-Convexity and Momentum](#non-convexity-and-momentum): Momentum helps carry updates past plateaus, saddle points, and shallow local minima. -->
 
 
 </section>
@@ -2148,6 +2129,9 @@ g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr).
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../../content/notes/artificial-intelligence/7.html" class="pagination-link" aria-label="Deep Learning II">
+        <span class="nav-page-text">Deep Learning II</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
