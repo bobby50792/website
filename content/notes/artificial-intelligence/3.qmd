@@ -97,10 +97,10 @@ Calculating some useful quantity from a joint probability distribution.
 2. **Eliminate** all hidden variables.
 3. **Normalize** the result.
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
 
 - [Assumptions](#assumptions): A Bayes' net assumes $P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))$.
 - [D-Separation](#d-separation): If all paths between $A$ and $B$ are blocked given $Z$, then $A \perp\!\!\!\perp B \mid Z$.
-- [Inference by Enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize.
+- [Inference by Enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize. -->

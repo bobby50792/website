@@ -1,5 +1,6 @@
 ---
 title: "Machine Learning"
+description: "Linear regression and classification, nonlinear methods, regularization, evaluation, and unsupervised learning."
 page-layout: article
 search: true
 toc-depth: 3
@@ -9,5 +10,274 @@ crossref:
   chapters: true
 ---
 
+- Supervised learning: Learn a mapping from inputs $x^{(i)}$ to outputs $y^{(i)}$ (regression when $y\in\mathbb R$, classification when $y$ is discrete).
+- Unsupervised learning: Extract structure from unlabeled inputs $x^{(i)}$ alone (clustering, dimensionality reduction).
+
 ## Linear Regression
 
+### Canonical Machine Learning Problem
+
+- Training data: inputs $x^{(i)}\in\mathbb R^n$ and outputs $y^{(i)}\in\mathbb R$ for $i=1,\ldots,m$ (often appending a constant $1$ to $x^{(i)}$ for the intercept).
+- Model parameters: $\theta\in\mathbb R^n$; hypothesis function: $h_\theta:\mathbb R^n\to\mathbb R$ (e.g., $h_\theta(x)=\theta^\top x$).
+- Loss function: $\ell:\mathbb R\times\mathbb R\to\mathbb R_+$, measuring how far a prediction $h_\theta(x)$ is from $y$.
+
+::: {#def-ai-5-1 name="Canonical Machine Learning Optimization"}
+
+Given training pairs $(x^{(i)},y^{(i)})$ for $i=1,\ldots,m$, choose parameters $\theta$ to minimize the total loss:
+
+$$
+\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr).
+$$
+
+:::
+
+Virtually all supervised learning algorithms specify three ingredients:
+
+1. The hypothesis function $h_\theta$.
+2. The loss function $\ell$.
+3. The optimization algorithm used to minimize the objective.
+
+### Least Squares
+
+Take a linear hypothesis $h_\theta(x)=\theta^\top x$ and squared loss $\ell(h_\theta(x),y)=(h_\theta(x)-y)^2$. Stacking $x^{(i)\top}$ as rows of $X\in\mathbb R^{m\times n}$ and $y^{(i)}$ into $y\in\mathbb R^m$:
+
+$$
+\min_\theta \sum_{i=1}^m (\theta^\top x^{(i)}-y^{(i)})^2
+= \min_\theta \|X\theta - y\|_2^2.
+$$
+
+This objective is convex in $\theta$, so any stationary point is a global minimum, with gradient $\nabla_\theta \|X\theta-y\|_2^2 = 2X^\top(X\theta - y)$.
+
+#### Solution via Gradient Descent
+
+Iteratively step opposite the gradient with step size $\alpha$:
+
+$$
+\theta \leftarrow \theta - 2\alpha\sum_{i=1}^m x^{(i)}\bigl(\theta^\top x^{(i)}-y^{(i)}\bigr).
+$$
+
+#### Normal Equations (Closed-Form Solution)
+
+Setting the gradient to zero yields the **normal equations**
+
+$$
+2X^\top(X\theta^*-y)=0
+\;\implies\;
+X^\top X\theta^* = X^\top y
+\;\implies\;
+\theta^* = (X^\top X)^{-1}X^\top y.
+$$
+
+#### Alternative Loss Functions
+
+Using absolute loss $\ell(h_\theta(x),y)=|h_\theta(x)-y|$ leads to $\ell_1$ regression:
+
+$$
+\min_\theta \|X\theta - y\|_1.
+$$
+
+There is no closed-form solution, but it can be minimized with subgradient descent using $\nabla_\theta \|X\theta-y\|_1 = X^\top\operatorname{sign}(X\theta-y)$.
+
+## Linear Classification
+
+### Formal Setting and Loss Functions
+
+- Binary outputs $y^{(i)}\in\{-1,+1\}$; linear hypothesis $h_\theta(x)=\theta^\top x\in\mathbb R$ (a signed confidence score), with predicted label $\hat y=\operatorname{sign}(h_\theta(x))$.
+- Squared loss is poorly suited for classification because confident correct predictions are heavily penalized.
+- The ideal error metric is 0/1 loss:
+
+$$
+\ell_{0/1}\bigl(h_\theta(x),y\bigr) = \mathbf 1\{y\cdot h_\theta(x)\le 0\}.
+$$
+
+- Minimizing 0/1 loss is NP-hard (non-convex), so convex surrogate losses are used instead:
+
+| Loss | Formula |
+|---|---|
+| 0/1 loss | $\mathbf 1\{y\cdot h_\theta(x)\le 0\}$ |
+| Logistic loss | $\log\bigl(1+\exp(-y\cdot h_\theta(x))\bigr)$ |
+| Hinge loss | $\max\{1 - y\cdot h_\theta(x),\, 0\}$ |
+| Exponential loss | $\exp\bigl(-y\cdot h_\theta(x)\bigr)$ |
+
+### Support Vector Machine
+
+A linear SVM solves the canonical problem with hinge loss and a linear hypothesis (standard SVMs also add an $\ell_2$ regularization term):
+
+$$
+\min_\theta \sum_{i=1}^m \max\{1 - y^{(i)}\cdot\theta^\top x^{(i)},\, 0\}.
+$$
+
+Subgradient descent update:
+
+$$
+\theta \leftarrow \theta - \alpha\sum_{i=1}^m \Bigl(-y^{(i)}x^{(i)}\mathbf 1\{y^{(i)}\cdot\theta^\top x^{(i)}\le 1\}\Bigr).
+$$
+
+### Logistic Regression
+
+Regularized logistic regression minimizes
+
+$$
+\min_\theta\; \lambda\|\theta\|_2^2 + \sum_{i=1}^m \log\bigl(1 + e^{-y^{(i)}h_\theta(x^{(i)})}\bigr).
+$$
+
+- Probabilistic interpretation: $p(y=+1\mid x)=\dfrac{1}{1+\exp(-\theta^\top x)}$.
+- Differentiable and convex, with no closed-form solution; commonly solved with Newton's method or gradient descent.
+
+### Multiclass Classification
+
+When $y\in\{1,\ldots,k\}$:
+
+1. One-vs-all: Train $k$ binary classifiers $h_{\theta_i}$ (class $i$ vs. all others) and predict $\hat y=\arg\max_i h_{\theta_i}(x)$.
+2. Softmax (cross-entropy) loss: Use a vector-valued hypothesis $h_\theta:\mathbb R^n\to\mathbb R^k$ with loss
+
+$$
+\ell\bigl(h_\theta(x), y\bigr) = \log\sum_{j=1}^k \exp\bigl(h_\theta(x)_j\bigr) - h_\theta(x)_y.
+$$
+
+## Nonlinear Methods
+
+### Nonlinear Features
+
+Apply linear regression or classification to nonlinear feature mappings of the raw input (e.g., polynomial features $x^{(i)}=[(z^{(i)})^2,\,z^{(i)},\,1]^\top$).
+
+- Hypothesis remains linear in $\theta$ ($h_\theta(x)=\theta^\top x$), so the same normal equations $\theta=(X^\top X)^{-1}X^\top y$ apply while producing nonlinear fits in the original input.
+
+### Kernel Methods
+
+A linear hypothesis parameterized by similarity to every training example:
+
+$$
+h_\theta(x) = \sum_{i=1}^m \theta_i K(x, x_i),
+$$
+
+where $K:\mathbb R^n\times\mathbb R^n\to\mathbb R$ is a **kernel function** measuring similarity.
+
+- For suitable $K$, this corresponds to operating in a high-dimensional feature space without forming features explicitly (e.g., $\phi(a,b)=(a,b,a^2+b^2)$ yields $K(x,y)=x\cdot y+\|x\|^2\|y\|^2$).
+- Still linear in $\theta$, so the same optimization algorithms apply.
+- Non-parametric: $\theta\in\mathbb R^m$ has as many parameters as training examples.
+
+### Nearest Neighbor Methods
+
+Predict using the closest training example under a distance function $\operatorname{dist}:\mathbb R^n\times\mathbb R^n\to\mathbb R_+$:
+
+$$
+h_\theta(x) = y_{\arg\min_i \operatorname{dist}(x, x_i)}.
+$$
+
+- Generalizes to $k$-nearest neighbors by averaging or voting over the $k$ closest points.
+- No separate training phase, but non-parametric: requires storing all training data.
+
+### Decision Trees
+
+- Recursively partition the input space into regions by testing feature thresholds at internal nodes; leaves output labels or local linear predictors.
+- Built greedily by choosing splits that best separate the data.
+
+### Neural Networks
+
+Compose affine maps with elementwise nonlinearities, such as a 2-layer network:
+
+$$
+h_\theta(x) = \sigma\bigl(\theta_2^\top \sigma(\Theta_1^\top x)\bigr),
+$$
+
+where $\Theta_1\in\mathbb R^{n\times p}$, $\theta_2\in\mathbb R^p$, and $\sigma(z)=1/(1+e^{-z})$ is the sigmoid function applied elementwise.
+
+### Ensemble Methods
+
+Combine multiple base hypotheses:
+
+$$
+h_\theta(x) = \sum_{i=1}^k \theta_i \operatorname{sign}\bigl(h_i(x)\bigr).
+$$
+
+- Random forests: Ensemble of decision trees trained on different subsets of the training data.
+- Boosting: Iteratively train models on reweighted examples that emphasize errors of previous hypotheses.
+
+## Overfitting, Generalization, and Regularization
+
+### Parameters, Hyperparameters, and Cross-Validation
+
+High-complexity models (e.g., high-degree polynomials) can fit any finite training set exactly while incurring large generalization error on unseen data (**overfitting**).
+
+- Parameters ($\theta$): Fit on the training set.
+- Hyperparameters (polynomial degree, regularization $\lambda$, etc.): Chosen on a holdout (validation) set.
+
+#### $k$-Fold Cross-Validation
+
+Partition the data into $k$ folds; train $k$ times using $k-1$ folds for training and the remaining fold for validation, and average the validation error.
+
+- Leave-one-out CV: Limit $k=m$ (each fold is one example; for least squares, computable with the same complexity as a single matrix solve).
+- Stratified CV: Keep roughly equal class proportions in every fold.
+- Caution: $k$-fold CV is not always appropriate—for time series, holdout data must occur after the training data.
+
+### Regularization
+
+Overfitted high-degree models typically have enormous parameter magnitudes. **Regularization** controls complexity by penalizing large weights:
+
+::: {#def-ai-5-2 name="Regularized Loss Minimization"}
+
+$$
+\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr) + \frac{\lambda}{2}\|\theta\|_2^2.
+$$
+
+Sweeping $\lambda$ from $0$ (no regularization) to $\infty$ ($\theta\to 0$) controls the trade-off between training fit and model complexity.
+
+:::
+
+#### Regularized Least Squares
+
+Minimizing $\frac12\|X\theta-y\|_2^2 + \frac{\lambda}{2}\|\theta\|_2^2$ gives gradient $X^\top(X\theta-y)+\lambda\theta=0$, so:
+
+$$
+(X^\top X + \lambda I)\theta = X^\top y
+\;\implies\;
+\theta = (X^\top X + \lambda I)^{-1}X^\top y.
+$$
+
+## Evaluating Machine Learning Algorithms
+
+- Pitfall of a single train/holdout split: Selecting the best algorithm or hyperparameters by holdout error effectively fits the hyperparameters to the holdout set (even random predictors can score well given enough searches).
+- Proper split: Divide data into training, validation (holdout), and test sets—fit parameters on training, choose hyperparameters on validation, and report performance on the untouched test set.
+- Test-set leakage in practice: Once you inspect test performance to guide design choices, the test set is corrupted. Mitigate by evaluating on fresh live data, recollecting test sets when needed, and checking test performance sparingly (theoretically addressed by adaptive data analysis / differential privacy).
+
+## Unsupervised Learning
+
+Given unlabeled inputs $x_1,\ldots,x_m\in\mathbb R^n$, many unsupervised methods fit a hypothesis $h_\theta:\mathbb R^n\to\mathbb R^n$ by minimizing a **reconstruction loss**:
+
+$$
+\ell\bigl(x_i, h_\theta(x_i)\bigr) = \|x_i - h_\theta(x_i)\|_2^2.
+$$
+
+### $k$-Means
+
+- Parameters: $k$ cluster centers $\theta=\{\mu_1,\ldots,\mu_k\}$ with $\mu_j\in\mathbb R^n$.
+- Hypothesis maps $x$ to its closest center: $h_\theta(x)=\mu_{\arg\min_j \|x-\mu_j\|_2^2}$, minimizing
+
+$$
+\min_{\mu_1,\ldots,\mu_k}\sum_{i=1}^m \bigl\|x_i - \mu_{\arg\min_j \|x_i-\mu_j\|_2^2}\bigr\|_2^2.
+$$
+
+- Non-convex; solved iteratively by alternating between assigning each $x_i$ to its nearest $\mu_j$ and updating each $\mu_j$ to the mean of its assigned points.
+
+### Principal Component Analysis
+
+- Parameters: two matrices $\Theta_1\in\mathbb R^{n\times k}$ and $\Theta_2\in\mathbb R^{k\times n}$ ($k<n$), with hypothesis $h_\theta(x)=\Theta_1\Theta_2 x$.
+- Interpretation: $\Theta_2 x\in\mathbb R^k$ projects $x$ to a lower-dimensional representation preserving enough information for $\Theta_1$ to reconstruct $x$.
+- Objective:
+
+$$
+\min_{\Theta_1,\Theta_2}\sum_{i=1}^m \|x_i - \Theta_1\Theta_2 x_i\|_2^2.
+$$
+
+- Non-convex, yet solvable exactly via eigenvalue decomposition.
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results
+
+- [Canonical Machine Learning Problem](#canonical-machine-learning-problem): Supervised algorithms specify a hypothesis function, a loss function, and an optimization method to minimize $\sum_i \ell(h_\theta(x^{(i)}), y^{(i)})$.
+- [Normal Equations](#normal-equations-closed-form-solution): Least squares has closed-form solution $\theta^*=(X^\top X)^{-1}X^\top y$, and $\ell_2$ regularization adds $\lambda I$ to $X^\top X$.
+- [Linear Classification](#linear-classification): Because 0/1 loss is non-convex and NP-hard, SVM (hinge), logistic regression (logistic), and multiclass softmax optimize convex surrogates.
+- [Evaluating Machine Learning Algorithms](#evaluating-machine-learning-algorithms): Use separate training, validation, and test sets to avoid overfitting hyperparameters to the evaluation set.
+- [Unsupervised Learning](#unsupervised-learning): Both $k$-means and PCA can be cast as minimizing reconstruction loss $\|x_i-h_\theta(x_i)\|_2^2$; $k$-means alternates assignment and averaging, while PCA is solved exactly by eigendecomposition. -->

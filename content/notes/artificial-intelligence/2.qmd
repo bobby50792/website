@@ -325,11 +325,11 @@ Modus ponens is **complete** with respect to Horn clauses:
 
 :::
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
 
 - @def-ai-2-1 and @def-ai-2-2: Soundness means everything derived is entailed; completeness means everything entailed is derived.
 - @thm-ai-2-1: Modus ponens is complete for first-order logic with only Horn clauses.
 - @thm-ai-2-2: First-order logic is semi-decidable, even when restricted to Horn clauses.
-- @prp-ai-2-1: Every propositional formula can be converted into an equivalent CNF formula.
+- @prp-ai-2-1: Every propositional formula can be converted into an equivalent CNF formula. -->

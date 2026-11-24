@@ -405,7 +405,7 @@ Utilities are functions from outcomes (states of the world) to real numbers that
 
 Rational preferences imply behavior describable as maximization of expected utility.
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
 
@@ -413,4 +413,4 @@ Rational preferences imply behavior describable as maximization of expected util
 - [Alpha-Beta Search](#alpha-beta-search): With perfect ordering, time drops to $O(b^{m/2})$.
 - @thm-ai-1-1: A game with finitely many players and actions always has a Nash equilibrium.
 - @thm-ai-1-2: In a finite two-player zero-sum game, the max-min and min-max values agree.
-- [Principle of Maximum Expected Utility](#principle-of-maximum-expected-utility): Rational preferences imply behavior describable as maximizing expected utility.
+- [Principle of Maximum Expected Utility](#principle-of-maximum-expected-utility): Rational preferences imply behavior describable as maximizing expected utility. -->

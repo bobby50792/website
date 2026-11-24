@@ -187,11 +187,11 @@ m_t[x_t] &= \max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\
 \end{aligned}
 $$
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
 
 - [Variable Elimination](#variable-elimination): Interleaving joins and marginalization is still NP-hard, but usually much faster than enumeration.
 - [Gibbs Sampling](#gibbs-sampling): Each conditional update is a Metropolis–Hastings step with acceptance probability 1.
 - [Forward Algorithm](#forward-algorithm): Each time step costs $|X|^2$ time and $|X|$ space.
-- [Viterbi Algorithm](#viterbi-algorithm-max): Replacing the forward algorithm's sum with a max finds the most likely explanation.
+- [Viterbi Algorithm](#viterbi-algorithm-max): Replacing the forward algorithm's sum with a max finds the most likely explanation. -->
