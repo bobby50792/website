@@ -1,0 +1,136 @@
+---
+title: "From MDPs to RL"
+description: "Markov decision processes, value iteration, policy iteration, dynamic programming, and passive reinforcement learning."
+page-layout: article
+search: true
+toc-depth: 3
+number-offset: [8]
+
+crossref:
+  chapters: true
+---
+
+## Markov Decision Processes (MDPs)
+
+An MDP models sequential decision making under uncertainty (non-deterministic search).
+
+::: {#def-ai-8-1 name="Markov Decision Process"}
+
+An MDP is specified by:
+
+- A set of states $s\in S$ and actions $a\in A$.
+- A transition function (model / dynamics) $T(s,a,s') = P(s'\mid s,a)$.
+- A reward function $R(s)$ (or more generally $R(s,a)$ or $R(s,a,s')$).
+- A start state (or start distribution) and optionally terminal states.
+
+:::
+
+Core assumptions: first-order Markovian dynamics ($P(S_{t+1}\mid S_t,A_t)$ depends only on current state and action), stationary dynamics (time-invariant), state-dependent rewards, and full observability (after executing an action, the resulting state is observed).
+
+- Planning vs. RL: In planning, the dynamics $T$ and rewards $R$ are known; in reinforcement learning, $T$ and $R$ are unknown and must be learned from interaction.
+
+### Policies and Value Functions
+
+Because actions have stochastic outcomes, a fixed action sequence is insufficient—a solution must specify what to do in every reachable state.
+
+- Non-stationary policy (finite horizon $H$): $\pi: S\times T\to A$, where $\pi(s,t)$ chooses an action with $t$ stages to go.
+- Stationary policy (infinite horizon): $\pi: S\to A$, specifying a reactive action $\pi(s)$ independent of time.
+
+Under **infinite-horizon discounted value** with discount factor $0\le\gamma<1$ (which avoids infinite returns in cyclic MDPs and prefers earlier rewards), the value of policy $\pi$ at state $s$ is the expected discounted sum of rewards:
+
+$$
+V^\pi(s) = \mathbb E\!\left[\sum_{t=0}^\infty \gamma^t R(S_t)\;\middle|\; S_0 = s,\,\pi\right]
+= R(s) + \gamma\sum_{s'\in S} T\bigl(s,\pi(s),s'\bigr)\,V^\pi(s').
+$$
+
+An optimal policy $\pi^*$ satisfies $V^{\pi^*}(s)\ge V^\pi(s)$ for all $s\in S$ and all $\pi$, and its value function $V^*$ satisfies the **Bellman optimality equation**:
+
+$$
+V^*(s) = R(s) + \gamma\max_{a\in A}\sum_{s'\in S} T(s,a,s')\,V^*(s').
+$$
+
+## Value Iteration
+
+**Value iteration** computes $V^*$ by starting from any $V_0$ (e.g., $0$) and repeatedly applying the Bellman optimality backup to every state:
+
+$$
+V_{k+1}(s) \leftarrow R(s) + \gamma\max_{a\in A}\sum_{s'\in S} T(s,a,s')\,V_k(s').
+$$
+
+### Convergence and Stopping Condition
+
+Because the Bellman optimality operator is a $\gamma$-contraction in the max norm $\|\cdot\|_\infty$, value iteration converges geometrically to the unique fixed point $V^*$:
+
+$$
+\|V_{k+1} - V^*\|_\infty \le \gamma\,\|V_k - V^*\|_\infty.
+$$
+
+- Stopping criterion: If $\|V_k - V_{k-1}\|_\infty \le \epsilon$, then $\|V_k - V^*\|_\infty \le \dfrac{\epsilon\gamma}{1-\gamma}$.
+- Acting greedily: Given an approximation $V_k$, the one-step lookahead greedy policy $\pi_g(s) = \arg\max_a \sum_{s'} T(s,a,s')V_k(s')$ has value $V^{\pi_g}$ satisfying
+
+$$
+\|V_k - V^*\|_\infty \le \lambda \;\implies\; \|V^{\pi_g} - V^*\|_\infty \le \frac{2\lambda\gamma}{1-\gamma}.
+$$
+
+Moreover, once $V_k$ is sufficiently close to $V^*$ (within a finite threshold $\epsilon$), the greedy policy $\pi_g$ is already exact optimal.
+
+- Limitations of value iteration: Each sweep costs $O(|S|^2|A|)$, the maximizing action at each state rarely changes, and the policy typically converges long before the value numbers finish converging.
+
+## Policy Iteration
+
+**Policy iteration** alternates two steps until the policy stops changing:
+
+1. Policy evaluation: Given fixed $\pi$, compute $V^\pi$ either iteratively via $V_{k+1}^\pi(s) \leftarrow R(s) + \gamma\sum_{s'} T(s,\pi(s),s')V_k^\pi(s')$ or exactly by solving the linear system $(I - \gamma T^\pi)V^\pi = R$.
+2. Policy improvement: Update the policy greedily with respect to $V^\pi$:
+
+$$
+\pi'(s) = \arg\max_{a\in A}\sum_{s'\in S} T(s,a,s')\,V^\pi(s').
+$$
+
+- Convergence and complexity: Every step strictly improves the policy ($V^{\pi'}\ge V^\pi$) unless $\pi$ is already optimal, so PI never repeats a policy and terminates in at most $|A|^{|S|}$ iterations (empirically $O(|S|)$; whether a polynomial worst-case bound exists remains open).
+- Modified policy iteration and GPI: Solving the linear system costs $O(|S|^{2.373})$; running just $k$ iterative evaluation backups instead gives modified policy iteration. **Generalized policy iteration (GPI)** refers to any interleaving of evaluation and improvement regardless of granularity.
+
+### Asynchronous and Approximate Dynamic Programming
+
+- Synchronous vs. asynchronous DP: Synchronous DP sweeps all states before updating; asynchronous DP backs up states individually in any order (converging as long as all states continue to be visited). Three standard strategies are in-place DP (one value table), prioritized sweeping (backing up states with largest Bellman error via a priority queue, requiring reverse dynamics), and real-time DP (backing up states visited by the agent's experience).
+- Curse of dimensionality: Full-width DP backups sum over all successors and actions, which becomes intractable as $|S|$ grows exponentially with state variables. Two remedies are sample backups (updating from observed transitions $\langle s,a,r,s'\rangle$ at constant cost independent of $|S|$) and approximate DP (e.g., fitted value iteration using a function approximator $\hat v(\cdot,w)$).
+
+## From MDPs to RL: Passive Learning
+
+In reinforcement learning, $T$ and $R$ are unknown and must be learned from sampled transitions $\langle s,a,r,s'\rangle$. Model-based RL learns an approximate model $(\hat T, \hat R)$ and plans with it; model-free RL estimates values or policies directly without learning $T$.
+
+In **passive RL**, a stationary policy $\pi$ is fixed and the goal is to estimate $V^\pi(s)$ from episodes generated by following $\pi$.
+
+### Monte Carlo Direct Estimation (Model-Free)
+
+- Estimate $V^\pi(s)$ as the empirical average of the discounted reward-to-go observed from state $s$ to episode termination.
+- Simple and fast per update, but ignores Bellman relationships between neighboring states and converges slowly.
+
+### Adaptive Dynamic Programming (Model-Based)
+
+- Estimate $\hat T(s,a,s')$ as the empirical fraction of transitions from $(s,a)$ to $s'$ and record observed rewards $\hat R(s)$, then run DP policy evaluation on $(\hat T, \hat R)$.
+- Fully exploits Bellman constraints and needs fewer episodes, but each update requires a full policy evaluation.
+
+### Temporal Difference (TD) Learning (Model-Free)
+
+Motivated by online mean estimation ($\bar x_{n+1} = \bar x_n + \frac{1}{n+1}(x_{n+1}-\bar x_n)$), **TD learning** performs a local incremental update on every observed transition $(s, a, r, s')$ without estimating $T$:
+
+$$
+V^\pi(s) \leftarrow V^\pi(s) + \alpha\Bigl(R(s) + \gamma V^\pi(s') - V^\pi(s)\Bigr),
+$$
+
+where $\alpha$ is the learning rate. Each update nudges $V^\pi(s)$ toward the noisy Bellman sample $R(s)+\gamma V^\pi(s')$, and converges to the true $V^\pi$ when $\alpha$ decays appropriately (e.g., $1/n$).
+
+### Comparison and Bridging ADP and TD
+
+| Method | Type | Exploits Bellman Constraints | Compute / Step | Sample Efficiency |
+|---|---|---|---|---|
+| Direct Estimation (MC) | Model-free | No | Low | Low |
+| Adaptive DP (ADP) | Model-based | Fully | High | High |
+| TD Learning | Model-free | Partially (observed successor) | Low | Medium |
+
+- Between ADP and TD: Perform TD updates on both real observed transitions and "imagined" transitions sampled from an estimated model. Increasing imagined transitions trades extra computation for better sample efficiency, approaching ADP in the limit.
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

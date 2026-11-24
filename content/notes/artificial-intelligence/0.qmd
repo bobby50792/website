@@ -2,7 +2,7 @@
 title: "Artificial Intelligence"
 output-file: index.html
 home-order: 9
-description: "Search, logic, Bayesian networks, probabilistic inference, machine learning, and deep learning."
+description: "Search, logic, Bayesian networks, probabilistic inference, machine learning, deep learning, and reinforcement learning."
 page-layout: article
 search: true
 listing:

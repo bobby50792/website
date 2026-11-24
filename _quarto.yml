@@ -240,8 +240,12 @@ website:
                   href: content/notes/artificial-intelligence/4.qmd
                 - text: "Machine Learning"
                   href: content/notes/artificial-intelligence/5.qmd
-                - text: "Deep Learning"
+                - text: "Deep Learning I"
                   href: content/notes/artificial-intelligence/6.qmd
+                - text: "Deep Learning II"
+                  href: content/notes/artificial-intelligence/7.qmd
+                - text: "From MDPs to RL"
+                  href: content/notes/artificial-intelligence/8.qmd
 
 format:
   html:

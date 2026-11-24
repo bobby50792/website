@@ -1,0 +1,155 @@
+---
+title: "Deep Learning II"
+description: "Convolutional neural networks and ResNet, RNNs and LSTM, attention and Transformers, adaptive learning rates, and dropout."
+page-layout: article
+search: true
+toc-depth: 3
+number-offset: [7]
+
+crossref:
+  chapters: true
+---
+
+## Convolutional Neural Networks (CNNs)
+
+### Core Layers
+
+A CNN stacks four types of layers to extract local spatial patterns and map an input image to class predictions:
+
+- Convolution: Slides learned local filters across the image (elementwise multiply and sum) to produce a stack of feature maps. Sharing filter weights across positions drastically reduces parameter count compared to fully connected networks.
+- Nonlinearity (ReLU): Applies $z_i = \max(0, z_{i-1})$ elementwise, zeroing out negative values. Compared to sigmoid or $\tanh$, ReLU is fast to compute, produces sparse activations, and mitigates the **vanishing gradient problem** because active units pass gradients through without shrinking them.
+- Pooling (max pooling): Slides a window (typically $2\times 2$ or $3\times 3$, stride $2$) and keeps the maximum value in each window. This reduces spatial size, computation, and overfitting, though overly aggressive downsampling can limit depth and performance.
+- Fully connected layers: Flatten the final activation volume into class votes / probabilities.
+
+### Backpropagation in CNNs
+
+The learnable parameters are the filter weights in convolutional layers and the weights in fully connected layers. Because convolution is a linear operation, it can be expressed as a structured matrix multiplication, and its backward pass uses the transposed operation.
+
+- ReLU backward: $\dfrac{\partial L}{\partial z_{i-1}} = \dfrac{\partial L}{\partial z_i}$ if $z_{i-1} > 0$, and $0$ otherwise. To avoid "dying ReLU" neurons stuck at gradient $0$, Leaky ReLU uses $z_i = \max(0.1 z_{i-1}, z_{i-1})$.
+- Max-pooling backward: Routes the upstream gradient $\dfrac{\partial L}{\partial z_i(x,y)}$ exclusively to the argmax element inside the pooling window, and $0$ to all other positions.
+
+### Residual Networks (ResNet)
+
+Simply stacking more layers in a plain CNN can produce *higher training error* (e.g., a 34-layer plain CNN fits ImageNet worse than an 18-layer one), pointing to an optimization difficulty rather than overfitting.
+
+A **residual block** (He et al., 2016) reformulates a group of layers (e.g., two $3\times 3$ convolutions) to learn the residual change $F(x) = H(x) - x$ and adds the input back via a shortcut connection:
+
+$$
+H(x) = x + F(x).
+$$
+
+- Identity mappings are easy to represent by pushing $F(x)\to 0$.
+- At the addition, $\dfrac{\partial y}{\partial x} = I + J_F(x)$ provides a direct identity path for activations and gradients.
+- When resolution decreases and channel count increases between stages, the shortcut applies a projection so the feature-map shapes match.
+
+### Scope and Limitations
+
+- CNNs work well on any 2D or 3D grid where nearby entries are strongly correlated (images, audio spectrograms, video), and intermediate layers provide reusable visual features (e.g., vision encoders in multimodal models).
+- Rule of thumb: CNNs only capture local spatial patterns—if swapping feature columns leaves the data equally useful (such as tabular customer data), CNNs are not suitable.
+
+## Recurrent Neural Networks and LSTM
+
+### Vanilla RNN
+
+Recurrent neural networks process variable-length sequences (one-to-many such as image captioning, many-to-one such as sentiment classification, and many-to-many such as machine translation) by carrying a hidden state $h_t$ across time with shared weights (bias omitted):
+
+$$
+h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t).
+$$
+
+Unrolling the RNN across time yields a deep shared-weight network in which output $y_i$ depends on $x_1,\ldots,x_i$, trained by **backpropagation through time (BPTT)** to minimize total sequence loss. Repeated transformations over many steps cause gradients to vanish, making long-term dependencies (such as matching distant brackets) difficult to capture.
+
+### Long Short-Term Memory (LSTM)
+
+An **LSTM** adds a gated memory cell $c_t$ controlled by three sigmoid-activated gates in $(0,1)$—a forget gate $f_t$, input gate $i_t$, and output gate $o_t$—to learn what to keep, write, and expose:
+
+$$
+c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t,
+\qquad
+h_t = o_t \odot \tanh(c_t).
+$$
+
+Additive cell updates regulate information flow and preserve gradients across long sequences, though computation remains sequential across time steps.
+
+## Attention and Transformers
+
+### Scaled Dot-Product Self-Attention
+
+Instead of passing information step by step through a hidden state, **self-attention** reads relevant information directly across all positions using content-dependent weights. Each input produces learned query, key, and value projections:
+
+$$
+Q = X W_Q, \qquad K = X W_K, \qquad V = X W_V.
+$$
+
+Similarity scores $S = QK^\top$ ($S_{ij} = q_i\cdot k_j$) are scaled by $\sqrt{d_k}$ so dot products do not grow too large and push softmax into overly peaked regimes:
+
+$$
+A = \operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right),
+\qquad
+Y = AV \quad \Bigl(y_i = \sum_j A_{ij} v_j\Bigr).
+$$
+
+### Positional Information
+
+Self-attention alone is permutation-equivariant (permuting inputs permutes outputs), so sequence order must be supplied explicitly:
+
+- Additive position embeddings: Add a position vector $p_i$ to each token embedding ($z_i = x_i + p_i$) before forming $Q, K, V$. Choices include fixed sinusoidal encodings ($(p_i)_{2r} = \sin(i\omega_r)$, $(p_i)_{2r+1} = \cos(i\omega_r)$) or learned lookup vectors $p_i = P[i]$.
+- **RoPE** (Rotary Position Embedding, Su et al., 2021): Splits projected $Q$ and $K$ into 2D coordinate pairs and rotates pair $r$ at position $i$ by angle $i\theta_r$ (leaving $V$ unchanged). Because rotation preserves dot products, query–key scores depend on relative offset $j-i$:
+
+$$
+\bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j-i) k_j.
+$$
+
+### Multi-Head Attention and Causal Masking
+
+Multi-head self-attention runs $H$ independent heads of width $d_h = d/H$ in parallel (each with its own $Q, K, V$ projections), then concatenates and projects back to model width $d$:
+
+$$
+\operatorname{head}_h = \operatorname{softmax}\!\left(\frac{Q_h K_h^\top}{\sqrt{d_h}}\right)V_h,
+\qquad
+O = \operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_H)\,W^O.
+$$
+
+For next-token prediction $P(\text{next token}\mid\text{previous tokens})$, **causal masking** sets attention scores at future positions ($j > i$) to $-\infty$ before softmax so their weights become $0$. During training, all positions are computed in parallel with the mask; during generation, tokens are appended autoregressively one at a time.
+
+### Transformer Block and Variants
+
+A Transformer block combines multi-head self-attention (mixing information across positions) with a position-wise feed-forward network (transforming each token independently):
+
+$$
+\operatorname{FFN}(x) = W_2 \operatorname{ReLU}(W_1 x + b_1) + b_2.
+$$
+
+Each sublayer is wrapped with a residual connection and **Layer Normalization** ("Add & Norm"), where LayerNorm normalizes across feature coordinates independently for each token ($\mu = \operatorname{mean}(x)$, $\sigma^2 = \operatorname{mean}((x-\mu)^2)$):
+
+$$
+\operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta.
+$$
+
+Stacking $N$ blocks yields three main variants:
+
+- Decoder-only: Masked (causal) self-attention + FFN, followed by a linear layer and softmax to predict the next token.
+- Encoder-only: Removes the causal mask so every token attends bidirectionally to the entire input.
+- Encoder–Decoder: Encoder reads the full source sequence; decoder uses causal self-attention plus cross-attention ($Q$ from the decoder, $K$ and $V$ from the encoder).
+
+## Tips for Training Deep Neural Networks
+
+### Adaptive Learning Rates
+
+Choosing a fixed learning rate $\eta$ is delicate: too large prevents the loss from decreasing, while too small makes training slow. **Adagrad** maintains a separate learning rate for each parameter $w$, scaled inversely by the root sum of squared past gradients ($g_t = \frac{\partial C(\theta^t)}{\partial w}$):
+
+$$
+w^{t+1} \leftarrow w^t - \frac{\eta}{\sqrt{\sum_{i=0}^t g_i^2}}\,g_t.
+$$
+
+The effective learning rate shrinks over time, and parameters with smaller historical gradients receive larger effective steps (and vice versa). Subsequent adaptive optimizers include RMSprop, Adadelta, Adam, AdamW, and Muon.
+
+### Dropout
+
+- Training: Before computing gradients on each minibatch, randomly drop each neuron with probability $p$, training a thinner subnetwork per minibatch.
+- Testing: Keep all neurons active and multiply all weights by the keep probability $(1-p)$ so expected activations match training.
+- Interpretation: Prevents co-adaptation among neurons and acts as an implicit ensemble over up to $2^M$ weight-sharing subnetworks (for $M$ neurons). Variants include DropConnect (dropping connections), annealed dropout (decaying $p$ over epochs), and Standout (per-neuron dropout rates).
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

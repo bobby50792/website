@@ -1,5 +1,5 @@
 ---
-title: "Deep Learning"
+title: "Deep Learning I"
 description: "Neural networks, depth and modularity, stochastic gradient descent, backpropagation, and momentum."
 page-layout: article
 search: true
@@ -12,54 +12,70 @@ crossref:
 
 ## Neural Networks
 
-A neural network is a hypothesis class built from **composed nonlinear functions** that learns features directly from raw inputs.
-
-- Composing linear maps alone collapses into a single linear map.
-- Applying an elementwise nonlinearity after each affine layer gives:
+A neural network is a hypothesis class built from **composed nonlinear functions** that learns features directly from raw inputs. Composing linear maps alone collapses into a single linear map; applying an elementwise nonlinearity after each affine layer gives
 
 $$
 z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i), \qquad h_\theta(x) = z_k.
 $$
 
-- Common activations $f_i:\mathbb R\to\mathbb R$: $\tanh(x) = \frac{e^{2x}-1}{e^{2x}+1}$, sigmoid $\sigma(x) = \frac{1}{1+e^{-x}}$, and ReLU $\max\{x, 0\}$.
+Expressing each layer as a matrix operation maps naturally to parallel hardware (GPUs).
 
-```{=html}
-<svg viewBox="0 0 720 190" width="100%" role="img" aria-label="Plots of tanh, sigmoid, and ReLU activation functions" style="display:block;max-width:720px;margin:0.75rem auto 1rem;font-family:var(--studio-sans);">
-  <text x="120" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--studio-ink)">tanh(x)</text>
-  <rect x="10" y="28" width="220" height="148" rx="6" fill="none" stroke="var(--studio-line)"/>
-  <line x1="16" y1="47.2" x2="224" y2="47.2" stroke="var(--studio-line)" stroke-dasharray="4 3"/>
-  <line x1="16" y1="156.8" x2="224" y2="156.8" stroke="var(--studio-line)" stroke-dasharray="4 3"/>
-  <line x1="16" y1="102.0" x2="224" y2="102.0" stroke="var(--studio-muted)" opacity="0.6"/>
-  <line x1="120.0" y1="34" x2="120.0" y2="170" stroke="var(--studio-muted)" opacity="0.6"/>
-  <line x1="117.0" y1="47.2" x2="123.0" y2="47.2" stroke="var(--studio-muted)"/>
-  <text x="114.0" y="50.7" text-anchor="end" font-size="10" fill="var(--studio-muted)">1</text>
-  <line x1="117.0" y1="156.8" x2="123.0" y2="156.8" stroke="var(--studio-muted)"/>
-  <text x="114.0" y="160.3" text-anchor="end" font-size="10" fill="var(--studio-muted)">-1</text>
-  <polyline fill="none" stroke="var(--studio-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="10.0,156.8 17.9,156.7 25.7,156.7 33.6,156.6 41.4,156.5 49.3,156.2 57.1,155.7 65.0,154.8 72.9,153.4 80.7,150.9 88.6,146.7 96.4,140.1 104.3,130.3 112.1,117.2 120.0,102.0 127.9,86.8 135.7,73.7 143.6,63.9 151.4,57.3 159.3,53.1 167.1,50.6 175.0,49.2 182.9,48.3 190.7,47.8 198.6,47.5 206.4,47.4 214.3,47.3 222.1,47.3 230.0,47.2"/>
-  <text x="360" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--studio-ink)">Sigmoid σ(x)</text>
-  <rect x="250" y="28" width="220" height="148" rx="6" fill="none" stroke="var(--studio-line)"/>
-  <line x1="256" y1="52.7" x2="464" y2="52.7" stroke="var(--studio-line)" stroke-dasharray="4 3"/>
-  <line x1="256" y1="151.3" x2="464" y2="151.3" stroke="var(--studio-muted)" opacity="0.6"/>
-  <line x1="360.0" y1="34" x2="360.0" y2="170" stroke="var(--studio-muted)" opacity="0.6"/>
-  <line x1="357.0" y1="52.7" x2="363.0" y2="52.7" stroke="var(--studio-muted)"/>
-  <text x="354.0" y="56.2" text-anchor="end" font-size="10" fill="var(--studio-muted)">1</text>
-  <line x1="357.0" y1="102.0" x2="363.0" y2="102.0" stroke="var(--studio-muted)"/>
-  <text x="354.0" y="105.5" text-anchor="end" font-size="10" fill="var(--studio-muted)">0.5</text>
-  <polyline fill="none" stroke="var(--studio-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="250.0,150.7 257.9,150.4 265.7,150.0 273.6,149.4 281.4,148.6 289.3,147.5 297.1,146.0 305.0,143.8 312.9,141.0 320.7,137.2 328.6,132.3 336.4,126.2 344.3,118.9 352.1,110.7 360.0,102.0 367.9,93.3 375.7,85.1 383.6,77.8 391.4,71.7 399.3,66.8 407.1,63.0 415.0,60.2 422.9,58.0 430.7,56.5 438.6,55.4 446.4,54.6 454.3,54.0 462.1,53.6 470.0,53.3"/>
-  <text x="600" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--studio-ink)">ReLU max(x, 0)</text>
-  <rect x="490" y="28" width="220" height="148" rx="6" fill="none" stroke="var(--studio-line)"/>
-  <line x1="496" y1="152.6" x2="704" y2="152.6" stroke="var(--studio-muted)" opacity="0.6"/>
-  <line x1="600.0" y1="34" x2="600.0" y2="170" stroke="var(--studio-muted)" opacity="0.6"/>
-  <line x1="597.0" y1="113.7" x2="603.0" y2="113.7" stroke="var(--studio-muted)"/>
-  <text x="594.0" y="117.2" text-anchor="end" font-size="10" fill="var(--studio-muted)">1</text>
-  <line x1="597.0" y1="74.7" x2="603.0" y2="74.7" stroke="var(--studio-muted)"/>
-  <text x="594.0" y="78.2" text-anchor="end" font-size="10" fill="var(--studio-muted)">2</text>
-  <line x1="597.0" y1="35.8" x2="603.0" y2="35.8" stroke="var(--studio-muted)"/>
-  <text x="594.0" y="39.3" text-anchor="end" font-size="10" fill="var(--studio-muted)">3</text>
-  <polyline fill="none" stroke="var(--studio-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="490.0,152.6 600.0,152.6 710.0,35.8"/>
-</svg>
+### Activation Functions
+
+Common elementwise nonlinearities $f_i:\mathbb R\to\mathbb R$:
+
+- Hyperbolic tangent: $\tanh(x) = \dfrac{e^{2x}-1}{e^{2x}+1}$
+- Sigmoid: $\sigma(x) = \dfrac{1}{1+e^{-x}}$
+- ReLU: $\max\{x, 0\}$
+
+```{python}
+#| echo: false
+#| warning: false
+#| out-width: 100%
+#| fig-align: center
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-5, 5, 400)
+specs = [
+    (r"Tanh $\tanh(x)$", np.tanh(x), (-1.28, 1.28), [-1, 0, 1], ["-1", "0", "1"], [-1, 1], (0, 0)),
+    (r"Sigmoid $\sigma(x)$", 1 / (1 + np.exp(-x)), (-0.22, 1.22), [0, 0.5, 1], ["0", "0.5", "1"], [0, 1], (0, 0.5)),
+    (r"ReLU $\max(x, 0)$", np.maximum(0, x), (-0.6, 5.2), [0, 2, 4], ["0", "2", "4"], [], (0, 0)),
+]
+
+fig, axes = plt.subplots(1, 3, figsize=(7.6, 2.35))
+fig.patch.set_alpha(0.0)
+ink, muted, grid_c, accent = "#5c6670", "#85909b", "#9aa5b1", "#3b78b0"
+
+for ax, (title, y, ylim, yticks, ylabels, asym, pt) in zip(axes, specs):
+    ax.set_facecolor("none")
+    ax.grid(True, color=grid_c, lw=0.6, alpha=0.22)
+    ax.set_axisbelow(True)
+    for a in asym:
+        ax.axhline(a, color=muted, ls="--", lw=0.85, alpha=0.55)
+    ax.axhline(0, color=muted, lw=0.85, alpha=0.45)
+    ax.axvline(0, color=muted, lw=0.85, alpha=0.45)
+    ax.fill_between(x, 0, y, color=accent, alpha=0.07)
+    ax.plot(x, y, color=accent, lw=2.2, solid_capstyle="round")
+    ax.scatter([pt[0]], [pt[1]], color=accent, s=22, zorder=4)
+    ax.set_title(title, fontsize=10.5, fontweight="bold", color=ink, pad=9)
+    ax.set_xlim(-5, 5)
+    ax.set_ylim(*ylim)
+    ax.set_xticks([-4, 0, 4])
+    ax.set_yticks(yticks)
+    ax.set_yticklabels(ylabels)
+    ax.tick_params(colors=muted, labelsize=8.5, length=3, width=0.7)
+    for spine in ("top", "right"):
+        ax.spines[spine].set_visible(False)
+    for spine in ("left", "bottom"):
+        ax.spines[spine].set_color(muted)
+        ax.spines[spine].set_alpha(0.35)
+        ax.spines[spine].set_linewidth(0.8)
+
+plt.tight_layout(w_pad=2.0)
+plt.show()
 ```
-- Matrix formulation maps naturally to parallel hardware (GPUs).
 
 ### Universal Approximation
 
@@ -69,22 +85,21 @@ Any continuous function can be approximated arbitrarily well by a neural network
 
 :::
 
-## Why Deep?
+## Depth and Representation
 
 - Biology: Loosely inspired by hierarchical processing in the visual cortex (though the actual biological link is weak).
 - Circuit theory: Depth yields exponentially more compact representations—e.g., $n$-bit parity needs $O(2^n)$ units in one hidden layer, vs. $O(n)$ units across $O(\log n)$ layers.
 - Modularity: Lower layers learn reusable features shared by higher layers (a learnable kernel rather than a hand-crafted one), improving data efficiency.
 - Empirical performance: At the same parameter budget, deep ("thin + tall") networks outperform wide shallow ("fat + short") ones.
-- Why now: Driven by large datasets, parallel compute, and better architectures/optimization.
+- Why now: Driven by large datasets, parallel compute, and better architectures and optimization.
 
 ## Training Neural Networks
 
-Minimize $\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}), y^{(i)}\bigr)$ with standard losses (squared error, logistic/hinge, softmax). The objective is non-convex, so optimization targets good local solutions.
+Training minimizes $\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}), y^{(i)}\bigr)$ with standard losses (squared error, logistic/hinge, softmax). Because the objective is non-convex, optimization targets good local solutions rather than guaranteed global optima.
 
 ### Stochastic Gradient Descent
 
-- Full gradient descent averages over all $m$ samples per step, which is costly for large datasets.
-- **Stochastic gradient descent (SGD)** updates on one sample (or a small **minibatch**) at a time:
+Full gradient descent averages over all $m$ samples per step, which is costly for large datasets. **Stochastic gradient descent (SGD)** updates on one sample (or in practice a small **minibatch**) at a time:
 
 $$
 \theta \leftarrow \theta - \alpha\,\nabla_\theta\ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr).
@@ -98,20 +113,23 @@ For $f:\mathbb R^n\to\mathbb R^m$, the Jacobian $\frac{\partial f(x)}{\partial x
 
 :::
 
-Key rules: chain rule $\frac{\partial f(g(x))}{\partial x} = \frac{\partial f}{\partial g}\frac{\partial g}{\partial x}$, linear map $\frac{\partial(Ax)}{\partial x}=A$, and elementwise map $\frac{\partial f(x)}{\partial x}=\operatorname{diag}(f'(x))$.
+Three Jacobian rules used in the derivation:
 
-**Backpropagation** computes all parameter gradients simultaneously in one forward pass and one backward pass by caching intermediate products:
+- Chain rule: $\dfrac{\partial f(g(x))}{\partial x} = \dfrac{\partial f}{\partial g}\dfrac{\partial g}{\partial x}$.
+- Linear map: $\dfrac{\partial(Ax)}{\partial x} = A$.
+- Elementwise map: $\dfrac{\partial f(x)}{\partial x} = \operatorname{diag}\bigl(f'(x)\bigr)$.
 
-- Layer Jacobians: $\frac{\partial z_{i+1}}{\partial z_i} = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)W_i$ and $\frac{\partial z_{i+1}}{\partial b_i} = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)$.
-- Upstream gradients $g_i^\top = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}$ satisfy the backward recursion (with $\circ$ elementwise):
+**Backpropagation** computes all parameter gradients simultaneously in one forward pass and one backward pass by caching intermediate products. For layer $z_{i+1} = f_i(W_i z_i + b_i)$, let $D_i = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)$, so $\frac{\partial z_{i+1}}{\partial z_i} = D_i W_i$ and $\frac{\partial z_{i+1}}{\partial b_i} = D_i$.
+
+Define the upstream gradient $g_i^\top = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}$. Then $g_i$ satisfies the backward recursion (with $\circ$ elementwise):
 
 $$
 g_k = \nabla_{z_k}\ell(z_k, y),
 \qquad
-g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr).
+g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr),
 $$
 
-- Parameter gradients:
+which immediately gives the parameter gradients:
 
 $$
 \nabla_{b_i}\ell = g_{i+1}\circ f_i'(W_i z_i + b_i),
@@ -119,24 +137,31 @@ $$
 \nabla_{W_i}\ell = \bigl(g_{i+1}\circ f_i'(W_i z_i + b_i)\bigr)z_i^\top.
 $$
 
-- Complexity: Evaluating $g_i$ via vector-matrix products costs $O(n^2(k-i))$ instead of $O(n^3(k-i))$ for matrix-matrix products.
+Evaluating $g_i$ via vector–matrix products from left to right costs $O(n^2(k-i))$ instead of $O(n^3(k-i))$ for matrix–matrix products.
 
 ::: {.callout-note title="Matrix Gradients via Vectorization" collapse="true"}
 
-Using $\operatorname{vec}(ABC)=(C^\top\otimes A)\operatorname{vec}(B)$, write $W_i z_i = (z_i^\top\otimes I)\operatorname{vec}(W_i)$. The chain rule gives $\frac{\partial \ell}{\partial\operatorname{vec}(W_i)} = g_{i+1}^\top\operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top\otimes I)$, which reshapes to $\nabla_{W_i}\ell = \bigl(f_i'(W_i z_i + b_i)\circ g_{i+1}\bigr)z_i^\top$.
+Using $\operatorname{vec}(ABC)=(C^\top\otimes A)\operatorname{vec}(B)$, write $W_i z_i = (z_i^\top\otimes I)\operatorname{vec}(W_i)$. The chain rule gives
+
+$$
+\frac{\partial \ell}{\partial\operatorname{vec}(W_i)}
+= g_{i+1}^\top\operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top\otimes I),
+$$
+
+which reshapes to $\nabla_{W_i}\ell = \bigl(f_i'(W_i z_i + b_i)\circ g_{i+1}\bigr)z_i^\top$.
 
 :::
 
 ### Non-Convexity and Momentum
 
-- Non-convex losses have plateaus, saddle points, and local minima; gradient descent has no global-optimum guarantee.
-- **Momentum** adds inertia from the previous step ($\text{movement} = -\text{gradient} + \text{momentum}$) to help pass plateaus, saddle points, and shallow local minima.
+- Non-convex losses contain plateaus, saddle points, and local minima, so gradient descent has no global-optimum guarantee.
+- **Momentum** adds inertia from the previous step ($\text{movement} = -\text{gradient} + \text{momentum}$) to help carry updates past plateaus, saddle points, and shallow local minima.
 
-## Supplementary Notes {.supplementary-notes}
+<!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results
 
 - [Universal Approximation](#universal-approximation): One hidden layer suffices for continuity, but depth represents structured functions exponentially more compactly.
 - [Stochastic Gradient Descent](#stochastic-gradient-descent): Minibatch updates avoid scanning the full dataset every step.
 - [Jacobians and Backpropagation](#jacobians-and-backpropagation): Caching upstream gradients $g_i = W_i^\top(g_{i+1}\circ f_i'(W_i z_i + b_i))$ computes all gradients in $O(n^2)$ per layer.
-- [Non-Convexity and Momentum](#non-convexity-and-momentum): Momentum helps carry updates past plateaus, saddle points, and shallow local minima.
+- [Non-Convexity and Momentum](#non-convexity-and-momentum): Momentum helps carry updates past plateaus, saddle points, and shallow local minima. -->
