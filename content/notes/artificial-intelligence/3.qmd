@@ -15,10 +15,15 @@ crossref:
 - Joint distribution $P(X_1, \dots, X_n)$: Table of size $O(d^n)$ for domain size $d$—exponentially costly to store or estimate.
 - Core rules:
   - Marginalization: $P(a) = \sum_b P(a, b)$.
-  - Conditioning & normalization: $P(a \mid b) = \dfrac{P(a, b)}{P(b)} \propto_A P(a, b)$ (select rows matching $b$, then normalize).
-  - Chain rule: $P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid x_1, \dots, x_{i-1})$.
-  - Bayes' rule: $P(x \mid y) = \dfrac{P(y \mid x)P(x)}{P(y)}$.
-- **Conditional independence** ($X \perp\!\!\!\perp Y \mid Z$): $P(x, y \mid z) = P(x \mid z)P(y \mid z) \iff P(x \mid y, z) = P(x \mid z)$ (e.g., $\mathrm{Catch} \perp\!\!\!\perp \mathrm{Toothache} \mid \mathrm{Cavity}$).
+  - Conditioning & normalization trick: $P(a \mid b) = \dfrac{P(a, b)}{P(b)} \propto_A P(a, b)$ (select joint rows matching $b$, then normalize their sum $P(b)$ to $1$).
+  - Product & chain rules: $P(a, b) = P(a \mid b)P(b)$, $\quad P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid x_1, \dots, x_{i-1})$.
+  - Bayes' rule:
+
+    $$
+    P(x \mid y) = \frac{P(y \mid x)P(x)}{P(y)} = \frac{P(y \mid x)P(x)}{\sum_{x'} P(y \mid x')P(x')}.
+    $$
+
+- **Conditional independence** ($X \perp\!\!\!\perp Y \mid Z$): $P(x, y \mid z) = P(x \mid z)P(y \mid z) \iff P(x \mid y, z) = P(x \mid z)$ (e.g., $\mathrm{Catch} \perp\!\!\!\perp \mathrm{Toothache} \mid \mathrm{Cavity}$, whereas marginally $\mathrm{Catch} \not\perp\!\!\!\perp \mathrm{Toothache}$).
 
 ## Bayesian Networks
 
@@ -40,7 +45,7 @@ $$
 
 :::
 
-- Graph semantics vs. causality: Arcs encode conditional independence, not physical causation ($T \to R$ and $R \to T$ can represent the same $P(R, T)$), though causal ordering yields sparser graphs and simpler CPTs.
+- Graph semantics vs. causality: Arcs encode conditional independence, not physical causation ($T \to R$ and $R \to T$ can represent the exact same joint $P(R, T)$), though causal ordering yields sparser graphs and simpler CPTs.
 
 ### D-Separation
 
@@ -56,7 +61,7 @@ Every undirected path between $X$ and $Y$ decomposes into three-node triples giv
 
 1. Shade evidence nodes $Z$ and inspect all undirected paths between $X$ and $Y$.
 2. A path is active iff *every* triple along it is active; one blocked triple blocks the path.
-3. If no path is active, $X$ and $Y$ are **d-separated** $\implies X \perp\!\!\!\perp Y \mid Z$ in all distributions compatible with the DAG.
+3. If no path is active, $X$ and $Y$ are **d-separated** $\implies X \perp\!\!\!\perp Y \mid Z$ in all distributions compatible with the DAG *(specific numerical CPTs may hold accidental extra independencies)*.
 
 :::
 
@@ -67,13 +72,13 @@ Every undirected path between $X$ and $Y$ decomposes into three-node triples giv
 Partition variables into query $Q$, observed evidence $e$, and hidden $H$:
 
 $$
-P(Q \mid e) = \frac{1}{Z} \sum_h P(Q, h, e) = \frac{1}{Z} \sum_h \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
+P(Q \mid e) = \frac{P(Q, e)}{P(e)} = \frac{1}{Z} \sum_h P(Q, h, e) = \frac{1}{Z} \sum_h \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
 $$
 
-Three operations on multidimensional probability tables (**factors**):
+Three algebraic operations on multidimensional probability tables (**factors**):
 
-1. Evidence restriction: Keep only CPT rows consistent with $e$.
-2. Join (`×`): Pointwise product over the union of variables (e.g., $P(R) \times P(T \mid R) = P(R, T)$).
-3. Eliminate (`∑`): Sum out a hidden variable from a factor.
+1. Evidence instantiation: Restrict each initial CPT to rows matching observed $e$.
+2. Join (`×`): Pointwise product over the union of variables (e.g., $P(R) \times P(T \mid R) = P(R, T)$); any variable unconditioned (left of `|`) in *any* input factor becomes unconditioned in the output factor.
+3. Eliminate (`∑`): Sum out a hidden variable from a factor, projecting onto remaining variables.
 
 - Bottleneck of enumeration: Joining all factors before summing out $H$ builds an $O(d^n)$ table—motivating Variable Elimination in Chapter 4.

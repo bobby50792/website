@@ -12,7 +12,7 @@ crossref:
 
 ## Exact Inference: Variable Elimination
 
-Variable Elimination (VE) pushes sums inside products ($\sum uwy + \cdots = (u+v)(w+x)(y+z)$) by interleaving joins and marginalization:
+Variable Elimination (VE) exploits distributivity ($\sum uwy + \cdots = (u+v)(w+x)(y+z)$) by interleaving joins and marginalization:
 
 1. Restrict all local CPTs to observed evidence $e$.
 2. For each hidden variable $H_k$ (in chosen elimination order): join all factors mentioning $H_k$, then eliminate (sum out) $H_k$.
@@ -20,36 +20,80 @@ Variable Elimination (VE) pushes sums inside products ($\sum uwy + \cdots = (u+v
 
 ![Variable elimination interleaves factor joins and early marginalization to avoid forming the full joint table.](images/bn-variable-elimination.png){.notes-slide-fig width="78%" fig-align="center"}
 
-- Complexity: Governed by the largest intermediate factor; elimination order can mean $2^n$ vs. $2$ entries (e.g., eliminating a star hub first vs. last).
+- Complexity & ordering example: Cost is governed by the largest intermediate factor—on a star graph ($Z$ connected to $X_1,\dots,X_n$), eliminating hub $Z$ *first* creates one $O(2^n)$ factor $P(X_1,\dots,X_n)$, whereas eliminating leaves $X_i$ first keeps all intermediate factors of size $2$.
 - Hardness: Exact BN inference is **NP-hard** (reduces from 3-SAT), but runs in linear time on **polytrees** (singly connected DAGs with no undirected cycles).
 
 ## Approximate Inference via Sampling
 
-Draw $N$ discrete samples (via inverse-CDF lookup on $u \sim \operatorname{Uniform}[0,1)$) to approximate $P(Q \mid e)$:
+Draw $N$ discrete outcomes (via inverse-CDF intervals on $u \sim \operatorname{Uniform}[0,1)$) to approximate $P(Q \mid e)$:
 
-| Method | Procedure | Pros & Cons |
-| :--- | :--- | :--- |
-| Prior Sampling | Sample $x_i \sim P(X_i \mid \mathrm{pa})$ topologically | Unbiased for $P(X)$; ignores evidence $e$ |
-| Rejection Sampling | Prior sample; discard if $x_i \ne e_i$ | Consistent, but rejects almost all samples when $P(e)$ is small |
-| Likelihood Weighting | Clamp $E_i = e_i$, sample rest; weight $w = \prod_i P(e_i \mid \mathrm{pa})$ | Uses all samples ($S_{\mathrm{WS}} \cdot w = P(\mathbf{z}, \mathbf{e})$), but upstream ignores downstream $e$ (weight collapse) |
-| Gibbs Sampling (MCMC) | Clamp $e$; repeatedly resample $Z_i \sim P(Z_i \mid \mathrm{MB}(Z_i))$ | Uses upstream & downstream evidence; correlated samples, slow mixing diagnosis |
+| Method | Target | Evidence Handling | Trade-off |
+| :--- | :--- | :--- | :--- |
+| Prior Sampling | $P(X)$ | Ignored ($S_{\mathrm{PS}}(x) = \prod_i P(x_i \mid \mathrm{pa})$) | Unbiased for $P(X)$, cannot condition on rare $e$ |
+| Rejection Sampling | $P(Q \mid e)$ | Discard samples violating $e$ | Consistent, rejects $\approx 1 - P(e)$ of samples |
+| Likelihood Weighting | $P(Q \mid e)$ | Clamp $e$, weight $w = \prod_i P(e_i \mid \mathrm{pa})$ | Uses all samples, upstream ignores downstream $e$ |
+| Gibbs Sampling | $P(Q \mid e)$ | Clamp $e$, resample via Markov blanket | Uses upstream & downstream $e$, correlated MCMC |
 
-Key Gibbs sampling details:
+### Sampling Algorithms and Consistency Derivations
 
-- **Markov blanket** $\mathrm{MB}(Z_i)$: All CPTs not mentioning $Z_i$ cancel in $P(Z_i \mid x_{-i})$, leaving only $P(Z_i \mid \operatorname{Parents}(Z_i)) \prod_{Y_j \in \operatorname{Children}(Z_i)} P(Y_j \mid \operatorname{Parents}(Y_j))$ (parents, children, and co-parents).
-- Convergence: Kernel $q(x \to x') = P(x_i' \mid x_{-i}, e)$ satisfies **detailed balance** with $P(x \mid e)$ (Metropolis–Hastings with acceptance $1$).
+```python
+def rejection_sample(network, evidence):
+    x = {}
+    for X_i in topological_order(network):
+        x[X_i] = sample(P(X_i | x[Parents(X_i)]))
+        if X_i in evidence and x[X_i] != evidence[X_i]:
+            return REJECT
+    return x
+
+def weighted_sample(network, evidence):
+    x, w = {}, 1.0
+    for X_i in topological_order(network):
+        if X_i in evidence:
+            x[X_i] = evidence[X_i]
+            w *= P(X_i = evidence[X_i] | x[Parents(X_i)])
+        else:
+            x[X_i] = sample(P(X_i | x[Parents(X_i)]))
+    return x, w
+
+def gibbs_sampling(Q, evidence, network, N):
+    counts = {v: 0 for v in domain(Q)}
+    x = initialize_randomly_with_clamped(evidence)
+    for _ in range(N):
+        for Z_i in non_evidence_vars(network):
+            x[Z_i] = sample(P(Z_i | x[MarkovBlanket(Z_i)]))
+            counts[x[Q]] += 1
+    return normalize(counts)
+```
+
+- Likelihood weighting consistency: Proposal probability times weight reconstructs the exact joint:
+
+  $$
+  S_{\mathrm{WS}}(\mathbf{z}, \mathbf{e}) \cdot w(\mathbf{z}, \mathbf{e})
+  = \Bigl(\prod_j P(z_j \mid \operatorname{Parents}(Z_j))\Bigr)\Bigl(\prod_i P(e_i \mid \operatorname{Parents}(E_i))\Bigr)
+  = P(\mathbf{z}, \mathbf{e}).
+  $$
+
+- Gibbs **Markov blanket** cancellation & MCMC guarantee:
+  - In $P(Z_i \mid x_{-i}) = \frac{P(z_i, x_{-i})}{\sum_{z_i'} P(z_i', x_{-i})}$, every CPT not mentioning $Z_i$ cancels out:
+
+    $$
+    P(Z_i \mid x_{-i}) \propto_{Z_i} P\bigl(Z_i \mid \operatorname{Parents}(Z_i)\bigr) \prod_{Y_j \in \operatorname{Children}(Z_i)} P\bigl(Y_j \mid \operatorname{Parents}(Y_j)\bigr),
+    $$
+
+    depending only on parents, children, and children's co-parents.
+  - Transition kernel $q(x \to x') = P(x_i' \mid x_{-i}, e)$ satisfies **detailed balance** $\pi(x)q(x \to x') = \pi(x')q(x' \to x)$ with $\pi(x) = P(x \mid e)$ (Metropolis–Hastings with acceptance $1$).
 
 ## Probabilistic Reasoning over Time
 
 ### Markov Chains and Stationary Distributions
 
-- Markov chain: Prior $P(X_1)$ and stationary transition $P(X_t \mid X_{t-1})$ with $X_t \perp\!\!\!\perp X_{1:t-2} \mid X_{t-1}$; forward propagation updates $P(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1})P(x_{t-1})$.
+- Markov chain: Prior $P(X_1)$ and stationary transition $P(X_t \mid X_{t-1})$ with $X_t \perp\!\!\!\perp X_{1:t-2} \mid X_{t-1}$; marginals evolve via $P(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1})P(x_{t-1})$.
 
 ::: {#def-ai-4-1 name="Stationary Distribution"}
 
 Ergodic chains converge to a unique $P_\infty$ invariant under transitions: $P_\infty(x') = \sum_x P(x' \mid x)P_\infty(x)$.
 
-- PageRank: Surfer jumps to a uniform random page with probability $c$ and follows an outlink with probability $1-c$; $P_\infty$ ranks page authority.
+- PageRank: Surfer jumps uniformly to a random page with probability $c$ and follows an outlink with probability $1-c$; $P_\infty$ ranks page authority.
 
 :::
 
@@ -57,28 +101,28 @@ Ergodic chains converge to a unique $P_\infty$ invariant under transitions: $P_\
 
 ::: {#def-ai-4-2 name="Hidden Markov Model (HMM)"}
 
-Hidden states $X_{1:T}$ emit noisy observations $E_{1:T}$ via $P(X_1)$, $P(X_t \mid X_{t-1})$, and $P(E_t \mid X_t)$, with $X_t \perp\!\!\!\perp X_{1:t-2}, E_{1:t-1} \mid X_{t-1}$ and $E_t \perp\!\!\!\perp X_{1:t-1}, E_{1:t-1} \mid X_t$.
+Hidden states $X_{1:T}$ emit noisy observations $E_{1:T}$ via $P(X_1)$, $P(X_t \mid X_{t-1})$, and $P(E_t \mid X_t)$, satisfying $X_t \perp\!\!\!\perp X_{1:t-2}, E_{1:t-1} \mid X_{t-1}$ and $E_t \perp\!\!\!\perp X_{1:t-1}, E_{1:t-1} \mid X_t$.
 
 :::
 
 - Online filtering (Forward Algorithm) updates belief $B_t(x_t) = P(x_t \mid e_{1:t})$ in $O(|X|^2)$ time and $O(|X|)$ space per step (*Kalman filter* for linear-Gaussian systems):
-  1. Time elapse: $B'_t(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1}) B_{t-1}(x_{t-1})$.
-  2. Observe: $B_t(x_t) \propto_{X_t} P(e_t \mid x_t) B'_t(x_t)$.
+  1. Time elapse: $B'_t(x_t) = P(x_t \mid e_{1:t-1}) = \sum_{x_{t-1}} P(x_t \mid x_{t-1}) B_{t-1}(x_{t-1})$.
+  2. Observe: $B_t(x_t) = P(x_t \mid e_{1:t}) \propto_{X_t} P(e_t \mid x_t) B'_t(x_t)$.
 - Particle filtering ($O(N)$ per step for $N \ll |X|$ particles, when $|X|$ is huge or continuous):
-  1. Elapse: Sample $x_t^{(i)} \sim P(X_t \mid x_{t-1}^{(i)})$.
-  2. Weight: Set $w_i = P(e_t \mid x_t^{(i)})$.
-  3. Resample: Draw $N$ unweighted particles proportional to $\{w_i\}$.
+  1. Elapse: Propagate $x_t^{(i)} \sim P(X_t \mid x_{t-1}^{(i)})$.
+  2. Weight: Assign $w_i = P(e_t \mid x_t^{(i)})$.
+  3. Resample: Draw $N$ unweighted particles with replacement proportional to $\{w_i\}$.
   - SLAM: Jointly filters robot pose and map (e.g., FastSLAM).
 
 ### DBNs, Viterbi, and Probabilistic Programming
 
-- Dynamic Bayes Nets (DBNs): Multi-variable BN slice repeated across $t-1 \to t$; particle filtering tracks state-tuple particles.
-- Viterbi algorithm ($\arg\max_{x_{1:T}} P(x_{1:T} \mid e_{1:T})$): Replaces the Forward sum over trellis paths with a `max` (plus backpointers):
+- Dynamic Bayes Nets (DBNs): Multi-variable BN slice repeated across $t-1 \to t$; exact online inference eliminates slice $t-1$, while DBN particle filtering propagates full tuple particles.
+- Viterbi algorithm ($\arg\max_{x_{1:T}} P(x_{1:T} \mid e_{1:T})$): Replaces the Forward sum over trellis paths with `max` (storing backpointers):
 
   $$
   \begin{aligned}
-  \text{Forward:}\quad f_t[x_t] &= P(e_t \mid x_t)\sum_{x_{t-1}} P(x_t \mid x_{t-1})\,f_{t-1}[x_{t-1}], \\
-  \text{Viterbi:}\quad m_t[x_t] &= P(e_t \mid x_t)\max_{x_{t-1}} P(x_t \mid x_{t-1})\,m_{t-1}[x_{t-1}].
+  \text{Forward (sum):}\quad f_t[x_t] &= P(x_t, e_{1:t}) = P(e_t \mid x_t)\sum_{x_{t-1}} P(x_t \mid x_{t-1})\,f_{t-1}[x_{t-1}], \\
+  \text{Viterbi (max):}\quad m_t[x_t] &= \max_{x_{1:t-1}} P(x_{1:t}, e_{1:t}) = P(e_t \mid x_t)\max_{x_{t-1}} P(x_t \mid x_{t-1})\,m_{t-1}[x_{t-1}].
   \end{aligned}
   $$
 

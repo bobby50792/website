@@ -17,18 +17,20 @@ A logical language balances expressivity and computational efficiency via three 
 ### Propositional Logic
 
 - Syntax: Atomic symbols $A, B, C, \dots$ combined via $\neg f$, $f \land g$, $f \lor g$, $f \to g$, and $f \leftrightarrow g$.
-- Semantics: A **model** $w \in \{0,1\}^n$ assigns truth values to all $n$ symbols ($2^n$ models); $\mathcal{I}(f, w) \in \{0,1\}$ evaluates truth recursively ($\mathcal{I}(f \to g, w) = 1 \iff \mathcal{I}(f,w) \le \mathcal{I}(g,w)$).
-- Knowledge base: Set of formulas $\mathrm{KB}$ with model set $\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f)$.
+- Semantics: A **model** $w \in \{0,1\}^n$ assigns truth values to all $n$ symbols ($2^n$ models). Interpretation $\mathcal{I}(f, w) \in \{0,1\}$ is defined recursively from $\mathcal{I}(p, w) = w(p)$:
+  - $\mathcal{I}(\neg f, w) = 1 - \mathcal{I}(f, w)$, $\quad \mathcal{I}(f \land g, w) = \min\bigl(\mathcal{I}(f, w), \mathcal{I}(g, w)\bigr)$, $\quad \mathcal{I}(f \lor g, w) = \max\bigl(\mathcal{I}(f, w), \mathcal{I}(g, w)\bigr)$.
+  - $\mathcal{I}(f \to g, w) = \mathbf{1}\bigl\{\mathcal{I}(f, w) \le \mathcal{I}(g, w)\bigr\}$, $\quad \mathcal{I}(f \leftrightarrow g, w) = \mathbf{1}\bigl\{\mathcal{I}(f, w) = \mathcal{I}(g, w)\bigr\}$.
+- Knowledge base: Formula set $\mathrm{KB}$ with satisfying models $\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f)$, where $\mathcal{M}(f) = \{w : \mathcal{I}(f, w) = 1\}$.
 
 ### First-Order Logic (FOL)
 
 - Syntax:
-  - Terms (objects): constants $c$, variables $x$, and functions $f(t_1, \dots, t_n)$.
-  - Formulas (truth values): predicates $P(t_1, \dots, t_n)$, equality $=$, connectives, and quantifiers $\forall x$, $\exists x$.
+  - Terms (objects): constants $c$, variables $x$, and function applications $f(t_1, \dots, t_n)$.
+  - Formulas (truth values): predicates $P(t_1, \dots, t_n)$, equality $t_1 = t_2$, connectives, and quantifiers $\forall x\,\varphi$, $\exists x\,\varphi$.
 - Quantifier rules:
   - Idioms: $\forall x\,(P(x) \to Q(x))$ vs. $\exists x\,(P(x) \land Q(x))$.
-  - Duality & order: $\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)$; $\forall x\,\exists y \not\equiv \exists y\,\forall x$.
-- Semantics & **propositionalization**: A model maps constants/functions/predicates over an object domain $D$. FOL reduces to propositional logic iff *unique names* (at most one constant per object) and *domain closure* (at least one constant per object, finite $D$) hold.
+  - Duality & order: $\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)$; quantifier order matters ($\forall x\,\exists y\,L(x,y) \not\equiv \exists y\,\forall x\,L(x,y)$).
+- Semantics & **propositionalization**: A FOL model maps constants/functions/predicates over an object domain $D$. FOL reduces to propositional logic iff *unique names* (at most one constant per object) and *domain closure* (at least one constant per object, finite $D$) hold.
 
 ## Inference
 
@@ -37,15 +39,20 @@ A logical language balances expressivity and computational efficiency via three 
 - Semantic relations between $\mathrm{KB}$ and query $f$:
   - Entailment ($\mathrm{KB} \models f$): $\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)$ (`Ask[f]` = Yes).
   - Contradiction ($\mathrm{KB} \models \neg f$): $\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset$ (`Ask[f]` = No).
-  - Contingency: Nonempty proper overlap (`Ask[f]` = Don't know).
-- Reduction to SAT ($\mathcal{M}(\mathrm{KB}) \ne \emptyset$): $\mathrm{KB} \models f \iff \mathrm{KB} \cup \{\neg f\}$ is unsatisfiable.
-- SAT solvers (viewing SAT as a CSP): DPLL (backtracking + unit propagation + pruning) and WalkSAT (randomized local variable flips).
+  - Contingency: $\emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})$ (`Ask[f]` = Don't know).
+- Reduction to SAT ($\mathcal{M}(\mathrm{KB}) \ne \emptyset$): $\mathrm{KB} \models f \iff \mathrm{KB} \cup \{\neg f\}$ is unsatisfiable; $\mathrm{KB}$ contradicts $f \iff \mathrm{KB} \cup \{f\}$ is unsatisfiable.
+- SAT solvers (viewing SAT as a CSP): DPLL (backtracking + unit propagation + conflict pruning) and WalkSAT (randomized local variable flips).
 
 ### Horn Clauses, Modus Ponens, and Unification
 
-- **Horn clause**: Clause with *at most one* positive literal—either a definite clause $(p_1 \land \dots \land p_k) \to q$ or goal clause $(p_1 \land \dots \land p_k) \to \mathrm{false}$.
-- Propositional Modus Ponens: Derives $q$ from $p_1, \dots, p_k$ and $(p_1 \land \dots \land p_k) \to q$ in linear time.
-- First-order Modus Ponens: Given substitution $\theta = \operatorname{Unify}\bigl((a_1',\dots,a_k'),\,(a_1,\dots,a_k)\bigr)$ (**most general unifier**, MGU):
+- **Horn clause**: Clause with *at most one* positive literal—either a definite clause $(p_1 \land \dots \land p_k) \to q$ ($\neg p_1 \lor \dots \lor \neg p_k \lor q$) or goal clause $(p_1 \land \dots \land p_k) \to \mathrm{false}$.
+- Propositional Modus Ponens (forward chaining runs in linear time since each step adds one atom):
+
+  $$
+  \frac{p_1,\quad \dots,\quad p_k,\quad (p_1 \land \dots \land p_k) \to q}{q}.
+  $$
+
+- First-order Modus Ponens: Given substitution $\theta = \operatorname{Unify}\bigl((a_1',\dots,a_k'),\,(a_1,\dots,a_k)\bigr)$ (**most general unifier**, MGU, such that $\operatorname{Subst}[\theta, f] = \operatorname{Subst}[\theta, g]$):
 
   $$
   \frac{a_1', \dots, a_k', \qquad \forall x_1 \cdots \forall x_n \bigl((a_1 \land \dots \land a_k) \to b\bigr)}{\operatorname{Subst}[\theta, b]}.
@@ -60,22 +67,24 @@ A logical language balances expressivity and computational efficiency via three 
 
 ### Resolution and CNF
 
-Modus Ponens cannot cancel general disjunctions; first-order resolution resolves complementary literals with $\theta = \operatorname{Unify}[p, q]$:
+Modus Ponens cannot cancel general disjunctions ($A \lor B$ with $\neg A \lor C$). Propositional and first-order resolution (with $\theta = \operatorname{Unify}[p, q]$) cancel complementary literals:
 
 $$
-\frac{f_1 \lor \cdots \lor f_n \lor p, \qquad \neg q \lor g_1 \lor \cdots \lor g_m}{\operatorname{Subst}[\theta,\, f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]}.
+\frac{f_1 \lor \cdots \lor f_n \lor p, \quad \neg p \lor g_1 \lor \cdots \lor g_m}{f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m},
+\qquad
+\frac{f_1 \lor \cdots \lor f_n \lor p, \quad \neg q \lor g_1 \lor \cdots \lor g_m}{\operatorname{Subst}[\theta,\, f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]}.
 $$
 
 ::: {#prp-ai-2-1 name="CNF Conversion Steps"}
 
-1. Eliminate $\leftrightarrow$ and $\to$ ($f \to g \leadsto \neg f \lor g$).
-2. Push $\neg$ inward (De Morgan + quantifier duality) and drop $\neg\neg$.
-3. *(FOL)* Standardize variables apart, **Skolemize** $\exists$ into fresh constants / Skolem functions of enclosing $\forall$-variables ($\forall x\,\exists y \leadsto Y(x)$), and drop $\forall$.
-4. Distribute $\lor$ over $\land$.
+1. Eliminate biconditionals and implications: $f \leftrightarrow g \leadsto (f \to g) \land (g \to f)$, $\quad f \to g \leadsto \neg f \lor g$.
+2. Push $\neg$ inward via De Morgan's laws and quantifier duality; drop $\neg\neg f \leadsto f$.
+3. *(FOL)* Standardize variable names apart, **Skolemize** $\exists$ into fresh constants or Skolem functions of enclosing $\forall$-variables ($\forall x\,\exists y\,P(x,y) \leadsto P(x, Y(x))$), and drop $\forall$.
+4. Distribute $\lor$ over $\land$: $f \lor (g \land h) \leadsto (f \lor g) \land (f \lor h)$.
 
 :::
 
-- **Resolution refutation**: Convert $\mathrm{KB} \cup \{\neg f\}$ to CNF and resolve until deriving the empty clause ($\mathrm{false}$); sound and complete, exponential worst-case time.
+- **Resolution refutation**: Convert $\mathrm{KB} \cup \{\neg f\}$ to CNF and resolve clauses until deriving the empty clause ($\mathrm{false}$); sound and complete, exponential worst-case time.
 
 ## Soundness, Completeness, and Verification
 
@@ -86,15 +95,15 @@ $$
 
 :::
 
-| Language | Horn Clauses (Fast / Linear) | General CNF (Expressive / Exponential) |
+| Language | Horn Clauses (Linear / Fast) | General CNF (Expressive / Exponential) |
 | :--- | :--- | :--- |
 | Propositional Logic | Modus Ponens | SAT (DPLL / WalkSAT) or Resolution |
 | First-Order Logic | Modus Ponens + Unification | Propositionalization or Resolution + Unification |
 
 ### Formal Verification and AlphaProof
 
-- Proof search vs. proof checking: Finding a tactic proof faces huge branching factors (timeout $\ne$ disproof), whereas checking a completed proof term in a kernel (**Lean**) is deterministic and fast.
-- Trust boundary: Lean guarantees the proof validly proves the *formalized statement*, even from an untrusted LLM, but cannot verify that the formalization matches human intent.
-- AlphaProof: Pairs Lean's tactic kernel (exact RL verification signal) with a policy/value network and tree search over proof states.
+- Proof search vs. proof checking: Searching over tactics faces huge branching factors (search failure/timeout $\ne$ disproof), whereas checking a completed proof certificate in a formal kernel (**Lean**) is deterministic and fast.
+- Trust boundary: Lean guarantees the checked proof validly establishes the *formalized statement* from axioms, even if proposed by an untrusted LLM, but cannot verify that the formal translation matches human intent.
+- AlphaProof: Pairs Lean's tactic environment (exact RL reward + soundness) with a policy/value proof network and tree search over proof states.
 
 ![AlphaProof architecture: Lean formal tactic environment, neural proof network (tactic sampling + value head), and tree search over proof states.](images/logic-alphaproof.png){.notes-slide-fig width="92%" fig-align="center"}

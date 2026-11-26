@@ -26,8 +26,17 @@ Fully connected nets fail on images due to shift/scale/rotation variations and m
 Backpropagation through CNN layers (only conv filters and FC weights are learned):
 
 - Convolution: Linear sparse-matrix operator $\implies$ backward pass applies the transposed operation.
-- ReLU: Passes $\frac{\partial L}{\partial z_i}$ if $z_{i-1} > 0$, else $0$ (Leaky ReLU $\max(0.1 z_{i-1}, z_{i-1})$ fixes "dying ReLUs").
-- Max pooling: Routes $\frac{\partial L}{\partial z_i(x,y)}$ solely to the window's argmax entry ($0$ elsewhere).
+- ReLU (Leaky ReLU $\max(0.1 z_{i-1}, z_{i-1})$ fixes zero-gradient "dying ReLUs"):
+
+  $$
+  \frac{\partial L}{\partial z_{i-1}} =
+  \begin{cases}
+  \dfrac{\partial L}{\partial z_i}, & z_{i-1} > 0, \\[4pt]
+  0, & z_{i-1} < 0.
+  \end{cases}
+  $$
+
+- Max pooling ($k \times k$ window): Forward takes $z_i(x, y) = \max_{0 \le p, q < k} z_{i-1}(x + p, y + q)$; backward routes $\frac{\partial L}{\partial z_i(x,y)}$ solely to the winning entry $(x+p^*, y+q^*)$ ($0$ elsewhere).
 
 ### Residual Networks (ResNet) and Scope
 
@@ -53,8 +62,8 @@ $$
 ### Vanilla RNN and BPTT
 
 - Sequence topologies: One-to-many (captioning), many-to-one (sentiment), and many-to-many (translation).
-- Shared-weight state update across time: $h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)$, with $y_t$ depending on $x_1, \dots, x_t$.
-- **BPTT**: Unrolls across $t = 1,\dots,T$ and backpropagates total loss $\sum_t L_t$; repeated $W_{hh}^\top$ products cause vanishing gradients on long-range dependencies.
+- Shared-weight recurrence: $h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)$, with $y_t = W_{hy} h_t$ depending on $x_1, \dots, x_t$.
+- **BPTT**: Unrolls across $t = 1,\dots,T$ and backpropagates total loss $\sum_{t=1}^T L_t$; repeated $W_{hh}^\top$ products cause vanishing gradients on long-range dependencies (e.g., matching distant brackets).
 
 ![Sequence input–output topologies enabled by recurrent networks.](images/rnn-topologies.png){.notes-slide-fig width="88%" fig-align="center"}
 
@@ -93,29 +102,37 @@ Q = X W_Q, \qquad K = X W_K, \qquad V = X W_V,
 $$
 
 $$
-A = \operatorname{softmax}\!\left(\frac{Q K^\top}{\sqrt{d_k}}\right), \qquad Y = A V \quad \Bigl(y_i = \sum_{j=1}^n A_{ij} v_j\Bigr).
+S = Q K^\top \;(S_{ij} = q_i \cdot k_j), \qquad E = \frac{S}{\sqrt{d_k}}, \qquad A = \operatorname{softmax}(E), \qquad Y = A V \;\Bigl(y_i = \sum_{j=1}^n A_{ij} v_j\Bigr).
 $$
 
 :::
 
-- Why $1/\sqrt{d_k}$: Prevents dot products from growing with $d_k$ and pushing $\operatorname{softmax}$ into peaked, tiny-gradient saturation.
+- Why $1/\sqrt{d_k}$: Dot products sum $d_k$ coordinate terms and grow with $d_k$; scaling keeps $E_{ij}$ from pushing $\operatorname{softmax}$ into peaked, tiny-gradient saturation.
 
 ![Scaled dot-product self-attention flow from $X_i$ to weighted outputs $Y_i$.](images/self-attention.png){.notes-slide-fig width="36%" fig-align="center"}
 
 ### Position Encodings, Multi-Head, and Masking
 
-- Positional cues (needed because pure attention is permutation-equivariant):
-  - Additive ($z_i = x_i + p_i$): Fixed sinusoidal ($\sin(i\omega_r), \cos(i\omega_r)$) or learned $p_i = P[i]$.
-  - **RoPE**: Rotates 2D coordinate pairs of $Q, K$ by angle $i\theta_r$ ($V$ unchanged), making scores depend only on relative offset $j - i$: $\bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j - i) k_j$.
+- Positional cues (pure attention is permutation-equivariant):
+  - Additive ($z_i = x_i + p_i$ before $Q,K,V$): Fixed sinusoidal $(p_i)_{2r} = \sin(i\omega_r),\, (p_i)_{2r+1} = \cos(i\omega_r)$ or learned $p_i = P[i]$.
+  - **RoPE**: Rotates 2D coordinate pairs of $Q, K$ by angle $i\theta_r$ ($V$ unchanged); shift invariance $(j+t)-(i+t)=j-i$ makes scores depend on relative offset $j - i$:
+
+    $$
+    \bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j - i) k_j.
+    $$
 
 ![RoPE rotates 2D pairs of query/key vectors by position-proportional angles $m\theta_r$.](images/rope.png){.notes-slide-fig width="80%" fig-align="center"}
 
-- Multi-head attention: Run $H$ parallel heads of width $d_h = d/H$, concatenate ($H d_h = d$), and project via $O = \operatorname{Concat}(\operatorname{head}_1,\dots,\operatorname{head}_H) W^O$.
-- **Causal masking**: Set $E_{ij} = -\infty$ for $j > i$ before $\operatorname{softmax}$ ($A_{ij} = 0$). Training evaluates all positions in parallel; generation appends tokens sequentially.
+- Multi-head attention: Run $H$ parallel heads of width $d_h = d/H$ ($\operatorname{head}_h = \operatorname{softmax}(Q_h K_h^\top / \sqrt{d_h})V_h$), concatenate ($H d_h = d$), and project via $O = \operatorname{Concat}(\operatorname{head}_1,\dots,\operatorname{head}_H) W^O$.
+- **Causal masking** for $P(x_{i+1} \mid x_1,\dots,x_i)$: Set $E_{ij} = -\infty$ for $j > i$ before $\operatorname{softmax}$ ($A_{ij} = 0$). Training computes all target shifts in parallel (e.g., input `[Attention, is, very]` $\to$ target `[is, very, cool]`); generation appends tokens sequentially.
 
 ### Transformer Block and Variants
 
-- Sublayers per block ($N\times$): Multi-head attention + position-wise $\operatorname{FFN}(x) = W_2\operatorname{ReLU}(W_1 x + b_1) + b_2$, each wrapped in Add & Norm ($y = x + F(x)$ and per-token feature **LayerNorm** $\operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta$).
+- Sublayers per block ($N\times$): Multi-head attention + position-wise $\operatorname{FFN}(x) = W_2\operatorname{ReLU}(W_1 x + b_1) + b_2$, each wrapped in Add & Norm ($y = x + F(x)$ and per-token feature **LayerNorm**):
+
+  $$
+  \mu = \operatorname{mean}(x), \qquad \sigma^2 = \operatorname{mean}\bigl((x - \mu)^2\bigr), \qquad \operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta.
+  $$
 
 | Variant | Attention Pattern | Typical Use |
 | :--- | :--- | :--- |
@@ -135,6 +152,6 @@ $$
 
   Shrinks steps over time and gives larger steps to flat/infrequent coordinates (extended via moving averages and momentum in RMSprop, Adam, AdamW, Muon).
 - Dropout:
-  - Train: Drop each neuron with probability $p$ per minibatch (thinner subnetwork).
-  - Test: Keep all neurons and multiply weights by $(1 - p)$ so expected activations match training ($p=0.5 \implies \times 0.5$).
-  - Effect: Prevents co-adaptation and approximates averaging $2^M$ weight-sharing subnetworks (variants: DropConnect, annealed dropout).
+  - Train: Drop each neuron with probability $p$ per minibatch (resampling thinner subnetworks).
+  - Test: Keep all neurons active and multiply weights by keep probability $(1 - p)$—at $p = 0.5$, unscaled test pre-activations would double ($z' \approx 2z$), whereas $\times 0.5$ matches training expectation ($z' \approx z$).
+  - Effect: Prevents co-adaptation and approximates averaging $2^M$ weight-sharing subnetworks (variants: Maxout, DropConnect, annealed dropout, Standout).

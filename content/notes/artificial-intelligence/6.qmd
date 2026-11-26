@@ -80,8 +80,15 @@ Any continuous function on a compact domain can be approximated arbitrarily clos
 ## Why Deep?
 
 - Circuit compactness: $n$-bit parity needs $O(2^n)$ units in 1 hidden layer vs. $O(n)$ units across $O(\log n)$ layers.
-- Modularity & data efficiency: Lower layers learn reusable sub-features (**learnable kernel** $\phi_\theta(x)$) shared across upper-layer tasks.
-- Empirical "thin + tall" > "fat + short": At matched parameter counts, deeper nets outperform wide shallow ones (e.g., $7\times 2\text{k}$ beats $1\times 16\text{k}$ on speech recognition).
+- Modularity & data efficiency: Lower layers learn reusable sub-features (**learnable kernel** $\phi_\theta(x)$) shared across upper-layer classifiers.
+- Empirical "thin + tall" > "fat + short" (Seide et al., 2011 speech WER at matched parameter budgets):
+
+| Deep ("Thin + Tall") | WER (%) | Shallow ("Fat + Short") | WER (%) |
+| :--- | :--- | :--- | :--- |
+| $1 \times 2\text{k}$ | 24.2 | $1 \times 3772$ | 22.5 |
+| $3 \times 2\text{k}$ | 18.4 | $1 \times 4634$ | 22.6 |
+| $7 \times 2\text{k}$ | 17.1 | $1 \times 16\text{k}$ | 22.1 |
+
 - Why now: Large datasets + parallel GPU compute + improved architectures and optimizers.
 
 ![Feature mapping $\phi$ lifts inputs into a linearly separable space; deep networks learn $\phi$ end-to-end.](images/dl1-feature-space.png){.notes-slide-fig width="68%" fig-align="center"}
@@ -90,8 +97,11 @@ Any continuous function on a compact domain can be approximated arbitrarily clos
 
 ### Losses and Minibatch SGD
 
-- Standard losses: Squared $\|h_\theta(x)-y\|_2^2$ (regression), logistic/hinge (binary), and softmax $\log\sum_j e^{h_\theta(x)_j} - h_\theta(x)_y$ (multiclass).
-- **Minibatch SGD**: Avoids scanning all $m$ examples per step by updating on a small minibatch $B$:
+- Standard losses on $h_\theta(x) = z_k$:
+  - Regression: $\ell(h_\theta(x), y) = \|h_\theta(x) - y\|_2^2$.
+  - Binary classification ($y \in \{-1, +1\}$): $\log(1 + e^{-y \cdot h_\theta(x)})$ or $\max\{0, 1 - y \cdot h_\theta(x)\}$.
+  - Multiclass ($y \in \{1, \dots, K\}$): $\ell(h_\theta(x), y) = \log\sum_{j=1}^K \exp(h_\theta(x)_j) - h_\theta(x)_y$.
+- **Minibatch SGD**: Updates on a small minibatch $B$ instead of scanning all $m$ samples per step:
 
   $$
   \theta \leftarrow \theta - \frac{\alpha}{|B|}\sum_{i \in B} \nabla_\theta \ell\bigl(h_\theta(x^{(i)}),\, y^{(i)}\bigr).
@@ -108,20 +118,29 @@ For $f: \mathbb{R}^n \to \mathbb{R}^m$, $\bigl(\frac{\partial f}{\partial x}\big
 
 :::
 
-**Backpropagation** computes all gradients in $O(k n^2)$ time (matrix–vector products, avoiding $O(k n^3)$ matrix–matrix products):
+For layer $z_{i+1} = f_i(u_i)$ with $u_i = W_i z_i + b_i$ and $D_i = \operatorname{diag}(f_i'(u_i))$, local Jacobians are $\frac{\partial z_{i+1}}{\partial z_i} = D_i W_i$ and $\frac{\partial z_{i+1}}{\partial b_i} = D_i$. Defining upstream gradient $g_i^\top = \frac{\partial \ell}{\partial z_i} = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}$, **backpropagation** evaluates left-to-right in $O(k n^2)$ time (matrix–vector products, vs. $O(k n^3)$ right-to-left):
 
 1. Forward ($i = 1, \dots, k-1$): Cache $u_i = W_i z_i + b_i$ and $z_{i+1} = f_i(u_i)$.
-2. Backward ($i = k-1, \dots, 1$): From $g_k = \nabla_{z_k}\ell(z_k, y)$, propagate upstream gradients:
+2. Backward ($i = k-1, \dots, 1$): From $g_k = \nabla_{z_k}\ell(z_k, y)$, recurse via $g_i^\top = g_{i+1}^\top D_i W_i$:
 
    $$
    \delta_i = g_{i+1} \circ f_i'(u_i), \qquad g_i = W_i^\top \delta_i.
    $$
 
-3. Gradients: $\nabla_{b_i}\ell = \delta_i$ and $\nabla_{W_i}\ell = \delta_i z_i^\top$.
+3. Parameter gradients: $\nabla_{b_i}\ell = \delta_i$ and $\nabla_{W_i}\ell = \delta_i z_i^\top$.
 
 ::: {.callout-note title="Matrix Gradient via Vectorization" collapse="true"}
 
-Using $\operatorname{vec}(ABC) = (C^\top \otimes A)\operatorname{vec}(B)$, $W_i z_i = (z_i^\top \otimes I)\operatorname{vec}(W_i)$, so $\frac{\partial \ell}{\partial \operatorname{vec}(W_i)} = \delta_i^\top(z_i^\top \otimes I)$, which reshapes to $\nabla_{W_i}\ell = \delta_i z_i^\top$.
+Using $\operatorname{vec}(ABC) = (C^\top \otimes A)\operatorname{vec}(B)$, write $W_i z_i = I W_i z_i = (z_i^\top \otimes I)\operatorname{vec}(W_i)$:
+
+$$
+\frac{\partial \ell}{\partial \operatorname{vec}(W_i)}
+= g_{i+1}^\top \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top \otimes I)
+= \delta_i^\top (z_i^\top \otimes I)
+= (z_i \otimes \delta_i)^\top,
+$$
+
+which reshapes to $\nabla_{W_i}\ell = \delta_i z_i^\top = \bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr)z_i^\top$.
 
 :::
 

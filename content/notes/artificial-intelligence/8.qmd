@@ -18,7 +18,7 @@ Sequential decision model under stochastic dynamics: states $S$, actions $A$, tr
 
 :::
 
-- Assumptions: First-order Markov & stationary $T$, **full observability** ($s_t = f(o_t)$ observed after acting), and scalar rewards specifying *what* to achieve (dense shaping rewards learn faster than sparse rewards).
+- Experience & assumptions: History $o_1, r_1, a_1, \dots, o_t, r_t$ summarizes to $s_t = f(\dots)$, reducing to $s_t = f(o_t)$ under **full observability**; dynamics are first-order Markov and stationary; scalar rewards specify *what* to achieve (dense rewards learn faster than sparse rewards).
 - Planning (known $T, R$) vs. reinforcement learning (unknown $T, R$, learned from $\langle s, a, r, s' \rangle$ samples).
 
 ![Stochastic Grid World: intended move succeeds with probability 0.8 and slips laterally with 0.1 each.](images/rl-stochastic-gridworld.png){.notes-slide-fig width="58%" fig-align="center"}
@@ -38,7 +38,7 @@ Sequential decision model under stochastic dynamics: states $S$, actions $A$, tr
   V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
   $$
 
-- Living-reward intuition (Grid World with $+1$ goal, $-1$ cliff): $R(s) = -2.0$ jumps into nearest exit (even $-1$); $-0.4$ risks the short cliff path; $-0.03$ detours safely; $-0.01$ faces into the wall so slips never hit $-1$.
+- Living-reward regimes (Grid World with $+1$ goal, $-1$ cliff): $R(s) = -2.0$ rushes into nearest exit (even $-1$); $-0.4$ risks the short cliff path; $-0.03$ detours safely; $-0.01$ faces into the safe wall so lateral slips never hit $-1$.
 
 ## Value and Policy Iteration
 
@@ -50,7 +50,13 @@ Repeatedly apply $V_{k+1}(s) \leftarrow R(s) + \gamma \max_a \sum_{s'} T(s,a,s')
 
 1. $\gamma$-contraction: $\|V_{k+1} - V^*\|_\infty \le \gamma \|V_k - V^*\|_\infty \implies V_k \to V^*$ uniquely.
 2. Stopping rule: $\|V_k - V_{k-1}\|_\infty \le \epsilon \implies \|V_k - V^*\|_\infty \le \dfrac{\epsilon\gamma}{1 - \gamma}$.
-3. Greedy policy $\pi_g$ on $V_k$: $\|V_k - V^*\|_\infty \le \lambda \implies \|V^{\pi_g} - V^*\|_\infty \le \dfrac{2\lambda\gamma}{1 - \gamma}$ (exact $\pi_g = \pi^*$ below a finite $\lambda$).
+3. Greedy policy $\pi_g(s) = \arg\max_a \sum_{s'} T(s,a,s') V_k(s')$:
+
+   $$
+   \|V_k - V^*\|_\infty \le \lambda \;\implies\; \|V^{\pi_g} - V^*\|_\infty \le \frac{2\lambda\gamma}{1 - \gamma},
+   $$
+
+   and $\pi_g = \pi^*$ is exact once $\lambda$ drops below a finite positive gap.
 
 :::
 
@@ -66,22 +72,25 @@ Policy Iteration alternates until $\pi' = \pi$ (monotonic $V^{\pi'} \ge V^\pi$; 
 Scaling beyond full-width $O(|S|^2|A|)$ sweeps (**curse of dimensionality**):
 
 - Asynchronous DP (individual state backups): In-place DP (1 table), Prioritized sweeping (max Bellman error via reverse dynamics), and Real-time DP (states visited along agent trajectories).
-- Sample backups ($O(1)$ per $\langle s,a,r,s'\rangle$) & Fitted VI: Sample states $\{s^{(i)}\}$, compute Bellman targets $y^{(i)}$, and regress $\hat{v}(s, w)$ onto $y^{(i)}$.
+- Sample backups ($O(1)$ per $\langle s,a,r,s'\rangle$) & Fitted Value Iteration on approximator $\hat{v}(s, w)$:
+  1. Sample state batch $\{s^{(i)}\}_{i=1}^m$.
+  2. Compute Bellman targets $y^{(i)} = R(s^{(i)}) + \gamma \max_a \sum_{s'} T(s^{(i)}, a, s')\,\hat{v}(s', w_k)$.
+  3. Regress $\hat{v}(s^{(i)}, w)$ onto $y^{(i)}$ to obtain $w_{k+1}$.
 
 ## Passive Reinforcement Learning
 
 Fix policy $\pi$ under unknown $(T, R)$ and estimate $V^\pi(s)$ from trajectory episodes:
 
-| Method | Mechanism | Bellman | Cost | Sample Eff. |
+| Method | Estimator | Bellman | Cost | Sample Eff. |
 | :--- | :--- | :--- | :--- | :--- |
-| MC (model-free) | Average discounted reward-to-go | None | Low | Low |
-| ADP (model-based) | Fit $\hat{T}, \hat{R}$, run full DP evaluation | Full | High | High |
-| TD (model-free) | Bootstrap on observed $(s,a,r,s')$ | Partial | Low | Medium |
+| MC (model-free) | Empirical mean of reward-to-go $G_t = \sum_{k=0}^{T-t}\gamma^k r_{t+k}$ | None | Low | Low |
+| ADP (model-based) | $\hat{T}(s,a,s') = \frac{N(s,a,s')}{N(s,a)}$, $\hat{R}(s) \to$ full DP eval | Full | High | High |
+| TD (model-free) | Bootstrap update on observed $(s,a,r,s')$ | Partial | Low | Medium |
 
-- **Temporal Difference (TD)** update (online running mean toward noisy target $R(s) + \gamma V^\pi(s')$, converging as $\alpha_n \propto 1/n$):
+- **Temporal Difference (TD)** derivation: Applying online running-mean estimation $\bar{x}_{n+1} = \bar{x}_n + \frac{1}{n+1}(x_{n+1} - \bar{x}_n)$ to noisy one-step Bellman samples $R(s) + \gamma V^\pi(s')$ yields (converging to $V^\pi$ as $\alpha_n \propto 1/n$):
 
   $$
-  V^\pi(s) \leftarrow V^\pi(s) + \alpha \Bigl(R(s) + \gamma V^\pi(s') - V^\pi(s)\Bigr).
+  V^\pi(s) \leftarrow V^\pi(s) + \alpha \Bigl(\underbrace{R(s) + \gamma V^\pi(s')}_{\text{TD target}} - V^\pi(s)\Bigr).
   $$
 
 - Bridging TD & ADP: Mix real TD updates with TD updates on "imagined" transitions sampled from $\hat{T}$—trading extra compute per step for higher sample efficiency (approaching ADP as imagined samples $\to \infty$).
