@@ -1,6 +1,6 @@
 ---
 title: "Probabilistic Inference"
-description: "Exact and approximate inference in Bayesian networks, and probabilistic reasoning over time."
+description: "Variable elimination, BN sampling and MCMC, Markov chains, HMMs, particle filtering, DBNs, and Viterbi."
 page-layout: article
 search: true
 toc-depth: 3
@@ -10,188 +10,76 @@ crossref:
   chapters: true
 ---
 
-## Bayesian Nets: Exact Inference
+## Exact Inference: Variable Elimination
 
-### Inference by Enumeration
+Variable Elimination (VE) pushes sums inside products ($\sum uwy + \cdots = (u+v)(w+x)(y+z)$) by interleaving joins and marginalization:
 
-Join up the whole joint distribution before you sum out the hidden variables.
+1. Restrict all local CPTs to observed evidence $e$.
+2. For each hidden variable $H_k$ (in chosen elimination order): join all factors mentioning $H_k$, then eliminate (sum out) $H_k$.
+3. Join remaining factors over $Q$ and normalize.
 
-### Variable Elimination
+![Variable elimination interleaves factor joins and early marginalization to avoid forming the full joint table.](images/bn-variable-elimination.png){.notes-slide-fig width="78%" fig-align="center"}
 
-- Interleave joining and marginalizing.
-- Still NP-hard, but usually much faster than inference by enumeration.
-- A polytree is a directed graph with no undirected cycles. For poly-trees you can always find an ordering that is efficient.
+- Complexity: Governed by the largest intermediate factor; elimination order can mean $2^n$ vs. $2$ entries (e.g., eliminating a star hub first vs. last).
+- Hardness: Exact BN inference is **NP-hard** (reduces from 3-SAT), but runs in linear time on **polytrees** (singly connected DAGs with no undirected cycles).
 
-## Bayesian Nets: Approximate Inference
+## Approximate Inference via Sampling
 
-### Prior Sampling
+Draw $N$ discrete samples (via inverse-CDF lookup on $u \sim \operatorname{Uniform}[0,1)$) to approximate $P(Q \mid e)$:
 
-- Ignore evidence. Sample from the joint probability.
-- Do inference by counting the right samples.
+| Method | Procedure | Pros & Cons |
+| :--- | :--- | :--- |
+| Prior Sampling | Sample $x_i \sim P(X_i \mid \mathrm{pa})$ topologically | Unbiased for $P(X)$; ignores evidence $e$ |
+| Rejection Sampling | Prior sample; discard if $x_i \ne e_i$ | Consistent, but rejects almost all samples when $P(e)$ is small |
+| Likelihood Weighting | Clamp $E_i = e_i$, sample rest; weight $w = \prod_i P(e_i \mid \mathrm{pa})$ | Uses all samples ($S_{\mathrm{WS}} \cdot w = P(\mathbf{z}, \mathbf{e})$), but upstream ignores downstream $e$ (weight collapse) |
+| Gibbs Sampling (MCMC) | Clamp $e$; repeatedly resample $Z_i \sim P(Z_i \mid \mathrm{MB}(Z_i))$ | Uses upstream & downstream evidence; correlated samples, slow mixing diagnosis |
 
-### Rejection Sampling
+Key Gibbs sampling details:
 
-```python
-RejectionSample(network, evidence):
-    x = {}
-    for X_i in topological_order(network):
-        x[X_i] ~ P(X_i | sampled values of Parents(X_i))
-        if X_i in evidence and x[X_i] != evidence[X_i]:
-            return REJECT
-    return x
-```
-
-- Repeat and estimate conditional probabilities using only accepted samples.
-- Hopelessly expensive if $P(e)$ is small.
-
-### Likelihood Weighting
-
-Fix evidence values and weight each sample by the product of their conditional probabilities.
-
-```python
-LikelihoodWeighting(X, evidence, network, N):
-    W = {v: 0 for v in domain(X)}
-    for j = 1 to N:
-        x, w = WeightedSample(network, evidence)
-        W[x[X]] += w
-    return normalize(W)
-
-WeightedSample(network, evidence):
-    x, w = {}, 1
-    for X_i in topological_order(network):
-        parents = assigned values of Parents(X_i) in x
-        if X_i in evidence:
-            x[X_i] = evidence[X_i]
-            w *= P(X_i = x[X_i] | parents)
-        else:
-            x[X_i] ~ P(X_i | parents)
-    return x, w
-```
-
-- Normalize the weighted counts to estimate $P(X\mid e)$.
-- Degradation in performance as the number of evidence variables increases.
-
-### Gibbs Sampling
-
-Keep a complete assignment (the network state), fix evidence, and repeatedly resample one non-evidence variable at a time.
-
-```python
-GibbsSampling(X, evidence, network, N):
-    counts = {v: 0 for v in domain(X)}
-    Z = non-evidence variables in network
-    x = copy(evidence)
-    initialize x[Z] to a valid random assignment
-    for j = 1 to N:
-        for Z_i in Z:
-            x[Z_i] ~ P(Z_i | current values of MB(Z_i) in x)
-            counts[x[X]] += 1
-    return normalize(counts)
-```
-
-- Markov blanket: Parents, children, and the children's other parents.
-- Rationale: Updates use both parent and child information, allowing evidence to influence upstream and downstream variables through repeated updates.
-- Monte Carlo uses random samples for estimation; MCMC generates correlated samples through a Markov chain.
-- Gibbs sampling is an MCMC method. Each conditional update is a special Metropolis–Hastings step with acceptance probability 1.
+- **Markov blanket** $\mathrm{MB}(Z_i)$: All CPTs not mentioning $Z_i$ cancel in $P(Z_i \mid x_{-i})$, leaving only $P(Z_i \mid \operatorname{Parents}(Z_i)) \prod_{Y_j \in \operatorname{Children}(Z_i)} P(Y_j \mid \operatorname{Parents}(Y_j))$ (parents, children, and co-parents).
+- Convergence: Kernel $q(x \to x') = P(x_i' \mid x_{-i}, e)$ satisfies **detailed balance** with $P(x \mid e)$ (Metropolis–Hastings with acceptance $1$).
 
 ## Probabilistic Reasoning over Time
 
-### Markov Models
+### Markov Chains and Stationary Distributions
 
-- State: The value of $X_t$ at time $t$.
-- Parameters: Initial distribution $P(X_1)$ and transition probabilities $P(X_t\mid X_{t-1})$.
-- First-order Markov property: Past and future are conditionally independent given the present:
-
-$$
-P(X_t\mid X_1,\ldots,X_{t-1})=P(X_t\mid X_{t-1}).
-$$
+- Markov chain: Prior $P(X_1)$ and stationary transition $P(X_t \mid X_{t-1})$ with $X_t \perp\!\!\!\perp X_{1:t-2} \mid X_{t-1}$; forward propagation updates $P(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1})P(x_{t-1})$.
 
 ::: {#def-ai-4-1 name="Stationary Distribution"}
 
-A distribution $P_\infty$ unchanged by a transition. If the chain converges, its limiting distribution is stationary:
+Ergodic chains converge to a unique $P_\infty$ invariant under transitions: $P_\infty(x') = \sum_x P(x' \mid x)P_\infty(x)$.
 
-$$
-P_\infty(x')=\sum_x P(x'\mid x)P_\infty(x).
-$$
+- PageRank: Surfer jumps to a uniform random page with probability $c$ and follows an outlink with probability $1-c$; $P_\infty$ ranks page authority.
 
 :::
 
-### Hidden Markov Models
+### Hidden Markov Models and Filtering
 
-- Hidden states $X_t$ form a Markov chain with transition model $P(X_t\mid X_{t-1})$.
-- At each time step, observe an output $E_t$ generated according to $P(E_t\mid X_t)$; the states are not directly observed.
+::: {#def-ai-4-2 name="Hidden Markov Model (HMM)"}
 
-#### Filtering / State Estimation
+Hidden states $X_{1:T}$ emit noisy observations $E_{1:T}$ via $P(X_1)$, $P(X_t \mid X_{t-1})$, and $P(E_t \mid X_t)$, with $X_t \perp\!\!\!\perp X_{1:t-2}, E_{1:t-1} \mid X_{t-1}$ and $E_t \perp\!\!\!\perp X_{1:t-1}, E_{1:t-1} \mid X_t$.
 
-- Track the belief state: the current state distribution conditioned on observations so far:
+:::
 
-$$
-B_t(x)=P(X_t=x\mid e_1,\ldots,e_t).
-$$
+- Online filtering (Forward Algorithm) updates belief $B_t(x_t) = P(x_t \mid e_{1:t})$ in $O(|X|^2)$ time and $O(|X|)$ space per step (*Kalman filter* for linear-Gaussian systems):
+  1. Time elapse: $B'_t(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1}) B_{t-1}(x_{t-1})$.
+  2. Observe: $B_t(x_t) \propto_{X_t} P(e_t \mid x_t) B'_t(x_t)$.
+- Particle filtering ($O(N)$ per step for $N \ll |X|$ particles, when $|X|$ is huge or continuous):
+  1. Elapse: Sample $x_t^{(i)} \sim P(X_t \mid x_{t-1}^{(i)})$.
+  2. Weight: Set $w_i = P(e_t \mid x_t^{(i)})$.
+  3. Resample: Draw $N$ unweighted particles proportional to $\{w_i\}$.
+  - SLAM: Jointly filters robot pose and map (e.g., FastSLAM).
 
-- Initialize from a prior distribution, often uniform; update by predicting as time advances and conditioning on new observations.
-- Kalman filtering was developed in the 1960s and used for Apollo trajectory estimation.
+### DBNs, Viterbi, and Probabilistic Programming
 
-#### Forward Algorithm
+- Dynamic Bayes Nets (DBNs): Multi-variable BN slice repeated across $t-1 \to t$; particle filtering tracks state-tuple particles.
+- Viterbi algorithm ($\arg\max_{x_{1:T}} P(x_{1:T} \mid e_{1:T})$): Replaces the Forward sum over trellis paths with a `max` (plus backpointers):
 
-- Every time step, we start with current $P(X\mid \text{evidence})$.
-- We update for time:
+  $$
+  \begin{aligned}
+  \text{Forward:}\quad f_t[x_t] &= P(e_t \mid x_t)\sum_{x_{t-1}} P(x_t \mid x_{t-1})\,f_{t-1}[x_{t-1}], \\
+  \text{Viterbi:}\quad m_t[x_t] &= P(e_t \mid x_t)\max_{x_{t-1}} P(x_t \mid x_{t-1})\,m_{t-1}[x_{t-1}].
+  \end{aligned}
+  $$
 
-$$
-P(x_t\mid e_{1:t-1})=\sum_{x_{t-1}}P(x_{t-1}\mid e_{1:t-1})\cdot P(x_t\mid x_{t-1}).
-$$
-
-- We update for evidence:
-
-$$
-P(x_t\mid e_{1:t})\propto_X P(x_t\mid e_{1:t-1})\cdot P(e_t\mid x_t).
-$$
-
-- The forward algorithm does both at once (and doesn't normalize).
-- Problem: space is $|X|$ and time is $|X|^2$ per time step.
-
-#### Particle Filtering
-
-Approximate $P(X_t\mid e_{1:t})$ with $N$ particles (sampled states), initialized from the prior. At each time step:
-
-1. Predict: Sample $x_t^{(i)}\sim P(X_t\mid x_{t-1}^{(i)})$.
-2. Weight: Set $w_i=P(e_t\mid x_t^{(i)})$ and normalize the weights.
-3. Resample: Draw $N$ particles with replacement in proportion to their weights.
-
-After resampling, estimate state probabilities by particle frequencies. More particles generally improve accuracy but increase computation.
-
-### Dynamic Bayes Nets (DBNs)
-
-- We want to track multiple variables over time, using multiple sources of evidence.
-- Repeat a fixed Bayes net structure at each time.
-- Variables from time $t$ can condition on those from $t-1$.
-
-### Most Likely Explanation
-
-State trellis: Graph of states and transitions over time.
-
-#### Forward Algorithm (Sum)
-
-$$
-\begin{aligned}
-f_t[x_t] &= P(x_t,e_{1:t}) \\
-&= P(e_t\mid x_t)\sum_{x_{t-1}}P(x_t\mid x_{t-1})f_{t-1}[x_{t-1}].
-\end{aligned}
-$$
-
-#### Viterbi Algorithm (Max)
-
-$$
-\begin{aligned}
-m_t[x_t] &= \max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\
-&= P(e_t\mid x_t)\max_{x_{t-1}}P(x_t\mid x_{t-1})m_{t-1}[x_{t-1}].
-\end{aligned}
-$$
-
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results
-
-- [Variable Elimination](#variable-elimination): Interleaving joins and marginalization is still NP-hard, but usually much faster than enumeration.
-- [Gibbs Sampling](#gibbs-sampling): Each conditional update is a Metropolis–Hastings step with acceptance probability 1.
-- [Forward Algorithm](#forward-algorithm): Each time step costs $|X|^2$ time and $|X|$ space.
-- [Viterbi Algorithm](#viterbi-algorithm-max): Replacing the forward algorithm's sum with a max finds the most likely explanation. -->
+- Probabilistic programming (PyMC, Stan, Edward): Expresses generative models as code with automated MCMC/variational posterior inference.

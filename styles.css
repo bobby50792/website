@@ -156,6 +156,34 @@ body.quarto-dark #quarto-header {
   margin-inline: auto;
 }
 
+.notes-studio figure.figure {
+  margin-block: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.notes-studio figure.figure figcaption {
+  margin-block-start: .55rem;
+  color: var(--studio-muted);
+  font-family: var(--studio-sans);
+  font-size: .82rem;
+  line-height: 1.45;
+}
+
+.notes-studio img.notes-slide-fig {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+  margin-inline: auto;
+  padding: .65rem .85rem;
+  border: 1px solid var(--studio-line);
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+body.quarto-dark.notes-studio img.notes-slide-fig {
+  filter: brightness(.92) contrast(1.03);
+}
+
 .notes-studio .math.display {
   display: block;
   max-inline-size: 100%;

@@ -1,6 +1,6 @@
 ---
 title: "Deep Learning I"
-description: "Neural networks, depth and modularity, stochastic gradient descent, backpropagation, and momentum."
+description: "Neural networks, depth and modularity, minibatch SGD, backpropagation, and momentum."
 page-layout: article
 search: true
 toc-depth: 3
@@ -12,21 +12,15 @@ crossref:
 
 ## Neural Networks
 
-A neural network is a hypothesis class built from **composed nonlinear functions** that learns features directly from raw inputs. Composing linear maps alone collapses into a single linear map; applying an elementwise nonlinearity after each affine layer gives
+Purely linear layers collapse ($W_2(W_1 x) = (W_2 W_1)x$); inserting elementwise nonlinearities $f_i$ learns hierarchical features directly on GPUs via dense matrix operations:
 
 $$
-z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i), \qquad h_\theta(x) = z_k.
+z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i) \quad (i = 1, \dots, k-1), \qquad h_\theta(x) = z_k.
 $$
 
-Expressing each layer as a matrix operation maps naturally to parallel hardware (GPUs).
+### Activations and Universal Approximation
 
-### Activation Functions
-
-Common elementwise nonlinearities $f_i:\mathbb R\to\mathbb R$:
-
-- Hyperbolic tangent: $\tanh(x) = \dfrac{e^{2x}-1}{e^{2x}+1}$
-- Sigmoid: $\sigma(x) = \dfrac{1}{1+e^{-x}}$
-- ReLU: $\max\{x, 0\}$
+- Common activations: $\tanh(x) = \dfrac{e^{2x}-1}{e^{2x}+1} \in (-1,1)$, sigmoid $\sigma(x) = \dfrac{1}{1+e^{-x}} \in (0,1)$, and ReLU $\max\{x, 0\}$.
 
 ```{python}
 #| echo: false
@@ -77,91 +71,67 @@ plt.tight_layout(w_pad=2.0)
 plt.show()
 ```
 
-### Universal Approximation
-
 ::: {#thm-ai-6-1 name="Universal Approximation Theorem"}
 
-Any continuous function can be approximated arbitrarily well by a neural network with a single hidden layer, given enough hidden neurons.
+Any continuous function on a compact domain can be approximated arbitrarily closely by a single-hidden-layer network with enough hidden units (guarantees existence, not compact width or efficient learnability).
 
 :::
 
-## Depth and Representation
+## Why Deep?
 
-- Biology: Loosely inspired by hierarchical processing in the visual cortex (though the actual biological link is weak).
-- Circuit theory: Depth yields exponentially more compact representations—e.g., $n$-bit parity needs $O(2^n)$ units in one hidden layer, vs. $O(n)$ units across $O(\log n)$ layers.
-- Modularity: Lower layers learn reusable features shared by higher layers (a learnable kernel rather than a hand-crafted one), improving data efficiency.
-- Empirical performance: At the same parameter budget, deep ("thin + tall") networks outperform wide shallow ("fat + short") ones.
-- Why now: Driven by large datasets, parallel compute, and better architectures and optimization.
+- Circuit compactness: $n$-bit parity needs $O(2^n)$ units in 1 hidden layer vs. $O(n)$ units across $O(\log n)$ layers.
+- Modularity & data efficiency: Lower layers learn reusable sub-features (**learnable kernel** $\phi_\theta(x)$) shared across upper-layer tasks.
+- Empirical "thin + tall" > "fat + short": At matched parameter counts, deeper nets outperform wide shallow ones (e.g., $7\times 2\text{k}$ beats $1\times 16\text{k}$ on speech recognition).
+- Why now: Large datasets + parallel GPU compute + improved architectures and optimizers.
+
+![Feature mapping $\phi$ lifts inputs into a linearly separable space; deep networks learn $\phi$ end-to-end.](images/dl1-feature-space.png){.notes-slide-fig width="68%" fig-align="center"}
 
 ## Training Neural Networks
 
-Training minimizes $\min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}), y^{(i)}\bigr)$ with standard losses (squared error, logistic/hinge, softmax). Because the objective is non-convex, optimization targets good local solutions rather than guaranteed global optima.
+### Losses and Minibatch SGD
 
-### Stochastic Gradient Descent
+- Standard losses: Squared $\|h_\theta(x)-y\|_2^2$ (regression), logistic/hinge (binary), and softmax $\log\sum_j e^{h_\theta(x)_j} - h_\theta(x)_y$ (multiclass).
+- **Minibatch SGD**: Avoids scanning all $m$ examples per step by updating on a small minibatch $B$:
 
-Full gradient descent averages over all $m$ samples per step, which is costly for large datasets. **Stochastic gradient descent (SGD)** updates on one sample (or in practice a small **minibatch**) at a time:
-
-$$
-\theta \leftarrow \theta - \alpha\,\nabla_\theta\ell\bigl(h_\theta(x^{(i)}),\,y^{(i)}\bigr).
-$$
+  $$
+  \theta \leftarrow \theta - \frac{\alpha}{|B|}\sum_{i \in B} \nabla_\theta \ell\bigl(h_\theta(x^{(i)}),\, y^{(i)}\bigr).
+  $$
 
 ### Jacobians and Backpropagation
 
-::: {#def-ai-6-1 name="Jacobian Matrix"}
+::: {#def-ai-6-1 name="Jacobian Rules"}
 
-For $f:\mathbb R^n\to\mathbb R^m$, the Jacobian $\frac{\partial f(x)}{\partial x}\in\mathbb R^{m\times n}$ has $(i,j)$-entry $\frac{\partial f_i(x)}{\partial x_j}$. For scalar $f$, $\nabla_x f(x) = \bigl(\frac{\partial f(x)}{\partial x}\bigr)^\top$.
+For $f: \mathbb{R}^n \to \mathbb{R}^m$, $\bigl(\frac{\partial f}{\partial x}\bigr)_{ij} = \frac{\partial f_i}{\partial x_j}$ (scalar $f$: $\nabla_x f = (\frac{\partial f}{\partial x})^\top$). Key rules:
+
+- Chain rule: $\dfrac{\partial f(g(x))}{\partial x} = \dfrac{\partial f}{\partial g}\dfrac{\partial g}{\partial x}$.
+- Linear & elementwise maps: $\dfrac{\partial(Ax)}{\partial x} = A$, $\quad \dfrac{\partial f(u)}{\partial u} = \operatorname{diag}\bigl(f'(u)\bigr)$.
 
 :::
 
-Three Jacobian rules used in the derivation:
+**Backpropagation** computes all gradients in $O(k n^2)$ time (matrix–vector products, avoiding $O(k n^3)$ matrix–matrix products):
 
-- Chain rule: $\dfrac{\partial f(g(x))}{\partial x} = \dfrac{\partial f}{\partial g}\dfrac{\partial g}{\partial x}$.
-- Linear map: $\dfrac{\partial(Ax)}{\partial x} = A$.
-- Elementwise map: $\dfrac{\partial f(x)}{\partial x} = \operatorname{diag}\bigl(f'(x)\bigr)$.
+1. Forward ($i = 1, \dots, k-1$): Cache $u_i = W_i z_i + b_i$ and $z_{i+1} = f_i(u_i)$.
+2. Backward ($i = k-1, \dots, 1$): From $g_k = \nabla_{z_k}\ell(z_k, y)$, propagate upstream gradients:
 
-**Backpropagation** computes all parameter gradients simultaneously in one forward pass and one backward pass by caching intermediate products. For layer $z_{i+1} = f_i(W_i z_i + b_i)$, let $D_i = \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)$, so $\frac{\partial z_{i+1}}{\partial z_i} = D_i W_i$ and $\frac{\partial z_{i+1}}{\partial b_i} = D_i$.
+   $$
+   \delta_i = g_{i+1} \circ f_i'(u_i), \qquad g_i = W_i^\top \delta_i.
+   $$
 
-Define the upstream gradient $g_i^\top = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}$. Then $g_i$ satisfies the backward recursion (with $\circ$ elementwise):
+3. Gradients: $\nabla_{b_i}\ell = \delta_i$ and $\nabla_{W_i}\ell = \delta_i z_i^\top$.
 
-$$
-g_k = \nabla_{z_k}\ell(z_k, y),
-\qquad
-g_i = W_i^\top\bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr),
-$$
+::: {.callout-note title="Matrix Gradient via Vectorization" collapse="true"}
 
-which immediately gives the parameter gradients:
-
-$$
-\nabla_{b_i}\ell = g_{i+1}\circ f_i'(W_i z_i + b_i),
-\qquad
-\nabla_{W_i}\ell = \bigl(g_{i+1}\circ f_i'(W_i z_i + b_i)\bigr)z_i^\top.
-$$
-
-Evaluating $g_i$ via vector–matrix products from left to right costs $O(n^2(k-i))$ instead of $O(n^3(k-i))$ for matrix–matrix products.
-
-::: {.callout-note title="Matrix Gradients via Vectorization" collapse="true"}
-
-Using $\operatorname{vec}(ABC)=(C^\top\otimes A)\operatorname{vec}(B)$, write $W_i z_i = (z_i^\top\otimes I)\operatorname{vec}(W_i)$. The chain rule gives
-
-$$
-\frac{\partial \ell}{\partial\operatorname{vec}(W_i)}
-= g_{i+1}^\top\operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top\otimes I),
-$$
-
-which reshapes to $\nabla_{W_i}\ell = \bigl(f_i'(W_i z_i + b_i)\circ g_{i+1}\bigr)z_i^\top$.
+Using $\operatorname{vec}(ABC) = (C^\top \otimes A)\operatorname{vec}(B)$, $W_i z_i = (z_i^\top \otimes I)\operatorname{vec}(W_i)$, so $\frac{\partial \ell}{\partial \operatorname{vec}(W_i)} = \delta_i^\top(z_i^\top \otimes I)$, which reshapes to $\nabla_{W_i}\ell = \delta_i z_i^\top$.
 
 :::
 
 ### Non-Convexity and Momentum
 
-- Non-convex losses contain plateaus, saddle points, and local minima, so gradient descent has no global-optimum guarantee.
-- **Momentum** adds inertia from the previous step ($\text{movement} = -\text{gradient} + \text{momentum}$) to help carry updates past plateaus, saddle points, and shallow local minima.
+- Non-convex surfaces contain flat plateaus, saddle points, and local minima (initialization-dependent).
+- **Momentum** adds velocity inertia to push past plateaus, saddles, and shallow local traps:
 
-<!-- ## Supplementary Notes {.supplementary-notes}
+  $$
+  v_{t+1} = \beta v_t - \alpha \nabla_\theta \ell(\theta_t), \qquad \theta_{t+1} = \theta_t + v_{t+1}.
+  $$
 
-### Key Results
-
-- [Universal Approximation](#universal-approximation): One hidden layer suffices for continuity, but depth represents structured functions exponentially more compactly.
-- [Stochastic Gradient Descent](#stochastic-gradient-descent): Minibatch updates avoid scanning the full dataset every step.
-- [Jacobians and Backpropagation](#jacobians-and-backpropagation): Caching upstream gradients $g_i = W_i^\top(g_{i+1}\circ f_i'(W_i z_i + b_i))$ computes all gradients in $O(n^2)$ per layer.
-- [Non-Convexity and Momentum](#non-convexity-and-momentum): Momentum helps carry updates past plateaus, saddle points, and shallow local minima. -->
+![Non-convex loss surface where different initializations $\theta_0$ reach distinct local minima.](images/dl1-loss-landscape.png){.notes-slide-fig width="46%" fig-align="center"}

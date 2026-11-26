@@ -2,7 +2,7 @@
 title: "Advanced Computer Graphics"
 output-file: index.html
 home-order: 8
-description: "Geometric representations, transformations, rasterization, shading, and ray tracing."
+description: "Geometric representations, transformations, rasterization, shading, ray tracing, and physical simulation."
 page-layout: article
 search: true
 listing:

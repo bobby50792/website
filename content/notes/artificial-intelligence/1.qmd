@@ -1,8 +1,9 @@
 ---
 title: "Search"
-description: "Single-agent search and adversarial search."
+description: "Heuristic search, motion planning, adversarial game trees, game theory, MCTS, and expected utility."
 page-layout: article
 search: true
+toc-depth: 3
 number-offset: [1]
 
 crossref:
@@ -11,406 +12,121 @@ crossref:
 
 ## Single-Agent Search
 
-### Planning as Search Problems
+### Formulation and Search Strategies
 
-- A **search problem** consists of:
-  - $S$: a state space
-  - $s_{\mathrm{start}}$: start state
-  - $\operatorname{Actions}(s)$: possible actions
-  - $\operatorname{Succ}(s,a)$: successor
-  - $\operatorname{Cost}(s,a)$: action cost
-  - $\operatorname{IsEnd}(s)$: a goal test
+- Search problem: State space $S$, start $s_{\mathrm{start}}$, $\operatorname{Actions}(s)$, successor $\operatorname{Succ}(s,a)$, $\operatorname{Cost}(s,a)$, and goal test $\operatorname{IsEnd}(s)$; find a minimum-cost action plan to a goal.
+- Fringe priority ($g(n)$: backward path cost; $h(n)$: estimated forward cost to goal):
 
-- A **solution** is a sequence of actions (a plan)
-  which transforms the start state to a goal state.
+| Method | Priority | Optimal? | Note |
+| :--- | :--- | :--- | :--- |
+| UCS | $g(n)$ | Yes ($\text{cost} \ge 0$) | Explores uniform cost contours ($h=0$) |
+| Greedy | $h(n)$ | No | Myopic forward estimate only |
+| A\* | $f(n) = g(n) + h(n)$ | Yes (admissible / consistent $h$) | Optimal efficiency among exact methods |
 
-### Uninformed Search
+- Goal-test rule: Stop only when a goal is **popped for expansion**, never when first pushed onto the fringe.
 
-Can only generate successors and distinguish goals from non-goals. Fringe: nodes ordered by $g(x)$ = work done so far.
+### A\* Tree Search vs. Graph Search
 
-### Informed Search
+::: {#def-ai-1-1 name="Admissible and Consistent Heuristics"}
 
-Can know whether one non-goal is more promising than another.
-
-#### Search Heuristics
-
-A function that estimates how close a state is to a goal.
-
-#### Greedy Search
-
-Fringe: nodes ordered by $h(x)$ = heuristic evaluation of cost from $x$ to goal.
-
-#### A\* Search
-
-Fringe: nodes ordered by $f(x) = g(x) + h(x)$. Stop only when a goal is expanded.
-
-::: {#def-ai-1-1 name="Admissible Heuristic"}
-
-A heuristic $h$ is admissible (optimistic) if:
-
-$$
-0 \le h(n) \le h^*(n)
-$$
-
-where $h^*(n)$ is the true cost to a nearest goal.
+- Admissible (optimistic): $0 \le h(n) \le h^*(n)$, where $h^*(n)$ is true minimum cost to a goal.
+- Consistent (triangle inequality): $h(n) \le \operatorname{cost}(n \to n') + h(n')$ for every arc $n \to n'$.
 
 :::
 
-Coming up with admissible heuristics is most of what's involved in using A\* in practice.
+- A\* tree-search optimality: For optimal goal $A$ and suboptimal goal $B$, any unexpanded ancestor $n$ of $A$ satisfies $f(n) \le g(A) < g(B) = f(B)$, so $A$ is expanded before $B$.
+- Graph search: Maintain a **closed set** (hash/tree set) of expanded states to avoid exponential repeated-state work.
+- Why consistency matters:
+  - Implies admissibility, and forces non-decreasing $f(n') \ge f(n)$ along paths.
+  - Guarantees A\* graph search expands every state along an optimal path first.
+- Relaxed-problem heuristics: Exact optimal cost $h(s) = \operatorname{FutureCost}^j(s)$ in a relaxed problem ($\operatorname{Cost}^j \le \operatorname{Cost}$, e.g., Manhattan distance) is automatically consistent; if $h_1, h_2$ are consistent, so is $\max\{h_1, h_2\}$.
 
-#### Graph Search
+### Motion Planning Variants
 
-Never expand a state twice.
+- Cell decomposition: Partition space into free, obstacle, and mixed cells; search free cells and recursively split mixed cells.
+- Visibility graph: Connect mutually visible polygonal obstacle vertices ($O(n^2)$ edges) to find exact Euclidean shortest paths.
+- Weighted A\*: Priority $f(s) = g(s) + \varepsilon h(s)$ ($\varepsilon > 1$) gives large speedups with $\varepsilon$-suboptimal cost ($\le \varepsilon \cdot \text{opt}$).
+- **Hybrid A\***: Searches $(x, y, \theta)$ grid cells using continuous kinematically feasible motion primitives $s' = F(s, u)$.
 
-::: {#def-ai-1-2 name="Consistent Heuristic"}
+![Grid-based cell decomposition discretizing continuous free space around a polygonal obstacle.](images/search-cell-decomp.png){.notes-slide-fig width="74%" fig-align="center"}
 
-A heuristic is consistent if for every node $n$ and its successor $n'$:
+## Adversarial Search and Game Theory
 
-$$
-h(n) \le \operatorname{cost}(n \text{ to } n') + h(n')
-$$
+### Minimax and Alpha-Beta Pruning
 
-:::
+- Turn-based game: States $S$, players $P$, actions $A$, transition $S \times A \to S$, terminal test, and utilities (zero-sum: $u_2 = -u_1$; general-sum: independent payoffs). Solution is a policy $\pi: S \to A$.
+- Minimax (2-player zero-sum): MAX maximizes $\max_{s'} V(s')$, MIN minimizes $\min_{s'} V(s')$; takes $O(b^m)$ time and $O(bm)$ space.
 
-A\* graph search is optimal.
+![Minimax game tree for Tic-Tac-Toe alternating MAX (X) and MIN (O) layers down to terminal utilities.](images/search-minimax-tree.png){.notes-slide-fig width="78%" fig-align="center"}
 
-Consistency implies admissibility.
+- Alpha-Beta pruning: Track $\alpha$ (best value MAX can guarantee on path) and $\beta$ (best value MIN can guarantee); prune remaining children whenever $v \ge \beta$ at MAX or $v \le \alpha$ at MIN, preserving exact root value:
 
-UCS (Uniform Cost Search) is a special case ($h = 0$).
-
-#### Create Heuristics
-
-Often, heuristics are solutions to relaxed problems, where new actions are available.
-
-### General Framework of Relaxed Problems
-
-A **relaxation** $P^j$ of a search problem $P$ has costs that satisfy:
-
-$$
-\operatorname{Cost}^j(s,a) \le \operatorname{Cost}(s,a).
-$$
-
-Given a relaxed search problem $P^j$, define the **relaxed heuristic**
-
-$$
-h(s) = \operatorname{FutureCost}^j(s),
-$$
-
-the minimum cost from $s$ to an end state using $\operatorname{Cost}^j(s,a)$.
-
-- Suppose $h(s) = \operatorname{FutureCost}^j(s)$ for some relaxed problem $P^j$. Then $h(s)$ is a consistent heuristic.
-
-- Suppose $h_1(s)$ and $h_2(s)$ are consistent.
-  Then $h(s) = \max\{h_1(s), h_2(s)\}$ is consistent.
-
-### Application in Robotics: Motion Planning
-
-#### Cell Decomposition
-
-Distinguish between Cells that are contained in obstacles and Cells that intersect obstacles.
-If no path found, subdivide the mixed cells.
-
-#### The Optimal Path
-
-Assuming (closed) polygonal obstacles, shortest path is a polygonal path whose inner vertices are vertices of obstacles.
-
-#### Visibility Graph
-
-Connect mutually visible obstacle vertices and the start and goal positions.
-
-#### Weighted A\*
-
-expands states in the order of $f = g + \varepsilon h$ values, $\varepsilon > 1$ = bias towards states that are closer to goal.
-
-#### Weighted A\* Search
-
-- Trades off optimality for speed.
-- $\varepsilon$-suboptimal:
-
-  $$
-  \operatorname{cost}(\text{solution})
-  \le \varepsilon \cdot \operatorname{cost}(\text{optimal solution})
-  $$
-
-- In many domains, it has been shown to be orders of magnitude faster than A\*.
-- Research focuses on developing a heuristic function that has shallow local minima.
-
-## Adversarial Problems
-
-### Deterministic Games
-
-Many possible formalizations, one is:
-
-- States: $S$ (start at $s_0$)
-- Players: $P = \{1, \ldots, N\}$ (usually take turns)
-- Actions: $A$ (may depend on player / state)
-- Transition Function: $S \times A \to S$
-- Terminal Test: $S \to \{t, f\}$
-- Terminal Utilities: $S \times P \to \mathbb{R}$
-
-A solution for a player is a **policy**: $S \to A$
-
-Zero-Sum Games vs. General-Sum Games
-
-### Minimax Search
-
-#### Deterministic, Zero-Sum Games
-
-e.g., Tic-tac-toe, chess, checkers. One player maximizes result, the other minimizes it.
-
-#### Complexity
-
-Time: $O(b^m)$, Space: $O(b^m)$, is completely infeasible.
-
-### Alpha-Beta Search
-
-```cpp
-#include <algorithm>
-#include <limits>
-
-constexpr double INF = std::numeric_limits<double>::infinity();
-
-double min_value(const State& state, double alpha, double beta);
-
-double max_value(const State& state, double alpha, double beta) {
-    if (is_terminal(state)) return utility(state);
-
-    double v = -INF;
-    for (const auto& successor : successors(state)) {
-        v = std::max(v, min_value(successor, alpha, beta));
-        if (v >= beta) return v;
-        alpha = std::max(alpha, v);
-    }
-    return v;
-}
-
-double min_value(const State& state, double alpha, double beta) {
-    if (is_terminal(state)) return utility(state);
-
-    double v = INF;
-    for (const auto& successor : successors(state)) {
-        v = std::min(v, max_value(successor, alpha, beta));
-        if (v <= alpha) return v;
-        beta = std::min(beta, v);
-    }
-    return v;
-}
+```python
+def max_value(s, alpha, beta):
+    if is_terminal(s): return utility(s)
+    v = -inf
+    for s_next in successors(s):
+        v = max(v, min_value(s_next, alpha, beta))
+        if v >= beta: return v
+        alpha = max(alpha, v)
+    return v
 ```
 
-#### With Perfect Ordering
+- Move ordering & cutoffs:
+  - Perfect move ordering cuts time from $O(b^m)$ to $O(b^{m/2})$ (doubles solvable depth).
+  - Depth-limited minimax: Combine iterative deepening with a linear feature evaluation $\operatorname{Eval}(s) = \sum_i w_i f_i(s)$ at cutoff leaves.
 
-- Time complexity drops to $O(b^{m/2})$.
-- Doubles solvable depth!
+![Alternating MAX and MIN game tree structure traversed by Alpha-Beta pruning.](images/search-alphabeta-tree.png){.notes-slide-fig width="48%" fig-align="center"}
 
-### Heuristic Minimax
+### Normal-Form Games and Nash Equilibrium
 
-#### Depth-Limited Search
+- Strategies: Pure strategy picks one action deterministically; mixed strategy randomizes over actions. Player $i$'s best response is $\operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})$.
 
-Replace terminal utilities with an evaluation function for non-terminal positions. More plies makes a BIG difference. Use iterative deepening for an anytime algorithm.
+::: {#def-ai-1-2 name="Nash Equilibrium"}
 
-In practice: typically weighted linear sum of features:
-
-$$
-\operatorname{Eval}(s) = w_1 f_1(s) + w_2 f_2(s) + \cdots + w_n f_n(s)
-$$
-
-e.g.
+Profile $s^* = (s_1^*, \dots, s_N^*)$ is a Nash equilibrium if $s_i^* \in \operatorname{BR}_i(s_{-i}^*)$ for all $i$ (no profitable unilateral deviation):
 
 $$
-f_1(s) = (\text{num white queens} - \text{num black queens}),
-$$
-
-etc.
-
-### Game Theory
-
-#### Normal Form Game
-
-Approximate games as single shot,
-Represent only actions and utilities.
-
-#### Pure vs Mixed Strategies
-
-deterministic ($p = 1$) selection of actions vs. randomization over actions.
-
-$$
-u(\text{action}) = \sum_{\text{world}} p(\text{world}) \cdot u(\text{action}, \text{world})
-$$
-
-$$
-u(s) = \sum_{a \in s} p(a) \cdot \sum_{\text{world}} p(\text{world}) \cdot u(a, \text{world})
-$$
-
-#### Best Response
-
-Given the strategies of all other players $s_{-i}$, a best response for player $i$ is:
-
-$$
-\operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})
-$$
-
-::: {#def-ai-1-3 name="Nash Equilibrium"}
-
-Nash Equilibria are strategy profiles $\vec{s}$ where none of the participants benefit from unilaterally changing their decision.
-
-$$
-\forall i \quad u_i(\vec{s}) \geq u_i(\operatorname{neighbor}(\vec{s}))
+\forall\,i,\, s_i: \quad u_i(s_i^*, s_{-i}^*) \ge u_i(s_i, s_{-i}^*).
 $$
 
 :::
 
-::: {#thm-ai-1-1 name="Existence of Nash Equilibria"}
+- Computing NE: Find mutual best-response cells, eliminate strictly dominated strategies, or use the **indifference principle**—every pure action in the support of a mixed NE yields equal expected payoff (e.g., $(\frac13,\frac13,\frac13)$ in Rock–Paper–Scissors).
 
-If there are a finite number of players and each player has a finite number of actions, there always exists a Nash Equilibrium. The NE may be pure or it may be a mixed strategy.
+::: {#thm-ai-1-1 name="Nash Existence & von Neumann Minimax"}
 
-:::
-
-#### Indifference Principle
-
-In a mixed-strategy Nash equilibrium, every pure strategy played with positive probability must give the same expected payoff.
-
-::: {#thm-ai-1-2 name="von Neumann Minimax Theorem"}
-
-For every finite two-player zero-sum game:
-
-$$
-\max_{\sigma_1}\min_{\sigma_2} u(\sigma_1,\sigma_2)
-=
-\min_{\sigma_2}\max_{\sigma_1} u(\sigma_1,\sigma_2)
-$$
-
-There exists a value $v$ such that:
-
-$$
-v = \max_{\sigma_1}\min_{\sigma_2} u
-= \min_{\sigma_2}\max_{\sigma_1} u
-$$
-
-The equilibrium strategies guarantee this value.
-
-$$
-u(\sigma_1,\sigma_2^*) \le v \le u(\sigma_1^*,\sigma_2)
-$$
+1. Nash (1950): Every finite game (finitely many players and actions) has at least one pure or mixed Nash equilibrium.
+2. von Neumann: In any finite two-player zero-sum game, $\max_{\sigma_1}\min_{\sigma_2} u(\sigma_1,\sigma_2) = \min_{\sigma_2}\max_{\sigma_1} u(\sigma_1,\sigma_2) = v$ (NE coincides with Minimax).
 
 :::
 
-Two-player zero-sum Nash equilibrium = Minimax solution
+### Monte Carlo Tree Search (MCTS)
 
-#### Game Types
+For high-branching games ($b \approx 361$ in Go), MCTS grows an asymmetric tree online via four steps per iteration:
 
-- Perfect-information, zero-sum: Minimax or Alpha–Beta
+1. Selection: Traverse from root via tree policy (**UCT**) to an expandable node:
 
-- General-sum games: Nash Equilibrium
+   $$
+   \operatorname{UCT}_j = \overline{X}_j + 2 C_p \sqrt{\frac{2\ln n}{n_j}} \qquad (n_j = 0 \implies \infty).
+   $$
 
-- Large game trees: Heuristic Search or Monte Carlo Tree Search
+2. Expansion: Add unvisited child node(s).
+3. Simulation: Roll out from the new node to termination using a fast default policy.
+4. Backpropagation: Update visit counts $n_j$ and win rates $\overline{X}_j$ along the visited path.
 
-### Monte Carlo Tree Search
+- Decision & AlphaGo: Final root move uses Max (highest $\overline{X}_j$), Robust (highest $n_j$), or Max-Robust child. Vanilla MCTS is anytime and domain-agnostic but can miss narrow traps; AlphaGo guides expansion and evaluation with policy nets ($p_\sigma, p_\pi, p_\rho$) and a value net $v_\theta$.
 
-Combination of Simulation and Bandit-Based Method
+![Four phases of Monte Carlo Tree Search (Selection, Expansion, Evaluation, and Backup) illustrated on Go.](images/search-mcts.png){.notes-slide-fig width="92%" fig-align="center"}
 
-#### Two Fundamental Concepts
+### Expected Utility and Rationality
 
-1. The true value of any action can be approximated by running several random simulations.
-2. These values can be efficiently used to adjust the policy (strategy) towards a best-first strategy.
+- Cardinal vs. ordinal utility: Minimax is invariant to any monotonic transform of utilities; stochastic expectation requires cardinal utilities (invariant only up to positive affine transforms).
+- Rationality axioms on lotteries $L = [p, A;\, 1-p, B]$: Orderability, Transitivity (violating it creates a "money pump"), Continuity, Substitutability, and Monotonicity.
 
-#### MCTS Algorithm
+::: {.callout-note title="vNM Utility Theorem & Human Risk Behavior" collapse="true"}
 
-1. Selection: Start at the root node and select children using the tree policy. Stop when an expandable node is reached.
-2. Expansion: Add one or more child nodes to the tree.
-3. Simulation: Run a simulation from the newly added node. The default policy (or rollout policy) determines how the simulation is run.
-4. Backpropagation: Update values based on the outcome.
+- Ramsey / vNM Theorem: Preferences obeying the five axioms admit a utility $U$ with $A \succeq B \iff U(A) \ge U(B)$ and $U([p_1, S_1; \dots; p_n, S_n]) = \sum_i p_i U(S_i)$ (**Maximum Expected Utility**).
+- Risk preferences: Concave $U(\text{money})$ implies risk aversion ($U(L) < U(\operatorname{EMV}(L))$, motivating insurance premiums); human choices systematically violate vNM independence under certainty effects (*Allais paradox*).
 
-#### Policies
-
-Tree policy, Default policy, Decision policy (selecting the best child).
-
-#### Upper Confidence Bound on Trees (UCT)
-
-Formulated node selection as Multi-Arm Bandit problem.
-
-#### UCT Node Selection (UCB1)
-
-UCB1 applied for each child selection.
-
-$$
-UCT = \overline{X}_j + 2C_p \sqrt{\frac{2\ln n}{n_j}}
-$$
-
-- $\overline{X}_j$: mean reward of selecting this position
-- $n$: number of times current(parent) node has been visited
-- $n_j$: number of times child $j$ has been visited
-- $C_p$: some constant $> 0$
-
-#### Advantages and Disadvantages of MCTS
-
-- Advantages:
-  - Proved MCTS converges to minimax solution
-  - Domain-independent
-  - Anytime algorithm
-  - Achieving better with a large branch factor
-
-- Disadvantages:
-  - Basic version converges very slowly
-  - Leading to small-probability failures
-
-### Principle of Maximum Expected Utility
-
-A rational agent should choose the action that maximizes its expected utility, given its knowledge.
-
-#### Utilities
-
-Utilities are functions from outcomes (states of the world) to real numbers that describe an agent's preferences. We hard-wire utilities and let behaviors emerge.
-
-#### The Axioms of Rationality
-
-- Orderability
-
-  $$
-  (A \succ B) \lor (B \succ A) \lor (A \sim B)
-  $$
-
-- Transitivity
-
-  $$
-  (A \succ B) \land (B \succ C) \Rightarrow (A \succ C)
-  $$
-
-- Continuity
-
-  $$
-  A \succ B \succ C
-  \Rightarrow
-  \exists p \; [p, A;\ 1-p, C] \sim B
-  $$
-
-- Substitutability
-
-  $$
-  A \sim B
-  \Rightarrow
-  [p, A;\ 1-p, C] \sim [p, B;\ 1-p, C]
-  $$
-
-- Monotonicity
-
-  $$
-  A \succ B
-  \Rightarrow
-  \left(
-  p \ge q
-  \iff
-  [p, A;\ 1-p, B] \succeq [q, A;\ 1-q, B]
-  \right)
-  $$
-
-Rational preferences imply behavior describable as maximization of expected utility.
-
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results
-
-- @def-ai-1-2: A\* graph search with a consistent heuristic is optimal, and consistency implies admissibility.
-- [Alpha-Beta Search](#alpha-beta-search): With perfect ordering, time drops to $O(b^{m/2})$.
-- @thm-ai-1-1: A game with finitely many players and actions always has a Nash equilibrium.
-- @thm-ai-1-2: In a finite two-player zero-sum game, the max-min and min-max values agree.
-- [Principle of Maximum Expected Utility](#principle-of-maximum-expected-utility): Rational preferences imply behavior describable as maximizing expected utility. -->
+:::

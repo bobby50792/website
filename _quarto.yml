@@ -223,10 +223,14 @@ website:
                   href: content/notes/advanced-computer-graphics/4.qmd
                 - text: "Shading"
                   href: content/notes/advanced-computer-graphics/5.qmd
-                - text: "Ray Tracing"
+                - text: "Ray Tracing I"
                   href: content/notes/advanced-computer-graphics/6.qmd
-                - text: "Advanced Rendering"
+                - text: "Ray Tracing II"
                   href: content/notes/advanced-computer-graphics/7.qmd
+                - text: "Advanced Rendering"
+                  href: content/notes/advanced-computer-graphics/8.qmd
+                - text: "Simulation I"
+                  href: content/notes/advanced-computer-graphics/9.qmd
             - section: "Artificial Intelligence"
               href: content/notes/artificial-intelligence/0.qmd
               contents:

@@ -1,335 +1,100 @@
 ---
 title: "Logic"
-description: "Logical representation, inference, and semantics."
+description: "Propositional and first-order logic, SAT, Modus Ponens, unification, resolution, soundness, completeness, and formal verification."
 page-layout: article
 search: true
+toc-depth: 3
 number-offset: [2]
 
 crossref:
   chapters: true
 ---
 
-- Representation (Syntax): defines a set of valid formulas.
-- Semantics: for each formula, specify a set of models (assignments / configurations of the world).
-- Inference rule: a rule that allows us to derive new formulas from existing ones.
+A logical language balances expressivity and computational efficiency via three parts: syntax (well-formed formulas), semantics (satisfying models $\mathcal{M}(f)$), and inference rules (syntactic derivations $\mathrm{KB} \vdash f$).
 
 ## Representation
 
-Formal languages: syntax and model
-
 ### Propositional Logic
 
-#### Syntax
+- Syntax: Atomic symbols $A, B, C, \dots$ combined via $\neg f$, $f \land g$, $f \lor g$, $f \to g$, and $f \leftrightarrow g$.
+- Semantics: A **model** $w \in \{0,1\}^n$ assigns truth values to all $n$ symbols ($2^n$ models); $\mathcal{I}(f, w) \in \{0,1\}$ evaluates truth recursively ($\mathcal{I}(f \to g, w) = 1 \iff \mathcal{I}(f,w) \le \mathcal{I}(g,w)$).
+- Knowledge base: Set of formulas $\mathrm{KB}$ with model set $\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f)$.
 
-- Propositional symbols (atomic formulas): $A, B, C$
-- Logical connectives: $\neg, \land, \lor, \to, \leftrightarrow$
-- Build up formulas recursively—if $f$ and $g$ are formulas, so are the following:
-  - Negation: $\neg f$
-  - Conjunction: $f \land g$
-  - Disjunction: $f \lor g$
-  - Implication: $f \to g$
-  - Biconditional: $f \leftrightarrow g$
+### First-Order Logic (FOL)
 
-#### Model
-
-A model $w$ in propositional logic is an assignment of truth values to propositional symbols.
-
-#### Interpretation Function
-
-Let $f$ be a formula and $w$ be a model. An interpretation function $\mathcal{I}(f,w)$ returns:
-
-- true (1) (say that $w$ satisfies $f$)
-- false (0) (say that $w$ does not satisfy $f$)
-
-#### Base Case
-
-For a propositional symbol $p$ (e.g., $A, B, C$):
-
-$$
-\mathcal{I}(p,w) = w(p)
-$$
-
-#### Recursive Case
-
-Let $\mathcal{M}(f)$ be the set of **models** $w$ for which $\mathcal{I}(f,w) = 1$.
-
-#### Knowledge Base
-
-A knowledge base $\mathrm{KB}$ is a set of formulas representing their conjunction / intersection:
-
-$$
-\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f).
-$$
-
-### First-Order Logic
-
-#### Syntax
-
-- Terms denote objects: constant symbols $c$, variables $x$, and function applications $f(t_1,\ldots,t_n)$, where each $t_i$ is a term.
-- Formulas are built from:
-  - Atomic formulas: $P(t_1,\ldots,t_n)$; also $t_1=t_2$ in logic with equality.
-  - Connectives applied to formulas: $\neg,\land,\lor,\to,\leftrightarrow$.
-  - Quantifiers applied to formulas: $\forall x\,\varphi$, $\exists x\,\varphi$.
-
-#### Models
-
-- A model $w$ specifies a nonempty domain $D$ and interprets:
-  - Constant symbols as objects: $w(c)\in D$.
-  - Function symbols as functions: $w(f):D^n\to D$.
-  - Predicate symbols as sets of tuples: $w(P)\subseteq D^n$, equivalently functions $D^n\to\{0,1\}$.
-- A separate variable assignment $s:\mathrm{Var}\to D$ gives variables their values: $s(x)\in D$.
-
-For example, if $w(\mathrm{alice})=o_1$, $w(\mathrm{arithmetic})=o_3$, and $(o_1,o_3)\in w(\mathrm{Knows})$, then $\mathrm{Knows}(\mathrm{alice},\mathrm{arithmetic})$ is true.
+- Syntax:
+  - Terms (objects): constants $c$, variables $x$, and functions $f(t_1, \dots, t_n)$.
+  - Formulas (truth values): predicates $P(t_1, \dots, t_n)$, equality $=$, connectives, and quantifiers $\forall x$, $\exists x$.
+- Quantifier rules:
+  - Idioms: $\forall x\,(P(x) \to Q(x))$ vs. $\exists x\,(P(x) \land Q(x))$.
+  - Duality & order: $\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)$; $\forall x\,\exists y \not\equiv \exists y\,\forall x$.
+- Semantics & **propositionalization**: A model maps constants/functions/predicates over an object domain $D$. FOL reduces to propositional logic iff *unique names* (at most one constant per object) and *domain closure* (at least one constant per object, finite $D$) hold.
 
 ## Inference
 
-### Entailment and Satisfiability
+### Entailment and SAT
 
-#### Entailment
+- Semantic relations between $\mathrm{KB}$ and query $f$:
+  - Entailment ($\mathrm{KB} \models f$): $\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)$ (`Ask[f]` = Yes).
+  - Contradiction ($\mathrm{KB} \models \neg f$): $\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset$ (`Ask[f]` = No).
+  - Contingency: Nonempty proper overlap (`Ask[f]` = Don't know).
+- Reduction to SAT ($\mathcal{M}(\mathrm{KB}) \ne \emptyset$): $\mathrm{KB} \models f \iff \mathrm{KB} \cup \{\neg f\}$ is unsatisfiable.
+- SAT solvers (viewing SAT as a CSP): DPLL (backtracking + unit propagation + pruning) and WalkSAT (randomized local variable flips).
 
-$\mathrm{KB}$ entails $f$ (written $\mathrm{KB} \models f$) iff $\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)$.
+### Horn Clauses, Modus Ponens, and Unification
 
-#### Contradiction
+- **Horn clause**: Clause with *at most one* positive literal—either a definite clause $(p_1 \land \dots \land p_k) \to q$ or goal clause $(p_1 \land \dots \land p_k) \to \mathrm{false}$.
+- Propositional Modus Ponens: Derives $q$ from $p_1, \dots, p_k$ and $(p_1 \land \dots \land p_k) \to q$ in linear time.
+- First-order Modus Ponens: Given substitution $\theta = \operatorname{Unify}\bigl((a_1',\dots,a_k'),\,(a_1,\dots,a_k)\bigr)$ (**most general unifier**, MGU):
 
-$\mathrm{KB}$ contradicts $f$ iff $\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset$.
+  $$
+  \frac{a_1', \dots, a_k', \qquad \forall x_1 \cdots \forall x_n \bigl((a_1 \land \dots \land a_k) \to b\bigr)}{\operatorname{Subst}[\theta, b]}.
+  $$
 
-#### Contingency
+::: {#thm-ai-2-1 name="Completeness & Semi-Decidability on Horn Clauses"}
 
-$$
-\emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})
-$$
-
-#### Satisfiability
-
-A knowledge base $\mathrm{KB}$ is satisfiable if $\mathcal{M}(\mathrm{KB}) \neq \emptyset$.
-
-### SAT and Model-Checking
-
-#### Model Checking
-
-- Input: knowledge base $\mathrm{KB}$
-- Output: exists satisfying model ($\mathcal{M}(\mathrm{KB}) \neq \emptyset$)?
-
-#### Popular Algorithms
-
-- DPLL (backtracking + propagation + pruning)
-- WalkSat (randomized local search over complete assignments)
-
-### Inference Rules
-
-#### Modus Ponens Inference Rule
-
-For any propositional symbols $p$ and $q$:
-
-$$
-\frac{p,\quad p \to q}{q}
-$$
-
-#### General Inference Rule
-
-If $f_1, \ldots, f_k, g$ are formulas, then the following is an inference rule:
-
-$$
-\frac{f_1,\quad \ldots,\quad f_k}{g}
-$$
-
-#### Algorithm: Forward Inference
-
-Input: set of inference rules $\mathrm{Rules}$.
-
-Repeat until no changes to $\mathrm{KB}$:
-
-1. Choose set of formulas $f_1, \ldots, f_k \in \mathrm{KB}$.
-2. If matching rule $\frac{f_1,\quad \cdots,\quad f_k}{g}$ exists, add $g$ to $\mathrm{KB}$.
-
-#### Derivation
-
-$\mathrm{KB}$ derives/proves $f$ ($\mathrm{KB} \vdash f$) iff $f$ eventually gets added to $\mathrm{KB}$.
-
-### Horn Clauses and Modus Ponens
-
-#### Propositional Logic
-
-##### Definite Clause
-
-A definite clause has the following form:
-
-$$
-(p_1 \land \cdots \land p_k) \to q
-$$
-
-where $p_1, \ldots, p_k, q$ are propositional symbols.
-
-##### Horn Clause
-
-A Horn clause is either:
-
-- a definite clause $(p_1 \land \cdots \land p_k \to q)$
-- a goal clause $(p_1 \land \cdots \land p_k \to \mathrm{false})$
-
-##### Modus Ponens
-
-$$
-\frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
-$$
-
-#### First-Order Logic
-
-##### Definite Clause
-
-A definite clause has the following form:
-
-$$
-\forall x_1 \cdots \forall x_n \bigl((a_1 \land \cdots \land a_k) \to b\bigr)
-$$
-
-for variables $x_1, \ldots, x_n$ and atomic formulas $a_1, \ldots, a_k, b$ (which contain those variables).
-
-##### Modus Ponens
-
-$$
-\frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
-$$
-
-##### Substitution
-
-A substitution $\theta$ is a mapping from variables to terms.
-
-$\operatorname{Subst}[\theta, f]$ returns the result of performing substitution $\theta$ on $f$.
-
-##### Unification
-
-Unification takes two formulas $f$ and $g$ and returns a substitution $\theta$ which is the most general unifier:
-
-$$
-\operatorname{Unify}[f,g] = \theta
-\quad \text{such that} \quad
-\operatorname{Subst}[\theta,f] = \operatorname{Subst}[\theta,g]
-$$
-
-or "fail" if no such $\theta$ exists.
-
-### Complexity
-
-::: {#thm-ai-2-1 name="Completeness of Modus Ponens"}
-
-Modus ponens is complete for first-order logic with only Horn clauses.
+- Modus Ponens (with unification) is complete for propositional and FOL Horn clauses.
+- Function symbols generate infinitely many ground terms ($a, F(a), F(F(a)), \dots$), making FOL **semi-decidable** (halts if $\mathrm{KB} \models f$, may loop forever if $\mathrm{KB} \not\models f$).
 
 :::
 
-::: {#thm-ai-2-2 name="Semi-Decidability"}
+### Resolution and CNF
 
-First-order logic (even restricted to only Horn clauses) is **semi-decidable**.
+Modus Ponens cannot cancel general disjunctions; first-order resolution resolves complementary literals with $\theta = \operatorname{Unify}[p, q]$:
 
-- If $\mathrm{KB} \models f$, forward inference on complete inference rules will prove $f$ in finite time.
-- If $\mathrm{KB} \not\models f$, no algorithm can show this in finite time.
+$$
+\frac{f_1 \lor \cdots \lor f_n \lor p, \qquad \neg q \lor g_1 \lor \cdots \lor g_m}{\operatorname{Subst}[\theta,\, f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]}.
+$$
+
+::: {#prp-ai-2-1 name="CNF Conversion Steps"}
+
+1. Eliminate $\leftrightarrow$ and $\to$ ($f \to g \leadsto \neg f \lor g$).
+2. Push $\neg$ inward (De Morgan + quantifier duality) and drop $\neg\neg$.
+3. *(FOL)* Standardize variables apart, **Skolemize** $\exists$ into fresh constants / Skolem functions of enclosing $\forall$-variables ($\forall x\,\exists y \leadsto Y(x)$), and drop $\forall$.
+4. Distribute $\lor$ over $\land$.
 
 :::
 
-### Resolution
+- **Resolution refutation**: Convert $\mathrm{KB} \cup \{\neg f\}$ to CNF and resolve until deriving the empty clause ($\mathrm{false}$); sound and complete, exponential worst-case time.
 
-#### Propositional Resolution Rule
+## Soundness, Completeness, and Verification
 
-$$
-\frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
-{f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
-$$
+::: {#def-ai-2-1 name="Soundness and Completeness"}
 
-#### Conjunctive Normal Form (CNF)
-
-A CNF formula is a conjunction of clauses.
-
-::: {#prp-ai-2-1 name="Conversion to CNF"}
-
-Every formula $f$ in propositional logic can be converted into an equivalent CNF formula $f'$:
-
-$$
-\mathcal{M}(f) = \mathcal{M}(f')
-$$
+- Soundness ("nothing but the truth"): $\{f : \mathrm{KB} \vdash f\} \subseteq \{f : \mathrm{KB} \models f\}$.
+- Completeness ("the whole truth"): $\{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}$.
 
 :::
 
-#### First-Order Conversion to CNF
+| Language | Horn Clauses (Fast / Linear) | General CNF (Expressive / Exponential) |
+| :--- | :--- | :--- |
+| Propositional Logic | Modus Ponens | SAT (DPLL / WalkSAT) or Resolution |
+| First-Order Logic | Modus Ponens + Unification | Propositionalization or Resolution + Unification |
 
-- All variable have universal quantifiers by default
-- Introduce Skolem functions (e.g., $Y(x)$) to represent existentially quantified variables.
+### Formal Verification and AlphaProof
 
-#### First-Order Resolution Rule
+- Proof search vs. proof checking: Finding a tactic proof faces huge branching factors (timeout $\ne$ disproof), whereas checking a completed proof term in a kernel (**Lean**) is deterministic and fast.
+- Trust boundary: Lean guarantees the proof validly proves the *formalized statement*, even from an untrusted LLM, but cannot verify that the formalization matches human intent.
+- AlphaProof: Pairs Lean's tactic kernel (exact RL verification signal) with a policy/value network and tree search over proof states.
 
-$$
-\frac{
-f_1 \lor \cdots \lor f_n \lor p,\qquad
-\neg q \lor g_1 \lor \cdots \lor g_m
-}{
-\operatorname{Subst}[\theta,\,
-f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
-}
-$$
-
-where $\theta = \operatorname{Unify}[p,q]$.
-
-## Semantics
-
-### Desiderata for Inference Rules
-
-#### Semantics
-
-Interpretation defines **entailed/true** formulas: $\mathrm{KB} \models f$.
-
-$$
-\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)
-$$
-
-#### Syntax
-
-Inference rules **derive** formulas: $\mathrm{KB} \vdash f$
-
-::: {#def-ai-2-1 name="Soundness"}
-
-A set of inference rules $\mathrm{Rules}$ is **sound** if:
-
-$$
-\{f : \mathrm{KB} \vdash f\}
-\subseteq
-\{f : \mathrm{KB} \models f\}.
-$$
-
-:::
-
-::: {#def-ai-2-2 name="Completeness"}
-
-A set of inference rules $\mathrm{Rules}$ is **complete** if:
-
-$$
-\{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}
-$$
-
-:::
-
-### Fixing Completeness
-
-1. Option 1: Restrict the allowed set of formulas
-
-   propositional logic $\to$ propositional logic with only Horn clauses
-
-2. Option 2: Use more powerful inference rules
-
-   Modus ponens $\to$ resolution
-
-::: {#thm-ai-2-3 name="Modus Ponens on Horn Clauses"}
-
-Modus ponens is **complete** with respect to Horn clauses:
-
-- Suppose $\mathrm{KB}$ contains only Horn clauses and $p$ is an entailed propositional symbol.
-- Then applying modus ponens will derive $p$.
-
-:::
-
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results
-
-- @def-ai-2-1 and @def-ai-2-2: Soundness means everything derived is entailed; completeness means everything entailed is derived.
-- @thm-ai-2-1: Modus ponens is complete for first-order logic with only Horn clauses.
-- @thm-ai-2-2: First-order logic is semi-decidable, even when restricted to Horn clauses.
-- @prp-ai-2-1: Every propositional formula can be converted into an equivalent CNF formula. -->
+![AlphaProof architecture: Lean formal tactic environment, neural proof network (tactic sampling + value head), and tree search over proof states.](images/logic-alphaproof.png){.notes-slide-fig width="92%" fig-align="center"}

@@ -1,0 +1,244 @@
+---
+title: "Advanced Rendering Topics"
+description: "Materials and appearance modeling, neural radiance fields with volume rendering, and NeRF extensions."
+page-layout: article
+search: true
+number-offset: [8]
+
+crossref:
+  chapters: true
+---
+
+## Materials and Appearances
+
+In computer graphics, **Material = BRDF** (or BSDF when transmission is included).
+
+#### Diffuse / Lambertian Material
+
+Light is scattered uniformly in all directions across the hemisphere (uniform colored or textured diffuse BRDF).
+
+::: {#def-acg-8-1 name="Lambertian BRDF"}
+
+For reflectance (albedo) $\rho \in [0, 1]$ under uniform incoming radiance, energy conservation gives
+
+$$
+f_r(\omega_i \to \omega_o) = \frac{\rho}{\pi}.
+$$
+
+:::
+
+#### Glossy Material
+
+Reflects light preferentially in a lobe around the mirror reflection direction (e.g., copper, aluminum).
+
+#### Ideal Reflective / Refractive Material (BSDF)
+
+- **Perfect specular reflection**: $\omega_r = -\omega_i + 2(\omega_i \cdot \mathbf{n})\mathbf{n}$.
+- **Specular refraction (Snell's Law)**:
+
+$$
+\eta_i \sin\theta_i = \eta_t \sin\theta_t,
+$$
+
+where $\eta_i, \eta_t$ are the indices of refraction (IOR) of the incident and exiting media (wavelength-dependent; typical averages: vacuum $1.0$, air $1.00029$, water $1.333$, glass $1.5\text{–}1.6$, diamond $2.42$).
+- **Total internal reflection (Snell's window)**: Occurs when light travels from a denser to a rarer medium ($\eta_i > \eta_t$) beyond the critical angle.
+
+#### Fresnel Reflection / Term
+
+Reflectance depends on the incident angle (and polarization of light), increasing sharply at grazing angles.
+
+- **Dielectrics** (e.g., glass, $\eta = 1.5$): Low reflectance at normal incidence, rising to $1$ at grazing angles.
+- **Conductors** (metals): High reflectance across angles, often colored due to wavelength dependence.
+
+::: {#def-acg-8-2 name="Schlick's Approximation"}
+
+A fast approximation to the exact (polarization-dependent) Fresnel term:
+
+$$
+R(\theta) = R_0 + (1 - R_0)(1 - \cos\theta)^5,
+\qquad
+R_0 = \left(\frac{\eta_1 - \eta_2}{\eta_1 + \eta_2}\right)^2.
+$$
+
+:::
+
+#### Microfacet Material
+
+Rough surfaces look flat and rough at the **macroscale**, but bumpy and specular at the **microscale**—composed of tiny mirror-like **microfacets**, each with its own normal.
+
+- Concentrated normal distribution $\iff$ glossy; spread-out normal distribution $\iff$ diffuse.
+
+::: {#def-acg-8-3 name="Microfacet BRDF"}
+
+$$
+f(\mathbf{i}, \mathbf{o})
+= \frac{F(\mathbf{i}, \mathbf{h})\,G(\mathbf{i}, \mathbf{o}, \mathbf{h})\,D(\mathbf{h})}
+       {4(\mathbf{n}\cdot\mathbf{i})(\mathbf{n}\cdot\mathbf{o})}.
+$$
+
+- $\mathbf{h} = \operatorname{normalize}(\mathbf{i} + \mathbf{o})$: Half vector (only microfacets with normal $\mathbf{h}$ reflect $\mathbf{i}$ to $\mathbf{o}$).
+- $F(\mathbf{i}, \mathbf{h})$: Fresnel term.
+- $G(\mathbf{i}, \mathbf{o}, \mathbf{h})$: Shadowing–masking term (accounts for microfacets occluding each other at grazing angles).
+- $D(\mathbf{h})$: Distribution of microfacet normals.
+
+:::
+
+#### Isotropic vs. Anisotropic Materials
+
+- **Isotropic**: Underlying surface has no preferred orientation; $f_r(\theta_i, \phi_i; \theta_r, \phi_r) = f_r(\theta_i, \theta_r, \phi_r - \phi_i)$.
+- **Anisotropic**: Reflection depends on absolute azimuthal angle $\phi$ due to oriented microstructure (e.g., brushed metal, nylon, velvet).
+
+#### Properties of BRDFs
+
+1. **Non-negativity**: $f_r(\omega_i \to \omega_r) \ge 0$.
+2. **Linearity**: Combined BRDFs sum linearly in the reflection equation.
+3. **Reciprocity principle**: $f_r(\omega_r \to \omega_i) = f_r(\omega_i \to \omega_r)$.
+4. **Energy conservation**: $\displaystyle\forall\,\omega_r,\;\int_{H^2} f_r(\omega_i \to \omega_r)\cos\theta_i\,d\omega_i \le 1$.
+5. **Bilateral symmetry** (isotropic): $f_r(\theta_i, \theta_r, \phi_r - \phi_i) = f_r(\theta_i, \theta_r, |\phi_r - \phi_i|)$.
+
+#### Measuring BRDFs
+
+- Avoids deriving analytical models and automatically captures all real-world scattering effects (useful for product design, VFX).
+- Measured using image-based BRDF acquisition (Marschner et al. 1999) or a **gonioreflectometer** (spherical gantry).
+
+## Advanced Appearance Modeling
+
+#### Non-Surface Models
+
+- **Participating media** (clouds, fog, smoke): As light travels through a medium, it can be absorbed and scattered.
+  - A **phase function** describes the angular distribution of scattering at any point $x$.
+  - Rendering: randomly choose a bounce direction, randomly choose a straight-line travel distance, and connect to the light at each shading point.
+- **Hair**:
+  - *Kajiya–Kay model*: Simple diffuse + specular cylinder shading.
+  - *Marschner model* (Marschner et al. 2003): Models hair as a glass-like cylinder (cuticle + absorbing cortex) with three light interactions: $R$ (surface reflection), $TT$ (transmission), and $TRT$ (internal reflection).
+
+#### Surface Models
+
+- **Translucent materials (Subsurface Scattering / BSSRDF)**: Light exits at a different point than it enters (skin, jade, marble), violating a fundamental assumption of the BRDF.
+  - **BSSRDF** $S(x_i, \omega_i, x_o, \omega_o)$ generalizes the BRDF by integrating over both all surface points and all directions:
+
+$$
+L(x_o, \omega_o)
+= \int_A \int_{H^2} S(x_i, \omega_i, x_o, \omega_o)\,L_i(x_i, \omega_i)\cos\theta_i\,d\omega_i\,dA.
+$$
+
+- **Cloth**: A collection of twisted fibers (two levels of twist, woven or knitted), rendered in three ways:
+  1. *As a surface*: Compute overall behavior from the weaving pattern and render with a BRDF.
+  2. *As participating media*: Map individual fiber properties and distribution to volumetric scattering parameters.
+  3. *As actual fibers*: Render every fiber explicitly.
+
+#### Procedural Appearance
+
+Define details without storing textures by evaluating a **3D noise function** on the fly (e.g., thresholding noise into binary reflectance, or Worley noise). Because the noise is defined in 3D, cut or broken objects automatically reveal consistent internal structure.
+
+## Neural Radiance Fields (NeRF)
+
+Traditional rendering maps a 3D scene (geometry, materials, lighting) and camera parameters (6 DoF extrinsics + intrinsics such as focal length and principal point) to an image. **Neural rendering** encodes the entire scene description inside a neural network for **novel view synthesis**.
+
+- Inspired by RGB-Alpha volume rendering (*Neural Volumes*, Lombardi et al. 2019), **NeRF** replaces an explicit voxel volume with a continuous **implicit function** (MLP) that tracks view-dependent light emission:
+
+$$
+F_\Theta : (x, y, z, \theta, \phi) \longmapsto \left(\alpha_i,\;\frac{c_i}{\sigma_i}\right)
+\quad\text{or}\quad
+\left(\sigma_i,\;\frac{c_i}{\sigma_i}\right).
+$$
+
+### Volume Rendering with Ray Marching
+
+Along a camera ray, a volumetric light transport model accounts for **transmission** (attenuation coefficient $\sigma$) and **in-scatter / emission** (emission radiance $c$).
+
+::: {#def-acg-8-4 name="Beer–Lambert Segment Radiance"}
+
+By Beer–Lambert's law, the opacity over a segment $[0, t]$ with constant attenuation $\sigma$ is $\alpha(t) = 1 - \exp(-\sigma t)$. Assuming constant emission $c(t) = c$ over a short segment $[0, \delta]$:
+
+$$
+\int_0^\delta \bigl(1 - \alpha(t)\bigr)\,c(t)\,dt
+\approx c \int_0^\delta \exp(-\sigma t)\,dt
+= \frac{c}{\sigma}\bigl(1 - \exp(-\delta\sigma)\bigr)
+= \alpha(\delta)\left(\frac{c}{\sigma}\right).
+$$
+
+:::
+
+#### Discretized Radiance Integration (Ray Marching)
+
+Accumulating $n$ sample points along a ray (from far point $1$ to near point $n$):
+
+- 1 point: $I_1 = \alpha_1\left(\frac{c_1}{\sigma_1}\right)$.
+- 2 points: $I_2 = \alpha_2\left(\frac{c_2}{\sigma_2}\right) + (1 - \alpha_2)I_1$.
+- General ($n$ points):
+
+$$
+I = \sum_{i=1}^n T_i\,\alpha_i\left(\frac{c_i}{\sigma_i}\right),
+\qquad
+T_i = \prod_{j=i+1}^n (1 - \alpha_j) = \exp\!\left(-\sum_{j=i+1}^n \sigma_j \delta_j\right).
+$$
+
+- Because $\sigma_i$ and $c_i$ are frequently both close to zero, NeRF predicts $c_i / \sigma_i$ (color) directly for numerical stability.
+
+### Learning NeRF
+
+#### Training Pipeline
+
+- Given a collection of calibrated images (known camera poses) of a single scene, shoot camera rays, march along each ray to compute rendered radiance $I$, compare with ground-truth pixel values via a pixel loss ($L_1$ or $L_2$), and optimize the MLP weights by gradient descent.
+- Stores the entire scene compactly in network weights (~$3000\times$ storage gain over voxelized representations).
+
+#### Key Tricks
+
+- **Hierarchical sampling (coarse-to-fine)**: First evaluate a coarse network on stratified samples along the ray to locate occupied regions, then importance-sample finer points concentrated near surfaces.
+- **Depth vs. inverse-depth sampling**: Sample uniformly in depth $d$ for scenes with limited depth variation (e.g., an object), or uniformly in inverse depth $1/d$ for scenes with large depth range.
+- **Positional encoding (Fourier basis features)**: Maps each 5D input coordinate into a higher-dimensional frequency space (Tancik et al. 2020), overcoming the difficulty of MLPs in learning high-frequency detail via frequency disentangling:
+
+$$
+\gamma(p) = \bigl(\sin(2^0\pi p),\,\cos(2^0\pi p),\,\ldots,\,\sin(2^{L-1}\pi p),\,\cos(2^{L-1}\pi p)\bigr).
+$$
+
+::: {.callout-note collapse="true"}
+
+## Remaining Challenges of Vanilla NeRF
+
+- Only applicable to **static (rigid) scenes** with calibrated multi-view images.
+- **One network per scene**—no cross-scene generalization and requires many views.
+- **Low efficiency** in both training and rendering due to dense MLP queries along every ray.
+
+:::
+
+## NeRF Extensions
+
+#### D-NeRF (Dynamic Scenes)
+
+Pumarola et al. 2020. Extends NeRF to a **6D** function (adding time $t$) for rigid and non-rigid scenes using a single view per time instant.
+
+- **Deformation network**: Maps a point at time $t$ to its corresponding location in a **canonical space** ($t = 0$).
+- **Canonical network**: Standard 5D NeRF predicting color and density in canonical space, rendered with the same volume rendering.
+
+#### PixelNeRF (Few-Shot Generalization)
+
+Yu et al. 2020. Trains across multiple scenes to learn a **scene prior**, enabling novel view synthesis from one or a few posed images.
+
+- Operates in the **camera coordinate system** (rather than a canonical world frame) and aggregates image features from a variable number of input views.
+
+#### Plenoxels (Radiance Fields Without Neural Networks)
+
+Yu et al. Replaces the MLP with a **sparse voxel grid** storing density and **Spherical Harmonics (SH)** basis coefficients for view-dependent color, pruning low-density voxels for fast training.
+
+#### Instant-NGP (Hybrid Representation)
+
+Müller et al. Combines a **multiresolution feature hash grid** with a **lightweight MLP**:
+
+1. Hash voxel vertices at multiple resolutions $\to$ 2. Lookup feature vectors $\to$ 3. Linear interpolation $\to$ 4. Concatenate across levels $\to$ 5. Feed features + viewing direction into a tiny MLP for color and density.
+
+#### 3D Gaussian Splatting (3DGS)
+
+Moves beyond dense volumetric fields by representing the scene with explicit **3D Gaussians** (position, 3D covariance, opacity, view-dependent color).
+
+- **Key mathematical property**: Gaussians are closed under affine transforms (e.g., camera-to-world) and integration along an axis, so a projected 3D Gaussian is a **2D Gaussian**.
+- Enables fast **rasterization** instead of slow ray-marching volume rendering.
+
+#### DreamFusion (NeRF in AIGC)
+
+Poole et al. 2022. Performs **text-to-3D generation** by optimizing a NeRF using pretrained 2D diffusion models as a prior.
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

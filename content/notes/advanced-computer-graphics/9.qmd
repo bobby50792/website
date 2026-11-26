@@ -1,0 +1,398 @@
+---
+title: "Simulation I"
+description: "Physical simulation overview, particle systems and collisions, mass-spring systems, and numerical ODE solvers."
+page-layout: article
+search: true
+number-offset: [9]
+
+crossref:
+  chapters: true
+---
+
+## Physical Simulation Overview
+
+**Physical simulation** (physically based animation) generates motion by numerically solving equations of motion—starting from Newton's second law, $\mathbf{F} = m\mathbf{a}$—rather than hand-authoring keyframes. Over a small step $\Delta t$ with constant acceleration,
+
+$$
+\mathbf{x}^{t+\Delta t} = \mathbf{x}^t + \Delta t\,\mathbf{v}^t + \frac{1}{2}(\Delta t)^2 \mathbf{a}^t.
+$$
+
+Simulation produces realistic motion automatically, but is difficult to control artistically.
+
+### Types of Dynamics and Discretizations
+
+Dynamics fall into three categories: point dynamics, rigid bodies, and deformable bodies (cloth, hair, elastic/plastic solids, fluids, and smoke). Spatial discretization depends on the phenomenon:
+
+| Method | Rigid Bodies | Cloth & Hair | Soft Bodies | Fluids |
+| :--- | :--- | :--- | :--- | :--- |
+| Mesh | Contacts, fracture | Cloth, hair | Elastic, plastic | Drops & waves (real-time) |
+| Particle | Fracture (meshless) | — | — | Smoke (real-time), splashes |
+| Grid | — | Contact simplification | — | Smoke, drops & waves, splashes |
+
+In practice, **hybrid methods** combine meshes, particles, and grids, while **coupling** models two-way interaction across domains (e.g., rigid–fluid coupling).
+
+## Particle Systems
+
+A **particle** approximates a body as a point carrying physical attributes (mass $m$, position $\mathbf{x}$, velocity $\mathbf{v}$, force $\mathbf{F}$) and auxiliary attributes (age, color, agent type).
+
+A **particle system** evolves a collection of such particles under external fields and inter-particle forces:
+
+- Spawned by emitters with controlled randomness, typically with finite lifetimes.
+- Often independent of one another, making simulation fast and simple.
+- Decoupled from rendering—can be drawn as points, sprites, fluid surfaces, or agents.
+
+```python
+for each frame in animation:
+    create_new_particles()                 # if needed
+    calculate_forces(particles)
+    update_positions_and_velocities(particles, dt)
+    remove_dead_particles()                # if needed
+    render(particles)
+```
+
+### Forces
+
+Classified by state dependence:
+
+- Constant forces: gravity $\mathbf{f} = m\mathbf{g}$.
+- Time-dependent forces: unsteady wind $\mathbf{f}_{\text{wind}} = \mathbf{f}(\mathbf{x}, t)$.
+- Position-dependent forces: force fields, spatially varying wind.
+- Velocity-dependent forces: drag $\mathbf{f}_{\text{drag}} = -k_{\text{drag}}\mathbf{v}_{\text{rel}}$, friction.
+- Position- and velocity-dependent forces: damped springs $\mathbf{f}_{\text{spring}} = -k\mathbf{x} - k_d\dot{\mathbf{x}}$.
+
+Alternatively, grouped by physical role:
+
+- Attraction and repulsion: gravity, electromagnetism, springs, propulsion.
+- Damping: friction, air drag, viscosity.
+- Collisions: walls, containers, dynamic objects, and character body parts.
+
+### Collision Detection
+
+Testing whether a particle has entered an obstacle reduces to a signed inside–outside test $s$:
+
+- Plane (point $\mathbf{p}$, outward unit normal $\mathbf{n}$): $s = (\mathbf{x} - \mathbf{p}) \cdot \mathbf{n}$; outside if $s > 0$, inside if $s < 0$.
+- Box or convex polyhedron: inside if the particle lies on the interior side of all face planes.
+- Sphere (center $\mathbf{c}$, radius $r$): $s = \|\mathbf{q} - \mathbf{c}\| - r$; outside if $s > 0$, inside if $s < 0$.
+
+### Collision Response and Friction
+
+Collision response returns colliding bodies to a non-colliding state while satisfying four goals:
+
+- Remove interpenetration.
+- Conserve linear and angular momentum.
+- Produce post-impact relative velocities consistent with material properties.
+- Look physically plausible.
+
+::: {#def-acg-9-1 name="1D Impulse-Based Collision Response"}
+
+For two bodies with masses $m_a, m_b$, pre-impact velocities $u_a, u_b$, post-impact velocities $v_a, v_b$, and **coefficient of restitution** $c_R \in [0, 1]$ ($0$ completely inelastic; $1$ completely elastic), restitution and momentum conservation give
+
+$$
+c_R = -\frac{v_b - v_a}{u_b - u_a},
+\qquad
+m_a u_a + m_b u_b = m_a v_a + m_b v_b.
+$$
+
+Solving for the post-impact velocities yields
+
+$$
+\begin{aligned}
+v_a &= \frac{m_a u_a + m_b u_b - m_b c_R (u_a - u_b)}{m_a + m_b}, \\
+v_b &= \frac{m_a u_a + m_b u_b - m_a c_R (u_b - u_a)}{m_a + m_b}.
+\end{aligned}
+$$
+
+Equivalently, body $a$ receives impulse $j = m_a(v_a - u_a)$ and body $b$ receives $-j$.
+
+:::
+
+For an infinitely heavy kinematic obstacle ($m_b \to \infty$):
+
+- Moving obstacle: $v_b = u_b$ and $v_a = u_b - c_R(u_a - u_b)$.
+- Stationary obstacle ($u_b = 0$): $v_a = -c_R u_a$.
+
+#### Point–Plane Collision in 3D
+
+Because surfaces are locally planar, 3D collisions apply the 1D law along the normal $\mathbf{N}$ and leave tangential velocity unchanged (without friction).
+
+1. Confirm the particle is approaching the plane rather than separating: $\mathbf{V} \cdot \mathbf{N} < 0$.
+2. Split velocity into normal and tangential components:
+
+   $$
+   \mathbf{V}_N = (\mathbf{V} \cdot \mathbf{N})\mathbf{N},
+   \qquad
+   \mathbf{V}_T = \mathbf{V} - \mathbf{V}_N.
+   $$
+
+3. Update the normal component (and project the position back to the plane if penetrating):
+
+   $$
+   \mathbf{V}' = \mathbf{V}_T - c_R \mathbf{V}_N.
+   $$
+
+#### Collisional Friction
+
+With normal collision impulse $\mathbf{j}_n$ and kinetic friction coefficient $\mu$, friction opposes tangential motion and is clamped at zero so it never reverses velocity:
+
+$$
+\mathbf{V}' = \max\!\left(0,\; 1 - \frac{\mu \|\mathbf{j}_n\|}{m \|\mathbf{V}_T\|}\right)\mathbf{V}_T - c_R \mathbf{V}_N.
+$$
+
+To include static friction, evaluate the formula first with the larger static coefficient $\mu_s$:
+
+- If the $\max$ clamps to $0$, static friction halts tangential slip.
+- Otherwise, recompute using the smaller kinetic coefficient $\mu_k$.
+
+#### Inter-Particle Interactions and Sphere–Sphere Collisions
+
+- Detection: Point particles almost never collide; treating particles as spheres allows collision detection whenever center distance $\le r_1 + r_2$.
+- Continuous resolution: Given distances at $t^n$ and $t^n + \Delta t$, linearly solve for the contact time $t \in (t^n, t^n + \Delta t)$ where center distance equals $r_1 + r_2$, apply momentum-conserving response along the line of centers, and re-evolve positions over the remainder of $\Delta t$.
+- Non-contact forces: Pairwise distance-dependent forces also model gravitation, magnetism, and fluid pressure toward constant density.
+
+### Crowds and Emergent Behavior
+
+Particles can represent autonomous agents (flocks, herds, pedestrians), producing collective group motion from local rules.
+
+- Flocking (Boids, Reynolds): Each agent responds to attraction toward neighbors' center, repulsion from overly close neighbors, and alignment with neighbors' average trajectory.
+- Social force model (pedestrians): The force on pedestrian $\alpha$ combines four terms:
+
+  $$
+  \begin{aligned}
+  \mathbf{F}_\alpha(t)
+  &= \underbrace{\mathbf{F}_\alpha^0(\mathbf{v}_\alpha, v_\alpha^0 \mathbf{e}_\alpha)}_{\text{Desired motion}}
+   + \underbrace{\sum_\beta \mathbf{F}_{\alpha\beta}(\mathbf{e}_\alpha, \mathbf{r}_\alpha - \mathbf{r}_\beta)}_{\text{Social force}} \\
+  &\quad + \underbrace{\sum_B \mathbf{F}_{\alpha B}(\mathbf{e}_\alpha, \mathbf{r}_\alpha - \mathbf{r}_B^\alpha)}_{\text{Obstacle avoidance}}
+   + \underbrace{\sum_i \mathbf{F}_{\alpha i}(\mathbf{e}_\alpha, \mathbf{r}_\alpha - \mathbf{r}_i, t)}_{\text{Attractive forces}}.
+  \end{aligned}
+  $$
+
+Key design details of pedestrian social forces:
+
+- Social repulsion uses an elliptical personal-space shape to leave room ahead, applied only to visible agents unobstructed by obstacles.
+- Obstacle avoidance strengthens potential fields or thickens collision geometry; attractive forces (inverted repulsion) model friends, performers, or displays.
+- Emergent behaviors include door oscillation and lane formation.
+
+## Mass-Spring Systems
+
+Coupling particles into a network of pairwise springs models connected deformable objects such as strings, hair, cloth, and soft bodies. Using dot notation for position $\mathbf{x}$, velocity is $\dot{\mathbf{x}} = \mathbf{v}$ and acceleration is $\ddot{\mathbf{x}} = \mathbf{a}$.
+
+### Spring and Damping Forces
+
+::: {#def-acg-9-2 name="Hookean Spring with Rest Length"}
+
+For particles at $\mathbf{a}$ and $\mathbf{b}$ connected by a spring of stiffness $k_s$ and rest length $l$, Hooke's law gives
+
+$$
+\mathbf{f}_{a \to b} = k_s \frac{\mathbf{b} - \mathbf{a}}{\|\mathbf{b} - \mathbf{a}\|}\bigl(\|\mathbf{b} - \mathbf{a}\| - l\bigr),
+\qquad
+\mathbf{f}_{b \to a} = -\mathbf{f}_{a \to b}.
+$$
+
+Setting $l = 0$ yields the idealized zero-length spring $\mathbf{f}_{a \to b} = k_s(\mathbf{b} - \mathbf{a})$, which collapses to zero length. Without damping, a spring oscillates indefinitely.
+
+:::
+
+Simple motion damping $\mathbf{f} = -k_d \dot{\mathbf{b}}$ acts as global viscous drag—it slows down all motion, including rigid falling and global rotation.
+
+To damp only internal spring oscillation, project the relative velocity onto the spring axis:
+
+::: {#def-acg-9-3 name="Internal Spring Damping"}
+
+With damping coefficient $k_d$, the internal damping force on particle $b$ from spring $(a, b)$ is
+
+$$
+\mathbf{f}_b = -k_d \left[(\dot{\mathbf{b}} - \dot{\mathbf{a}}) \cdot \frac{\mathbf{b} - \mathbf{a}}{\|\mathbf{b} - \mathbf{a}\|}\right]\frac{\mathbf{b} - \mathbf{a}}{\|\mathbf{b} - \mathbf{a}\|},
+$$
+
+with $\mathbf{f}_a = -\mathbf{f}_b$ on particle $a$. Because it opposes only changes in spring length, global translation and rotation remain undamped.
+
+:::
+
+### Structures from Springs
+
+Macroscopic mechanical behavior is dictated by spring connectivity:
+
+- Strings and hair: Structural springs along a chain preserve segment lengths (with slight elastic oscillation). Bending resistance uses angular forces or weaker bending springs linking mass $n$ to $n+2$ with rest length $2L_0$.
+- Cloth sheets:
+  - Structural springs (grid edges) resist stretching, but neither shearing nor bending.
+  - Shear springs (diagonals) resist shearing; using both diagonals removes anisotropic bias.
+  - Bending springs (weaker skip-one links connecting vertices two steps apart) resist out-of-plane bending.
+- Volumetric blocks: 3D spring lattices model elastic soft bodies.
+
+::: {.callout-note collapse="true"}
+
+## Practical Limitations of Mass-Spring Cloth
+
+- Discretization dependence: Refining the mesh can alter macroscopic stiffness unless parameters are carefully scaled.
+- Collisions: Dense external contacts and self-contacts require fast collision detection and robust numerical treatment.
+
+:::
+
+## ODE Solvers
+
+Physical simulation solves an ordinary differential equation (ODE) initial value problem: given $\frac{d\mathbf{x}}{dt} = f(\mathbf{x}(t), t)$ and $\mathbf{x}(t_0) = \mathbf{x}_0$, find $\mathbf{x}(t)$ for $t > t_0$.
+
+### Reduction to a First-Order System
+
+Stacking position and velocity turns second-order Newton's law ($\mathbf{F} = m\frac{d^2\mathbf{x}}{dt^2}$) into a first-order system. For one 3D particle ($\mathbf{X} \in \mathbb{R}^6$),
+
+$$
+\mathbf{X} = \begin{pmatrix} \mathbf{x} \\ \mathbf{v} \end{pmatrix},
+\qquad
+\frac{d}{dt}\mathbf{X} = f(\mathbf{X}, t) = \begin{pmatrix} \mathbf{v} \\ \mathbf{F}(\mathbf{x}, \mathbf{v}, t) / m \end{pmatrix}.
+$$
+
+For $N$ particles, stack all positions and velocities into $\mathbf{X} \in \mathbb{R}^{6N}$:
+
+$$
+\mathbf{X} = \begin{pmatrix} \mathbf{x}_1 \\ \mathbf{v}_1 \\ \vdots \\ \mathbf{x}_N \\ \mathbf{v}_N \end{pmatrix},
+\qquad
+\frac{d}{dt}\mathbf{X} = f(\mathbf{X}, t) = \begin{pmatrix} \mathbf{v}_1 \\ \mathbf{F}^1(\mathbf{X}, t)/m_1 \\ \vdots \\ \mathbf{v}_N \\ \mathbf{F}^N(\mathbf{X}, t)/m_N \end{pmatrix}.
+$$
+
+### Explicit (Forward) Euler Method
+
+Replace $dt$ with a finite step size $h$ and advance along the current tangent:
+
+$$
+t_{n+1} = t_n + h,
+\qquad
+\mathbf{X}_{n+1} = \mathbf{X}_n + h\,f(\mathbf{X}_n, t_n).
+$$
+
+#### Accuracy Analysis
+
+Expanding the exact solution in a Taylor series,
+
+$$
+\mathbf{X}(t_0 + h) = \mathbf{X}(t_0) + h\left.\frac{d\mathbf{X}}{dt}\right|_{t_0} + \frac{h^2}{2!}\left.\frac{d^2\mathbf{X}}{dt^2}\right|_{t_0} + \frac{h^3}{3!}\left.\frac{d^3\mathbf{X}}{dt^3}\right|_{t_0} + \cdots,
+$$
+
+reveals two limitations:
+
+- **First-order** accuracy: Local error is $O(h^2)$ per step; halving $h$ quarters per-step error across twice as many steps, giving $O(h)$ global error ($100\times$ accuracy requires $100\times$ steps).
+- Tangent drift: Stepping along tangents leaves curved trajectories—for $f(\mathbf{X}, t) = (-y, x)^\top$ (exact circles), forward Euler spirals outward for every $h > 0$.
+
+#### Stability Analysis
+
+On the scalar test equation $\frac{dx}{dt} = -kx$ ($k > 0$, exact solution $x(t) = x_0 e^{-kt}$), one forward Euler step gives $x_{t+h} = (1 - hk)x_t$, so
+
+$$
+x(t) = x_0(1 - hk)^{t/h}.
+$$
+
+- $0 \le 1 - hk < 1 \iff h < 1/k$: smooth decay.
+- $-1 \le 1 - hk \le 0 \iff 1/k \le h \le 2/k$: bounded oscillation.
+- $1 - hk < -1 \iff h > 2/k$: exponential explosion.
+
+In graphics, moderate accuracy error is often acceptable visually, whereas **instability** causes divergence and cannot be ignored.
+
+### Higher-Order Explicit Methods
+
+Because $f(\mathbf{X}, t)$ varies across a step, evaluating additional slopes improves accuracy.
+
+- Trapezoid method: Take an Euler step to estimate the arrival slope, then average start and end slopes:
+
+  $$
+  \begin{aligned}
+  f_0 &= f(\mathbf{X}_0, t_0), \qquad f_1 = f(\mathbf{X}_0 + h f_0,\, t_0 + h), \\
+  \mathbf{X}(t_0 + h) &= \mathbf{X}_0 + \frac{h}{2}(f_0 + f_1) + O(h^3).
+  \end{aligned}
+  $$
+
+- Midpoint method: Take a half Euler step to sample the midpoint slope, then take a full step from $\mathbf{X}_0$:
+
+  $$
+  \begin{aligned}
+  f_0 &= f(\mathbf{X}_0, t_0), \qquad f_1 = f\!\left(\mathbf{X}_0 + \frac{h}{2}f_0,\, t_0 + \frac{h}{2}\right), \\
+  \mathbf{X}(t_0 + h) &= \mathbf{X}_0 + h f_1 + O(h^3).
+  \end{aligned}
+  $$
+
+Both achieve second-order global accuracy $O(h^2)$ with slightly different trajectories, and remain conditionally stable.
+
+::: {#def-acg-9-4 name="Fourth-Order Runge–Kutta (RK4)"}
+
+For $\frac{dy}{dt} = f(t, y)$ with $y(t_0) = y_0$, RK4 combines four slope evaluations per step for strong nonlinear accuracy:
+
+$$
+y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4),
+\qquad
+t_{n+1} = t_n + h,
+$$
+
+where
+
+$$
+\begin{aligned}
+k_1 &= f(t_n,\, y_n), &
+k_2 &= f\!\left(t_n + \frac{h}{2},\, y_n + \frac{h}{2}k_1\right), \\
+k_3 &= f\!\left(t_n + \frac{h}{2},\, y_n + \frac{h}{2}k_2\right), &
+k_4 &= f(t_n + h,\, y_n + h k_3).
+\end{aligned}
+$$
+
+:::
+
+#### Adaptive Step Size
+
+To adapt step size automatically, repeat until the error falls below a threshold:
+
+1. Compute one Euler step $\mathbf{X}_T$ of size $T$ and two half steps $\mathbf{X}_{T/2}$ of size $T/2$.
+2. Measure the discrepancy $\|\mathbf{X}_T - \mathbf{X}_{T/2}\|$.
+3. If the discrepancy exceeds the threshold, reduce $T$ and retry.
+
+Practical in general, though stiff systems may still force impractically small steps.
+
+### Implicit (Backward) Euler and Variational Integration
+
+**Implicit (backward) Euler** evaluates the derivative at the unknown next state:
+
+$$
+\frac{\mathbf{X}_{i+1} - \mathbf{X}_i}{h} = f(\mathbf{X}_{i+1}, t + h)
+\iff
+\mathbf{X}_{i+1} - h\,f(\mathbf{X}_{i+1}, t + h) = \mathbf{X}_i.
+$$
+
+Geometrically, it finds the state $\mathbf{X}_{i+1}$ whose tangent points backward to $\mathbf{X}_i$.
+
+On the test equation $\frac{dx}{dt} = -kx$,
+
+$$
+\frac{x_{t+h} - x_t}{h} = -k x_{t+h}
+\implies
+x_{t+h} = \frac{x_t}{1 + hk}
+\implies
+x(t) = x_0(1 + hk)^{-t/h}.
+$$
+
+Because $0 < (1 + hk)^{-1} \le 1$ for all $h, k > 0$, implicit Euler is **unconditionally stable**.
+
+- Pros: Unconditional stability permits large time steps on stiff systems.
+- Cons: Requires solving a system of equations each step; accuracy remains $O(h)$; introduces artificial energy loss (**numerical viscosity**).
+
+| Method | Global Order | Stability | Key Trade-off |
+| :--- | :--- | :--- | :--- |
+| Explicit Euler | $O(h)$ | Conditional ($h < 2/k$) | Cheapest; drifts outward / artificial energy gain |
+| Midpoint / Trapezoid | $O(h^2)$ | Conditional | Two $f$ evaluations per step; improved accuracy |
+| RK4 | $O(h^4)$ | Conditional | Four $f$ evaluations; accurate on nonlinear systems |
+| Implicit Euler | $O(h)$ | Unconditional | Requires linear/nonlinear solve; introduces numerical damping |
+
+Compared with explicit methods (artificial driving) and implicit Euler (artificial damping), **variational integrators** preserve energy behavior much more faithfully over long horizons.
+
+### Extension to Rigid Bodies
+
+A planar rigid body extends the same first-order ODE by adding orientation $\theta$ and angular velocity $\omega$:
+
+$$
+\frac{d}{dt}
+\begin{pmatrix} \mathbf{X} \\ \theta \\ \dot{\mathbf{X}} \\ \omega \end{pmatrix}
+=
+\begin{pmatrix} \dot{\mathbf{X}} \\ \omega \\ \mathbf{F}/M \\ \Gamma/I \end{pmatrix},
+$$
+
+where $M$ is mass, $\mathbf{F}$ is force, $\Gamma$ is torque, and $I$ is moment of inertia.
+
+<!-- ## Supplementary Notes {.supplementary-notes}
+
+### Key Results -->

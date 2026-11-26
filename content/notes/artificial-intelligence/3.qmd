@@ -1,106 +1,79 @@
 ---
 title: "Probabilistic Models"
-description: "Probability basics and Bayesian networks: representation and inference."
+description: "Probability rules, conditional independence, Bayesian networks, D-separation, and factor operations."
 page-layout: article
 search: true
+toc-depth: 3
 number-offset: [3]
 
 crossref:
   chapters: true
 ---
 
-## Basics on Probability
+## Probability Fundamentals
 
-### Random Variables and Distributions
+- Joint distribution $P(X_1, \dots, X_n)$: Table of size $O(d^n)$ for domain size $d$—exponentially costly to store or estimate.
+- Core rules:
+  - Marginalization: $P(a) = \sum_b P(a, b)$.
+  - Conditioning & normalization: $P(a \mid b) = \dfrac{P(a, b)}{P(b)} \propto_A P(a, b)$ (select rows matching $b$, then normalize).
+  - Chain rule: $P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid x_1, \dots, x_{i-1})$.
+  - Bayes' rule: $P(x \mid y) = \dfrac{P(y \mid x)P(x)}{P(y)}$.
+- **Conditional independence** ($X \perp\!\!\!\perp Y \mid Z$): $P(x, y \mid z) = P(x \mid z)P(y \mid z) \iff P(x \mid y, z) = P(x \mid z)$ (e.g., $\mathrm{Catch} \perp\!\!\!\perp \mathrm{Toothache} \mid \mathrm{Cavity}$).
 
-#### Random Variables
+## Bayesian Networks
 
-A random variable is some aspect of the world about which we (may) have uncertainty.
+### Syntax and Factorization
 
-#### Probability Distribution
+- Components: A DAG (one node per variable $X_i$) plus a local **Conditional Probability Table (CPT)** $P(X_i \mid \operatorname{Parents}(X_i))$ at each node.
 
-A probability distribution over a random variable associates a probability with each value.
+![Example Bayesian network (Insurance domain) encoding joint dependencies through sparse local parent–child links.](images/bn-insurance.png){.notes-slide-fig width="80%" fig-align="center"}
 
-#### Joint Distributions
+![Graphical notation: independent variable (`Weather`) and a common-cause fork (`Cavity` $\to$ `Toothache`, `Catch`).](images/bn-graphical-notation.png){.notes-slide-fig width="46%" fig-align="center"}
 
-A joint distribution over a set of random variables: specifies a real number for each assignment.
+::: {#def-ai-3-1 name="Bayesian Network Joint Factorization"}
 
-#### Marginal Distributions
-
-Marginalization (summing out): Combine collapsed rows by adding.
-
-### Conditional Probability and Bayes' Rule
-
-#### Conditional Probabilities
-
-Conditional distributions are probability distributions over some variables given fixed values of others.
-
-#### Bayes' Rule
-
-Bayes' rule allows us to compute conditional probabilities in terms of other conditional probabilities.
-
-## Bayesian Nets: Representation
-
-### Bayes' Nets
-
-a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)
-
-- More properly called **graphical models**
-- Local interactions chain together to give global, indirect interactions
-
-### Graphical Model Notation
-
-- Nodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)
-- Arcs: interactions: Formally: encode conditional independence
-
-### Bayes' Net Semantics
-
-- A set of nodes, one per random variable $X$
-- A directed, acyclic graph
-- A conditional distribution for each node: a collection of distributions over $X$, one for each combination of parents’ values
-
-  $$
-  P(X \mid a_1 \ldots a_n)
-  $$
-
-#### CPT (Conditional Probability Table)
-
-description of a noisy causal process.
-
-### Assumptions
-
-Assumptions we are required to make to define the Bayes net when given the graph:
+Assuming $X_i \perp\!\!\!\perp \{X_1,\dots,X_{i-1}\} \setminus \operatorname{Parents}(X_i) \mid \operatorname{Parents}(X_i)$ in topological order:
 
 $$
-P(x_i \mid x_1,\ldots,x_{i-1})
-=
-P(x_i \mid \operatorname{parents}(X_i)).
+P(x_1, \dots, x_n) = \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
 $$
+
+:::
+
+- Graph semantics vs. causality: Arcs encode conditional independence, not physical causation ($T \to R$ and $R \to T$ can represent the same $P(R, T)$), though causal ordering yields sparser graphs and simpler CPTs.
 
 ### D-Separation
 
-If all paths between $A$ and $B$ are blocked given observed variables $Z$, then $A \perp\!\!\!\perp B \mid Z$.
+Every undirected path between $X$ and $Y$ decomposes into three-node triples given evidence $Z$:
 
-- Chain / fork: observing the middle node blocks the path.
-- Collider ($A \to M \leftarrow B$): blocks the path unless $M$ or a descendant is observed.
-- One blocked segment blocks a path; any active path means independence is not guaranteed.
+| Triple | $M \notin Z$ | $M \in Z$ | Mechanism |
+| :--- | :--- | :--- | :--- |
+| Causal chain ($X \to M \to Y$) | Active | Blocked ($\perp\!\!\!\perp$) | Observing $M$ intercepts flow |
+| Common cause ($X \leftarrow M \to Y$) | Active | Blocked ($\perp\!\!\!\perp$) | Observing $M$ explains correlation |
+| Common effect ($X \to M \leftarrow Y$) | Blocked ($\perp\!\!\!\perp$) | Active (if $M$ or descendant $\in Z$) | *Explaining away*: causes compete |
 
-## Bayesian Nets: Inference
+::: {#def-ai-3-2 name="D-Separation Rule"}
 
-### Inference
+1. Shade evidence nodes $Z$ and inspect all undirected paths between $X$ and $Y$.
+2. A path is active iff *every* triple along it is active; one blocked triple blocks the path.
+3. If no path is active, $X$ and $Y$ are **d-separated** $\implies X \perp\!\!\!\perp Y \mid Z$ in all distributions compatible with the DAG.
 
-Calculating some useful quantity from a joint probability distribution.
+:::
 
-### Inference by Enumeration
+## Exact Inference Basics
 
-1. **Join** all factors.
-2. **Eliminate** all hidden variables.
-3. **Normalize** the result.
+### Enumeration and Factors
 
-<!-- ## Supplementary Notes {.supplementary-notes}
+Partition variables into query $Q$, observed evidence $e$, and hidden $H$:
 
-### Key Results
+$$
+P(Q \mid e) = \frac{1}{Z} \sum_h P(Q, h, e) = \frac{1}{Z} \sum_h \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
+$$
 
-- [Assumptions](#assumptions): A Bayes' net assumes $P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))$.
-- [D-Separation](#d-separation): If all paths between $A$ and $B$ are blocked given $Z$, then $A \perp\!\!\!\perp B \mid Z$.
-- [Inference by Enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize. -->
+Three operations on multidimensional probability tables (**factors**):
+
+1. Evidence restriction: Keep only CPT rows consistent with $e$.
+2. Join (`×`): Pointwise product over the union of variables (e.g., $P(R) \times P(T \mid R) = P(R, T)$).
+3. Eliminate (`∑`): Sum out a hidden variable from a factor.
+
+- Bottleneck of enumeration: Joining all factors before summing out $H$ builds an $O(d^n)$ table—motivating Variable Elimination in Chapter 4.
