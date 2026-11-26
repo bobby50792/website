@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Exact and approximate inference in Bayesian networks, and probabilistic reasoning over time.">
+<meta name="description" content="Variable elimination, BN sampling and MCMC, Markov chains, HMMs, particle filtering, DBNs, and Viterbi.">
 
 <title>Probabilistic Inference – Bobby</title>
 <style>
@@ -26,41 +26,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -977,13 +942,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1059,24 +1036,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#bayesian-nets-exact-inference" id="toc-bayesian-nets-exact-inference" class="nav-link active" data-scroll-target="#bayesian-nets-exact-inference"><span class="header-section-number">4.1</span> Bayesian Nets: Exact Inference</a>
-  <ul class="collapse">
-  <li><a href="#inference-by-enumeration" id="toc-inference-by-enumeration" class="nav-link" data-scroll-target="#inference-by-enumeration"><span class="header-section-number">4.1.1</span> Inference by Enumeration</a></li>
-  <li><a href="#variable-elimination" id="toc-variable-elimination" class="nav-link" data-scroll-target="#variable-elimination"><span class="header-section-number">4.1.2</span> Variable Elimination</a></li>
-  </ul></li>
-  <li><a href="#bayesian-nets-approximate-inference" id="toc-bayesian-nets-approximate-inference" class="nav-link" data-scroll-target="#bayesian-nets-approximate-inference"><span class="header-section-number">4.2</span> Bayesian Nets: Approximate Inference</a>
-  <ul class="collapse">
-  <li><a href="#prior-sampling" id="toc-prior-sampling" class="nav-link" data-scroll-target="#prior-sampling"><span class="header-section-number">4.2.1</span> Prior Sampling</a></li>
-  <li><a href="#rejection-sampling" id="toc-rejection-sampling" class="nav-link" data-scroll-target="#rejection-sampling"><span class="header-section-number">4.2.2</span> Rejection Sampling</a></li>
-  <li><a href="#likelihood-weighting" id="toc-likelihood-weighting" class="nav-link" data-scroll-target="#likelihood-weighting"><span class="header-section-number">4.2.3</span> Likelihood Weighting</a></li>
-  <li><a href="#gibbs-sampling" id="toc-gibbs-sampling" class="nav-link" data-scroll-target="#gibbs-sampling"><span class="header-section-number">4.2.4</span> Gibbs Sampling</a></li>
-  </ul></li>
+  <li><a href="#exact-inference-variable-elimination" id="toc-exact-inference-variable-elimination" class="nav-link active" data-scroll-target="#exact-inference-variable-elimination"><span class="header-section-number">4.1</span> Exact Inference: Variable Elimination</a></li>
+  <li><a href="#approximate-inference-via-sampling" id="toc-approximate-inference-via-sampling" class="nav-link" data-scroll-target="#approximate-inference-via-sampling"><span class="header-section-number">4.2</span> Approximate Inference via Sampling</a></li>
   <li><a href="#probabilistic-reasoning-over-time" id="toc-probabilistic-reasoning-over-time" class="nav-link" data-scroll-target="#probabilistic-reasoning-over-time"><span class="header-section-number">4.3</span> Probabilistic Reasoning over Time</a>
   <ul class="collapse">
-  <li><a href="#markov-models" id="toc-markov-models" class="nav-link" data-scroll-target="#markov-models"><span class="header-section-number">4.3.1</span> Markov Models</a></li>
-  <li><a href="#hidden-markov-models" id="toc-hidden-markov-models" class="nav-link" data-scroll-target="#hidden-markov-models"><span class="header-section-number">4.3.2</span> Hidden Markov Models</a></li>
-  <li><a href="#dynamic-bayes-nets-dbns" id="toc-dynamic-bayes-nets-dbns" class="nav-link" data-scroll-target="#dynamic-bayes-nets-dbns"><span class="header-section-number">4.3.3</span> Dynamic Bayes Nets (DBNs)</a></li>
-  <li><a href="#most-likely-explanation" id="toc-most-likely-explanation" class="nav-link" data-scroll-target="#most-likely-explanation"><span class="header-section-number">4.3.4</span> Most Likely Explanation</a></li>
+  <li><a href="#markov-chains-and-stationary-distributions" id="toc-markov-chains-and-stationary-distributions" class="nav-link" data-scroll-target="#markov-chains-and-stationary-distributions"><span class="header-section-number">4.3.1</span> Markov Chains and Stationary Distributions</a></li>
+  <li><a href="#hidden-markov-models-and-filtering" id="toc-hidden-markov-models-and-filtering" class="nav-link" data-scroll-target="#hidden-markov-models-and-filtering"><span class="header-section-number">4.3.2</span> Hidden Markov Models and Filtering</a></li>
+  <li><a href="#dbns-viterbi-and-probabilistic-programming" id="toc-dbns-viterbi-and-probabilistic-programming" class="nav-link" data-scroll-target="#dbns-viterbi-and-probabilistic-programming"><span class="header-section-number">4.3.3</span> DBNs, Viterbi, and Probabilistic Programming</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1092,7 +1058,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Exact and approximate inference in Bayesian networks, and probabilistic reasoning over time.
+    Variable elimination, BN sampling and MCMC, Markov chains, HMMs, particle filtering, DBNs, and Viterbi.
   </div>
 </div>
 
@@ -1109,198 +1075,121 @@ window.Quarto = {
 </header>
 
 
-<section id="bayesian-nets-exact-inference" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="bayesian-nets-exact-inference"><span class="header-section-number">4.1</span> Bayesian Nets: Exact Inference</h2>
-<section id="inference-by-enumeration" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="inference-by-enumeration"><span class="header-section-number">4.1.1</span> Inference by Enumeration</h3>
-<p>Join up the whole joint distribution before you sum out the hidden variables.</p>
-</section>
-<section id="variable-elimination" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="variable-elimination"><span class="header-section-number">4.1.2</span> Variable Elimination</h3>
+<section id="exact-inference-variable-elimination" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="exact-inference-variable-elimination"><span class="header-section-number">4.1</span> Exact Inference: Variable Elimination</h2>
+<p>Variable Elimination (VE) pushes sums inside products (<span class="math inline">\(\sum uwy + \cdots = (u+v)(w+x)(y+z)\)</span>) by interleaving joins and marginalization:</p>
+<ol type="1">
+<li>Restrict all local CPTs to observed evidence <span class="math inline">\(e\)</span>.</li>
+<li>For each hidden variable <span class="math inline">\(H_k\)</span> (in chosen elimination order): join all factors mentioning <span class="math inline">\(H_k\)</span>, then eliminate (sum out) <span class="math inline">\(H_k\)</span>.</li>
+<li>Join remaining factors over <span class="math inline">\(Q\)</span> and normalize.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bn-variable-elimination.png" class="notes-slide-fig img-fluid figure-img" style="width:78.0%"></p>
+<figcaption>Variable elimination interleaves factor joins and early marginalization to avoid forming the full joint table.</figcaption>
+</figure>
+</div>
 <ul>
-<li>Interleave joining and marginalizing.</li>
-<li>Still NP-hard, but usually much faster than inference by enumeration.</li>
-<li>A polytree is a directed graph with no undirected cycles. For poly-trees you can always find an ordering that is efficient.</li>
+<li>Complexity: Governed by the largest intermediate factor; elimination order can mean <span class="math inline">\(2^n\)</span> vs.&nbsp;<span class="math inline">\(2\)</span> entries (e.g., eliminating a star hub first vs.&nbsp;last).</li>
+<li>Hardness: Exact BN inference is <strong>NP-hard</strong> (reduces from 3-SAT), but runs in linear time on <strong>polytrees</strong> (singly connected DAGs with no undirected cycles).</li>
 </ul>
 </section>
-</section>
-<section id="bayesian-nets-approximate-inference" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="bayesian-nets-approximate-inference"><span class="header-section-number">4.2</span> Bayesian Nets: Approximate Inference</h2>
-<section id="prior-sampling" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="prior-sampling"><span class="header-section-number">4.2.1</span> Prior Sampling</h3>
+<section id="approximate-inference-via-sampling" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="approximate-inference-via-sampling"><span class="header-section-number">4.2</span> Approximate Inference via Sampling</h2>
+<p>Draw <span class="math inline">\(N\)</span> discrete samples (via inverse-CDF lookup on <span class="math inline">\(u \sim \operatorname{Uniform}[0,1)\)</span>) to approximate <span class="math inline">\(P(Q \mid e)\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Procedure</th>
+<th style="text-align: left;">Pros &amp; Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Prior Sampling</td>
+<td style="text-align: left;">Sample <span class="math inline">\(x_i \sim P(X_i \mid \mathrm{pa})\)</span> topologically</td>
+<td style="text-align: left;">Unbiased for <span class="math inline">\(P(X)\)</span>; ignores evidence <span class="math inline">\(e\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rejection Sampling</td>
+<td style="text-align: left;">Prior sample; discard if <span class="math inline">\(x_i \ne e_i\)</span></td>
+<td style="text-align: left;">Consistent, but rejects almost all samples when <span class="math inline">\(P(e)\)</span> is small</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Likelihood Weighting</td>
+<td style="text-align: left;">Clamp <span class="math inline">\(E_i = e_i\)</span>, sample rest; weight <span class="math inline">\(w = \prod_i P(e_i \mid \mathrm{pa})\)</span></td>
+<td style="text-align: left;">Uses all samples (<span class="math inline">\(S_{\mathrm{WS}} \cdot w = P(\mathbf{z}, \mathbf{e})\)</span>), but upstream ignores downstream <span class="math inline">\(e\)</span> (weight collapse)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gibbs Sampling (MCMC)</td>
+<td style="text-align: left;">Clamp <span class="math inline">\(e\)</span>; repeatedly resample <span class="math inline">\(Z_i \sim P(Z_i \mid \mathrm{MB}(Z_i))\)</span></td>
+<td style="text-align: left;">Uses upstream &amp; downstream evidence; correlated samples, slow mixing diagnosis</td>
+</tr>
+</tbody>
+</table>
+<p>Key Gibbs sampling details:</p>
 <ul>
-<li>Ignore evidence. Sample from the joint probability.</li>
-<li>Do inference by counting the right samples.</li>
+<li><strong>Markov blanket</strong> <span class="math inline">\(\mathrm{MB}(Z_i)\)</span>: All CPTs not mentioning <span class="math inline">\(Z_i\)</span> cancel in <span class="math inline">\(P(Z_i \mid x_{-i})\)</span>, leaving only <span class="math inline">\(P(Z_i \mid \operatorname{Parents}(Z_i)) \prod_{Y_j \in \operatorname{Children}(Z_i)} P(Y_j \mid \operatorname{Parents}(Y_j))\)</span> (parents, children, and co-parents).</li>
+<li>Convergence: Kernel <span class="math inline">\(q(x \to x') = P(x_i' \mid x_{-i}, e)\)</span> satisfies <strong>detailed balance</strong> with <span class="math inline">\(P(x \mid e)\)</span> (Metropolis–Hastings with acceptance <span class="math inline">\(1\)</span>).</li>
 </ul>
-</section>
-<section id="rejection-sampling" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="rejection-sampling"><span class="header-section-number">4.2.2</span> Rejection Sampling</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>RejectionSample(network, evidence):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> {}</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X_i <span class="kw">in</span> topological_order(network):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        x[X_i] <span class="op">~</span> P(X_i <span class="op">|</span> sampled values of Parents(X_i))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> X_i <span class="kw">in</span> evidence <span class="kw">and</span> x[X_i] <span class="op">!=</span> evidence[X_i]:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> REJECT</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Repeat and estimate conditional probabilities using only accepted samples.</li>
-<li>Hopelessly expensive if <span class="math inline">\(P(e)\)</span> is small.</li>
-</ul>
-</section>
-<section id="likelihood-weighting" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="likelihood-weighting"><span class="header-section-number">4.2.3</span> Likelihood Weighting</h3>
-<p>Fix evidence values and weight each sample by the product of their conditional probabilities.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>LikelihoodWeighting(X, evidence, network, N):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> {v: <span class="dv">0</span> <span class="cf">for</span> v <span class="kw">in</span> domain(X)}</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="op">=</span> <span class="dv">1</span> to N:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        x, w <span class="op">=</span> WeightedSample(network, evidence)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        W[x[X]] <span class="op">+=</span> w</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> normalize(W)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>WeightedSample(network, evidence):</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    x, w <span class="op">=</span> {}, <span class="dv">1</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X_i <span class="kw">in</span> topological_order(network):</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        parents <span class="op">=</span> assigned values of Parents(X_i) <span class="kw">in</span> x</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> X_i <span class="kw">in</span> evidence:</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            x[X_i] <span class="op">=</span> evidence[X_i]</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            w <span class="op">*=</span> P(X_i <span class="op">=</span> x[X_i] <span class="op">|</span> parents)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            x[X_i] <span class="op">~</span> P(X_i <span class="op">|</span> parents)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, w</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Normalize the weighted counts to estimate <span class="math inline">\(P(X\mid e)\)</span>.</li>
-<li>Degradation in performance as the number of evidence variables increases.</li>
-</ul>
-</section>
-<section id="gibbs-sampling" class="level3" data-number="4.2.4">
-<h3 data-number="4.2.4" class="anchored" data-anchor-id="gibbs-sampling"><span class="header-section-number">4.2.4</span> Gibbs Sampling</h3>
-<p>Keep a complete assignment (the network state), fix evidence, and repeatedly resample one non-evidence variable at a time.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>GibbsSampling(X, evidence, network, N):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> {v: <span class="dv">0</span> <span class="cf">for</span> v <span class="kw">in</span> domain(X)}</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Z <span class="op">=</span> non<span class="op">-</span>evidence variables <span class="kw">in</span> network</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> copy(evidence)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    initialize x[Z] to a valid random assignment</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="op">=</span> <span class="dv">1</span> to N:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> Z_i <span class="kw">in</span> Z:</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            x[Z_i] <span class="op">~</span> P(Z_i <span class="op">|</span> current values of MB(Z_i) <span class="kw">in</span> x)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            counts[x[X]] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> normalize(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Markov blanket: Parents, children, and the children’s other parents.</li>
-<li>Rationale: Updates use both parent and child information, allowing evidence to influence upstream and downstream variables through repeated updates.</li>
-<li>Monte Carlo uses random samples for estimation; MCMC generates correlated samples through a Markov chain.</li>
-<li>Gibbs sampling is an MCMC method. Each conditional update is a special Metropolis–Hastings step with acceptance probability 1.</li>
-</ul>
-</section>
 </section>
 <section id="probabilistic-reasoning-over-time" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="probabilistic-reasoning-over-time"><span class="header-section-number">4.3</span> Probabilistic Reasoning over Time</h2>
-<section id="markov-models" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="markov-models"><span class="header-section-number">4.3.1</span> Markov Models</h3>
+<section id="markov-chains-and-stationary-distributions" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="markov-chains-and-stationary-distributions"><span class="header-section-number">4.3.1</span> Markov Chains and Stationary Distributions</h3>
 <ul>
-<li>State: The value of <span class="math inline">\(X_t\)</span> at time <span class="math inline">\(t\)</span>.</li>
-<li>Parameters: Initial distribution <span class="math inline">\(P(X_1)\)</span> and transition probabilities <span class="math inline">\(P(X_t\mid X_{t-1})\)</span>.</li>
-<li>First-order Markov property: Past and future are conditionally independent given the present:</li>
+<li>Markov chain: Prior <span class="math inline">\(P(X_1)\)</span> and stationary transition <span class="math inline">\(P(X_t \mid X_{t-1})\)</span> with <span class="math inline">\(X_t \perp\!\!\!\perp X_{1:t-2} \mid X_{t-1}\)</span>; forward propagation updates <span class="math inline">\(P(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1})P(x_{t-1})\)</span>.</li>
 </ul>
-<p><span class="math display">\[
-P(X_t\mid X_1,\ldots,X_{t-1})=P(X_t\mid X_{t-1}).
-\]</span></p>
 <div id="def-ai-4-1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4.1 (Stationary Distribution)</strong></span> A distribution <span class="math inline">\(P_\infty\)</span> unchanged by a transition. If the chain converges, its limiting distribution is stationary:</p>
-<p><span class="math display">\[
-P_\infty(x')=\sum_x P(x'\mid x)P_\infty(x).
-\]</span></p>
+<p><span class="theorem-title"><strong>Definition 4.1 (Stationary Distribution)</strong></span> Ergodic chains converge to a unique <span class="math inline">\(P_\infty\)</span> invariant under transitions: <span class="math inline">\(P_\infty(x') = \sum_x P(x' \mid x)P_\infty(x)\)</span>.</p>
+<ul>
+<li>PageRank: Surfer jumps to a uniform random page with probability <span class="math inline">\(c\)</span> and follows an outlink with probability <span class="math inline">\(1-c\)</span>; <span class="math inline">\(P_\infty\)</span> ranks page authority.</li>
+</ul>
 </div>
 </section>
-<section id="hidden-markov-models" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="hidden-markov-models"><span class="header-section-number">4.3.2</span> Hidden Markov Models</h3>
+<section id="hidden-markov-models-and-filtering" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="hidden-markov-models-and-filtering"><span class="header-section-number">4.3.2</span> Hidden Markov Models and Filtering</h3>
+<div id="def-ai-4-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.2 (Hidden Markov Model (HMM))</strong></span> Hidden states <span class="math inline">\(X_{1:T}\)</span> emit noisy observations <span class="math inline">\(E_{1:T}\)</span> via <span class="math inline">\(P(X_1)\)</span>, <span class="math inline">\(P(X_t \mid X_{t-1})\)</span>, and <span class="math inline">\(P(E_t \mid X_t)\)</span>, with <span class="math inline">\(X_t \perp\!\!\!\perp X_{1:t-2}, E_{1:t-1} \mid X_{t-1}\)</span> and <span class="math inline">\(E_t \perp\!\!\!\perp X_{1:t-1}, E_{1:t-1} \mid X_t\)</span>.</p>
+</div>
 <ul>
-<li>Hidden states <span class="math inline">\(X_t\)</span> form a Markov chain with transition model <span class="math inline">\(P(X_t\mid X_{t-1})\)</span>.</li>
-<li>At each time step, observe an output <span class="math inline">\(E_t\)</span> generated according to <span class="math inline">\(P(E_t\mid X_t)\)</span>; the states are not directly observed.</li>
-</ul>
-<section id="filtering-state-estimation" class="level4" data-number="4.3.2.1">
-<h4 data-number="4.3.2.1" class="anchored" data-anchor-id="filtering-state-estimation"><span class="header-section-number">4.3.2.1</span> Filtering / State Estimation</h4>
-<ul>
-<li>Track the belief state: the current state distribution conditioned on observations so far:</li>
-</ul>
-<p><span class="math display">\[
-B_t(x)=P(X_t=x\mid e_1,\ldots,e_t).
-\]</span></p>
-<ul>
-<li>Initialize from a prior distribution, often uniform; update by predicting as time advances and conditioning on new observations.</li>
-<li>Kalman filtering was developed in the 1960s and used for Apollo trajectory estimation.</li>
-</ul>
-</section>
-<section id="forward-algorithm" class="level4" data-number="4.3.2.2">
-<h4 data-number="4.3.2.2" class="anchored" data-anchor-id="forward-algorithm"><span class="header-section-number">4.3.2.2</span> Forward Algorithm</h4>
-<ul>
-<li>Every time step, we start with current <span class="math inline">\(P(X\mid \text{evidence})\)</span>.</li>
-<li>We update for time:</li>
-</ul>
-<p><span class="math display">\[
-P(x_t\mid e_{1:t-1})=\sum_{x_{t-1}}P(x_{t-1}\mid e_{1:t-1})\cdot P(x_t\mid x_{t-1}).
-\]</span></p>
-<ul>
-<li>We update for evidence:</li>
-</ul>
-<p><span class="math display">\[
-P(x_t\mid e_{1:t})\propto_X P(x_t\mid e_{1:t-1})\cdot P(e_t\mid x_t).
-\]</span></p>
-<ul>
-<li>The forward algorithm does both at once (and doesn’t normalize).</li>
-<li>Problem: space is <span class="math inline">\(|X|\)</span> and time is <span class="math inline">\(|X|^2\)</span> per time step.</li>
-</ul>
-</section>
-<section id="particle-filtering" class="level4" data-number="4.3.2.3">
-<h4 data-number="4.3.2.3" class="anchored" data-anchor-id="particle-filtering"><span class="header-section-number">4.3.2.3</span> Particle Filtering</h4>
-<p>Approximate <span class="math inline">\(P(X_t\mid e_{1:t})\)</span> with <span class="math inline">\(N\)</span> particles (sampled states), initialized from the prior. At each time step:</p>
+<li>Online filtering (Forward Algorithm) updates belief <span class="math inline">\(B_t(x_t) = P(x_t \mid e_{1:t})\)</span> in <span class="math inline">\(O(|X|^2)\)</span> time and <span class="math inline">\(O(|X|)\)</span> space per step (<em>Kalman filter</em> for linear-Gaussian systems):
 <ol type="1">
-<li>Predict: Sample <span class="math inline">\(x_t^{(i)}\sim P(X_t\mid x_{t-1}^{(i)})\)</span>.</li>
-<li>Weight: Set <span class="math inline">\(w_i=P(e_t\mid x_t^{(i)})\)</span> and normalize the weights.</li>
-<li>Resample: Draw <span class="math inline">\(N\)</span> particles with replacement in proportion to their weights.</li>
+<li>Time elapse: <span class="math inline">\(B'_t(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1}) B_{t-1}(x_{t-1})\)</span>.</li>
+<li>Observe: <span class="math inline">\(B_t(x_t) \propto_{X_t} P(e_t \mid x_t) B'_t(x_t)\)</span>.</li>
+</ol></li>
+<li>Particle filtering (<span class="math inline">\(O(N)\)</span> per step for <span class="math inline">\(N \ll |X|\)</span> particles, when <span class="math inline">\(|X|\)</span> is huge or continuous):
+<ol type="1">
+<li>Elapse: Sample <span class="math inline">\(x_t^{(i)} \sim P(X_t \mid x_{t-1}^{(i)})\)</span>.</li>
+<li>Weight: Set <span class="math inline">\(w_i = P(e_t \mid x_t^{(i)})\)</span>.</li>
+<li>Resample: Draw <span class="math inline">\(N\)</span> unweighted particles proportional to <span class="math inline">\(\{w_i\}\)</span>.</li>
 </ol>
-<p>After resampling, estimate state probabilities by particle frequencies. More particles generally improve accuracy but increase computation.</p>
-</section>
-</section>
-<section id="dynamic-bayes-nets-dbns" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="dynamic-bayes-nets-dbns"><span class="header-section-number">4.3.3</span> Dynamic Bayes Nets (DBNs)</h3>
 <ul>
-<li>We want to track multiple variables over time, using multiple sources of evidence.</li>
-<li>Repeat a fixed Bayes net structure at each time.</li>
-<li>Variables from time <span class="math inline">\(t\)</span> can condition on those from <span class="math inline">\(t-1\)</span>.</li>
+<li>SLAM: Jointly filters robot pose and map (e.g., FastSLAM).</li>
+</ul></li>
 </ul>
 </section>
-<section id="most-likely-explanation" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="most-likely-explanation"><span class="header-section-number">4.3.4</span> Most Likely Explanation</h3>
-<p>State trellis: Graph of states and transitions over time.</p>
-<section id="forward-algorithm-sum" class="level4" data-number="4.3.4.1">
-<h4 data-number="4.3.4.1" class="anchored" data-anchor-id="forward-algorithm-sum"><span class="header-section-number">4.3.4.1</span> Forward Algorithm (Sum)</h4>
+<section id="dbns-viterbi-and-probabilistic-programming" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="dbns-viterbi-and-probabilistic-programming"><span class="header-section-number">4.3.3</span> DBNs, Viterbi, and Probabilistic Programming</h3>
+<ul>
+<li><p>Dynamic Bayes Nets (DBNs): Multi-variable BN slice repeated across <span class="math inline">\(t-1 \to t\)</span>; particle filtering tracks state-tuple particles.</p></li>
+<li><p>Viterbi algorithm (<span class="math inline">\(\arg\max_{x_{1:T}} P(x_{1:T} \mid e_{1:T})\)</span>): Replaces the Forward sum over trellis paths with a <code>max</code> (plus backpointers):</p>
 <p><span class="math display">\[
 \begin{aligned}
-f_t[x_t] &amp;= P(x_t,e_{1:t}) \\
-&amp;= P(e_t\mid x_t)\sum_{x_{t-1}}P(x_t\mid x_{t-1})f_{t-1}[x_{t-1}].
+\text{Forward:}\quad f_t[x_t] &amp;= P(e_t \mid x_t)\sum_{x_{t-1}} P(x_t \mid x_{t-1})\,f_{t-1}[x_{t-1}], \\
+\text{Viterbi:}\quad m_t[x_t] &amp;= P(e_t \mid x_t)\max_{x_{t-1}} P(x_t \mid x_{t-1})\,m_{t-1}[x_{t-1}].
 \end{aligned}
-\]</span></p>
-</section>
-<section id="viterbi-algorithm-max" class="level4" data-number="4.3.4.2">
-<h4 data-number="4.3.4.2" class="anchored" data-anchor-id="viterbi-algorithm-max"><span class="header-section-number">4.3.4.2</span> Viterbi Algorithm (Max)</h4>
-<p><span class="math display">\[
-\begin{aligned}
-m_t[x_t] &amp;= \max_{x_{1:t-1}}P(x_{1:t-1},x_t,e_{1:t}) \\
-&amp;= P(e_t\mid x_t)\max_{x_{t-1}}P(x_t\mid x_{t-1})m_{t-1}[x_{t-1}].
-\end{aligned}
-\]</span></p>
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results
-
-- [Variable Elimination](#variable-elimination): Interleaving joins and marginalization is still NP-hard, but usually much faster than enumeration.
-- [Gibbs Sampling](#gibbs-sampling): Each conditional update is a Metropolis–Hastings step with acceptance probability 1.
-- [Forward Algorithm](#forward-algorithm): Each time step costs $|X|^2$ time and $|X|$ space.
-- [Viterbi Algorithm](#viterbi-algorithm-max): Replacing the forward algorithm's sum with a max finds the most likely explanation. -->
+\]</span></p></li>
+<li><p>Probabilistic programming (PyMC, Stan, Edward): Expresses generative models as code with automated MCMC/variational posterior inference.</p></li>
+</ul>
 
 
-</section>
 </section>
 </section>
 

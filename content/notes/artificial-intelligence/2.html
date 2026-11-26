@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Logical representation, inference, and semantics.">
+<meta name="description" content="Propositional and first-order logic, SAT, Modus Ponens, unification, resolution, soundness, completeness, and formal verification.">
 
 <title>Logic – Bobby</title>
 <style>
@@ -942,13 +942,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1027,21 +1039,17 @@ window.Quarto = {
   <li><a href="#representation" id="toc-representation" class="nav-link active" data-scroll-target="#representation"><span class="header-section-number">2.1</span> Representation</a>
   <ul class="collapse">
   <li><a href="#propositional-logic" id="toc-propositional-logic" class="nav-link" data-scroll-target="#propositional-logic"><span class="header-section-number">2.1.1</span> Propositional Logic</a></li>
-  <li><a href="#first-order-logic" id="toc-first-order-logic" class="nav-link" data-scroll-target="#first-order-logic"><span class="header-section-number">2.1.2</span> First-Order Logic</a></li>
+  <li><a href="#first-order-logic-fol" id="toc-first-order-logic-fol" class="nav-link" data-scroll-target="#first-order-logic-fol"><span class="header-section-number">2.1.2</span> First-Order Logic (FOL)</a></li>
   </ul></li>
   <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">2.2</span> Inference</a>
   <ul class="collapse">
-  <li><a href="#entailment-and-satisfiability" id="toc-entailment-and-satisfiability" class="nav-link" data-scroll-target="#entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and Satisfiability</a></li>
-  <li><a href="#sat-and-model-checking" id="toc-sat-and-model-checking" class="nav-link" data-scroll-target="#sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and Model-Checking</a></li>
-  <li><a href="#inference-rules" id="toc-inference-rules" class="nav-link" data-scroll-target="#inference-rules"><span class="header-section-number">2.2.3</span> Inference Rules</a></li>
-  <li><a href="#horn-clauses-and-modus-ponens" id="toc-horn-clauses-and-modus-ponens" class="nav-link" data-scroll-target="#horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn Clauses and Modus Ponens</a></li>
-  <li><a href="#complexity" id="toc-complexity" class="nav-link" data-scroll-target="#complexity"><span class="header-section-number">2.2.5</span> Complexity</a></li>
-  <li><a href="#resolution" id="toc-resolution" class="nav-link" data-scroll-target="#resolution"><span class="header-section-number">2.2.6</span> Resolution</a></li>
+  <li><a href="#entailment-and-sat" id="toc-entailment-and-sat" class="nav-link" data-scroll-target="#entailment-and-sat"><span class="header-section-number">2.2.1</span> Entailment and SAT</a></li>
+  <li><a href="#horn-clauses-modus-ponens-and-unification" id="toc-horn-clauses-modus-ponens-and-unification" class="nav-link" data-scroll-target="#horn-clauses-modus-ponens-and-unification"><span class="header-section-number">2.2.2</span> Horn Clauses, Modus Ponens, and Unification</a></li>
+  <li><a href="#resolution-and-cnf" id="toc-resolution-and-cnf" class="nav-link" data-scroll-target="#resolution-and-cnf"><span class="header-section-number">2.2.3</span> Resolution and CNF</a></li>
   </ul></li>
-  <li><a href="#semantics" id="toc-semantics" class="nav-link" data-scroll-target="#semantics"><span class="header-section-number">2.3</span> Semantics</a>
+  <li><a href="#soundness-completeness-and-verification" id="toc-soundness-completeness-and-verification" class="nav-link" data-scroll-target="#soundness-completeness-and-verification"><span class="header-section-number">2.3</span> Soundness, Completeness, and Verification</a>
   <ul class="collapse">
-  <li><a href="#desiderata-for-inference-rules" id="toc-desiderata-for-inference-rules" class="nav-link" data-scroll-target="#desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for Inference Rules</a></li>
-  <li><a href="#fixing-completeness" id="toc-fixing-completeness" class="nav-link" data-scroll-target="#fixing-completeness"><span class="header-section-number">2.3.2</span> Fixing Completeness</a></li>
+  <li><a href="#formal-verification-and-alphaproof" id="toc-formal-verification-and-alphaproof" class="nav-link" data-scroll-target="#formal-verification-and-alphaproof"><span class="header-section-number">2.3.1</span> Formal Verification and AlphaProof</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1057,7 +1065,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Logical representation, inference, and semantics.
+    Propositional and first-order logic, SAT, Modus Ponens, unification, resolution, soundness, completeness, and formal verification.
   </div>
 </div>
 
@@ -1074,328 +1082,135 @@ window.Quarto = {
 </header>
 
 
-<ul>
-<li>Representation (Syntax): defines a set of valid formulas.</li>
-<li>Semantics: for each formula, specify a set of models (assignments / configurations of the world).</li>
-<li>Inference rule: a rule that allows us to derive new formulas from existing ones.</li>
-</ul>
+<p>A logical language balances expressivity and computational efficiency via three parts: syntax (well-formed formulas), semantics (satisfying models <span class="math inline">\(\mathcal{M}(f)\)</span>), and inference rules (syntactic derivations <span class="math inline">\(\mathrm{KB} \vdash f\)</span>).</p>
 <section id="representation" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="representation"><span class="header-section-number">2.1</span> Representation</h2>
-<p>Formal languages: syntax and model</p>
 <section id="propositional-logic" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="propositional-logic"><span class="header-section-number">2.1.1</span> Propositional Logic</h3>
-<section id="syntax" class="level4" data-number="2.1.1.1">
-<h4 data-number="2.1.1.1" class="anchored" data-anchor-id="syntax"><span class="header-section-number">2.1.1.1</span> Syntax</h4>
 <ul>
-<li>Propositional symbols (atomic formulas): <span class="math inline">\(A, B, C\)</span></li>
-<li>Logical connectives: <span class="math inline">\(\neg, \land, \lor, \to, \leftrightarrow\)</span></li>
-<li>Build up formulas recursively—if <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are formulas, so are the following:
+<li>Syntax: Atomic symbols <span class="math inline">\(A, B, C, \dots\)</span> combined via <span class="math inline">\(\neg f\)</span>, <span class="math inline">\(f \land g\)</span>, <span class="math inline">\(f \lor g\)</span>, <span class="math inline">\(f \to g\)</span>, and <span class="math inline">\(f \leftrightarrow g\)</span>.</li>
+<li>Semantics: A <strong>model</strong> <span class="math inline">\(w \in \{0,1\}^n\)</span> assigns truth values to all <span class="math inline">\(n\)</span> symbols (<span class="math inline">\(2^n\)</span> models); <span class="math inline">\(\mathcal{I}(f, w) \in \{0,1\}\)</span> evaluates truth recursively (<span class="math inline">\(\mathcal{I}(f \to g, w) = 1 \iff \mathcal{I}(f,w) \le \mathcal{I}(g,w)\)</span>).</li>
+<li>Knowledge base: Set of formulas <span class="math inline">\(\mathrm{KB}\)</span> with model set <span class="math inline">\(\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f)\)</span>.</li>
+</ul>
+</section>
+<section id="first-order-logic-fol" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="first-order-logic-fol"><span class="header-section-number">2.1.2</span> First-Order Logic (FOL)</h3>
 <ul>
-<li>Negation: <span class="math inline">\(\neg f\)</span></li>
-<li>Conjunction: <span class="math inline">\(f \land g\)</span></li>
-<li>Disjunction: <span class="math inline">\(f \lor g\)</span></li>
-<li>Implication: <span class="math inline">\(f \to g\)</span></li>
-<li>Biconditional: <span class="math inline">\(f \leftrightarrow g\)</span></li>
+<li>Syntax:
+<ul>
+<li>Terms (objects): constants <span class="math inline">\(c\)</span>, variables <span class="math inline">\(x\)</span>, and functions <span class="math inline">\(f(t_1, \dots, t_n)\)</span>.</li>
+<li>Formulas (truth values): predicates <span class="math inline">\(P(t_1, \dots, t_n)\)</span>, equality <span class="math inline">\(=\)</span>, connectives, and quantifiers <span class="math inline">\(\forall x\)</span>, <span class="math inline">\(\exists x\)</span>.</li>
 </ul></li>
-</ul>
-</section>
-<section id="model" class="level4" data-number="2.1.1.2">
-<h4 data-number="2.1.1.2" class="anchored" data-anchor-id="model"><span class="header-section-number">2.1.1.2</span> Model</h4>
-<p>A model <span class="math inline">\(w\)</span> in propositional logic is an assignment of truth values to propositional symbols.</p>
-</section>
-<section id="interpretation-function" class="level4" data-number="2.1.1.3">
-<h4 data-number="2.1.1.3" class="anchored" data-anchor-id="interpretation-function"><span class="header-section-number">2.1.1.3</span> Interpretation Function</h4>
-<p>Let <span class="math inline">\(f\)</span> be a formula and <span class="math inline">\(w\)</span> be a model. An interpretation function <span class="math inline">\(\mathcal{I}(f,w)\)</span> returns:</p>
+<li>Quantifier rules:
 <ul>
-<li>true (1) (say that <span class="math inline">\(w\)</span> satisfies <span class="math inline">\(f\)</span>)</li>
-<li>false (0) (say that <span class="math inline">\(w\)</span> does not satisfy <span class="math inline">\(f\)</span>)</li>
-</ul>
-</section>
-<section id="base-case" class="level4" data-number="2.1.1.4">
-<h4 data-number="2.1.1.4" class="anchored" data-anchor-id="base-case"><span class="header-section-number">2.1.1.4</span> Base Case</h4>
-<p>For a propositional symbol <span class="math inline">\(p\)</span> (e.g., <span class="math inline">\(A, B, C\)</span>):</p>
-<p><span class="math display">\[
-\mathcal{I}(p,w) = w(p)
-\]</span></p>
-</section>
-<section id="recursive-case" class="level4" data-number="2.1.1.5">
-<h4 data-number="2.1.1.5" class="anchored" data-anchor-id="recursive-case"><span class="header-section-number">2.1.1.5</span> Recursive Case</h4>
-<p>Let <span class="math inline">\(\mathcal{M}(f)\)</span> be the set of <strong>models</strong> <span class="math inline">\(w\)</span> for which <span class="math inline">\(\mathcal{I}(f,w) = 1\)</span>.</p>
-</section>
-<section id="knowledge-base" class="level4" data-number="2.1.1.6">
-<h4 data-number="2.1.1.6" class="anchored" data-anchor-id="knowledge-base"><span class="header-section-number">2.1.1.6</span> Knowledge Base</h4>
-<p>A knowledge base <span class="math inline">\(\mathrm{KB}\)</span> is a set of formulas representing their conjunction / intersection:</p>
-<p><span class="math display">\[
-\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f).
-\]</span></p>
-</section>
-</section>
-<section id="first-order-logic" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="first-order-logic"><span class="header-section-number">2.1.2</span> First-Order Logic</h3>
-<section id="syntax-1" class="level4" data-number="2.1.2.1">
-<h4 data-number="2.1.2.1" class="anchored" data-anchor-id="syntax-1"><span class="header-section-number">2.1.2.1</span> Syntax</h4>
-<ul>
-<li>Terms denote objects: constant symbols <span class="math inline">\(c\)</span>, variables <span class="math inline">\(x\)</span>, and function applications <span class="math inline">\(f(t_1,\ldots,t_n)\)</span>, where each <span class="math inline">\(t_i\)</span> is a term.</li>
-<li>Formulas are built from:
-<ul>
-<li>Atomic formulas: <span class="math inline">\(P(t_1,\ldots,t_n)\)</span>; also <span class="math inline">\(t_1=t_2\)</span> in logic with equality.</li>
-<li>Connectives applied to formulas: <span class="math inline">\(\neg,\land,\lor,\to,\leftrightarrow\)</span>.</li>
-<li>Quantifiers applied to formulas: <span class="math inline">\(\forall x\,\varphi\)</span>, <span class="math inline">\(\exists x\,\varphi\)</span>.</li>
+<li>Idioms: <span class="math inline">\(\forall x\,(P(x) \to Q(x))\)</span> vs.&nbsp;<span class="math inline">\(\exists x\,(P(x) \land Q(x))\)</span>.</li>
+<li>Duality &amp; order: <span class="math inline">\(\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)\)</span>; <span class="math inline">\(\forall x\,\exists y \not\equiv \exists y\,\forall x\)</span>.</li>
 </ul></li>
+<li>Semantics &amp; <strong>propositionalization</strong>: A model maps constants/functions/predicates over an object domain <span class="math inline">\(D\)</span>. FOL reduces to propositional logic iff <em>unique names</em> (at most one constant per object) and <em>domain closure</em> (at least one constant per object, finite <span class="math inline">\(D\)</span>) hold.</li>
 </ul>
-</section>
-<section id="models" class="level4" data-number="2.1.2.2">
-<h4 data-number="2.1.2.2" class="anchored" data-anchor-id="models"><span class="header-section-number">2.1.2.2</span> Models</h4>
-<ul>
-<li>A model <span class="math inline">\(w\)</span> specifies a nonempty domain <span class="math inline">\(D\)</span> and interprets:
-<ul>
-<li>Constant symbols as objects: <span class="math inline">\(w(c)\in D\)</span>.</li>
-<li>Function symbols as functions: <span class="math inline">\(w(f):D^n\to D\)</span>.</li>
-<li>Predicate symbols as sets of tuples: <span class="math inline">\(w(P)\subseteq D^n\)</span>, equivalently functions <span class="math inline">\(D^n\to\{0,1\}\)</span>.</li>
-</ul></li>
-<li>A separate variable assignment <span class="math inline">\(s:\mathrm{Var}\to D\)</span> gives variables their values: <span class="math inline">\(s(x)\in D\)</span>.</li>
-</ul>
-<p>For example, if <span class="math inline">\(w(\mathrm{alice})=o_1\)</span>, <span class="math inline">\(w(\mathrm{arithmetic})=o_3\)</span>, and <span class="math inline">\((o_1,o_3)\in w(\mathrm{Knows})\)</span>, then <span class="math inline">\(\mathrm{Knows}(\mathrm{alice},\mathrm{arithmetic})\)</span> is true.</p>
-</section>
 </section>
 </section>
 <section id="inference" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="inference"><span class="header-section-number">2.2</span> Inference</h2>
-<section id="entailment-and-satisfiability" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="entailment-and-satisfiability"><span class="header-section-number">2.2.1</span> Entailment and Satisfiability</h3>
-<section id="entailment" class="level4" data-number="2.2.1.1">
-<h4 data-number="2.2.1.1" class="anchored" data-anchor-id="entailment"><span class="header-section-number">2.2.1.1</span> Entailment</h4>
-<p><span class="math inline">\(\mathrm{KB}\)</span> entails <span class="math inline">\(f\)</span> (written <span class="math inline">\(\mathrm{KB} \models f\)</span>) iff <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)\)</span>.</p>
-</section>
-<section id="contradiction" class="level4" data-number="2.2.1.2">
-<h4 data-number="2.2.1.2" class="anchored" data-anchor-id="contradiction"><span class="header-section-number">2.2.1.2</span> Contradiction</h4>
-<p><span class="math inline">\(\mathrm{KB}\)</span> contradicts <span class="math inline">\(f\)</span> iff <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset\)</span>.</p>
-</section>
-<section id="contingency" class="level4" data-number="2.2.1.3">
-<h4 data-number="2.2.1.3" class="anchored" data-anchor-id="contingency"><span class="header-section-number">2.2.1.3</span> Contingency</h4>
-<p><span class="math display">\[
-\emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})
-\]</span></p>
-</section>
-<section id="satisfiability" class="level4" data-number="2.2.1.4">
-<h4 data-number="2.2.1.4" class="anchored" data-anchor-id="satisfiability"><span class="header-section-number">2.2.1.4</span> Satisfiability</h4>
-<p>A knowledge base <span class="math inline">\(\mathrm{KB}\)</span> is satisfiable if <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \neq \emptyset\)</span>.</p>
-</section>
-</section>
-<section id="sat-and-model-checking" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="sat-and-model-checking"><span class="header-section-number">2.2.2</span> SAT and Model-Checking</h3>
-<section id="model-checking" class="level4" data-number="2.2.2.1">
-<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="model-checking"><span class="header-section-number">2.2.2.1</span> Model Checking</h4>
+<section id="entailment-and-sat" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="entailment-and-sat"><span class="header-section-number">2.2.1</span> Entailment and SAT</h3>
 <ul>
-<li>Input: knowledge base <span class="math inline">\(\mathrm{KB}\)</span></li>
-<li>Output: exists satisfying model (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \neq \emptyset\)</span>)?</li>
+<li>Semantic relations between <span class="math inline">\(\mathrm{KB}\)</span> and query <span class="math inline">\(f\)</span>:
+<ul>
+<li>Entailment (<span class="math inline">\(\mathrm{KB} \models f\)</span>): <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)\)</span> (<code>Ask[f]</code> = Yes).</li>
+<li>Contradiction (<span class="math inline">\(\mathrm{KB} \models \neg f\)</span>): <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset\)</span> (<code>Ask[f]</code> = No).</li>
+<li>Contingency: Nonempty proper overlap (<code>Ask[f]</code> = Don’t know).</li>
+</ul></li>
+<li>Reduction to SAT (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \ne \emptyset\)</span>): <span class="math inline">\(\mathrm{KB} \models f \iff \mathrm{KB} \cup \{\neg f\}\)</span> is unsatisfiable.</li>
+<li>SAT solvers (viewing SAT as a CSP): DPLL (backtracking + unit propagation + pruning) and WalkSAT (randomized local variable flips).</li>
 </ul>
 </section>
-<section id="popular-algorithms" class="level4" data-number="2.2.2.2">
-<h4 data-number="2.2.2.2" class="anchored" data-anchor-id="popular-algorithms"><span class="header-section-number">2.2.2.2</span> Popular Algorithms</h4>
+<section id="horn-clauses-modus-ponens-and-unification" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="horn-clauses-modus-ponens-and-unification"><span class="header-section-number">2.2.2</span> Horn Clauses, Modus Ponens, and Unification</h3>
 <ul>
-<li>DPLL (backtracking + propagation + pruning)</li>
-<li>WalkSat (randomized local search over complete assignments)</li>
+<li><p><strong>Horn clause</strong>: Clause with <em>at most one</em> positive literal—either a definite clause <span class="math inline">\((p_1 \land \dots \land p_k) \to q\)</span> or goal clause <span class="math inline">\((p_1 \land \dots \land p_k) \to \mathrm{false}\)</span>.</p></li>
+<li><p>Propositional Modus Ponens: Derives <span class="math inline">\(q\)</span> from <span class="math inline">\(p_1, \dots, p_k\)</span> and <span class="math inline">\((p_1 \land \dots \land p_k) \to q\)</span> in linear time.</p></li>
+<li><p>First-order Modus Ponens: Given substitution <span class="math inline">\(\theta = \operatorname{Unify}\bigl((a_1',\dots,a_k'),\,(a_1,\dots,a_k)\bigr)\)</span> (<strong>most general unifier</strong>, MGU):</p>
+<p><span class="math display">\[
+\frac{a_1', \dots, a_k', \qquad \forall x_1 \cdots \forall x_n \bigl((a_1 \land \dots \land a_k) \to b\bigr)}{\operatorname{Subst}[\theta, b]}.
+\]</span></p></li>
 </ul>
-</section>
-</section>
-<section id="inference-rules" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="inference-rules"><span class="header-section-number">2.2.3</span> Inference Rules</h3>
-<section id="modus-ponens-inference-rule" class="level4" data-number="2.2.3.1">
-<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="modus-ponens-inference-rule"><span class="header-section-number">2.2.3.1</span> Modus Ponens Inference Rule</h4>
-<p>For any propositional symbols <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>:</p>
-<p><span class="math display">\[
-\frac{p,\quad p \to q}{q}
-\]</span></p>
-</section>
-<section id="general-inference-rule" class="level4" data-number="2.2.3.2">
-<h4 data-number="2.2.3.2" class="anchored" data-anchor-id="general-inference-rule"><span class="header-section-number">2.2.3.2</span> General Inference Rule</h4>
-<p>If <span class="math inline">\(f_1, \ldots, f_k, g\)</span> are formulas, then the following is an inference rule:</p>
-<p><span class="math display">\[
-\frac{f_1,\quad \ldots,\quad f_k}{g}
-\]</span></p>
-</section>
-<section id="algorithm-forward-inference" class="level4" data-number="2.2.3.3">
-<h4 data-number="2.2.3.3" class="anchored" data-anchor-id="algorithm-forward-inference"><span class="header-section-number">2.2.3.3</span> Algorithm: Forward Inference</h4>
-<p>Input: set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span>.</p>
-<p>Repeat until no changes to <span class="math inline">\(\mathrm{KB}\)</span>:</p>
-<ol type="1">
-<li>Choose set of formulas <span class="math inline">\(f_1, \ldots, f_k \in \mathrm{KB}\)</span>.</li>
-<li>If matching rule <span class="math inline">\(\frac{f_1,\quad \cdots,\quad f_k}{g}\)</span> exists, add <span class="math inline">\(g\)</span> to <span class="math inline">\(\mathrm{KB}\)</span>.</li>
-</ol>
-</section>
-<section id="derivation" class="level4" data-number="2.2.3.4">
-<h4 data-number="2.2.3.4" class="anchored" data-anchor-id="derivation"><span class="header-section-number">2.2.3.4</span> Derivation</h4>
-<p><span class="math inline">\(\mathrm{KB}\)</span> derives/proves <span class="math inline">\(f\)</span> (<span class="math inline">\(\mathrm{KB} \vdash f\)</span>) iff <span class="math inline">\(f\)</span> eventually gets added to <span class="math inline">\(\mathrm{KB}\)</span>.</p>
-</section>
-</section>
-<section id="horn-clauses-and-modus-ponens" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="horn-clauses-and-modus-ponens"><span class="header-section-number">2.2.4</span> Horn Clauses and Modus Ponens</h3>
-<section id="propositional-logic-1" class="level4" data-number="2.2.4.1">
-<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="propositional-logic-1"><span class="header-section-number">2.2.4.1</span> Propositional Logic</h4>
-<section id="definite-clause" class="level5" data-number="2.2.4.1.1">
-<h5 data-number="2.2.4.1.1" class="anchored" data-anchor-id="definite-clause"><span class="header-section-number">2.2.4.1.1</span> Definite Clause</h5>
-<p>A definite clause has the following form:</p>
-<p><span class="math display">\[
-(p_1 \land \cdots \land p_k) \to q
-\]</span></p>
-<p>where <span class="math inline">\(p_1, \ldots, p_k, q\)</span> are propositional symbols.</p>
-</section>
-<section id="horn-clause" class="level5" data-number="2.2.4.1.2">
-<h5 data-number="2.2.4.1.2" class="anchored" data-anchor-id="horn-clause"><span class="header-section-number">2.2.4.1.2</span> Horn Clause</h5>
-<p>A Horn clause is either:</p>
-<ul>
-<li>a definite clause <span class="math inline">\((p_1 \land \cdots \land p_k \to q)\)</span></li>
-<li>a goal clause <span class="math inline">\((p_1 \land \cdots \land p_k \to \mathrm{false})\)</span></li>
-</ul>
-</section>
-<section id="modus-ponens" class="level5" data-number="2.2.4.1.3">
-<h5 data-number="2.2.4.1.3" class="anchored" data-anchor-id="modus-ponens"><span class="header-section-number">2.2.4.1.3</span> Modus Ponens</h5>
-<p><span class="math display">\[
-\frac{p_1,\quad \cdots,\quad p_k,\quad (p_1 \land \cdots \land p_k) \to q}{q}
-\]</span></p>
-</section>
-</section>
-<section id="first-order-logic-1" class="level4" data-number="2.2.4.2">
-<h4 data-number="2.2.4.2" class="anchored" data-anchor-id="first-order-logic-1"><span class="header-section-number">2.2.4.2</span> First-Order Logic</h4>
-<section id="definite-clause-1" class="level5" data-number="2.2.4.2.1">
-<h5 data-number="2.2.4.2.1" class="anchored" data-anchor-id="definite-clause-1"><span class="header-section-number">2.2.4.2.1</span> Definite Clause</h5>
-<p>A definite clause has the following form:</p>
-<p><span class="math display">\[
-\forall x_1 \cdots \forall x_n \bigl((a_1 \land \cdots \land a_k) \to b\bigr)
-\]</span></p>
-<p>for variables <span class="math inline">\(x_1, \ldots, x_n\)</span> and atomic formulas <span class="math inline">\(a_1, \ldots, a_k, b\)</span> (which contain those variables).</p>
-</section>
-<section id="modus-ponens-1" class="level5" data-number="2.2.4.2.2">
-<h5 data-number="2.2.4.2.2" class="anchored" data-anchor-id="modus-ponens-1"><span class="header-section-number">2.2.4.2.2</span> Modus Ponens</h5>
-<p><span class="math display">\[
-\frac{a_1,\ldots,a_k \qquad \forall x_1\cdots\forall x_n\bigl((a_1\land\cdots\land a_k)\to b\bigr)}{b}
-\]</span></p>
-</section>
-<section id="substitution" class="level5" data-number="2.2.4.2.3">
-<h5 data-number="2.2.4.2.3" class="anchored" data-anchor-id="substitution"><span class="header-section-number">2.2.4.2.3</span> Substitution</h5>
-<p>A substitution <span class="math inline">\(\theta\)</span> is a mapping from variables to terms.</p>
-<p><span class="math inline">\(\operatorname{Subst}[\theta, f]\)</span> returns the result of performing substitution <span class="math inline">\(\theta\)</span> on <span class="math inline">\(f\)</span>.</p>
-</section>
-<section id="unification" class="level5" data-number="2.2.4.2.4">
-<h5 data-number="2.2.4.2.4" class="anchored" data-anchor-id="unification"><span class="header-section-number">2.2.4.2.4</span> Unification</h5>
-<p>Unification takes two formulas <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> and returns a substitution <span class="math inline">\(\theta\)</span> which is the most general unifier:</p>
-<p><span class="math display">\[
-\operatorname{Unify}[f,g] = \theta
-\quad \text{such that} \quad
-\operatorname{Subst}[\theta,f] = \operatorname{Subst}[\theta,g]
-\]</span></p>
-<p>or “fail” if no such <span class="math inline">\(\theta\)</span> exists.</p>
-</section>
-</section>
-</section>
-<section id="complexity" class="level3" data-number="2.2.5">
-<h3 data-number="2.2.5" class="anchored" data-anchor-id="complexity"><span class="header-section-number">2.2.5</span> Complexity</h3>
 <div id="thm-ai-2-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.1 (Completeness of Modus Ponens)</strong></span> Modus ponens is complete for first-order logic with only Horn clauses.</p>
-</div>
-<div id="thm-ai-2-2" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.2 (Semi-Decidability)</strong></span> First-order logic (even restricted to only Horn clauses) is <strong>semi-decidable</strong>.</p>
+<p><span class="theorem-title"><strong>Theorem 2.1 (Completeness &amp; Semi-Decidability on Horn Clauses)</strong></span> &nbsp;</p>
 <ul>
-<li>If <span class="math inline">\(\mathrm{KB} \models f\)</span>, forward inference on complete inference rules will prove <span class="math inline">\(f\)</span> in finite time.</li>
-<li>If <span class="math inline">\(\mathrm{KB} \not\models f\)</span>, no algorithm can show this in finite time.</li>
+<li>Modus Ponens (with unification) is complete for propositional and FOL Horn clauses.</li>
+<li>Function symbols generate infinitely many ground terms (<span class="math inline">\(a, F(a), F(F(a)), \dots\)</span>), making FOL <strong>semi-decidable</strong> (halts if <span class="math inline">\(\mathrm{KB} \models f\)</span>, may loop forever if <span class="math inline">\(\mathrm{KB} \not\models f\)</span>).</li>
 </ul>
 </div>
 </section>
-<section id="resolution" class="level3" data-number="2.2.6">
-<h3 data-number="2.2.6" class="anchored" data-anchor-id="resolution"><span class="header-section-number">2.2.6</span> Resolution</h3>
-<section id="propositional-resolution-rule" class="level4" data-number="2.2.6.1">
-<h4 data-number="2.2.6.1" class="anchored" data-anchor-id="propositional-resolution-rule"><span class="header-section-number">2.2.6.1</span> Propositional Resolution Rule</h4>
+<section id="resolution-and-cnf" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="resolution-and-cnf"><span class="header-section-number">2.2.3</span> Resolution and CNF</h3>
+<p>Modus Ponens cannot cancel general disjunctions; first-order resolution resolves complementary literals with <span class="math inline">\(\theta = \operatorname{Unify}[p, q]\)</span>:</p>
 <p><span class="math display">\[
-\frac{f_1 \lor \cdots \lor f_n \lor p,\quad \neg p \lor g_1 \lor \cdots \lor g_m}
-{f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m}
+\frac{f_1 \lor \cdots \lor f_n \lor p, \qquad \neg q \lor g_1 \lor \cdots \lor g_m}{\operatorname{Subst}[\theta,\, f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]}.
 \]</span></p>
-</section>
-<section id="conjunctive-normal-form-cnf" class="level4" data-number="2.2.6.2">
-<h4 data-number="2.2.6.2" class="anchored" data-anchor-id="conjunctive-normal-form-cnf"><span class="header-section-number">2.2.6.2</span> Conjunctive Normal Form (CNF)</h4>
-<p>A CNF formula is a conjunction of clauses.</p>
 <div id="prp-ai-2-1" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2.1 (Conversion to CNF)</strong></span> Every formula <span class="math inline">\(f\)</span> in propositional logic can be converted into an equivalent CNF formula <span class="math inline">\(f'\)</span>:</p>
-<p><span class="math display">\[
-\mathcal{M}(f) = \mathcal{M}(f')
-\]</span></p>
-</div>
-</section>
-<section id="first-order-conversion-to-cnf" class="level4" data-number="2.2.6.3">
-<h4 data-number="2.2.6.3" class="anchored" data-anchor-id="first-order-conversion-to-cnf"><span class="header-section-number">2.2.6.3</span> First-Order Conversion to CNF</h4>
-<ul>
-<li>All variable have universal quantifiers by default</li>
-<li>Introduce Skolem functions (e.g., <span class="math inline">\(Y(x)\)</span>) to represent existentially quantified variables.</li>
-</ul>
-</section>
-<section id="first-order-resolution-rule" class="level4" data-number="2.2.6.4">
-<h4 data-number="2.2.6.4" class="anchored" data-anchor-id="first-order-resolution-rule"><span class="header-section-number">2.2.6.4</span> First-Order Resolution Rule</h4>
-<p><span class="math display">\[
-\frac{
-f_1 \lor \cdots \lor f_n \lor p,\qquad
-\neg q \lor g_1 \lor \cdots \lor g_m
-}{
-\operatorname{Subst}[\theta,\,
-f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]
-}
-\]</span></p>
-<p>where <span class="math inline">\(\theta = \operatorname{Unify}[p,q]\)</span>.</p>
-</section>
-</section>
-</section>
-<section id="semantics" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="semantics"><span class="header-section-number">2.3</span> Semantics</h2>
-<section id="desiderata-for-inference-rules" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="desiderata-for-inference-rules"><span class="header-section-number">2.3.1</span> Desiderata for Inference Rules</h3>
-<section id="semantics-1" class="level4" data-number="2.3.1.1">
-<h4 data-number="2.3.1.1" class="anchored" data-anchor-id="semantics-1"><span class="header-section-number">2.3.1.1</span> Semantics</h4>
-<p>Interpretation defines <strong>entailed/true</strong> formulas: <span class="math inline">\(\mathrm{KB} \models f\)</span>.</p>
-<p><span class="math display">\[
-\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)
-\]</span></p>
-</section>
-<section id="syntax-2" class="level4" data-number="2.3.1.2">
-<h4 data-number="2.3.1.2" class="anchored" data-anchor-id="syntax-2"><span class="header-section-number">2.3.1.2</span> Syntax</h4>
-<p>Inference rules <strong>derive</strong> formulas: <span class="math inline">\(\mathrm{KB} \vdash f\)</span></p>
-<div id="def-ai-2-1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.1 (Soundness)</strong></span> A set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span> is <strong>sound</strong> if:</p>
-<p><span class="math display">\[
-\{f : \mathrm{KB} \vdash f\}
-\subseteq
-\{f : \mathrm{KB} \models f\}.
-\]</span></p>
-</div>
-<div id="def-ai-2-2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.2 (Completeness)</strong></span> A set of inference rules <span class="math inline">\(\mathrm{Rules}\)</span> is <strong>complete</strong> if:</p>
-<p><span class="math display">\[
-\{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}
-\]</span></p>
-</div>
-</section>
-</section>
-<section id="fixing-completeness" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="fixing-completeness"><span class="header-section-number">2.3.2</span> Fixing Completeness</h3>
+<p><span class="theorem-title"><strong>Proposition 2.1 (CNF Conversion Steps)</strong></span> &nbsp;</p>
 <ol type="1">
-<li><p>Option 1: Restrict the allowed set of formulas</p>
-<p>propositional logic <span class="math inline">\(\to\)</span> propositional logic with only Horn clauses</p></li>
-<li><p>Option 2: Use more powerful inference rules</p>
-<p>Modus ponens <span class="math inline">\(\to\)</span> resolution</p></li>
+<li>Eliminate <span class="math inline">\(\leftrightarrow\)</span> and <span class="math inline">\(\to\)</span> (<span class="math inline">\(f \to g \leadsto \neg f \lor g\)</span>).</li>
+<li>Push <span class="math inline">\(\neg\)</span> inward (De Morgan + quantifier duality) and drop <span class="math inline">\(\neg\neg\)</span>.</li>
+<li><em>(FOL)</em> Standardize variables apart, <strong>Skolemize</strong> <span class="math inline">\(\exists\)</span> into fresh constants / Skolem functions of enclosing <span class="math inline">\(\forall\)</span>-variables (<span class="math inline">\(\forall x\,\exists y \leadsto Y(x)\)</span>), and drop <span class="math inline">\(\forall\)</span>.</li>
+<li>Distribute <span class="math inline">\(\lor\)</span> over <span class="math inline">\(\land\)</span>.</li>
 </ol>
-<div id="thm-ai-2-3" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2.3 (Modus Ponens on Horn Clauses)</strong></span> Modus ponens is <strong>complete</strong> with respect to Horn clauses:</p>
+</div>
 <ul>
-<li>Suppose <span class="math inline">\(\mathrm{KB}\)</span> contains only Horn clauses and <span class="math inline">\(p\)</span> is an entailed propositional symbol.</li>
-<li>Then applying modus ponens will derive <span class="math inline">\(p\)</span>.</li>
+<li><strong>Resolution refutation</strong>: Convert <span class="math inline">\(\mathrm{KB} \cup \{\neg f\}\)</span> to CNF and resolve until deriving the empty clause (<span class="math inline">\(\mathrm{false}\)</span>); sound and complete, exponential worst-case time.</li>
+</ul>
+</section>
+</section>
+<section id="soundness-completeness-and-verification" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="soundness-completeness-and-verification"><span class="header-section-number">2.3</span> Soundness, Completeness, and Verification</h2>
+<div id="def-ai-2-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.1 (Soundness and Completeness)</strong></span> &nbsp;</p>
+<ul>
+<li>Soundness (“nothing but the truth”): <span class="math inline">\(\{f : \mathrm{KB} \vdash f\} \subseteq \{f : \mathrm{KB} \models f\}\)</span>.</li>
+<li>Completeness (“the whole truth”): <span class="math inline">\(\{f : \mathrm{KB} \vdash f\} \supseteq \{f : \mathrm{KB} \models f\}\)</span>.</li>
 </ul>
 </div>
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results
-
-- @def-ai-2-1 and @def-ai-2-2: Soundness means everything derived is entailed; completeness means everything entailed is derived.
-- @thm-ai-2-1: Modus ponens is complete for first-order logic with only Horn clauses.
-- @thm-ai-2-2: First-order logic is semi-decidable, even when restricted to Horn clauses.
-- @prp-ai-2-1: Every propositional formula can be converted into an equivalent CNF formula. -->
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Language</th>
+<th style="text-align: left;">Horn Clauses (Fast / Linear)</th>
+<th style="text-align: left;">General CNF (Expressive / Exponential)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Propositional Logic</td>
+<td style="text-align: left;">Modus Ponens</td>
+<td style="text-align: left;">SAT (DPLL / WalkSAT) or Resolution</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">First-Order Logic</td>
+<td style="text-align: left;">Modus Ponens + Unification</td>
+<td style="text-align: left;">Propositionalization or Resolution + Unification</td>
+</tr>
+</tbody>
+</table>
+<section id="formal-verification-and-alphaproof" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="formal-verification-and-alphaproof"><span class="header-section-number">2.3.1</span> Formal Verification and AlphaProof</h3>
+<ul>
+<li>Proof search vs.&nbsp;proof checking: Finding a tactic proof faces huge branching factors (timeout <span class="math inline">\(\ne\)</span> disproof), whereas checking a completed proof term in a kernel (<strong>Lean</strong>) is deterministic and fast.</li>
+<li>Trust boundary: Lean guarantees the proof validly proves the <em>formalized statement</em>, even from an untrusted LLM, but cannot verify that the formalization matches human intent.</li>
+<li>AlphaProof: Pairs Lean’s tactic kernel (exact RL verification signal) with a policy/value network and tree search over proof states.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/logic-alphaproof.png" class="notes-slide-fig img-fluid figure-img" style="width:92.0%"></p>
+<figcaption>AlphaProof architecture: Lean formal tactic environment, neural proof network (tactic sampling + value head), and tree search over proof states.</figcaption>
+</figure>
+</div>
 
 
 </section>

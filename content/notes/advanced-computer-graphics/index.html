@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Geometric representations, transformations, rasterization, shading, and ray tracing.">
+<meta name="description" content="Geometric representations, transformations, rasterization, shading, ray tracing, and physical simulation.">
 
 <title>Advanced Computer Graphics – Bobby</title>
 <style>
@@ -967,13 +967,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1058,7 +1070,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Geometric representations, transformations, rasterization, shading, and ray tracing.
+    Geometric representations, transformations, rasterization, shading, ray tracing, and physical simulation.
   </div>
 </div>
 
@@ -1083,7 +1095,7 @@ window.Quarto = {
 
     <div class="chapter-list" role="list">
 
-      <div class="chapter-row" role="listitem" data-index="0" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="4" data-listing-word-count-sort="708">
+      <div class="chapter-row" role="listitem" data-index="0" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="4" data-listing-word-count-sort="708">
         <span class="chapter-num">1</span>
         <span class="chapter-main">
 
@@ -1095,7 +1107,7 @@ window.Quarto = {
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="1" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="7" data-listing-word-count-sort="1354">
+      <div class="chapter-row" role="listitem" data-index="1" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="7" data-listing-word-count-sort="1354">
         <span class="chapter-num">2</span>
         <span class="chapter-main">
 
@@ -1107,7 +1119,7 @@ window.Quarto = {
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="2" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="4" data-listing-word-count-sort="655">
+      <div class="chapter-row" role="listitem" data-index="2" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="4" data-listing-word-count-sort="655">
         <span class="chapter-num">3</span>
         <span class="chapter-main">
 
@@ -1119,7 +1131,7 @@ window.Quarto = {
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="3" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="5" data-listing-word-count-sort="884">
+      <div class="chapter-row" role="listitem" data-index="3" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="5" data-listing-word-count-sort="884">
         <span class="chapter-num">4</span>
         <span class="chapter-main">
 
@@ -1131,7 +1143,7 @@ window.Quarto = {
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="4" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="5" data-listing-word-count-sort="959">
+      <div class="chapter-row" role="listitem" data-index="4" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="5" data-listing-word-count-sort="959">
         <span class="chapter-num">5</span>
         <span class="chapter-main">
 
@@ -1143,25 +1155,49 @@ window.Quarto = {
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="5" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="12" data-listing-word-count-sort="2330">
+      <div class="chapter-row" role="listitem" data-index="5" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="7" data-listing-word-count-sort="1201">
         <span class="chapter-num">6</span>
         <span class="chapter-main">
 
-          <a class="chapter-title listing-title" href="../../../content/notes/advanced-computer-graphics/6.html">Ray Tracing</a>
+          <a class="chapter-title listing-title" href="../../../content/notes/advanced-computer-graphics/6.html">Ray Tracing I</a>
 
-          <span class="chapter-desc listing-description">Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration, radiometry, light transport, Monte Carlo integration, path tracing, and advanced light transport.</span>
+          <span class="chapter-desc listing-description">Ray casting, Whitted-style ray tracing, ray-object intersections, acceleration structures, and basic radiometry.</span>
 
         </span>
 
       </div>
 
-      <div class="chapter-row" role="listitem" data-index="6" data-listing-file-modified-sort="1795533540900" data-listing-reading-time-sort="7" data-listing-word-count-sort="1380">
+      <div class="chapter-row" role="listitem" data-index="6" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="6" data-listing-word-count-sort="1135">
         <span class="chapter-num">7</span>
         <span class="chapter-main">
 
-          <a class="chapter-title listing-title" href="../../../content/notes/advanced-computer-graphics/7.html">Advanced Rendering Topics</a>
+          <a class="chapter-title listing-title" href="../../../content/notes/advanced-computer-graphics/7.html">Ray Tracing II</a>
+
+          <span class="chapter-desc listing-description">Light transport, the rendering equation, Monte Carlo integration, path tracing, and advanced light transport.</span>
+
+        </span>
+
+      </div>
+
+      <div class="chapter-row" role="listitem" data-index="7" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="7" data-listing-word-count-sort="1380">
+        <span class="chapter-num">8</span>
+        <span class="chapter-main">
+
+          <a class="chapter-title listing-title" href="../../../content/notes/advanced-computer-graphics/8.html">Advanced Rendering Topics</a>
 
           <span class="chapter-desc listing-description">Materials and appearance modeling, neural radiance fields with volume rendering, and NeRF extensions.</span>
+
+        </span>
+
+      </div>
+
+      <div class="chapter-row" role="listitem" data-index="8" data-listing-file-modified-sort="1795711167839" data-listing-reading-time-sort="11" data-listing-word-count-sort="2169">
+        <span class="chapter-num">9</span>
+        <span class="chapter-main">
+
+          <a class="chapter-title listing-title" href="../../../content/notes/advanced-computer-graphics/9.html">Simulation I</a>
+
+          <span class="chapter-desc listing-description">Physical simulation overview, particle systems and collisions, mass-spring systems, and numerical ODE solvers.</span>
 
         </span>
 

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Probability basics and Bayesian networks: representation and inference.">
+<meta name="description" content="Probability rules, conditional independence, Bayesian networks, D-separation, and factor operations.">
 
 <title>Probabilistic Models – Bobby</title>
 <style>
@@ -942,13 +942,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1024,23 +1036,15 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#basics-on-probability" id="toc-basics-on-probability" class="nav-link active" data-scroll-target="#basics-on-probability"><span class="header-section-number">3.1</span> Basics on Probability</a>
+  <li><a href="#probability-fundamentals" id="toc-probability-fundamentals" class="nav-link active" data-scroll-target="#probability-fundamentals"><span class="header-section-number">3.1</span> Probability Fundamentals</a></li>
+  <li><a href="#bayesian-networks" id="toc-bayesian-networks" class="nav-link" data-scroll-target="#bayesian-networks"><span class="header-section-number">3.2</span> Bayesian Networks</a>
   <ul class="collapse">
-  <li><a href="#random-variables-and-distributions" id="toc-random-variables-and-distributions" class="nav-link" data-scroll-target="#random-variables-and-distributions"><span class="header-section-number">3.1.1</span> Random Variables and Distributions</a></li>
-  <li><a href="#conditional-probability-and-bayes-rule" id="toc-conditional-probability-and-bayes-rule" class="nav-link" data-scroll-target="#conditional-probability-and-bayes-rule"><span class="header-section-number">3.1.2</span> Conditional Probability and Bayes’ Rule</a></li>
+  <li><a href="#syntax-and-factorization" id="toc-syntax-and-factorization" class="nav-link" data-scroll-target="#syntax-and-factorization"><span class="header-section-number">3.2.1</span> Syntax and Factorization</a></li>
+  <li><a href="#d-separation" id="toc-d-separation" class="nav-link" data-scroll-target="#d-separation"><span class="header-section-number">3.2.2</span> D-Separation</a></li>
   </ul></li>
-  <li><a href="#bayesian-nets-representation" id="toc-bayesian-nets-representation" class="nav-link" data-scroll-target="#bayesian-nets-representation"><span class="header-section-number">3.2</span> Bayesian Nets: Representation</a>
+  <li><a href="#exact-inference-basics" id="toc-exact-inference-basics" class="nav-link" data-scroll-target="#exact-inference-basics"><span class="header-section-number">3.3</span> Exact Inference Basics</a>
   <ul class="collapse">
-  <li><a href="#bayes-nets" id="toc-bayes-nets" class="nav-link" data-scroll-target="#bayes-nets"><span class="header-section-number">3.2.1</span> Bayes’ Nets</a></li>
-  <li><a href="#graphical-model-notation" id="toc-graphical-model-notation" class="nav-link" data-scroll-target="#graphical-model-notation"><span class="header-section-number">3.2.2</span> Graphical Model Notation</a></li>
-  <li><a href="#bayes-net-semantics" id="toc-bayes-net-semantics" class="nav-link" data-scroll-target="#bayes-net-semantics"><span class="header-section-number">3.2.3</span> Bayes’ Net Semantics</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">3.2.4</span> Assumptions</a></li>
-  <li><a href="#d-separation" id="toc-d-separation" class="nav-link" data-scroll-target="#d-separation"><span class="header-section-number">3.2.5</span> D-Separation</a></li>
-  </ul></li>
-  <li><a href="#bayesian-nets-inference" id="toc-bayesian-nets-inference" class="nav-link" data-scroll-target="#bayesian-nets-inference"><span class="header-section-number">3.3</span> Bayesian Nets: Inference</a>
-  <ul class="collapse">
-  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">3.3.1</span> Inference</a></li>
-  <li><a href="#inference-by-enumeration" id="toc-inference-by-enumeration" class="nav-link" data-scroll-target="#inference-by-enumeration"><span class="header-section-number">3.3.2</span> Inference by Enumeration</a></li>
+  <li><a href="#enumeration-and-factors" id="toc-enumeration-and-factors" class="nav-link" data-scroll-target="#enumeration-and-factors"><span class="header-section-number">3.3.1</span> Enumeration and Factors</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1056,7 +1060,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Probability basics and Bayesian networks: representation and inference.
+    Probability rules, conditional independence, Bayesian networks, D-separation, and factor operations.
   </div>
 </div>
 
@@ -1073,110 +1077,115 @@ window.Quarto = {
 </header>
 
 
-<section id="basics-on-probability" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="basics-on-probability"><span class="header-section-number">3.1</span> Basics on Probability</h2>
-<section id="random-variables-and-distributions" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="random-variables-and-distributions"><span class="header-section-number">3.1.1</span> Random Variables and Distributions</h3>
-<section id="random-variables" class="level4" data-number="3.1.1.1">
-<h4 data-number="3.1.1.1" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">3.1.1.1</span> Random Variables</h4>
-<p>A random variable is some aspect of the world about which we (may) have uncertainty.</p>
-</section>
-<section id="probability-distribution" class="level4" data-number="3.1.1.2">
-<h4 data-number="3.1.1.2" class="anchored" data-anchor-id="probability-distribution"><span class="header-section-number">3.1.1.2</span> Probability Distribution</h4>
-<p>A probability distribution over a random variable associates a probability with each value.</p>
-</section>
-<section id="joint-distributions" class="level4" data-number="3.1.1.3">
-<h4 data-number="3.1.1.3" class="anchored" data-anchor-id="joint-distributions"><span class="header-section-number">3.1.1.3</span> Joint Distributions</h4>
-<p>A joint distribution over a set of random variables: specifies a real number for each assignment.</p>
-</section>
-<section id="marginal-distributions" class="level4" data-number="3.1.1.4">
-<h4 data-number="3.1.1.4" class="anchored" data-anchor-id="marginal-distributions"><span class="header-section-number">3.1.1.4</span> Marginal Distributions</h4>
-<p>Marginalization (summing out): Combine collapsed rows by adding.</p>
-</section>
-</section>
-<section id="conditional-probability-and-bayes-rule" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="conditional-probability-and-bayes-rule"><span class="header-section-number">3.1.2</span> Conditional Probability and Bayes’ Rule</h3>
-<section id="conditional-probabilities" class="level4" data-number="3.1.2.1">
-<h4 data-number="3.1.2.1" class="anchored" data-anchor-id="conditional-probabilities"><span class="header-section-number">3.1.2.1</span> Conditional Probabilities</h4>
-<p>Conditional distributions are probability distributions over some variables given fixed values of others.</p>
-</section>
-<section id="bayes-rule" class="level4" data-number="3.1.2.2">
-<h4 data-number="3.1.2.2" class="anchored" data-anchor-id="bayes-rule"><span class="header-section-number">3.1.2.2</span> Bayes’ Rule</h4>
-<p>Bayes’ rule allows us to compute conditional probabilities in terms of other conditional probabilities.</p>
-</section>
-</section>
-</section>
-<section id="bayesian-nets-representation" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="bayesian-nets-representation"><span class="header-section-number">3.2</span> Bayesian Nets: Representation</h2>
-<section id="bayes-nets" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="bayes-nets"><span class="header-section-number">3.2.1</span> Bayes’ Nets</h3>
-<p>a technique for describing complex joint distributions (models) using simple, local distributions (conditional probabilities)</p>
+<section id="probability-fundamentals" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="probability-fundamentals"><span class="header-section-number">3.1</span> Probability Fundamentals</h2>
 <ul>
-<li>More properly called <strong>graphical models</strong></li>
-<li>Local interactions chain together to give global, indirect interactions</li>
+<li>Joint distribution <span class="math inline">\(P(X_1, \dots, X_n)\)</span>: Table of size <span class="math inline">\(O(d^n)\)</span> for domain size <span class="math inline">\(d\)</span>—exponentially costly to store or estimate.</li>
+<li>Core rules:
+<ul>
+<li>Marginalization: <span class="math inline">\(P(a) = \sum_b P(a, b)\)</span>.</li>
+<li>Conditioning &amp; normalization: <span class="math inline">\(P(a \mid b) = \dfrac{P(a, b)}{P(b)} \propto_A P(a, b)\)</span> (select rows matching <span class="math inline">\(b\)</span>, then normalize).</li>
+<li>Chain rule: <span class="math inline">\(P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid x_1, \dots, x_{i-1})\)</span>.</li>
+<li>Bayes’ rule: <span class="math inline">\(P(x \mid y) = \dfrac{P(y \mid x)P(x)}{P(y)}\)</span>.</li>
+</ul></li>
+<li><strong>Conditional independence</strong> (<span class="math inline">\(X \perp\!\!\!\perp Y \mid Z\)</span>): <span class="math inline">\(P(x, y \mid z) = P(x \mid z)P(y \mid z) \iff P(x \mid y, z) = P(x \mid z)\)</span> (e.g., <span class="math inline">\(\mathrm{Catch} \perp\!\!\!\perp \mathrm{Toothache} \mid \mathrm{Cavity}\)</span>).</li>
 </ul>
 </section>
-<section id="graphical-model-notation" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="graphical-model-notation"><span class="header-section-number">3.2.2</span> Graphical Model Notation</h3>
+<section id="bayesian-networks" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="bayesian-networks"><span class="header-section-number">3.2</span> Bayesian Networks</h2>
+<section id="syntax-and-factorization" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="syntax-and-factorization"><span class="header-section-number">3.2.1</span> Syntax and Factorization</h3>
 <ul>
-<li>Nodes: variables (with domains): can be assigned (observed) or unassigned (unobserved)</li>
-<li>Arcs: interactions: Formally: encode conditional independence</li>
+<li>Components: A DAG (one node per variable <span class="math inline">\(X_i\)</span>) plus a local <strong>Conditional Probability Table (CPT)</strong> <span class="math inline">\(P(X_i \mid \operatorname{Parents}(X_i))\)</span> at each node.</li>
 </ul>
-</section>
-<section id="bayes-net-semantics" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="bayes-net-semantics"><span class="header-section-number">3.2.3</span> Bayes’ Net Semantics</h3>
-<ul>
-<li><p>A set of nodes, one per random variable <span class="math inline">\(X\)</span></p></li>
-<li><p>A directed, acyclic graph</p></li>
-<li><p>A conditional distribution for each node: a collection of distributions over <span class="math inline">\(X\)</span>, one for each combination of parents’ values</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bn-insurance.png" class="notes-slide-fig img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Example Bayesian network (Insurance domain) encoding joint dependencies through sparse local parent–child links.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bn-graphical-notation.png" class="notes-slide-fig img-fluid figure-img" style="width:46.0%"></p>
+<figcaption>Graphical notation: independent variable (<code>Weather</code>) and a common-cause fork (<code>Cavity</code> <span class="math inline">\(\to\)</span> <code>Toothache</code>, <code>Catch</code>).</figcaption>
+</figure>
+</div>
+<div id="def-ai-3-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.1 (Bayesian Network Joint Factorization)</strong></span> Assuming <span class="math inline">\(X_i \perp\!\!\!\perp \{X_1,\dots,X_{i-1}\} \setminus \operatorname{Parents}(X_i) \mid \operatorname{Parents}(X_i)\)</span> in topological order:</p>
 <p><span class="math display">\[
-P(X \mid a_1 \ldots a_n)
-\]</span></p></li>
-</ul>
-<section id="cpt-conditional-probability-table" class="level4" data-number="3.2.3.1">
-<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="cpt-conditional-probability-table"><span class="header-section-number">3.2.3.1</span> CPT (Conditional Probability Table)</h4>
-<p>description of a noisy causal process.</p>
-</section>
-</section>
-<section id="assumptions" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.2.4</span> Assumptions</h3>
-<p>Assumptions we are required to make to define the Bayes net when given the graph:</p>
-<p><span class="math display">\[
-P(x_i \mid x_1,\ldots,x_{i-1})
-=
-P(x_i \mid \operatorname{parents}(X_i)).
+P(x_1, \dots, x_n) = \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
 \]</span></p>
-</section>
-<section id="d-separation" class="level3" data-number="3.2.5">
-<h3 data-number="3.2.5" class="anchored" data-anchor-id="d-separation"><span class="header-section-number">3.2.5</span> D-Separation</h3>
-<p>If all paths between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are blocked given observed variables <span class="math inline">\(Z\)</span>, then <span class="math inline">\(A \perp\!\!\!\perp B \mid Z\)</span>.</p>
+</div>
 <ul>
-<li>Chain / fork: observing the middle node blocks the path.</li>
-<li>Collider (<span class="math inline">\(A \to M \leftarrow B\)</span>): blocks the path unless <span class="math inline">\(M\)</span> or a descendant is observed.</li>
-<li>One blocked segment blocks a path; any active path means independence is not guaranteed.</li>
+<li>Graph semantics vs.&nbsp;causality: Arcs encode conditional independence, not physical causation (<span class="math inline">\(T \to R\)</span> and <span class="math inline">\(R \to T\)</span> can represent the same <span class="math inline">\(P(R, T)\)</span>), though causal ordering yields sparser graphs and simpler CPTs.</li>
 </ul>
 </section>
-</section>
-<section id="bayesian-nets-inference" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="bayesian-nets-inference"><span class="header-section-number">3.3</span> Bayesian Nets: Inference</h2>
-<section id="inference" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="inference"><span class="header-section-number">3.3.1</span> Inference</h3>
-<p>Calculating some useful quantity from a joint probability distribution.</p>
-</section>
-<section id="inference-by-enumeration" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="inference-by-enumeration"><span class="header-section-number">3.3.2</span> Inference by Enumeration</h3>
+<section id="d-separation" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="d-separation"><span class="header-section-number">3.2.2</span> D-Separation</h3>
+<p>Every undirected path between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> decomposes into three-node triples given evidence <span class="math inline">\(Z\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Triple</th>
+<th style="text-align: left;"><span class="math inline">\(M \notin Z\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(M \in Z\)</span></th>
+<th style="text-align: left;">Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Causal chain (<span class="math inline">\(X \to M \to Y\)</span>)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Blocked (<span class="math inline">\(\perp\!\!\!\perp\)</span>)</td>
+<td style="text-align: left;">Observing <span class="math inline">\(M\)</span> intercepts flow</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Common cause (<span class="math inline">\(X \leftarrow M \to Y\)</span>)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Blocked (<span class="math inline">\(\perp\!\!\!\perp\)</span>)</td>
+<td style="text-align: left;">Observing <span class="math inline">\(M\)</span> explains correlation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Common effect (<span class="math inline">\(X \to M \leftarrow Y\)</span>)</td>
+<td style="text-align: left;">Blocked (<span class="math inline">\(\perp\!\!\!\perp\)</span>)</td>
+<td style="text-align: left;">Active (if <span class="math inline">\(M\)</span> or descendant <span class="math inline">\(\in Z\)</span>)</td>
+<td style="text-align: left;"><em>Explaining away</em>: causes compete</td>
+</tr>
+</tbody>
+</table>
+<div id="def-ai-3-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3.2 (D-Separation Rule)</strong></span> &nbsp;</p>
 <ol type="1">
-<li><strong>Join</strong> all factors.</li>
-<li><strong>Eliminate</strong> all hidden variables.</li>
-<li><strong>Normalize</strong> the result.</li>
+<li>Shade evidence nodes <span class="math inline">\(Z\)</span> and inspect all undirected paths between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
+<li>A path is active iff <em>every</em> triple along it is active; one blocked triple blocks the path.</li>
+<li>If no path is active, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>d-separated</strong> <span class="math inline">\(\implies X \perp\!\!\!\perp Y \mid Z\)</span> in all distributions compatible with the DAG.</li>
 </ol>
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results
-
-- [Assumptions](#assumptions): A Bayes' net assumes $P(x_i \mid x_1,\ldots,x_{i-1}) = P(x_i \mid \operatorname{parents}(X_i))$.
-- [D-Separation](#d-separation): If all paths between $A$ and $B$ are blocked given $Z$, then $A \perp\!\!\!\perp B \mid Z$.
-- [Inference by Enumeration](#inference-by-enumeration): Join all factors, eliminate hidden variables, then normalize. -->
+</div>
+</section>
+</section>
+<section id="exact-inference-basics" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="exact-inference-basics"><span class="header-section-number">3.3</span> Exact Inference Basics</h2>
+<section id="enumeration-and-factors" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="enumeration-and-factors"><span class="header-section-number">3.3.1</span> Enumeration and Factors</h3>
+<p>Partition variables into query <span class="math inline">\(Q\)</span>, observed evidence <span class="math inline">\(e\)</span>, and hidden <span class="math inline">\(H\)</span>:</p>
+<p><span class="math display">\[
+P(Q \mid e) = \frac{1}{Z} \sum_h P(Q, h, e) = \frac{1}{Z} \sum_h \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
+\]</span></p>
+<p>Three operations on multidimensional probability tables (<strong>factors</strong>):</p>
+<ol type="1">
+<li>Evidence restriction: Keep only CPT rows consistent with <span class="math inline">\(e\)</span>.</li>
+<li>Join (<code>×</code>): Pointwise product over the union of variables (e.g., <span class="math inline">\(P(R) \times P(T \mid R) = P(R, T)\)</span>).</li>
+<li>Eliminate (<code>∑</code>): Sum out a hidden variable from a factor.</li>
+</ol>
+<ul>
+<li>Bottleneck of enumeration: Joining all factors before summing out <span class="math inline">\(H\)</span> builds an <span class="math inline">\(O(d^n)\)</span> table—motivating Variable Elimination in Chapter 4.</li>
+</ul>
 
 
 </section>

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Materials and appearance modeling, neural radiance fields with volume rendering, and NeRF extensions.">
+<meta name="description" content="Light transport, the rendering equation, Monte Carlo integration, path tracing, and advanced light transport.">
 
-<title>Advanced Rendering Topics – Bobby</title>
+<title>Ray Tracing II – Bobby</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,6 +27,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -37,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../content/notes/artificial-intelligence/index.html" rel="next">
+<link href="../../../content/notes/advanced-computer-graphics/8.html" rel="next">
 <link href="../../../content/notes/advanced-computer-graphics/6.html" rel="prev">
 <link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -344,7 +379,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/index.html">Computer Graphics</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/7.html">Advanced Rendering</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/index.html">Computer Graphics</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/7.html">Ray Tracing II</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -942,13 +977,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1024,14 +1071,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#materials-and-appearances" id="toc-materials-and-appearances" class="nav-link active" data-scroll-target="#materials-and-appearances"><span class="header-section-number">7.1</span> Materials and Appearances</a></li>
-  <li><a href="#advanced-appearance-modeling" id="toc-advanced-appearance-modeling" class="nav-link" data-scroll-target="#advanced-appearance-modeling"><span class="header-section-number">7.2</span> Advanced Appearance Modeling</a></li>
-  <li><a href="#neural-radiance-fields-nerf" id="toc-neural-radiance-fields-nerf" class="nav-link" data-scroll-target="#neural-radiance-fields-nerf"><span class="header-section-number">7.3</span> Neural Radiance Fields (NeRF)</a>
-  <ul class="collapse">
-  <li><a href="#volume-rendering-with-ray-marching" id="toc-volume-rendering-with-ray-marching" class="nav-link" data-scroll-target="#volume-rendering-with-ray-marching"><span class="header-section-number">7.3.1</span> Volume Rendering with Ray Marching</a></li>
-  <li><a href="#learning-nerf" id="toc-learning-nerf" class="nav-link" data-scroll-target="#learning-nerf"><span class="header-section-number">7.3.2</span> Learning NeRF</a></li>
-  </ul></li>
-  <li><a href="#nerf-extensions" id="toc-nerf-extensions" class="nav-link" data-scroll-target="#nerf-extensions"><span class="header-section-number">7.4</span> NeRF Extensions</a></li>
+  <li><a href="#light-transport" id="toc-light-transport" class="nav-link active" data-scroll-target="#light-transport"><span class="header-section-number">7.1</span> Light Transport</a></li>
+  <li><a href="#monte-carlo-integration" id="toc-monte-carlo-integration" class="nav-link" data-scroll-target="#monte-carlo-integration"><span class="header-section-number">7.2</span> Monte Carlo Integration</a></li>
+  <li><a href="#path-tracing" id="toc-path-tracing" class="nav-link" data-scroll-target="#path-tracing"><span class="header-section-number">7.3</span> Path Tracing</a></li>
+  <li><a href="#advanced-light-transport" id="toc-advanced-light-transport" class="nav-link" data-scroll-target="#advanced-light-transport"><span class="header-section-number">7.4</span> Advanced Light Transport</a></li>
   </ul>
 </nav>
     </div>
@@ -1039,14 +1082,14 @@ window.Quarto = {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/index.html">Computer Graphics</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/7.html">Advanced Rendering</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../content/notes/index.html">Notes</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/index.html">Computer Graphics</a></li><li class="breadcrumb-item"><a href="../../../content/notes/advanced-computer-graphics/7.html">Ray Tracing II</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Advanced Rendering Topics</h1>
+<h1 class="title">Ray Tracing II</h1>
 </div>
 
 <div>
   <div class="description">
-    Materials and appearance modeling, neural radiance fields with volume rendering, and NeRF extensions.
+    Light transport, the rendering equation, Monte Carlo integration, path tracing, and advanced light transport.
   </div>
 </div>
 
@@ -1063,260 +1106,192 @@ window.Quarto = {
 </header>
 
 
-<section id="materials-and-appearances" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="materials-and-appearances"><span class="header-section-number">7.1</span> Materials and Appearances</h2>
-<p>In computer graphics, <strong>Material = BRDF</strong> (or BSDF when transmission is included).</p>
-<section id="diffuse-lambertian-material" class="level4" data-number="7.1.0.1">
-<h4 data-number="7.1.0.1" class="anchored" data-anchor-id="diffuse-lambertian-material"><span class="header-section-number">7.1.0.1</span> Diffuse / Lambertian Material</h4>
-<p>Light is scattered uniformly in all directions across the hemisphere (uniform colored or textured diffuse BRDF).</p>
+<section id="light-transport" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="light-transport"><span class="header-section-number">7.1</span> Light Transport</h2>
+<section id="bidirectional-reflectance-distribution-function-brdf" class="level4" data-number="7.1.0.1">
+<h4 data-number="7.1.0.1" class="anchored" data-anchor-id="bidirectional-reflectance-distribution-function-brdf"><span class="header-section-number">7.1.0.1</span> Bidirectional Reflectance Distribution Function (BRDF)</h4>
+<p><span class="math inline">\(\displaystyle f_r(\omega_i \to \omega_r) = \frac{dL_r(\omega_r)}{dE_i(\omega_i)} = \frac{dL_r(\omega_r)}{L_i(\omega_i) \cos \theta_i \, d\omega_i} [\text{1/sr}]\)</span></p>
+</section>
+<section id="the-rendering-equation" class="level4" data-number="7.1.0.2">
+<h4 data-number="7.1.0.2" class="anchored" data-anchor-id="the-rendering-equation"><span class="header-section-number">7.1.0.2</span> The Rendering Equation</h4>
+<p><span class="math display">\[
+\underbrace{L_r(x, \omega_r)}_{\substack{\text{Reflected Light} \\ \text{(Output Image)} \\ \text{Unknown}}}
+= \underbrace{L_e(x, \omega_r)}_{\substack{\text{Emission} \\ \text{Known}}}
++ \int_{\Omega} \underbrace{L_r(x', -\omega_i)}_{\substack{\text{Reflected Light} \\ \text{Unknown}}}
+\, \underbrace{f(x, \omega_i, \omega_r)}_{\substack{\text{BRDF} \\ \text{Known}}}
+\, \underbrace{\cos \theta_i}_{\substack{\text{Cosine of} \\ \text{Incident Angle} \\ \text{Known}}}
+\, d\omega_i
+\]</span></p>
+</section>
+<section id="rendering-equation-as-a-linear-operator-equation" class="level4" data-number="7.1.0.3">
+<h4 data-number="7.1.0.3" class="anchored" data-anchor-id="rendering-equation-as-a-linear-operator-equation"><span class="header-section-number">7.1.0.3</span> Rendering Equation as a Linear Operator Equation</h4>
+<p>The rendering equation is a <strong>Fredholm integral equation of the second kind</strong> with canonical form <span class="math inline">\(l(u) = e(u) + \int l(v)K(u,v)\,dv\)</span>. Writing it in operator (or discretized matrix) form gives <span class="math inline">\(L = E + KL\)</span>, where <span class="math inline">\(K\)</span> is the light transport operator. By the binomial expansion:</p>
+<p><span class="math display">\[
+(I - K)L = E
+\implies
+L = (I - K)^{-1}E = E + KE + K^2 E + K^3 E + \cdots
+\]</span></p>
+<ul>
+<li><span class="math inline">\(E\)</span>: Emission directly from light sources.</li>
+<li><span class="math inline">\(KE\)</span>: Direct illumination on surfaces (<span class="math inline">\(E + KE\)</span> corresponds to shading in rasterization).</li>
+<li><span class="math inline">\(K^2 E\)</span>: One-bounce indirect illumination (mirrors, refraction).</li>
+<li><span class="math inline">\(K^3 E + \cdots\)</span>: Multi-bounce indirect illumination.</li>
+<li>Global illumination = direct + indirect illumination.</li>
+</ul>
+</section>
+</section>
+<section id="monte-carlo-integration" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="monte-carlo-integration"><span class="header-section-number">7.2</span> Monte Carlo Integration</h2>
+<p>Used to numerically estimate integrals that cannot be solved analytically, by averaging random samples of the integrand.</p>
 <div id="def-acg-7-1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7.1 (Lambertian BRDF)</strong></span> For reflectance (albedo) <span class="math inline">\(\rho \in [0, 1]\)</span> under uniform incoming radiance, energy conservation gives</p>
+<p><span class="theorem-title"><strong>Definition 7.1 (Monte Carlo Estimator)</strong></span> To estimate <span class="math inline">\(\displaystyle I = \int_a^b f(x)\,dx\)</span>, draw i.i.d. samples <span class="math inline">\(X_1,\ldots,X_N \sim p(x)\)</span>:</p>
 <p><span class="math display">\[
-f_r(\omega_i \to \omega_o) = \frac{\rho}{\pi}.
-\]</span></p>
-</div>
-</section>
-<section id="glossy-material" class="level4" data-number="7.1.0.2">
-<h4 data-number="7.1.0.2" class="anchored" data-anchor-id="glossy-material"><span class="header-section-number">7.1.0.2</span> Glossy Material</h4>
-<p>Reflects light preferentially in a lobe around the mirror reflection direction (e.g., copper, aluminum).</p>
-</section>
-<section id="ideal-reflective-refractive-material-bsdf" class="level4" data-number="7.1.0.3">
-<h4 data-number="7.1.0.3" class="anchored" data-anchor-id="ideal-reflective-refractive-material-bsdf"><span class="header-section-number">7.1.0.3</span> Ideal Reflective / Refractive Material (BSDF)</h4>
-<ul>
-<li><strong>Perfect specular reflection</strong>: <span class="math inline">\(\omega_r = -\omega_i + 2(\omega_i \cdot \mathbf{n})\mathbf{n}\)</span>.</li>
-<li><strong>Specular refraction (Snell’s Law)</strong>:</li>
-</ul>
-<p><span class="math display">\[
-\eta_i \sin\theta_i = \eta_t \sin\theta_t,
-\]</span></p>
-<p>where <span class="math inline">\(\eta_i, \eta_t\)</span> are the indices of refraction (IOR) of the incident and exiting media (wavelength-dependent; typical averages: vacuum <span class="math inline">\(1.0\)</span>, air <span class="math inline">\(1.00029\)</span>, water <span class="math inline">\(1.333\)</span>, glass <span class="math inline">\(1.5\text{–}1.6\)</span>, diamond <span class="math inline">\(2.42\)</span>). - <strong>Total internal reflection (Snell’s window)</strong>: Occurs when light travels from a denser to a rarer medium (<span class="math inline">\(\eta_i &gt; \eta_t\)</span>) beyond the critical angle.</p>
-</section>
-<section id="fresnel-reflection-term" class="level4" data-number="7.1.0.4">
-<h4 data-number="7.1.0.4" class="anchored" data-anchor-id="fresnel-reflection-term"><span class="header-section-number">7.1.0.4</span> Fresnel Reflection / Term</h4>
-<p>Reflectance depends on the incident angle (and polarization of light), increasing sharply at grazing angles.</p>
-<ul>
-<li><strong>Dielectrics</strong> (e.g., glass, <span class="math inline">\(\eta = 1.5\)</span>): Low reflectance at normal incidence, rising to <span class="math inline">\(1\)</span> at grazing angles.</li>
-<li><strong>Conductors</strong> (metals): High reflectance across angles, often colored due to wavelength dependence.</li>
-</ul>
-<div id="def-acg-7-2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7.2 (Schlick’s Approximation)</strong></span> A fast approximation to the exact (polarization-dependent) Fresnel term:</p>
-<p><span class="math display">\[
-R(\theta) = R_0 + (1 - R_0)(1 - \cos\theta)^5,
-\qquad
-R_0 = \left(\frac{\eta_1 - \eta_2}{\eta_1 + \eta_2}\right)^2.
-\]</span></p>
-</div>
-</section>
-<section id="microfacet-material" class="level4" data-number="7.1.0.5">
-<h4 data-number="7.1.0.5" class="anchored" data-anchor-id="microfacet-material"><span class="header-section-number">7.1.0.5</span> Microfacet Material</h4>
-<p>Rough surfaces look flat and rough at the <strong>macroscale</strong>, but bumpy and specular at the <strong>microscale</strong>—composed of tiny mirror-like <strong>microfacets</strong>, each with its own normal.</p>
-<ul>
-<li>Concentrated normal distribution <span class="math inline">\(\iff\)</span> glossy; spread-out normal distribution <span class="math inline">\(\iff\)</span> diffuse.</li>
-</ul>
-<div id="def-acg-7-3" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7.3 (Microfacet BRDF)</strong></span> <span class="math display">\[
-f(\mathbf{i}, \mathbf{o})
-= \frac{F(\mathbf{i}, \mathbf{h})\,G(\mathbf{i}, \mathbf{o}, \mathbf{h})\,D(\mathbf{h})}
-       {4(\mathbf{n}\cdot\mathbf{i})(\mathbf{n}\cdot\mathbf{o})}.
+F_N = \frac{1}{N}\sum_{i=1}^N \frac{f(X_i)}{p(X_i)}.
 \]</span></p>
 <ul>
-<li><span class="math inline">\(\mathbf{h} = \operatorname{normalize}(\mathbf{i} + \mathbf{o})\)</span>: Half vector (only microfacets with normal <span class="math inline">\(\mathbf{h}\)</span> reflect <span class="math inline">\(\mathbf{i}\)</span> to <span class="math inline">\(\mathbf{o}\)</span>).</li>
-<li><span class="math inline">\(F(\mathbf{i}, \mathbf{h})\)</span>: Fresnel term.</li>
-<li><span class="math inline">\(G(\mathbf{i}, \mathbf{o}, \mathbf{h})\)</span>: Shadowing–masking term (accounts for microfacets occluding each other at grazing angles).</li>
-<li><span class="math inline">\(D(\mathbf{h})\)</span>: Distribution of microfacet normals.</li>
+<li><strong>Uniform Monte Carlo estimator</strong>: For <span class="math inline">\(p(x) = \frac{1}{b-a}\)</span>, <span class="math inline">\(F_N = \frac{b-a}{N}\sum_{i=1}^N f(X_i)\)</span>.</li>
+<li>More samples <span class="math inline">\(\implies\)</span> less variance.</li>
+<li><strong>Sample on <span class="math inline">\(x\)</span>, integrate on <span class="math inline">\(x\)</span></strong>: The PDF must be defined over the same domain as the integration variable.</li>
 </ul>
 </div>
 </section>
-<section id="isotropic-vs.-anisotropic-materials" class="level4" data-number="7.1.0.6">
-<h4 data-number="7.1.0.6" class="anchored" data-anchor-id="isotropic-vs.-anisotropic-materials"><span class="header-section-number">7.1.0.6</span> Isotropic vs.&nbsp;Anisotropic Materials</h4>
+<section id="path-tracing" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="path-tracing"><span class="header-section-number">7.3</span> Path Tracing</h2>
+<section id="limitations-of-whitted-style-ray-tracing" class="level4" data-number="7.3.0.1">
+<h4 data-number="7.3.0.1" class="anchored" data-anchor-id="limitations-of-whitted-style-ray-tracing"><span class="header-section-number">7.3.0.1</span> Limitations of Whitted-Style Ray Tracing</h4>
 <ul>
-<li><strong>Isotropic</strong>: Underlying surface has no preferred orientation; <span class="math inline">\(f_r(\theta_i, \phi_i; \theta_r, \phi_r) = f_r(\theta_i, \theta_r, \phi_r - \phi_i)\)</span>.</li>
-<li><strong>Anisotropic</strong>: Reflection depends on absolute azimuthal angle <span class="math inline">\(\phi\)</span> due to oriented microstructure (e.g., brushed metal, nylon, velvet).</li>
+<li>Always performs ideal specular reflections/refractions and stops bouncing at diffuse surfaces.</li>
+<li>Problem 1: Cannot handle <strong>glossy reflections</strong> (e.g., Utah teapot).</li>
+<li>Problem 2: Misses <strong>indirect diffuse reflections</strong> (e.g., color bleeding in the Cornell box).</li>
 </ul>
 </section>
-<section id="properties-of-brdfs" class="level4" data-number="7.1.0.7">
-<h4 data-number="7.1.0.7" class="anchored" data-anchor-id="properties-of-brdfs"><span class="header-section-number">7.1.0.7</span> Properties of BRDFs</h4>
-<ol type="1">
-<li><strong>Non-negativity</strong>: <span class="math inline">\(f_r(\omega_i \to \omega_r) \ge 0\)</span>.</li>
-<li><strong>Linearity</strong>: Combined BRDFs sum linearly in the reflection equation.</li>
-<li><strong>Reciprocity principle</strong>: <span class="math inline">\(f_r(\omega_r \to \omega_i) = f_r(\omega_i \to \omega_r)\)</span>.</li>
-<li><strong>Energy conservation</strong>: <span class="math inline">\(\displaystyle\forall\,\omega_r,\;\int_{H^2} f_r(\omega_i \to \omega_r)\cos\theta_i\,d\omega_i \le 1\)</span>.</li>
-<li><strong>Bilateral symmetry</strong> (isotropic): <span class="math inline">\(f_r(\theta_i, \theta_r, \phi_r - \phi_i) = f_r(\theta_i, \theta_r, |\phi_r - \phi_i|)\)</span>.</li>
-</ol>
-</section>
-<section id="measuring-brdfs" class="level4" data-number="7.1.0.8">
-<h4 data-number="7.1.0.8" class="anchored" data-anchor-id="measuring-brdfs"><span class="header-section-number">7.1.0.8</span> Measuring BRDFs</h4>
+<section id="from-recursive-monte-carlo-to-path-tracing" class="level4" data-number="7.3.0.2">
+<h4 data-number="7.3.0.2" class="anchored" data-anchor-id="from-recursive-monte-carlo-to-path-tracing"><span class="header-section-number">7.3.0.2</span> From Recursive Monte Carlo to Path Tracing</h4>
+<p>Solving the reflection equation numerically with <span class="math inline">\(N\)</span> random directions per bounce causes exponential ray explosion (<span class="math inline">\(\#\text{rays} = N^{\#\text{bounces}}\)</span>).</p>
 <ul>
-<li>Avoids deriving analytical models and automatically captures all real-world scattering effects (useful for product design, VFX).</li>
-<li>Measured using image-based BRDF acquisition (Marschner et al.&nbsp;1999) or a <strong>gonioreflectometer</strong> (spherical gantry).</li>
+<li><strong>Path tracing</strong> sets <span class="math inline">\(N = 1\)</span> (only 1 ray is traced at each shading point; <span class="math inline">\(N \ne 1\)</span> is <em>Distributed Ray Tracing</em>).</li>
+<li>To reduce noise, trace multiple paths through each pixel (<strong>SPP</strong>, samples per pixel) and average their radiance:</li>
 </ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ray_generation(camPos, pixel):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Uniformly choose N sample positions within the pixel</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    pixel_radiance <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each sample <span class="kw">in</span> pixel:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        ray <span class="op">=</span> Ray(camPos, cam_to_sample)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> closest_intersection(ray, scene)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p exists:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            pixel_radiance <span class="op">+=</span> (<span class="dv">1</span> <span class="op">/</span> N) <span class="op">*</span> shade(p, sample_to_cam)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pixel_radiance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-</section>
-<section id="advanced-appearance-modeling" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="advanced-appearance-modeling"><span class="header-section-number">7.2</span> Advanced Appearance Modeling</h2>
-<section id="non-surface-models" class="level4" data-number="7.2.0.1">
-<h4 data-number="7.2.0.1" class="anchored" data-anchor-id="non-surface-models"><span class="header-section-number">7.2.0.1</span> Non-Surface Models</h4>
+<section id="russian-roulette-rr" class="level4" data-number="7.3.0.3">
+<h4 data-number="7.3.0.3" class="anchored" data-anchor-id="russian-roulette-rr"><span class="header-section-number">7.3.0.3</span> Russian Roulette (RR)</h4>
+<p>Cutting the number of bounces at a fixed depth cuts energy (introduces bias). With <strong>Russian Roulette</strong>, choose a survival probability <span class="math inline">\(P_{\text{RR}} \in (0, 1)\)</span>:</p>
 <ul>
-<li><strong>Participating media</strong> (clouds, fog, smoke): As light travels through a medium, it can be absorbed and scattered.
-<ul>
-<li>A <strong>phase function</strong> describes the angular distribution of scattering at any point <span class="math inline">\(x\)</span>.</li>
-<li>Rendering: randomly choose a bounce direction, randomly choose a straight-line travel distance, and connect to the light at each shading point.</li>
-</ul></li>
-<li><strong>Hair</strong>:
-<ul>
-<li><em>Kajiya–Kay model</em>: Simple diffuse + specular cylinder shading.</li>
-<li><em>Marschner model</em> (Marschner et al.&nbsp;2003): Models hair as a glass-like cylinder (cuticle + absorbing cortex) with three light interactions: <span class="math inline">\(R\)</span> (surface reflection), <span class="math inline">\(TT\)</span> (transmission), and <span class="math inline">\(TRT\)</span> (internal reflection).</li>
-</ul></li>
+<li>Draw <span class="math inline">\(\xi \sim \mathrm{Uniform}[0, 1]\)</span>.</li>
+<li>If <span class="math inline">\(\xi \le P_{\text{RR}}\)</span>: shoot a bounce ray and return <span class="math inline">\(L_o / P_{\text{RR}}\)</span>.</li>
+<li>If <span class="math inline">\(\xi &gt; P_{\text{RR}}\)</span>: terminate and return <span class="math inline">\(0\)</span>.</li>
 </ul>
-</section>
-<section id="surface-models" class="level4" data-number="7.2.0.2">
-<h4 data-number="7.2.0.2" class="anchored" data-anchor-id="surface-models"><span class="header-section-number">7.2.0.2</span> Surface Models</h4>
-<ul>
-<li><strong>Translucent materials (Subsurface Scattering / BSSRDF)</strong>: Light exits at a different point than it enters (skin, jade, marble), violating a fundamental assumption of the BRDF.
-<ul>
-<li><strong>BSSRDF</strong> <span class="math inline">\(S(x_i, \omega_i, x_o, \omega_o)\)</span> generalizes the BRDF by integrating over both all surface points and all directions:</li>
-</ul></li>
-</ul>
+<p>The expected value remains unbiased:</p>
 <p><span class="math display">\[
-L(x_o, \omega_o)
-= \int_A \int_{H^2} S(x_i, \omega_i, x_o, \omega_o)\,L_i(x_i, \omega_i)\cos\theta_i\,d\omega_i\,dA.
+\mathbb{E}[L] = P_{\text{RR}}\cdot\frac{L_o}{P_{\text{RR}}} + (1 - P_{\text{RR}})\cdot 0 = L_o.
+\]</span></p>
+</section>
+<section id="sampling-the-light-directly" class="level4" data-number="7.3.0.4">
+<h4 data-number="7.3.0.4" class="anchored" data-anchor-id="sampling-the-light-directly"><span class="header-section-number">7.3.0.4</span> Sampling the Light Directly</h4>
+<p>Uniform hemisphere sampling (<span class="math inline">\(p(\omega_i) = \frac{1}{2\pi}\)</span>) wastes most rays when light sources are small, producing noisy results at low SPP. Split shading into <strong>direct</strong> (light source, no RR) and <strong>indirect</strong> (other reflectors, with RR) contributions.</p>
+<p>Sample uniformly on the light area <span class="math inline">\(A\)</span> with <span class="math inline">\(p(x') = 1/A\)</span>, and rewrite the integral from solid angle <span class="math inline">\(d\omega_i\)</span> to area <span class="math inline">\(dA\)</span> via <span class="math inline">\(d\omega_i = \frac{\cos\theta'}{\|x'-x\|^2}\,dA\)</span>:</p>
+<p><span class="math display">\[
+L_{\text{dir}}(x, \omega_o)
+= \int_A L_i(x, \omega_i)\,f_r(x, \omega_i, \omega_o)\,
+  \frac{\cos\theta\,\cos\theta'}{\|x'-x\|^2}\,dA.
 \]</span></p>
 <ul>
-<li><strong>Cloth</strong>: A collection of twisted fibers (two levels of twist, woven or knitted), rendered in three ways:
-<ol type="1">
-<li><em>As a surface</em>: Compute overall behavior from the weaving pattern and render with a BRDF.</li>
-<li><em>As participating media</em>: Map individual fiber properties and distribution to volumetric scattering parameters.</li>
-<li><em>As actual fibers</em>: Render every fiber explicitly.</li>
-</ol></li>
+<li><span class="math inline">\(\theta\)</span>: Angle between <span class="math inline">\(\omega_i\)</span> and the surface normal at <span class="math inline">\(x\)</span>.</li>
+<li><span class="math inline">\(\theta'\)</span>: Angle between <span class="math inline">\(-\omega_i\)</span> and the light normal at <span class="math inline">\(x'\)</span>.</li>
+<li>Shoot a shadow ray from <span class="math inline">\(x\)</span> to <span class="math inline">\(x'\)</span> to check whether the light sample is blocked.</li>
 </ul>
 </section>
-<section id="procedural-appearance" class="level4" data-number="7.2.0.3">
-<h4 data-number="7.2.0.3" class="anchored" data-anchor-id="procedural-appearance"><span class="header-section-number">7.2.0.3</span> Procedural Appearance</h4>
-<p>Define details without storing textures by evaluating a <strong>3D noise function</strong> on the fly (e.g., thresholding noise into binary reflectance, or Worley noise). Because the noise is defined in 3D, cut or broken objects automatically reveal consistent internal structure.</p>
-</section>
-</section>
-<section id="neural-radiance-fields-nerf" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="neural-radiance-fields-nerf"><span class="header-section-number">7.3</span> Neural Radiance Fields (NeRF)</h2>
-<p>Traditional rendering maps a 3D scene (geometry, materials, lighting) and camera parameters (6 DoF extrinsics + intrinsics such as focal length and principal point) to an image. <strong>Neural rendering</strong> encodes the entire scene description inside a neural network for <strong>novel view synthesis</strong>.</p>
-<ul>
-<li>Inspired by RGB-Alpha volume rendering (<em>Neural Volumes</em>, Lombardi et al.&nbsp;2019), <strong>NeRF</strong> replaces an explicit voxel volume with a continuous <strong>implicit function</strong> (MLP) that tracks view-dependent light emission:</li>
-</ul>
-<p><span class="math display">\[
-F_\Theta : (x, y, z, \theta, \phi) \longmapsto \left(\alpha_i,\;\frac{c_i}{\sigma_i}\right)
-\quad\text{or}\quad
-\left(\sigma_i,\;\frac{c_i}{\sigma_i}\right).
-\]</span></p>
-<section id="volume-rendering-with-ray-marching" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="volume-rendering-with-ray-marching"><span class="header-section-number">7.3.1</span> Volume Rendering with Ray Marching</h3>
-<p>Along a camera ray, a volumetric light transport model accounts for <strong>transmission</strong> (attenuation coefficient <span class="math inline">\(\sigma\)</span>) and <strong>in-scatter / emission</strong> (emission radiance <span class="math inline">\(c\)</span>).</p>
-<div id="def-acg-7-4" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7.4 (Beer–Lambert Segment Radiance)</strong></span> By Beer–Lambert’s law, the opacity over a segment <span class="math inline">\([0, t]\)</span> with constant attenuation <span class="math inline">\(\sigma\)</span> is <span class="math inline">\(\alpha(t) = 1 - \exp(-\sigma t)\)</span>. Assuming constant emission <span class="math inline">\(c(t) = c\)</span> over a short segment <span class="math inline">\([0, \delta]\)</span>:</p>
-<p><span class="math display">\[
-\int_0^\delta \bigl(1 - \alpha(t)\bigr)\,c(t)\,dt
-\approx c \int_0^\delta \exp(-\sigma t)\,dt
-= \frac{c}{\sigma}\bigl(1 - \exp(-\delta\sigma)\bigr)
-= \alpha(\delta)\left(\frac{c}{\sigma}\right).
-\]</span></p>
-</div>
-<section id="discretized-radiance-integration-ray-marching" class="level4" data-number="7.3.1.1">
-<h4 data-number="7.3.1.1" class="anchored" data-anchor-id="discretized-radiance-integration-ray-marching"><span class="header-section-number">7.3.1.1</span> Discretized Radiance Integration (Ray Marching)</h4>
-<p>Accumulating <span class="math inline">\(n\)</span> sample points along a ray (from far point <span class="math inline">\(1\)</span> to near point <span class="math inline">\(n\)</span>):</p>
-<ul>
-<li>1 point: <span class="math inline">\(I_1 = \alpha_1\left(\frac{c_1}{\sigma_1}\right)\)</span>.</li>
-<li>2 points: <span class="math inline">\(I_2 = \alpha_2\left(\frac{c_2}{\sigma_2}\right) + (1 - \alpha_2)I_1\)</span>.</li>
-<li>General (<span class="math inline">\(n\)</span> points):</li>
-</ul>
-<p><span class="math display">\[
-I = \sum_{i=1}^n T_i\,\alpha_i\left(\frac{c_i}{\sigma_i}\right),
-\qquad
-T_i = \prod_{j=i+1}^n (1 - \alpha_j) = \exp\!\left(-\sum_{j=i+1}^n \sigma_j \delta_j\right).
-\]</span></p>
-<ul>
-<li>Because <span class="math inline">\(\sigma_i\)</span> and <span class="math inline">\(c_i\)</span> are frequently both close to zero, NeRF predicts <span class="math inline">\(c_i / \sigma_i\)</span> (color) directly for numerical stability.</li>
-</ul>
-</section>
-</section>
-<section id="learning-nerf" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="learning-nerf"><span class="header-section-number">7.3.2</span> Learning NeRF</h3>
-<section id="training-pipeline" class="level4" data-number="7.3.2.1">
-<h4 data-number="7.3.2.1" class="anchored" data-anchor-id="training-pipeline"><span class="header-section-number">7.3.2.1</span> Training Pipeline</h4>
-<ul>
-<li>Given a collection of calibrated images (known camera poses) of a single scene, shoot camera rays, march along each ray to compute rendered radiance <span class="math inline">\(I\)</span>, compare with ground-truth pixel values via a pixel loss (<span class="math inline">\(L_1\)</span> or <span class="math inline">\(L_2\)</span>), and optimize the MLP weights by gradient descent.</li>
-<li>Stores the entire scene compactly in network weights (~<span class="math inline">\(3000\times\)</span> storage gain over voxelized representations).</li>
-</ul>
-</section>
-<section id="key-tricks" class="level4" data-number="7.3.2.2">
-<h4 data-number="7.3.2.2" class="anchored" data-anchor-id="key-tricks"><span class="header-section-number">7.3.2.2</span> Key Tricks</h4>
-<ul>
-<li><strong>Hierarchical sampling (coarse-to-fine)</strong>: First evaluate a coarse network on stratified samples along the ray to locate occupied regions, then importance-sample finer points concentrated near surfaces.</li>
-<li><strong>Depth vs.&nbsp;inverse-depth sampling</strong>: Sample uniformly in depth <span class="math inline">\(d\)</span> for scenes with limited depth variation (e.g., an object), or uniformly in inverse depth <span class="math inline">\(1/d\)</span> for scenes with large depth range.</li>
-<li><strong>Positional encoding (Fourier basis features)</strong>: Maps each 5D input coordinate into a higher-dimensional frequency space (Tancik et al.&nbsp;2020), overcoming the difficulty of MLPs in learning high-frequency detail via frequency disentangling:</li>
-</ul>
-<p><span class="math display">\[
-\gamma(p) = \bigl(\sin(2^0\pi p),\,\cos(2^0\pi p),\,\ldots,\,\sin(2^{L-1}\pi p),\,\cos(2^{L-1}\pi p)\bigr).
-\]</span></p>
+<section id="path-tracing-algorithm-pseudocode" class="level4" data-number="7.3.0.5">
+<h4 data-number="7.3.0.5" class="anchored" data-anchor-id="path-tracing-algorithm-pseudocode"><span class="header-section-number">7.3.0.5</span> Path Tracing Algorithm (Pseudocode)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>shade(p, wo):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Contribution from the light source (direct, no RR)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    L_dir <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    x_prime <span class="op">=</span> sample_light()               <span class="co"># pdf_light = 1 / A</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> blocked(p, x_prime):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        L_dir <span class="op">=</span> L_i <span class="op">*</span> f_r <span class="op">*</span> cos_theta <span class="op">*</span> cos_theta_prime <span class="op">\</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                <span class="op">/</span> (dist(p, x_prime)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> pdf_light)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Contribution from other reflectors (indirect, with RR)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    L_indir <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rand() <span class="op">&lt;=</span> P_RR:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        wi <span class="op">=</span> sample_hemisphere(N)          <span class="co"># pdf_hemi = 1 / (2 * pi)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        q <span class="op">=</span> closest_intersection(ray(p, wi), scene)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> q exists <span class="kw">and</span> <span class="kw">not</span> is_light(q):</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            L_indir <span class="op">=</span> shade(q, <span class="op">-</span>wi) <span class="op">*</span> f_r <span class="op">*</span> cos_theta <span class="op">/</span> (pdf_hemi <span class="op">*</span> P_RR)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L_dir <span class="op">+</span> L_indir</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Remaining Challenges of Vanilla NeRF
+<span class="screen-reader-only">Note</span>Additional Topics in Modern Path Tracing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Only applicable to <strong>static (rigid) scenes</strong> with calibrated multi-view images.</li>
-<li><strong>One network per scene</strong>—no cross-scene generalization and requires many views.</li>
-<li><strong>Low efficiency</strong> in both training and rendering due to dense MLP queries along every ray.</li>
+<li><strong>Sampling &amp; variance reduction</strong>: Sampling arbitrary PDFs, importance sampling, low-discrepancy sequences, and combining light + hemisphere sampling via <strong>Multiple Importance Sampling (MIS)</strong>.</li>
+<li><strong>Image formation</strong>: Pixel reconstruction filters (beyond uniform averaging) and converting radiance to display color (gamma correction, tone-mapping curves, color spaces).</li>
 </ul>
 </div>
 </div>
 </div>
 </section>
 </section>
-</section>
-<section id="nerf-extensions" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="nerf-extensions"><span class="header-section-number">7.4</span> NeRF Extensions</h2>
-<section id="d-nerf-dynamic-scenes" class="level4" data-number="7.4.0.1">
-<h4 data-number="7.4.0.1" class="anchored" data-anchor-id="d-nerf-dynamic-scenes"><span class="header-section-number">7.4.0.1</span> D-NeRF (Dynamic Scenes)</h4>
-<p>Pumarola et al.&nbsp;2020. Extends NeRF to a <strong>6D</strong> function (adding time <span class="math inline">\(t\)</span>) for rigid and non-rigid scenes using a single view per time instant.</p>
+<section id="advanced-light-transport" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="advanced-light-transport"><span class="header-section-number">7.4</span> Advanced Light Transport</h2>
+<section id="biased-vs.-unbiased-monte-carlo-estimators" class="level4" data-number="7.4.0.1">
+<h4 data-number="7.4.0.1" class="anchored" data-anchor-id="biased-vs.-unbiased-monte-carlo-estimators"><span class="header-section-number">7.4.0.1</span> Biased vs.&nbsp;Unbiased Monte Carlo Estimators</h4>
 <ul>
-<li><strong>Deformation network</strong>: Maps a point at time <span class="math inline">\(t\)</span> to its corresponding location in a <strong>canonical space</strong> (<span class="math inline">\(t = 0\)</span>).</li>
-<li><strong>Canonical network</strong>: Standard 5D NeRF predicting color and density in canonical space, rendered with the same volume rendering.</li>
+<li><strong>Unbiased</strong>: No systematic error—the expected value equals the true value regardless of the number of samples.</li>
+<li><strong>Biased</strong>: Otherwise. A biased estimator is <strong>consistent</strong> if its expected value converges to the true value as the number of samples approaches infinity.</li>
+<li>Visual intuition: <em>biased</em> <span class="math inline">\(\leftrightarrow\)</span> blurry; <em>consistent</em> <span class="math inline">\(\leftrightarrow\)</span> not blurry with infinite samples.</li>
 </ul>
 </section>
-<section id="pixelnerf-few-shot-generalization" class="level4" data-number="7.4.0.2">
-<h4 data-number="7.4.0.2" class="anchored" data-anchor-id="pixelnerf-few-shot-generalization"><span class="header-section-number">7.4.0.2</span> PixelNeRF (Few-Shot Generalization)</h4>
-<p>Yu et al.&nbsp;2020. Trains across multiple scenes to learn a <strong>scene prior</strong>, enabling novel view synthesis from one or a few posed images.</p>
+<section id="bidirectional-path-tracing-bdpt" class="level4" data-number="7.4.0.2">
+<h4 data-number="7.4.0.2" class="anchored" data-anchor-id="bidirectional-path-tracing-bdpt"><span class="header-section-number">7.4.0.2</span> Bidirectional Path Tracing (BDPT)</h4>
+<p><em>Unbiased</em> (Veach 1997).</p>
 <ul>
-<li>Operates in the <strong>camera coordinate system</strong> (rather than a canonical world frame) and aggregates image features from a variable number of input views.</li>
+<li>Traces sub-paths from <strong>both</strong> the camera and the light source, then connects their endpoints.</li>
+<li>Suitable when light transport is complex on the light’s side; difficult to implement and relatively slow.</li>
 </ul>
 </section>
-<section id="plenoxels-radiance-fields-without-neural-networks" class="level4" data-number="7.4.0.3">
-<h4 data-number="7.4.0.3" class="anchored" data-anchor-id="plenoxels-radiance-fields-without-neural-networks"><span class="header-section-number">7.4.0.3</span> Plenoxels (Radiance Fields Without Neural Networks)</h4>
-<p>Yu et al.&nbsp;Replaces the MLP with a <strong>sparse voxel grid</strong> storing density and <strong>Spherical Harmonics (SH)</strong> basis coefficients for view-dependent color, pruning low-density voxels for fast training.</p>
+<section id="metropolis-light-transport-mlt" class="level4" data-number="7.4.0.3">
+<h4 data-number="7.4.0.3" class="anchored" data-anchor-id="metropolis-light-transport-mlt"><span class="header-section-number">7.4.0.3</span> Metropolis Light Transport (MLT)</h4>
+<p><em>Unbiased</em>, based on Markov Chain Monte Carlo (MCMC).</p>
+<ul>
+<li>Locally perturbs an existing path to generate the next path; excels at exploring difficult light paths (e.g., light passing through a small gap or caustics).</li>
+<li>Cons: Hard to estimate convergence rate, uneven convergence across pixels (“dirty” look), and generally unsuitable for animations.</li>
+</ul>
 </section>
-<section id="instant-ngp-hybrid-representation" class="level4" data-number="7.4.0.4">
-<h4 data-number="7.4.0.4" class="anchored" data-anchor-id="instant-ngp-hybrid-representation"><span class="header-section-number">7.4.0.4</span> Instant-NGP (Hybrid Representation)</h4>
-<p>Müller et al.&nbsp;Combines a <strong>multiresolution feature hash grid</strong> with a <strong>lightweight MLP</strong>:</p>
+<section id="photon-mapping" class="level4" data-number="7.4.0.4">
+<h4 data-number="7.4.0.4" class="anchored" data-anchor-id="photon-mapping"><span class="header-section-number">7.4.0.4</span> Photon Mapping</h4>
+<p><em>Biased, consistent</em>, two-stage method. Excels at <strong>Specular–Diffuse–Specular (SDS)</strong> paths and <strong>caustics</strong>.</p>
 <ol type="1">
-<li>Hash voxel vertices at multiple resolutions <span class="math inline">\(\to\)</span> 2. Lookup feature vectors <span class="math inline">\(\to\)</span> 3. Linear interpolation <span class="math inline">\(\to\)</span> 4. Concatenate across levels <span class="math inline">\(\to\)</span> 5. Feed features + viewing direction into a tiny MLP for color and density.</li>
+<li><strong>Photon tracing</strong>: Emit photons from light sources, bounce them through the scene, and record hits on diffuse surfaces.</li>
+<li><strong>Photon collection (final gathering)</strong>: Shoot sub-paths from the camera until they hit diffuse surfaces, then estimate local radiance by finding the nearest <span class="math inline">\(N\)</span> photons covering surface area <span class="math inline">\(\Delta A\)</span>.</li>
 </ol>
-</section>
-<section id="d-gaussian-splatting-3dgs" class="level4" data-number="7.4.0.5">
-<h4 data-number="7.4.0.5" class="anchored" data-anchor-id="d-gaussian-splatting-3dgs"><span class="header-section-number">7.4.0.5</span> 3D Gaussian Splatting (3DGS)</h4>
-<p>Moves beyond dense volumetric fields by representing the scene with explicit <strong>3D Gaussians</strong> (position, 3D covariance, opacity, view-dependent color).</p>
 <ul>
-<li><strong>Key mathematical property</strong>: Gaussians are closed under affine transforms (e.g., camera-to-world) and integration along an axis, so a projected 3D Gaussian is a <strong>2D Gaussian</strong>.</li>
-<li>Enables fast <strong>rasterization</strong> instead of slow ray-marching volume rendering.</li>
+<li>Why biased: Local density estimation approximates <span class="math inline">\(dN/dA\)</span> by <span class="math inline">\(\Delta N / \Delta A\)</span>.</li>
+<li>Why consistent: As more photons are emitted, the same <span class="math inline">\(N\)</span> photons cover a smaller <span class="math inline">\(\Delta A \to dA\)</span>.</li>
+<li>Trade-off: Small <span class="math inline">\(N \leftrightarrow\)</span> noisy; large <span class="math inline">\(N \leftrightarrow\)</span> blurry.</li>
 </ul>
 </section>
-<section id="dreamfusion-nerf-in-aigc" class="level4" data-number="7.4.0.6">
-<h4 data-number="7.4.0.6" class="anchored" data-anchor-id="dreamfusion-nerf-in-aigc"><span class="header-section-number">7.4.0.6</span> DreamFusion (NeRF in AIGC)</h4>
-<p>Poole et al.&nbsp;2022. Performs <strong>text-to-3D generation</strong> by optimizing a NeRF using pretrained 2D diffusion models as a prior.</p>
+<section id="vertex-connection-and-merging-vcm" class="level4" data-number="7.4.0.5">
+<h4 data-number="7.4.0.5" class="anchored" data-anchor-id="vertex-connection-and-merging-vcm"><span class="header-section-number">7.4.0.5</span> Vertex Connection and Merging (VCM)</h4>
+<p><em>Biased, consistent</em> (Georgiev et al.&nbsp;2012). Combines <strong>BDPT</strong> and <strong>Photon Mapping</strong>: instead of wasting BDPT sub-paths whose endpoints cannot be connected directly, merges nearby endpoints using photon-mapping density estimation.</p>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results -->
@@ -2264,13 +2239,13 @@ T_i = \prod_{j=i+1}^n (1 - \alpha_j) = \exp\!\left(-\sum_{j=i+1}^n \sigma_j \del
   </script>
 <nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="../../../content/notes/advanced-computer-graphics/6.html" class="pagination-link" aria-label="Ray Tracing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Ray Tracing</span>
+      <a href="../../../content/notes/advanced-computer-graphics/6.html" class="pagination-link" aria-label="Ray Tracing I">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Ray Tracing I</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../content/notes/artificial-intelligence/index.html" class="pagination-link" aria-label="Artificial Intelligence">
-        <span class="nav-page-text">Artificial Intelligence</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../content/notes/advanced-computer-graphics/8.html" class="pagination-link" aria-label="Advanced Rendering">
+        <span class="nav-page-text">Advanced Rendering</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

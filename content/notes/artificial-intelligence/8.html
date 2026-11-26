@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Markov decision processes, value iteration, policy iteration, dynamic programming, and passive reinforcement learning.">
+<meta name="description" content="Markov decision processes, value and policy iteration, dynamic programming extensions, and passive RL.">
 
 <title>From MDPs to RL – Bobby</title>
 <style>
@@ -941,13 +941,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1025,23 +1037,14 @@ window.Quarto = {
   <ul>
   <li><a href="#markov-decision-processes-mdps" id="toc-markov-decision-processes-mdps" class="nav-link active" data-scroll-target="#markov-decision-processes-mdps"><span class="header-section-number">8.1</span> Markov Decision Processes (MDPs)</a>
   <ul class="collapse">
-  <li><a href="#policies-and-value-functions" id="toc-policies-and-value-functions" class="nav-link" data-scroll-target="#policies-and-value-functions"><span class="header-section-number">8.1.1</span> Policies and Value Functions</a></li>
+  <li><a href="#policies-and-bellman-equations" id="toc-policies-and-bellman-equations" class="nav-link" data-scroll-target="#policies-and-bellman-equations"><span class="header-section-number">8.1.1</span> Policies and Bellman Equations</a></li>
   </ul></li>
-  <li><a href="#value-iteration" id="toc-value-iteration" class="nav-link" data-scroll-target="#value-iteration"><span class="header-section-number">8.2</span> Value Iteration</a>
+  <li><a href="#value-and-policy-iteration" id="toc-value-and-policy-iteration" class="nav-link" data-scroll-target="#value-and-policy-iteration"><span class="header-section-number">8.2</span> Value and Policy Iteration</a>
   <ul class="collapse">
-  <li><a href="#convergence-and-stopping-condition" id="toc-convergence-and-stopping-condition" class="nav-link" data-scroll-target="#convergence-and-stopping-condition"><span class="header-section-number">8.2.1</span> Convergence and Stopping Condition</a></li>
+  <li><a href="#value-iteration-vi" id="toc-value-iteration-vi" class="nav-link" data-scroll-target="#value-iteration-vi"><span class="header-section-number">8.2.1</span> Value Iteration (VI)</a></li>
+  <li><a href="#policy-iteration-pi-and-dp-extensions" id="toc-policy-iteration-pi-and-dp-extensions" class="nav-link" data-scroll-target="#policy-iteration-pi-and-dp-extensions"><span class="header-section-number">8.2.2</span> Policy Iteration (PI) and DP Extensions</a></li>
   </ul></li>
-  <li><a href="#policy-iteration" id="toc-policy-iteration" class="nav-link" data-scroll-target="#policy-iteration"><span class="header-section-number">8.3</span> Policy Iteration</a>
-  <ul class="collapse">
-  <li><a href="#asynchronous-and-approximate-dynamic-programming" id="toc-asynchronous-and-approximate-dynamic-programming" class="nav-link" data-scroll-target="#asynchronous-and-approximate-dynamic-programming"><span class="header-section-number">8.3.1</span> Asynchronous and Approximate Dynamic Programming</a></li>
-  </ul></li>
-  <li><a href="#from-mdps-to-rl-passive-learning" id="toc-from-mdps-to-rl-passive-learning" class="nav-link" data-scroll-target="#from-mdps-to-rl-passive-learning"><span class="header-section-number">8.4</span> From MDPs to RL: Passive Learning</a>
-  <ul class="collapse">
-  <li><a href="#monte-carlo-direct-estimation-model-free" id="toc-monte-carlo-direct-estimation-model-free" class="nav-link" data-scroll-target="#monte-carlo-direct-estimation-model-free"><span class="header-section-number">8.4.1</span> Monte Carlo Direct Estimation (Model-Free)</a></li>
-  <li><a href="#adaptive-dynamic-programming-model-based" id="toc-adaptive-dynamic-programming-model-based" class="nav-link" data-scroll-target="#adaptive-dynamic-programming-model-based"><span class="header-section-number">8.4.2</span> Adaptive Dynamic Programming (Model-Based)</a></li>
-  <li><a href="#temporal-difference-td-learning-model-free" id="toc-temporal-difference-td-learning-model-free" class="nav-link" data-scroll-target="#temporal-difference-td-learning-model-free"><span class="header-section-number">8.4.3</span> Temporal Difference (TD) Learning (Model-Free)</a></li>
-  <li><a href="#comparison-and-bridging-adp-and-td" id="toc-comparison-and-bridging-adp-and-td" class="nav-link" data-scroll-target="#comparison-and-bridging-adp-and-td"><span class="header-section-number">8.4.4</span> Comparison and Bridging ADP and TD</a></li>
-  </ul></li>
+  <li><a href="#passive-reinforcement-learning" id="toc-passive-reinforcement-learning" class="nav-link" data-scroll-target="#passive-reinforcement-learning"><span class="header-section-number">8.3</span> Passive Reinforcement Learning</a></li>
   </ul>
 </nav>
     </div>
@@ -1056,7 +1059,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Markov decision processes, value iteration, policy iteration, dynamic programming, and passive reinforcement learning.
+    Markov decision processes, value and policy iteration, dynamic programming extensions, and passive RL.
   </div>
 </div>
 
@@ -1075,113 +1078,69 @@ window.Quarto = {
 
 <section id="markov-decision-processes-mdps" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="markov-decision-processes-mdps"><span class="header-section-number">8.1</span> Markov Decision Processes (MDPs)</h2>
-<p>An MDP models sequential decision making under uncertainty (non-deterministic search).</p>
 <div id="def-ai-8-1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.1 (Markov Decision Process)</strong></span> An MDP is specified by:</p>
-<ul>
-<li>A set of states <span class="math inline">\(s\in S\)</span> and actions <span class="math inline">\(a\in A\)</span>.</li>
-<li>A transition function (model / dynamics) <span class="math inline">\(T(s,a,s') = P(s'\mid s,a)\)</span>.</li>
-<li>A reward function <span class="math inline">\(R(s)\)</span> (or more generally <span class="math inline">\(R(s,a)\)</span> or <span class="math inline">\(R(s,a,s')\)</span>).</li>
-<li>A start state (or start distribution) and optionally terminal states.</li>
-</ul>
+<p><span class="theorem-title"><strong>Definition 8.1 (Markov Decision Process)</strong></span> Sequential decision model under stochastic dynamics: states <span class="math inline">\(S\)</span>, actions <span class="math inline">\(A\)</span>, transition <span class="math inline">\(T(s,a,s') = P(s' \mid s,a)\)</span>, reward <span class="math inline">\(R(s)\)</span> (or <span class="math inline">\(R(s,a,s')\)</span>), start state, and optional terminal states.</p>
 </div>
-<p>Core assumptions: first-order Markovian dynamics (<span class="math inline">\(P(S_{t+1}\mid S_t,A_t)\)</span> depends only on current state and action), stationary dynamics (time-invariant), state-dependent rewards, and full observability (after executing an action, the resulting state is observed).</p>
 <ul>
-<li>Planning vs.&nbsp;RL: In planning, the dynamics <span class="math inline">\(T\)</span> and rewards <span class="math inline">\(R\)</span> are known; in reinforcement learning, <span class="math inline">\(T\)</span> and <span class="math inline">\(R\)</span> are unknown and must be learned from interaction.</li>
+<li>Assumptions: First-order Markov &amp; stationary <span class="math inline">\(T\)</span>, <strong>full observability</strong> (<span class="math inline">\(s_t = f(o_t)\)</span> observed after acting), and scalar rewards specifying <em>what</em> to achieve (dense shaping rewards learn faster than sparse rewards).</li>
+<li>Planning (known <span class="math inline">\(T, R\)</span>) vs.&nbsp;reinforcement learning (unknown <span class="math inline">\(T, R\)</span>, learned from <span class="math inline">\(\langle s, a, r, s' \rangle\)</span> samples).</li>
 </ul>
-<section id="policies-and-value-functions" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="policies-and-value-functions"><span class="header-section-number">8.1.1</span> Policies and Value Functions</h3>
-<p>Because actions have stochastic outcomes, a fixed action sequence is insufficient—a solution must specify what to do in every reachable state.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rl-stochastic-gridworld.png" class="notes-slide-fig img-fluid figure-img" style="width:58.0%"></p>
+<figcaption>Stochastic Grid World: intended move succeeds with probability 0.8 and slips laterally with 0.1 each.</figcaption>
+</figure>
+</div>
+<section id="policies-and-bellman-equations" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="policies-and-bellman-equations"><span class="header-section-number">8.1.1</span> Policies and Bellman Equations</h3>
 <ul>
-<li>Non-stationary policy (finite horizon <span class="math inline">\(H\)</span>): <span class="math inline">\(\pi: S\times T\to A\)</span>, where <span class="math inline">\(\pi(s,t)\)</span> chooses an action with <span class="math inline">\(t\)</span> stages to go.</li>
-<li>Stationary policy (infinite horizon): <span class="math inline">\(\pi: S\to A\)</span>, specifying a reactive action <span class="math inline">\(\pi(s)\)</span> independent of time.</li>
-</ul>
-<p>Under <strong>infinite-horizon discounted value</strong> with discount factor <span class="math inline">\(0\le\gamma&lt;1\)</span> (which avoids infinite returns in cyclic MDPs and prefers earlier rewards), the value of policy <span class="math inline">\(\pi\)</span> at state <span class="math inline">\(s\)</span> is the expected discounted sum of rewards:</p>
+<li><p>Policy: Closed-loop map <span class="math inline">\(\pi(s, t)\)</span> (finite horizon, <span class="math inline">\(t\)</span> stages-to-go) or stationary <span class="math inline">\(\pi: S \to A\)</span> (infinite horizon).</p></li>
+<li><p>Discounted value (<span class="math inline">\(0 \le \gamma &lt; 1\)</span>, bounding cyclic sums and favoring earlier rewards):</p>
 <p><span class="math display">\[
-V^\pi(s) = \mathbb E\!\left[\sum_{t=0}^\infty \gamma^t R(S_t)\;\middle|\; S_0 = s,\,\pi\right]
-= R(s) + \gamma\sum_{s'\in S} T\bigl(s,\pi(s),s'\bigr)\,V^\pi(s').
-\]</span></p>
-<p>An optimal policy <span class="math inline">\(\pi^*\)</span> satisfies <span class="math inline">\(V^{\pi^*}(s)\ge V^\pi(s)\)</span> for all <span class="math inline">\(s\in S\)</span> and all <span class="math inline">\(\pi\)</span>, and its value function <span class="math inline">\(V^*\)</span> satisfies the <strong>Bellman optimality equation</strong>:</p>
+V^\pi(s) = \mathbb{E}\!\left[\sum_{t=0}^\infty \gamma^t R(S_t) \;\middle|\; S_0 = s, \pi\right] = R(s) + \gamma \sum_{s' \in S} T\bigl(s, \pi(s), s'\bigr) V^\pi(s').
+\]</span></p></li>
+<li><p><strong>Bellman optimality</strong> (from the <em>Principle of Optimality</em>):</p>
 <p><span class="math display">\[
-V^*(s) = R(s) + \gamma\max_{a\in A}\sum_{s'\in S} T(s,a,s')\,V^*(s').
-\]</span></p>
-</section>
-</section>
-<section id="value-iteration" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="value-iteration"><span class="header-section-number">8.2</span> Value Iteration</h2>
-<p><strong>Value iteration</strong> computes <span class="math inline">\(V^*\)</span> by starting from any <span class="math inline">\(V_0\)</span> (e.g., <span class="math inline">\(0\)</span>) and repeatedly applying the Bellman optimality backup to every state:</p>
-<p><span class="math display">\[
-V_{k+1}(s) \leftarrow R(s) + \gamma\max_{a\in A}\sum_{s'\in S} T(s,a,s')\,V_k(s').
-\]</span></p>
-<section id="convergence-and-stopping-condition" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="convergence-and-stopping-condition"><span class="header-section-number">8.2.1</span> Convergence and Stopping Condition</h3>
-<p>Because the Bellman optimality operator is a <span class="math inline">\(\gamma\)</span>-contraction in the max norm <span class="math inline">\(\|\cdot\|_\infty\)</span>, value iteration converges geometrically to the unique fixed point <span class="math inline">\(V^*\)</span>:</p>
-<p><span class="math display">\[
-\|V_{k+1} - V^*\|_\infty \le \gamma\,\|V_k - V^*\|_\infty.
-\]</span></p>
-<ul>
-<li>Stopping criterion: If <span class="math inline">\(\|V_k - V_{k-1}\|_\infty \le \epsilon\)</span>, then <span class="math inline">\(\|V_k - V^*\|_\infty \le \dfrac{\epsilon\gamma}{1-\gamma}\)</span>.</li>
-<li>Acting greedily: Given an approximation <span class="math inline">\(V_k\)</span>, the one-step lookahead greedy policy <span class="math inline">\(\pi_g(s) = \arg\max_a \sum_{s'} T(s,a,s')V_k(s')\)</span> has value <span class="math inline">\(V^{\pi_g}\)</span> satisfying</li>
-</ul>
-<p><span class="math display">\[
-\|V_k - V^*\|_\infty \le \lambda \;\implies\; \|V^{\pi_g} - V^*\|_\infty \le \frac{2\lambda\gamma}{1-\gamma}.
-\]</span></p>
-<p>Moreover, once <span class="math inline">\(V_k\)</span> is sufficiently close to <span class="math inline">\(V^*\)</span> (within a finite threshold <span class="math inline">\(\epsilon\)</span>), the greedy policy <span class="math inline">\(\pi_g\)</span> is already exact optimal.</p>
-<ul>
-<li>Limitations of value iteration: Each sweep costs <span class="math inline">\(O(|S|^2|A|)\)</span>, the maximizing action at each state rarely changes, and the policy typically converges long before the value numbers finish converging.</li>
+V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
+\]</span></p></li>
+<li><p>Living-reward intuition (Grid World with <span class="math inline">\(+1\)</span> goal, <span class="math inline">\(-1\)</span> cliff): <span class="math inline">\(R(s) = -2.0\)</span> jumps into nearest exit (even <span class="math inline">\(-1\)</span>); <span class="math inline">\(-0.4\)</span> risks the short cliff path; <span class="math inline">\(-0.03\)</span> detours safely; <span class="math inline">\(-0.01\)</span> faces into the wall so slips never hit <span class="math inline">\(-1\)</span>.</p></li>
 </ul>
 </section>
 </section>
-<section id="policy-iteration" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="policy-iteration"><span class="header-section-number">8.3</span> Policy Iteration</h2>
-<p><strong>Policy iteration</strong> alternates two steps until the policy stops changing:</p>
+<section id="value-and-policy-iteration" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="value-and-policy-iteration"><span class="header-section-number">8.2</span> Value and Policy Iteration</h2>
+<section id="value-iteration-vi" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="value-iteration-vi"><span class="header-section-number">8.2.1</span> Value Iteration (VI)</h3>
+<p>Repeatedly apply <span class="math inline">\(V_{k+1}(s) \leftarrow R(s) + \gamma \max_a \sum_{s'} T(s,a,s') V_k(s')\)</span> from <span class="math inline">\(V_0 = 0\)</span>:</p>
+<div id="thm-ai-8-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8.1 (Contraction and Greedy Bounds)</strong></span> &nbsp;</p>
 <ol type="1">
-<li>Policy evaluation: Given fixed <span class="math inline">\(\pi\)</span>, compute <span class="math inline">\(V^\pi\)</span> either iteratively via <span class="math inline">\(V_{k+1}^\pi(s) \leftarrow R(s) + \gamma\sum_{s'} T(s,\pi(s),s')V_k^\pi(s')\)</span> or exactly by solving the linear system <span class="math inline">\((I - \gamma T^\pi)V^\pi = R\)</span>.</li>
-<li>Policy improvement: Update the policy greedily with respect to <span class="math inline">\(V^\pi\)</span>:</li>
+<li><span class="math inline">\(\gamma\)</span>-contraction: <span class="math inline">\(\|V_{k+1} - V^*\|_\infty \le \gamma \|V_k - V^*\|_\infty \implies V_k \to V^*\)</span> uniquely.</li>
+<li>Stopping rule: <span class="math inline">\(\|V_k - V_{k-1}\|_\infty \le \epsilon \implies \|V_k - V^*\|_\infty \le \dfrac{\epsilon\gamma}{1 - \gamma}\)</span>.</li>
+<li>Greedy policy <span class="math inline">\(\pi_g\)</span> on <span class="math inline">\(V_k\)</span>: <span class="math inline">\(\|V_k - V^*\|_\infty \le \lambda \implies \|V^{\pi_g} - V^*\|_\infty \le \dfrac{2\lambda\gamma}{1 - \gamma}\)</span> (exact <span class="math inline">\(\pi_g = \pi^*\)</span> below a finite <span class="math inline">\(\lambda\)</span>).</li>
 </ol>
-<p><span class="math display">\[
-\pi'(s) = \arg\max_{a\in A}\sum_{s'\in S} T(s,a,s')\,V^\pi(s').
-\]</span></p>
+</div>
 <ul>
-<li>Convergence and complexity: Every step strictly improves the policy (<span class="math inline">\(V^{\pi'}\ge V^\pi\)</span>) unless <span class="math inline">\(\pi\)</span> is already optimal, so PI never repeats a policy and terminates in at most <span class="math inline">\(|A|^{|S|}\)</span> iterations (empirically <span class="math inline">\(O(|S|)\)</span>; whether a polynomial worst-case bound exists remains open).</li>
-<li>Modified policy iteration and GPI: Solving the linear system costs <span class="math inline">\(O(|S|^{2.373})\)</span>; running just <span class="math inline">\(k\)</span> iterative evaluation backups instead gives modified policy iteration. <strong>Generalized policy iteration (GPI)</strong> refers to any interleaving of evaluation and improvement regardless of granularity.</li>
-</ul>
-<section id="asynchronous-and-approximate-dynamic-programming" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="asynchronous-and-approximate-dynamic-programming"><span class="header-section-number">8.3.1</span> Asynchronous and Approximate Dynamic Programming</h3>
-<ul>
-<li>Synchronous vs.&nbsp;asynchronous DP: Synchronous DP sweeps all states before updating; asynchronous DP backs up states individually in any order (converging as long as all states continue to be visited). Three standard strategies are in-place DP (one value table), prioritized sweeping (backing up states with largest Bellman error via a priority queue, requiring reverse dynamics), and real-time DP (backing up states visited by the agent’s experience).</li>
-<li>Curse of dimensionality: Full-width DP backups sum over all successors and actions, which becomes intractable as <span class="math inline">\(|S|\)</span> grows exponentially with state variables. Two remedies are sample backups (updating from observed transitions <span class="math inline">\(\langle s,a,r,s'\rangle\)</span> at constant cost independent of <span class="math inline">\(|S|\)</span>) and approximate DP (e.g., fitted value iteration using a function approximator <span class="math inline">\(\hat v(\cdot,w)\)</span>).</li>
+<li>Drawbacks of VI: <span class="math inline">\(O(|S|^2|A|)\)</span> per sweep; <span class="math inline">\(\arg\max_a\)</span> rarely changes, and <span class="math inline">\(\pi_g\)</span> converges long before <span class="math inline">\(V_k\)</span>.</li>
 </ul>
 </section>
-</section>
-<section id="from-mdps-to-rl-passive-learning" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="from-mdps-to-rl-passive-learning"><span class="header-section-number">8.4</span> From MDPs to RL: Passive Learning</h2>
-<p>In reinforcement learning, <span class="math inline">\(T\)</span> and <span class="math inline">\(R\)</span> are unknown and must be learned from sampled transitions <span class="math inline">\(\langle s,a,r,s'\rangle\)</span>. Model-based RL learns an approximate model <span class="math inline">\((\hat T, \hat R)\)</span> and plans with it; model-free RL estimates values or policies directly without learning <span class="math inline">\(T\)</span>.</p>
-<p>In <strong>passive RL</strong>, a stationary policy <span class="math inline">\(\pi\)</span> is fixed and the goal is to estimate <span class="math inline">\(V^\pi(s)\)</span> from episodes generated by following <span class="math inline">\(\pi\)</span>.</p>
-<section id="monte-carlo-direct-estimation-model-free" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="monte-carlo-direct-estimation-model-free"><span class="header-section-number">8.4.1</span> Monte Carlo Direct Estimation (Model-Free)</h3>
+<section id="policy-iteration-pi-and-dp-extensions" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="policy-iteration-pi-and-dp-extensions"><span class="header-section-number">8.2.2</span> Policy Iteration (PI) and DP Extensions</h3>
+<p>Policy Iteration alternates until <span class="math inline">\(\pi' = \pi\)</span> (monotonic <span class="math inline">\(V^{\pi'} \ge V^\pi\)</span>; at most <span class="math inline">\(|A|^{|S|}\)</span> steps, empirically <span class="math inline">\(O(|S|)\)</span>, worst-case polynomial bound open):</p>
+<ol type="1">
+<li>Evaluation: Solve <span class="math inline">\((I - \gamma T^\pi)V^\pi = R\)</span> (<span class="math inline">\(O(|S|^{2.373})\)</span>), or run <span class="math inline">\(k\)</span> iterative backups (<strong>Modified PI</strong>; GPI = any interleaving).</li>
+<li>Improvement: <span class="math inline">\(\pi'(s) = \arg\max_a \sum_{s'} T(s,a,s') V^\pi(s')\)</span>.</li>
+</ol>
+<p>Scaling beyond full-width <span class="math inline">\(O(|S|^2|A|)\)</span> sweeps (<strong>curse of dimensionality</strong>):</p>
 <ul>
-<li>Estimate <span class="math inline">\(V^\pi(s)\)</span> as the empirical average of the discounted reward-to-go observed from state <span class="math inline">\(s\)</span> to episode termination.</li>
-<li>Simple and fast per update, but ignores Bellman relationships between neighboring states and converges slowly.</li>
+<li>Asynchronous DP (individual state backups): In-place DP (1 table), Prioritized sweeping (max Bellman error via reverse dynamics), and Real-time DP (states visited along agent trajectories).</li>
+<li>Sample backups (<span class="math inline">\(O(1)\)</span> per <span class="math inline">\(\langle s,a,r,s'\rangle\)</span>) &amp; Fitted VI: Sample states <span class="math inline">\(\{s^{(i)}\}\)</span>, compute Bellman targets <span class="math inline">\(y^{(i)}\)</span>, and regress <span class="math inline">\(\hat{v}(s, w)\)</span> onto <span class="math inline">\(y^{(i)}\)</span>.</li>
 </ul>
 </section>
-<section id="adaptive-dynamic-programming-model-based" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="adaptive-dynamic-programming-model-based"><span class="header-section-number">8.4.2</span> Adaptive Dynamic Programming (Model-Based)</h3>
-<ul>
-<li>Estimate <span class="math inline">\(\hat T(s,a,s')\)</span> as the empirical fraction of transitions from <span class="math inline">\((s,a)\)</span> to <span class="math inline">\(s'\)</span> and record observed rewards <span class="math inline">\(\hat R(s)\)</span>, then run DP policy evaluation on <span class="math inline">\((\hat T, \hat R)\)</span>.</li>
-<li>Fully exploits Bellman constraints and needs fewer episodes, but each update requires a full policy evaluation.</li>
-</ul>
 </section>
-<section id="temporal-difference-td-learning-model-free" class="level3" data-number="8.4.3">
-<h3 data-number="8.4.3" class="anchored" data-anchor-id="temporal-difference-td-learning-model-free"><span class="header-section-number">8.4.3</span> Temporal Difference (TD) Learning (Model-Free)</h3>
-<p>Motivated by online mean estimation (<span class="math inline">\(\bar x_{n+1} = \bar x_n + \frac{1}{n+1}(x_{n+1}-\bar x_n)\)</span>), <strong>TD learning</strong> performs a local incremental update on every observed transition <span class="math inline">\((s, a, r, s')\)</span> without estimating <span class="math inline">\(T\)</span>:</p>
-<p><span class="math display">\[
-V^\pi(s) \leftarrow V^\pi(s) + \alpha\Bigl(R(s) + \gamma V^\pi(s') - V^\pi(s)\Bigr),
-\]</span></p>
-<p>where <span class="math inline">\(\alpha\)</span> is the learning rate. Each update nudges <span class="math inline">\(V^\pi(s)\)</span> toward the noisy Bellman sample <span class="math inline">\(R(s)+\gamma V^\pi(s')\)</span>, and converges to the true <span class="math inline">\(V^\pi\)</span> when <span class="math inline">\(\alpha\)</span> decays appropriately (e.g., <span class="math inline">\(1/n\)</span>).</p>
-</section>
-<section id="comparison-and-bridging-adp-and-td" class="level3" data-number="8.4.4">
-<h3 data-number="8.4.4" class="anchored" data-anchor-id="comparison-and-bridging-adp-and-td"><span class="header-section-number">8.4.4</span> Comparison and Bridging ADP and TD</h3>
+<section id="passive-reinforcement-learning" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="passive-reinforcement-learning"><span class="header-section-number">8.3</span> Passive Reinforcement Learning</h2>
+<p>Fix policy <span class="math inline">\(\pi\)</span> under unknown <span class="math inline">\((T, R)\)</span> and estimate <span class="math inline">\(V^\pi(s)\)</span> from trajectory episodes:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -1192,46 +1151,52 @@ V^\pi(s) \leftarrow V^\pi(s) + \alpha\Bigl(R(s) + \gamma V^\pi(s') - V^\pi(s)\Bi
 </colgroup>
 <thead>
 <tr class="header">
-<th>Method</th>
-<th>Type</th>
-<th>Exploits Bellman Constraints</th>
-<th>Compute / Step</th>
-<th>Sample Efficiency</th>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Mechanism</th>
+<th style="text-align: left;">Bellman</th>
+<th style="text-align: left;">Cost</th>
+<th style="text-align: left;">Sample Eff.</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Direct Estimation (MC)</td>
-<td>Model-free</td>
-<td>No</td>
-<td>Low</td>
-<td>Low</td>
+<td style="text-align: left;">MC (model-free)</td>
+<td style="text-align: left;">Average discounted reward-to-go</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Low</td>
+<td style="text-align: left;">Low</td>
 </tr>
 <tr class="even">
-<td>Adaptive DP (ADP)</td>
-<td>Model-based</td>
-<td>Fully</td>
-<td>High</td>
-<td>High</td>
+<td style="text-align: left;">ADP (model-based)</td>
+<td style="text-align: left;">Fit <span class="math inline">\(\hat{T}, \hat{R}\)</span>, run full DP evaluation</td>
+<td style="text-align: left;">Full</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">High</td>
 </tr>
 <tr class="odd">
-<td>TD Learning</td>
-<td>Model-free</td>
-<td>Partially (observed successor)</td>
-<td>Low</td>
-<td>Medium</td>
+<td style="text-align: left;">TD (model-free)</td>
+<td style="text-align: left;">Bootstrap on observed <span class="math inline">\((s,a,r,s')\)</span></td>
+<td style="text-align: left;">Partial</td>
+<td style="text-align: left;">Low</td>
+<td style="text-align: left;">Medium</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>Between ADP and TD: Perform TD updates on both real observed transitions and “imagined” transitions sampled from an estimated model. Increasing imagined transitions trades extra computation for better sample efficiency, approaching ADP in the limit.</li>
+<li><p><strong>Temporal Difference (TD)</strong> update (online running mean toward noisy target <span class="math inline">\(R(s) + \gamma V^\pi(s')\)</span>, converging as <span class="math inline">\(\alpha_n \propto 1/n\)</span>):</p>
+<p><span class="math display">\[
+V^\pi(s) \leftarrow V^\pi(s) + \alpha \Bigl(R(s) + \gamma V^\pi(s') - V^\pi(s)\Bigr).
+\]</span></p></li>
+<li><p>Bridging TD &amp; ADP: Mix real TD updates with TD updates on “imagined” transitions sampled from <span class="math inline">\(\hat{T}\)</span>—trading extra compute per step for higher sample efficiency (approaching ADP as imagined samples <span class="math inline">\(\to \infty\)</span>).</p></li>
 </ul>
-<!-- ## Supplementary Notes {.supplementary-notes}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rl-td-vs-adp.png" class="notes-slide-fig img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Grid World value convergence: TD has lower per-episode compute but higher variance than model-based ADP.</figcaption>
+</figure>
+</div>
 
-### Key Results -->
 
-
-</section>
 </section>
 
 </main> <!-- /main -->

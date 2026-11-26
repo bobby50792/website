@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Convolutional neural networks and ResNet, RNNs and LSTM, attention and Transformers, adaptive learning rates, and dropout.">
+<meta name="description" content="CNNs and ResNet, RNNs and LSTM, self-attention and Transformers, adaptive learning rates, and dropout.">
 
 <title>Deep Learning II – Bobby</title>
 <style>
@@ -942,13 +942,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ray Tracing</span></a>
+ <span class="menu-text">Ray Tracing I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../content/notes/advanced-computer-graphics/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ray Tracing II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Rendering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../content/notes/advanced-computer-graphics/9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation I</span></a>
   </div>
 </li>
       </ul>
@@ -1026,28 +1038,21 @@ window.Quarto = {
   <ul>
   <li><a href="#convolutional-neural-networks-cnns" id="toc-convolutional-neural-networks-cnns" class="nav-link active" data-scroll-target="#convolutional-neural-networks-cnns"><span class="header-section-number">7.1</span> Convolutional Neural Networks (CNNs)</a>
   <ul class="collapse">
-  <li><a href="#core-layers" id="toc-core-layers" class="nav-link" data-scroll-target="#core-layers"><span class="header-section-number">7.1.1</span> Core Layers</a></li>
-  <li><a href="#backpropagation-in-cnns" id="toc-backpropagation-in-cnns" class="nav-link" data-scroll-target="#backpropagation-in-cnns"><span class="header-section-number">7.1.2</span> Backpropagation in CNNs</a></li>
-  <li><a href="#residual-networks-resnet" id="toc-residual-networks-resnet" class="nav-link" data-scroll-target="#residual-networks-resnet"><span class="header-section-number">7.1.3</span> Residual Networks (ResNet)</a></li>
-  <li><a href="#scope-and-limitations" id="toc-scope-and-limitations" class="nav-link" data-scroll-target="#scope-and-limitations"><span class="header-section-number">7.1.4</span> Scope and Limitations</a></li>
+  <li><a href="#core-layers-and-backpropagation" id="toc-core-layers-and-backpropagation" class="nav-link" data-scroll-target="#core-layers-and-backpropagation"><span class="header-section-number">7.1.1</span> Core Layers and Backpropagation</a></li>
+  <li><a href="#residual-networks-resnet-and-scope" id="toc-residual-networks-resnet-and-scope" class="nav-link" data-scroll-target="#residual-networks-resnet-and-scope"><span class="header-section-number">7.1.2</span> Residual Networks (ResNet) and Scope</a></li>
   </ul></li>
   <li><a href="#recurrent-neural-networks-and-lstm" id="toc-recurrent-neural-networks-and-lstm" class="nav-link" data-scroll-target="#recurrent-neural-networks-and-lstm"><span class="header-section-number">7.2</span> Recurrent Neural Networks and LSTM</a>
   <ul class="collapse">
-  <li><a href="#vanilla-rnn" id="toc-vanilla-rnn" class="nav-link" data-scroll-target="#vanilla-rnn"><span class="header-section-number">7.2.1</span> Vanilla RNN</a></li>
+  <li><a href="#vanilla-rnn-and-bptt" id="toc-vanilla-rnn-and-bptt" class="nav-link" data-scroll-target="#vanilla-rnn-and-bptt"><span class="header-section-number">7.2.1</span> Vanilla RNN and BPTT</a></li>
   <li><a href="#long-short-term-memory-lstm" id="toc-long-short-term-memory-lstm" class="nav-link" data-scroll-target="#long-short-term-memory-lstm"><span class="header-section-number">7.2.2</span> Long Short-Term Memory (LSTM)</a></li>
   </ul></li>
   <li><a href="#attention-and-transformers" id="toc-attention-and-transformers" class="nav-link" data-scroll-target="#attention-and-transformers"><span class="header-section-number">7.3</span> Attention and Transformers</a>
   <ul class="collapse">
   <li><a href="#scaled-dot-product-self-attention" id="toc-scaled-dot-product-self-attention" class="nav-link" data-scroll-target="#scaled-dot-product-self-attention"><span class="header-section-number">7.3.1</span> Scaled Dot-Product Self-Attention</a></li>
-  <li><a href="#positional-information" id="toc-positional-information" class="nav-link" data-scroll-target="#positional-information"><span class="header-section-number">7.3.2</span> Positional Information</a></li>
-  <li><a href="#multi-head-attention-and-causal-masking" id="toc-multi-head-attention-and-causal-masking" class="nav-link" data-scroll-target="#multi-head-attention-and-causal-masking"><span class="header-section-number">7.3.3</span> Multi-Head Attention and Causal Masking</a></li>
-  <li><a href="#transformer-block-and-variants" id="toc-transformer-block-and-variants" class="nav-link" data-scroll-target="#transformer-block-and-variants"><span class="header-section-number">7.3.4</span> Transformer Block and Variants</a></li>
+  <li><a href="#position-encodings-multi-head-and-masking" id="toc-position-encodings-multi-head-and-masking" class="nav-link" data-scroll-target="#position-encodings-multi-head-and-masking"><span class="header-section-number">7.3.2</span> Position Encodings, Multi-Head, and Masking</a></li>
+  <li><a href="#transformer-block-and-variants" id="toc-transformer-block-and-variants" class="nav-link" data-scroll-target="#transformer-block-and-variants"><span class="header-section-number">7.3.3</span> Transformer Block and Variants</a></li>
   </ul></li>
-  <li><a href="#tips-for-training-deep-neural-networks" id="toc-tips-for-training-deep-neural-networks" class="nav-link" data-scroll-target="#tips-for-training-deep-neural-networks"><span class="header-section-number">7.4</span> Tips for Training Deep Neural Networks</a>
-  <ul class="collapse">
-  <li><a href="#adaptive-learning-rates" id="toc-adaptive-learning-rates" class="nav-link" data-scroll-target="#adaptive-learning-rates"><span class="header-section-number">7.4.1</span> Adaptive Learning Rates</a></li>
-  <li><a href="#dropout" id="toc-dropout" class="nav-link" data-scroll-target="#dropout"><span class="header-section-number">7.4.2</span> Dropout</a></li>
-  </ul></li>
+  <li><a href="#training-tips-adaptive-rates-and-dropout" id="toc-training-tips-adaptive-rates-and-dropout" class="nav-link" data-scroll-target="#training-tips-adaptive-rates-and-dropout"><span class="header-section-number">7.4</span> Training Tips: Adaptive Rates and Dropout</a></li>
   </ul>
 </nav>
     </div>
@@ -1062,7 +1067,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Convolutional neural networks and ResNet, RNNs and LSTM, attention and Transformers, adaptive learning rates, and dropout.
+    CNNs and ResNet, RNNs and LSTM, self-attention and Transformers, adaptive learning rates, and dropout.
   </div>
 </div>
 
@@ -1081,143 +1086,199 @@ window.Quarto = {
 
 <section id="convolutional-neural-networks-cnns" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="convolutional-neural-networks-cnns"><span class="header-section-number">7.1</span> Convolutional Neural Networks (CNNs)</h2>
-<section id="core-layers" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="core-layers"><span class="header-section-number">7.1.1</span> Core Layers</h3>
-<p>A CNN stacks four types of layers to extract local spatial patterns and map an input image to class predictions:</p>
+<section id="core-layers-and-backpropagation" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="core-layers-and-backpropagation"><span class="header-section-number">7.1.1</span> Core Layers and Backpropagation</h3>
+<p>Fully connected nets fail on images due to shift/scale/rotation variations and massive parameter counts. A CNN stacks four layer types:</p>
 <ul>
-<li>Convolution: Slides learned local filters across the image (elementwise multiply and sum) to produce a stack of feature maps. Sharing filter weights across positions drastically reduces parameter count compared to fully connected networks.</li>
-<li>Nonlinearity (ReLU): Applies <span class="math inline">\(z_i = \max(0, z_{i-1})\)</span> elementwise, zeroing out negative values. Compared to sigmoid or <span class="math inline">\(\tanh\)</span>, ReLU is fast to compute, produces sparse activations, and mitigates the <strong>vanishing gradient problem</strong> because active units pass gradients through without shrinking them.</li>
-<li>Pooling (max pooling): Slides a window (typically <span class="math inline">\(2\times 2\)</span> or <span class="math inline">\(3\times 3\)</span>, stride <span class="math inline">\(2\)</span>) and keeps the maximum value in each window. This reduces spatial size, computation, and overfitting, though overly aggressive downsampling can limit depth and performance.</li>
-<li>Fully connected layers: Flatten the final activation volume into class votes / probabilities.</li>
+<li>Convolution: Slides shared local filters across patches (elementwise multiply + sum) to output <strong>feature maps</strong> with far fewer weights.</li>
+<li>ReLU (<span class="math inline">\(z_i = \max(0, z_{i-1})\)</span>): Fast, sparse, avoids cancellation, and mitigates <strong>vanishing gradients</strong> (unit slope <span class="math inline">\(1\)</span> on active units).</li>
+<li>Max pooling (<span class="math inline">\(2\times 2\)</span> or <span class="math inline">\(3\times 3\)</span>, stride <span class="math inline">\(2\)</span>): Keeps window maxima to cut spatial size, compute, and overfitting (over-pooling limits depth).</li>
+<li>Fully connected: Flattens final features into class logits.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/cnn-lenet5.png" class="notes-slide-fig img-fluid figure-img" style="width:92.0%"></p>
+<figcaption>LeNet-5 architecture: alternating convolution and pooling layers followed by fully connected layers.</figcaption>
+</figure>
+</div>
+<p>Backpropagation through CNN layers (only conv filters and FC weights are learned):</p>
+<ul>
+<li>Convolution: Linear sparse-matrix operator <span class="math inline">\(\implies\)</span> backward pass applies the transposed operation.</li>
+<li>ReLU: Passes <span class="math inline">\(\frac{\partial L}{\partial z_i}\)</span> if <span class="math inline">\(z_{i-1} &gt; 0\)</span>, else <span class="math inline">\(0\)</span> (Leaky ReLU <span class="math inline">\(\max(0.1 z_{i-1}, z_{i-1})\)</span> fixes “dying ReLUs”).</li>
+<li>Max pooling: Routes <span class="math inline">\(\frac{\partial L}{\partial z_i(x,y)}\)</span> solely to the window’s argmax entry (<span class="math inline">\(0\)</span> elsewhere).</li>
 </ul>
 </section>
-<section id="backpropagation-in-cnns" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="backpropagation-in-cnns"><span class="header-section-number">7.1.2</span> Backpropagation in CNNs</h3>
-<p>The learnable parameters are the filter weights in convolutional layers and the weights in fully connected layers. Because convolution is a linear operation, it can be expressed as a structured matrix multiplication, and its backward pass uses the transposed operation.</p>
+<section id="residual-networks-resnet-and-scope" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="residual-networks-resnet-and-scope"><span class="header-section-number">7.1.2</span> Residual Networks (ResNet) and Scope</h3>
 <ul>
-<li>ReLU backward: <span class="math inline">\(\dfrac{\partial L}{\partial z_{i-1}} = \dfrac{\partial L}{\partial z_i}\)</span> if <span class="math inline">\(z_{i-1} &gt; 0\)</span>, and <span class="math inline">\(0\)</span> otherwise. To avoid “dying ReLU” neurons stuck at gradient <span class="math inline">\(0\)</span>, Leaky ReLU uses <span class="math inline">\(z_i = \max(0.1 z_{i-1}, z_{i-1})\)</span>.</li>
-<li>Max-pooling backward: Routes the upstream gradient <span class="math inline">\(\dfrac{\partial L}{\partial z_i(x,y)}\)</span> exclusively to the argmax element inside the pooling window, and <span class="math inline">\(0\)</span> to all other positions.</li>
+<li>Degradation problem: Plain 34-layer CNNs have <em>higher training error</em> than 18-layer ones—an optimization failure, not overfitting.</li>
 </ul>
-</section>
-<section id="residual-networks-resnet" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="residual-networks-resnet"><span class="header-section-number">7.1.3</span> Residual Networks (ResNet)</h3>
-<p>Simply stacking more layers in a plain CNN can produce <em>higher training error</em> (e.g., a 34-layer plain CNN fits ImageNet worse than an 18-layer one), pointing to an optimization difficulty rather than overfitting.</p>
-<p>A <strong>residual block</strong> (He et al., 2016) reformulates a group of layers (e.g., two <span class="math inline">\(3\times 3\)</span> convolutions) to learn the residual change <span class="math inline">\(F(x) = H(x) - x\)</span> and adds the input back via a shortcut connection:</p>
+<div id="def-ai-7-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7.1 (Residual Block)</strong></span> Learn the residual change <span class="math inline">\(F(x) = H(x) - x\)</span> (e.g., two <span class="math inline">\(3\times 3\)</span> convs) around an identity shortcut:</p>
 <p><span class="math display">\[
-H(x) = x + F(x).
+H(x) = x + F(x), \qquad \frac{\partial H(x)}{\partial x} = I + J_F(x).
 \]</span></p>
+</div>
 <ul>
-<li>Identity mappings are easy to represent by pushing <span class="math inline">\(F(x)\to 0\)</span>.</li>
-<li>At the addition, <span class="math inline">\(\dfrac{\partial y}{\partial x} = I + J_F(x)\)</span> provides a direct identity path for activations and gradients.</li>
-<li>When resolution decreases and channel count increases between stages, the shortcut applies a projection so the feature-map shapes match.</li>
+<li>Why shortcuts work: <span class="math inline">\(F(x) \to 0\)</span> easily represents identity, and <span class="math inline">\(I + J_F(x)\)</span> provides an unimpeded gradient highway (using projection shortcuts when spatial/channel shapes change).</li>
+<li>Scope &amp; column-swap rule: Works on locally correlated 2D/3D grids (images, video, audio spectrograms, multimodal vision encoders); unsuitable if permuting feature columns preserves meaning (tabular data).</li>
 </ul>
-</section>
-<section id="scope-and-limitations" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="scope-and-limitations"><span class="header-section-number">7.1.4</span> Scope and Limitations</h3>
-<ul>
-<li>CNNs work well on any 2D or 3D grid where nearby entries are strongly correlated (images, audio spectrograms, video), and intermediate layers provide reusable visual features (e.g., vision encoders in multimodal models).</li>
-<li>Rule of thumb: CNNs only capture local spatial patterns—if swapping feature columns leaves the data equally useful (such as tabular customer data), CNNs are not suitable.</li>
-</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resnet-block.png" class="notes-slide-fig img-fluid figure-img" style="width:82.0%"></p>
+<figcaption>Plain convolutional layers vs.&nbsp;a residual block with identity shortcut <span class="math inline">\(H(x) = x + F(x)\)</span>.</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="recurrent-neural-networks-and-lstm" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="recurrent-neural-networks-and-lstm"><span class="header-section-number">7.2</span> Recurrent Neural Networks and LSTM</h2>
-<section id="vanilla-rnn" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="vanilla-rnn"><span class="header-section-number">7.2.1</span> Vanilla RNN</h3>
-<p>Recurrent neural networks process variable-length sequences (one-to-many such as image captioning, many-to-one such as sentiment classification, and many-to-many such as machine translation) by carrying a hidden state <span class="math inline">\(h_t\)</span> across time with shared weights (bias omitted):</p>
-<p><span class="math display">\[
-h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t).
-\]</span></p>
-<p>Unrolling the RNN across time yields a deep shared-weight network in which output <span class="math inline">\(y_i\)</span> depends on <span class="math inline">\(x_1,\ldots,x_i\)</span>, trained by <strong>backpropagation through time (BPTT)</strong> to minimize total sequence loss. Repeated transformations over many steps cause gradients to vanish, making long-term dependencies (such as matching distant brackets) difficult to capture.</p>
+<section id="vanilla-rnn-and-bptt" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="vanilla-rnn-and-bptt"><span class="header-section-number">7.2.1</span> Vanilla RNN and BPTT</h3>
+<ul>
+<li>Sequence topologies: One-to-many (captioning), many-to-one (sentiment), and many-to-many (translation).</li>
+<li>Shared-weight state update across time: <span class="math inline">\(h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)\)</span>, with <span class="math inline">\(y_t\)</span> depending on <span class="math inline">\(x_1, \dots, x_t\)</span>.</li>
+<li><strong>BPTT</strong>: Unrolls across <span class="math inline">\(t = 1,\dots,T\)</span> and backpropagates total loss <span class="math inline">\(\sum_t L_t\)</span>; repeated <span class="math inline">\(W_{hh}^\top\)</span> products cause vanishing gradients on long-range dependencies.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rnn-topologies.png" class="notes-slide-fig img-fluid figure-img" style="width:88.0%"></p>
+<figcaption>Sequence input–output topologies enabled by recurrent networks.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rnn-cell.png" class="notes-slide-fig img-fluid figure-img" style="width:44.0%"></p>
+<figcaption>Vanilla RNN cell updating <span class="math inline">\(h_t\)</span> from <span class="math inline">\(h_{t-1}\)</span> and <span class="math inline">\(x_t\)</span> with shared weights.</figcaption>
+</figure>
+</div>
 </section>
 <section id="long-short-term-memory-lstm" class="level3" data-number="7.2.2">
 <h3 data-number="7.2.2" class="anchored" data-anchor-id="long-short-term-memory-lstm"><span class="header-section-number">7.2.2</span> Long Short-Term Memory (LSTM)</h3>
-<p>An <strong>LSTM</strong> adds a gated memory cell <span class="math inline">\(c_t\)</span> controlled by three sigmoid-activated gates in <span class="math inline">\((0,1)\)</span>—a forget gate <span class="math inline">\(f_t\)</span>, input gate <span class="math inline">\(i_t\)</span>, and output gate <span class="math inline">\(o_t\)</span>—to learn what to keep, write, and expose:</p>
+<div id="def-ai-7-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7.2 (LSTM Gated Memory Cell)</strong></span> Four affine projections <span class="math inline">\((z, z_i, z_f, z_o)\)</span> of <span class="math inline">\([x_t;\, h_{t-1}]\)</span> form candidate <span class="math inline">\(\tilde{c}_t = g(z) = \tanh(z)\)</span> and sigmoid gates in <span class="math inline">\((0,1)\)</span>:</p>
 <p><span class="math display">\[
-c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t,
-\qquad
-h_t = o_t \odot \tanh(c_t).
+i_t = \sigma(z_i) \;\text{(write)}, \qquad f_t = \sigma(z_f) \;\text{(keep)}, \qquad o_t = \sigma(z_o) \;\text{(expose)},
 \]</span></p>
-<p>Additive cell updates regulate information flow and preserve gradients across long sequences, though computation remains sequential across time steps.</p>
+<p><span class="math display">\[
+c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t, \qquad h_t = o_t \odot \tanh(c_t).
+\]</span></p>
+</div>
+<ul>
+<li>Trade-off: Additive cell updates preserve long-horizon gradients when <span class="math inline">\(f_t \approx 1\)</span>, but step <span class="math inline">\(t\)</span> remains sequential in <span class="math inline">\(t-1\)</span>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lstm-cell.png" class="notes-slide-fig img-fluid figure-img" style="width:54.0%"></p>
+<figcaption>LSTM block annotated with inputs <span class="math inline">\((z, z_i, z_f, z_o)\)</span>, candidate <span class="math inline">\(\tilde{c}_t\)</span>, and gated cell update.</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="attention-and-transformers" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="attention-and-transformers"><span class="header-section-number">7.3</span> Attention and Transformers</h2>
 <section id="scaled-dot-product-self-attention" class="level3" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="scaled-dot-product-self-attention"><span class="header-section-number">7.3.1</span> Scaled Dot-Product Self-Attention</h3>
-<p>Instead of passing information step by step through a hidden state, <strong>self-attention</strong> reads relevant information directly across all positions using content-dependent weights. Each input produces learned query, key, and value projections:</p>
+<div id="def-ai-7-3" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7.3 (Scaled Dot-Product Self-Attention)</strong></span> Project tokens <span class="math inline">\(X \in \mathbb{R}^{n \times d}\)</span> to queries (<em>look for</em>), keys (<em>match</em>), and values (<em>pass on</em>):</p>
 <p><span class="math display">\[
-Q = X W_Q, \qquad K = X W_K, \qquad V = X W_V.
+Q = X W_Q, \qquad K = X W_K, \qquad V = X W_V,
 \]</span></p>
-<p>Similarity scores <span class="math inline">\(S = QK^\top\)</span> (<span class="math inline">\(S_{ij} = q_i\cdot k_j\)</span>) are scaled by <span class="math inline">\(\sqrt{d_k}\)</span> so dot products do not grow too large and push softmax into overly peaked regimes:</p>
 <p><span class="math display">\[
-A = \operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right),
-\qquad
-Y = AV \quad \Bigl(y_i = \sum_j A_{ij} v_j\Bigr).
+A = \operatorname{softmax}\!\left(\frac{Q K^\top}{\sqrt{d_k}}\right), \qquad Y = A V \quad \Bigl(y_i = \sum_{j=1}^n A_{ij} v_j\Bigr).
 \]</span></p>
-</section>
-<section id="positional-information" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="positional-information"><span class="header-section-number">7.3.2</span> Positional Information</h3>
-<p>Self-attention alone is permutation-equivariant (permuting inputs permutes outputs), so sequence order must be supplied explicitly:</p>
+</div>
 <ul>
-<li>Additive position embeddings: Add a position vector <span class="math inline">\(p_i\)</span> to each token embedding (<span class="math inline">\(z_i = x_i + p_i\)</span>) before forming <span class="math inline">\(Q, K, V\)</span>. Choices include fixed sinusoidal encodings (<span class="math inline">\((p_i)_{2r} = \sin(i\omega_r)\)</span>, <span class="math inline">\((p_i)_{2r+1} = \cos(i\omega_r)\)</span>) or learned lookup vectors <span class="math inline">\(p_i = P[i]\)</span>.</li>
-<li><strong>RoPE</strong> (Rotary Position Embedding, Su et al., 2021): Splits projected <span class="math inline">\(Q\)</span> and <span class="math inline">\(K\)</span> into 2D coordinate pairs and rotates pair <span class="math inline">\(r\)</span> at position <span class="math inline">\(i\)</span> by angle <span class="math inline">\(i\theta_r\)</span> (leaving <span class="math inline">\(V\)</span> unchanged). Because rotation preserves dot products, query–key scores depend on relative offset <span class="math inline">\(j-i\)</span>:</li>
+<li>Why <span class="math inline">\(1/\sqrt{d_k}\)</span>: Prevents dot products from growing with <span class="math inline">\(d_k\)</span> and pushing <span class="math inline">\(\operatorname{softmax}\)</span> into peaked, tiny-gradient saturation.</li>
 </ul>
-<p><span class="math display">\[
-\bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j-i) k_j.
-\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/self-attention.png" class="notes-slide-fig img-fluid figure-img" style="width:36.0%"></p>
+<figcaption>Scaled dot-product self-attention flow from <span class="math inline">\(X_i\)</span> to weighted outputs <span class="math inline">\(Y_i\)</span>.</figcaption>
+</figure>
+</div>
 </section>
-<section id="multi-head-attention-and-causal-masking" class="level3" data-number="7.3.3">
-<h3 data-number="7.3.3" class="anchored" data-anchor-id="multi-head-attention-and-causal-masking"><span class="header-section-number">7.3.3</span> Multi-Head Attention and Causal Masking</h3>
-<p>Multi-head self-attention runs <span class="math inline">\(H\)</span> independent heads of width <span class="math inline">\(d_h = d/H\)</span> in parallel (each with its own <span class="math inline">\(Q, K, V\)</span> projections), then concatenates and projects back to model width <span class="math inline">\(d\)</span>:</p>
-<p><span class="math display">\[
-\operatorname{head}_h = \operatorname{softmax}\!\left(\frac{Q_h K_h^\top}{\sqrt{d_h}}\right)V_h,
-\qquad
-O = \operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_H)\,W^O.
-\]</span></p>
-<p>For next-token prediction <span class="math inline">\(P(\text{next token}\mid\text{previous tokens})\)</span>, <strong>causal masking</strong> sets attention scores at future positions (<span class="math inline">\(j &gt; i\)</span>) to <span class="math inline">\(-\infty\)</span> before softmax so their weights become <span class="math inline">\(0\)</span>. During training, all positions are computed in parallel with the mask; during generation, tokens are appended autoregressively one at a time.</p>
-</section>
-<section id="transformer-block-and-variants" class="level3" data-number="7.3.4">
-<h3 data-number="7.3.4" class="anchored" data-anchor-id="transformer-block-and-variants"><span class="header-section-number">7.3.4</span> Transformer Block and Variants</h3>
-<p>A Transformer block combines multi-head self-attention (mixing information across positions) with a position-wise feed-forward network (transforming each token independently):</p>
-<p><span class="math display">\[
-\operatorname{FFN}(x) = W_2 \operatorname{ReLU}(W_1 x + b_1) + b_2.
-\]</span></p>
-<p>Each sublayer is wrapped with a residual connection and <strong>Layer Normalization</strong> (“Add &amp; Norm”), where LayerNorm normalizes across feature coordinates independently for each token (<span class="math inline">\(\mu = \operatorname{mean}(x)\)</span>, <span class="math inline">\(\sigma^2 = \operatorname{mean}((x-\mu)^2)\)</span>):</p>
-<p><span class="math display">\[
-\operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta.
-\]</span></p>
-<p>Stacking <span class="math inline">\(N\)</span> blocks yields three main variants:</p>
+<section id="position-encodings-multi-head-and-masking" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="position-encodings-multi-head-and-masking"><span class="header-section-number">7.3.2</span> Position Encodings, Multi-Head, and Masking</h3>
 <ul>
-<li>Decoder-only: Masked (causal) self-attention + FFN, followed by a linear layer and softmax to predict the next token.</li>
-<li>Encoder-only: Removes the causal mask so every token attends bidirectionally to the entire input.</li>
-<li>Encoder–Decoder: Encoder reads the full source sequence; decoder uses causal self-attention plus cross-attention (<span class="math inline">\(Q\)</span> from the decoder, <span class="math inline">\(K\)</span> and <span class="math inline">\(V\)</span> from the encoder).</li>
+<li>Positional cues (needed because pure attention is permutation-equivariant):
+<ul>
+<li>Additive (<span class="math inline">\(z_i = x_i + p_i\)</span>): Fixed sinusoidal (<span class="math inline">\(\sin(i\omega_r), \cos(i\omega_r)\)</span>) or learned <span class="math inline">\(p_i = P[i]\)</span>.</li>
+<li><strong>RoPE</strong>: Rotates 2D coordinate pairs of <span class="math inline">\(Q, K\)</span> by angle <span class="math inline">\(i\theta_r\)</span> (<span class="math inline">\(V\)</span> unchanged), making scores depend only on relative offset <span class="math inline">\(j - i\)</span>: <span class="math inline">\(\bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j - i) k_j\)</span>.</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rope.png" class="notes-slide-fig img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>RoPE rotates 2D pairs of query/key vectors by position-proportional angles <span class="math inline">\(m\theta_r\)</span>.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Multi-head attention: Run <span class="math inline">\(H\)</span> parallel heads of width <span class="math inline">\(d_h = d/H\)</span>, concatenate (<span class="math inline">\(H d_h = d\)</span>), and project via <span class="math inline">\(O = \operatorname{Concat}(\operatorname{head}_1,\dots,\operatorname{head}_H) W^O\)</span>.</li>
+<li><strong>Causal masking</strong>: Set <span class="math inline">\(E_{ij} = -\infty\)</span> for <span class="math inline">\(j &gt; i\)</span> before <span class="math inline">\(\operatorname{softmax}\)</span> (<span class="math inline">\(A_{ij} = 0\)</span>). Training evaluates all positions in parallel; generation appends tokens sequentially.</li>
 </ul>
 </section>
-</section>
-<section id="tips-for-training-deep-neural-networks" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="tips-for-training-deep-neural-networks"><span class="header-section-number">7.4</span> Tips for Training Deep Neural Networks</h2>
-<section id="adaptive-learning-rates" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="adaptive-learning-rates"><span class="header-section-number">7.4.1</span> Adaptive Learning Rates</h3>
-<p>Choosing a fixed learning rate <span class="math inline">\(\eta\)</span> is delicate: too large prevents the loss from decreasing, while too small makes training slow. <strong>Adagrad</strong> maintains a separate learning rate for each parameter <span class="math inline">\(w\)</span>, scaled inversely by the root sum of squared past gradients (<span class="math inline">\(g_t = \frac{\partial C(\theta^t)}{\partial w}\)</span>):</p>
-<p><span class="math display">\[
-w^{t+1} \leftarrow w^t - \frac{\eta}{\sqrt{\sum_{i=0}^t g_i^2}}\,g_t.
-\]</span></p>
-<p>The effective learning rate shrinks over time, and parameters with smaller historical gradients receive larger effective steps (and vice versa). Subsequent adaptive optimizers include RMSprop, Adadelta, Adam, AdamW, and Muon.</p>
-</section>
-<section id="dropout" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="dropout"><span class="header-section-number">7.4.2</span> Dropout</h3>
+<section id="transformer-block-and-variants" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="transformer-block-and-variants"><span class="header-section-number">7.3.3</span> Transformer Block and Variants</h3>
 <ul>
-<li>Training: Before computing gradients on each minibatch, randomly drop each neuron with probability <span class="math inline">\(p\)</span>, training a thinner subnetwork per minibatch.</li>
-<li>Testing: Keep all neurons active and multiply all weights by the keep probability <span class="math inline">\((1-p)\)</span> so expected activations match training.</li>
-<li>Interpretation: Prevents co-adaptation among neurons and acts as an implicit ensemble over up to <span class="math inline">\(2^M\)</span> weight-sharing subnetworks (for <span class="math inline">\(M\)</span> neurons). Variants include DropConnect (dropping connections), annealed dropout (decaying <span class="math inline">\(p\)</span> over epochs), and Standout (per-neuron dropout rates).</li>
+<li>Sublayers per block (<span class="math inline">\(N\times\)</span>): Multi-head attention + position-wise <span class="math inline">\(\operatorname{FFN}(x) = W_2\operatorname{ReLU}(W_1 x + b_1) + b_2\)</span>, each wrapped in Add &amp; Norm (<span class="math inline">\(y = x + F(x)\)</span> and per-token feature <strong>LayerNorm</strong> <span class="math inline">\(\operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta\)</span>).</li>
 </ul>
-<!-- ## Supplementary Notes {.supplementary-notes}
-
-### Key Results -->
-
-
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variant</th>
+<th style="text-align: left;">Attention Pattern</th>
+<th style="text-align: left;">Typical Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Decoder-only</td>
+<td style="text-align: left;">Causal self-attention + FFN <span class="math inline">\(\to\)</span> linear + softmax</td>
+<td style="text-align: left;">Autoregressive LLMs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Encoder-only</td>
+<td style="text-align: left;">Bidirectional (unmasked) self-attention + FFN</td>
+<td style="text-align: left;">Classification, embeddings</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Encoder–Decoder</td>
+<td style="text-align: left;">Bidirectional encoder + causal decoder + cross-attention (<span class="math inline">\(Q\)</span>: dec, <span class="math inline">\(K,V\)</span>: enc)</td>
+<td style="text-align: left;">Translation / seq2seq</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/transformer-encoder-decoder.png" class="notes-slide-fig img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Transformer Encoder–Decoder architecture.</figcaption>
+</figure>
+</div>
 </section>
+</section>
+<section id="training-tips-adaptive-rates-and-dropout" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="training-tips-adaptive-rates-and-dropout"><span class="header-section-number">7.4</span> Training Tips: Adaptive Rates and Dropout</h2>
+<ul>
+<li><p>Adagrad: Per-parameter step scaled inversely by cumulative squared gradients (<span class="math inline">\(g_i = \frac{\partial C(\theta^i)}{\partial w}\)</span>):</p>
+<p><span class="math display">\[
+w^{t+1} \leftarrow w^t - \frac{\eta}{\sqrt{\sum_{i=0}^t g_i^2}}\, g_t.
+\]</span></p>
+<p>Shrinks steps over time and gives larger steps to flat/infrequent coordinates (extended via moving averages and momentum in RMSprop, Adam, AdamW, Muon).</p></li>
+<li><p>Dropout:</p>
+<ul>
+<li>Train: Drop each neuron with probability <span class="math inline">\(p\)</span> per minibatch (thinner subnetwork).</li>
+<li>Test: Keep all neurons and multiply weights by <span class="math inline">\((1 - p)\)</span> so expected activations match training (<span class="math inline">\(p=0.5 \implies \times 0.5\)</span>).</li>
+<li>Effect: Prevents co-adaptation and approximates averaging <span class="math inline">\(2^M\)</span> weight-sharing subnetworks (variants: DropConnect, annealed dropout).</li>
+</ul></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
