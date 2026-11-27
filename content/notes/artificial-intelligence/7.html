@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1103,9 +1103,16 @@ window.Quarto = {
 </div>
 <p>Backpropagation through CNN layers (only conv filters and FC weights are learned):</p>
 <ul>
-<li>Convolution: Linear sparse-matrix operator <span class="math inline">\(\implies\)</span> backward pass applies the transposed operation.</li>
-<li>ReLU: Passes <span class="math inline">\(\frac{\partial L}{\partial z_i}\)</span> if <span class="math inline">\(z_{i-1} &gt; 0\)</span>, else <span class="math inline">\(0\)</span> (Leaky ReLU <span class="math inline">\(\max(0.1 z_{i-1}, z_{i-1})\)</span> fixes “dying ReLUs”).</li>
-<li>Max pooling: Routes <span class="math inline">\(\frac{\partial L}{\partial z_i(x,y)}\)</span> solely to the window’s argmax entry (<span class="math inline">\(0\)</span> elsewhere).</li>
+<li><p>Convolution: Linear sparse-matrix operator <span class="math inline">\(\implies\)</span> backward pass applies the transposed operation.</p></li>
+<li><p>ReLU (Leaky ReLU <span class="math inline">\(\max(0.1 z_{i-1}, z_{i-1})\)</span> fixes zero-gradient “dying ReLUs”):</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial z_{i-1}} =
+\begin{cases}
+\dfrac{\partial L}{\partial z_i}, &amp; z_{i-1} &gt; 0, \\[4pt]
+0, &amp; z_{i-1} &lt; 0.
+\end{cases}
+\]</span></p></li>
+<li><p>Max pooling (<span class="math inline">\(k \times k\)</span> window): Forward takes <span class="math inline">\(z_i(x, y) = \max_{0 \le p, q &lt; k} z_{i-1}(x + p, y + q)\)</span>; backward routes <span class="math inline">\(\frac{\partial L}{\partial z_i(x,y)}\)</span> solely to the winning entry <span class="math inline">\((x+p^*, y+q^*)\)</span> (<span class="math inline">\(0\)</span> elsewhere).</p></li>
 </ul>
 </section>
 <section id="residual-networks-resnet-and-scope" class="level3" data-number="7.1.2">
@@ -1137,8 +1144,8 @@ H(x) = x + F(x), \qquad \frac{\partial H(x)}{\partial x} = I + J_F(x).
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="vanilla-rnn-and-bptt"><span class="header-section-number">7.2.1</span> Vanilla RNN and BPTT</h3>
 <ul>
 <li>Sequence topologies: One-to-many (captioning), many-to-one (sentiment), and many-to-many (translation).</li>
-<li>Shared-weight state update across time: <span class="math inline">\(h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)\)</span>, with <span class="math inline">\(y_t\)</span> depending on <span class="math inline">\(x_1, \dots, x_t\)</span>.</li>
-<li><strong>BPTT</strong>: Unrolls across <span class="math inline">\(t = 1,\dots,T\)</span> and backpropagates total loss <span class="math inline">\(\sum_t L_t\)</span>; repeated <span class="math inline">\(W_{hh}^\top\)</span> products cause vanishing gradients on long-range dependencies.</li>
+<li>Shared-weight recurrence: <span class="math inline">\(h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)\)</span>, with <span class="math inline">\(y_t = W_{hy} h_t\)</span> depending on <span class="math inline">\(x_1, \dots, x_t\)</span>.</li>
+<li><strong>BPTT</strong>: Unrolls across <span class="math inline">\(t = 1,\dots,T\)</span> and backpropagates total loss <span class="math inline">\(\sum_{t=1}^T L_t\)</span>; repeated <span class="math inline">\(W_{hh}^\top\)</span> products cause vanishing gradients on long-range dependencies (e.g., matching distant brackets).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1185,11 +1192,11 @@ c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t, \qquad h_t = o_t \odot \tanh(c_
 Q = X W_Q, \qquad K = X W_K, \qquad V = X W_V,
 \]</span></p>
 <p><span class="math display">\[
-A = \operatorname{softmax}\!\left(\frac{Q K^\top}{\sqrt{d_k}}\right), \qquad Y = A V \quad \Bigl(y_i = \sum_{j=1}^n A_{ij} v_j\Bigr).
+S = Q K^\top \;(S_{ij} = q_i \cdot k_j), \qquad E = \frac{S}{\sqrt{d_k}}, \qquad A = \operatorname{softmax}(E), \qquad Y = A V \;\Bigl(y_i = \sum_{j=1}^n A_{ij} v_j\Bigr).
 \]</span></p>
 </div>
 <ul>
-<li>Why <span class="math inline">\(1/\sqrt{d_k}\)</span>: Prevents dot products from growing with <span class="math inline">\(d_k\)</span> and pushing <span class="math inline">\(\operatorname{softmax}\)</span> into peaked, tiny-gradient saturation.</li>
+<li>Why <span class="math inline">\(1/\sqrt{d_k}\)</span>: Dot products sum <span class="math inline">\(d_k\)</span> coordinate terms and grow with <span class="math inline">\(d_k\)</span>; scaling keeps <span class="math inline">\(E_{ij}\)</span> from pushing <span class="math inline">\(\operatorname{softmax}\)</span> into peaked, tiny-gradient saturation.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1201,10 +1208,13 @@ A = \operatorname{softmax}\!\left(\frac{Q K^\top}{\sqrt{d_k}}\right), \qquad Y =
 <section id="position-encodings-multi-head-and-masking" class="level3" data-number="7.3.2">
 <h3 data-number="7.3.2" class="anchored" data-anchor-id="position-encodings-multi-head-and-masking"><span class="header-section-number">7.3.2</span> Position Encodings, Multi-Head, and Masking</h3>
 <ul>
-<li>Positional cues (needed because pure attention is permutation-equivariant):
+<li>Positional cues (pure attention is permutation-equivariant):
 <ul>
-<li>Additive (<span class="math inline">\(z_i = x_i + p_i\)</span>): Fixed sinusoidal (<span class="math inline">\(\sin(i\omega_r), \cos(i\omega_r)\)</span>) or learned <span class="math inline">\(p_i = P[i]\)</span>.</li>
-<li><strong>RoPE</strong>: Rotates 2D coordinate pairs of <span class="math inline">\(Q, K\)</span> by angle <span class="math inline">\(i\theta_r\)</span> (<span class="math inline">\(V\)</span> unchanged), making scores depend only on relative offset <span class="math inline">\(j - i\)</span>: <span class="math inline">\(\bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j - i) k_j\)</span>.</li>
+<li><p>Additive (<span class="math inline">\(z_i = x_i + p_i\)</span> before <span class="math inline">\(Q,K,V\)</span>): Fixed sinusoidal <span class="math inline">\((p_i)_{2r} = \sin(i\omega_r),\, (p_i)_{2r+1} = \cos(i\omega_r)\)</span> or learned <span class="math inline">\(p_i = P[i]\)</span>.</p></li>
+<li><p><strong>RoPE</strong>: Rotates 2D coordinate pairs of <span class="math inline">\(Q, K\)</span> by angle <span class="math inline">\(i\theta_r\)</span> (<span class="math inline">\(V\)</span> unchanged); shift invariance <span class="math inline">\((j+t)-(i+t)=j-i\)</span> makes scores depend on relative offset <span class="math inline">\(j - i\)</span>:</p>
+<p><span class="math display">\[
+\bigl(R(i)q_i\bigr)^\top \bigl(R(j)k_j\bigr) = q_i^\top R(j - i) k_j.
+\]</span></p></li>
 </ul></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -1214,14 +1224,17 @@ A = \operatorname{softmax}\!\left(\frac{Q K^\top}{\sqrt{d_k}}\right), \qquad Y =
 </figure>
 </div>
 <ul>
-<li>Multi-head attention: Run <span class="math inline">\(H\)</span> parallel heads of width <span class="math inline">\(d_h = d/H\)</span>, concatenate (<span class="math inline">\(H d_h = d\)</span>), and project via <span class="math inline">\(O = \operatorname{Concat}(\operatorname{head}_1,\dots,\operatorname{head}_H) W^O\)</span>.</li>
-<li><strong>Causal masking</strong>: Set <span class="math inline">\(E_{ij} = -\infty\)</span> for <span class="math inline">\(j &gt; i\)</span> before <span class="math inline">\(\operatorname{softmax}\)</span> (<span class="math inline">\(A_{ij} = 0\)</span>). Training evaluates all positions in parallel; generation appends tokens sequentially.</li>
+<li>Multi-head attention: Run <span class="math inline">\(H\)</span> parallel heads of width <span class="math inline">\(d_h = d/H\)</span> (<span class="math inline">\(\operatorname{head}_h = \operatorname{softmax}(Q_h K_h^\top / \sqrt{d_h})V_h\)</span>), concatenate (<span class="math inline">\(H d_h = d\)</span>), and project via <span class="math inline">\(O = \operatorname{Concat}(\operatorname{head}_1,\dots,\operatorname{head}_H) W^O\)</span>.</li>
+<li><strong>Causal masking</strong> for <span class="math inline">\(P(x_{i+1} \mid x_1,\dots,x_i)\)</span>: Set <span class="math inline">\(E_{ij} = -\infty\)</span> for <span class="math inline">\(j &gt; i\)</span> before <span class="math inline">\(\operatorname{softmax}\)</span> (<span class="math inline">\(A_{ij} = 0\)</span>). Training computes all target shifts in parallel (e.g., input <code>[Attention, is, very]</code> <span class="math inline">\(\to\)</span> target <code>[is, very, cool]</code>); generation appends tokens sequentially.</li>
 </ul>
 </section>
 <section id="transformer-block-and-variants" class="level3" data-number="7.3.3">
 <h3 data-number="7.3.3" class="anchored" data-anchor-id="transformer-block-and-variants"><span class="header-section-number">7.3.3</span> Transformer Block and Variants</h3>
 <ul>
-<li>Sublayers per block (<span class="math inline">\(N\times\)</span>): Multi-head attention + position-wise <span class="math inline">\(\operatorname{FFN}(x) = W_2\operatorname{ReLU}(W_1 x + b_1) + b_2\)</span>, each wrapped in Add &amp; Norm (<span class="math inline">\(y = x + F(x)\)</span> and per-token feature <strong>LayerNorm</strong> <span class="math inline">\(\operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta\)</span>).</li>
+<li><p>Sublayers per block (<span class="math inline">\(N\times\)</span>): Multi-head attention + position-wise <span class="math inline">\(\operatorname{FFN}(x) = W_2\operatorname{ReLU}(W_1 x + b_1) + b_2\)</span>, each wrapped in Add &amp; Norm (<span class="math inline">\(y = x + F(x)\)</span> and per-token feature <strong>LayerNorm</strong>):</p>
+<p><span class="math display">\[
+\mu = \operatorname{mean}(x), \qquad \sigma^2 = \operatorname{mean}\bigl((x - \mu)^2\bigr), \qquad \operatorname{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \varepsilon}} + \beta.
+\]</span></p></li>
 </ul>
 <table class="caption-top table">
 <colgroup>
@@ -1272,9 +1285,9 @@ w^{t+1} \leftarrow w^t - \frac{\eta}{\sqrt{\sum_{i=0}^t g_i^2}}\, g_t.
 <p>Shrinks steps over time and gives larger steps to flat/infrequent coordinates (extended via moving averages and momentum in RMSprop, Adam, AdamW, Muon).</p></li>
 <li><p>Dropout:</p>
 <ul>
-<li>Train: Drop each neuron with probability <span class="math inline">\(p\)</span> per minibatch (thinner subnetwork).</li>
-<li>Test: Keep all neurons and multiply weights by <span class="math inline">\((1 - p)\)</span> so expected activations match training (<span class="math inline">\(p=0.5 \implies \times 0.5\)</span>).</li>
-<li>Effect: Prevents co-adaptation and approximates averaging <span class="math inline">\(2^M\)</span> weight-sharing subnetworks (variants: DropConnect, annealed dropout).</li>
+<li>Train: Drop each neuron with probability <span class="math inline">\(p\)</span> per minibatch (resampling thinner subnetworks).</li>
+<li>Test: Keep all neurons active and multiply weights by keep probability <span class="math inline">\((1 - p)\)</span>—at <span class="math inline">\(p = 0.5\)</span>, unscaled test pre-activations would double (<span class="math inline">\(z' \approx 2z\)</span>), whereas <span class="math inline">\(\times 0.5\)</span> matches training expectation (<span class="math inline">\(z' \approx z\)</span>).</li>
+<li>Effect: Prevents co-adaptation and approximates averaging <span class="math inline">\(2^M\)</span> weight-sharing subnetworks (variants: Maxout, DropConnect, annealed dropout, Standout).</li>
 </ul></li>
 </ul>
 

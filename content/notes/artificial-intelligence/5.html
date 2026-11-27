@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1091,7 +1091,7 @@ window.Quarto = {
 <h2 data-number="5.1" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">5.1</span> Linear Regression</h2>
 <section id="canonical-setup" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="canonical-setup"><span class="header-section-number">5.1.1</span> Canonical Setup</h3>
-<p>Given <span class="math inline">\((x^{(i)}, y^{(i)})_{i=1}^m\)</span> with <span class="math inline">\(x^{(i)} \in \mathbb{R}^n\)</span> (appending <span class="math inline">\(1\)</span> for the intercept), every supervised method specifies three parts: hypothesis <span class="math inline">\(h_\theta\)</span>, loss <span class="math inline">\(\ell\)</span>, and optimizer:</p>
+<p>Given <span class="math inline">\((x^{(i)}, y^{(i)})_{i=1}^m\)</span> with <span class="math inline">\(x^{(i)} \in \mathbb{R}^n\)</span> (appending <span class="math inline">\(1\)</span> for the intercept), every supervised method specifies three ingredients: hypothesis <span class="math inline">\(h_\theta\)</span>, loss <span class="math inline">\(\ell\)</span>, and optimizer:</p>
 <div id="def-ai-5-1" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.1 (Canonical Machine Learning Problem)</strong></span> <span class="math display">\[
 \min_{\theta \in \mathbb{R}^n} \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}),\, y^{(i)}\bigr).
@@ -1106,11 +1106,17 @@ window.Quarto = {
 </section>
 <section id="least-squares-and-ell_1-regression" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="least-squares-and-ell_1-regression"><span class="header-section-number">5.1.2</span> Least Squares and <span class="math inline">\(\ell_1\)</span> Regression</h3>
-<p>With <span class="math inline">\(h_\theta(x) = \theta^\top x\)</span>, squared loss, and rows <span class="math inline">\(x^{(i)\top}\)</span> stacked into <span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span>, least squares minimizes the convex objective <span class="math inline">\(\min_\theta \|X\theta - y\|_2^2\)</span> (<span class="math inline">\(\nabla_\theta = 2X^\top(X\theta - y)\)</span>):</p>
+<p>With <span class="math inline">\(h_\theta(x) = \theta^\top x\)</span>, squared loss, and rows <span class="math inline">\(x^{(i)\top}\)</span> stacked into <span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span>, least squares minimizes the convex quadratic objective (<span class="math inline">\(\nabla_\theta \|X\theta - y\|_2^2 = 2X^\top(X\theta - y)\)</span>):</p>
+<p><span class="math display">\[
+\min_\theta \sum_{i=1}^m (\theta^\top x^{(i)} - y^{(i)})^2 = \min_\theta \|X\theta - y\|_2^2.
+\]</span></p>
 <ul>
-<li>Gradient descent: <span class="math inline">\(\theta \leftarrow \theta - 2\alpha X^\top(X\theta - y)\)</span>.</li>
-<li><strong>Normal equations</strong> (closed form): <span class="math inline">\(X^\top X \theta^* = X^\top y \implies \theta^* = (X^\top X)^{-1} X^\top y\)</span>.</li>
-<li><span class="math inline">\(\ell_1\)</span> regression (<span class="math inline">\(\min_\theta \|X\theta - y\|_1\)</span>): Outlier-robust and convex; no closed form, solved via subgradient <span class="math inline">\(X^\top \operatorname{sign}(X\theta - y)\)</span>.</li>
+<li><p>Gradient descent: <span class="math inline">\(\theta \leftarrow \theta - 2\alpha \sum_{i=1}^m x^{(i)}(\theta^\top x^{(i)} - y^{(i)}) = \theta - 2\alpha X^\top(X\theta - y)\)</span>.</p></li>
+<li><p><strong>Normal equations</strong> (closed form):</p>
+<p><span class="math display">\[
+2X^\top(X\theta^* - y) = 0 \;\implies\; X^\top X \theta^* = X^\top y \;\implies\; \theta^* = (X^\top X)^{-1} X^\top y.
+\]</span></p></li>
+<li><p><span class="math inline">\(\ell_1\)</span> regression (<span class="math inline">\(\min_\theta \|X\theta - y\|_1\)</span>): Outlier-robust and convex; no closed form, solved via subgradient <span class="math inline">\(X^\top \operatorname{sign}(X\theta - y)\)</span>.</p></li>
 </ul>
 </section>
 </section>
@@ -1165,9 +1171,9 @@ window.Quarto = {
 </tbody>
 </table>
 <ul>
-<li><p>Linear SVM: Minimizes hinge loss (+ <span class="math inline">\(\frac{\lambda}{2}\|\theta\|_2^2\)</span>); subgradient updates only on margin violations (<span class="math inline">\(y^{(i)}\theta^\top x^{(i)} \le 1\)</span>):</p>
+<li><p>Linear SVM: Minimizes <span class="math inline">\(\sum_{i=1}^m \max\{1 - y^{(i)}\theta^\top x^{(i)}, 0\}\)</span> (+ <span class="math inline">\(\frac{\lambda}{2}\|\theta\|_2^2\)</span>); subgradient updates only on margin violations (<span class="math inline">\(y^{(i)}\theta^\top x^{(i)} \le 1\)</span>):</p>
 <p><span class="math display">\[
-\theta \leftarrow \theta + \alpha \sum_{i=1}^m y^{(i)} x^{(i)}\, \mathbf{1}\bigl\{y^{(i)}\theta^\top x^{(i)} \le 1\bigr\}.
+\theta \leftarrow \theta - \alpha \sum_{i=1}^m \Bigl(-y^{(i)} x^{(i)}\, \mathbf{1}\bigl\{y^{(i)}\theta^\top x^{(i)} \le 1\bigr\}\Bigr).
 \]</span></p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -1177,11 +1183,14 @@ window.Quarto = {
 </figure>
 </div>
 <ul>
-<li>Logistic regression: Minimizes <span class="math inline">\(\lambda\|\theta\|_2^2 + \sum_{i=1}^m \log(1 + e^{-y^{(i)}\theta^\top x^{(i)}})\)</span> via GD or Newton’s method; models <span class="math inline">\(p(y = +1 \mid x) = \sigma(\theta^\top x) = (1 + e^{-\theta^\top x})^{-1}\)</span>.</li>
+<li>Logistic regression: Minimizes <span class="math inline">\(\lambda\|\theta\|_2^2 + \sum_{i=1}^m \log(1 + e^{-y^{(i)}\theta^\top x^{(i)}})\)</span> via GD or Newton’s method; models calibrated posterior <span class="math inline">\(p(y = +1 \mid x) = \dfrac{1}{1 + \exp(-\theta^\top x)}\)</span>.</li>
 <li>Multiclass (<span class="math inline">\(y \in \{1,\dots,k\}\)</span>):
 <ul>
-<li>One-vs-all: Train <span class="math inline">\(k\)</span> binary classifiers <span class="math inline">\(h_{\theta_j}\)</span> and predict <span class="math inline">\(\arg\max_j h_{\theta_j}(x)\)</span>.</li>
-<li>Softmax (cross-entropy): For <span class="math inline">\(h_\theta: \mathbb{R}^n \to \mathbb{R}^k\)</span>, minimize <span class="math inline">\(\ell(h_\theta(x), y) = \log\sum_{j=1}^k \exp(h_\theta(x)_j) - h_\theta(x)_y\)</span>.</li>
+<li><p>One-vs-all: Train <span class="math inline">\(k\)</span> binary classifiers <span class="math inline">\(h_{\theta_j}\)</span> and predict <span class="math inline">\(\hat{y} = \arg\max_j h_{\theta_j}(x)\)</span>.</p></li>
+<li><p>Softmax (cross-entropy): For <span class="math inline">\(h_\theta: \mathbb{R}^n \to \mathbb{R}^k\)</span>, model <span class="math inline">\(p(y = j \mid x) = \frac{\exp(h_\theta(x)_j)}{\sum_{c=1}^k \exp(h_\theta(x)_c)}\)</span> and minimize negative log-likelihood:</p>
+<p><span class="math display">\[
+\ell\bigl(h_\theta(x), y\bigr) = \log\sum_{j=1}^k \exp\bigl(h_\theta(x)_j\bigr) - h_\theta(x)_y.
+\]</span></p></li>
 </ul></li>
 </ul>
 </section>
@@ -1189,12 +1198,16 @@ window.Quarto = {
 <section id="nonlinear-methods" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="nonlinear-methods"><span class="header-section-number">5.3</span> Nonlinear Methods</h2>
 <ul>
-<li>Nonlinear features: Apply linear models to <span class="math inline">\(\phi(z)\)</span> (e.g., polynomials <span class="math inline">\([z^d,\dots,z,1]^\top\)</span>)—nonlinear in <span class="math inline">\(z\)</span>, still linear in <span class="math inline">\(\theta\)</span>.</li>
-<li>Kernel methods: <span class="math inline">\(h_\theta(x) = \sum_{i=1}^m \theta_i K(x, x^{(i)})\)</span> where <span class="math inline">\(K(x,z) = \phi(x)^\top \phi(z)\)</span> computes high-dimensional inner products implicitly; linear in <span class="math inline">\(\theta \in \mathbb{R}^m\)</span>, <strong>non-parametric</strong> (<span class="math inline">\(m\)</span> weights).</li>
-<li><span class="math inline">\(k\)</span>-Nearest Neighbors (<span class="math inline">\(k\)</span>-NN): Vote or average over the <span class="math inline">\(k\)</span> closest training points under <span class="math inline">\(\operatorname{dist}(x, x^{(i)})\)</span>; no training step, <span class="math inline">\(O(m)\)</span> storage.</li>
+<li>Nonlinear features: Apply linear models to <span class="math inline">\(\phi(z)\)</span> (e.g., polynomials <span class="math inline">\([z^d,\dots,z,1]^\top\)</span>)—nonlinear in <span class="math inline">\(z\)</span>, still linear in <span class="math inline">\(\theta\)</span> (<span class="math inline">\(\theta^* = (X^\top X)^{-1}X^\top y\)</span>).</li>
+<li>Kernel methods: <span class="math inline">\(h_\theta(x) = \sum_{i=1}^m \theta_i K(x, x^{(i)})\)</span> where <span class="math inline">\(K(x,z) = \phi(x)^\top \phi(z)\)</span> computes inner products implicitly:
+<ul>
+<li>Worked lift: <span class="math inline">\(\phi(a, b) = (a, b, a^2 + b^2)\)</span> gives <span class="math inline">\(K(x, z) = x^\top z + \|x\|_2^2 \|z\|_2^2\)</span>, separating 2D concentric rings by a linear hyperplane in 3D.</li>
+<li>Linear in <span class="math inline">\(\theta \in \mathbb{R}^m\)</span>, <strong>non-parametric</strong> (<span class="math inline">\(m\)</span> parameters).</li>
+</ul></li>
+<li><span class="math inline">\(k\)</span>-Nearest Neighbors (<span class="math inline">\(k\)</span>-NN): 1-NN predicts <span class="math inline">\(y^{(\arg\min_i \operatorname{dist}(x, x^{(i)}))}\)</span> (<span class="math inline">\(k\)</span>-NN votes or averages); zero training, <span class="math inline">\(O(m)\)</span> storage.</li>
 <li>Decision trees: Greedily split features (<span class="math inline">\(x_j \le t\)</span>) to partition <span class="math inline">\(\mathbb{R}^n\)</span>; leaves output labels or local linear fits.</li>
-<li>Neural networks: Composed affine + nonlinear layers, e.g., <span class="math inline">\(h_\theta(x) = \sigma(\theta_2^\top \sigma(\Theta_1^\top x))\)</span>.</li>
-<li>Ensembles (<span class="math inline">\(h_\theta(x) = \sum_{j=1}^k \theta_j \operatorname{sign}(h_j(x))\)</span>): Random forests (trees on bootstrap data/features) and boosting (reweighting prior errors).</li>
+<li>Neural networks: Composed affine + nonlinear layers, e.g., <span class="math inline">\(h_\theta(x) = \sigma\bigl(\theta_2^\top \sigma(\Theta_1^\top x)\bigr)\)</span>.</li>
+<li>Ensembles (<span class="math inline">\(h_\theta(x) = \sum_{j=1}^k \theta_j \operatorname{sign}(h_j(x))\)</span>): Random forests (trees on bootstrap subsets) and boosting (reweighting prior errors).</li>
 </ul>
 </section>
 <section id="generalization-regularization-and-evaluation" class="level2" data-number="5.4">
@@ -1202,8 +1215,8 @@ window.Quarto = {
 <section id="overfitting-and-cross-validation" class="level3" data-number="5.4.1">
 <h3 data-number="5.4.1" class="anchored" data-anchor-id="overfitting-and-cross-validation"><span class="header-section-number">5.4.1</span> Overfitting and Cross-Validation</h3>
 <ul>
-<li><strong>Overfitting</strong>: High-capacity models fit training noise (low training loss, high generalization error). Fit parameters <span class="math inline">\(\theta\)</span> on training data; tune hyperparameters (<span class="math inline">\(d, \lambda, k\)</span>) on validation data.</li>
-<li><strong><span class="math inline">\(k\)</span>-fold CV</strong>: Average validation loss across <span class="math inline">\(k\)</span> held-out folds. Variants: leave-one-out (<span class="math inline">\(k=m\)</span>, fast in closed form for least squares) and stratified CV (preserves class ratios). <em>Time-series rule</em>: validation data must strictly follow training data in time.</li>
+<li><strong>Overfitting</strong>: High-capacity models (e.g., degree-50 polynomials) interpolate noise—near-zero training loss, huge generalization error. Fit parameters <span class="math inline">\(\theta\)</span> on training data; select hyperparameters (<span class="math inline">\(d, \lambda, k\)</span>) on validation data.</li>
+<li><strong><span class="math inline">\(k\)</span>-fold CV</strong>: Partition into <span class="math inline">\(k\)</span> folds and average validation error across all <span class="math inline">\(k\)</span> held-out folds. Variants: leave-one-out (<span class="math inline">\(k=m\)</span>, computable for least squares at single-solve cost) and stratified CV (preserves class ratios). <em>Time-series rule</em>: validation splits must strictly follow training splits in time.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1215,17 +1228,20 @@ window.Quarto = {
 <section id="regularization-and-evaluation-protocol" class="level3" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="regularization-and-evaluation-protocol"><span class="header-section-number">5.4.2</span> Regularization and Evaluation Protocol</h3>
 <div id="def-ai-5-2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.2 (Regularized Loss &amp; Ridge Regression)</strong></span> Penalizing <span class="math inline">\(\|\theta\|_2^2\)</span> damps large oscillating weights (<span class="math inline">\(\lambda\)</span>: fit vs.&nbsp;complexity trade-off):</p>
+<p><span class="theorem-title"><strong>Definition 5.2 (Regularized Loss &amp; Ridge Regression)</strong></span> Penalizing <span class="math inline">\(\|\theta\|_2^2\)</span> damps oscillating weights (e.g., smoothing a degree-50 polynomial fit at <span class="math inline">\(\lambda = 1\)</span>):</p>
 <p><span class="math display">\[
 \min_\theta \sum_{i=1}^m \ell\bigl(h_\theta(x^{(i)}),\, y^{(i)}\bigr) + \frac{\lambda}{2}\|\theta\|_2^2.
 \]</span></p>
-<p>For <span class="math inline">\(\frac{1}{2}\|X\theta - y\|_2^2 + \frac{\lambda}{2}\|\theta\|_2^2\)</span>, the closed-form solution is <span class="math inline">\(\theta^* = (X^\top X + \lambda I)^{-1} X^\top y\)</span>.</p>
+<p>For ridge regression <span class="math inline">\(\frac{1}{2}\|X\theta - y\|_2^2 + \frac{\lambda}{2}\|\theta\|_2^2\)</span>, setting <span class="math inline">\(X^\top(X\theta^* - y) + \lambda\theta^* = 0\)</span> yields</p>
+<p><span class="math display">\[
+(X^\top X + \lambda I)\theta^* = X^\top y \;\implies\; \theta^* = (X^\top X + \lambda I)^{-1} X^\top y.
+\]</span></p>
 </div>
 <ul>
 <li>Train / Validation / Test split:
 <ol type="1">
-<li>Fit <span class="math inline">\(\theta\)</span> on Train; tune hyperparameters/models on Validation (never on Test, or hyperparameters overfit the holdout).</li>
-<li>Report final performance <em>once</em> on Test—repeatedly tuning against Test leaks information (mitigate with fresh live data and sparse test checks).</li>
+<li>Fit <span class="math inline">\(\theta\)</span> on Train; select models/hyperparameters on Validation (tuning on a single holdout makes holdout error optimistically biased).</li>
+<li>Report final error <em>once</em> on Test (optionally after retraining <span class="math inline">\(\theta\)</span> on <span class="math inline">\(\text{Train}\cup\text{Val}\)</span>); repeated test peeking leaks information (mitigate via fresh live data and sparse test queries).</li>
 </ol></li>
 </ul>
 </section>
@@ -1234,8 +1250,8 @@ window.Quarto = {
 <h2 data-number="5.5" class="anchored" data-anchor-id="unsupervised-learning"><span class="header-section-number">5.5</span> Unsupervised Learning</h2>
 <p>Minimize squared <strong>reconstruction loss</strong> <span class="math inline">\(\sum_{i=1}^m \|x_i - h_\theta(x_i)\|_2^2\)</span> on unlabeled <span class="math inline">\(x_1, \dots, x_m \in \mathbb{R}^n\)</span>:</p>
 <ul>
-<li><span class="math inline">\(k\)</span>-Means (<span class="math inline">\(h_\theta(x) = \mu_{\arg\min_j \|x - \mu_j\|_2^2}\)</span>): Non-convex; alternate (1) assigning each <span class="math inline">\(x_i\)</span> to its nearest centroid <span class="math inline">\(\mu_j\)</span>, and (2) updating <span class="math inline">\(\mu_j\)</span> to the mean of assigned points.</li>
-<li>PCA (<span class="math inline">\(h_\theta(x) = \Theta_1 \Theta_2 x\)</span> with <span class="math inline">\(\Theta_2 \in \mathbb{R}^{k \times n}, \Theta_1 \in \mathbb{R}^{n \times k}\)</span>, <span class="math inline">\(k &lt; n\)</span>): Non-convex in <span class="math inline">\((\Theta_1, \Theta_2)\)</span>, but solved in closed form via top-<span class="math inline">\(k\)</span> eigenvectors of <span class="math inline">\(\sum_i x_i x_i^\top\)</span> (<span class="math inline">\(\Theta_1 = U_k, \Theta_2 = U_k^\top\)</span>).</li>
+<li><span class="math inline">\(k\)</span>-Means (<span class="math inline">\(h_\theta(x) = \mu_{\arg\min_j \|x - \mu_j\|_2^2}\)</span>): Non-convex; alternate (1) assigning <span class="math inline">\(x_i\)</span> to <span class="math inline">\(\arg\min_j \|x_i - \mu_j\|_2^2\)</span>, and (2) updating <span class="math inline">\(\mu_j\)</span> to the mean of assigned points.</li>
+<li>PCA (<span class="math inline">\(h_\theta(x) = \Theta_1 \Theta_2 x\)</span> with <span class="math inline">\(\Theta_2 \in \mathbb{R}^{k \times n}, \Theta_1 \in \mathbb{R}^{n \times k}\)</span>, <span class="math inline">\(k &lt; n\)</span>): Non-convex in <span class="math inline">\((\Theta_1, \Theta_2)\)</span>, solved exactly via top-<span class="math inline">\(k\)</span> eigenvectors <span class="math inline">\(U_k\)</span> of <span class="math inline">\(\sum_{i=1}^m x_i x_i^\top\)</span> (<span class="math inline">\(\Theta_1 = U_k, \Theta_2 = U_k^\top\)</span>).</li>
 </ul>
 
 

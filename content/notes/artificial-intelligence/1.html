@@ -87,9 +87,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1143,13 +1143,13 @@ window.Quarto = {
 <td style="text-align: left;">UCS</td>
 <td style="text-align: left;"><span class="math inline">\(g(n)\)</span></td>
 <td style="text-align: left;">Yes (<span class="math inline">\(\text{cost} \ge 0\)</span>)</td>
-<td style="text-align: left;">Explores uniform cost contours (<span class="math inline">\(h=0\)</span>)</td>
+<td style="text-align: left;">Uniform cost contours (<span class="math inline">\(h=0\)</span>)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Greedy</td>
 <td style="text-align: left;"><span class="math inline">\(h(n)\)</span></td>
 <td style="text-align: left;">No</td>
-<td style="text-align: left;">Myopic forward estimate only</td>
+<td style="text-align: left;">Forward estimate only</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A*</td>
@@ -1173,23 +1173,31 @@ window.Quarto = {
 </ul>
 </div>
 <ul>
-<li>A* tree-search optimality: For optimal goal <span class="math inline">\(A\)</span> and suboptimal goal <span class="math inline">\(B\)</span>, any unexpanded ancestor <span class="math inline">\(n\)</span> of <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(f(n) \le g(A) &lt; g(B) = f(B)\)</span>, so <span class="math inline">\(A\)</span> is expanded before <span class="math inline">\(B\)</span>.</li>
-<li>Graph search: Maintain a <strong>closed set</strong> (hash/tree set) of expanded states to avoid exponential repeated-state work.</li>
-<li>Why consistency matters:
-<ul>
-<li>Implies admissibility, and forces non-decreasing <span class="math inline">\(f(n') \ge f(n)\)</span> along paths.</li>
-<li>Guarantees A* graph search expands every state along an optimal path first.</li>
-</ul></li>
-<li>Relaxed-problem heuristics: Exact optimal cost <span class="math inline">\(h(s) = \operatorname{FutureCost}^j(s)\)</span> in a relaxed problem (<span class="math inline">\(\operatorname{Cost}^j \le \operatorname{Cost}\)</span>, e.g., Manhattan distance) is automatically consistent; if <span class="math inline">\(h_1, h_2\)</span> are consistent, so is <span class="math inline">\(\max\{h_1, h_2\}\)</span>.</li>
+<li><p>A* tree-search optimality (blocking proof): Let <span class="math inline">\(A\)</span> be an optimal goal and <span class="math inline">\(B\)</span> a suboptimal goal (<span class="math inline">\(f(A) = g(A) &lt; g(B) = f(B)\)</span> since <span class="math inline">\(h=0\)</span> at goals). Any unexpanded fringe ancestor <span class="math inline">\(n\)</span> of <span class="math inline">\(A\)</span> satisfies</p>
+<p><span class="math display">\[
+f(n) = g(n) + h(n) \le g(A) = f(A) &lt; f(B),
+\]</span></p>
+<p>so <span class="math inline">\(n\)</span>—and eventually <span class="math inline">\(A\)</span>—is expanded before <span class="math inline">\(B\)</span>.</p></li>
+<li><p>Graph search: Maintain a <strong>closed set</strong> (hash/tree set) of expanded states to avoid exponential repeated-state work.</p></li>
+<li><p>Consistency implies non-decreasing <span class="math inline">\(f\)</span>-contours along every arc <span class="math inline">\(n \to n'\)</span>:</p>
+<p><span class="math display">\[
+f(n') = g(n) + \operatorname{cost}(n \to n') + h(n') \ge g(n) + h(n) = f(n),
+\]</span></p>
+<p>guaranteeing A* graph search pops every state via an optimal path first.</p></li>
+<li><p>Relaxed-problem heuristics: For any relaxation <span class="math inline">\(P^j\)</span> with <span class="math inline">\(\operatorname{Cost}^j(s,a) \le \operatorname{Cost}(s,a)\)</span> (e.g., tile-overlapping 8-puzzle <span class="math inline">\(\implies\)</span> Manhattan distance), <span class="math inline">\(h(s) = \operatorname{FutureCost}^j(s)\)</span> is automatically consistent:</p>
+<p><span class="math display">\[
+h(s) \le \operatorname{Cost}^j(s, a) + h\bigl(\operatorname{Succ}(s, a)\bigr) \le \operatorname{Cost}(s, a) + h\bigl(\operatorname{Succ}(s, a)\bigr).
+\]</span></p>
+<p>If <span class="math inline">\(h_1, h_2\)</span> are consistent, <span class="math inline">\(h(s) = \max\{h_1(s), h_2(s)\}\)</span> is consistent and dominates both.</p></li>
 </ul>
 </section>
 <section id="motion-planning-variants" class="level3" data-number="1.1.3">
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="motion-planning-variants"><span class="header-section-number">1.1.3</span> Motion Planning Variants</h3>
 <ul>
-<li>Cell decomposition: Partition space into free, obstacle, and mixed cells; search free cells and recursively split mixed cells.</li>
-<li>Visibility graph: Connect mutually visible polygonal obstacle vertices (<span class="math inline">\(O(n^2)\)</span> edges) to find exact Euclidean shortest paths.</li>
-<li>Weighted A*: Priority <span class="math inline">\(f(s) = g(s) + \varepsilon h(s)\)</span> (<span class="math inline">\(\varepsilon &gt; 1\)</span>) gives large speedups with <span class="math inline">\(\varepsilon\)</span>-suboptimal cost (<span class="math inline">\(\le \varepsilon \cdot \text{opt}\)</span>).</li>
-<li><strong>Hybrid A*</strong>: Searches <span class="math inline">\((x, y, \theta)\)</span> grid cells using continuous kinematically feasible motion primitives <span class="math inline">\(s' = F(s, u)\)</span>.</li>
+<li>Cell decomposition: Partition space into free, obstacle, and mixed cells; search free cells and recursively subdivide mixed cells.</li>
+<li>Visibility graph: Connect mutually visible polygonal obstacle vertices (<span class="math inline">\(O(n^2)\)</span> edges, built in <span class="math inline">\(O(n^2)\)</span>–<span class="math inline">\(O(n^3)\)</span>) for exact Euclidean shortest paths.</li>
+<li>Weighted A*: Priority <span class="math inline">\(f(s) = g(s) + \varepsilon h(s)\)</span> (<span class="math inline">\(\varepsilon &gt; 1\)</span>) yields large speedups with <span class="math inline">\(\varepsilon\)</span>-suboptimality (<span class="math inline">\(\operatorname{cost} \le \varepsilon \cdot \operatorname{opt}\)</span>).</li>
+<li><strong>Hybrid A*</strong>: Searches <span class="math inline">\((x, y, \theta)\)</span> cells using continuous kinematically feasible primitives <span class="math inline">\(s' = F(s, u)\)</span> (steering + forward/reverse).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1205,7 +1213,7 @@ window.Quarto = {
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="minimax-and-alpha-beta-pruning"><span class="header-section-number">1.2.1</span> Minimax and Alpha-Beta Pruning</h3>
 <ul>
 <li>Turn-based game: States <span class="math inline">\(S\)</span>, players <span class="math inline">\(P\)</span>, actions <span class="math inline">\(A\)</span>, transition <span class="math inline">\(S \times A \to S\)</span>, terminal test, and utilities (zero-sum: <span class="math inline">\(u_2 = -u_1\)</span>; general-sum: independent payoffs). Solution is a policy <span class="math inline">\(\pi: S \to A\)</span>.</li>
-<li>Minimax (2-player zero-sum): MAX maximizes <span class="math inline">\(\max_{s'} V(s')\)</span>, MIN minimizes <span class="math inline">\(\min_{s'} V(s')\)</span>; takes <span class="math inline">\(O(b^m)\)</span> time and <span class="math inline">\(O(bm)\)</span> space.</li>
+<li>Minimax (2-player zero-sum): MAX takes <span class="math inline">\(\max_{s'} V(s')\)</span>, MIN takes <span class="math inline">\(\min_{s'} V(s')\)</span>; <span class="math inline">\(O(b^m)\)</span> time, <span class="math inline">\(O(bm)\)</span> space.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1214,21 +1222,30 @@ window.Quarto = {
 </figure>
 </div>
 <ul>
-<li>Alpha-Beta pruning: Track <span class="math inline">\(\alpha\)</span> (best value MAX can guarantee on path) and <span class="math inline">\(\beta\)</span> (best value MIN can guarantee); prune remaining children whenever <span class="math inline">\(v \ge \beta\)</span> at MAX or <span class="math inline">\(v \le \alpha\)</span> at MIN, preserving exact root value:</li>
+<li>Alpha-Beta pruning: Track <span class="math inline">\(\alpha\)</span> (best value MAX can guarantee on path) and <span class="math inline">\(\beta\)</span> (best value MIN can guarantee); prune when <span class="math inline">\(v \ge \beta\)</span> at MAX or <span class="math inline">\(v \le \alpha\)</span> at MIN, preserving exact root value:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> max_value(s, alpha, beta):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_terminal(s): <span class="cf">return</span> utility(s)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> max_value(state, alpha, beta):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_terminal(state): <span class="cf">return</span> utility(state)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> <span class="op">-</span>inf</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> s_next <span class="kw">in</span> successors(s):</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> <span class="bu">max</span>(v, min_value(s_next, alpha, beta))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> s <span class="kw">in</span> successors(state):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> <span class="bu">max</span>(v, min_value(s, alpha, beta))</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="op">&gt;=</span> beta: <span class="cf">return</span> v</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        alpha <span class="op">=</span> <span class="bu">max</span>(alpha, v)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> v</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> min_value(state, alpha, beta):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_terminal(state): <span class="cf">return</span> utility(state)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> <span class="op">+</span>inf</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> s <span class="kw">in</span> successors(state):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> <span class="bu">min</span>(v, max_value(s, alpha, beta))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="op">&lt;=</span> alpha: <span class="cf">return</span> v</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        beta <span class="op">=</span> <span class="bu">min</span>(beta, v)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Move ordering &amp; cutoffs:
 <ul>
-<li>Perfect move ordering cuts time from <span class="math inline">\(O(b^m)\)</span> to <span class="math inline">\(O(b^{m/2})\)</span> (doubles solvable depth).</li>
-<li>Depth-limited minimax: Combine iterative deepening with a linear feature evaluation <span class="math inline">\(\operatorname{Eval}(s) = \sum_i w_i f_i(s)\)</span> at cutoff leaves.</li>
+<li>Perfect ordering cuts time from <span class="math inline">\(O(b^m)\)</span> to <span class="math inline">\(O(b^{m/2})\)</span> (doubles solvable depth).</li>
+<li>Depth-limited minimax: Pair iterative deepening with a linear feature evaluation <span class="math inline">\(\operatorname{Eval}(s) = \sum_{i=1}^n w_i f_i(s)\)</span> at cutoff leaves.</li>
 </ul></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -1241,28 +1258,28 @@ window.Quarto = {
 <section id="normal-form-games-and-nash-equilibrium" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="normal-form-games-and-nash-equilibrium"><span class="header-section-number">1.2.2</span> Normal-Form Games and Nash Equilibrium</h3>
 <ul>
-<li>Strategies: Pure strategy picks one action deterministically; mixed strategy randomizes over actions. Player <span class="math inline">\(i\)</span>’s best response is <span class="math inline">\(\operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})\)</span>.</li>
+<li>Strategies: Pure strategy picks one action (<span class="math inline">\(p=1\)</span>); mixed strategy randomizes over actions. Player <span class="math inline">\(i\)</span>’s best response is <span class="math inline">\(\operatorname{BR}_i(s_{-i}) = \arg\max_{s_i} u_i(s_i, s_{-i})\)</span>.</li>
 </ul>
 <div id="def-ai-1-2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.2 (Nash Equilibrium)</strong></span> Profile <span class="math inline">\(s^* = (s_1^*, \dots, s_N^*)\)</span> is a Nash equilibrium if <span class="math inline">\(s_i^* \in \operatorname{BR}_i(s_{-i}^*)\)</span> for all <span class="math inline">\(i\)</span> (no profitable unilateral deviation):</p>
+<p><span class="theorem-title"><strong>Definition 1.2 (Nash Equilibrium)</strong></span> Profile <span class="math inline">\(s^* = (s_1^*, \dots, s_N^*)\)</span> is a Nash equilibrium if <span class="math inline">\(s_i^* \in \operatorname{BR}_i(s_{-i}^*)\)</span> for all <span class="math inline">\(i\)</span>:</p>
 <p><span class="math display">\[
 \forall\,i,\, s_i: \quad u_i(s_i^*, s_{-i}^*) \ge u_i(s_i, s_{-i}^*).
 \]</span></p>
 </div>
 <ul>
-<li>Computing NE: Find mutual best-response cells, eliminate strictly dominated strategies, or use the <strong>indifference principle</strong>—every pure action in the support of a mixed NE yields equal expected payoff (e.g., <span class="math inline">\((\frac13,\frac13,\frac13)\)</span> in Rock–Paper–Scissors).</li>
+<li>Computing NE: Check mutual best-response cells, iteratively eliminate strictly dominated strategies, or apply the <strong>indifference principle</strong>—every pure action played with positive probability in a mixed NE yields equal expected payoff (e.g., unique <span class="math inline">\((\frac13,\frac13,\frac13)\)</span> in Rock–Paper–Scissors).</li>
 </ul>
 <div id="thm-ai-1-1" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.1 (Nash Existence &amp; von Neumann Minimax)</strong></span> &nbsp;</p>
 <ol type="1">
-<li>Nash (1950): Every finite game (finitely many players and actions) has at least one pure or mixed Nash equilibrium.</li>
+<li>Nash (1950): Every finite game (finitely many players and actions) admits at least one pure or mixed Nash equilibrium.</li>
 <li>von Neumann: In any finite two-player zero-sum game, <span class="math inline">\(\max_{\sigma_1}\min_{\sigma_2} u(\sigma_1,\sigma_2) = \min_{\sigma_2}\max_{\sigma_1} u(\sigma_1,\sigma_2) = v\)</span> (NE coincides with Minimax).</li>
 </ol>
 </div>
 </section>
 <section id="monte-carlo-tree-search-mcts" class="level3" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="monte-carlo-tree-search-mcts"><span class="header-section-number">1.2.3</span> Monte Carlo Tree Search (MCTS)</h3>
-<p>For high-branching games (<span class="math inline">\(b \approx 361\)</span> in Go), MCTS grows an asymmetric tree online via four steps per iteration:</p>
+<p>For huge branching factors (<span class="math inline">\(b \approx 361\)</span> in Go), MCTS grows an asymmetric tree online via four phases per iteration:</p>
 <ol type="1">
 <li><p>Selection: Traverse from root via tree policy (<strong>UCT</strong>) to an expandable node:</p>
 <p><span class="math display">\[
@@ -1273,7 +1290,7 @@ window.Quarto = {
 <li><p>Backpropagation: Update visit counts <span class="math inline">\(n_j\)</span> and win rates <span class="math inline">\(\overline{X}_j\)</span> along the visited path.</p></li>
 </ol>
 <ul>
-<li>Decision &amp; AlphaGo: Final root move uses Max (highest <span class="math inline">\(\overline{X}_j\)</span>), Robust (highest <span class="math inline">\(n_j\)</span>), or Max-Robust child. Vanilla MCTS is anytime and domain-agnostic but can miss narrow traps; AlphaGo guides expansion and evaluation with policy nets (<span class="math inline">\(p_\sigma, p_\pi, p_\rho\)</span>) and a value net <span class="math inline">\(v_\theta\)</span>.</li>
+<li>Decision &amp; AlphaGo: Select root move via Max (highest <span class="math inline">\(\overline{X}_j\)</span>), Robust (highest <span class="math inline">\(n_j\)</span>), or Max-Robust child. AlphaGo replaces blind rollouts/uniform priors with policy nets (<span class="math inline">\(p_\sigma, p_\pi, p_\rho\)</span>) and a value net <span class="math inline">\(v_\theta\)</span>.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1285,8 +1302,15 @@ window.Quarto = {
 <section id="expected-utility-and-rationality" class="level3" data-number="1.2.4">
 <h3 data-number="1.2.4" class="anchored" data-anchor-id="expected-utility-and-rationality"><span class="header-section-number">1.2.4</span> Expected Utility and Rationality</h3>
 <ul>
-<li>Cardinal vs.&nbsp;ordinal utility: Minimax is invariant to any monotonic transform of utilities; stochastic expectation requires cardinal utilities (invariant only up to positive affine transforms).</li>
-<li>Rationality axioms on lotteries <span class="math inline">\(L = [p, A;\, 1-p, B]\)</span>: Orderability, Transitivity (violating it creates a “money pump”), Continuity, Substitutability, and Monotonicity.</li>
+<li>Scale invariance: Minimax depends only on ordinal state ranking (invariant to monotonic transforms); expectation requires cardinal utilities (invariant up to positive affine transforms).</li>
+<li>Rationality axioms on lotteries <span class="math inline">\(L = [p, A;\, 1-p, B]\)</span>:
+<ul>
+<li>Orderability: <span class="math inline">\((A \succ B) \lor (B \succ A) \lor (A \sim B)\)</span>.</li>
+<li>Transitivity: <span class="math inline">\((A \succ B) \land (B \succ C) \implies (A \succ C)\)</span> (violation creates a “money pump”).</li>
+<li>Continuity: <span class="math inline">\(A \succ B \succ C \implies \exists\,p \in [0,1]\)</span> with <span class="math inline">\([p, A;\, 1-p, C] \sim B\)</span>.</li>
+<li>Substitutability: <span class="math inline">\(A \sim B \implies [p, A;\, 1-p, C] \sim [p, B;\, 1-p, C]\)</span>.</li>
+<li>Monotonicity: <span class="math inline">\(A \succ B \implies \bigl(p \ge q \iff [p, A;\, 1-p, B] \succeq [q, A;\, 1-q, B]\bigr)\)</span>.</li>
+</ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -1294,15 +1318,16 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>vNM Utility Theorem &amp; Human Risk Behavior
+<span class="screen-reader-only">Note</span>vNM Utility Theorem, Risk Aversion &amp; Allais Paradox
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Ramsey / vNM Theorem: Preferences obeying the five axioms admit a utility <span class="math inline">\(U\)</span> with <span class="math inline">\(A \succeq B \iff U(A) \ge U(B)\)</span> and <span class="math inline">\(U([p_1, S_1; \dots; p_n, S_n]) = \sum_i p_i U(S_i)\)</span> (<strong>Maximum Expected Utility</strong>).</li>
-<li>Risk preferences: Concave <span class="math inline">\(U(\text{money})\)</span> implies risk aversion (<span class="math inline">\(U(L) &lt; U(\operatorname{EMV}(L))\)</span>, motivating insurance premiums); human choices systematically violate vNM independence under certainty effects (<em>Allais paradox</em>).</li>
+<li>Ramsey / vNM Theorem: Preferences satisfying the five axioms admit a real utility <span class="math inline">\(U\)</span> with <span class="math inline">\(A \succeq B \iff U(A) \ge U(B)\)</span> and <span class="math inline">\(U([p_1, S_1; \dots; p_n, S_n]) = \sum_i p_i U(S_i)\)</span> (<strong>Maximum Expected Utility</strong>). Calibrate <span class="math inline">\(U(A) = p \in [0,1]\)</span> via indifference <span class="math inline">\(A \sim [p, u^+;\, 1-p, u^-]\)</span> between best prize <span class="math inline">\(u^+\)</span> and worst catastrophe <span class="math inline">\(u^-\)</span>.</li>
+<li>Risk aversion: For monetary lottery <span class="math inline">\(L = [p, \$X;\, 1-p, \$Y]\)</span> with <span class="math inline">\(\operatorname{EMV}(L) = pX + (1-p)Y\)</span>, concave <span class="math inline">\(U\)</span> gives <span class="math inline">\(U(L) &lt; U(\operatorname{EMV}(L))\)</span> (difference between <span class="math inline">\(\operatorname{EMV}\)</span> and certainty equivalent is the insurance premium).</li>
+<li>Allais paradox (1953): Humans typically prefer guaranteed <span class="math inline">\(\$3\text{k}\)</span> over <span class="math inline">\([0.8, \$4\text{k};\, 0.2, \$0]\)</span>, yet prefer <span class="math inline">\([0.2, \$4\text{k};\, 0.8, \$0]\)</span> over <span class="math inline">\([0.25, \$3\text{k};\, 0.75, \$0]\)</span>—implying both <span class="math inline">\(U(\$3\text{k}) &gt; 0.8\,U(\$4\text{k})\)</span> and <span class="math inline">\(0.2\,U(\$4\text{k}) &gt; 0.25\,U(\$3\text{k}) \iff U(\$3\text{k}) &lt; 0.8\,U(\$4\text{k})\)</span> (with <span class="math inline">\(U(\$0)=0\)</span>), violating expected utility.</li>
 </ul>
 </div>
 </div>

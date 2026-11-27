@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1089,7 +1089,7 @@ z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i) \quad (i = 1, \dots, k-1), \qquad h
 <ul>
 <li>Common activations: <span class="math inline">\(\tanh(x) = \dfrac{e^{2x}-1}{e^{2x}+1} \in (-1,1)\)</span>, sigmoid <span class="math inline">\(\sigma(x) = \dfrac{1}{1+e^{-x}} \in (0,1)\)</span>, and ReLU <span class="math inline">\(\max\{x, 0\}\)</span>.</li>
 </ul>
-<div id="9da02d5a" class="cell" data-execution_count="1">
+<div id="0989462e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1107,8 +1107,40 @@ z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i) \quad (i = 1, \dots, k-1), \qquad h
 <h2 data-number="6.2" class="anchored" data-anchor-id="why-deep"><span class="header-section-number">6.2</span> Why Deep?</h2>
 <ul>
 <li>Circuit compactness: <span class="math inline">\(n\)</span>-bit parity needs <span class="math inline">\(O(2^n)\)</span> units in 1 hidden layer vs.&nbsp;<span class="math inline">\(O(n)\)</span> units across <span class="math inline">\(O(\log n)\)</span> layers.</li>
-<li>Modularity &amp; data efficiency: Lower layers learn reusable sub-features (<strong>learnable kernel</strong> <span class="math inline">\(\phi_\theta(x)\)</span>) shared across upper-layer tasks.</li>
-<li>Empirical “thin + tall” &gt; “fat + short”: At matched parameter counts, deeper nets outperform wide shallow ones (e.g., <span class="math inline">\(7\times 2\text{k}\)</span> beats <span class="math inline">\(1\times 16\text{k}\)</span> on speech recognition).</li>
+<li>Modularity &amp; data efficiency: Lower layers learn reusable sub-features (<strong>learnable kernel</strong> <span class="math inline">\(\phi_\theta(x)\)</span>) shared across upper-layer classifiers.</li>
+<li>Empirical “thin + tall” &gt; “fat + short” (Seide et al., 2011 speech WER at matched parameter budgets):</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Deep (“Thin + Tall”)</th>
+<th style="text-align: left;">WER (%)</th>
+<th style="text-align: left;">Shallow (“Fat + Short”)</th>
+<th style="text-align: left;">WER (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(1 \times 2\text{k}\)</span></td>
+<td style="text-align: left;">24.2</td>
+<td style="text-align: left;"><span class="math inline">\(1 \times 3772\)</span></td>
+<td style="text-align: left;">22.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(3 \times 2\text{k}\)</span></td>
+<td style="text-align: left;">18.4</td>
+<td style="text-align: left;"><span class="math inline">\(1 \times 4634\)</span></td>
+<td style="text-align: left;">22.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(7 \times 2\text{k}\)</span></td>
+<td style="text-align: left;">17.1</td>
+<td style="text-align: left;"><span class="math inline">\(1 \times 16\text{k}\)</span></td>
+<td style="text-align: left;">22.1</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li>Why now: Large datasets + parallel GPU compute + improved architectures and optimizers.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -1123,8 +1155,13 @@ z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i) \quad (i = 1, \dots, k-1), \qquad h
 <section id="losses-and-minibatch-sgd" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="losses-and-minibatch-sgd"><span class="header-section-number">6.3.1</span> Losses and Minibatch SGD</h3>
 <ul>
-<li><p>Standard losses: Squared <span class="math inline">\(\|h_\theta(x)-y\|_2^2\)</span> (regression), logistic/hinge (binary), and softmax <span class="math inline">\(\log\sum_j e^{h_\theta(x)_j} - h_\theta(x)_y\)</span> (multiclass).</p></li>
-<li><p><strong>Minibatch SGD</strong>: Avoids scanning all <span class="math inline">\(m\)</span> examples per step by updating on a small minibatch <span class="math inline">\(B\)</span>:</p>
+<li><p>Standard losses on <span class="math inline">\(h_\theta(x) = z_k\)</span>:</p>
+<ul>
+<li>Regression: <span class="math inline">\(\ell(h_\theta(x), y) = \|h_\theta(x) - y\|_2^2\)</span>.</li>
+<li>Binary classification (<span class="math inline">\(y \in \{-1, +1\}\)</span>): <span class="math inline">\(\log(1 + e^{-y \cdot h_\theta(x)})\)</span> or <span class="math inline">\(\max\{0, 1 - y \cdot h_\theta(x)\}\)</span>.</li>
+<li>Multiclass (<span class="math inline">\(y \in \{1, \dots, K\}\)</span>): <span class="math inline">\(\ell(h_\theta(x), y) = \log\sum_{j=1}^K \exp(h_\theta(x)_j) - h_\theta(x)_y\)</span>.</li>
+</ul></li>
+<li><p><strong>Minibatch SGD</strong>: Updates on a small minibatch <span class="math inline">\(B\)</span> instead of scanning all <span class="math inline">\(m\)</span> samples per step:</p>
 <p><span class="math display">\[
 \theta \leftarrow \theta - \frac{\alpha}{|B|}\sum_{i \in B} \nabla_\theta \ell\bigl(h_\theta(x^{(i)}),\, y^{(i)}\bigr).
 \]</span></p></li>
@@ -1139,14 +1176,14 @@ z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i) \quad (i = 1, \dots, k-1), \qquad h
 <li>Linear &amp; elementwise maps: <span class="math inline">\(\dfrac{\partial(Ax)}{\partial x} = A\)</span>, <span class="math inline">\(\quad \dfrac{\partial f(u)}{\partial u} = \operatorname{diag}\bigl(f'(u)\bigr)\)</span>.</li>
 </ul>
 </div>
-<p><strong>Backpropagation</strong> computes all gradients in <span class="math inline">\(O(k n^2)\)</span> time (matrix–vector products, avoiding <span class="math inline">\(O(k n^3)\)</span> matrix–matrix products):</p>
+<p>For layer <span class="math inline">\(z_{i+1} = f_i(u_i)\)</span> with <span class="math inline">\(u_i = W_i z_i + b_i\)</span> and <span class="math inline">\(D_i = \operatorname{diag}(f_i'(u_i))\)</span>, local Jacobians are <span class="math inline">\(\frac{\partial z_{i+1}}{\partial z_i} = D_i W_i\)</span> and <span class="math inline">\(\frac{\partial z_{i+1}}{\partial b_i} = D_i\)</span>. Defining upstream gradient <span class="math inline">\(g_i^\top = \frac{\partial \ell}{\partial z_i} = \frac{\partial \ell}{\partial z_k}\frac{\partial z_k}{\partial z_{k-1}}\cdots\frac{\partial z_{i+1}}{\partial z_i}\)</span>, <strong>backpropagation</strong> evaluates left-to-right in <span class="math inline">\(O(k n^2)\)</span> time (matrix–vector products, vs.&nbsp;<span class="math inline">\(O(k n^3)\)</span> right-to-left):</p>
 <ol type="1">
 <li><p>Forward (<span class="math inline">\(i = 1, \dots, k-1\)</span>): Cache <span class="math inline">\(u_i = W_i z_i + b_i\)</span> and <span class="math inline">\(z_{i+1} = f_i(u_i)\)</span>.</p></li>
-<li><p>Backward (<span class="math inline">\(i = k-1, \dots, 1\)</span>): From <span class="math inline">\(g_k = \nabla_{z_k}\ell(z_k, y)\)</span>, propagate upstream gradients:</p>
+<li><p>Backward (<span class="math inline">\(i = k-1, \dots, 1\)</span>): From <span class="math inline">\(g_k = \nabla_{z_k}\ell(z_k, y)\)</span>, recurse via <span class="math inline">\(g_i^\top = g_{i+1}^\top D_i W_i\)</span>:</p>
 <p><span class="math display">\[
 \delta_i = g_{i+1} \circ f_i'(u_i), \qquad g_i = W_i^\top \delta_i.
 \]</span></p></li>
-<li><p>Gradients: <span class="math inline">\(\nabla_{b_i}\ell = \delta_i\)</span> and <span class="math inline">\(\nabla_{W_i}\ell = \delta_i z_i^\top\)</span>.</p></li>
+<li><p>Parameter gradients: <span class="math inline">\(\nabla_{b_i}\ell = \delta_i\)</span> and <span class="math inline">\(\nabla_{W_i}\ell = \delta_i z_i^\top\)</span>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -1160,7 +1197,14 @@ z_1 = x, \qquad z_{i+1} = f_i(W_i z_i + b_i) \quad (i = 1, \dots, k-1), \qquad h
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Using <span class="math inline">\(\operatorname{vec}(ABC) = (C^\top \otimes A)\operatorname{vec}(B)\)</span>, <span class="math inline">\(W_i z_i = (z_i^\top \otimes I)\operatorname{vec}(W_i)\)</span>, so <span class="math inline">\(\frac{\partial \ell}{\partial \operatorname{vec}(W_i)} = \delta_i^\top(z_i^\top \otimes I)\)</span>, which reshapes to <span class="math inline">\(\nabla_{W_i}\ell = \delta_i z_i^\top\)</span>.</p>
+<p>Using <span class="math inline">\(\operatorname{vec}(ABC) = (C^\top \otimes A)\operatorname{vec}(B)\)</span>, write <span class="math inline">\(W_i z_i = I W_i z_i = (z_i^\top \otimes I)\operatorname{vec}(W_i)\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial \ell}{\partial \operatorname{vec}(W_i)}
+= g_{i+1}^\top \operatorname{diag}\bigl(f_i'(W_i z_i + b_i)\bigr)(z_i^\top \otimes I)
+= \delta_i^\top (z_i^\top \otimes I)
+= (z_i \otimes \delta_i)^\top,
+\]</span></p>
+<p>which reshapes to <span class="math inline">\(\nabla_{W_i}\ell = \delta_i z_i^\top = \bigl(g_{i+1} \circ f_i'(W_i z_i + b_i)\bigr)z_i^\top\)</span>.</p>
 </div>
 </div>
 </div>

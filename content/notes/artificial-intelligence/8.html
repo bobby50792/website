@@ -51,9 +51,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1082,7 +1082,7 @@ window.Quarto = {
 <p><span class="theorem-title"><strong>Definition 8.1 (Markov Decision Process)</strong></span> Sequential decision model under stochastic dynamics: states <span class="math inline">\(S\)</span>, actions <span class="math inline">\(A\)</span>, transition <span class="math inline">\(T(s,a,s') = P(s' \mid s,a)\)</span>, reward <span class="math inline">\(R(s)\)</span> (or <span class="math inline">\(R(s,a,s')\)</span>), start state, and optional terminal states.</p>
 </div>
 <ul>
-<li>Assumptions: First-order Markov &amp; stationary <span class="math inline">\(T\)</span>, <strong>full observability</strong> (<span class="math inline">\(s_t = f(o_t)\)</span> observed after acting), and scalar rewards specifying <em>what</em> to achieve (dense shaping rewards learn faster than sparse rewards).</li>
+<li>Experience &amp; assumptions: History <span class="math inline">\(o_1, r_1, a_1, \dots, o_t, r_t\)</span> summarizes to <span class="math inline">\(s_t = f(\dots)\)</span>, reducing to <span class="math inline">\(s_t = f(o_t)\)</span> under <strong>full observability</strong>; dynamics are first-order Markov and stationary; scalar rewards specify <em>what</em> to achieve (dense rewards learn faster than sparse rewards).</li>
 <li>Planning (known <span class="math inline">\(T, R\)</span>) vs.&nbsp;reinforcement learning (unknown <span class="math inline">\(T, R\)</span>, learned from <span class="math inline">\(\langle s, a, r, s' \rangle\)</span> samples).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -1103,7 +1103,7 @@ V^\pi(s) = \mathbb{E}\!\left[\sum_{t=0}^\infty \gamma^t R(S_t) \;\middle|\; S_0 
 <p><span class="math display">\[
 V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
 \]</span></p></li>
-<li><p>Living-reward intuition (Grid World with <span class="math inline">\(+1\)</span> goal, <span class="math inline">\(-1\)</span> cliff): <span class="math inline">\(R(s) = -2.0\)</span> jumps into nearest exit (even <span class="math inline">\(-1\)</span>); <span class="math inline">\(-0.4\)</span> risks the short cliff path; <span class="math inline">\(-0.03\)</span> detours safely; <span class="math inline">\(-0.01\)</span> faces into the wall so slips never hit <span class="math inline">\(-1\)</span>.</p></li>
+<li><p>Living-reward regimes (Grid World with <span class="math inline">\(+1\)</span> goal, <span class="math inline">\(-1\)</span> cliff): <span class="math inline">\(R(s) = -2.0\)</span> rushes into nearest exit (even <span class="math inline">\(-1\)</span>); <span class="math inline">\(-0.4\)</span> risks the short cliff path; <span class="math inline">\(-0.03\)</span> detours safely; <span class="math inline">\(-0.01\)</span> faces into the safe wall so lateral slips never hit <span class="math inline">\(-1\)</span>.</p></li>
 </ul>
 </section>
 </section>
@@ -1115,9 +1115,13 @@ V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
 <div id="thm-ai-8-1" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 8.1 (Contraction and Greedy Bounds)</strong></span> &nbsp;</p>
 <ol type="1">
-<li><span class="math inline">\(\gamma\)</span>-contraction: <span class="math inline">\(\|V_{k+1} - V^*\|_\infty \le \gamma \|V_k - V^*\|_\infty \implies V_k \to V^*\)</span> uniquely.</li>
-<li>Stopping rule: <span class="math inline">\(\|V_k - V_{k-1}\|_\infty \le \epsilon \implies \|V_k - V^*\|_\infty \le \dfrac{\epsilon\gamma}{1 - \gamma}\)</span>.</li>
-<li>Greedy policy <span class="math inline">\(\pi_g\)</span> on <span class="math inline">\(V_k\)</span>: <span class="math inline">\(\|V_k - V^*\|_\infty \le \lambda \implies \|V^{\pi_g} - V^*\|_\infty \le \dfrac{2\lambda\gamma}{1 - \gamma}\)</span> (exact <span class="math inline">\(\pi_g = \pi^*\)</span> below a finite <span class="math inline">\(\lambda\)</span>).</li>
+<li><p><span class="math inline">\(\gamma\)</span>-contraction: <span class="math inline">\(\|V_{k+1} - V^*\|_\infty \le \gamma \|V_k - V^*\|_\infty \implies V_k \to V^*\)</span> uniquely.</p></li>
+<li><p>Stopping rule: <span class="math inline">\(\|V_k - V_{k-1}\|_\infty \le \epsilon \implies \|V_k - V^*\|_\infty \le \dfrac{\epsilon\gamma}{1 - \gamma}\)</span>.</p></li>
+<li><p>Greedy policy <span class="math inline">\(\pi_g(s) = \arg\max_a \sum_{s'} T(s,a,s') V_k(s')\)</span>:</p>
+<p><span class="math display">\[
+\|V_k - V^*\|_\infty \le \lambda \;\implies\; \|V^{\pi_g} - V^*\|_\infty \le \frac{2\lambda\gamma}{1 - \gamma},
+\]</span></p>
+<p>and <span class="math inline">\(\pi_g = \pi^*\)</span> is exact once <span class="math inline">\(\lambda\)</span> drops below a finite positive gap.</p></li>
 </ol>
 </div>
 <ul>
@@ -1134,7 +1138,12 @@ V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
 <p>Scaling beyond full-width <span class="math inline">\(O(|S|^2|A|)\)</span> sweeps (<strong>curse of dimensionality</strong>):</p>
 <ul>
 <li>Asynchronous DP (individual state backups): In-place DP (1 table), Prioritized sweeping (max Bellman error via reverse dynamics), and Real-time DP (states visited along agent trajectories).</li>
-<li>Sample backups (<span class="math inline">\(O(1)\)</span> per <span class="math inline">\(\langle s,a,r,s'\rangle\)</span>) &amp; Fitted VI: Sample states <span class="math inline">\(\{s^{(i)}\}\)</span>, compute Bellman targets <span class="math inline">\(y^{(i)}\)</span>, and regress <span class="math inline">\(\hat{v}(s, w)\)</span> onto <span class="math inline">\(y^{(i)}\)</span>.</li>
+<li>Sample backups (<span class="math inline">\(O(1)\)</span> per <span class="math inline">\(\langle s,a,r,s'\rangle\)</span>) &amp; Fitted Value Iteration on approximator <span class="math inline">\(\hat{v}(s, w)\)</span>:
+<ol type="1">
+<li>Sample state batch <span class="math inline">\(\{s^{(i)}\}_{i=1}^m\)</span>.</li>
+<li>Compute Bellman targets <span class="math inline">\(y^{(i)} = R(s^{(i)}) + \gamma \max_a \sum_{s'} T(s^{(i)}, a, s')\,\hat{v}(s', w_k)\)</span>.</li>
+<li>Regress <span class="math inline">\(\hat{v}(s^{(i)}, w)\)</span> onto <span class="math inline">\(y^{(i)}\)</span> to obtain <span class="math inline">\(w_{k+1}\)</span>.</li>
+</ol></li>
 </ul>
 </section>
 </section>
@@ -1152,7 +1161,7 @@ V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
 <thead>
 <tr class="header">
 <th style="text-align: left;">Method</th>
-<th style="text-align: left;">Mechanism</th>
+<th style="text-align: left;">Estimator</th>
 <th style="text-align: left;">Bellman</th>
 <th style="text-align: left;">Cost</th>
 <th style="text-align: left;">Sample Eff.</th>
@@ -1161,21 +1170,21 @@ V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">MC (model-free)</td>
-<td style="text-align: left;">Average discounted reward-to-go</td>
+<td style="text-align: left;">Empirical mean of reward-to-go <span class="math inline">\(G_t = \sum_{k=0}^{T-t}\gamma^k r_{t+k}\)</span></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;">Low</td>
 <td style="text-align: left;">Low</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ADP (model-based)</td>
-<td style="text-align: left;">Fit <span class="math inline">\(\hat{T}, \hat{R}\)</span>, run full DP evaluation</td>
+<td style="text-align: left;"><span class="math inline">\(\hat{T}(s,a,s') = \frac{N(s,a,s')}{N(s,a)}\)</span>, <span class="math inline">\(\hat{R}(s) \to\)</span> full DP eval</td>
 <td style="text-align: left;">Full</td>
 <td style="text-align: left;">High</td>
 <td style="text-align: left;">High</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TD (model-free)</td>
-<td style="text-align: left;">Bootstrap on observed <span class="math inline">\((s,a,r,s')\)</span></td>
+<td style="text-align: left;">Bootstrap update on observed <span class="math inline">\((s,a,r,s')\)</span></td>
 <td style="text-align: left;">Partial</td>
 <td style="text-align: left;">Low</td>
 <td style="text-align: left;">Medium</td>
@@ -1183,9 +1192,9 @@ V^*(s) = R(s) + \gamma \max_{a \in A} \sum_{s' \in S} T(s, a, s') V^*(s').
 </tbody>
 </table>
 <ul>
-<li><p><strong>Temporal Difference (TD)</strong> update (online running mean toward noisy target <span class="math inline">\(R(s) + \gamma V^\pi(s')\)</span>, converging as <span class="math inline">\(\alpha_n \propto 1/n\)</span>):</p>
+<li><p><strong>Temporal Difference (TD)</strong> derivation: Applying online running-mean estimation <span class="math inline">\(\bar{x}_{n+1} = \bar{x}_n + \frac{1}{n+1}(x_{n+1} - \bar{x}_n)\)</span> to noisy one-step Bellman samples <span class="math inline">\(R(s) + \gamma V^\pi(s')\)</span> yields (converging to <span class="math inline">\(V^\pi\)</span> as <span class="math inline">\(\alpha_n \propto 1/n\)</span>):</p>
 <p><span class="math display">\[
-V^\pi(s) \leftarrow V^\pi(s) + \alpha \Bigl(R(s) + \gamma V^\pi(s') - V^\pi(s)\Bigr).
+V^\pi(s) \leftarrow V^\pi(s) + \alpha \Bigl(\underbrace{R(s) + \gamma V^\pi(s')}_{\text{TD target}} - V^\pi(s)\Bigr).
 \]</span></p></li>
 <li><p>Bridging TD &amp; ADP: Mix real TD updates with TD updates on “imagined” transitions sampled from <span class="math inline">\(\hat{T}\)</span>—trading extra compute per step for higher sample efficiency (approaching ADP as imagined samples <span class="math inline">\(\to \infty\)</span>).</p></li>
 </ul>

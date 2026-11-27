@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1089,8 +1089,12 @@ window.Quarto = {
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="propositional-logic"><span class="header-section-number">2.1.1</span> Propositional Logic</h3>
 <ul>
 <li>Syntax: Atomic symbols <span class="math inline">\(A, B, C, \dots\)</span> combined via <span class="math inline">\(\neg f\)</span>, <span class="math inline">\(f \land g\)</span>, <span class="math inline">\(f \lor g\)</span>, <span class="math inline">\(f \to g\)</span>, and <span class="math inline">\(f \leftrightarrow g\)</span>.</li>
-<li>Semantics: A <strong>model</strong> <span class="math inline">\(w \in \{0,1\}^n\)</span> assigns truth values to all <span class="math inline">\(n\)</span> symbols (<span class="math inline">\(2^n\)</span> models); <span class="math inline">\(\mathcal{I}(f, w) \in \{0,1\}\)</span> evaluates truth recursively (<span class="math inline">\(\mathcal{I}(f \to g, w) = 1 \iff \mathcal{I}(f,w) \le \mathcal{I}(g,w)\)</span>).</li>
-<li>Knowledge base: Set of formulas <span class="math inline">\(\mathrm{KB}\)</span> with model set <span class="math inline">\(\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f)\)</span>.</li>
+<li>Semantics: A <strong>model</strong> <span class="math inline">\(w \in \{0,1\}^n\)</span> assigns truth values to all <span class="math inline">\(n\)</span> symbols (<span class="math inline">\(2^n\)</span> models). Interpretation <span class="math inline">\(\mathcal{I}(f, w) \in \{0,1\}\)</span> is defined recursively from <span class="math inline">\(\mathcal{I}(p, w) = w(p)\)</span>:
+<ul>
+<li><span class="math inline">\(\mathcal{I}(\neg f, w) = 1 - \mathcal{I}(f, w)\)</span>, <span class="math inline">\(\quad \mathcal{I}(f \land g, w) = \min\bigl(\mathcal{I}(f, w), \mathcal{I}(g, w)\bigr)\)</span>, <span class="math inline">\(\quad \mathcal{I}(f \lor g, w) = \max\bigl(\mathcal{I}(f, w), \mathcal{I}(g, w)\bigr)\)</span>.</li>
+<li><span class="math inline">\(\mathcal{I}(f \to g, w) = \mathbf{1}\bigl\{\mathcal{I}(f, w) \le \mathcal{I}(g, w)\bigr\}\)</span>, <span class="math inline">\(\quad \mathcal{I}(f \leftrightarrow g, w) = \mathbf{1}\bigl\{\mathcal{I}(f, w) = \mathcal{I}(g, w)\bigr\}\)</span>.</li>
+</ul></li>
+<li>Knowledge base: Formula set <span class="math inline">\(\mathrm{KB}\)</span> with satisfying models <span class="math inline">\(\mathcal{M}(\mathrm{KB}) = \bigcap_{f \in \mathrm{KB}} \mathcal{M}(f)\)</span>, where <span class="math inline">\(\mathcal{M}(f) = \{w : \mathcal{I}(f, w) = 1\}\)</span>.</li>
 </ul>
 </section>
 <section id="first-order-logic-fol" class="level3" data-number="2.1.2">
@@ -1098,15 +1102,15 @@ window.Quarto = {
 <ul>
 <li>Syntax:
 <ul>
-<li>Terms (objects): constants <span class="math inline">\(c\)</span>, variables <span class="math inline">\(x\)</span>, and functions <span class="math inline">\(f(t_1, \dots, t_n)\)</span>.</li>
-<li>Formulas (truth values): predicates <span class="math inline">\(P(t_1, \dots, t_n)\)</span>, equality <span class="math inline">\(=\)</span>, connectives, and quantifiers <span class="math inline">\(\forall x\)</span>, <span class="math inline">\(\exists x\)</span>.</li>
+<li>Terms (objects): constants <span class="math inline">\(c\)</span>, variables <span class="math inline">\(x\)</span>, and function applications <span class="math inline">\(f(t_1, \dots, t_n)\)</span>.</li>
+<li>Formulas (truth values): predicates <span class="math inline">\(P(t_1, \dots, t_n)\)</span>, equality <span class="math inline">\(t_1 = t_2\)</span>, connectives, and quantifiers <span class="math inline">\(\forall x\,\varphi\)</span>, <span class="math inline">\(\exists x\,\varphi\)</span>.</li>
 </ul></li>
 <li>Quantifier rules:
 <ul>
 <li>Idioms: <span class="math inline">\(\forall x\,(P(x) \to Q(x))\)</span> vs.&nbsp;<span class="math inline">\(\exists x\,(P(x) \land Q(x))\)</span>.</li>
-<li>Duality &amp; order: <span class="math inline">\(\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)\)</span>; <span class="math inline">\(\forall x\,\exists y \not\equiv \exists y\,\forall x\)</span>.</li>
+<li>Duality &amp; order: <span class="math inline">\(\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)\)</span>; quantifier order matters (<span class="math inline">\(\forall x\,\exists y\,L(x,y) \not\equiv \exists y\,\forall x\,L(x,y)\)</span>).</li>
 </ul></li>
-<li>Semantics &amp; <strong>propositionalization</strong>: A model maps constants/functions/predicates over an object domain <span class="math inline">\(D\)</span>. FOL reduces to propositional logic iff <em>unique names</em> (at most one constant per object) and <em>domain closure</em> (at least one constant per object, finite <span class="math inline">\(D\)</span>) hold.</li>
+<li>Semantics &amp; <strong>propositionalization</strong>: A FOL model maps constants/functions/predicates over an object domain <span class="math inline">\(D\)</span>. FOL reduces to propositional logic iff <em>unique names</em> (at most one constant per object) and <em>domain closure</em> (at least one constant per object, finite <span class="math inline">\(D\)</span>) hold.</li>
 </ul>
 </section>
 </section>
@@ -1119,18 +1123,21 @@ window.Quarto = {
 <ul>
 <li>Entailment (<span class="math inline">\(\mathrm{KB} \models f\)</span>): <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \subseteq \mathcal{M}(f)\)</span> (<code>Ask[f]</code> = Yes).</li>
 <li>Contradiction (<span class="math inline">\(\mathrm{KB} \models \neg f\)</span>): <span class="math inline">\(\mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) = \emptyset\)</span> (<code>Ask[f]</code> = No).</li>
-<li>Contingency: Nonempty proper overlap (<code>Ask[f]</code> = Don’t know).</li>
+<li>Contingency: <span class="math inline">\(\emptyset \subsetneq \mathcal{M}(\mathrm{KB}) \cap \mathcal{M}(f) \subsetneq \mathcal{M}(\mathrm{KB})\)</span> (<code>Ask[f]</code> = Don’t know).</li>
 </ul></li>
-<li>Reduction to SAT (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \ne \emptyset\)</span>): <span class="math inline">\(\mathrm{KB} \models f \iff \mathrm{KB} \cup \{\neg f\}\)</span> is unsatisfiable.</li>
-<li>SAT solvers (viewing SAT as a CSP): DPLL (backtracking + unit propagation + pruning) and WalkSAT (randomized local variable flips).</li>
+<li>Reduction to SAT (<span class="math inline">\(\mathcal{M}(\mathrm{KB}) \ne \emptyset\)</span>): <span class="math inline">\(\mathrm{KB} \models f \iff \mathrm{KB} \cup \{\neg f\}\)</span> is unsatisfiable; <span class="math inline">\(\mathrm{KB}\)</span> contradicts <span class="math inline">\(f \iff \mathrm{KB} \cup \{f\}\)</span> is unsatisfiable.</li>
+<li>SAT solvers (viewing SAT as a CSP): DPLL (backtracking + unit propagation + conflict pruning) and WalkSAT (randomized local variable flips).</li>
 </ul>
 </section>
 <section id="horn-clauses-modus-ponens-and-unification" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="horn-clauses-modus-ponens-and-unification"><span class="header-section-number">2.2.2</span> Horn Clauses, Modus Ponens, and Unification</h3>
 <ul>
-<li><p><strong>Horn clause</strong>: Clause with <em>at most one</em> positive literal—either a definite clause <span class="math inline">\((p_1 \land \dots \land p_k) \to q\)</span> or goal clause <span class="math inline">\((p_1 \land \dots \land p_k) \to \mathrm{false}\)</span>.</p></li>
-<li><p>Propositional Modus Ponens: Derives <span class="math inline">\(q\)</span> from <span class="math inline">\(p_1, \dots, p_k\)</span> and <span class="math inline">\((p_1 \land \dots \land p_k) \to q\)</span> in linear time.</p></li>
-<li><p>First-order Modus Ponens: Given substitution <span class="math inline">\(\theta = \operatorname{Unify}\bigl((a_1',\dots,a_k'),\,(a_1,\dots,a_k)\bigr)\)</span> (<strong>most general unifier</strong>, MGU):</p>
+<li><p><strong>Horn clause</strong>: Clause with <em>at most one</em> positive literal—either a definite clause <span class="math inline">\((p_1 \land \dots \land p_k) \to q\)</span> (<span class="math inline">\(\neg p_1 \lor \dots \lor \neg p_k \lor q\)</span>) or goal clause <span class="math inline">\((p_1 \land \dots \land p_k) \to \mathrm{false}\)</span>.</p></li>
+<li><p>Propositional Modus Ponens (forward chaining runs in linear time since each step adds one atom):</p>
+<p><span class="math display">\[
+\frac{p_1,\quad \dots,\quad p_k,\quad (p_1 \land \dots \land p_k) \to q}{q}.
+\]</span></p></li>
+<li><p>First-order Modus Ponens: Given substitution <span class="math inline">\(\theta = \operatorname{Unify}\bigl((a_1',\dots,a_k'),\,(a_1,\dots,a_k)\bigr)\)</span> (<strong>most general unifier</strong>, MGU, such that <span class="math inline">\(\operatorname{Subst}[\theta, f] = \operatorname{Subst}[\theta, g]\)</span>):</p>
 <p><span class="math display">\[
 \frac{a_1', \dots, a_k', \qquad \forall x_1 \cdots \forall x_n \bigl((a_1 \land \dots \land a_k) \to b\bigr)}{\operatorname{Subst}[\theta, b]}.
 \]</span></p></li>
@@ -1145,21 +1152,23 @@ window.Quarto = {
 </section>
 <section id="resolution-and-cnf" class="level3" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="resolution-and-cnf"><span class="header-section-number">2.2.3</span> Resolution and CNF</h3>
-<p>Modus Ponens cannot cancel general disjunctions; first-order resolution resolves complementary literals with <span class="math inline">\(\theta = \operatorname{Unify}[p, q]\)</span>:</p>
+<p>Modus Ponens cannot cancel general disjunctions (<span class="math inline">\(A \lor B\)</span> with <span class="math inline">\(\neg A \lor C\)</span>). Propositional and first-order resolution (with <span class="math inline">\(\theta = \operatorname{Unify}[p, q]\)</span>) cancel complementary literals:</p>
 <p><span class="math display">\[
-\frac{f_1 \lor \cdots \lor f_n \lor p, \qquad \neg q \lor g_1 \lor \cdots \lor g_m}{\operatorname{Subst}[\theta,\, f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]}.
+\frac{f_1 \lor \cdots \lor f_n \lor p, \quad \neg p \lor g_1 \lor \cdots \lor g_m}{f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m},
+\qquad
+\frac{f_1 \lor \cdots \lor f_n \lor p, \quad \neg q \lor g_1 \lor \cdots \lor g_m}{\operatorname{Subst}[\theta,\, f_1 \lor \cdots \lor f_n \lor g_1 \lor \cdots \lor g_m]}.
 \]</span></p>
 <div id="prp-ai-2-1" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 2.1 (CNF Conversion Steps)</strong></span> &nbsp;</p>
 <ol type="1">
-<li>Eliminate <span class="math inline">\(\leftrightarrow\)</span> and <span class="math inline">\(\to\)</span> (<span class="math inline">\(f \to g \leadsto \neg f \lor g\)</span>).</li>
-<li>Push <span class="math inline">\(\neg\)</span> inward (De Morgan + quantifier duality) and drop <span class="math inline">\(\neg\neg\)</span>.</li>
-<li><em>(FOL)</em> Standardize variables apart, <strong>Skolemize</strong> <span class="math inline">\(\exists\)</span> into fresh constants / Skolem functions of enclosing <span class="math inline">\(\forall\)</span>-variables (<span class="math inline">\(\forall x\,\exists y \leadsto Y(x)\)</span>), and drop <span class="math inline">\(\forall\)</span>.</li>
-<li>Distribute <span class="math inline">\(\lor\)</span> over <span class="math inline">\(\land\)</span>.</li>
+<li>Eliminate biconditionals and implications: <span class="math inline">\(f \leftrightarrow g \leadsto (f \to g) \land (g \to f)\)</span>, <span class="math inline">\(\quad f \to g \leadsto \neg f \lor g\)</span>.</li>
+<li>Push <span class="math inline">\(\neg\)</span> inward via De Morgan’s laws and quantifier duality; drop <span class="math inline">\(\neg\neg f \leadsto f\)</span>.</li>
+<li><em>(FOL)</em> Standardize variable names apart, <strong>Skolemize</strong> <span class="math inline">\(\exists\)</span> into fresh constants or Skolem functions of enclosing <span class="math inline">\(\forall\)</span>-variables (<span class="math inline">\(\forall x\,\exists y\,P(x,y) \leadsto P(x, Y(x))\)</span>), and drop <span class="math inline">\(\forall\)</span>.</li>
+<li>Distribute <span class="math inline">\(\lor\)</span> over <span class="math inline">\(\land\)</span>: <span class="math inline">\(f \lor (g \land h) \leadsto (f \lor g) \land (f \lor h)\)</span>.</li>
 </ol>
 </div>
 <ul>
-<li><strong>Resolution refutation</strong>: Convert <span class="math inline">\(\mathrm{KB} \cup \{\neg f\}\)</span> to CNF and resolve until deriving the empty clause (<span class="math inline">\(\mathrm{false}\)</span>); sound and complete, exponential worst-case time.</li>
+<li><strong>Resolution refutation</strong>: Convert <span class="math inline">\(\mathrm{KB} \cup \{\neg f\}\)</span> to CNF and resolve clauses until deriving the empty clause (<span class="math inline">\(\mathrm{false}\)</span>); sound and complete, exponential worst-case time.</li>
 </ul>
 </section>
 </section>
@@ -1181,7 +1190,7 @@ window.Quarto = {
 <thead>
 <tr class="header">
 <th style="text-align: left;">Language</th>
-<th style="text-align: left;">Horn Clauses (Fast / Linear)</th>
+<th style="text-align: left;">Horn Clauses (Linear / Fast)</th>
 <th style="text-align: left;">General CNF (Expressive / Exponential)</th>
 </tr>
 </thead>
@@ -1201,9 +1210,9 @@ window.Quarto = {
 <section id="formal-verification-and-alphaproof" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="formal-verification-and-alphaproof"><span class="header-section-number">2.3.1</span> Formal Verification and AlphaProof</h3>
 <ul>
-<li>Proof search vs.&nbsp;proof checking: Finding a tactic proof faces huge branching factors (timeout <span class="math inline">\(\ne\)</span> disproof), whereas checking a completed proof term in a kernel (<strong>Lean</strong>) is deterministic and fast.</li>
-<li>Trust boundary: Lean guarantees the proof validly proves the <em>formalized statement</em>, even from an untrusted LLM, but cannot verify that the formalization matches human intent.</li>
-<li>AlphaProof: Pairs Lean’s tactic kernel (exact RL verification signal) with a policy/value network and tree search over proof states.</li>
+<li>Proof search vs.&nbsp;proof checking: Searching over tactics faces huge branching factors (search failure/timeout <span class="math inline">\(\ne\)</span> disproof), whereas checking a completed proof certificate in a formal kernel (<strong>Lean</strong>) is deterministic and fast.</li>
+<li>Trust boundary: Lean guarantees the checked proof validly establishes the <em>formalized statement</em> from axioms, even if proposed by an untrusted LLM, but cannot verify that the formal translation matches human intent.</li>
+<li>AlphaProof: Pairs Lean’s tactic environment (exact RL reward + soundness) with a policy/value proof network and tree search over proof states.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

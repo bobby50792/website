@@ -52,9 +52,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1083,12 +1083,15 @@ window.Quarto = {
 <li>Joint distribution <span class="math inline">\(P(X_1, \dots, X_n)\)</span>: Table of size <span class="math inline">\(O(d^n)\)</span> for domain size <span class="math inline">\(d\)</span>—exponentially costly to store or estimate.</li>
 <li>Core rules:
 <ul>
-<li>Marginalization: <span class="math inline">\(P(a) = \sum_b P(a, b)\)</span>.</li>
-<li>Conditioning &amp; normalization: <span class="math inline">\(P(a \mid b) = \dfrac{P(a, b)}{P(b)} \propto_A P(a, b)\)</span> (select rows matching <span class="math inline">\(b\)</span>, then normalize).</li>
-<li>Chain rule: <span class="math inline">\(P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid x_1, \dots, x_{i-1})\)</span>.</li>
-<li>Bayes’ rule: <span class="math inline">\(P(x \mid y) = \dfrac{P(y \mid x)P(x)}{P(y)}\)</span>.</li>
+<li><p>Marginalization: <span class="math inline">\(P(a) = \sum_b P(a, b)\)</span>.</p></li>
+<li><p>Conditioning &amp; normalization trick: <span class="math inline">\(P(a \mid b) = \dfrac{P(a, b)}{P(b)} \propto_A P(a, b)\)</span> (select joint rows matching <span class="math inline">\(b\)</span>, then normalize their sum <span class="math inline">\(P(b)\)</span> to <span class="math inline">\(1\)</span>).</p></li>
+<li><p>Product &amp; chain rules: <span class="math inline">\(P(a, b) = P(a \mid b)P(b)\)</span>, <span class="math inline">\(\quad P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid x_1, \dots, x_{i-1})\)</span>.</p></li>
+<li><p>Bayes’ rule:</p>
+<p><span class="math display">\[
+P(x \mid y) = \frac{P(y \mid x)P(x)}{P(y)} = \frac{P(y \mid x)P(x)}{\sum_{x'} P(y \mid x')P(x')}.
+\]</span></p></li>
 </ul></li>
-<li><strong>Conditional independence</strong> (<span class="math inline">\(X \perp\!\!\!\perp Y \mid Z\)</span>): <span class="math inline">\(P(x, y \mid z) = P(x \mid z)P(y \mid z) \iff P(x \mid y, z) = P(x \mid z)\)</span> (e.g., <span class="math inline">\(\mathrm{Catch} \perp\!\!\!\perp \mathrm{Toothache} \mid \mathrm{Cavity}\)</span>).</li>
+<li><strong>Conditional independence</strong> (<span class="math inline">\(X \perp\!\!\!\perp Y \mid Z\)</span>): <span class="math inline">\(P(x, y \mid z) = P(x \mid z)P(y \mid z) \iff P(x \mid y, z) = P(x \mid z)\)</span> (e.g., <span class="math inline">\(\mathrm{Catch} \perp\!\!\!\perp \mathrm{Toothache} \mid \mathrm{Cavity}\)</span>, whereas marginally <span class="math inline">\(\mathrm{Catch} \not\perp\!\!\!\perp \mathrm{Toothache}\)</span>).</li>
 </ul>
 </section>
 <section id="bayesian-networks" class="level2" data-number="3.2">
@@ -1117,7 +1120,7 @@ P(x_1, \dots, x_n) = \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\b
 \]</span></p>
 </div>
 <ul>
-<li>Graph semantics vs.&nbsp;causality: Arcs encode conditional independence, not physical causation (<span class="math inline">\(T \to R\)</span> and <span class="math inline">\(R \to T\)</span> can represent the same <span class="math inline">\(P(R, T)\)</span>), though causal ordering yields sparser graphs and simpler CPTs.</li>
+<li>Graph semantics vs.&nbsp;causality: Arcs encode conditional independence, not physical causation (<span class="math inline">\(T \to R\)</span> and <span class="math inline">\(R \to T\)</span> can represent the exact same joint <span class="math inline">\(P(R, T)\)</span>), though causal ordering yields sparser graphs and simpler CPTs.</li>
 </ul>
 </section>
 <section id="d-separation" class="level3" data-number="3.2.2">
@@ -1164,7 +1167,7 @@ P(x_1, \dots, x_n) = \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\b
 <ol type="1">
 <li>Shade evidence nodes <span class="math inline">\(Z\)</span> and inspect all undirected paths between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
 <li>A path is active iff <em>every</em> triple along it is active; one blocked triple blocks the path.</li>
-<li>If no path is active, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>d-separated</strong> <span class="math inline">\(\implies X \perp\!\!\!\perp Y \mid Z\)</span> in all distributions compatible with the DAG.</li>
+<li>If no path is active, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>d-separated</strong> <span class="math inline">\(\implies X \perp\!\!\!\perp Y \mid Z\)</span> in all distributions compatible with the DAG <em>(specific numerical CPTs may hold accidental extra independencies)</em>.</li>
 </ol>
 </div>
 </section>
@@ -1175,13 +1178,13 @@ P(x_1, \dots, x_n) = \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\b
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="enumeration-and-factors"><span class="header-section-number">3.3.1</span> Enumeration and Factors</h3>
 <p>Partition variables into query <span class="math inline">\(Q\)</span>, observed evidence <span class="math inline">\(e\)</span>, and hidden <span class="math inline">\(H\)</span>:</p>
 <p><span class="math display">\[
-P(Q \mid e) = \frac{1}{Z} \sum_h P(Q, h, e) = \frac{1}{Z} \sum_h \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
+P(Q \mid e) = \frac{P(Q, e)}{P(e)} = \frac{1}{Z} \sum_h P(Q, h, e) = \frac{1}{Z} \sum_h \prod_{i=1}^n P\bigl(x_i \mid \operatorname{Parents}(X_i)\bigr).
 \]</span></p>
-<p>Three operations on multidimensional probability tables (<strong>factors</strong>):</p>
+<p>Three algebraic operations on multidimensional probability tables (<strong>factors</strong>):</p>
 <ol type="1">
-<li>Evidence restriction: Keep only CPT rows consistent with <span class="math inline">\(e\)</span>.</li>
-<li>Join (<code>×</code>): Pointwise product over the union of variables (e.g., <span class="math inline">\(P(R) \times P(T \mid R) = P(R, T)\)</span>).</li>
-<li>Eliminate (<code>∑</code>): Sum out a hidden variable from a factor.</li>
+<li>Evidence instantiation: Restrict each initial CPT to rows matching observed <span class="math inline">\(e\)</span>.</li>
+<li>Join (<code>×</code>): Pointwise product over the union of variables (e.g., <span class="math inline">\(P(R) \times P(T \mid R) = P(R, T)\)</span>); any variable unconditioned (left of <code>|</code>) in <em>any</em> input factor becomes unconditioned in the output factor.</li>
+<li>Eliminate (<code>∑</code>): Sum out a hidden variable from a factor, projecting onto remaining variables.</li>
 </ol>
 <ul>
 <li>Bottleneck of enumeration: Joining all factors before summing out <span class="math inline">\(H\)</span> builds an <span class="math inline">\(O(d^n)\)</span> table—motivating Variable Elimination in Chapter 4.</li>

@@ -27,6 +27,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -52,9 +87,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f4ef0bb9b66ee9bda7ed7d28075c6b0f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-971da4dbdb2014bc89045cef7b61a395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-013ca72b86df845317890f358ce36b8d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b01338a683c72af67f3cf1b7660a0e6d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-9d69ed8346acf2ca1c239217e34c23c6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1037,7 +1072,10 @@ window.Quarto = {
    
   <ul>
   <li><a href="#exact-inference-variable-elimination" id="toc-exact-inference-variable-elimination" class="nav-link active" data-scroll-target="#exact-inference-variable-elimination"><span class="header-section-number">4.1</span> Exact Inference: Variable Elimination</a></li>
-  <li><a href="#approximate-inference-via-sampling" id="toc-approximate-inference-via-sampling" class="nav-link" data-scroll-target="#approximate-inference-via-sampling"><span class="header-section-number">4.2</span> Approximate Inference via Sampling</a></li>
+  <li><a href="#approximate-inference-via-sampling" id="toc-approximate-inference-via-sampling" class="nav-link" data-scroll-target="#approximate-inference-via-sampling"><span class="header-section-number">4.2</span> Approximate Inference via Sampling</a>
+  <ul class="collapse">
+  <li><a href="#sampling-algorithms-and-consistency-derivations" id="toc-sampling-algorithms-and-consistency-derivations" class="nav-link" data-scroll-target="#sampling-algorithms-and-consistency-derivations"><span class="header-section-number">4.2.1</span> Sampling Algorithms and Consistency Derivations</a></li>
+  </ul></li>
   <li><a href="#probabilistic-reasoning-over-time" id="toc-probabilistic-reasoning-over-time" class="nav-link" data-scroll-target="#probabilistic-reasoning-over-time"><span class="header-section-number">4.3</span> Probabilistic Reasoning over Time</a>
   <ul class="collapse">
   <li><a href="#markov-chains-and-stationary-distributions" id="toc-markov-chains-and-stationary-distributions" class="nav-link" data-scroll-target="#markov-chains-and-stationary-distributions"><span class="header-section-number">4.3.1</span> Markov Chains and Stationary Distributions</a></li>
@@ -1077,7 +1115,7 @@ window.Quarto = {
 
 <section id="exact-inference-variable-elimination" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="exact-inference-variable-elimination"><span class="header-section-number">4.1</span> Exact Inference: Variable Elimination</h2>
-<p>Variable Elimination (VE) pushes sums inside products (<span class="math inline">\(\sum uwy + \cdots = (u+v)(w+x)(y+z)\)</span>) by interleaving joins and marginalization:</p>
+<p>Variable Elimination (VE) exploits distributivity (<span class="math inline">\(\sum uwy + \cdots = (u+v)(w+x)(y+z)\)</span>) by interleaving joins and marginalization:</p>
 <ol type="1">
 <li>Restrict all local CPTs to observed evidence <span class="math inline">\(e\)</span>.</li>
 <li>For each hidden variable <span class="math inline">\(H_k\)</span> (in chosen elimination order): join all factors mentioning <span class="math inline">\(H_k\)</span>, then eliminate (sum out) <span class="math inline">\(H_k\)</span>.</li>
@@ -1090,85 +1128,132 @@ window.Quarto = {
 </figure>
 </div>
 <ul>
-<li>Complexity: Governed by the largest intermediate factor; elimination order can mean <span class="math inline">\(2^n\)</span> vs.&nbsp;<span class="math inline">\(2\)</span> entries (e.g., eliminating a star hub first vs.&nbsp;last).</li>
+<li>Complexity &amp; ordering example: Cost is governed by the largest intermediate factor—on a star graph (<span class="math inline">\(Z\)</span> connected to <span class="math inline">\(X_1,\dots,X_n\)</span>), eliminating hub <span class="math inline">\(Z\)</span> <em>first</em> creates one <span class="math inline">\(O(2^n)\)</span> factor <span class="math inline">\(P(X_1,\dots,X_n)\)</span>, whereas eliminating leaves <span class="math inline">\(X_i\)</span> first keeps all intermediate factors of size <span class="math inline">\(2\)</span>.</li>
 <li>Hardness: Exact BN inference is <strong>NP-hard</strong> (reduces from 3-SAT), but runs in linear time on <strong>polytrees</strong> (singly connected DAGs with no undirected cycles).</li>
 </ul>
 </section>
 <section id="approximate-inference-via-sampling" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="approximate-inference-via-sampling"><span class="header-section-number">4.2</span> Approximate Inference via Sampling</h2>
-<p>Draw <span class="math inline">\(N\)</span> discrete samples (via inverse-CDF lookup on <span class="math inline">\(u \sim \operatorname{Uniform}[0,1)\)</span>) to approximate <span class="math inline">\(P(Q \mid e)\)</span>:</p>
+<p>Draw <span class="math inline">\(N\)</span> discrete outcomes (via inverse-CDF intervals on <span class="math inline">\(u \sim \operatorname{Uniform}[0,1)\)</span>) to approximate <span class="math inline">\(P(Q \mid e)\)</span>:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Method</th>
-<th style="text-align: left;">Procedure</th>
-<th style="text-align: left;">Pros &amp; Cons</th>
+<th style="text-align: left;">Target</th>
+<th style="text-align: left;">Evidence Handling</th>
+<th style="text-align: left;">Trade-off</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Prior Sampling</td>
-<td style="text-align: left;">Sample <span class="math inline">\(x_i \sim P(X_i \mid \mathrm{pa})\)</span> topologically</td>
-<td style="text-align: left;">Unbiased for <span class="math inline">\(P(X)\)</span>; ignores evidence <span class="math inline">\(e\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(P(X)\)</span></td>
+<td style="text-align: left;">Ignored (<span class="math inline">\(S_{\mathrm{PS}}(x) = \prod_i P(x_i \mid \mathrm{pa})\)</span>)</td>
+<td style="text-align: left;">Unbiased for <span class="math inline">\(P(X)\)</span>, cannot condition on rare <span class="math inline">\(e\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Rejection Sampling</td>
-<td style="text-align: left;">Prior sample; discard if <span class="math inline">\(x_i \ne e_i\)</span></td>
-<td style="text-align: left;">Consistent, but rejects almost all samples when <span class="math inline">\(P(e)\)</span> is small</td>
+<td style="text-align: left;"><span class="math inline">\(P(Q \mid e)\)</span></td>
+<td style="text-align: left;">Discard samples violating <span class="math inline">\(e\)</span></td>
+<td style="text-align: left;">Consistent, rejects <span class="math inline">\(\approx 1 - P(e)\)</span> of samples</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Likelihood Weighting</td>
-<td style="text-align: left;">Clamp <span class="math inline">\(E_i = e_i\)</span>, sample rest; weight <span class="math inline">\(w = \prod_i P(e_i \mid \mathrm{pa})\)</span></td>
-<td style="text-align: left;">Uses all samples (<span class="math inline">\(S_{\mathrm{WS}} \cdot w = P(\mathbf{z}, \mathbf{e})\)</span>), but upstream ignores downstream <span class="math inline">\(e\)</span> (weight collapse)</td>
+<td style="text-align: left;"><span class="math inline">\(P(Q \mid e)\)</span></td>
+<td style="text-align: left;">Clamp <span class="math inline">\(e\)</span>, weight <span class="math inline">\(w = \prod_i P(e_i \mid \mathrm{pa})\)</span></td>
+<td style="text-align: left;">Uses all samples, upstream ignores downstream <span class="math inline">\(e\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Gibbs Sampling (MCMC)</td>
-<td style="text-align: left;">Clamp <span class="math inline">\(e\)</span>; repeatedly resample <span class="math inline">\(Z_i \sim P(Z_i \mid \mathrm{MB}(Z_i))\)</span></td>
-<td style="text-align: left;">Uses upstream &amp; downstream evidence; correlated samples, slow mixing diagnosis</td>
+<td style="text-align: left;">Gibbs Sampling</td>
+<td style="text-align: left;"><span class="math inline">\(P(Q \mid e)\)</span></td>
+<td style="text-align: left;">Clamp <span class="math inline">\(e\)</span>, resample via Markov blanket</td>
+<td style="text-align: left;">Uses upstream &amp; downstream <span class="math inline">\(e\)</span>, correlated MCMC</td>
 </tr>
 </tbody>
 </table>
-<p>Key Gibbs sampling details:</p>
+<section id="sampling-algorithms-and-consistency-derivations" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="sampling-algorithms-and-consistency-derivations"><span class="header-section-number">4.2.1</span> Sampling Algorithms and Consistency Derivations</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rejection_sample(network, evidence):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> {}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X_i <span class="kw">in</span> topological_order(network):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        x[X_i] <span class="op">=</span> sample(P(X_i <span class="op">|</span> x[Parents(X_i)]))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> X_i <span class="kw">in</span> evidence <span class="kw">and</span> x[X_i] <span class="op">!=</span> evidence[X_i]:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> REJECT</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_sample(network, evidence):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    x, w <span class="op">=</span> {}, <span class="fl">1.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X_i <span class="kw">in</span> topological_order(network):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> X_i <span class="kw">in</span> evidence:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            x[X_i] <span class="op">=</span> evidence[X_i]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            w <span class="op">*=</span> P(X_i <span class="op">=</span> evidence[X_i] <span class="op">|</span> x[Parents(X_i)])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            x[X_i] <span class="op">=</span> sample(P(X_i <span class="op">|</span> x[Parents(X_i)]))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, w</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gibbs_sampling(Q, evidence, network, N):</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> {v: <span class="dv">0</span> <span class="cf">for</span> v <span class="kw">in</span> domain(Q)}</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> initialize_randomly_with_clamped(evidence)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> Z_i <span class="kw">in</span> non_evidence_vars(network):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            x[Z_i] <span class="op">=</span> sample(P(Z_i <span class="op">|</span> x[MarkovBlanket(Z_i)]))</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            counts[x[Q]] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> normalize(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><strong>Markov blanket</strong> <span class="math inline">\(\mathrm{MB}(Z_i)\)</span>: All CPTs not mentioning <span class="math inline">\(Z_i\)</span> cancel in <span class="math inline">\(P(Z_i \mid x_{-i})\)</span>, leaving only <span class="math inline">\(P(Z_i \mid \operatorname{Parents}(Z_i)) \prod_{Y_j \in \operatorname{Children}(Z_i)} P(Y_j \mid \operatorname{Parents}(Y_j))\)</span> (parents, children, and co-parents).</li>
-<li>Convergence: Kernel <span class="math inline">\(q(x \to x') = P(x_i' \mid x_{-i}, e)\)</span> satisfies <strong>detailed balance</strong> with <span class="math inline">\(P(x \mid e)\)</span> (Metropolis–Hastings with acceptance <span class="math inline">\(1\)</span>).</li>
+<li><p>Likelihood weighting consistency: Proposal probability times weight reconstructs the exact joint:</p>
+<p><span class="math display">\[
+S_{\mathrm{WS}}(\mathbf{z}, \mathbf{e}) \cdot w(\mathbf{z}, \mathbf{e})
+= \Bigl(\prod_j P(z_j \mid \operatorname{Parents}(Z_j))\Bigr)\Bigl(\prod_i P(e_i \mid \operatorname{Parents}(E_i))\Bigr)
+= P(\mathbf{z}, \mathbf{e}).
+\]</span></p></li>
+<li><p>Gibbs <strong>Markov blanket</strong> cancellation &amp; MCMC guarantee:</p>
+<ul>
+<li><p>In <span class="math inline">\(P(Z_i \mid x_{-i}) = \frac{P(z_i, x_{-i})}{\sum_{z_i'} P(z_i', x_{-i})}\)</span>, every CPT not mentioning <span class="math inline">\(Z_i\)</span> cancels out:</p>
+<p><span class="math display">\[
+P(Z_i \mid x_{-i}) \propto_{Z_i} P\bigl(Z_i \mid \operatorname{Parents}(Z_i)\bigr) \prod_{Y_j \in \operatorname{Children}(Z_i)} P\bigl(Y_j \mid \operatorname{Parents}(Y_j)\bigr),
+\]</span></p>
+<p>depending only on parents, children, and children’s co-parents.</p></li>
+<li><p>Transition kernel <span class="math inline">\(q(x \to x') = P(x_i' \mid x_{-i}, e)\)</span> satisfies <strong>detailed balance</strong> <span class="math inline">\(\pi(x)q(x \to x') = \pi(x')q(x' \to x)\)</span> with <span class="math inline">\(\pi(x) = P(x \mid e)\)</span> (Metropolis–Hastings with acceptance <span class="math inline">\(1\)</span>).</p></li>
+</ul></li>
 </ul>
+</section>
 </section>
 <section id="probabilistic-reasoning-over-time" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="probabilistic-reasoning-over-time"><span class="header-section-number">4.3</span> Probabilistic Reasoning over Time</h2>
 <section id="markov-chains-and-stationary-distributions" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="markov-chains-and-stationary-distributions"><span class="header-section-number">4.3.1</span> Markov Chains and Stationary Distributions</h3>
 <ul>
-<li>Markov chain: Prior <span class="math inline">\(P(X_1)\)</span> and stationary transition <span class="math inline">\(P(X_t \mid X_{t-1})\)</span> with <span class="math inline">\(X_t \perp\!\!\!\perp X_{1:t-2} \mid X_{t-1}\)</span>; forward propagation updates <span class="math inline">\(P(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1})P(x_{t-1})\)</span>.</li>
+<li>Markov chain: Prior <span class="math inline">\(P(X_1)\)</span> and stationary transition <span class="math inline">\(P(X_t \mid X_{t-1})\)</span> with <span class="math inline">\(X_t \perp\!\!\!\perp X_{1:t-2} \mid X_{t-1}\)</span>; marginals evolve via <span class="math inline">\(P(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1})P(x_{t-1})\)</span>.</li>
 </ul>
 <div id="def-ai-4-1" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.1 (Stationary Distribution)</strong></span> Ergodic chains converge to a unique <span class="math inline">\(P_\infty\)</span> invariant under transitions: <span class="math inline">\(P_\infty(x') = \sum_x P(x' \mid x)P_\infty(x)\)</span>.</p>
 <ul>
-<li>PageRank: Surfer jumps to a uniform random page with probability <span class="math inline">\(c\)</span> and follows an outlink with probability <span class="math inline">\(1-c\)</span>; <span class="math inline">\(P_\infty\)</span> ranks page authority.</li>
+<li>PageRank: Surfer jumps uniformly to a random page with probability <span class="math inline">\(c\)</span> and follows an outlink with probability <span class="math inline">\(1-c\)</span>; <span class="math inline">\(P_\infty\)</span> ranks page authority.</li>
 </ul>
 </div>
 </section>
 <section id="hidden-markov-models-and-filtering" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="hidden-markov-models-and-filtering"><span class="header-section-number">4.3.2</span> Hidden Markov Models and Filtering</h3>
 <div id="def-ai-4-2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4.2 (Hidden Markov Model (HMM))</strong></span> Hidden states <span class="math inline">\(X_{1:T}\)</span> emit noisy observations <span class="math inline">\(E_{1:T}\)</span> via <span class="math inline">\(P(X_1)\)</span>, <span class="math inline">\(P(X_t \mid X_{t-1})\)</span>, and <span class="math inline">\(P(E_t \mid X_t)\)</span>, with <span class="math inline">\(X_t \perp\!\!\!\perp X_{1:t-2}, E_{1:t-1} \mid X_{t-1}\)</span> and <span class="math inline">\(E_t \perp\!\!\!\perp X_{1:t-1}, E_{1:t-1} \mid X_t\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 4.2 (Hidden Markov Model (HMM))</strong></span> Hidden states <span class="math inline">\(X_{1:T}\)</span> emit noisy observations <span class="math inline">\(E_{1:T}\)</span> via <span class="math inline">\(P(X_1)\)</span>, <span class="math inline">\(P(X_t \mid X_{t-1})\)</span>, and <span class="math inline">\(P(E_t \mid X_t)\)</span>, satisfying <span class="math inline">\(X_t \perp\!\!\!\perp X_{1:t-2}, E_{1:t-1} \mid X_{t-1}\)</span> and <span class="math inline">\(E_t \perp\!\!\!\perp X_{1:t-1}, E_{1:t-1} \mid X_t\)</span>.</p>
 </div>
 <ul>
 <li>Online filtering (Forward Algorithm) updates belief <span class="math inline">\(B_t(x_t) = P(x_t \mid e_{1:t})\)</span> in <span class="math inline">\(O(|X|^2)\)</span> time and <span class="math inline">\(O(|X|)\)</span> space per step (<em>Kalman filter</em> for linear-Gaussian systems):
 <ol type="1">
-<li>Time elapse: <span class="math inline">\(B'_t(x_t) = \sum_{x_{t-1}} P(x_t \mid x_{t-1}) B_{t-1}(x_{t-1})\)</span>.</li>
-<li>Observe: <span class="math inline">\(B_t(x_t) \propto_{X_t} P(e_t \mid x_t) B'_t(x_t)\)</span>.</li>
+<li>Time elapse: <span class="math inline">\(B'_t(x_t) = P(x_t \mid e_{1:t-1}) = \sum_{x_{t-1}} P(x_t \mid x_{t-1}) B_{t-1}(x_{t-1})\)</span>.</li>
+<li>Observe: <span class="math inline">\(B_t(x_t) = P(x_t \mid e_{1:t}) \propto_{X_t} P(e_t \mid x_t) B'_t(x_t)\)</span>.</li>
 </ol></li>
 <li>Particle filtering (<span class="math inline">\(O(N)\)</span> per step for <span class="math inline">\(N \ll |X|\)</span> particles, when <span class="math inline">\(|X|\)</span> is huge or continuous):
 <ol type="1">
-<li>Elapse: Sample <span class="math inline">\(x_t^{(i)} \sim P(X_t \mid x_{t-1}^{(i)})\)</span>.</li>
-<li>Weight: Set <span class="math inline">\(w_i = P(e_t \mid x_t^{(i)})\)</span>.</li>
-<li>Resample: Draw <span class="math inline">\(N\)</span> unweighted particles proportional to <span class="math inline">\(\{w_i\}\)</span>.</li>
+<li>Elapse: Propagate <span class="math inline">\(x_t^{(i)} \sim P(X_t \mid x_{t-1}^{(i)})\)</span>.</li>
+<li>Weight: Assign <span class="math inline">\(w_i = P(e_t \mid x_t^{(i)})\)</span>.</li>
+<li>Resample: Draw <span class="math inline">\(N\)</span> unweighted particles with replacement proportional to <span class="math inline">\(\{w_i\}\)</span>.</li>
 </ol>
 <ul>
 <li>SLAM: Jointly filters robot pose and map (e.g., FastSLAM).</li>
@@ -1178,12 +1263,12 @@ window.Quarto = {
 <section id="dbns-viterbi-and-probabilistic-programming" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="dbns-viterbi-and-probabilistic-programming"><span class="header-section-number">4.3.3</span> DBNs, Viterbi, and Probabilistic Programming</h3>
 <ul>
-<li><p>Dynamic Bayes Nets (DBNs): Multi-variable BN slice repeated across <span class="math inline">\(t-1 \to t\)</span>; particle filtering tracks state-tuple particles.</p></li>
-<li><p>Viterbi algorithm (<span class="math inline">\(\arg\max_{x_{1:T}} P(x_{1:T} \mid e_{1:T})\)</span>): Replaces the Forward sum over trellis paths with a <code>max</code> (plus backpointers):</p>
+<li><p>Dynamic Bayes Nets (DBNs): Multi-variable BN slice repeated across <span class="math inline">\(t-1 \to t\)</span>; exact online inference eliminates slice <span class="math inline">\(t-1\)</span>, while DBN particle filtering propagates full tuple particles.</p></li>
+<li><p>Viterbi algorithm (<span class="math inline">\(\arg\max_{x_{1:T}} P(x_{1:T} \mid e_{1:T})\)</span>): Replaces the Forward sum over trellis paths with <code>max</code> (storing backpointers):</p>
 <p><span class="math display">\[
 \begin{aligned}
-\text{Forward:}\quad f_t[x_t] &amp;= P(e_t \mid x_t)\sum_{x_{t-1}} P(x_t \mid x_{t-1})\,f_{t-1}[x_{t-1}], \\
-\text{Viterbi:}\quad m_t[x_t] &amp;= P(e_t \mid x_t)\max_{x_{t-1}} P(x_t \mid x_{t-1})\,m_{t-1}[x_{t-1}].
+\text{Forward (sum):}\quad f_t[x_t] &amp;= P(x_t, e_{1:t}) = P(e_t \mid x_t)\sum_{x_{t-1}} P(x_t \mid x_{t-1})\,f_{t-1}[x_{t-1}], \\
+\text{Viterbi (max):}\quad m_t[x_t] &amp;= \max_{x_{1:t-1}} P(x_{1:t}, e_{1:t}) = P(e_t \mid x_t)\max_{x_{t-1}} P(x_t \mid x_{t-1})\,m_{t-1}[x_{t-1}].
 \end{aligned}
 \]</span></p></li>
 <li><p>Probabilistic programming (PyMC, Stan, Edward): Expresses generative models as code with automated MCMC/variational posterior inference.</p></li>
