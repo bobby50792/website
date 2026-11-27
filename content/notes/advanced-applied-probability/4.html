@@ -86,6 +86,35 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -1002,8 +1031,18 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link active" data-scroll-target="#conditional-expectation"><span class="header-section-number">4.1</span> Conditional Expectation</a></li>
+  <li><a href="#filtrations-and-martingales" id="toc-filtrations-and-martingales" class="nav-link" data-scroll-target="#filtrations-and-martingales"><span class="header-section-number">4.2</span> Filtrations and Martingales</a></li>
+  <li><a href="#martingale-transforms-and-stopping-times" id="toc-martingale-transforms-and-stopping-times" class="nav-link" data-scroll-target="#martingale-transforms-and-stopping-times"><span class="header-section-number">4.3</span> Martingale Transforms and Stopping Times</a></li>
+  <li><a href="#martingale-convergence" id="toc-martingale-convergence" class="nav-link" data-scroll-target="#martingale-convergence"><span class="header-section-number">4.4</span> Martingale Convergence</a></li>
+  <li><a href="#uniform-integrability" id="toc-uniform-integrability" class="nav-link" data-scroll-target="#uniform-integrability"><span class="header-section-number">4.5</span> Uniform Integrability</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -1033,11 +1072,436 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="conditional-expectation" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">4.1</span> Conditional Expectation</h2>
+<p>Work on a probability space <span class="math inline">\((\Omega,\mathcal F_0,\mathbb P)\)</span> with sub-<span class="math inline">\(\sigma\)</span>-fields <span class="math inline">\(\mathcal F,\mathcal F_1,\mathcal F_2\subseteq\mathcal F_0\)</span>.</p>
+<div id="thm-aap-4-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.1 (Basic Properties of Conditional Expectation)</strong></span> Let <span class="math inline">\(X,Y\)</span> be integrable random variables, with <a href="../../../content/notes/advanced-applied-probability/2.html#def-aap-2-7">conditional expectation</a> <span class="math inline">\(\omega\mapsto\mathbb E[X\mid\mathcal F](\omega)\)</span>. The following hold almost surely:</p>
+<ol type="i">
+<li><p><strong>Linearity.</strong> For any <span class="math inline">\(a\in\mathbb R\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[aX+Y\mid\mathcal F]
+=a\,\mathbb E[X\mid\mathcal F]+\mathbb E[Y\mid\mathcal F].
+\]</span></p></li>
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(X\le Y\)</span> a.s., then <span class="math inline">\(\mathbb E[X\mid\mathcal F]\le\mathbb E[Y\mid\mathcal F]\)</span> a.s.</p></li>
+<li><p><strong>Monotone convergence.</strong> If <span class="math inline">\(X_n\ge0\)</span> and <span class="math inline">\(X_n\uparrow X\)</span> a.s. with <span class="math inline">\(\mathbb E X&lt;\infty\)</span>, then <span class="math inline">\(\mathbb E[X_n\mid\mathcal F]\uparrow\mathbb E[X\mid\mathcal F]\)</span> a.s.</p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Existence of <span class="math inline">\(\mathbb E[X\mid\mathcal F]\)</span> follows by applying the <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-9">Radon–Nikodym theorem</a> to <span class="math inline">\(A\mapsto\int_A X^\pm\,d\mathbb P\)</span> on <span class="math inline">\((\Omega,\mathcal F)\)</span>. For (i), <span class="math inline">\(a\,\mathbb E[X\mid\mathcal F]+\mathbb E[Y\mid\mathcal F]\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable and has integral <span class="math inline">\(\int_A(aX+Y)\,d\mathbb P\)</span> on every <span class="math inline">\(A\in\mathcal F\)</span>, so uniqueness a.s. gives equality. For (ii), let <span class="math inline">\(A=\{\mathbb E[X\mid\mathcal F]&gt;\mathbb E[Y\mid\mathcal F]\}\in\mathcal F\)</span>; then <span class="math inline">\(\int_A(\mathbb E[X\mid\mathcal F]-\mathbb E[Y\mid\mathcal F])\,d\mathbb P=\int_A(X-Y)\,d\mathbb P\le0\)</span>, forcing <span class="math inline">\(\mathbb P(A)=0\)</span>. For (iii), monotonicity gives <span class="math inline">\(\mathbb E[X_n\mid\mathcal F]\uparrow Z\)</span> a.s. for an <span class="math inline">\(\mathcal F\)</span>-measurable <span class="math inline">\(Z\ge0\)</span>, and <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-15">monotone convergence</a> yields <span class="math inline">\(\int_A Z\,d\mathbb P=\lim_{n\to\infty}\int_A X_n\,d\mathbb P=\int_A X\,d\mathbb P\)</span> for every <span class="math inline">\(A\in\mathcal F\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.2 (Conditioning Known Random Variables)</strong></span> If <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable (<span class="math inline">\(X\in\mathcal F\)</span>) and <span class="math inline">\(\mathbb E|X|&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb E[X\mid\mathcal F]=X
+\qquad\text{a.s.}
+\]</span></p>
+<p>More generally, if <span class="math inline">\(X\in\mathcal F\)</span> and <span class="math inline">\(\mathbb E|Y|,\mathbb E|XY|&lt;\infty\)</span>, then <span class="math inline">\(\mathbb E[XY\mid\mathcal F]=X\,\mathbb E[Y\mid\mathcal F]\)</span> a.s.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The random variable <span class="math inline">\(X\)</span> itself satisfies both conditions of <a href="../../../content/notes/advanced-applied-probability/2.html#def-aap-2-7">conditional expectation</a>: <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable and <span class="math inline">\(\int_A X\,d\mathbb P=\int_A X\,d\mathbb P\)</span> for every <span class="math inline">\(A\in\mathcal F\)</span>, so <span class="math inline">\(\mathbb E[X\mid\mathcal F](\omega)=X(\omega)\)</span> for a.e. <span class="math inline">\(\omega\)</span>. For the pull-out rule, <span class="math inline">\(X=\mathbf 1_B\)</span> (<span class="math inline">\(B\in\mathcal F\)</span>) follows from <span class="math inline">\(\int_A\mathbf 1_B Y\,d\mathbb P=\int_{A\cap B}\mathbb E[Y\mid\mathcal F]\,d\mathbb P=\int_A\mathbf 1_B\mathbb E[Y\mid\mathcal F]\,d\mathbb P\)</span>, and the general case follows by linearity, <a href="#thm-aap-4-1" class="quarto-xref">Theorem&nbsp;4.1</a>(iii), and splitting into positive and negative parts.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-3" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.3 (Conditioning Under Independence)</strong></span> If <span class="math inline">\(X\)</span> is independent of <span class="math inline">\(\mathcal F\)</span> (i.e., <span class="math inline">\(\sigma(X)\perp\!\!\!\perp\mathcal F\)</span>) and <span class="math inline">\(\mathbb E|X|&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb E[X\mid\mathcal F]=\mathbb E[X]
+\qquad\text{a.s.}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The constant random variable <span class="math inline">\(c(\omega)=\mathbb E[X]\)</span> is <span class="math inline">\(\mathcal F\)</span>-measurable. For every <span class="math inline">\(A\in\mathcal F\)</span>, <span class="math inline">\(\sigma(X)\perp\!\!\!\perp\mathcal F\)</span> implies that <span class="math inline">\(X\)</span> and <span class="math inline">\(\mathbf 1_A\)</span> are independent (when <span class="math inline">\(\mathbb P(A)&gt;0\)</span>, <span class="math inline">\(\mathbb E[X\mid A]=\mathbb E[X]\)</span>), so by <a href="../../../content/notes/advanced-applied-probability/2.html#thm-aap-2-3">product expectation</a>,</p>
+<p><span class="math display">\[
+\int_A X\,d\mathbb P
+=\mathbb E[X\mathbf 1_A]
+=\mathbb E[X]\,\mathbb P(A)
+=\int_A\mathbb E[X]\,d\mathbb P.
+\]</span></p>
+<p>By uniqueness in <a href="../../../content/notes/advanced-applied-probability/2.html#def-aap-2-7">Kolmogorov’s definition</a>, <span class="math inline">\(\mathbb E[X\mid\mathcal F]=\mathbb E[X]\)</span> a.s.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-4" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.4 (Tower Property and Conditional Jensen’s Inequality)</strong></span> Let <span class="math inline">\(X\)</span> be an integrable random variable.</p>
+<ol type="i">
+<li><p><strong>Tower property.</strong> If <span class="math inline">\(\mathcal F_1\subseteq\mathcal F_2\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb E\bigl[\mathbb E[X\mid\mathcal F_2]\bigm|\mathcal F_1\bigr]
+=\mathbb E[X\mid\mathcal F_1]
+=\mathbb E\bigl[\mathbb E[X\mid\mathcal F_1]\bigm|\mathcal F_2\bigr]
+\qquad\text{a.s.}
+\]</span></p>
+<p>In particular, <span class="math inline">\(\mathbb E\bigl[\mathbb E[X\mid\mathcal F]\bigr]=\mathbb E[X]\)</span>.</p></li>
+<li><p><strong>Conditional Jensen’s inequality.</strong> If <span class="math inline">\(\varphi:\mathbb R\to\mathbb R\)</span> is convex and <span class="math inline">\(\mathbb E|\varphi(X)|&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\varphi\bigl(\mathbb E[X\mid\mathcal F]\bigr)
+\le\mathbb E[\varphi(X)\mid\mathcal F]
+\qquad\text{a.s.}
+\]</span></p>
+<p>In particular, <span class="math inline">\(\|\mathbb E[X\mid\mathcal F]\|_p\le\|X\|_p\)</span> for all <span class="math inline">\(1\le p&lt;\infty\)</span>.</p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In (i), the first equality holds because every <span class="math inline">\(A\in\mathcal F_1\)</span> also lies in <span class="math inline">\(\mathcal F_2\)</span>, so <span class="math inline">\(\int_A\mathbb E[X\mid\mathcal F_2]\,d\mathbb P=\int_A X\,d\mathbb P\)</span>; the second holds by <a href="#thm-aap-4-2" class="quarto-xref">Theorem&nbsp;4.2</a> since <span class="math inline">\(\mathbb E[X\mid\mathcal F_1]\in\mathcal F_2\)</span>.</p>
+<p>In (ii), write <span class="math inline">\(\varphi(x)=\sup_{q\in\mathbb Q}L_q(x)\)</span> as the supremum of supporting lines <span class="math inline">\(L_q(x)=\varphi(q)+\varphi'_+(q)(x-q)\)</span> at rational points. By <a href="#thm-aap-4-1" class="quarto-xref">Theorem&nbsp;4.1</a>, <span class="math inline">\(\mathbb E[\varphi(X)\mid\mathcal F]\ge\mathbb E[L_q(X)\mid\mathcal F]=L_q(\mathbb E[X\mid\mathcal F])\)</span> a.s. for each <span class="math inline">\(q\in\mathbb Q\)</span>, and taking the countable supremum gives the bound.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="filtrations-and-martingales" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="filtrations-and-martingales"><span class="header-section-number">4.2</span> Filtrations and Martingales</h2>
+<div id="def-aap-4-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.1 (Filtration and Adapted Process)</strong></span> A <strong>filtration</strong> on <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span> is an increasing sequence of sub-<span class="math inline">\(\sigma\)</span>-fields</p>
+<p><span class="math display">\[
+\mathcal F_0\subseteq\mathcal F_1\subseteq\mathcal F_2\subseteq\cdots\subseteq\mathcal F,
+\]</span></p>
+<p>with <span class="math inline">\(\mathcal F_\infty=\sigma\bigl(\bigcup_{n=0}^\infty\mathcal F_n\bigr)\)</span>. A sequence <span class="math inline">\(\{X_n\}_{n\ge0}\)</span> is <strong>adapted</strong> to <span class="math inline">\(\{\mathcal F_n\}\)</span> if <span class="math inline">\(X_n\in\mathcal F_n\)</span> for every <span class="math inline">\(n\ge0\)</span>, and <span class="math inline">\(\{H_n\}_{n\ge1}\)</span> is <strong>predictable</strong> if <span class="math inline">\(H_n\in\mathcal F_{n-1}\)</span> for every <span class="math inline">\(n\ge1\)</span>.</p>
+</div>
+<div id="def-aap-4-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.2 (Martingale, Submartingale, and Supermartingale)</strong></span> A process <span class="math inline">\(\{X_n\}_{n\ge0}\)</span> is a <strong>martingale</strong> with respect to <span class="math inline">\(\{\mathcal F_n\}_{n\ge0}\)</span> if:</p>
+<ol type="i">
+<li><p><span class="math inline">\(X_n\)</span> is adapted to <span class="math inline">\(\mathcal F_n\)</span> for every <span class="math inline">\(n\ge0\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbb E|X_n|&lt;\infty\)</span> for every <span class="math inline">\(n\ge0\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbb E[X_{n+1}\mid\mathcal F_n]=X_n\)</span> a.s. for every <span class="math inline">\(n\ge0\)</span>.</p></li>
+</ol>
+<p>Replacing (iii) by <span class="math inline">\(\mathbb E[X_{n+1}\mid\mathcal F_n]\ge X_n\)</span> a.s. defines a <strong>submartingale</strong> (so <span class="math inline">\(\mathbb E X_n\)</span> is nondecreasing), and replacing it by <span class="math inline">\(\mathbb E[X_{n+1}\mid\mathcal F_n]\le X_n\)</span> a.s. defines a <strong>supermartingale</strong> (so <span class="math inline">\(\mathbb E X_n\)</span> is nonincreasing).</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example: Canonical Martingales
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Random walk:</strong> If <span class="math inline">\(\xi_1,\xi_2,\ldots\)</span> are independent with <span class="math inline">\(\mathbb E\xi_k=0\)</span>, <span class="math inline">\(\mathcal F_n=\sigma(\xi_1,\ldots,\xi_n)\)</span>, and <span class="math inline">\(S_n=\sum_{k=1}^n\xi_k\)</span> (<span class="math inline">\(S_0=0\)</span>), then <span class="math inline">\(\{S_n\}\)</span> is a martingale by <a href="#thm-aap-4-2" class="quarto-xref">Theorem&nbsp;4.2</a> and <a href="#thm-aap-4-3" class="quarto-xref">Theorem&nbsp;4.3</a>; if <span class="math inline">\(\operatorname{Var}(\xi_k)=\sigma_k^2&lt;\infty\)</span>, then <span class="math inline">\(S_n^2-\sum_{k=1}^n\sigma_k^2\)</span> is also a martingale.</li>
+<li><strong>Product martingale:</strong> If <span class="math inline">\(\xi_1,\xi_2,\ldots\ge0\)</span> are independent with <span class="math inline">\(\mathbb E\xi_k=1\)</span>, then <span class="math inline">\(M_n=\prod_{k=1}^n\xi_k\)</span> (<span class="math inline">\(M_0=1\)</span>) is a nonnegative martingale.</li>
+<li><strong>Doob’s martingale:</strong> For any <span class="math inline">\(X\in L^1\)</span> and filtration <span class="math inline">\(\{\mathcal F_n\}\)</span>, <span class="math inline">\(X_n=\mathbb E[X\mid\mathcal F_n]\)</span> is a martingale by <a href="#thm-aap-4-4" class="quarto-xref">Theorem&nbsp;4.4</a>(i).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="martingale-transforms-and-stopping-times" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="martingale-transforms-and-stopping-times"><span class="header-section-number">4.3</span> Martingale Transforms and Stopping Times</h2>
+<div id="def-aap-4-3" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.3 (Martingale Transform)</strong></span> For adapted <span class="math inline">\(\{X_n\}_{n\ge0}\)</span> and predictable <span class="math inline">\(\{H_n\}_{n\ge1}\)</span>, the <strong>martingale transform</strong> is <span class="math inline">\((H\cdot X)_0=0\)</span> and</p>
+<p><span class="math display">\[
+(H\cdot X)_n=\sum_{m=1}^n H_m(X_m-X_{m-1}),
+\qquad n\ge1.
+\]</span></p>
+</div>
+<div id="thm-aap-4-6" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.5 (Preservation Under Martingale Transforms)</strong></span> Let <span class="math inline">\(\{H_n\}_{n\ge1}\)</span> be predictable with <span class="math inline">\(|H_n|\le C_n&lt;\infty\)</span> for each <span class="math inline">\(n\)</span>.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\{X_n\}\)</span> is a submartingale (resp. supermartingale) and <span class="math inline">\(H_n\ge0\)</span>, then <span class="math inline">\(\{(H\cdot X)_n\}\)</span> is a submartingale (resp. supermartingale).</p></li>
+<li><p>If <span class="math inline">\(\{X_n\}\)</span> is a martingale, then <span class="math inline">\(\{(H\cdot X)_n\}\)</span> is a martingale.</p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Boundedness of <span class="math inline">\(H_m\)</span> ensures <span class="math inline">\(\mathbb E|(H\cdot X)_n|&lt;\infty\)</span>. Since <span class="math inline">\((H\cdot X)_n\in\mathcal F_n\)</span> and <span class="math inline">\(H_{n+1}\in\mathcal F_n\)</span>, <a href="#thm-aap-4-1" class="quarto-xref">Theorem&nbsp;4.1</a>(i) and <a href="#thm-aap-4-2" class="quarto-xref">Theorem&nbsp;4.2</a> give <span class="math inline">\(\mathbb E[(H\cdot X)_{n+1}\mid\mathcal F_n]=(H\cdot X)_n+H_{n+1}\,\mathbb E[X_{n+1}-X_n\mid\mathcal F_n]\)</span> a.s., which yields the required inequality or equality.</p>
+</div>
+</div>
+</div>
+<div id="def-aap-4-4" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.4 (Stopping Time and Stopped σ-Field)</strong></span> A random variable <span class="math inline">\(T:\Omega\to\{0,1,2,\ldots\}\cup\{\infty\}\)</span> is a <strong>stopping time</strong> if</p>
+<p><span class="math display">\[
+\{T=n\}\in\mathcal F_n
+\qquad\text{for every }n\ge0
+\]</span></p>
+<p>(equivalently, <span class="math inline">\(\{T\le n\}\in\mathcal F_n\)</span> for every <span class="math inline">\(n\ge0\)</span>). For instance, the first hitting time <span class="math inline">\(T_B=\inf\{n\ge0:X_n\in B\}\)</span> of an adapted process is a stopping time since <span class="math inline">\(\{T_B\le n\}=\bigcup_{k=0}^n\{X_k\in B\}\in\mathcal F_n\)</span>.</p>
+<p>The <strong>stopped <span class="math inline">\(\sigma\)</span>-field</strong> is <span class="math inline">\(\mathcal F_T=\{A\in\mathcal F_\infty:A\cap\{T\le n\}\in\mathcal F_n\text{ for all }n\ge0\}\)</span>.</p>
+</div>
+</section>
+<section id="martingale-convergence" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="martingale-convergence"><span class="header-section-number">4.4</span> Martingale Convergence</h2>
+<div id="lem-aap-4-1" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 4.1 (Doob’s Upcrossing Inequality)</strong></span> Let <span class="math inline">\(\{X_m\}_{m\ge0}\)</span> be a submartingale and fix <span class="math inline">\(a&lt;b\)</span>. Define stopping times <span class="math inline">\(N_0=-1\)</span> and, for <span class="math inline">\(k\ge1\)</span>,</p>
+<p><span class="math display">\[
+N_{2k-1}=\inf\{m&gt;N_{2k-2}:X_m\le a\},
+\qquad
+N_{2k}=\inf\{m&gt;N_{2k-1}:X_m\ge b\},
+\]</span></p>
+<p>and let <span class="math inline">\(U_n[a,b]=\sup\{k\ge1:N_{2k}\le n\}\)</span> be the number of upcrossings of <span class="math inline">\([a,b]\)</span> by time <span class="math inline">\(n\)</span>. Then</p>
+<p><span class="math display">\[
+(b-a)\,\mathbb E\,U_n[a,b]
+\le\mathbb E(X_n-a)^+-\mathbb E(X_0-a)^+
+\le\mathbb E X_n^++|a|.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Set <span class="math inline">\(Y_m=a+(X_m-a)^+\)</span>, which is a submartingale (by <a href="#thm-aap-4-4" class="quarto-xref">Theorem&nbsp;4.4</a>(ii)) with the same upcrossings of <span class="math inline">\([a,b]\)</span> as <span class="math inline">\(\{X_m\}\)</span>. Let <span class="math inline">\(H_m=\sum_{k\ge1}\mathbf 1_{\{N_{2k-1}&lt;m\le N_{2k}\}}\in\mathcal F_{m-1}\)</span>. Each completed upcrossing gains at least <span class="math inline">\(b-a\)</span>, and any incomplete final upcrossing starts at <span class="math inline">\(Y_{N_{2r-1}}=a\le Y_n\)</span>, so <span class="math inline">\((b-a)U_n[a,b]\le(H\cdot Y)_n\)</span>. Since <span class="math inline">\(1-H_m\ge0\)</span> is predictable, <span class="math inline">\(\mathbb E[((1-H)\cdot Y)_n]\ge0\)</span> by <a href="#thm-aap-4-6" class="quarto-xref">Theorem&nbsp;4.5</a>, giving <span class="math inline">\((b-a)\mathbb E\,U_n[a,b]\le\mathbb E(H\cdot Y)_n\le\mathbb E(Y_n-Y_0)\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-9" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.6 (Martingale Convergence Theorem)</strong></span> If <span class="math inline">\(\{X_n\}_{n\ge0}\)</span> is a submartingale with <span class="math inline">\(\sup_{n\ge0}\mathbb E X_n^+&lt;\infty\)</span>, then as <span class="math inline">\(n\to\infty\)</span>, <span class="math inline">\(X_n\)</span> converges almost surely to a random variable <span class="math inline">\(X_\infty\)</span> with <span class="math inline">\(\mathbb E|X_\infty|&lt;\infty\)</span>.</p>
+<p>In particular, every nonnegative supermartingale (<span class="math inline">\(X_n\ge0\)</span>) converges almost surely to <span class="math inline">\(X_\infty\)</span> with <span class="math inline">\(\mathbb E X_\infty\le\mathbb E X_0\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For all rationals <span class="math inline">\(a&lt;b\)</span>, <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-15">monotone convergence</a> and <a href="#lem-aap-4-1" class="quarto-xref">Lemma&nbsp;4.1</a> give <span class="math inline">\(\mathbb E[\lim_{n\to\infty}U_n[a,b]]\le(\sup_n\mathbb E X_n^++|a|)/(b-a)&lt;\infty\)</span>, so the total upcrossings of every rational interval <span class="math inline">\([a,b]\)</span> are a.s. finite, forcing <span class="math inline">\(\liminf_n X_n=\limsup_n X_n=:X_\infty\)</span> a.s. Using <span class="math inline">\(|X_n|=2X_n^+-X_n\)</span> and <span class="math inline">\(\mathbb E X_n\ge\mathbb E X_0\)</span> gives <span class="math inline">\(\sup_n\mathbb E|X_n|\le 2\sup_n\mathbb E X_n^+-\mathbb E X_0&lt;\infty\)</span>, and <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-14">Fatou’s lemma</a> yields <span class="math inline">\(\mathbb E|X_\infty|&lt;\infty\)</span>. For a nonnegative supermartingale, apply this to <span class="math inline">\(-X_n\le0\)</span> and Fatou’s lemma.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-10" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.7 (Doob’s Maximal Inequalities)</strong></span> &nbsp;</p>
+<ol type="i">
+<li><p><strong>Maximal inequality.</strong> If <span class="math inline">\(\{X_m\}_{m\ge0}\)</span> is a submartingale and <span class="math inline">\(\lambda&gt;0\)</span>, then for <span class="math inline">\(A=\bigl\{\max_{0\le m\le n}X_m\ge\lambda\bigr\}\)</span>,</p>
+<p><span class="math display">\[
+\lambda\,\mathbb P\left(\max_{0\le m\le n}X_m\ge\lambda\right)
+\le\mathbb E[X_n\mathbf 1_A]
+\le\mathbb E[X_n^+\mathbf 1_A]
+\le\mathbb E X_n^+.
+\]</span></p></li>
+<li><p><strong><span class="math inline">\(L^p\)</span> maximal inequality.</strong> If <span class="math inline">\(\{X_m\}_{m\ge0}\)</span> is a martingale or a nonnegative submartingale and <span class="math inline">\(1&lt;p&lt;\infty\)</span>, then for <span class="math inline">\(\bar X_n=\max_{0\le m\le n}|X_m|\)</span>,</p>
+<p><span class="math display">\[
+\|\bar X_n\|_p\le\frac{p}{p-1}\,\|X_n\|_p.
+\]</span></p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (i), partition <span class="math inline">\(A\)</span> by the first hitting time into disjoint sets <span class="math inline">\(A_m=\{X_0&lt;\lambda,\ldots,X_{m-1}&lt;\lambda,\,X_m\ge\lambda\}\in\mathcal F_m\)</span> (<span class="math inline">\(0\le m\le n\)</span>). Since <span class="math inline">\(X_m\le\mathbb E[X_n\mid\mathcal F_m]\)</span> a.s.,</p>
+<p><span class="math display">\[
+\lambda\,\mathbb P(A)
+=\sum_{m=0}^n\lambda\,\mathbb P(A_m)
+\le\sum_{m=0}^n\int_{A_m}X_m\,d\mathbb P
+\le\sum_{m=0}^n\int_{A_m}X_n\,d\mathbb P
+=\mathbb E[X_n\mathbf 1_A].
+\]</span></p>
+<p>For (ii), assume <span class="math inline">\(\|X_n\|_p&lt;\infty\)</span> and truncate <span class="math inline">\(Y=\bar X_n\wedge M\)</span>. Applying <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-19">Fubini’s theorem</a>, part (i) for <span class="math inline">\(\{|X_m|\}\)</span>, and <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-11">Hölder’s inequality</a> gives <span class="math inline">\(\mathbb E Y^p=\int_0^M p\lambda^{p-1}\mathbb P(\bar X_n\ge\lambda)\,d\lambda\le\frac{p}{p-1}\mathbb E[|X_n|Y^{p-1}]\le\frac{p}{p-1}\|X_n\|_p\|Y\|_p^{p-1}\)</span>. Dividing by <span class="math inline">\(\|Y\|_p^{p-1}\)</span> and letting <span class="math inline">\(M\uparrow\infty\)</span> yields the bound.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.8 (Lᵖ Martingale Convergence Theorem)</strong></span> Let <span class="math inline">\(\{X_n\}_{n\ge0}\)</span> be a martingale and <span class="math inline">\(1&lt;p&lt;\infty\)</span>. Then <span class="math inline">\(\sup_{n\ge0}\mathbb E|X_n|^p&lt;\infty\)</span> if and only if <span class="math inline">\(X_n\)</span> converges almost surely and in <span class="math inline">\(L^p\)</span> to a random variable <span class="math inline">\(X_\infty\in L^p\)</span> (in which case <span class="math inline">\(X_n=\mathbb E[X_\infty\mid\mathcal F_n]\)</span> a.s.).</p>
+<p>In particular, for <span class="math inline">\(p=2\)</span>, martingale increments are orthogonal, <span class="math inline">\(\mathbb E X_n^2=\mathbb E X_0^2+\sum_{k=1}^n\mathbb E[(X_k-X_{k-1})^2]\)</span>, so <span class="math inline">\(X_n\)</span> converges a.s. and in <span class="math inline">\(L^2\)</span> if and only if <span class="math inline">\(\sum_{k=1}^\infty\mathbb E[(X_k-X_{k-1})^2]&lt;\infty\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(\sup_n\|X_n\|_p&lt;\infty\)</span>, <a href="#thm-aap-4-9" class="quarto-xref">Theorem&nbsp;4.6</a> gives <span class="math inline">\(X_n\to X_\infty\)</span> a.s., while <a href="#thm-aap-4-10" class="quarto-xref">Theorem&nbsp;4.7</a>(ii) and <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-15">monotone convergence</a> give <span class="math inline">\(\sup_n|X_n|\in L^p\)</span>; <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-16">dominated convergence</a> then yields <span class="math inline">\(\mathbb E|X_n-X_\infty|^p\to0\)</span>, and passing <span class="math inline">\(n\to\infty\)</span> in <span class="math inline">\(\int_A X_m\,d\mathbb P=\int_A X_n\,d\mathbb P\)</span> (<span class="math inline">\(A\in\mathcal F_m\)</span>) gives <span class="math inline">\(X_m=\mathbb E[X_\infty\mid\mathcal F_m]\)</span> a.s. The converse is immediate. For <span class="math inline">\(p=2\)</span>, <span class="math inline">\(\mathbb E[(X_n-X_m)(X_k-X_j)]=0\)</span> (<span class="math inline">\(j&lt;k\le m&lt;n\)</span>) follows by conditioning on <span class="math inline">\(\mathcal F_m\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="uniform-integrability" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="uniform-integrability"><span class="header-section-number">4.5</span> Uniform Integrability</h2>
+<div id="def-aap-4-5" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.5 (Uniform Integrability)</strong></span> A family of random variables <span class="math inline">\(\{X_i\}_{i\in I}\)</span> is <strong>uniformly integrable</strong> if</p>
+<p><span class="math display">\[
+\lim_{M\to\infty}\sup_{i\in I}
+\mathbb E\bigl[|X_i|\,\mathbf 1_{\{|X_i|&gt;M\}}\bigr]=0.
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why L¹-Boundedness Is Not Enough at p = 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(p=1\)</span>, an <span class="math inline">\(L^1\)</span>-bounded martingale need not converge in <span class="math inline">\(L^1\)</span>: if <span class="math inline">\(M_n=\prod_{k=1}^n\xi_k\)</span> with i.i.d. <span class="math inline">\(\mathbb P(\xi_k=2)=\mathbb P(\xi_k=0)=\tfrac12\)</span>, then <span class="math inline">\(\mathbb E M_n=1\)</span> for every <span class="math inline">\(n\)</span>, yet <span class="math inline">\(M_n\to0\)</span> a.s. Uniform integrability is the exact condition that prevents mass from escaping to infinity.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.9 (Sufficient Conditions for Uniform Integrability)</strong></span> &nbsp;</p>
+<ol type="i">
+<li><p><strong>Domination and <span class="math inline">\(L^p\)</span> bounds.</strong> <span class="math inline">\(\{X_i\}_{i\in I}\)</span> is uniformly integrable if <span class="math inline">\(|X_i|\le Y\)</span> a.s. for some <span class="math inline">\(Y\in L^1\)</span>, or if <span class="math inline">\(\sup_{i\in I}\mathbb E|X_i|^p&lt;\infty\)</span> for some <span class="math inline">\(p&gt;1\)</span>.</p></li>
+<li><p><strong>Conditional expectations of a single <span class="math inline">\(L^1\)</span> variable.</strong> If <span class="math inline">\(\mathbb E|X|&lt;\infty\)</span>, then <span class="math inline">\(\bigl\{\mathbb E[X\mid\mathcal G]:\mathcal G\subseteq\mathcal F_0\text{ is a sub-}\sigma\text{-field}\bigr\}\)</span> is uniformly integrable.</p></li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In (i), <span class="math inline">\(|X_i|\le Y\in L^1\)</span> gives <span class="math inline">\(\mathbb E[|X_i|\mathbf 1_{\{|X_i|&gt;M\}}]\le\mathbb E[Y\mathbf 1_{\{Y&gt;M\}}]\to0\)</span> by <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-16">dominated convergence</a>, while for <span class="math inline">\(p&gt;1\)</span>, <span class="math inline">\(|X_i|\mathbf 1_{\{|X_i|&gt;M\}}\le M^{-(p-1)}|X_i|^p\)</span>.</p>
+<p>In (ii), let <span class="math inline">\(Y_{\mathcal G}=\mathbb E[X\mid\mathcal G]\)</span> and <span class="math inline">\(A_{\mathcal G}=\{|Y_{\mathcal G}|&gt;M\}\in\mathcal G\)</span>. By <a href="#thm-aap-4-4" class="quarto-xref">Theorem&nbsp;4.4</a>(ii) and Markov’s inequality, <span class="math inline">\(|Y_{\mathcal G}|\le\mathbb E[|X|\mid\mathcal G]\)</span> a.s. and <span class="math inline">\(\mathbb P(A_{\mathcal G})\le\mathbb E|X|/M\to0\)</span> uniformly in <span class="math inline">\(\mathcal G\)</span> as <span class="math inline">\(M\to\infty\)</span>. Hence <span class="math inline">\(\mathbb E[|Y_{\mathcal G}|\mathbf 1_{A_{\mathcal G}}]\le\int_{A_{\mathcal G}}|X|\,d\mathbb P\to0\)</span> uniformly in <span class="math inline">\(\mathcal G\)</span> because <span class="math inline">\(X\in L^1\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.10 (Vitali Convergence Theorem)</strong></span> Let <span class="math inline">\(\{X_n\}_{n\ge1}\)</span> be integrable random variables. Then <span class="math inline">\(X_n\to X\)</span> in <span class="math inline">\(L^1\)</span> (with <span class="math inline">\(X\in L^1\)</span>) if and only if <span class="math inline">\(X_n\xrightarrow{\mathbb P}X\)</span> and <span class="math inline">\(\{X_n\}_{n\ge1}\)</span> is uniformly integrable.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>(<span class="math inline">\(\Rightarrow\)</span>)</strong> Markov’s inequality gives <span class="math inline">\(X_n\xrightarrow{\mathbb P}X\)</span>, and approximating <span class="math inline">\(X_n\)</span> by <span class="math inline">\(X\in L^1\)</span> for <span class="math inline">\(n&gt;N\)</span> leaves finitely many <span class="math inline">\(L^1\)</span> variables <span class="math inline">\(\{X_1,\ldots,X_N,X\}\)</span>, giving uniform integrability.</p>
+<p><strong>(<span class="math inline">\(\Leftarrow\)</span>)</strong> Passing to an a.s. convergent subsequence gives <span class="math inline">\(X\in L^1\)</span> by <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-14">Fatou’s lemma</a>. Truncating via <span class="math inline">\(\psi_M(x)=(x\wedge M)\vee(-M)\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E|X_n-X|
+\le\mathbb E\bigl[|X_n|\mathbf 1_{\{|X_n|&gt;M\}}\bigr]
++\mathbb E|\psi_M(X_n)-\psi_M(X)|
++\mathbb E\bigl[|X|\mathbf 1_{\{|X|&gt;M\}}\bigr].
+\]</span></p>
+<p>Fix <span class="math inline">\(M\)</span> large so the outer terms are small by uniform integrability and <span class="math inline">\(X\in L^1\)</span>, then send <span class="math inline">\(n\to\infty\)</span> in the middle term using the <a href="../../../content/notes/advanced-applied-probability/1.html#thm-aap-1-13">bounded convergence theorem</a>.</p>
+</div>
+</div>
+</div>
+<div id="thm-aap-4-14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.11 (Uniformly Integrable Martingales and Lévy’s Upward Theorem)</strong></span> For a martingale <span class="math inline">\(\{X_n\}_{n\ge0}\)</span>, the following are equivalent:</p>
+<ol type="i">
+<li><p><span class="math inline">\(\{X_n\}_{n\ge0}\)</span> is uniformly integrable.</p></li>
+<li><p><span class="math inline">\(X_n\)</span> converges almost surely and in <span class="math inline">\(L^1\)</span> to some <span class="math inline">\(X_\infty\in L^1\)</span>.</p></li>
+<li><p><span class="math inline">\(X_n\)</span> converges in <span class="math inline">\(L^1\)</span> to some <span class="math inline">\(X_\infty\in L^1\)</span>.</p></li>
+<li><p>There exists <span class="math inline">\(X\in L^1\)</span> such that <span class="math inline">\(X_n=\mathbb E[X\mid\mathcal F_n]\)</span> a.s. for every <span class="math inline">\(n\ge0\)</span>.</p></li>
+</ol>
+<p>Moreover, when these hold:</p>
+<ul>
+<li><strong>Lévy’s upward theorem:</strong> If <span class="math inline">\(X_n=\mathbb E[X\mid\mathcal F_n]\)</span> for <span class="math inline">\(X\in L^1\)</span>, then <span class="math inline">\(X_n\to\mathbb E[X\mid\mathcal F_\infty]\)</span> a.s. and in <span class="math inline">\(L^1\)</span>, and in general <span class="math inline">\(X_n=\mathbb E[X_\infty\mid\mathcal F_n]\)</span> a.s.</li>
+<li><strong>Optional stopping:</strong> For any stopping times <span class="math inline">\(S\le T\le\infty\)</span> (with <span class="math inline">\(X_T=X_\infty\)</span> on <span class="math inline">\(\{T=\infty\}\)</span>), <span class="math inline">\(\mathbb E[X_T\mid\mathcal F_S]=X_S\)</span> a.s. and <span class="math inline">\(\mathbb E X_T=\mathbb E X_0\)</span>.</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>(i) <span class="math inline">\(\Rightarrow\)</span> (ii):</strong> Uniform integrability implies <span class="math inline">\(\sup_n\mathbb E|X_n|&lt;\infty\)</span>, so <a href="#thm-aap-4-9" class="quarto-xref">Theorem&nbsp;4.6</a> gives <span class="math inline">\(X_n\to X_\infty\)</span> a.s. and <a href="#thm-aap-4-13" class="quarto-xref">Theorem&nbsp;4.10</a> upgrades this to <span class="math inline">\(L^1\)</span> convergence. <strong>(ii) <span class="math inline">\(\Rightarrow\)</span> (iii)</strong> is immediate; <strong>(iii) <span class="math inline">\(\Rightarrow\)</span> (iv)</strong> follows by letting <span class="math inline">\(n\to\infty\)</span> in <span class="math inline">\(\int_A X_m\,d\mathbb P=\int_A X_n\,d\mathbb P\)</span> (<span class="math inline">\(A\in\mathcal F_m\)</span>), giving <span class="math inline">\(X_m=\mathbb E[X_\infty\mid\mathcal F_m]\)</span> a.s.; and <strong>(iv) <span class="math inline">\(\Rightarrow\)</span> (i)</strong> is <a href="#thm-aap-4-12" class="quarto-xref">Theorem&nbsp;4.9</a>(ii).</p>
+<p>For Lévy’s upward theorem, <span class="math inline">\(\int_A X_\infty\,d\mathbb P=\int_A X\,d\mathbb P\)</span> holds on <span class="math inline">\(\bigcup_{m=0}^\infty\mathcal F_m\)</span> and extends to <span class="math inline">\(\mathcal F_\infty\)</span> by the <span class="math inline">\(\pi\)</span>-<span class="math inline">\(\lambda\)</span> theorem. For optional stopping, summing <span class="math inline">\(\int_{A\cap\{T=n\}}X_T\,d\mathbb P=\int_{A\cap\{T=n\}}X_\infty\,d\mathbb P\)</span> over <span class="math inline">\(n\ge0\)</span> (for <span class="math inline">\(A\in\mathcal F_T\)</span>) gives <span class="math inline">\(X_T=\mathbb E[X_\infty\mid\mathcal F_T]\)</span> a.s., and <a href="#thm-aap-4-4" class="quarto-xref">Theorem&nbsp;4.4</a>(i) yields <span class="math inline">\(\mathbb E[X_T\mid\mathcal F_S]=X_S\)</span> a.s. since <span class="math inline">\(\mathcal F_S\subseteq\mathcal F_T\)</span>.</p>
+</div>
+</div>
+</div>
 <!-- ## Supplementary Notes {.supplementary-notes}
 
 ### Key Results -->
 
 
+</section>
 
 </main> <!-- /main -->
 <script>
