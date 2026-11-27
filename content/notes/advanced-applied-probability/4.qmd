@@ -9,6 +9,517 @@ crossref:
   chapters: true
 ---
 
+## Conditional Expectation
+
+Work on a probability space $(\Omega,\mathcal F_0,\mathbb P)$ with
+sub-$\sigma$-fields $\mathcal F,\mathcal F_1,\mathcal F_2\subseteq\mathcal F_0$.
+
+::: {#thm-aap-4-1 name="Basic Properties of Conditional Expectation"}
+
+Let $X,Y$ be integrable random variables, with [conditional expectation](2.qmd#def-aap-2-7)
+$\omega\mapsto\mathbb E[X\mid\mathcal F](\omega)$. The following hold almost
+surely:
+
+i) **Linearity.** For any $a\in\mathbb R$,
+
+   $$
+   \mathbb E[aX+Y\mid\mathcal F]
+   =a\,\mathbb E[X\mid\mathcal F]+\mathbb E[Y\mid\mathcal F].
+   $$
+
+ii) **Monotonicity.** If $X\le Y$ a.s., then
+    $\mathbb E[X\mid\mathcal F]\le\mathbb E[Y\mid\mathcal F]$ a.s.
+
+iii) **Monotone convergence.** If $X_n\ge0$ and $X_n\uparrow X$ a.s. with
+     $\mathbb E X<\infty$, then
+     $\mathbb E[X_n\mid\mathcal F]\uparrow\mathbb E[X\mid\mathcal F]$ a.s.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Existence of $\mathbb E[X\mid\mathcal F]$ follows by applying the
+[Radon–Nikodym theorem](1.qmd#thm-aap-1-9) to $A\mapsto\int_A X^\pm\,d\mathbb P$
+on $(\Omega,\mathcal F)$. For (i),
+$a\,\mathbb E[X\mid\mathcal F]+\mathbb E[Y\mid\mathcal F]$ is
+$\mathcal F$-measurable and has integral $\int_A(aX+Y)\,d\mathbb P$ on every
+$A\in\mathcal F$, so uniqueness a.s. gives equality. For (ii), let
+$A=\{\mathbb E[X\mid\mathcal F]>\mathbb E[Y\mid\mathcal F]\}\in\mathcal F$;
+then $\int_A(\mathbb E[X\mid\mathcal F]-\mathbb E[Y\mid\mathcal F])\,d\mathbb P=\int_A(X-Y)\,d\mathbb P\le0$,
+forcing $\mathbb P(A)=0$. For (iii), monotonicity gives
+$\mathbb E[X_n\mid\mathcal F]\uparrow Z$ a.s. for an $\mathcal F$-measurable
+$Z\ge0$, and [monotone convergence](1.qmd#thm-aap-1-15) yields
+$\int_A Z\,d\mathbb P=\lim_{n\to\infty}\int_A X_n\,d\mathbb P=\int_A X\,d\mathbb P$
+for every $A\in\mathcal F$.
+
+:::
+
+::: {#thm-aap-4-2 name="Conditioning Known Random Variables"}
+
+If $X$ is $\mathcal F$-measurable ($X\in\mathcal F$) and $\mathbb E|X|<\infty$,
+then
+
+$$
+\mathbb E[X\mid\mathcal F]=X
+\qquad\text{a.s.}
+$$
+
+More generally, if $X\in\mathcal F$ and $\mathbb E|Y|,\mathbb E|XY|<\infty$,
+then $\mathbb E[XY\mid\mathcal F]=X\,\mathbb E[Y\mid\mathcal F]$ a.s.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+The random variable $X$ itself satisfies both conditions of
+[conditional expectation](2.qmd#def-aap-2-7): $X$ is $\mathcal F$-measurable
+and $\int_A X\,d\mathbb P=\int_A X\,d\mathbb P$ for every $A\in\mathcal F$, so
+$\mathbb E[X\mid\mathcal F](\omega)=X(\omega)$ for a.e. $\omega$. For the
+pull-out rule, $X=\mathbf 1_B$ ($B\in\mathcal F$) follows from
+$\int_A\mathbf 1_B Y\,d\mathbb P=\int_{A\cap B}\mathbb E[Y\mid\mathcal F]\,d\mathbb P=\int_A\mathbf 1_B\mathbb E[Y\mid\mathcal F]\,d\mathbb P$,
+and the general case follows by linearity, @thm-aap-4-1(iii), and splitting into
+positive and negative parts.
+
+:::
+
+::: {#thm-aap-4-3 name="Conditioning Under Independence"}
+
+If $X$ is independent of $\mathcal F$ (i.e., $\sigma(X)\perp\!\!\!\perp\mathcal F$)
+and $\mathbb E|X|<\infty$, then
+
+$$
+\mathbb E[X\mid\mathcal F]=\mathbb E[X]
+\qquad\text{a.s.}
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+The constant random variable $c(\omega)=\mathbb E[X]$ is $\mathcal F$-measurable.
+For every $A\in\mathcal F$, $\sigma(X)\perp\!\!\!\perp\mathcal F$ implies that
+$X$ and $\mathbf 1_A$ are independent (when $\mathbb P(A)>0$,
+$\mathbb E[X\mid A]=\mathbb E[X]$), so by
+[product expectation](2.qmd#thm-aap-2-3),
+
+$$
+\int_A X\,d\mathbb P
+=\mathbb E[X\mathbf 1_A]
+=\mathbb E[X]\,\mathbb P(A)
+=\int_A\mathbb E[X]\,d\mathbb P.
+$$
+
+By uniqueness in [Kolmogorov's definition](2.qmd#def-aap-2-7),
+$\mathbb E[X\mid\mathcal F]=\mathbb E[X]$ a.s.
+
+:::
+
+::: {#thm-aap-4-4 name="Tower Property and Conditional Jensen's Inequality"}
+
+Let $X$ be an integrable random variable.
+
+i) **Tower property.** If $\mathcal F_1\subseteq\mathcal F_2$, then
+
+   $$
+   \mathbb E\bigl[\mathbb E[X\mid\mathcal F_2]\bigm|\mathcal F_1\bigr]
+   =\mathbb E[X\mid\mathcal F_1]
+   =\mathbb E\bigl[\mathbb E[X\mid\mathcal F_1]\bigm|\mathcal F_2\bigr]
+   \qquad\text{a.s.}
+   $$
+
+   In particular, $\mathbb E\bigl[\mathbb E[X\mid\mathcal F]\bigr]=\mathbb E[X]$.
+
+ii) **Conditional Jensen's inequality.** If $\varphi:\mathbb R\to\mathbb R$ is
+    convex and $\mathbb E|\varphi(X)|<\infty$, then
+
+    $$
+    \varphi\bigl(\mathbb E[X\mid\mathcal F]\bigr)
+    \le\mathbb E[\varphi(X)\mid\mathcal F]
+    \qquad\text{a.s.}
+    $$
+
+    In particular, $\|\mathbb E[X\mid\mathcal F]\|_p\le\|X\|_p$ for all
+    $1\le p<\infty$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+In (i), the first equality holds because every $A\in\mathcal F_1$ also lies in
+$\mathcal F_2$, so $\int_A\mathbb E[X\mid\mathcal F_2]\,d\mathbb P=\int_A X\,d\mathbb P$;
+the second holds by @thm-aap-4-2 since $\mathbb E[X\mid\mathcal F_1]\in\mathcal F_2$.
+
+In (ii), write $\varphi(x)=\sup_{q\in\mathbb Q}L_q(x)$ as the supremum of
+supporting lines $L_q(x)=\varphi(q)+\varphi'_+(q)(x-q)$ at rational points. By
+@thm-aap-4-1, $\mathbb E[\varphi(X)\mid\mathcal F]\ge\mathbb E[L_q(X)\mid\mathcal F]=L_q(\mathbb E[X\mid\mathcal F])$
+a.s. for each $q\in\mathbb Q$, and taking the countable supremum gives the
+bound.
+
+:::
+
+## Filtrations and Martingales
+
+::: {#def-aap-4-1 name="Filtration and Adapted Process"}
+
+A **filtration** on $(\Omega,\mathcal F,\mathbb P)$ is an increasing sequence
+of sub-$\sigma$-fields
+
+$$
+\mathcal F_0\subseteq\mathcal F_1\subseteq\mathcal F_2\subseteq\cdots\subseteq\mathcal F,
+$$
+
+with $\mathcal F_\infty=\sigma\bigl(\bigcup_{n=0}^\infty\mathcal F_n\bigr)$. A
+sequence $\{X_n\}_{n\ge0}$ is **adapted** to $\{\mathcal F_n\}$ if $X_n\in\mathcal F_n$
+for every $n\ge0$, and $\{H_n\}_{n\ge1}$ is **predictable** if
+$H_n\in\mathcal F_{n-1}$ for every $n\ge1$.
+
+:::
+
+::: {#def-aap-4-2 name="Martingale, Submartingale, and Supermartingale"}
+
+A process $\{X_n\}_{n\ge0}$ is a **martingale** with respect to
+$\{\mathcal F_n\}_{n\ge0}$ if:
+
+i) $X_n$ is adapted to $\mathcal F_n$ for every $n\ge0$.
+
+ii) $\mathbb E|X_n|<\infty$ for every $n\ge0$.
+
+iii) $\mathbb E[X_{n+1}\mid\mathcal F_n]=X_n$ a.s. for every $n\ge0$.
+
+Replacing (iii) by $\mathbb E[X_{n+1}\mid\mathcal F_n]\ge X_n$ a.s. defines a
+**submartingale** (so $\mathbb E X_n$ is nondecreasing), and replacing it by
+$\mathbb E[X_{n+1}\mid\mathcal F_n]\le X_n$ a.s. defines a **supermartingale**
+(so $\mathbb E X_n$ is nonincreasing).
+
+:::
+
+::: {.callout-note title="Example: Canonical Martingales" collapse="true"}
+
+- **Random walk:** If $\xi_1,\xi_2,\ldots$ are independent with
+  $\mathbb E\xi_k=0$, $\mathcal F_n=\sigma(\xi_1,\ldots,\xi_n)$, and
+  $S_n=\sum_{k=1}^n\xi_k$ ($S_0=0$), then $\{S_n\}$ is a martingale by
+  @thm-aap-4-2 and @thm-aap-4-3; if $\operatorname{Var}(\xi_k)=\sigma_k^2<\infty$,
+  then $S_n^2-\sum_{k=1}^n\sigma_k^2$ is also a martingale.
+- **Product martingale:** If $\xi_1,\xi_2,\ldots\ge0$ are independent with
+  $\mathbb E\xi_k=1$, then $M_n=\prod_{k=1}^n\xi_k$ ($M_0=1$) is a nonnegative
+  martingale.
+- **Doob's martingale:** For any $X\in L^1$ and filtration $\{\mathcal F_n\}$,
+  $X_n=\mathbb E[X\mid\mathcal F_n]$ is a martingale by @thm-aap-4-4(i).
+
+:::
+
+## Martingale Transforms and Stopping Times
+
+::: {#def-aap-4-3 name="Martingale Transform"}
+
+For adapted $\{X_n\}_{n\ge0}$ and predictable $\{H_n\}_{n\ge1}$, the
+**martingale transform** is $(H\cdot X)_0=0$ and
+
+$$
+(H\cdot X)_n=\sum_{m=1}^n H_m(X_m-X_{m-1}),
+\qquad n\ge1.
+$$
+
+:::
+
+::: {#thm-aap-4-6 name="Preservation Under Martingale Transforms"}
+
+Let $\{H_n\}_{n\ge1}$ be predictable with $|H_n|\le C_n<\infty$ for each $n$.
+
+i) If $\{X_n\}$ is a submartingale (resp. supermartingale) and $H_n\ge0$, then
+   $\{(H\cdot X)_n\}$ is a submartingale (resp. supermartingale).
+
+ii) If $\{X_n\}$ is a martingale, then $\{(H\cdot X)_n\}$ is a martingale.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Boundedness of $H_m$ ensures $\mathbb E|(H\cdot X)_n|<\infty$. Since
+$(H\cdot X)_n\in\mathcal F_n$ and $H_{n+1}\in\mathcal F_n$, @thm-aap-4-1(i) and
+@thm-aap-4-2 give
+$\mathbb E[(H\cdot X)_{n+1}\mid\mathcal F_n]=(H\cdot X)_n+H_{n+1}\,\mathbb E[X_{n+1}-X_n\mid\mathcal F_n]$
+a.s., which yields the required inequality or equality.
+
+:::
+
+::: {#def-aap-4-4 name="Stopping Time and Stopped σ-Field"}
+
+A random variable $T:\Omega\to\{0,1,2,\ldots\}\cup\{\infty\}$ is a **stopping
+time** if
+
+$$
+\{T=n\}\in\mathcal F_n
+\qquad\text{for every }n\ge0
+$$
+
+(equivalently, $\{T\le n\}\in\mathcal F_n$ for every $n\ge0$). For instance,
+the first hitting time $T_B=\inf\{n\ge0:X_n\in B\}$ of an adapted process is a
+stopping time since $\{T_B\le n\}=\bigcup_{k=0}^n\{X_k\in B\}\in\mathcal F_n$.
+
+The **stopped $\sigma$-field** is
+$\mathcal F_T=\{A\in\mathcal F_\infty:A\cap\{T\le n\}\in\mathcal F_n\text{ for all }n\ge0\}$.
+
+:::
+
+## Martingale Convergence
+
+::: {#lem-aap-4-1 name="Doob's Upcrossing Inequality"}
+
+Let $\{X_m\}_{m\ge0}$ be a submartingale and fix $a<b$. Define stopping times
+$N_0=-1$ and, for $k\ge1$,
+
+$$
+N_{2k-1}=\inf\{m>N_{2k-2}:X_m\le a\},
+\qquad
+N_{2k}=\inf\{m>N_{2k-1}:X_m\ge b\},
+$$
+
+and let $U_n[a,b]=\sup\{k\ge1:N_{2k}\le n\}$ be the number of upcrossings of
+$[a,b]$ by time $n$. Then
+
+$$
+(b-a)\,\mathbb E\,U_n[a,b]
+\le\mathbb E(X_n-a)^+-\mathbb E(X_0-a)^+
+\le\mathbb E X_n^++|a|.
+$$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+Set $Y_m=a+(X_m-a)^+$, which is a submartingale (by @thm-aap-4-4(ii)) with the
+same upcrossings of $[a,b]$ as $\{X_m\}$. Let
+$H_m=\sum_{k\ge1}\mathbf 1_{\{N_{2k-1}<m\le N_{2k}\}}\in\mathcal F_{m-1}$. Each
+completed upcrossing gains at least $b-a$, and any incomplete final upcrossing
+starts at $Y_{N_{2r-1}}=a\le Y_n$, so $(b-a)U_n[a,b]\le(H\cdot Y)_n$. Since
+$1-H_m\ge0$ is predictable, $\mathbb E[((1-H)\cdot Y)_n]\ge0$ by @thm-aap-4-6,
+giving $(b-a)\mathbb E\,U_n[a,b]\le\mathbb E(H\cdot Y)_n\le\mathbb E(Y_n-Y_0)$.
+
+:::
+
+::: {#thm-aap-4-9 name="Martingale Convergence Theorem"}
+
+If $\{X_n\}_{n\ge0}$ is a submartingale with $\sup_{n\ge0}\mathbb E X_n^+<\infty$,
+then as $n\to\infty$, $X_n$ converges almost surely to a random variable
+$X_\infty$ with $\mathbb E|X_\infty|<\infty$.
+
+In particular, every nonnegative supermartingale ($X_n\ge0$) converges almost
+surely to $X_\infty$ with $\mathbb E X_\infty\le\mathbb E X_0$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+For all rationals $a<b$, [monotone convergence](1.qmd#thm-aap-1-15) and
+@lem-aap-4-1 give
+$\mathbb E[\lim_{n\to\infty}U_n[a,b]]\le(\sup_n\mathbb E X_n^++|a|)/(b-a)<\infty$,
+so the total upcrossings of every rational interval $[a,b]$ are a.s. finite,
+forcing $\liminf_n X_n=\limsup_n X_n=:X_\infty$ a.s. Using
+$|X_n|=2X_n^+-X_n$ and $\mathbb E X_n\ge\mathbb E X_0$ gives
+$\sup_n\mathbb E|X_n|\le 2\sup_n\mathbb E X_n^+-\mathbb E X_0<\infty$, and
+[Fatou's lemma](1.qmd#thm-aap-1-14) yields $\mathbb E|X_\infty|<\infty$. For a
+nonnegative supermartingale, apply this to $-X_n\le0$ and Fatou's lemma.
+
+:::
+
+::: {#thm-aap-4-10 name="Doob's Maximal Inequalities"}
+
+i) **Maximal inequality.** If $\{X_m\}_{m\ge0}$ is a submartingale and
+   $\lambda>0$, then for $A=\bigl\{\max_{0\le m\le n}X_m\ge\lambda\bigr\}$,
+
+   $$
+   \lambda\,\mathbb P\left(\max_{0\le m\le n}X_m\ge\lambda\right)
+   \le\mathbb E[X_n\mathbf 1_A]
+   \le\mathbb E[X_n^+\mathbf 1_A]
+   \le\mathbb E X_n^+.
+   $$
+
+ii) **$L^p$ maximal inequality.** If $\{X_m\}_{m\ge0}$ is a martingale or a
+    nonnegative submartingale and $1<p<\infty$, then for
+    $\bar X_n=\max_{0\le m\le n}|X_m|$,
+
+    $$
+    \|\bar X_n\|_p\le\frac{p}{p-1}\,\|X_n\|_p.
+    $$
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+For (i), partition $A$ by the first hitting time into disjoint sets
+$A_m=\{X_0<\lambda,\ldots,X_{m-1}<\lambda,\,X_m\ge\lambda\}\in\mathcal F_m$
+($0\le m\le n$). Since $X_m\le\mathbb E[X_n\mid\mathcal F_m]$ a.s.,
+
+$$
+\lambda\,\mathbb P(A)
+=\sum_{m=0}^n\lambda\,\mathbb P(A_m)
+\le\sum_{m=0}^n\int_{A_m}X_m\,d\mathbb P
+\le\sum_{m=0}^n\int_{A_m}X_n\,d\mathbb P
+=\mathbb E[X_n\mathbf 1_A].
+$$
+
+For (ii), assume $\|X_n\|_p<\infty$ and truncate $Y=\bar X_n\wedge M$. Applying
+[Fubini's theorem](1.qmd#thm-aap-1-19), part (i) for $\{|X_m|\}$, and
+[Hölder's inequality](1.qmd#thm-aap-1-11) gives
+$\mathbb E Y^p=\int_0^M p\lambda^{p-1}\mathbb P(\bar X_n\ge\lambda)\,d\lambda\le\frac{p}{p-1}\mathbb E[|X_n|Y^{p-1}]\le\frac{p}{p-1}\|X_n\|_p\|Y\|_p^{p-1}$.
+Dividing by $\|Y\|_p^{p-1}$ and letting $M\uparrow\infty$ yields the bound.
+
+:::
+
+::: {#thm-aap-4-11 name="Lᵖ Martingale Convergence Theorem"}
+
+Let $\{X_n\}_{n\ge0}$ be a martingale and $1<p<\infty$. Then
+$\sup_{n\ge0}\mathbb E|X_n|^p<\infty$ if and only if $X_n$ converges almost
+surely and in $L^p$ to a random variable $X_\infty\in L^p$ (in which case
+$X_n=\mathbb E[X_\infty\mid\mathcal F_n]$ a.s.).
+
+In particular, for $p=2$, martingale increments are orthogonal,
+$\mathbb E X_n^2=\mathbb E X_0^2+\sum_{k=1}^n\mathbb E[(X_k-X_{k-1})^2]$, so
+$X_n$ converges a.s. and in $L^2$ if and only if
+$\sum_{k=1}^\infty\mathbb E[(X_k-X_{k-1})^2]<\infty$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+If $\sup_n\|X_n\|_p<\infty$, @thm-aap-4-9 gives $X_n\to X_\infty$ a.s., while
+@thm-aap-4-10(ii) and [monotone convergence](1.qmd#thm-aap-1-15) give
+$\sup_n|X_n|\in L^p$; [dominated convergence](1.qmd#thm-aap-1-16) then yields
+$\mathbb E|X_n-X_\infty|^p\to0$, and passing $n\to\infty$ in
+$\int_A X_m\,d\mathbb P=\int_A X_n\,d\mathbb P$ ($A\in\mathcal F_m$) gives
+$X_m=\mathbb E[X_\infty\mid\mathcal F_m]$ a.s. The converse is immediate. For
+$p=2$, $\mathbb E[(X_n-X_m)(X_k-X_j)]=0$ ($j<k\le m<n$) follows by conditioning
+on $\mathcal F_m$.
+
+:::
+
+## Uniform Integrability
+
+::: {#def-aap-4-5 name="Uniform Integrability"}
+
+A family of random variables $\{X_i\}_{i\in I}$ is **uniformly integrable** if
+
+$$
+\lim_{M\to\infty}\sup_{i\in I}
+\mathbb E\bigl[|X_i|\,\mathbf 1_{\{|X_i|>M\}}\bigr]=0.
+$$
+
+:::
+
+::: {.callout-note title="Why L¹-Boundedness Is Not Enough at p = 1" collapse="true"}
+
+For $p=1$, an $L^1$-bounded martingale need not converge in $L^1$: if
+$M_n=\prod_{k=1}^n\xi_k$ with i.i.d. $\mathbb P(\xi_k=2)=\mathbb P(\xi_k=0)=\tfrac12$,
+then $\mathbb E M_n=1$ for every $n$, yet $M_n\to0$ a.s. Uniform integrability
+is the exact condition that prevents mass from escaping to infinity.
+
+:::
+
+::: {#thm-aap-4-12 name="Sufficient Conditions for Uniform Integrability"}
+
+i) **Domination and $L^p$ bounds.** $\{X_i\}_{i\in I}$ is uniformly integrable
+   if $|X_i|\le Y$ a.s. for some $Y\in L^1$, or if
+   $\sup_{i\in I}\mathbb E|X_i|^p<\infty$ for some $p>1$.
+
+ii) **Conditional expectations of a single $L^1$ variable.** If
+    $\mathbb E|X|<\infty$, then
+    $\bigl\{\mathbb E[X\mid\mathcal G]:\mathcal G\subseteq\mathcal F_0\text{ is a sub-}\sigma\text{-field}\bigr\}$
+    is uniformly integrable.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+In (i), $|X_i|\le Y\in L^1$ gives
+$\mathbb E[|X_i|\mathbf 1_{\{|X_i|>M\}}]\le\mathbb E[Y\mathbf 1_{\{Y>M\}}]\to0$
+by [dominated convergence](1.qmd#thm-aap-1-16), while for $p>1$,
+$|X_i|\mathbf 1_{\{|X_i|>M\}}\le M^{-(p-1)}|X_i|^p$.
+
+In (ii), let $Y_{\mathcal G}=\mathbb E[X\mid\mathcal G]$ and
+$A_{\mathcal G}=\{|Y_{\mathcal G}|>M\}\in\mathcal G$. By @thm-aap-4-4(ii) and
+Markov's inequality, $|Y_{\mathcal G}|\le\mathbb E[|X|\mid\mathcal G]$ a.s. and
+$\mathbb P(A_{\mathcal G})\le\mathbb E|X|/M\to0$ uniformly in $\mathcal G$ as
+$M\to\infty$. Hence
+$\mathbb E[|Y_{\mathcal G}|\mathbf 1_{A_{\mathcal G}}]\le\int_{A_{\mathcal G}}|X|\,d\mathbb P\to0$
+uniformly in $\mathcal G$ because $X\in L^1$.
+
+:::
+
+::: {#thm-aap-4-13 name="Vitali Convergence Theorem"}
+
+Let $\{X_n\}_{n\ge1}$ be integrable random variables. Then $X_n\to X$ in $L^1$
+(with $X\in L^1$) if and only if $X_n\xrightarrow{\mathbb P}X$ and
+$\{X_n\}_{n\ge1}$ is uniformly integrable.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+**($\Rightarrow$)** Markov's inequality gives $X_n\xrightarrow{\mathbb P}X$,
+and approximating $X_n$ by $X\in L^1$ for $n>N$ leaves finitely many $L^1$
+variables $\{X_1,\ldots,X_N,X\}$, giving uniform integrability.
+
+**($\Leftarrow$)** Passing to an a.s. convergent subsequence gives $X\in L^1$
+by [Fatou's lemma](1.qmd#thm-aap-1-14). Truncating via
+$\psi_M(x)=(x\wedge M)\vee(-M)$,
+
+$$
+\mathbb E|X_n-X|
+\le\mathbb E\bigl[|X_n|\mathbf 1_{\{|X_n|>M\}}\bigr]
++\mathbb E|\psi_M(X_n)-\psi_M(X)|
++\mathbb E\bigl[|X|\mathbf 1_{\{|X|>M\}}\bigr].
+$$
+
+Fix $M$ large so the outer terms are small by uniform integrability and
+$X\in L^1$, then send $n\to\infty$ in the middle term using the
+[bounded convergence theorem](1.qmd#thm-aap-1-13).
+
+:::
+
+::: {#thm-aap-4-14 name="Uniformly Integrable Martingales and Lévy's Upward Theorem"}
+
+For a martingale $\{X_n\}_{n\ge0}$, the following are equivalent:
+
+i) $\{X_n\}_{n\ge0}$ is uniformly integrable.
+
+ii) $X_n$ converges almost surely and in $L^1$ to some $X_\infty\in L^1$.
+
+iii) $X_n$ converges in $L^1$ to some $X_\infty\in L^1$.
+
+iv) There exists $X\in L^1$ such that $X_n=\mathbb E[X\mid\mathcal F_n]$ a.s.
+    for every $n\ge0$.
+
+Moreover, when these hold:
+
+- **Lévy's upward theorem:** If $X_n=\mathbb E[X\mid\mathcal F_n]$ for $X\in L^1$,
+  then $X_n\to\mathbb E[X\mid\mathcal F_\infty]$ a.s. and in $L^1$, and in
+  general $X_n=\mathbb E[X_\infty\mid\mathcal F_n]$ a.s.
+- **Optional stopping:** For any stopping times $S\le T\le\infty$ (with
+  $X_T=X_\infty$ on $\{T=\infty\}$), $\mathbb E[X_T\mid\mathcal F_S]=X_S$ a.s.
+  and $\mathbb E X_T=\mathbb E X_0$.
+
+:::
+
+::: {.callout-note title="Proof Sketch" collapse="true"}
+
+**(i) $\Rightarrow$ (ii):** Uniform integrability implies
+$\sup_n\mathbb E|X_n|<\infty$, so @thm-aap-4-9 gives $X_n\to X_\infty$ a.s. and
+@thm-aap-4-13 upgrades this to $L^1$ convergence. **(ii) $\Rightarrow$ (iii)**
+is immediate; **(iii) $\Rightarrow$ (iv)** follows by letting $n\to\infty$ in
+$\int_A X_m\,d\mathbb P=\int_A X_n\,d\mathbb P$ ($A\in\mathcal F_m$), giving
+$X_m=\mathbb E[X_\infty\mid\mathcal F_m]$ a.s.; and **(iv) $\Rightarrow$ (i)**
+is @thm-aap-4-12(ii).
+
+For Lévy's upward theorem, $\int_A X_\infty\,d\mathbb P=\int_A X\,d\mathbb P$
+holds on $\bigcup_{m=0}^\infty\mathcal F_m$ and extends to $\mathcal F_\infty$
+by the $\pi$-$\lambda$ theorem. For optional stopping, summing
+$\int_{A\cap\{T=n\}}X_T\,d\mathbb P=\int_{A\cap\{T=n\}}X_\infty\,d\mathbb P$
+over $n\ge0$ (for $A\in\mathcal F_T$) gives
+$X_T=\mathbb E[X_\infty\mid\mathcal F_T]$ a.s., and @thm-aap-4-4(i) yields
+$\mathbb E[X_T\mid\mathcal F_S]=X_S$ a.s. since $\mathcal F_S\subseteq\mathcal F_T$.
+
+:::
 
 
 
